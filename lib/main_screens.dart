@@ -507,10 +507,10 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                 filteredGames.isEmpty
                     ? EmptyStateView(
                       icon: Icons.search_off_rounded,
-                      title: GameContentLocalization.ui(context, "Aucun jeu trouvé"),
+                      title: AppLocalizations.of(context)!.aucunJeuTrouve,
                       subtitle:
-                          GameContentLocalization.ui(context, "Essaie d'ajuster tes filtres ou d'effectuer une autre recherche."),
-                      actionLabel: GameContentLocalization.ui(context, "Réinitialiser les filtres"),
+                          AppLocalizations.of(context)!.essaieDAjusterTesFiltres,
+                      actionLabel: AppLocalizations.of(context)!.reinitialiserLesFiltres,
                       actionIcon: Icons.refresh,
                       onActionPressed: () {
                         setState(() {
@@ -703,8 +703,8 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                             ),
                                           ],
                                         ),
-                                        child: const Text(
-                                          "✨ NOUVEAU",
+                                        child: Text(
+                                          AppLocalizations.of(context)!.nouveau,
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 9,

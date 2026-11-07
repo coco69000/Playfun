@@ -192,14 +192,11 @@ class _MainScreenState extends State<MainScreen> {
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: Text(GameContentLocalization.ui(context, "Joueurs bloqués")),
+            title: Text(AppLocalizations.of(context)!.joueursBloques1),
             content:
                 ps.blockedUsers.isEmpty
                     ? Text(
-                      GameContentLocalization.ui(
-                        context,
-                        "Vous n'avez bloqué aucun joueur.",
-                      ),
+                      AppLocalizations.of(context)!.vousNAvezBloqueAucun,
                       style: const TextStyle(color: Colors.white70),
                     )
                     : SizedBox(
@@ -223,10 +220,7 @@ class _MainScreenState extends State<MainScreen> {
                                 if (ctx.mounted) Navigator.pop(ctx);
                               },
                               child: Text(
-                                GameContentLocalization.ui(
-                                  context,
-                                  "Débloquer",
-                                ),
+                                AppLocalizations.of(context)!.debloquer,
                                 style: const TextStyle(
                                   color: Colors.cyanAccent,
                                 ),
@@ -239,7 +233,7 @@ class _MainScreenState extends State<MainScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: Text(GameContentLocalization.ui(context, "Fermer")),
+                child: Text(AppLocalizations.of(context)!.fermer),
               ),
             ],
           ),
@@ -272,8 +266,8 @@ class _MainScreenState extends State<MainScreen> {
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  labelText: "Nouvel email",
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.nouvelEmail,
                   prefixIcon: Icon(Icons.alternate_email, color: Colors.cyanAccent),
                 ),
               ),
@@ -282,8 +276,8 @@ class _MainScreenState extends State<MainScreen> {
                 controller: passwordController,
                 obscureText: true,
                 style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  labelText: "Mot de passe actuel",
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.motDePasseActuel,
                   prefixIcon: Icon(Icons.lock_outline, color: Colors.cyanAccent),
                 ),
               ),
@@ -296,7 +290,7 @@ class _MainScreenState extends State<MainScreen> {
           actions: [
             TextButton(
               onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
-              child: const Text("Annuler"),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: isLoading ? null : () async {
@@ -319,8 +313,8 @@ class _MainScreenState extends State<MainScreen> {
                   if (dlgCtx.mounted) Navigator.pop(dlgCtx);
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Email mis à jour avec succès !"),
+                      SnackBar(
+                        content: Text(AppLocalizations.of(context)!.emailMisAJourAvec),
                         backgroundColor: Colors.green,
                       ),
                     );
@@ -334,7 +328,7 @@ class _MainScreenState extends State<MainScreen> {
               },
               child: isLoading
                   ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                  : const Text("Confirmer"),
+                  : Text("Confirmer"),
             ),
           ],
         ),
@@ -355,11 +349,11 @@ class _MainScreenState extends State<MainScreen> {
         builder: (context, setDlgState) => AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
           backgroundColor: const Color(0xFF1E1B2E),
-          title: const Row(
+          title: Row(
             children: [
               Icon(Icons.lock_reset_rounded, color: Colors.amberAccent),
               SizedBox(width: 8),
-              Text("Modifier mot de passe", style: TextStyle(color: Colors.white, fontSize: 18)),
+              Text(AppLocalizations.of(context)!.modifierMotDePasse, style: TextStyle(color: Colors.white, fontSize: 18)),
             ],
           ),
           content: SingleChildScrollView(
@@ -370,8 +364,8 @@ class _MainScreenState extends State<MainScreen> {
                   controller: currentPwdController,
                   obscureText: true,
                   style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: "Mot de passe actuel",
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.motDePasseActuel,
                     prefixIcon: Icon(Icons.lock_outline, color: Colors.amberAccent),
                   ),
                 ),
@@ -380,8 +374,8 @@ class _MainScreenState extends State<MainScreen> {
                   controller: newPwdController,
                   obscureText: true,
                   style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: "Nouveau mot de passe",
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.nouveauMotDePasse,
                     prefixIcon: Icon(Icons.vpn_key_outlined, color: Colors.amberAccent),
                   ),
                 ),
@@ -390,8 +384,8 @@ class _MainScreenState extends State<MainScreen> {
                   controller: confirmPwdController,
                   obscureText: true,
                   style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: "Confirmer le mot de passe",
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.confirmerLeMotDePasse,
                     prefixIcon: Icon(Icons.check_circle_outline, color: Colors.amberAccent),
                   ),
                 ),
@@ -405,7 +399,7 @@ class _MainScreenState extends State<MainScreen> {
           actions: [
             TextButton(
               onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
-              child: const Text("Annuler"),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: isLoading ? null : () async {
@@ -433,8 +427,8 @@ class _MainScreenState extends State<MainScreen> {
                   if (dlgCtx.mounted) Navigator.pop(dlgCtx);
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Mot de passe modifié avec succès !"),
+                      SnackBar(
+                        content: Text(AppLocalizations.of(context)!.motDePasseModifieAvec),
                         backgroundColor: Colors.green,
                       ),
                     );
@@ -490,7 +484,7 @@ class _MainScreenState extends State<MainScreen> {
                         children: [
                           ListTile(
                             leading: const Icon(Icons.photo_camera_rounded, color: Colors.amberAccent),
-                            title: const Text("Prendre une photo", style: TextStyle(color: Colors.white)),
+                            title: Text(AppLocalizations.of(context)!.prendreUnePhoto, style: TextStyle(color: Colors.white)),
                             onTap: () async {
                               Navigator.pop(bottomSheetCtx);
                               try {
@@ -520,7 +514,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           ListTile(
                             leading: const Icon(Icons.photo_library_rounded, color: Colors.cyanAccent),
-                            title: const Text("Choisir depuis la galerie", style: TextStyle(color: Colors.white)),
+                            title: Text(AppLocalizations.of(context)!.choisirDepuisLaGalerie, style: TextStyle(color: Colors.white)),
                             onTap: () async {
                               Navigator.pop(bottomSheetCtx);
                               try {
@@ -551,7 +545,7 @@ class _MainScreenState extends State<MainScreen> {
                           if (ps.photoUrl != null && ps.photoUrl!.isNotEmpty)
                             ListTile(
                               leading: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent),
-                              title: const Text("Supprimer la photo", style: TextStyle(color: Colors.redAccent)),
+                              title: Text(AppLocalizations.of(context)!.supprimerLaPhoto, style: TextStyle(color: Colors.redAccent)),
                               onTap: () async {
                                 Navigator.pop(bottomSheetCtx);
                                 setStateDialog(() => isUploadingPhoto = true);
@@ -559,7 +553,7 @@ class _MainScreenState extends State<MainScreen> {
                                 setStateDialog(() => isUploadingPhoto = false);
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Photo de profil retirée.")),
+                                    SnackBar(content: Text(AppLocalizations.of(context)!.photoDeProfilRetiree)),
                                   );
                                 }
                               },
@@ -739,8 +733,8 @@ class _MainScreenState extends State<MainScreen> {
                                           nameError = null;
                                         });
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(
-                                            content: Text("Pseudo mis à jour !"),
+                                          SnackBar(
+                                            content: Text(AppLocalizations.of(context)!.pseudoMisAJour),
                                             backgroundColor: Colors.green,
                                           ),
                                         );
@@ -817,11 +811,11 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       const Divider(height: 24),
                       Row(
-                        children: const [
+                        children: [
                           Icon(Icons.security, size: 16, color: Colors.cyanAccent),
                           SizedBox(width: 8),
                           Text(
-                            "Compte & Sécurité",
+                            AppLocalizations.of(context)!.compteSecurite,
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 13,
@@ -852,7 +846,7 @@ class _MainScreenState extends State<MainScreen> {
                                 side: const BorderSide(color: Colors.amberAccent, width: 0.8),
                               ),
                               icon: const Icon(Icons.lock_reset_rounded, size: 15, color: Colors.amberAccent),
-                              label: const Text("Mot de passe", style: TextStyle(color: Colors.amberAccent, fontSize: 12)),
+                              label: Text(AppLocalizations.of(context)!.password, style: TextStyle(color: Colors.amberAccent, fontSize: 12)),
                               onPressed: () => _showChangePasswordDialog(context, auth),
                             ),
                           ),
@@ -894,11 +888,8 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                         label: Text(
                           ps.blockedUsers.isNotEmpty
-                              ? "${GameContentLocalization.ui(context, "Joueurs bloqués")} (${ps.blockedUsers.length})"
-                              : GameContentLocalization.ui(
-                                context,
-                                "Joueurs bloqués",
-                              ),
+                              ? "${AppLocalizations.of(context)!.joueursBloques1} (${ps.blockedUsers.length})"
+                              : AppLocalizations.of(context)!.joueursBloques1,
                           style: const TextStyle(
                             color: Colors.white70,
                             fontSize: 12,
@@ -966,8 +957,8 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ],
                       ),
-                      const Text(
-                        "Édité par Parrel • v1.0.0",
+                      Text(
+                        AppLocalizations.of(context)!.editeParParrelV10,
                         style: TextStyle(color: Colors.white38, fontSize: 11),
                       ),
                       const SizedBox(height: 14),
@@ -1019,10 +1010,7 @@ class _MainScreenState extends State<MainScreen> {
                                           () => Navigator.pop(confirmCtx),
                                       child: Text(
                                         l10n?.cancel ??
-                                            GameContentLocalization.ui(
-                                              context,
-                                              "Annuler",
-                                            ),
+                                            AppLocalizations.of(context)!.cancel,
                                       ),
                                     ),
                                     ElevatedButton(
@@ -1134,7 +1122,7 @@ class _MainScreenState extends State<MainScreen> {
                         },
                         child: Text(
                           AppLocalizations.of(context)?.joinGame ??
-                              GameContentLocalization.ui(context, "Rejoindre"),
+                              AppLocalizations.of(context)!.joinGame,
                         ),
                       ),
                     ],

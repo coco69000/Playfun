@@ -28,7 +28,7 @@
   "elements": "'{0}' elementi",
   "prompt": "Prompt: \"'{0}'\"",
   "utiliser": "USA",
-  "packActiveElements": "✨ Pacchetto '''{0}''' attivato ('{1}' oggetti)!",
+  "packActiveElements": "✨ Pacchetto '{0}' attivato ('{1}' oggetti)!",
   "fusionner": "FONDI",
   "themesFusionnesLePackActif": "✨ Temi Uniti! Il pacchetto attivo ora contiene '{0}' oggetti.",
   "modifierCompleter": "Modifica / Completa",
@@ -46,7 +46,7 @@
   "generationIa": "Generazione IA: '{0}'",
   "historique": "Cronologia",
   "melangerPlusieursThemes": "Mischia più temi:",
-  "combineS": "✨ '{0 combinato}'",
+  "combineS": "✨ ''(0 combinato)''",
   "nombreDElements": "Numero di elementi:",
   "minRequisRecommande": "Minimo richiesto: '{0}' | Consigliato: '{1}'",
   "ambianceTonaliteDeJeu": "Atmosfera / Tonalità di gioco:",
@@ -224,7 +224,7 @@
   "valider": "Conferma",
   "indiceEnvoyeEnAttenteDes": "✅ Indizio inviato! In attesa degli altri giocatori...",
   "phaseDeDiscussion": "Fase di discussione",
-  "soupconne": "👀 '{0 sospetti}' '{1}'",
+  "soupconne": "👀 ''(0 sospetti)'' '{1}'",
   "lancerLeVote": "Avvia voto",
   "debattezLHoteLanceraLe": "Discutete! L''host avvierà la votazione.",
   "aQuiLaSentence": "A chi la sentenza?",
@@ -248,7 +248,7 @@
   "pts": "+'{0}' punti",
   "leGagnantEst": "Il vincitore è '{0}' !",
   "classementFinal": "Classifica finale:",
-  "points": "'{0}'. '{1}': '{2.}' punti",
+  "points": "'{0}'. '{1}': ''(2.)'' punti",
   "retourALAccueil": "Torna alla Home",
   "laPartieAEteTerminee": "La partita è terminata o non esiste più.",
   "quitterLaPartie1": "Lascia la partita",
@@ -268,7 +268,7 @@
   "conserverAvecLIa": "Mantieni con IA",
   "expulser": "Espelli",
   "vousAvezEteExcluDe": "Sei stato escluso per inattività. Il computer gioca al tuo posto (nessuna ricompensa).",
-  "s": "'{0}' s",
+  "s": "# '{0}'",
   "pts1": "{pName}: {pScore} pazienti",
   "@pts1": {
     "placeholders": {
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 XP {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "Non ha più carte",
-  "cartesRestantes": "'{0.}' carte rimanenti",
-  "jetonsMise": "Fiche: '{$0,}' | Puntata: '{$1,}'",
+  "cartesRestantes": "''(0.)'' carte rimanenti",
+  "jetonsMise": "Fiche: ''($0,)'' | Puntata: ''($1,)''",
   "totalPts": "Totale: '{0}' punti",
   "k13Remplies": "'{0}'/13 compilato",
   "finDeLaManche": "Fine del Round!",
@@ -308,7 +308,7 @@
   "vernissage": "Inaugurazione!",
   "albumDe": "Album di '{0}'",
   "prec": "Prec.",
-  "album": "Album '{0}' / '{1}'",
+  "album": "Traduzione: '{0}' '{1}'",
   "suiv": "Succ.",
   "devineCeQueRepresenteCe": "Indovina cosa rappresenta questo disegno:",
   "ecrisTaPhrase": "Scrivi la tua frase...",
@@ -329,7 +329,7 @@
   "zombieEnMain": "ZOMBIE IN MANO",
   "sauve": "'{0}' (Salvato!)",
   "mainDeCartes": "Mano di '{0}' ('{1}' carte)",
-  "votreMainDeSurvieCartes": "LA TUA MANO DI SOPRAVVIVENZA ('{0.}' carte)",
+  "votreMainDeSurvieCartes": "LA TUA MANO DI SOPRAVVIVENZA (''(0.)'' carte)",
   "lesPairesSontDefausseesAutomatiquement": "Le coppie vengono scartate automaticamente",
   "carteSEnJeu": "Carta/e in gioco:",
   "aucuneCarteEnJeuJouez": "Nessuna carta in gioco. Gioca ciò che vuoi!",
@@ -341,18 +341,18 @@
   "tempsEcoule": "Tempo scaduto!",
   "tourSuivant": "Turno Successivo",
   "enAttenteDeLHote3": "In attesa dell''host per avviare il turno successivo...",
-  "equipeAPts": "Squadra A: '{}' punti '{pts}'",
-  "equipeBPts": "Squadra B: '{}' pt '{pts}'",
+  "equipeAPts": "Squadra A: ''()'' punti '{pts}'",
+  "equipeBPts": "Squadra B: ''()'' pt '{pts}'",
   "cEstAToiDe": "Tocca a TE indovinare!",
   "passer1": "PASSA",
   "motsTrouves": "Parole trovate: '{0}'",
   "ecrivezIci": "Scrivi qui...",
   "plierPasser": "PIEGA E PASSA",
-  "motsRediges": "✏️ '{0.}' parole scritte...",
+  "motsRediges": "✏️ ''(0.)'' parole scritte...",
   "leGrandDepliage": "Il Grande Dispiegamento!",
   "voiciLesUvresCollectivesNees": "Ecco le opere collettive nate dalla vostra immaginazione:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' prepara un attacco ('{1}') contro un giocatore!",
-  "km": "{oppDist} km",
+  "km": "0 km {oppDist}",
   "@km": {
     "placeholders": {
       "oppDist": {
@@ -360,7 +360,7 @@
       }
     }
   },
-  "km1": "{myDistance} / {targetDist} km",
+  "km1": "0 / 1 km {myDistance} {targetDist}",
   "@km1": {
     "placeholders": {
       "myDistance": {
@@ -446,16 +446,16 @@
   "votes": "Voti:",
   "aVote": "'{0}' votato: '{1}'",
   "lesPointsOntEteDistribues": "I punti sono stati assegnati in base ai vostri voti.",
-  "leMotDesCivilsEtait": "La parola dei civili fu: '''{0}'''",
-  "leMotDeLInfiltre": "La parola dell''Infiltratore ('{0}') era: '''{1}'''",
+  "leMotDesCivilsEtait": "La parola dei civili fu: '{0}'",
+  "leMotDeLInfiltre": "La parola dell''Infiltratore ('{0}') era: '{1}'",
   "mrWhiteNAvaitPas": "Il signor White ('{0}') non aveva parole.",
-  "leMotATrouverEtait": "La parola da inventare era sinonimo di '''{0}'''. Gli altri giocatori segnano 1 punto.",
+  "leMotATrouverEtait": "La parola da inventare era sinonimo di '{0}'. Gli altri giocatori segnano 1 punto.",
   "felicitationsAuDessinateurEtA": "Congratulazioni al fumettista '{0}' e a '{1}' !",
-  "saReponseEtait": "La sua risposta fu: '''{0}'''.",
+  "saReponseEtait": "La sua risposta fu: '{0}'.",
   "leMotEtait": "La parola era:",
   "cartesRevelees": "Carte rivelate:",
   "erreurDeChargementDuMeme": "Errore nel caricamento del meme.",
-  "scoreActuelDeCartes": "Punteggio attuale di '{0}': '{1.}' carte.",
+  "scoreActuelDeCartes": "Punteggio attuale di '{0}': ''(1.)'' carte.",
   "finDuTour1": "Fine del turno",
   "tourSuivant1": "Prossimo turno",
   "enAttenteDeLHote4": "In attesa dell''host per il prossimo turno...",
@@ -550,7 +550,7 @@
   "extremites": "Estremità: ",
   "pioche2": "Pesca: '{count}'",
   "piocher": "Pesca",
-  "ficheDePts": "'{0 record}' ('{1}' pts)",
+  "ficheDePts": "''(0 record)'' ('{1}' pts)",
   "pts2": "{otherName} ({otherTotal} punti)",
   "@pts2": {
     "placeholders": {
@@ -644,15 +644,15 @@
   "joueursNonAssignes1": "Giocatori non assegnati",
   "confirmerLancer": "Conferma e Avvia",
   "choisirUnJeuLocal": "Scegli un Gioco Locale",
-  "ilFautAuMoinsJoueurs": "Per questa modalità servono almeno '{0.}' giocatori!",
-  "ceModeSupporteAuMaximum": "Questa modalità supporta un massimo di '{0.}' giocatori!",
+  "ilFautAuMoinsJoueurs": "Per questa modalità servono almeno ''(0.)'' giocatori!",
+  "ceModeSupporteAuMaximum": "Questa modalità supporta un massimo di ''(0.)'' giocatori!",
   "parametresActionOuVerite1": "Impostazioni: Obbligo o Verità",
   "parametresDeLaPartie": "Impostazioni della partita",
   "k1IntensiteDesDefis": "1. Intensità delle sfide",
   "generationIaPersonnalisee": "Generazione IA personalizzata",
   "exSoireePyjamaSecretsDe": "es: Pigiama party, Segreti di coppia, Aneddoti di lavoro...",
   "defisIaGeneres": "✨ '{0}' sfide generate dall''IA!",
-  "defisPrets": "✅ '{0 sfide}' pronte!",
+  "defisPrets": "✅ ''(0 sfide)'' pronte!",
   "commencerLaPartie": "INIZIA LA PARTITA",
   "actionOuVerite": "Obbligo o Verità",
   "choisisTonDestin": "Scegli il tuo destino...",
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "Premi ''Gira la ruota'' per iniziare!",
   "verite": "Verità",
   "action": "Obbligo",
-  "pts9": "'{0}' : '{1.}' punti",
+  "pts9": "'{0}' : ''(1.)'' punti",
   "parametresLeDilemme": "Impostazioni: Il Dilemma",
   "parametresDuDilemme": "Impostazioni del Dilemma",
   "k1DifficulteDesChoix": "1. Difficoltà delle scelte",
@@ -670,7 +670,7 @@
   "generationIaDeDilemmesPersonnalises": "Generazione IA di dilemmi personalizzati",
   "exSuperPouvoirsVieQuotidienne": "es: Superpoteri, Vita quotidiana, Scelte morali...",
   "dilemmesIaGeneres": "✨ '{0}' dilemmi generati dall''IA!",
-  "dilemmesPrets": "✅ '{0 dilemmi}' pronti",
+  "dilemmesPrets": "✅ ''(0 dilemmi)'' pronti",
   "commencerLesDilemmes": "INIZIA I DILEMMI",
   "gererLesScores": "Gestisci Punteggi",
   "leDilemme": "IL DILEMMA",
@@ -685,7 +685,7 @@
   "generationIaDeQuestionsSecretes": "Generazione IA di domande segrete",
   "exAmourSeductionTravailAnecdotes": "es: Amore e Seduzione, Lavoro, Momenti imbarazzanti...",
   "questionsIaGenerees": "✨ '{0}' domande generate dall''IA!",
-  "questionsPretes": "✅ '{0 domande}' pronte",
+  "questionsPretes": "✅ ''(0 domande)'' pronte",
   "lancerLaPiece": "LANCIA LA MONETA",
   "jeuDeLaPiece": "Gioco della Moneta",
   "tuAsChoisiLaPiece": "Hai scelto '{0}'. La moneta è caduta su... '{1}' !",
@@ -812,12 +812,12 @@
   "veuillezRevenirALEcran": "Torna alla schermata di configurazione dei giocatori.",
   "retour": "Indietro",
   "lEquipeAGagne": "La squadra '{0}' vinto!",
-  "points1": "'{0.}' punti",
+  "points1": "''(0.)'' punti",
   "passeLObjet": "Passa l''Oggetto",
   "passeLObjetRapidement": "Passa l''Oggetto Rapidamente",
   "generationIaDeQuestions": "Generazione IA di domande",
   "exCultureGeneraleGagesDroles": "es: Cultura generale, Penitenze divertenti, Amici...",
-  "questionsIaPretes": "✨ '{0 domande}' AI pronte!",
+  "questionsIaPretes": "✨ ''(0 domande)'' AI pronte!",
   "designerUnJoueurAleatoireA": "Designa un giocatore casuale a cui passare",
   "sinonPassezPhysiquementAQui": "Altrimenti passa fisicamente a chiunque desideri",
   "afficherLeChronometre": "Mostra il cronometro",
@@ -844,7 +844,7 @@
   "equipe2": "SQUADRA 2",
   "validerLesEquipes": "Conferma squadre",
   "placezLeTelephoneSurVotre": "METTI IL TELEFONO SULLA TUA FRONTE!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -856,7 +856,7 @@
   "arreter": "Ferma",
   "hautPasser": "Su = Passa",
   "resultatsDuPassage": "Risultati del turno",
-  "pointsMarques": "+'{0.}' punti segnati!",
+  "pointsMarques": "+''(0.)'' punti segnati!",
   "touchezUnMotPourModifier": "Tocca una parola per modificare il risultato in caso di errore del sensore:",
   "pts10": "{teamAScore} PTS",
   "@pts10": {
@@ -896,7 +896,7 @@
   },
   "partieTerminee2": "PARTITA FINITA!",
   "victoireDe": "Vittoria di '{0}' !",
-  "cartes": "'{0.}' carte",
+  "cartes": "''(0.)'' carte",
   "ecrireUnMessage": "Scrivi un messaggio...",
   "codeDeSalonPriveIntrouvable": "Codice della stanza privata non trovato.",
   "erreurLorsDeLaConnexion": "Errore di accesso: '{0}'",
@@ -922,7 +922,7 @@
   "creerLeSalonCout5": "Crea Salotto (Costo: 5 monete)",
   "lancerUnJeuPourLe": "Avvia un gioco per il salotto",
   "jouer1": "Gioca",
-  "joueurSEnJeu": "'{0.}' giocatore/i in gioco",
+  "joueurSEnJeu": "''(0.)'' giocatore/i in gioco",
   "cloturerLaPartie": "Chiudi partita",
   "pretS": "'{0}' prestito/i",
   "annulerLaPartie": "Annulla partita",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "Chiudere il salotto?",
   "leSalonSeraDefinitivementSupprime": "Il salotto verrà eliminato definitivamente per tutti i partecipanti.",
   "aCreeUnePartieDe": "'{0}' creato una partita di '{1}' !",
-  "joueurSPrets": "'{0.}' giocatori pronti",
+  "joueurSPrets": "''(0.)'' giocatori pronti",
   "cettePartieEstTermineeOu": "Questa partita è terminata o annullata.",
   "enPartie": "IN GIOCO",
   "partieDeTerminee": "Partita di '{0}' finita!",
   "statistiques": "Statistiche - '{0}'",
-  "vainqueur1": "Vincitore: '{0}''{1}'\n",
+  "vainqueur1": "Vincitore: '{0}''{1}'''''''\n",
   "voirLesStats": "Vedi statistiche",
   "message": "Messaggio...",
   "k0Pts": "0 PT",
@@ -969,7 +969,7 @@
   "regardezRealiserLeDefi": "Guarda '{0}' completare la sfida...",
   "voteDeValidation": "🗳️ VOTO DI CONVALIDA",
   "estCeQueAReleve": "'{0}' ha accettato la sfida?",
-  "votesRecus": "'{0}' / '{1.}' voti ricevuti",
+  "votesRecus": "'{0}' / ''(1.)'' voti ricevuti",
   "vosAmisVotentPourEvaluer": "I tuoi amici stanno votando per valutare la tua esibizione...",
   "votreVoteABienEte": "Il tuo voto è stato registrato!",
   "ouiValide": "SÌ, Convalidato! 👍",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' tirato di nuovo i dadi ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} ha tenuto il dado con valore {dieVal} (dado #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Piccone",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' altro '''{''' \r\n      Sicurezza anti-duplicazione: se il",
   "vousNAvezPasDe": "Non hai parole",
   "equipe12": "Squadra 1",
   "equipe21": "Squadra 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Fine della manica (pulsante admin)\r\n  Future<void> aoVEndRound (Stringa gameCode, Stringa playerId) asincrono '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      finaleRiferimento = _db.collection(''games'').doc(gameCode); \r\n      snap finale = attendere la transazione.get(gameRef); \r\n      se (!snap.exists) ritorna; \r\n\r\n      final gameData = snap.data() come Map<String, dinamico>; \r\n      player finali = Map<String, dinamico>.da(gameData[''players''] ?? '{}'); \r\n\r\n      Determina il vincitore (più XP)\r\n      Stringa winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        xp finale = (pData[''xp''] come num?)?. toInt() ?? 0; \r\n        se (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''Stato del gioco'': ''gioco Over'', \r\n        ''giocoVincente'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Qualcuno",
   "aAtteintPointsEtRemporte": "{winnerName} raggiunto {targetScore} punti e vinto la partita!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Il giocatore",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Domande List<String> =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely [difficoltà]?? \r\n          GameWords.cheÈPiùProbabile[",
   "honnete": "Onesto",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [pari, pari]; \r\n\r\n        Lista<stringa> ruoli mescolati = Lista.da(ordineGiocatore).. mescola(); \r\n        Stringa secUndercoverId = ruoli mescolati[0]; \r\n        Stringa secMrWhiteId = ruoli mescolati[1]; \r\n\r\n        Domanda =\r\n            \"Descrivi la tua parola segreta in una parola. Impostori, bluff!\"; \r\n        for (var pId in players.keys) '''{''' \r\n          Stringa pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": ") Par.split(",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} raggiunto {updatedScoresoverallWinnerId} punti e vinto la partita!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "gioca carta",
   "enchereAutomatique": "offerta automatica",
   "passeLEnchere": "passa l''asta",
-  "elseIfGametype": ") '''{''' \r\n        se (voterId == votedForId) '''{''' \r\n          lanciare Eccezione (\"Divieto formale di votare per se stessi!\"); \r\n        '''}''''}''' altro se (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          transazione, \r\n          Rif. del gioco, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: vero, \r\n        ); \r\n      }' \r\n\r\n      int richiestiVoti = player.length; \r\n\r\n      if (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          mappa<stringa finale, int> voteCounts = '{}'; \r\n          per (obiettivo finale in votes.values) '{' \r\n            voteCounts[target come String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          Lista<Stringa> votatoPiù alto = []; \r\n          voteCounts.forEcha((target, count) '''{''' \r\n            se (conta > maxVotes) '{' \r\n              maxVotes = conteggio; \r\n              VotatoPiù alto = [obiettivo]; \r\n            '}' altro se (contare == maxVotes) '{' \r\n              topVoted.add(target); \r\n            '}''''}'''); \r\n\r\n          Aggiornamenti[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        mappa<stringa finale, int> voteCounts = '{}'; \r\n        per (obiettivo finale in votes.values) '{' \r\n          voteCounts[target come String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        Lista<Stringa> votatoPiù alto = []; \r\n        voteCounts.forEcha((target, count) '''{''' \r\n          se (conta > maxVotes) '{' \r\n            maxVotes = conteggio; \r\n            VotatoPiù alto = [obiettivo]; \r\n          '}' altro se (contare == maxVotes) '{' \r\n            topVoted.add(target); \r\n          '}''''}'''); \r\n\r\n        if (topVoted.length == 1) '''{''' \r\n          vincitore finale = votato.primo; \r\n          Aggiornamenti[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          transazione, \r\n          Rif. del gioco, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: vero, \r\n        ); \r\n      )'' \r\n\r\n      int richiestiVoti = player.length; \r\n\r\n      if (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} vinto tutte le fiches sul tavolo!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "Il Giudice sta scegliendo...",
   "coupAutomatiqueJouePourCause": "Movimento automatico giocato a causa dell''inattività.",
   "inactivite": "inattività",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0 : 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0 : {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Turno dell''avversario",
   "derniereCartePosee": "Ultima carta giocata!",
   "cEstTonTour": "È il TUO turno!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0 : 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Errore: Domanda non trovata.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0 : 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(nessuna risposta)",
   "deuxDefisReussis": "Due sfide completate.",
   "leChallenger": "Lo Sfidante",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": "'{0}' '{1}'",
   "uneDescriptionHilarante": "una didascalia esilarante",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Column( \r\n            Figli: [ \r\n              Testo( \r\n                ''",
   "unProblemeEstSurvenu": "Si è verificato un problema.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      Predefinito: \r\n        round finaleWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "0 : 1 / 2 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Vedi punteggio finale",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "0 1 / 2 — 3 : 4 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (altezza: 20), \r\n                Wrap( \r\n                  allineamento: WrapAlignment.center, \r\n                  Figli: \r\n                      soloOneFilteredClues\r\n                          .map((clende) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (altezza: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Testo( \r\n                    AppLocalizations.of(contest)!. allIndiziSono stati, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' altro '''{''' \r\n          Sta al veggente giocare\r\n          return Column( \r\n            Figli: [ \r\n              Testo(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0 : 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,9 +2060,7 @@
   "designez2Amoureux": "Designa 2 innamorati",
   "amoureuxUnis": "Innamorati uniti!",
   "laVictime": "La vittima",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Figli: [ \r\n                _buildActionButton( \r\n                  etichetta: AppLocalizations.of(contest)!. infettare, \r\n                  Icona: Icons.auto_fix_high, \r\n                  colore: Colors.violaAccento, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      Contesto, \r\n                      ascolta: falso, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Vero, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox(larghezza: 8), \r\n                _buildActionButton( \r\n                  etichetta: AppLocalizations.of(contest)!. divorare, \r\n                  icona: Icons.close, \r\n                  colore: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        falso, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          station wagon; \r\n        scatola ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Nessuna vittima la scorsa notte (protetti o risparmiati)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              stile: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Colore: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''lupo'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(testo: messaggio), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Barra di trasmissione compatta\r\n          if (canSendMessage)\r\n            Row( \r\n              Figli: [ \r\n                Espanso( \r\n                  bambino: SizedBox( \r\n                    Altezza: 32, \r\n                    figlio: TextField( \r\n                      Controllore: _chatController, \r\n                      style: const TextStyle(fontSize: 12, color: Colors.white), \r\n                      decorazione: InputDecoration( \r\n                        suggerimentoTesto: \r\n                            AppLocalizations.of(contest)!. writeAu, \r\n                        suggerimentoStilo: const StiloTesto( \r\n                          colore: Colors.white30, \r\n                          fontDimensione: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Riempito: vero, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          orizzontale: 10, \r\n                          verticale: 0, \r\n                        ), \r\n                      ), \r\n                      onSubmit: (testo) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(larghezza: 4), \r\n                IconButton( \r\n                  icona: const Icon( \r\n                    Icons.send_rounded, \r\n                    Taglia: 18, \r\n                    colore: Colors.cyanAccent, \r\n                  ), \r\n                  riempimento: EdgeInsets.zero, \r\n                  vincoli: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    if (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Etichetta stringa, tipo stringa, colore attivocolore) '{' \r\n    bool finale isSelected = _selectedChatType == tipo; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = tipo), \r\n      figlio: Container( \r\n        imbottitura: const EdgeInsets.symmetric (orizzontale: 8, verticale: 3), \r\n        decorazione: BoxDecoration( \r\n          Colore: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colori.bianco.conOpacità(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Colore: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        bambino: Testo( \r\n          etichetta, \r\n          stile: TextStyle( \r\n            fontDimensione: 10, \r\n            PesoFont: isSelezionato? PesoFont.grassetto: PesoFont.normale, \r\n            color: isSelected? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- AGGIORNATO AVATAR PER RENDERLO INTERATTIVO--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder consente un timer visivo super fluido senza bloccare timer e manuale setState, il che alleggerisce notevolmente il thread (Punto 4)\r\n    final endTime = startTime.toDate().add( \r\n      Durata(secondi: durataInSecondi), \r\n    ); \r\n    finale rimanente = fineTempo.differenza(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      ritorna Testo( \r\n        AppLocalizations.of(contest)!. k0S, \r\n        style: Theme.of( \r\n          Contesto, \r\n        ).testoTema.titoloPiccolo?. copiaCon (colore: Colori.rossoAccento), \r\n      ); \r\n\r\n    ritorna TweenAnimationBuilder<Durata>( \r\n      Durata: rimanente, \r\n      preadolescente: preadolescente(inizio: rimanente, fine: Durata.zero), \r\n      builder: (BuildContext contest, valore Duration, Widget?) '{' \r\n        secondi finali = value.inSeconds; \r\n        ritorna Testo( \r\n          AppLocalizations.of(contest)!. tempoRimanente, \r\n          stile: Tema.di(contesto).testoTema.titoloPiccolo?. copiaWith( \r\n            colore: secondi < 20 ? colori.rossoAccento : Colori.AmberAccento, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Contesto BuildContext, \r\n    Map<stringa, dinamica> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    player finali = Mappa<Stringa, dinamico>.da(gameData[''players''] ?? '{}'); \r\n    player finale Ordine = Lista<Stringa>.da( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    posizioni finali = Map<String, dinamico>.from( \r\n      gameData[''piccoliCavalliPosizioni''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    Stringa finale currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    bool finale isMyTurn = currentPlayerId == playerId; \r\n    dadi int finali = (gameData[''littleHorsesDice''] come num?)?. toInt() ?? 0; \r\n    bool finale haTirato = gameData[''piccoliCavalliHasRotola''] ?? falso; \r\n    bool finale isTeamMode = gameData[''smallTeamHorses''] ?? falso; \r\n    finale Map<Stringa, dinamica> consecutivaSei = Mappa<Stringa, dinamica>.da( \r\n      gameData[''piccoliCavalliSeiConsecutivi''?? '{}', \r\n    ); \r\n    final int mySixStreak = consecutiveSixes[playerId] ?? 0; \r\n\r\n    Palette Moderna Neon / Arcade su sfondo scuro\r\n    Lista<Colore> giocatoreColori = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon azzurro cielo\r\n      const Color(0xFF10B981), // Verde smeraldo\r\n      const Color(0xFFF59E0B), // Ambra dorata\r\n    ]; \r\n\r\n    --- SCHERMATA DI VITTORIA--- \r\n    if (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      ritorna UniversalGameEndScreen( \r\n        giocoTitolo:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Arrivo al centro del tabellone!",
   "deplacezUnCheval": "MUOVI UN CAVALLO!",
   "aVousDeLancer": "TOCCA A TE TIRARE!",
@@ -2082,7 +2071,7 @@
   "toutesLesGrillesSontCompletees": "Tutte le schede sono completate!",
   "cEstVotreTourTouchez": "È il tuo turno! Tocca un dado per bloccarlo (dorato 🔒)",
   "lancerLesDes": "Lancia i dadi",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1-6: 0 /63 1 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1-6: 0 /63 1 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "PERSO! Rivela la domanda e rispondi!",
   "gagneTonSecretEstPreserve": "VINTO! Il tuo segreto è al sicuro.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    '''}''' altro '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (Variante)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    per (giocatore VAR in _activePlayers) '''{''' \r\n      if (giocatore == sotto copertura) '''{''' \r\n        _playerRoles[giocatore] = \"Infiltratore\"; \r\n      '''}''' altro se (giocatore == _mrWhitePlayer) '''{''' \r\n        _playerRoles[giocatore] = \"Mr. White\"; \r\n      '''}''' altro '''{''' \r\n        _playerRoles[giocatore] = \"Civile\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.rivelazione; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  vuoto _nextPlayerReveal() '''{''' \r\n    se (_currentPlayerRevealIndex < _activePlayers.lunghezza - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' altro '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(suonatore di archi) '''{''' \r\n    Ruolo della stringa = _playerRoles[giocatore]!; \r\n    bool impostorsWin = ruolo == \"Civil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGamState.result; \r\n      se (impostorsWin) '''{''' \r\n        _resultMessage = \"'{'player'}' era un Civile! Gli Impostori vincono!\"; \r\n      '''}''' altro '''{''' \r\n        _resultMessage = \"'{'player'}' era il\r\n    \r\n  ",
   "requiert4Joueurs": "Richiede 4+ giocatori",
   "requiert3Joueurs": "Richiede 3+ giocatori",
   "genereDesCategoriesAmusantesPour": "Genera categorie divertenti per la patata bollente. Tema: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Squadra Blu)",
   "k2EquipesSAffrontent": "2 squadre si sfidano",
   "chacunPourSoi": "Tutti contro tutti",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0 : {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2263,7 +2251,7 @@
   "ceJeuRequiertExactement4": "Questo gioco richiede esattamente 4 giocatori.",
   "auMoins3JoueursRequis": "Almeno 3 giocatori richiesti.",
   "auMoins2JoueursRequis": "Almeno 2 giocatori richiesti.",
-  "jeu": "Gioco: ''0'''}'''",
+  "jeu": "Gioco: ''0'''')''''",
   "ami": "Amico",
   "deconnecte": "scollegato",
   "suspect": "Sospetto",
@@ -2338,7 +2326,7 @@
   "fin50": "FINE 50",
   "essence": "Benzina",
   "roueDeSecours": "Ruota di\nRilievo",
-  "radarCaseCiblee": "Causa ''0'''}' mirata!",
+  "radarCaseCiblee": "Causa ''0'''')'' mirata!",
   "ys": "ð",
   "yaaz": "ð",
   "joker": "Joker",
@@ -2367,7 +2355,7 @@
   "lesAutresJugentTonHistoire": "Gli altri stanno valutando la tua storia...",
   "vrai1": "Vero",
   "faux1": "Falso",
-  "tuAsVote": "Hai votato: ''0''}",
+  "tuAsVote": "Hai votato: ''0'')",
   "aEteChoisiPourSa": "'{0}' è stato scelto per la sua risposta e ha vinto 1 punto!",
   "resultatsDesVotes": "Risultati dei voti",
   "leMenteurEtait": "Il bugiardo era... {liarName}!",
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Il turno è terminato.",
-  "aGagneAvecSaDescription": "{winnerName} ha vinto con la sua descrizione:AppLocalizations.of(context)! extrainfoColumnTesto bambino 9999999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Nessuno ha vinto questo round. Pareggio o nessuna didascalia.",
   "aTrouveLeSymboleIl": "{winnerName} trovato il simbolo 99999! Vince il biglietto. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Indizio inviato! In attesa degli altri...",
   "carte3": "Carta",
   "score": "Punteggio",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :Applausi.del(contesto)! .styleConstTextstyleColori {value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "La notte cade sul villaggio...\n\nChiudi gli occhi.",
   "leMomentEstVenuLe": "E'' arrivato il momento...\n\nIl villaggio deve votare.",
   "victoireDesVillageois": "Vittoria dei Contadini!",
@@ -2557,19 +2508,11 @@
   "touchezUnJoueurPourSonder": "Tocca un giocatore per sondarne il ruolo",
   "leRatMaladeRode": "Il Topo Malato si aggira...",
   "contaminezJusquA2Joueurs": "Infetta fino a 2 giocatori",
-  "contaminer": "Contaminare (''0'''}''')",
+  "contaminer": "Contaminare (''0'''')'''')",
   "lesLoupsChassentEnMeute": "I Lupi cacciano in branco",
   "votezPourDevorerUneProie": "Vota per divorare una preda",
   "espionnezUnJoueur": "Spia un giocatore...",
   "leLoupNoirDecideDu": "Il Lupo Nero decide il destino della preda",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infettare {targetName} ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf colpisce solo",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Scegli una vittima da divorare",
   "laSorcierePrepareSesPotions": "La Strega prepara le pozioni",
   "cibleDesLoups": "Bersaglio dei lupi: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Lupi",
   "outreTombe": "Oltretomba",
   "amoureux": "Innamorati",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldSmall Horses",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Corsa individuale",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 lanci)",
   "@k3Lancers": {
@@ -2645,7 +2580,7 @@
   "uneQuestionDrolePourLa": "Una domanda divertente per chi tiene l''oggetto!",
   "devinezLeMotAvecL": "Indovina la parola con l''aiuto degli altri!",
   "reperezLeSymboleCommunLe": "Individua il simbolo comune più velocemente!",
-  "genereDesDilemmesAuFormat": "Genera dilemmi in formato ''OptionA o OptionB''. Tema: ''0''}",
+  "genereDesDilemmesAuFormat": "Genera dilemmi in formato ''OptionA o OptionB''. Tema: ''0'')",
   "jePasse": "Passo",
   "vote": "Votazione",
   "votes1": "Votazioni",
@@ -2694,22 +2629,21 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Chi potrebbe di più?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Votato da:",
-  "decisionUnanimeDuGroupePour": "Decisione unanime del gruppo per ''0'''}'!",
+  "decisionUnanimeDuGroupePour": "Decisione unanime del gruppo per ''0'''')''!",
   "ilFautAuMoins41": "Ci vogliono almeno 4 giocatori per Codenames (2 per squadra)!",
   "impossibleDeFormerLesEquipes": "Impossibile formare le squadre (dimensione minima non raggiunta). Riavvia con almeno 4 giocatori.",
   "lEquipeAReveleL": "La squadra ha rivelato l''Assassino! La squadra '{1}' vince!",
   "bleue": "Blu",
   "lEquipeATrouveTous": "La squadra '{0}' ha trovato tutte le sue parole e ha vinto!",
   "maitreEspionDeLEquipe": "Maestro Espion della squadra '{0}'",
-  "equipeRouge1": "Squadra Rossa: ''0'''}'''",
-  "equipeBleue1": "Squadra Blu: ''0'''}'''",
-  "maitreEspion": "''0'''}' - Maestro Espion ''1''",
+  "equipeRouge1": "Squadra Rossa: ''0'''')''''",
+  "equipeBleue1": "Squadra Blu: ''0'''')''''",
+  "maitreEspion": "''0'''')'' - Maestro Espion ''1''",
   "passeLeTelephoneAuxAgents": "Passare il telefono agli agenti di squadra '{0}'",
   "mime": "Mimo",
-  "cEstAuTourDe2": "E'' la volta di ''0'''}''' (''1'''}''')",
-  "genereDesQuestionsAmusantesEt": "Genera domande divertenti e veloci da fare. Tema: ''0''}",
+  "cEstAuTourDe2": "E'' la volta di ''0'''')'''' (''1'''')'''')",
+  "genereDesQuestionsAmusantesEt": "Genera domande divertenti e veloci da fare. Tema: ''0'')",
   "s3": "{minDuration} s",
   "@s3": {
     "placeholders": {
@@ -2727,7 +2661,7 @@
     }
   },
   "fin1": "FINE",
-  "trouves": "Trovato: ''0'''}'''",
+  "trouves": "Trovato: ''0'''')''''",
   "ecurie1": "Scuderia 1",
   "ecurie2": "Scuderia 2",
   "ecurie3": "Scuderia 3",
@@ -2762,7 +2696,7 @@
   "talkie": "Walkie-Talkie",
   "tronconneuse": "Motosega",
   "survie": "Sopravvivenza",
-  "redigezLPour": "Scrivere ''0'''}''' per '{'1'}'",
+  "redigezLPour": "Scrivere ''0'''')'''' per '{1}'",
   "rejouerGarderPts": "RIGIOCA (MANTIENI PT)",
   "indicesMontresA": "Indizi mostrati a",
   "playersWinneridname": "Vincitore del titolo",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "** Obiettivo**\nPrendere carte per creare coppie corrispondenti. Evitare di essere il giocatore che detiene la carta Zombie alla fine del gioco.\n♪Draft ♪\n1. Il gioco inizia con 33 carte (16 coppie + 1 Zombie card).\n2. Le carte sono distribuite ai 4 giocatori.\n3. Ogni turno un giocatore prende una carta dal giocatore successivo.\n4. Se la scheda crea un paio, viene automaticamente sconfitto.\n5. La mano del giocatore è mescolata.\n6. Il primo giocatore a non avere più carte vinte.\n7. Il giocatore rimanente con la carta Zombie perso!",
   "butDuJeuObtenirLe": "# L''obiettivo e'' #\nOttenere il punteggio più alto compilando 13 categorie con 5 dadi.\n\n♪ Running of a tower ♪\n1. **Lance**: È possibile lanciare i 5 dadi fino a 3 volte per turno.\n2. Dopo il 1 ° o 2 ° tiro, è possibile mantenere alcuni dadi e riavviare gli altri.\n3. **Score**: Dopo almeno un tiro, devi scegliere una categoria da segnare. Ogni categoria può essere utilizzata solo una volta per parte.\n\n\"Category\"\nSomma dei dadi corrispondenti. (Bound 35 punti se la sezione superiore totale 63 punti o più).\n- **Brelan** (3 o più dadi identici): Somma di tutti i dadi.\n- ** Square** (4 o più dadi identici): Somma di tutti i dadi.\n- **Full** (3 dadi identici + 1 coppia): 25 punti.\n- **Small Suite** (4 dadi consecutivi): 30 punti.\n- **Large Suite** (5 dadi consecutivi): 40 punti.\n50 punti.\nSomma di tutti i dadi.",
   "objectifNePasAvoirL": "** Obiettivo**\nNon avere il dispositivo nelle mani quando la patata esplode!\n\n♪Draft ♪\n1. Un tema appare sullo schermo.\n2. Il giocatore che tiene il dispositivo deve dare una risposta corrispondente al tema.\n3. Appena ha risposto, ha rapidamente passato l''aereo al suo vicino.\n4. Il prossimo deve a sua volta trovare una nuova risposta e passare il dispositivo.\n5. Il tempo è nascosto e casuale: la patata può esplodere in qualsiasi momento!\n6. Il giocatore che tiene il dispositivo al momento dell''esplosione perde la maniglia e riceve un impegno.",
-  "principeGeneralGribouillisEstUn": "** Principio generale **\nGribouillis è un gioco di disegno ispirato al \"telefono arabo\", dove le idee cambiano in ogni fase. Ci sono 3 modalità di gioco:\n\n**1. Modalità normale (Arabic Illustrated Phone)****\nOgni giocatore scrive una frase.\nOgni giocatore riceve un''altra frase e la disegna.\nOgni giocatore riceve un disegno e indovina cosa rappresenta.\n- Alternanza. Il gioco alterna disegno e indovinare fino a quando ogni \"album\" è andato intorno a tutti i giocatori.\n- Ma... Divertiti a vedere come una semplice frase si trasforma in qualcosa di completamente diverso!\n\n**2. Modalità di completamento (disegno collaborativo)**\nOgni giocatore inizia un semplice disegno.\n- **Completo**: Ogni giocatore riceve il disegno di un altro e deve arricchirlo, senza cancellare ciò che esiste già.\n- Alternanza... Il disegno va da giocatore a giocatore, ogni aggiungendo il suo tocco.\n- Parametro \"Add 1\"\n- *Se disabilitato (default)*: E'' una corda. Il disegno si evolve in ogni fase (Player A -> Player B -> Player C...).\n- *Se attivato*: Il disegno iniziale di ogni giocatore è completato da tutti gli altri giocatori, creando diverse opere collettive in parallelo.\n- Ma... Creare opere collettive sorprendenti e divertenti di arte.\n\n**3. Modalità Brise-Glace (interazione creativa)**\n- **Writing**: Ogni giocatore scrive un tema personale (ex: AppLocalizations.of(context)!.myPreference).\nOgni giocatore riceve i temi da tutti gli altri giocatori e deve disegnarli.\n- **Ma**: Ideale per rompere il ghiaccio, scoprire i gusti degli altri e lanciare la creatività in modo collaborativo e leggero.",
   "yzObjectifAvoirLeMoins": "Obiettivo\n\nAvere il più pochi punti possibile alla fine del gioco.\nIl gioco si ferma quando un giocatore raggiunge 100 punti o più, e il vincitore è quello con il punteggio totale più basso.\n\nAttrezzatura\n\n150 carte numerate da –2 a +12\n\nAttuazione\n\nMescolare tutte le carte.\nOgni giocatore riceve 12 carte, posizionate faccia giù davanti a lui, in 4 colonne × 3 righe.\nLe altre carte formano uno stock. Ritorna la prima carta per formare i rifiuti.\nOgni giocatore restituisce 2 carte di sua scelta dal suo 12.\n\nIl corso di un tour\n\nA sua volta, hai **30 secondi** per scegliere tra due azioni:\n\n1. Prendere la carta di scarico\nDevi scambiarlo con una delle tue 12 carte (lato visibile o nascosto).\nLa carta sostituita va sui rifiuti.\n\n2. Piocher un volto carta giù\nGuarda la mappa:\n- o lo tieni e sostituisci una delle tue carte (come sopra),\n- o lo rifiuti → lo metti direttamente sui rifiuti, e in questo caso devi restituire una delle tue carte ancora nascoste.\n\nRegole speciali\n\nTre carte identiche in una colonna → sono immediatamente sconfitte (valore 0).\n\nFine della maniglia:\n\nLa maniglia termina quando un giocatore ha rivelato tutte le sue carte.\nTutti gli altri giocatori poi rivelare le loro carte rimanenti. La maniglia e'' finita.\nTutti i giocatori contano la somma delle loro carte.\n\nSi prega di notare: se il giocatore che finisce non ha il punteggio più basso nel giro, prende una penalità di +10 punti (il suo punteggio maniglia è raddoppiato nella versione originale, useremo +10 per semplificare).\n\nFine del gioco\n\nGiochiamo tutte le maniche di cui abbiamo bisogno.\nUna volta che un giocatore raggiunge 100 punti o più, il gioco si ferma.\nIl giocatore con il punteggio cumulativo più basso vince.",
   "iAReglesDuPoker": "Obiettivo\n\nVincere i chip da altri giocatori avendo:\n- la mano migliore di 5 carte durante il macello,\n- o facendoli rinunciare (a dormire) grazie alle scommesse.\n\nClassificazione delle mani (dal più forte al più debole)\n\n1. Colore reale: 10 – V – D – R – A dello stesso colore\n2. Quint flush: 5 carte che si seguono, stesso colore\n3. Quadrato: 4 carte identiche\n4. Pieno: 3 carte identiche + 1 coppia\n5. Colore (flusso): 5 carte dello stesso colore (non-consecutivo)\n6. Successivo (Fifth): 5 carte che si seguono a vicenda (colori diversi)\n7. Brelan: 3 carte identiche\n8. Doppia coppia\n9. Coppia\n10. Carta alta (più alta se nessuno ottiene meglio)\n\nð\n\n1. Tende\nIl giocatore a sinistra del dealer fissa il piccolo cieco.\nIl giocatore successivo imposta il big blind.\n\n2. Distribuzione\nOgni giocatore riceve 2 carte chiuse (le \"carte private\").\n\n3. Asta torri e carte comuni\n- Preflop: gioca con carte private.\n- Flop: 3 mappe comuni rivelate. Nuove scommesse.\n- Torre: 4° mappa comune rivelata. Nuove scommesse.\n- Fiume: 5a e ultima mappa comune rivelata. Ultima scommessa.\n\n4. Sparare (mostramento)\nSe diversi giocatori rimangono, ogni mostra il loro gioco.\nLa migliore combinazione di 5 carte (tra le sue 2 carte private + i 5 comuni) vince il piatto.\n\nPossibili azioni\n\nA sua volta, un giocatore ha **30 secondi** per:\n- Checker: non scommettere niente, solo se nessuno scommette di nuovo.\nMetti delle patatine nella pentola.\n- Seguire (Call): uguale alla corsa.\n- Rilancio (Raise): aumentare la puntata.\n- Vai a letto (Fold): lascia le carte e vattene.\n\nFine del gioco\n\nIl gioco continua finché rimangono almeno 2 giocatori con chip.\nIl vincitore finale è quello che prende tutte le chips.",
   "butDuJeuGagnerLe": "# L''obiettivo e'' #\nVinci il più XP effettuando azioni e rispondendo alle verità!\n\n♪Draft ♪\n1. La roulette è il giocatore il cui turno è.\n2. Il giocatore spara \"Azione\" o \"Verità\".\n3. Modalità classica: Viene visualizzata una sfida/questione casuale.\n4. Modalità del giudice: Un giocatore casuale scrive la sfida, allora il giocatore lo realizza.\n5. Altri giocatori validano con un voto Sì/No.\n6. La percentuale di convalida determina il XP vinto.\n\n# Regole speciali #\n- 100% validazione = massimo XP\n- Giocatore con la maggior parte XP diventa amministratore del gioco\n- Il pulsante \"Fine della maniglia\" consente di chiudere la parte",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "# L''obiettivo e'' #\nSii il più veloce per individuare l''unico simbolo identico tra la carta al centro e la propria carta.\n\n**Draft (Mode ''La Torre Infernale'')****\n1. Ogni giocatore riceve un volto della carta giù. Il resto delle carte formano un titolo al centro, faccia visibile.\n2. All''inizio, tutti ritornano la loro carta.\n3. Ogni giocatore deve trovare il più rapidamente possibile l''unico simbolo che è presente sia sulla sua carta che sulla Stock Card.\n4. Il primo giocatore che trova il simbolo, l''annuncio aloud, prende la carta di credito e lo mette sulla sua carta.\n5. Questa nuova carta diventa la sua carta per il prossimo round. Una nuova mappa viene poi rivelata al centro della Stock.\n6. Il gioco continua fino a quando il titolo è esaurito. Il giocatore che ha raccolto il maggior numero di carte alla fine vince!",
   "butDuJeuSeDebarrasser": "# L''obiettivo e'' #\nSbarazzati di tutte le sue carte facendone il primo!\n\n♪Draft ♪\n1. **Distribution**: Ogni giocatore riceve 7 carte. Il resto forma lo stock. Una carta viene restituita per avviare la pila di rifiuti.\n2. ** Giocare una carta**: Il giocatore il cui turno è di **30 secondi** per mettere una carta in mano sulla pila di rifiuti. La carta giocata deve corrispondere alla carta superiore dello stack da:\n***Color** (ex: Red on Red)\nTraduzione:\nTraduzione:\n* ** Carta speciale** (Joker, +4, ecc.)\n3. Se un giocatore non può giocare una carta nel tempo assegnato, deve scegliere una carta dal pacchetto. Se può giocare a questa carta, può farlo immediatamente. Altrimenti il suo turno finisce.\n4. ** Carte speciali**:\n# Due carte # Il giocatore successivo sceglie 2 carte e passa il suo turno.\n***Sens Forbidden (Passa il tuo turno) * Il giocatore successivo passa il suo turno.\n# Inversione # Il senso del gioco è invertito.\n♪Joker (Colour Change) ♪ Il giocatore sceglie il colore della prossima carta da giocare. Può essere giocato su qualsiasi carta.\nTraduzione: Il giocatore sceglie il colore. Il prossimo giocatore sceglie 4 carte e passa il suo turno. Questa carta può essere giocata solo se il giocatore non ha altra carta del colore richiesto sul mucchio di rifiuti (a meno che non sfoca).\n5. Quando un giocatore ha una sola carta in mano, deve annunciare \"UNO!\". Se non lo fa e viene preso da un altro giocatore (prima che il giocatore successivo giochi o raccoglie), deve prendere 2 carte.\n6. La maniglia termina quando un giocatore si libera della sua ultima carta. I punti sono contati. Il giocatore che raggiunge 500 punti (o un totale definito) vince il gioco.\n\n** Punti di carico: **\n* Carte digitali (0-9): il loro valore facciale.\n* +2, Sens Forbidden, Inversione: 20 punti.\n* Joker, Super Joker +4: 50 punti.",
   "principeDuJeuLeJeu": "## Principio del gioco\n* Il gioco è giocato tra **3 e 10 giocatori****.\n* Ogni giocatore dà accesso a una parte della sua libreria di foto e sceglie le foto da condividere.\n* Durante un gioco, una foto viene selezionata ** casualmente** da tutti i giocatori, quindi visualizzata per alcuni secondi.\nI giocatori devono indovinare chi possiede la foto mostrata.\n* Il giocatore che indovina correttamente la maggior parte delle foto vince il gioco.\n\n## Procedura\n1. ** Selezione delle foto**: Ogni giocatore sceglie una serie di foto dalla loro galleria.\n2. ** Inizio del gioco**: Una volta che tutti sono pronti, l''host lancia il gioco.\n3.\n- Viene mostrata una foto casuale per 5 secondi.\n- Tutti i giocatori votano per indovinare il proprietario.\n4. **Risultati**: I punteggi vengono aggiornati dopo ogni round.\n5. ** Fine della partita ** Dopo un numero impostato di giri, il giocatore con la maggior parte dei punti vince.",
-  "butDuJeuCoulerTous": "# L''obiettivo e'' #\nStuck tutte le navi dell''avversario prima che affonda le tue.\n\n♪Draft ♪\n1. Ogni giocatore mette segretamente la sua flotta su una griglia 10x10.\n- Portaerei (5 scatole)\n- Crociere (4 scatole)\n- Submarine (3 celle)\n- Distruttore (3 scatole)\n- Patrol (2 scatole)\n2. A sua volta, i giocatori toccano una scatola da sparare.\n3. **Risultato**: AppLocalizations.of(context)!.touche, \"Coulated\" o \"Acquosa\".\n4. **Victoire**: Il primo giocatore ad affondare l''intera flotta avversaria vince.",
   "butDuJeuEtreLe2": "# L''obiettivo e'' #\nSii il primo a raggiungere la distanza di destinazione (1000 km per impostazione predefinita).\n♪Draft ♪\n- Ogni giocatore riceve sei carte.\n- A sua volta, giocare una carta (Distance, Attacco, Difesa, Sicurezza) o sbarazzarsi di esso.\n- Le carte **Attacks** (Stop, Red, Essence, Crevaison, Limit) bloccano l''avversario.\n- Maps **Defenses** (Green, Extra Tank, Repair, End Limit) contro attacchi.\nLe carte **Sicurezza** cancellano un attacco e impediscono la sua ricorrenza.\n- Mappe **Distance** (25, 50, 75, 100, 200 km) spostare il veicolo in avanti.\n- Scegli una carta alla fine del tuo turno.",
   "butDuJeuEtreLe3": "# L''obiettivo e'' #\nSii il primo a sbarazzarsi di tutte le sue carte formando combinazioni valide (melds).\n\n♪ Running of a tower ♪\n1. **Piocher**: Prendere la mappa dalla parte superiore dei rifiuti OR Stock.\n2. **Vendita (opzionale)**: Posizionare combinazioni valide sul tavolo.\n- **Sequenza (Run)**: 3 o più carte dello stesso colore che seguono (ad esempio 5) L''Asso può essere alto o basso.\n- **Gruppo (Set)**: 3 o 4 carte dello stesso valore ma di colori diversi (ad esempio 8♥, 8\n3. **Default**: sbarazzarsi di una carta dalla sua mano sui rifiuti.\n\n# Fine della maniglia #\nIl primo giocatore che non ha più carte dopo la sconfitta vince. Gli altri contano i punti delle loro carte rimanenti (Figures = 10, As = 15, altri = valore nominale). Il gioco si ferma a 100 punti.",
   "butDuJeuFaireDeviner2": "# L''obiettivo e'' #\nFai indovinare al tuo team un massimo di parole prima della fine del tempo, senza usare le parole proibite!\n\n♪Draft ♪\n1. Ogni turno, un giocatore (\"l''altoparlante\") cerca di far indovinare una parola alla sua squadra.\n2. L''altoparlante non dovrebbe **mai** pronunciare la parola per indovinare, né nessuna delle parole \"Taboo\" (nessuna parola) visualizzate sotto la parola di destinazione. Né può usare traduzioni o parole della stessa famiglia.\n3. Se l''altoparlante utilizza una parola Taboo, la squadra avversaria (o il giudice) segnala la colpa, la carta viene annullata e l''altoparlante si sposta al prossimo.\n4. Ogni parola indovinata restituisce un punto alla squadra.\n5. Il turno termina quando il tempo è finito.\n\n# Fine della parte #\nLa squadra con più punti dopo il numero di giri definiti vince!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Devi giocare lo stesso numero di carte.",
   "combinaisonDe5CartesTrop": "Combinazione di 5 carte troppo debole.",
   "vousDevezJouerUneCarte": "Devi giocare una carta più alta.",
-  "aGagne1": "Ha vinto!",
   "ceNEstPasVotre": "Non è il tuo turno.",
   "carteIntrouvableDansLaMain": "Carta non trovata nella mano.",
   "coupInvalideSelonLesRegles": "Mossa non valida secondo le regole di Mille Bornes!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Il tempo è scaduto per dichiarare la verità!",
   "cibleHorsDeLaGrille": "Bersaglio fuori dalla griglia.",
   "caseDejaCiblee": "Casella già colpita.",
-  "aCouleTouteLaFlotte": "Ho affondato l''intera flotta nemica!",
   "placementAutomatiqueEffectue": "⏱️ Posizionamento automatico completato.",
   "tempsEcoulePourLaSaisie": "⏰ Tempo scaduto per l''inserimento delle parole. La partita inizia con quelle inserite!",
   "laPhaseDeVoteA": "La fase di votazione è iniziata!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "Una transazione di successo. Torna indietro.",
   "debugJoingameLaPartieN": "[DEBUG JoinGame] Il gioco non esiste o non è più nella hall. Torna al falso.",
   "erreurCritiqueDansJoingame": "--- ERROR CRITICA A JoinGame ---",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":Applausi. di(contesto)! .wordcivilParts0TrimWordundercoverIA restituisce parole semplici separate",
   "infiltre": "Infiltrato",
   "civil": "Civile",
   "vendeurDeFalafels": "Falafels venditore",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Combinazione non valida secondo le regole del Ramino!",
   "defaussezExactement1Carte": "Scarta esattamente 1 carta.",
   "carteNonTrouvee": "Carta non trovata.",
-  "aGagneLaManche": "Ha vinto il round!",
   "desDejaLancesPourCe": "Dice ha già lanciato per questo tour.",
   "vousDevezDAbordLancer": "Devi prima lanciare il dado.",
   "vousNePouvezPasDeplacer": "Non puoi muovere la pedina di un avversario!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Non puoi scegliere un colore adesso.",
   "erreurCritiquePlayerorderEstVide": "CRITICAL ERROR: il giocatoreorder è vuoto nel prossimo round. Non posso continuare.",
   "questionNonTrouvee": "Domanda non trovata",
-  "quiPourraitLePlusApplocalizations1": "Chi potrebbe più?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft",
   "menteur": "Bugiardo",
   "pasAssezDeJoueursPour": "Non abbastanza giocatori per questa moda.",
   "ajouteLaDescriptionLaPlus": "Aggiungi la descrizione più divertente a questo meme!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Ogni giocatore attivo deve piazzare almeno una carta prima di rilanciare.",
   "enchereInvalide": "Offerta non valida.",
   "laSurenchereDoitEtreSuperieure": "Il rilancio deve essere superiore.",
-  "applocalizationsOfContextUnjoueurEst": "??? AppLocalizations.of(context)!.aPlayer'}' è l''ultimo sopravvissuto e vince Skull!",
-  "applocalizationsOfContextUnjoueurA": "] ?? AppLocalizations.of(context)!.aPlayer'}' ha vinto 2 sfide e ha vinto il gioco!",
-  "applocalizationsOfContextUnjoueurRemporte": "??? AppLocalizations.of(context)!.aPlayer'}' vince Skull!",
   "reponseVide": "Risposta vuota.",
   "leJugeNePeutPas1": "Il Giudice non può inviare risposte.",
   "toutLeMondeARepondu": "Tutti hanno risposto! Apriamo la porta.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Tutti hanno risposto! Vota.",
   "toutesLesReponsesSontRecues": "Tutte le risposte sono ricevute! Il giudice deve decidere.",
   "joueurCibleIntrouvable": "Giocatore mirato non trovato.",
-  "quiPourraitLePlusApplocalizations2": "Chi potrebbe di più?AppLocalizations.of(context)!.elseIfGametypeSynonym o Banni",
   "vousNePouvezPasBannir": "Non puoi bandire il tuo stesso sinonimo!",
   "seulLeJugeEnTitre": "Solo il Giudice in carica può designare il vincitore.",
   "ceJoueurNAPas1": "Questo giocatore non ha inviato risposte.",
-  "quiPourraitLePlusApplocalizations3": "Chi potrebbe di più?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIf Il giudice",
-  "quiPourraitLePlusApplocalizations4": "Chi potrebbe più?Applocalizations.of(context)!.forFinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Pareggio perfetto! Nessun punto assegnato.",
   "egaliteDansLesVotesAucun": "Pareggio nei voti: nessun giocatore bandito in questo turno.",
   "laDescriptionLaPlusDrole": "È stata scelta la descrizione più divertente!",
   "aucuneDescriptionNAEte": "Nessuna descrizione è stata votata.",
-  "quiPourraitLePlusApplocalizations5": "Chi potrebbe di più?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Giudice non trovato.",
   "laPartieDeZeroPointe": "La partita di Zero Punti inizia! Ogni giocatore deve rivelare 2 carte.",
   "toutLeMondeARevele": "Tutti hanno rivelato le proprie carte. La partita inizia!",
@@ -3164,19 +3084,16 @@
   "cultureDefi": "🧠 Cultura & Sfida",
   "familleToutPublic": "👨‍👩‍👧‍👦 Famiglia & Per tutti",
   "piquantInsolite": "🌶️ Piccante & Insolito",
-  "quiPourraitLePlusApplocalizations6": "Chi potrebbe più?AppLocalizations.of(contesto)! .chi potrebbe il vostro modegroup",
   "devineT": "Indovina.",
   "presidente": "Presidente",
   "chargement": "Caricamento...",
   "cursive": "Curva",
   "exception": "Eccezione:",
-  "debutDeLaConstructionDe": "--- LA CONSTRUZIONE DELL''IMO DI VOTE ''Chi potrebbe il più?Applocazioni.of(contesto)!.printIsactiondependingStateTo( isActionPending)players''] come Mappa",
   "clicSurLeJoueurPname": "> > CLICCA sul giocatore ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Transizione da isActionPending a true.",
   "erreurFirebaseLorsDuVote": "♪ ERREUR Firebase durante il voto: $e",
   "appelFirebaseTerminePassageDe": "- La chiamata alla base antincendio e'' finita. Transizione da isActionPending a false.",
   "attentionLeWidgetNEst": "Widget e'' andato, setState ha annullato.",
-  "quiPourraitLePlusApplocalizations7": "Chi potrebbe di più?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "FASE DI PIAZZAMENTO",
   "stre9f4a5": "🏆 Leggendario!",
   "str21f597": "⭐ Eccellente!",
@@ -3204,8 +3121,7 @@
   "chill": "Relax",
   "soiree": "Festa",
   "competition": "Competizione",
-  "enCours": "CURRENT: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \"\"'}'\" : GameMessageLocalization.tr (contesto, ragione),",
+  "enCours": "CURRENT: '{0}'",
   "jAiLanceUnePartie2": "Ho avviato una partita",
   "piedDeBiche": "Piede di porco",
   "appTitle": "Gioco da Festa",
@@ -3243,7 +3159,7 @@
   "onboardingSlide2Subtitle": "Guadagna XP a ogni vittoria, sali di livello e sblocca obiettivi esclusivi per personalizzare il tuo profilo.",
   "onboardingSlide3Title": "Crea o partecipa in pochi secondi",
   "onboardingSlide3Subtitle": "Basta un codice a 6 cifre per radunare i tuoi amici, oppure avvia il matchmaking rapido.",
-  "vipPass": "Pass VIP",
+  "vipPass": "Passo VIP",
   "vipActive": "Il tuo Pass VIP è attivo!",
   "vipActiveDesc": "Tutte le funzioni (IA, Stanze, Video, Matchmaking) sono illimitate.",
   "choosePlan": "Scegli la tua formula:",
@@ -3935,24 +3851,24 @@
   "miroir": "specchio",
   "magie": "magia",
   "cascade": "cascata",
-  "dragon": "dragon",
-  "boussole": "boussole",
-  "diamant": "diamant",
-  "flamme": "flamme",
-  "horloge": "horloge",
-  "pirate": "pirate",
-  "vortex": "vortex",
-  "aurore": "aurore",
-  "papillon": "papillon",
-  "bouclier": "bouclier",
-  "labyrinthe": "labyrinthe",
-  "cristal": "cristal",
-  "volcan": "volcan",
-  "mirage": "mirage",
-  "sentinelle": "sentinelle",
-  "cloche": "cloche",
-  "lanterne": "lanterne",
-  "parchemin": "parchemin",
+  "dragon": "drago drago",
+  "boussole": "bussola",
+  "diamant": "diamante",
+  "flamme": "fuoco",
+  "horloge": "orologio orologio orologio",
+  "pirate": "pirata pirata",
+  "vortex": "vortice",
+  "aurore": "Aurora",
+  "papillon": "farfalla",
+  "bouclier": "scudo",
+  "labyrinthe": "labirinto",
+  "cristal": "cristallo di cristallo",
+  "volcan": "vulcano",
+  "mirage": "miraggio",
+  "sentinelle": "Sennel",
+  "cloche": "campana",
+  "lanterne": "lanterna",
+  "parchemin": "Pergamena",
   "aGagne2": "{gameDataplayerswin} ha vinto!",
   "@aGagne2": {
     "placeholders": {
@@ -3992,7 +3908,7 @@
     }
   },
   "stop": "STOP",
-  "coupFourrePareLAttaque1": "⚡ COUP-FOURRÉ ! {playerstargetIdnam} pare l''attaque avec {matchingSafety} et prend la main !",
+  "coupFourrePareLAttaque1": "- Cosa? 0 preparare l''attacco con 1 e prendere la mano! {playerstargetIdnam} {matchingSafety}",
   "@coupFourrePareLAttaque1": {
     "placeholders": {
       "playerstargetIdnam": {
@@ -4022,7 +3938,7 @@
       }
     }
   },
-  "aTireAutomatiquementEn": "⏱️ {shooterDataname} a tiré automatiquement en {targetIndex101}-{targetIndex1011} ({result}).",
+  "aTireAutomatiquementEn": "0 licenziato automaticamente in 1 - 2 ( 3 ). {shooterDataname} {targetIndex101} {targetIndex1011} {result}",
   "@aTireAutomatiquementEn": {
     "placeholders": {
       "shooterDataname": {
@@ -4050,7 +3966,7 @@
       }
     }
   },
-  "pliTermineAuTourDe3": "⏱️ Pli terminé. Au tour de {gameDataplayerspla}.",
+  "pliTermineAuTourDe3": "Ho chiuso. Alla volta di 0 . {gameDataplayerspla}",
   "@pliTermineAuTourDe3": {
     "placeholders": {
       "gameDataplayerspla": {
@@ -4066,7 +3982,7 @@
       }
     }
   },
-  "egalitePersistanteLeDestinDepartage1": "Égalité persistante ! Le destin départage au hasard : {playerDatarandomEl} est éliminé.",
+  "egalitePersistanteLeDestinDepartage1": "Eguaglianza costante! Il destino inizia a caso: 0 viene eliminato. {playerDatarandomEl}",
   "@egalitePersistanteLeDestinDepartage1": {
     "placeholders": {
       "playerDatarandomEl": {
@@ -4104,7 +4020,7 @@
       }
     }
   },
-  "leVillageDecouvreAvecEffroi1": "Le village découvre avec effroi le(s) corps de : {deadThisNightNames}.",
+  "leVillageDecouvreAvecEffroi1": "Il villaggio scopre con orrore il corpo(i) di: 0 . {deadThisNightNames}",
   "@leVillageDecouvreAvecEffroi1": {
     "placeholders": {
       "deadThisNightNames": {
@@ -4126,7 +4042,7 @@
       }
     }
   },
-  "etEtaitUnE": "Et {playerDataotherRev} était un(e) {otherRevealedRole} !",
+  "etEtaitUnE": "E 0 era un 1! {playerDataotherRev} {otherRevealedRole}",
   "@etEtaitUnE": {
     "placeholders": {
       "playerDataotherRev": {
@@ -4183,8 +4099,8 @@
       }
     }
   },
-  "lAncienCapitaine1": "L''ancien Capitaine",
-  "aDit": "{playerDataplayerId} a dit : ''{cleanClue}''",
+  "lAncienCapitaine1": "L''ex capitano",
+  "aDit": "0 detto: '' 1 '' {playerDataplayerId} {cleanClue}",
   "@aDit": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4195,7 +4111,7 @@
       }
     }
   },
-  "aDevineLeMotCivil1": "{gameDataplayerData} a deviné le mot civil (''{civilWord}'') !",
+  "aDevineLeMotCivil1": "0 indovina la parola civile ('' 1 '')! {gameDataplayerData} {civilWord}",
   "@aDevineLeMotCivil1": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4206,7 +4122,7 @@
       }
     }
   },
-  "aProposeMaisCeN": "{gameDataplayerData} a proposé ''{guessedWord}'', mais ce n''était pas le mot civil (''{civilWord}'') !",
+  "aProposeMaisCeN": "0 proposto '' 1 '', ma non era la parola civile ('' 2 '')! {gameDataplayerData} {guessedWord} {civilWord}",
   "@aProposeMaisCeN": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4220,7 +4136,7 @@
       }
     }
   },
-  "flottesPlaceesCommenceATirer1": "Flottes placées ! {playerDatafirstPla} commence à tirer.",
+  "flottesPlaceesCommenceATirer1": "Floats posto! 0 inizia a sparare. {playerDatafirstPla}",
   "@flottesPlaceesCommenceATirer1": {
     "placeholders": {
       "playerDatafirstPla": {
@@ -4228,7 +4144,7 @@
       }
     }
   },
-  "tousLesJoueursSontPrets1": "Tous les joueurs sont prêts ! {playerDatafirstPla} commence à tirer.",
+  "tousLesJoueursSontPrets1": "Tutti i giocatori sono pronti! 0 inizia a sparare. {playerDatafirstPla}",
   "@tousLesJoueursSontPrets1": {
     "placeholders": {
       "playerDatafirstPla": {
@@ -4236,7 +4152,7 @@
       }
     }
   },
-  "laMancheDeRamiCommence1": "La manche de Rami commence ! C''est au tour de {playersplayerIdsfi}.",
+  "laMancheDeRamiCommence1": "La manica di Rami inizia! E'' la volta di 0. {playersplayerIdsfi}",
   "@laMancheDeRamiCommence1": {
     "placeholders": {
       "playersplayerIdsfi": {
@@ -4252,7 +4168,7 @@
       }
     }
   },
-  "k3SixConsecutifsLePion1": "⚠️ 3 six consécutifs ! Le pion de {playersplayerIdnam} retourne à l''écurie et son tour passe.",
+  "k3SixConsecutifsLePion1": "Tre sei consecutivi! Il pedone di 0 ritorna alla stalla e il suo turno passa. {playersplayerIdnam}",
   "@k3SixConsecutifsLePion1": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4268,7 +4184,7 @@
       }
     }
   },
-  "atteintPoints": "{playersplayerIdnam} atteint {targetScore} points !",
+  "atteintPoints": "0 raggiunto 1 punti! {playersplayerIdnam} {targetScore}",
   "@atteintPoints": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4279,7 +4195,7 @@
       }
     }
   },
-  "atteintPoints1": "{playerswinnerIdnam} atteint {targetScore} points !",
+  "atteintPoints1": "0 raggiunto 1 punti! {playerswinnerIdnam} {targetScore}",
   "@atteintPoints1": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4290,7 +4206,7 @@
       }
     }
   },
-  "mancheTermineeGagneAvecXp": "Manche terminée ! {playerswinnerIdnam} gagne avec {maxXp} XP !",
+  "mancheTermineeGagneAvecXp": "Giù le maniche! 0 vince con 1 XP! {playerswinnerIdnam} {maxXp}",
   "@mancheTermineeGagneAvecXp": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4404,7 +4320,7 @@
       }
     }
   },
-  "passeSonTour4": "{playersplayerIdnam} passe son tour.",
+  "passeSonTour4": "0 passa il suo turno. {playersplayerIdnam}",
   "@passeSonTour4": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4420,7 +4336,7 @@
       }
     }
   },
-  "votreCibleEstEliminezLe1": "Votre cible est {playerDatamercenai}. Éliminez-le(la) au Jour 1 !",
+  "votreCibleEstEliminezLe1": "Il tuo obiettivo è 0. Eliminalo il Giorno 1! {playerDatamercenai}",
   "@votreCibleEstEliminezLe1": {
     "placeholders": {
       "playerDatamercenai": {
@@ -4494,7 +4410,7 @@
     }
   },
   "appelUnoInvalide": "Chiamata UNO non valida.",
-  "aChoisiLaCouleur": "{playersplayerIdnam} a choisi la couleur {chosenColor} !",
+  "aChoisiLaCouleur": "0 ha scelto il colore 1! {playersplayerIdnam} {chosenColor}",
   "@aChoisiLaCouleur": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4505,7 +4421,7 @@
       }
     }
   },
-  "estLeDernierSurvivantEt": "{playerswinnerIdnam} est le dernier survivant et remporte Skull !",
+  "estLeDernierSurvivantEt": "0 è l''ultimo sopravvissuto e vince Skull! {playerswinnerIdnam}",
   "@estLeDernierSurvivantEt": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4513,7 +4429,7 @@
       }
     }
   },
-  "aRemporte2DefisEt": "{playerschallengerI} a remporté 2 défis et gagne la partie !",
+  "aRemporte2DefisEt": "0 ha vinto 2 sfide e ha vinto il gioco! {playerschallengerI}",
   "@aRemporte2DefisEt": {
     "placeholders": {
       "playerschallengerI": {
@@ -4578,7 +4494,7 @@
       }
     }
   },
-  "faitTapisAllInEn1": "{myDataname} fait tapis (all-in) en relançant à {totalBetAmount} !",
+  "faitTapisAllInEn1": "0 fa tappeto (all-in) rilanciando a 1! {myDataname} {totalBetAmount}",
   "@faitTapisAllInEn1": {
     "placeholders": {
       "myDataname": {
@@ -4620,7 +4536,7 @@
       }
     }
   },
-  "aPrisA": "{playerDataplayerId} a pris à {suit} !",
+  "aPrisA": "0 ha preso 1! {playerDataplayerId} {suit}",
   "@aPrisA": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4634,7 +4550,7 @@
   "histoireCollective": "STORIA COLLETTIVA",
   "distance": "DISTANZA",
   "botte": "SICUREZZA",
-  "pneuIncrevable": "Pneu\nIncrevable",
+  "pneuIncrevable": "Tiro\nIneleggibile",
   "increvable": "ANTIFORATURA",
   "citerne": "CISTERNA",
   "attaque": "ATTACCO",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "Ho gettato una parte di 0! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Roles ( 0 ) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Disegna questa frase:\n\" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "0 è stato bandito per la sua proposta '' 1''! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 trovato la parola: '' 1 ''! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Nessuno ha trovato la parola: '' 0 ''. {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 trovato la parola: '' 1 ''! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "(Rivoluzione!)",
   "tonMotEst2": "La tua parola è: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Pareggio!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "Ho gettato una parte di 0! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "La partita di Yams inizia!",
   "logClueGivingStart": "La partita inizia! Dai il tuo indizio...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "Il gioco Belote inizia!",
   "logBlokusStart": "La partita di Blokus inizia!",
   "pokerFlop": "--- FLOP ---",
   "pokerTurn": "--- TURN ---",
   "pokerRiver": "--- RIVER ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "0 ha sparato: 1! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "Il Team 0 ha rivelato l''Assassino! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCIA LA SFIDA",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Massimo possibile: 0 carte {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 riflette su una sfida di 1 carte... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "Il tuo uomo ( 0 carte) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 /30 tratti {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "Indici presentati: 0 / 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Colore selezionato:",
   "pokerRaiseTo": "Rilancia a {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "OFFERTA",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Risposta da 0: \" 1 \" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carta successiva",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Role:",
   "obligatoire": "Obbligatorio",
   "aSelectionneSonPionEtReflechit": "{playerName} ha selezionato la sua pedina e sta pensando...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0 è stato segnalato e nascosto per voi. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Non poteva ottenere un token di accesso video LiveKit sicuro.",
+  "veuillezEntrerUneAdresseEmail": "Inserisci un indirizzo email valido.",
+  "veuillezEntrerVotreMotDe": "Inserisci la password corrente.",
+  "entrezVotreMotDePasse": "Inserisci la password corrente.",
+  "leNouveauMotDePasse": "La nuova password deve essere di almeno 6 caratteri.",
+  "lesDeuxMotsDePasse": "Entrambe le password non corrispondono.",
+  "photoDeProfilMiseA": "Foto del profilo aggiornata!",
+  "echecDuChangementDePhoto": "Il cambiamento di foto è fallito.",
+  "k3CaracteresMinimum": "Minimo 3 caratteri",
+  "cePseudoEstDejaPris": "Questo nick e'' gia'' preso.",
+  "unAmi": "Un amico",
+  "ceJoueur": "questo giocatore",
+  "preparationDeLaRecherche": "Preparazione della ricerca...",
+  "erreurDeConnexionAuMatchmaking": "Errore di connessione al matchmaking. Per favore riprovate.",
+  "erreurDeConnexionALa": "Errore di connessione alla camera.",
+  "legendeVivante": "La leggenda vivente",
+  "grandMaitre": "Gran Maestro",
+  "stratege": "Strategia",
+  "initie": "Iniziato",
+  "illimiteesVip": "Illimitato (VIP)",
+  "pieces": "0 pezzi {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "utente non connesso.",
+  "entrezUnPseudo": "Inserisci uno pseudo",
+  "cePseudoEstDejaPris1": "Questo soprannome è già preso",
+  "pseudoDejaPrisParUn": "Pseudo già preso da un altro giocatore",
+  "cetteVersionDeLApplication": "Questa versione dell''applicazione è obsoleta. Si prega di installare l''ultima versione.",
+  "playfunEstActuellementEnMaintenance": "Playfun è attualmente in corso di manutenzione per migliorare le vostre serate. Torna indietro tra un minuto!",
+  "uneNouvelleVersionDePlayfun": "È disponibile una nuova versione di Playfun! È necessario aggiornare l''app per continuare a giocare.",
+  "derniereVersion": "Ultima versione",
+  "echecDeLEnvoi": "La spedizione non è andata.",
   "demandeDAmiEnvoyeeA": "Richiesta di amicizia inviata a {name}!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Giocatore ( 0 ) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Attiva il video",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Disponibile",
+  "entrezUnEmailValide": "Inserisci una email valida",
+  "k6CaracteresMinimum": "Minimo 6 caratteri",
+  "pasDeCompteSInscrire": "Nessun conto? Registrazione",
+  "dejaUnCompteSeConnecter": "Già un conto? Accedi",
+  "conditionsGeneralesDUtilisationCgu": "Condizioni generali di utilizzo (CGU / EULA)",
+  "politiqueDeConfidentialite": "Informativa sulla privacy",
+  "miseAJourRequise": "Aggiornamento richiesto",
   "joueursBloques": "Giocatori bloccati ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Identificatori non validi o conto non esistente.",
+  "leMotEtaitLabel": "La parola era:",
+  "mancheLabel": "Mano",
+  "et": "e",
+  "pokerPlayerCheck": "{playerName} fa check.",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Parola:",
+  "rouges": "Rosse",
+  "noirs": "Nere",
+  "crane2": "Teschio",
+  "enAttente2": "Finanziamenti",
+  "enCours1": "In corso",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} ha selezionato la sua pedina e sta pensando...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Tempo rimanente: {seconds} s",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Pacchetto {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Variante)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 vince con 1 punto 2! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Vince il Teschio! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Pacchetto IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Standard",
+  "lui": "Lui",
+  "carte4": "Carta {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Giocatori bloccati",
+  "vousNAvezBloqueAucun": "Non hai bloccato alcun giocatore.",
+  "debloquer": "Sblocca",
+  "nouvelEmail": "Nuova email",
+  "motDePasseActuel": "Password corrente",
+  "emailMisAJourAvec": "Email aggiornata con successo!",
+  "modifierMotDePasse": "Cambia password",
+  "nouveauMotDePasse": "Nuova password",
+  "confirmerLeMotDePasse": "Conferma la password",
+  "motDePasseModifieAvec": "Password modificata con successo!",
+  "prendreUnePhoto": "Fai una foto",
+  "choisirDepuisLaGalerie": "Scegli tra la galleria",
+  "supprimerLaPhoto": "Cancella la foto",
+  "photoDeProfilRetiree": "Foto profilo rimosso.",
+  "pseudoMisAJour": "Nickname aggiornato!",
+  "compteSecurite": "Account di sicurezza",
+  "editeParParrelV10": "Modificato da Parrel • v1.0.0",
+  "aucunJeuTrouve": "Nessun gioco trovato",
+  "essaieDAjusterTesFiltres": "Prova a regolare i tuoi filtri o a fare un''altra ricerca.",
+  "reinitialiserLesFiltres": "Reimposta filtri",
+  "nouveau": "NUOVO",
+  "gererMonAbonnement": "Gestire il mio abbonamento",
+  "mesPieces": "Le mie camere",
+  "rechargerLesOffresDuStore": "Reload Store offerte",
+  "gererMesAbonnements": "Gestire i miei abbonamenti",
+  "badges": "Distintivi",
+  "partiesJouees": "Partite Giocate",
+  "xpTotalSession": "XP Totale Sessione",
+  "moyennePartie": "Media / Partita",
+  "detailParJeuPerformanceXp": "Dettaglio per Gioco e Prestazione XP",
+  "jouezVosPremieresPartiesPour": "Gioca le tue prime partite per vedere le tue statistiche XP qui!",
+  "xpAuCompteur": "{psxp} XP accumulati",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Ancora {xpRemaining} XP prima del Liv. {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} giocata{played1s} • {won} vittoria{won1s} • ~{gameXp} XP guadagnati",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Errore durante il caricamento dei dati utente.",
+  "vousDevezAccepterLesCgu": "È necessario accettare i CGU e l''Informativa sulla privacy per creare un account.",
+  "miseAJourDisponible": "Aggiornamento disponibile",
+  "plusTard": "Più tardi",
+  "mettreAJour": "Aggiorna",
+  "uneNouvelleVersionDePlayfun1": "Una nuova versione ({newVersion}) di Playfun è disponibile con novità e correzioni!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Manutenzione continua",
+  "mettreAJourMaintenant": "Aggiorna ora",
+  "motifDuSignalement": "Motivo della segnalazione:",
+  "tricheOuAntiJeu": "Trucco o comportamento antisportivo",
+  "autre": "Altro",
+  "signaler": "Segnala",
+  "detailParJeu": "Dettaglio per gioco:",
+  "ceJoueurNAPas2": "Questo giocatore non ha ancora partite registrate.",
+  "badgesDebloques": "Distintivi sbloccati: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Giocatori bloccati ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "Sblocca {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Segnala o blocca {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "voto"
 }

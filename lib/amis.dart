@@ -1862,7 +1862,7 @@ class FirebaseService {
         if (autoTitle.length > 28)
           autoTitle = "${autoTitle.substring(0, 28)}...";
       } else if (words.isNotEmpty) {
-        autoTitle = "Pack ${words.take(2).join(', ')}";
+        autoTitle = _l10n.pack(words.take(2).join(', '));
       } else {
         autoTitle = _l10n.theme(gameType);
       }
@@ -2826,7 +2826,7 @@ class FirebaseService {
         await _db.collection('lounges').doc(loungeId).update({
           'pendingGame': FieldValue.delete(),
           'lastGameResult': {
-            'gameName': gData['gameType'] ?? pendingGame['gameName'] ?? 'Jeu',
+            'gameName': gData['gameType'] ?? pendingGame['gameName'] ?? _l10n.jeu1,
             'winnerName': winnerName,
             'reason': reason,
             'timestamp': FieldValue.serverTimestamp(),
@@ -2862,7 +2862,7 @@ class FirebaseService {
             type: 'game_result',
             extraData: {
               'gameName': gData['gameType'] ?? pendingGame['gameName'],
-              'winnerName': 'Aucun',
+              'winnerName': _l10n.aucun,
               'reason': _l10n.tousLesJoueursSeSont,
               'oldGameCode': gameCode,
             },
@@ -2871,7 +2871,7 @@ class FirebaseService {
             'pendingGame': FieldValue.delete(),
             'lastGameResult': {
               'gameName': gData['gameType'] ?? pendingGame['gameName'],
-              'winnerName': 'Aucun',
+              'winnerName': _l10n.aucun,
               'reason': _l10n.tousLesJoueursSeSont,
               'timestamp': FieldValue.serverTimestamp(),
             },
@@ -7814,7 +7814,7 @@ class FirebaseService {
           if (gameWinnerId != null)
             'players.$gameWinnerId.score': FieldValue.increment(1),
           'gameEndReason':
-              _l10n.gagneAvecLeScoreLe(players[gameWinnerId]?['name'] ?? 'Joueur'),
+              _l10n.gagneAvecLeScoreLe(players[gameWinnerId]?['name'] ?? _l10n.joueur),
         });
       }
 
@@ -9219,7 +9219,7 @@ class FirebaseService {
         });
         shouldAdvance = true;
       } else {
-        String targetRole = playerData[targetId]?['role'] ?? 'Inconnu';
+        String targetRole = playerData[targetId]?['role'] ?? _l10n.inconnu;
         String targetName = playerData[targetId]?['name'] ?? _l10n.inconnu;
 
         if (!(playerData[spyId]?['privateInfo']?.contains("infecté") ??
@@ -10615,7 +10615,7 @@ class FirebaseService {
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       String formerCaptainName =
           playerData[formerCaptainId]?['name'] ?? _l10n.lAncienCapitaine1;
-      String newCaptainName = playerData[newCaptainId]?['name'] ?? 'Inconnu';
+      String newCaptainName = playerData[newCaptainId]?['name'] ?? _l10n.inconnu;
 
       if (playerData[newCaptainId]?['status'] == 'vivant') {
         final players = Map<String, dynamic>.from(gameData['players'] ?? {});
@@ -10713,9 +10713,9 @@ class FirebaseService {
       currentLovers.add(targetId);
       if (currentLovers.length == 2) {
         String lover1Name =
-            playerData[currentLovers[0]]?['name'] ?? 'Amoureux 1';
+            playerData[currentLovers[0]]?['name'] ?? _l10n.amoureux1;
         String lover2Name =
-            playerData[currentLovers[1]]?['name'] ?? 'Amoureux 2';
+            playerData[currentLovers[1]]?['name'] ?? _l10n.amoureux2;
         transaction.update(gameRef, {
           'lovers': currentLovers,
           'nightActions.cupidonActed': true,
@@ -11798,7 +11798,7 @@ class FirebaseService {
       wordUndercover =
           (idx + 1 < wordPairs.length)
               ? wordPairs[idx + 1].trim()
-              : "${rawPair.trim()} (Variante)";
+              : _l10n.variante1(rawPair.trim());
     }
 
     final roleCounts = Map<String, int>.from(
@@ -15462,7 +15462,7 @@ class FirebaseService {
           if (winnerId.isNotEmpty)
             'players.$winnerId.score': FieldValue.increment(1),
           'gameEndReason':
-              _l10n.aLePlusDXp(players[winnerId]?['name'] ?? 'Joueur', maxXp),
+              _l10n.aLePlusDXp(players[winnerId]?['name'] ?? _l10n.joueur, maxXp),
         });
       } else {
         transaction.update(gameRef, {
@@ -17703,7 +17703,7 @@ class FirebaseService {
             possibleTargets[Random().nextInt(possibleTargets.length)];
         playerData[mercenaireId]['mercenaireTarget'] = mercenaireTargetId;
         playerData[mercenaireId]['privateInfo'] =
-            _l10n.votreCibleEstEliminezLe1(playerData[mercenaireTargetId]?['name'] ?? 'Inconnu');
+            _l10n.votreCibleEstEliminezLe1(playerData[mercenaireTargetId]?['name'] ?? _l10n.inconnu);
       }
     }
 
@@ -19761,7 +19761,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameEndReason':
-              '$winnerName gagne avec $lowestScore point${lowestScore > 1 ? 's' : ''} !',
+              _l10n.gagneAvecPoint(winnerName, lowestScore, lowestScore > 1 ? 's' : ''),
         });
         return;
       }
@@ -20203,7 +20203,7 @@ class FirebaseService {
         for (var pId in players.keys) {
           await gameRef.collection('private_data').doc(pId).set({
             'isLiar': (pId == secretLiarId),
-            'role': (pId == secretLiarId) ? 'Menteur' : _l10n.honnete,
+            'role': (pId == secretLiarId) ? _l10n.menteur : _l10n.honnete,
           });
         }
         liarId = null;
@@ -21029,7 +21029,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': winnerId,
           'gameEndReason':
-              '${players[winnerId]?['name'] ?? _l10n.unJoueur} remporte Skull !',
+              _l10n.remporteSkull1(players[winnerId]?['name'] ?? _l10n.unJoueur),
         });
         return;
       }
@@ -22606,7 +22606,7 @@ class FirebaseService {
             if ((myData['currentBet'] as num).toInt() < currentBet) {
               throw Exception(_l10n.vousNePouvezPasChecker);
             }
-            handLog.add("${myData['name']} check.");
+            handLog.add(_l10n.pokerPlayerCheck(myData['name']));
             break;
           case 'call':
             int callAmount = currentBet - (myData['currentBet'] as num).toInt();
@@ -22907,7 +22907,7 @@ class FirebaseService {
 
       final winnerNames = winners
           .map((id) => playerData[id]?['name'] ?? _l10n.inconnu)
-          .join(' et ');
+          .join(' ${_l10n.et} ');
       winnerAnnouncement =
           _l10n.gagneNtLePotAvec(winnerNames, bestHand?.rank.name ?? _l10n.uneMain);
     }
@@ -23880,15 +23880,12 @@ class FriendsModeHomeScreen extends StatelessWidget {
               Icon(Icons.nightlife, color: Colors.deepPurpleAccent, size: 80),
               SizedBox(height: 20),
               Text(
-                GameContentLocalization.ui(context, AppLocalizations.of(context)!.appTitle),
+                AppLocalizations.of(context)!.appTitle,
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               Text(
-                GameContentLocalization.ui(
-                  context,
-                  GameContentLocalization.ui(context, AppLocalizations.of(context)!.leCompagnonDeVosMeilleures),
-                ),
+                AppLocalizations.of(context)!.leCompagnonDeVosMeilleures,
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -23953,7 +23950,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              GameContentLocalization.ui(context, AppLocalizations.of(context)!.entrezVotrePseudo),
+              AppLocalizations.of(context)!.entrezVotrePseudo,
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
@@ -23968,17 +23965,14 @@ class MultiplayerMenuScreen extends StatelessWidget {
             SizedBox(height: 40),
             ElevatedButton(
               child: Text(
-                GameContentLocalization.ui(context, AppLocalizations.of(context)!.createGame),
+                AppLocalizations.of(context)!.createGame,
               ),
               onPressed: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        GameContentLocalization.ui(
-                          context,
-                          AppLocalizations.of(context)!.veuillezEntrerUnPseudo,
-                        ),
+                        AppLocalizations.of(context)!.veuillezEntrerUnPseudo,
                       ),
                     ),
                   );
@@ -24001,7 +23995,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
             SizedBox(height: 15),
             OutlinedButton(
               child: Text(
-                GameContentLocalization.ui(context, AppLocalizations.of(context)!.rejoindreUnePartie),
+                AppLocalizations.of(context)!.rejoindreUnePartie,
               ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -24016,10 +24010,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        GameContentLocalization.ui(
-                          context,
-                          AppLocalizations.of(context)!.veuillezEntrerUnPseudo,
-                        ),
+                        AppLocalizations.of(context)!.veuillezEntrerUnPseudo,
                       ),
                     ),
                   );
@@ -26253,7 +26244,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                                                     .isNotEmpty
                                                                 ? _selectedAiThemes
                                                                     .join(', ')
-                                                                : "Pack IA $_selectedGame";
+                                                                : AppLocalizations.of(context)!.packIa(_selectedGame);
                                                       }
                                                       if (autoTitle.length >
                                                           25) {
@@ -28192,7 +28183,7 @@ AppLocalizations.of(context)!.jeu,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.difficulte1, [gameData['difficulty'] ?? 'Standard']),
+                        GameContentLocalization.format(context, AppLocalizations.of(context)!.difficulte1, [gameData['difficulty'] ?? AppLocalizations.of(context)!.standard]),
                       ),
                     ),
                   ),
@@ -29457,7 +29448,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     style: TextStyle(fontSize: 14, color: Colors.white),
                     children: [
                       TextSpan(
-                        text: "${"Mot:"} ",
+                        text: "${AppLocalizations.of(context)!.mot1} ",
                         style: TextStyle(color: Colors.white70),
                       ),
                       TextSpan(
@@ -30310,12 +30301,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                GameContentLocalization.ui(
-                  context,
-                  uploadedUrls.isEmpty
+                uploadedUrls.isEmpty
                       ? AppLocalizations.of(context)!.echecDeLUploadDes
                       : AppLocalizations.of(context)!.ilFautAuMoins3,
-                ),
               ),
             ),
           );
@@ -35705,8 +35693,8 @@ AppLocalizations.of(context)!.jouePar,
                 isMyTurn
                     ? GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstVotreTour1, [
                         currentColor == 'red'
-                            ? GameContentLocalization.ui(context, 'Rouges')
-                            : GameContentLocalization.ui(context, 'Noirs'),
+                            ? AppLocalizations.of(context)!.rouges
+                            : AppLocalizations.of(context)!.noirs,
                       ])
                     : GameContentLocalization.format(context, AppLocalizations.of(context)!.auTourDe, [players[currentPlayerId]?['name'] ?? '...']),
                 style: TextStyle(
@@ -35757,7 +35745,7 @@ AppLocalizations.of(context)!.jouePar,
                             Icon(Icons.touch_app, color: Colors.amberAccent, size: 14),
                             SizedBox(width: 6),
                             Text(
-                              GameContentLocalization.format(context, "{0} a sélectionné son pion et réfléchit...", [players[currentPlayerId]?['name'] ?? GameContentLocalization.ui(context, "L'adversaire")]),
+                              AppLocalizations.of(context)!.aSelectionneSonPionEt1(players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.lAdversaire),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontSize: 12,
@@ -40544,7 +40532,7 @@ AppLocalizations.of(context)!.jouePar,
         cardText = '+2';
         break;
       case 'wild':
-        cardText = 'ðŸŒˆ';
+        cardText = '🌈';
         break;
       case 'wild_draw4':
         cardText = '+4';
@@ -40862,7 +40850,7 @@ AppLocalizations.of(context)!.jouePar,
         winnerName: players[gameData['gameWinner']]?['name'],
         reason:
             gameData['gameEndReason'] ??
-            'dobbleAllCardsFound',
+            AppLocalizations.of(context)!.dobbleAllCardsFound,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -41041,7 +41029,7 @@ AppLocalizations.of(context)!.jouePar,
                   ),
                   SizedBox(width: 8),
                   Text(
-                    'dobbleDeckCards',
+                    AppLocalizations.of(context)!.dobbleDeckCards("$cardsLeftInDeck"),
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -41083,7 +41071,7 @@ AppLocalizations.of(context)!.jouePar,
                         ),
                         SizedBox(width: 6),
                         Text(
-                          'dobbleTapSameSymbol',
+                          AppLocalizations.of(context)!.dobbleTapSameSymbol,
                           style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 13,
@@ -41390,7 +41378,7 @@ AppLocalizations.of(context)!.jouePar,
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'dobblePenaltyWait',
+            AppLocalizations.of(context)!.dobblePenaltyWait,
             textAlign: TextAlign.center,
           ),
           backgroundColor: Colors.red[900],
@@ -41425,7 +41413,7 @@ AppLocalizations.of(context)!.jouePar,
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  'dobbleWrongSymbolWarning',
+                  AppLocalizations.of(context)!.dobbleWrongSymbolWarning,
                 ),
                 backgroundColor: Colors.orange,
                 duration: Duration(seconds: 1),
@@ -43843,10 +43831,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
                           players[card['ownerId']]?['name'] ?? AppLocalizations.of(context)!.joueur;
                       return Chip(
                         label: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0, [ownerName, card['type'] == 'Crane' ? GameContentLocalization.ui(context, "Crâne") : GameContentLocalization.ui(context, "Rose")]),
+GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0, [ownerName, card['type'] == 'Crane' ? AppLocalizations.of(context)!.crane2 : AppLocalizations.of(context)!.rose1]),
 ),
                         backgroundColor:
-                            card['type'] == AppLocalizations.of(context)!.crane1
+                            card['type'] == 'Crane'
                                 ? Colors.redAccent.withOpacity(0.3)
                                 : Colors.greenAccent.withOpacity(0.2),
                       );
@@ -43914,7 +43902,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               AppLocalizations.of(context)!.aTrouveLeSymboleIl(winnerName, commonSym);
           extraInfo = Text(
             GameContentLocalization.format(context, AppLocalizations.of(context)!.scoreActuelDeCartes, [
-                players[winnerId]?['name'] ?? 'Lui',
+                players[winnerId]?['name'] ?? AppLocalizations.of(context)!.lui,
                 players[winnerId]?['score'] ?? 0,
               ]),
             style: TextStyle(fontStyle: FontStyle.italic),
@@ -45103,7 +45091,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         winnerName: players[gameData['gameWinner']]?['name'],
         reason:
             gameData['gameEndReason'] ??
-            'petitBacGameOverReason',
+            AppLocalizations.of(context)!.petitBacGameOverReason,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -45253,7 +45241,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'petitBacMinOneCategory',
+                                      AppLocalizations.of(context)!.petitBacMinOneCategory,
                                     ),
                                   ),
                                 );
@@ -45444,7 +45432,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 hasSubmitted
                     ? Center(
                       child: _buildWaitingWidget(
-                        'petitBacWaitingForBell',
+                        AppLocalizations.of(context)!.petitBacWaitingForBell,
                         players,
                         submittedPlayers.length,
                         players.length,
@@ -47167,11 +47155,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _buildSkullDiscCard(
-                          type: AppLocalizations.of(context)!.rose1,
+                          type: 'Rose',
                           label: AppLocalizations.of(context)!.rose,
                           icon: Icons.filter_vintage_rounded,
                           color: Color(0xFFF472B6), // Rose doux
-                          count: myHand.where((c) => c == AppLocalizations.of(context)!.rose1).length,
+                          count: myHand.where((c) => c == 'Rose').length,
                           isMyTurn: isMyTurn,
                           onTap: () {
                             HapticFeedback.lightImpact();
@@ -47180,7 +47168,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                 .placeSkullCard(
                                   widget.gameCode,
                                   playerId,
-                                  AppLocalizations.of(context)!.rose1,
+                                  'Rose',
                                 )
                                 .whenComplete(() {
                                   if (mounted)
@@ -47190,11 +47178,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         ),
                         SizedBox(width: 16),
                         _buildSkullDiscCard(
-                          type: AppLocalizations.of(context)!.crane1,
+                          type: 'Crane',
                           label: AppLocalizations.of(context)!.crane,
                           icon: Icons.coronavirus_rounded,
                           color: Color(0xFFEF4444), // Rouge crâne
-                          count: myHand.where((c) => c == AppLocalizations.of(context)!.crane1).length,
+                          count: myHand.where((c) => c == 'Crane').length,
                           isMyTurn: isMyTurn,
                           onTap: () {
                             HapticFeedback.mediumImpact();
@@ -47203,7 +47191,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                 .placeSkullCard(
                                   widget.gameCode,
                                   playerId,
-                                  AppLocalizations.of(context)!.crane1,
+                                  'Crane',
                                 )
                                 .whenComplete(() {
                                   if (mounted)
@@ -47986,7 +47974,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "${"Carte"} $deckIndex / $deckTotal",
+                  AppLocalizations.of(context)!.carte4(deckIndex, deckTotal),
                   style: TextStyle(color: Colors.white54, fontSize: 14),
                 ),
                 SizedBox(height: 12),
@@ -48003,7 +47991,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "${AppLocalizations.of(context)!.leMotEtait} ${justOneCurrentWord ?? ''}",
+                  "${AppLocalizations.of(context)!.leMotEtaitLabel} ${justOneCurrentWord ?? ''}",
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -48242,7 +48230,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           return Column(
             children: [
               Text(
-                "${AppLocalizations.of(context)!.carte} $deckIndex / $deckTotal — ${AppLocalizations.of(context)!.score} : $totalScore",
+                "${AppLocalizations.of(context)!.carte3} $deckIndex / $deckTotal — ${AppLocalizations.of(context)!.score} : $totalScore",
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
@@ -48444,7 +48432,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${AppLocalizations.of(context)!.manche} $currentRound",
+                "${AppLocalizations.of(context)!.mancheLabel} $currentRound",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               Row(
@@ -50174,7 +50162,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                           style: TextStyle(fontSize: 11, color: Colors.white),
                           children: [
                             TextSpan(
-                              text: isMine ? "${"Moi"}: " : "$senderName: ",
+                              text: isMine ? "${AppLocalizations.of(context)!.moi}: " : "$senderName: ",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color:
@@ -50320,9 +50308,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       builder: (BuildContext context, Duration value, Widget? child) {
         final seconds = value.inSeconds;
         return Text(
-          GameContentLocalization.format(context, "Temps restant : {0} s", [
-            seconds,
-          ]),
+          AppLocalizations.of(context)!.tempsRestantS1(seconds),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             color: seconds < 20 ? Colors.redAccent : Colors.amberAccent,
           ),
@@ -56053,11 +56039,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                       final res =
                                           await FirebaseService.generateAiWords(
                                             instructions:
-                                                GameContentLocalization.format(
-                                                  context,
-                                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.genereDesDilemmesAuFormat, [_aiController.text.trim()]),
-                                                  [_aiController.text.trim()],
-                                                ),
+                                                GameContentLocalization.format(context, AppLocalizations.of(context)!.genereDesDilemmesAuFormat, [_aiController.text.trim()]),
                                             count: 25,
                                             gameType: AppLocalizations.of(context)!.leDilemme1,
                                           );
@@ -56398,9 +56380,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
               SizedBox(height: 10),
               Text(
                 voteCount <= 1
-                    ? GameContentLocalization.format(context, AppLocalizations.of(context)!.vote, [
-                      '$voteCount',
-                    ])
+                    ? AppLocalizations.of(context)!.vote1
                     : GameContentLocalization.format(context, AppLocalizations.of(context)!.votes1, [
                       '$voteCount',
                     ]),
@@ -59694,11 +59674,7 @@ class _WhoIsMostLikelyLocalScreenState
                     subtitle:
                         votersList.isNotEmpty
                             ? Text(
-                              GameContentLocalization.format(
-                                context,
-                                GameContentLocalization.format(context, AppLocalizations.of(context)!.votePar, [votersList.join(", ")]),
-                                [votersList.join(", ")],
-                              ),
+                              GameContentLocalization.format(context, AppLocalizations.of(context)!.votePar, [votersList.join(", ")]),
                               style: TextStyle(fontSize: 12),
                             )
                             : Text(
@@ -59721,7 +59697,7 @@ class _WhoIsMostLikelyLocalScreenState
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        GameContentLocalization.format(context, "{0} {1}", [votesReceived, votesReceived > 1 ? GameContentLocalization.ui(context, "votes") : GameContentLocalization.ui(context, "vote")]),
+                        "${votesReceived} ${votesReceived > 1 ? AppLocalizations.of(context)!.votes : AppLocalizations.of(context)!.vote1}",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -59920,29 +59896,10 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
       _revealedWords[word] = true;
 
       if (actualColor == 'assassin') {
-        _gameResult = GameContentLocalization.format(
-          context,
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeAReveleL, [
-            GameContentLocalization.ui(
-              context,
-              _activeTeam == 'red' ? 'Rouge' : 'Bleue',
-            ),
-            GameContentLocalization.ui(
-              context,
-              opponentTeam == 'red' ? 'Rouge' : 'Bleue',
-            ),
-          ]),
-          [
-            GameContentLocalization.ui(
-              context,
-              _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-            ),
-            GameContentLocalization.ui(
-              context,
-              opponentTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-            ),
-          ],
-        );
+        _gameResult = GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeAReveleL, [
+            _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
+            opponentTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
+          ]);
         _gameState = CodenamesLocalGameState.gameOver;
         return;
       }
@@ -59955,21 +59912,9 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         }
         _guessesLeft--;
         if (_redScore == 0 || _blueScore == 0) {
-          _gameResult = GameContentLocalization.format(
-            context,
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeATrouveTous, [
-              GameContentLocalization.ui(
-                context,
-                _activeTeam == 'red' ? 'Rouge' : 'Bleue',
-              ),
-            ]),
-            [
-              GameContentLocalization.ui(
-                context,
-                _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-              ),
-            ],
-          );
+          _gameResult = GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeATrouveTous, [
+              _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
+            ]);
           _gameState = CodenamesLocalGameState.gameOver;
           return;
         }
@@ -59981,21 +59926,9 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             _blueScore--;
 
           if (_redScore == 0 || _blueScore == 0) {
-            _gameResult = GameContentLocalization.format(
-              context,
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeATrouveTous, [
-                GameContentLocalization.ui(
-                  context,
-                  actualColor == 'red' ? 'Rouge' : 'Bleue',
-                ),
-              ]),
-              [
-                GameContentLocalization.ui(
-                  context,
-                  actualColor == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-                ),
-              ],
-            );
+            _gameResult = GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeATrouveTous, [
+                actualColor == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
+              ]);
             _gameState = CodenamesLocalGameState.gameOver;
             return;
           }
@@ -60096,21 +60029,9 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 4),
               Text(
-                GameContentLocalization.format(
-                  context,
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.maitreEspionDeLEquipe, [
-                    GameContentLocalization.ui(
-                      context,
-                      _activeTeam == 'red' ? 'Rouge' : 'Bleue',
-                    ),
+                GameContentLocalization.format(context, AppLocalizations.of(context)!.maitreEspionDeLEquipe, [
+                    _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
                   ]),
-                  [
-                    GameContentLocalization.ui(
-                      context,
-                      _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-                    ),
-                  ],
-                ),
                 style: TextStyle(color: Colors.white70),
                 textAlign: TextAlign.center,
               ),
@@ -60164,7 +60085,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               SizedBox(height: 8),
               Text(
                 GameContentLocalization.format(context, AppLocalizations.of(context)!.equipe1, [
-                  _activeTeam == 'red' ? 'Rouge' : 'Bleue',
+                  _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRed : AppLocalizations.of(context)!.codenamesBlue,
                 ]),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color:
@@ -60417,10 +60338,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
         Text(
           GameContentLocalization.format(context, AppLocalizations.of(context)!.maitreEspion, [
             currentMasterSpy,
-            GameContentLocalization.ui(
-              context,
-              _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-            ),
+            _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
           ]),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
@@ -60468,21 +60386,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
         _buildScoreDisplay(),
         SizedBox(height: 15),
         Text(
-          GameContentLocalization.format(
-            context,
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.passeLeTelephoneAuxAgents, [
-              GameContentLocalization.ui(
-                context,
-                _activeTeam == 'red' ? 'Rouge' : 'Bleue',
-              ),
+          GameContentLocalization.format(context, AppLocalizations.of(context)!.passeLeTelephoneAuxAgents, [
+              _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
             ]),
-            [
-              GameContentLocalization.ui(
-                context,
-                _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-              ),
-            ],
-          ),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
@@ -61262,23 +61168,10 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ),
         SizedBox(height: 10),
         Text(
-          GameContentLocalization.format(
-            context,
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstAuTourDe2, [
+          GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstAuTourDe2, [
               currentGuesser,
-              GameContentLocalization.ui(
-                context,
-                _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRedTeam : AppLocalizations.of(context)!.codenamesBlueTeam,
-              ),
+              _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRedTeam : AppLocalizations.of(context)!.codenamesBlueTeam,
             ]),
-            [
-              currentGuesser,
-              GameContentLocalization.ui(
-                context,
-                _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRedTeam : AppLocalizations.of(context)!.codenamesBlueTeam,
-              ),
-            ],
-          ),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -61786,11 +61679,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                         final res =
                                             await FirebaseService.generateAiWords(
                                               instructions:
-                                                  GameContentLocalization.format(
-                                                    context,
-                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.genereDesQuestionsAmusantesEt, [_aiController.text.trim()]),
-                                                    [_aiController.text.trim()],
-                                                  ),
+                                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.genereDesQuestionsAmusantesEt, [_aiController.text.trim()]),
                                               count: 25,
                                               gameType: AppLocalizations.of(context)!.onSePasseUnObjet,
                                             );
@@ -65942,7 +65831,7 @@ backgroundColor: Colors.redAccent,
                           Icon(Icons.people, size: 16, color: isFull ? Colors.redAccent : Colors.white70),
                           SizedBox(height: 2),
                           Text(
-                            GameContentLocalization.format(context, "{0} / {1}", [activeCount, maxPlayers]),
+                            "${activeCount} / ${maxPlayers}",
                             style: TextStyle(
                               color: isFull ? Colors.redAccent : Colors.white70,
                               fontWeight: FontWeight.bold,
@@ -66412,7 +66301,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
           icon: Icon(Icons.hourglass_top, size: 18),
-          label: Text("${GameContentLocalization.ui(context, "En attente")} (${joined.length})"),
+          label: Text("${AppLocalizations.of(context)!.enAttente2} (${joined.length})"),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.deepPurple,
             foregroundColor: Colors.white,
@@ -66431,7 +66320,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
           icon: Icon(Icons.play_circle_fill, size: 18),
-          label: Text("${GameContentLocalization.ui(context, "En cours")} ($gameName)"),
+          label: Text("${AppLocalizations.of(context)!.enCours1} ($gameName)"),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.orange[800],
             foregroundColor: Colors.white,
@@ -67282,7 +67171,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                                   content: Text(
                                                     GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur1, [
                                                         msg['extraData']['winnerName'] ??
-                                                            'Inconnu',
+                                                            AppLocalizations.of(context)!.inconnu,
                                                         msg['extraData']['reason'] ??
                                                             '',
                                                       ]),

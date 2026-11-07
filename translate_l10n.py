@@ -88,7 +88,7 @@ DATABASE_KEYS = {
     'slots', 'recent', 'text/plain', 'Courier', 'serif', 'fr',
     # Valeurs d'état / rôles internes stockés en base et comparés dans la logique métier
     'Héritier', 'Sorcière', 'Infiltré', 'Fantôme', 'Déesse de la Justice', 'Les Amoureux',
-    'infecté', 'contaminé', 'pioche', 'Carré', 'Complément', 'Aucun',
+    'infecté', 'contaminé', 'pioche', 'Carré', 'Complément',
     'Simple Villageois', 'Voyante', 'Chasseur', 'Petite Fille', 'Cupidon', 'Garde',
     'Capitaine', 'Loup Noir', 'Loup Bavard', 'Loup Blanc', 'Mercenaire', 'Rat Malade',
     'Mentaliste', 'Fossoyeur', 'Dictateur', 'Chaperon Rouge', 'Pyromancien', 'Villageois',
@@ -160,6 +160,14 @@ FR_WORDS = {
     "reflechit", "termine", "restant", "ecrire", "meute", "vie",
     "personne", "systeme", "disponible", "ami", "connecte", "utilisateur",
     "identifiants", "incorrects", "compte", "inexistant",
+    "rouge", "bleue", "bleu", "noirs", "noir", "jeu", "pack", "et",
+    "inconnu", "inconnue", "amoureux", "variante", "standard", "lui",
+    "remporte", "menteur", "honnete", "votes", "crane", "rose", "cours",
+    "check", "confirmer", "modifier", "actuel", "nouveau", "abonnement",
+    "abonnements", "pieces", "gerer", "maintenant", "retiree", "profil",
+    "photo", "inapproprie", "insultes", "triche", "publicite", "offensante",
+    "motif", "signalement", "signaler", "debloquer", "bloques", "etoile",
+    "edite",
 }
 
 
@@ -364,6 +372,8 @@ def parse_dart_map_literal(map_str):
 def escape_icu_single_quotes(text):
     if not isinstance(text, str):
         return text
+    # Normaliser les anciens échappements corrompus du type '{'0'}' -> '{0}'
+    text = re.sub(r"'\{'([A-Za-z0-9_]+)'\}'", r"'{\1}'", text)
     # Protéger les blocs '{...}' déjà échappés pour ICU (ex: '{0}', '{player}')
     protected = {}
     def _protect(m):
@@ -375,6 +385,319 @@ def escape_icu_single_quotes(text):
     for tok, orig in protected.items():
         s = s.replace(tok, orig)
     return s
+
+
+def split_top_level_dart_args(s):
+    """Sépare une liste d'arguments Dart par les virgules de niveau 0."""
+    args = []
+    cur = []
+    depth = 0
+    i = 0
+    n = len(s)
+    while i < n:
+        c = s[i]
+        if c in "'\"":
+            q = c
+            cur.append(c)
+            i += 1
+            while i < n:
+                if s[i] == "\\":
+                    cur.append(s[i:i + 2])
+                    i += 2
+                    continue
+                if s[i] == "$" and i + 1 < n and s[i + 1] == "{":
+                    cur.append("${")
+                    i += 2
+                    bdepth = 1
+                    while i < n and bdepth > 0:
+                        if s[i] in "'\"":
+                            iq = s[i]
+                            cur.append(iq)
+                            i += 1
+                            while i < n:
+                                if s[i] == "\\":
+                                    cur.append(s[i:i + 2])
+                                    i += 2
+                                    continue
+                                cur.append(s[i])
+                                if s[i] == iq:
+                                    i += 1
+                                    break
+                                i += 1
+                            continue
+                        if s[i] == "{":
+                            bdepth += 1
+                        elif s[i] == "}":
+                            bdepth -= 1
+                        cur.append(s[i])
+                        i += 1
+                    continue
+                cur.append(s[i])
+                if s[i] == q:
+                    i += 1
+                    break
+                i += 1
+            continue
+        if c in "([{":
+            depth += 1
+            cur.append(c)
+        elif c in ")]}":
+            depth -= 1
+            cur.append(c)
+        elif c == "," and depth == 0:
+            arg = "".join(cur).strip()
+            if arg:
+                args.append(arg)
+            cur = []
+        else:
+            cur.append(c)
+        i += 1
+    last_arg = "".join(cur).strip()
+    if last_arg:
+        args.append(last_arg)
+    return args
+
+
+def register_or_get_key(arb_msg_raw, ph_names, key_to_msg, meta_tags, sig_to_key, preferred_key=None):
+    """Enregistre ou récupère une clé ARB existante pour (arb_msg_raw, tuple(ph_names))."""
+    phs_tuple = tuple(ph_names)
+    sig = (arb_msg_raw, phs_tuple)
+    arb_msg = escape_icu_single_quotes(arb_msg_raw)
+    if preferred_key and preferred_key not in key_to_msg:
+        key = preferred_key
+        key_to_msg[key] = arb_msg
+        sig_to_key[sig] = key
+    elif sig in sig_to_key:
+        key = sig_to_key[sig]
+    else:
+        base_key = preferred_key or make_clean_key(arb_msg_raw)
+        key, idx = base_key, 1
+        while key in key_to_msg:
+            existing_phs = tuple(_get_active_icu_placeholders(key_to_msg[key]))
+            if key_to_msg[key].replace("''", "'") == arb_msg_raw and existing_phs == phs_tuple:
+                break
+            key = f"{base_key}{idx}"
+            idx += 1
+        key_to_msg[key] = arb_msg
+        sig_to_key[sig] = key
+    if ph_names:
+        meta_tags["@" + key] = {
+            "placeholders": {p: {"type": "Object"} for p in ph_names}
+        }
+    return key
+
+
+def convert_legacy_localization_wrappers(content, key_to_msg, meta_tags, ui_dict, sig_to_key):
+    """
+    Convertit dans n'importe quel fichier Dart :
+    1. Les interpolations littérales redondantes "${"Mot:"} ", "${"Moi"}: ", "${"Carte"} $a / $b"
+    2. Les appels redondants GameContentLocalization.ui(ctx, AppLocalizations...)
+    3. Les appels doublement imbriqués GameContentLocalization.format(ctx, GameContentLocalization.format(...), [...])
+    4. Les appels GameContentLocalization.ui(ctx, "texte") et GameUiLocalization.tr(ctx, "texte") vers AppLocalizations
+    5. Les appels GameContentLocalization.format(ctx, "gabarit {0}", [args]) vers AppLocalizations
+    6. Les mots-clés `const` devant des widgets UI (Text, SnackBar, Row, InputDecoration) contenant du français à traduire
+    """
+    # 1. Aplatir les interpolations de littéraux constants "${"texte"}" ou "${'texte'}"
+    content = content.replace('text: "${"Mot:"} "', 'text: "${AppLocalizations.of(context)!.mot1} "')
+    key_to_msg.setdefault("mot1", "Mot:")
+    sig_to_key.setdefault(("Mot:", ()), "mot1")
+
+    content = content.replace('isMine ? "${"Moi"}: " : "$senderName: "', 'isMine ? "${AppLocalizations.of(context)!.moi}: " : "$senderName: "')
+    key_to_msg.setdefault("moi", "Moi")
+    sig_to_key.setdefault(("Moi", ()), "moi")
+
+    content = re.sub(r'\$\{"([^"$\\]+)"\}', r"\1", content)
+    content = re.sub(r"\$\{'([^'$\\]+)'\}", r"\1", content)
+
+    # 2. Désimbriquer GameContentLocalization.ui(ctx, AppLocalizations...) ou GameContentLocalization.ui(ctx, cond ? 'A' : 'B')
+    for _ in range(3):
+        changed = False
+        out = []
+        last = 0
+        for m in re.finditer(r"GameContentLocalization\.ui\s*\(", content):
+            if m.start() < last:
+                continue
+            call_str = extract_balanced_call(content, m.start())
+            if not call_str:
+                continue
+            inner = call_str[call_str.find("(") + 1:-1].strip()
+            parts = split_top_level_dart_args(inner)
+            if len(parts) == 2:
+                ctx_expr, arg_expr = parts[0], parts[1]
+                # Si l'argument est déjà un appel AppLocalizations / _l10n / GameContentLocalization.ui, ou un ternaire
+                if (
+                    arg_expr.startswith(("AppLocalizations.of", "_l10n", "l10n", "GameContentLocalization.ui"))
+                    or ("?" in arg_expr and ":" in arg_expr)
+                ):
+                    out.append(content[last:m.start()])
+                    out.append(arg_expr)
+                    last = m.start() + len(call_str)
+                    changed = True
+        if changed:
+            out.append(content[last:])
+            content = "".join(out)
+        else:
+            break
+
+    # 3. Désimbriquer les doubles appels GameContentLocalization.format(ctx, GameContentLocalization.format(ctx, tpl, [...]), [outer_args])
+    for _ in range(2):
+        changed = False
+        out = []
+        last = 0
+        for m in re.finditer(r"GameContentLocalization\.format\s*\(", content):
+            if m.start() < last:
+                continue
+            call_str = extract_balanced_call(content, m.start())
+            if not call_str:
+                continue
+            inner = call_str[call_str.find("(") + 1:-1].strip()
+            parts = split_top_level_dart_args(inner)
+            if len(parts) == 3 and parts[1].startswith("GameContentLocalization.format"):
+                inner_call = parts[1]
+                inner_body = inner_call[inner_call.find("(") + 1:-1].strip()
+                inner_parts = split_top_level_dart_args(inner_body)
+                if len(inner_parts) == 3:
+                    new_call = f"GameContentLocalization.format({parts[0]}, {inner_parts[1]}, {parts[2]})"
+                    out.append(content[last:m.start()])
+                    out.append(new_call)
+                    last = m.start() + len(call_str)
+                    changed = True
+        if changed:
+            out.append(content[last:])
+            content = "".join(out)
+        else:
+            break
+
+    # 4. Convertir GameContentLocalization.ui(ctx, "literal") et GameUiLocalization.tr(ctx, "literal")
+    out = []
+    last = 0
+    for m in re.finditer(r"(?:GameContentLocalization\.ui|GameUiLocalization\.tr)\s*\(", content):
+        if m.start() < last:
+            continue
+        call_str = extract_balanced_call(content, m.start())
+        if not call_str:
+            continue
+        inner = call_str[call_str.find("(") + 1:-1].strip()
+        parts = split_top_level_dart_args(inner)
+        if len(parts) >= 2:
+            ctx_expr = parts[0]
+            lit_expr = parts[1]
+            lm = re.match(r"^(['\"])((?:\\.|(?!\1).)*)\1$", lit_expr, re.S)
+            if lm:
+                raw_txt = unescape_dart_string(lm.group(2)).strip()
+                accessor = f"AppLocalizations.of({ctx_expr})!" if ctx_expr and ctx_expr != "null" else "_l10n"
+                is_ui_tr = call_str.startswith("GameUiLocalization.tr")
+                if is_ui_tr and (raw_txt in ui_dict or raw_txt in key_to_msg):
+                    k = raw_txt
+                    fr_val = ui_dict[k].get("fr", "") if k in ui_dict else key_to_msg[k].replace("''", "'")
+                    phs = list(dict.fromkeys(re.findall(r"\{([a-zA-Z0-9_]+)\}", fr_val)))
+                    phs = [p for p in phs if not p.isdigit()]
+                    key_to_msg[k] = escape_icu_single_quotes(fr_val)
+                    if phs:
+                        meta_tags["@" + k] = {"placeholders": {p: {"type": "Object"} for p in phs}}
+                        param_map = parse_dart_map_literal(parts[2]) if len(parts) >= 3 else {}
+                        arg_list = [param_map.get(p, "''") for p in phs]
+                        rep = f"{accessor}.{k}({', '.join(arg_list)})"
+                    else:
+                        rep = f"{accessor}.{k}"
+                else:
+                    k = register_or_get_key(raw_txt, [], key_to_msg, meta_tags, sig_to_key)
+                    rep = f"{accessor}.{k}"
+                out.append(content[last:m.start()])
+                out.append(rep)
+                last = m.start() + len(call_str)
+    out.append(content[last:])
+    content = "".join(out)
+
+    # 5. Convertir GameContentLocalization.format(ctx, "literal", [args]) avec littéral de chaîne
+    out = []
+    last = 0
+    for m in re.finditer(r"GameContentLocalization\.format\s*\(", content):
+        if m.start() < last:
+            continue
+        call_str = extract_balanced_call(content, m.start())
+        if not call_str:
+            continue
+        inner = call_str[call_str.find("(") + 1:-1].strip()
+        parts = split_top_level_dart_args(inner)
+        if len(parts) == 3:
+            ctx_expr, tpl_expr, list_expr = parts[0], parts[1], parts[2]
+            lm = re.match(r"^(['\"])((?:\\.|(?!\1).)*)\1$", tpl_expr, re.S)
+            if lm and list_expr.startswith("[") and list_expr.endswith("]"):
+                raw_tpl = unescape_dart_string(lm.group(2)).strip()
+                arg_items = split_top_level_dart_args(list_expr[1:-1])
+                accessor = f"AppLocalizations.of({ctx_expr})!" if ctx_expr and ctx_expr != "null" else "_l10n"
+                if raw_tpl == "{0} / {1}" and len(arg_items) == 2:
+                    rep = f'"${{{arg_items[0]}}} / ${{{arg_items[1]}}}"'
+                elif raw_tpl == "{0} {1}" and len(arg_items) == 2:
+                    rep = f'"${{{arg_items[0]}}} ${{{arg_items[1]}}}"'
+                else:
+                    ph_names = []
+                    used_names = set()
+                    arg_exprs = []
+                    idx_to_ph = {}
+                    for idx_num in sorted({int(x) for x in re.findall(r"\{(\d+)\}", raw_tpl)}):
+                        a_expr = arg_items[idx_num] if idx_num < len(arg_items) else "''"
+                        clean_id = re.sub(r"[^a-zA-Z0-9]", "", a_expr)
+                        if not clean_id or clean_id[0].isdigit():
+                            clean_id = f"val{idx_num}"
+                        else:
+                            clean_id = clean_id[0].lower() + clean_id[1:18]
+                        if clean_id in RESERVED_DART:
+                            clean_id += "Val"
+                        base_id = clean_id
+                        c = 1
+                        while clean_id in used_names:
+                            clean_id = f"{base_id}{c}"
+                            c += 1
+                        used_names.add(clean_id)
+                        ph_names.append(clean_id)
+                        arg_exprs.append(a_expr)
+                        idx_to_ph[idx_num] = clean_id
+                    arb_msg_raw = re.sub(
+                        r"\{(\d+)\}",
+                        lambda pm: f"{{{idx_to_ph.get(int(pm.group(1)), 'val')}}}",
+                        raw_tpl,
+                    )
+                    k = register_or_get_key(arb_msg_raw, ph_names, key_to_msg, meta_tags, sig_to_key)
+                    rep = f"{accessor}.{k}({', '.join(arg_exprs)})" if arg_exprs else f"{accessor}.{k}"
+                out.append(content[last:m.start()])
+                out.append(rep)
+                last = m.start() + len(call_str)
+    out.append(content[last:])
+    content = "".join(out)
+
+    # 6. Retirer `const` devant les widgets UI (Text, SnackBar, InputDecoration, Row, Column) qui contiennent du français
+    const_removals = []
+    for m in re.finditer(r"\bconst\s+(?=(?:Text|SnackBar|InputDecoration|Row|Column|Center|Padding|Tooltip|Tab|ListTile|AlertDialog|Chip)\s*\()", content):
+        call_str = extract_balanced_call(content, m.end())
+        if call_str:
+            inner_toks = scan_dart_strings(call_str)
+            if any(not t["raw"] and is_translatable(t["body"]) for t in inner_toks):
+                const_removals.append((m.start(), m.end()))
+    for m in re.finditer(r"children\s*:\s*(const\s+)\[", content):
+        # Extraire jusqu'au ']' fermant correspondant
+        b_open = m.end(1)
+        depth = 0
+        j = b_open
+        n = len(content)
+        while j < n:
+            if content[j] == "[":
+                depth += 1
+            elif content[j] == "]":
+                depth -= 1
+                if depth == 0:
+                    j += 1
+                    break
+            j += 1
+        inner_toks = scan_dart_strings(content[b_open:j])
+        if any(not t["raw"] and is_translatable(t["body"]) for t in inner_toks):
+            const_removals.append((m.start(1), m.end(1)))
+
+    for s, e in sorted(set(const_removals), reverse=True):
+        content = content[:s] + content[e:]
+
+    return content
 
 
 def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict, rules_dict):
@@ -422,28 +745,32 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
                 ctx_v, _, key_name, params_map_str = km.groups()
                 old_ui_calls.setdefault(key_name, []).append((ctx_v, params_map_str))
 
-    ui_keys_ignore = {"cards", "eliminated", "teamA", "teamB", "beloteTrumpSuit"}
+    ui_keys_ignore = {
+        "cards", "eliminated", "teamA", "teamB", "beloteTrumpSuit",
+        "gameOver", "full", "infecte", "aaaaaaceeeeiiiinooooouuuuyy",
+        "score", "vote", "votes",
+    }
     context_ranges, has_global_l10n = build_scope_locator(content)
 
-    # Trouver toutes les occurrences de clés brutes
+    # Trouver toutes les occurrences de clés brutes (dans ui_dict OU dans key_to_msg)
     raw_replacements = []
     for m in re.finditer(r"(['\"])([a-z][a-zA-Z0-9_]+)\1", content):
         k = m.group(2)
-        if k not in ui_dict or k in ui_keys_ignore:
+        if (k not in ui_dict and k not in key_to_msg) or k in DATABASE_KEYS or k in ui_keys_ignore:
             continue
         before = content[max(0, m.start() - 50):m.start()].rstrip()
         after = content[m.end():min(len(content), m.end() + 20)].lstrip()
-        if "GameUiLocalization" in before or "recordBadgeEvent" in before:
+        if "GameUiLocalization" in before or "MatchmakingLocalization" in before or "recordBadgeEvent" in before:
             continue
         if (after.startswith(":") and not before.endswith("?")) or (before.endswith("[") and after.startswith("]")):
             continue
         if before.endswith(("==", "!=")) or after.startswith(("==", "!=")):
             continue
 
-        fr_val = ui_dict[k].get("fr", "")
+        fr_val = ui_dict[k].get("fr", "") if k in ui_dict else key_to_msg.get(k, "").replace("''", "'")
         if not fr_val:
             continue
-        phs = list(dict.fromkeys(re.findall(r"\{([a-zA-Z0-9_]+)\}", fr_val)))
+        phs = _get_active_icu_placeholders(escape_icu_single_quotes(fr_val))
         accessor = get_l10n_accessor(m.start(), context_ranges, has_global_l10n) or "_l10n"
 
         # Enregistrer la clé dans key_to_msg et meta_tags
@@ -454,6 +781,8 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
             }
             calls = old_ui_calls.get(k, [])
             param_map = parse_dart_map_literal(calls[0][1]) if calls and calls[0][1] else {}
+            if k == "dobbleDeckCards" and not param_map:
+                param_map = {"count": '"$cardsLeftInDeck"'}
             # Remplacer aussi tout appel GameUiLocalization.tr interne dans les valeurs de paramètres
             arg_list = []
             for p in phs:
@@ -514,13 +843,27 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
                 if norm_tpl_no_quotes != norm_tpl:
                     old_format_by_tpl.setdefault(norm_tpl_no_quotes, []).append((ctx_var, args_str))
 
-        zero_keys = [
+        zero_keys = {
             k for k, v in key_to_msg.items()
             if isinstance(v, str) and ("{0}" in v or "{1}" in v)
-        ]
+        }
+
+        matches_by_key = {}
+        for m in re.finditer(r"(?:AppLocalizations\.of\(([^)]+)\)!|_l10n)\.([a-zA-Z0-9_]+)\b", content):
+            k = m.group(2)
+            if k not in zero_keys:
+                continue
+            before = content[max(0, m.start() - 160):m.start()]
+            after = content[m.end():m.end() + 40].lstrip()
+            if "GameContentLocalization.format" in before or after.startswith(".replaceAll") or after.startswith("("):
+                continue
+            # Ignorer si c'est dans "${AppLocalizations.of(context)!.vainqueur} $winner" (L67089)
+            if before.endswith("${") and after.startswith("}"):
+                continue
+            matches_by_key.setdefault(k, []).append((m.start(), m.end(), m.group(0), m.group(1)))
 
         zero_replacements = []
-        for k in zero_keys:
+        for k, matches in matches_by_key.items():
             raw_v = (
                 key_to_msg[k]
                 .replace("'''{0}'''", "'{0}'")
@@ -529,20 +872,6 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
                 .replace("'{2}'", "{2}")
                 .replace("''", "'")
             )
-            matches = []
-            for m in re.finditer(rf"(?:AppLocalizations\.of\(([^)]+)\)!|_l10n)\.{re.escape(k)}\b", content):
-                before = content[max(0, m.start() - 160):m.start()]
-                after = content[m.end():m.end() + 40].lstrip()
-                if "GameContentLocalization.format" in before or after.startswith(".replaceAll") or after.startswith("("):
-                    continue
-                # Ignorer si c'est dans "${AppLocalizations.of(context)!.vainqueur} $winner" (L67089)
-                if before.endswith("${") and after.startswith("}"):
-                    continue
-                matches.append((m.start(), m.end(), m.group(0), m.group(1)))
-
-            if not matches:
-                continue
-
             old_list = old_format_by_tpl.get(raw_v, [])
             if not old_list:
                 continue
@@ -808,8 +1137,15 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
         ),
         (
             '"${GameUiLocalization.tr(context, "Le mot était :")} ${justOneCurrentWord ?? \'\'}"',
+            '"${AppLocalizations.of(context)!.leMotEtaitLabel} ${justOneCurrentWord ?? \'\'}"',
+            "leMotEtaitLabel",
+            "Le mot était :",
+            [],
+        ),
+        (
             '"${AppLocalizations.of(context)!.leMotEtait} ${justOneCurrentWord ?? \'\'}"',
-            "leMotEtait",
+            '"${AppLocalizations.of(context)!.leMotEtaitLabel} ${justOneCurrentWord ?? \'\'}"',
+            "leMotEtaitLabel",
             "Le mot était :",
             [],
         ),
@@ -892,10 +1228,31 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
         ),
         (
             '"${"Manche"} $currentRound"',
-            '"${AppLocalizations.of(context)!.manche} $currentRound"',
-            "manche",
+            '"${AppLocalizations.of(context)!.mancheLabel} $currentRound"',
+            "mancheLabel",
             "Manche",
             [],
+        ),
+        (
+            '"${AppLocalizations.of(context)!.manche} $currentRound"',
+            '"${AppLocalizations.of(context)!.mancheLabel} $currentRound"',
+            "mancheLabel",
+            "Manche",
+            [],
+        ),
+        (
+            ".join(' et ')",
+            ".join(' ${_l10n.et} ')",
+            "et",
+            "et",
+            [],
+        ),
+        (
+            'handLog.add("${myData[\'name\']} check.");',
+            "handLog.add(_l10n.pokerPlayerCheck(myData['name']));",
+            "pokerPlayerCheck",
+            "{playerName} check.",
+            ["playerName"],
         ),
         (
             'text: "${"Rôle:"} "',
@@ -965,6 +1322,86 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
         content = content.replace(codenames_old, codenames_new)
     elif codenames_old.replace("\n", "\r\n") in content:
         content = content.replace(codenames_old.replace("\n", "\r\n"), codenames_new)
+
+    # H. Corrections des collisions de gabarits (leMotEtait, manche, carte3, enCours) et types Skull ('Rose' / 'Crane')
+    key_to_msg["leMotEtait"] = escape_icu_single_quotes("Le mot était : '{0}'")
+    key_to_msg["manche"] = escape_icu_single_quotes("Manche '{0}' : '{1}'")
+    key_to_msg["enCours"] = escape_icu_single_quotes("EN COURS : '{0}'")
+    content = content.replace(
+        '"${AppLocalizations.of(context)!.carte} $deckIndex / $deckTotal',
+        '"${AppLocalizations.of(context)!.carte3} $deckIndex / $deckTotal',
+    )
+    content = re.sub(
+        r'GameContentLocalization\.format\(context,\s*AppLocalizations\.of\(context\)!\.vote,\s*\[\s*\'\$voteCount\'\s*,\s*\]\)',
+        'GameContentLocalization.ui(context, "vote")',
+        content,
+    )
+    content = content.replace("'ðŸŒˆ'", "'🌈'")
+    content = content.replace(
+        "card['type'] == AppLocalizations.of(context)!.crane1",
+        "card['type'] == 'Crane'",
+    )
+    content = content.replace(
+        "type: AppLocalizations.of(context)!.rose1,",
+        "type: 'Rose',",
+    )
+    content = content.replace(
+        "count: myHand.where((c) => c == AppLocalizations.of(context)!.rose1).length,",
+        "count: myHand.where((c) => c == 'Rose').length,",
+    )
+    content = content.replace(
+        "type: AppLocalizations.of(context)!.crane1,",
+        "type: 'Crane',",
+    )
+    content = content.replace(
+        "count: myHand.where((c) => c == AppLocalizations.of(context)!.crane1).length,",
+        "count: myHand.where((c) => c == 'Crane').length,",
+    )
+    content = re.sub(
+        r"(\.placeSkullCard\(\s*widget\.gameCode\s*,\s*playerId\s*,\s*)AppLocalizations\.of\(context\)!\.rose1(\s*,?\s*\))",
+        r"\1'Rose'\2",
+        content,
+    )
+    content = re.sub(
+        r"(\.placeSkullCard\(\s*widget\.gameCode\s*,\s*playerId\s*,\s*)AppLocalizations\.of\(context\)!\.crane1(\s*,?\s*\))",
+        r"\1'Crane'\2",
+        content,
+    )
+
+    # Supprimer les anciennes clés multi-lignes ou de code Dart corrompues et inutilisées
+    corrupted_unused_keys = {
+        "wordcivilParts0TrimWordundercover",
+        "finDeMancheBoutonAdmin",
+        "listStringQuestionsAiwordpoolGamewords",
+        "pairPairListStringShuffledroles",
+        "elseIfGametype",
+        "forFinalTargetInVotes",
+        "forFinalTargetInVotes1",
+        "styleConstTextstyleColorColors",
+        "centeractionwidgetRowMainaxissizeMainaxissizeMin",
+        "styleTextstyleFontweightFontweightBold",
+        "wordcivilParts0TrimWordundercover1",
+        "aRelanceLesDes3",
+        "aGagne1",
+        "aCouleTouteLaFlotte",
+        "aGagneLaManche",
+        "applocalizationsOfContextUnjoueurEst",
+        "applocalizationsOfContextUnjoueurA",
+        "applocalizationsOfContextUnjoueurRemporte",
+        "debutDeLaConstructionDe",
+        "gamemessagelocalizationTrContextReason",
+    }
+    for bad_k in list(key_to_msg.keys()):
+        v_str = str(key_to_msg.get(bad_k, ""))
+        if (
+            bad_k in corrupted_unused_keys
+            or "AppLocalizations.of" in v_str
+            or "GameMessageLocalization.tr" in v_str
+            or "]''}''" in v_str
+            or "]'}'" in v_str
+        ):
+            key_to_msg.pop(bad_k, None)
+            meta_tags.pop("@" + bad_k, None)
 
     print(
         f"  ✅ Réparations appliquées : {stats['raw_keys']} clés brutes, "
@@ -1095,7 +1532,7 @@ def is_safe_replacement_position(src, start, end):
         return False
 
     # 3b. Fallback déjà localisé avec `l10n?.cle ?? "..."` ou `AppLocalizations.of(context)?.cle ?? "..."`
-    if before_stripped.endswith("??") and re.search(r"(?:l10n|_l10n|AppLocalizations)", before_slice):
+    if before_stripped.endswith("??") and re.search(r"(?:l10n|_l10n|AppLocalizations(?:\.of\([^)]+\))?)\s*\?\.[a-zA-Z0-9_]+\s*\?\?\s*$", before_slice):
         return False
 
     # 3c. Valeurs internes de DropdownMenuItem ou de filtre de catégories de badges
@@ -1110,8 +1547,8 @@ def is_safe_replacement_position(src, start, end):
     if before_stripped.endswith(("==", "!=")) or after_stripped.startswith(("==", "!=")):
         return False
 
-    # 5. Appels déjà encapsulés dans GameContentLocalization / GameUiLocalization / GameMessageLocalization / GameRulesLocalization
-    if re.search(r"Game(?:Content|Ui|Message|Rules)Localization\.\w+\s*\(\s*(?:[a-zA-Z0-9_]+\s*,\s*)?$", before_slice):
+    # 5. Appels déjà encapsulés dans GameContentLocalization / GameUiLocalization / GameMessageLocalization / GameRulesLocalization / MatchmakingLocalization
+    if re.search(r"(?:Game(?:Content|Ui|Message|Rules)|Matchmaking)Localization\.\w+\s*\(\s*(?:[a-zA-Z0-9_]+\s*,\s*)?$", before_slice):
         return False
 
     # 6. Méthodes de manipulation de chaînes / logique ou logs console
@@ -1228,9 +1665,11 @@ def parse_interpolations(raw_msg):
                 expr = raw_msg[idx + 2:j - 1].strip()
                 if not expr or "\n" in expr or ";" in expr:
                     return None
-                # Rejeter les ternaires contenant des littéraux de chaînes en français à l'intérieur
+                # Rejeter uniquement les ternaires contenant des littéraux de chaînes en français à l'intérieur
                 if "?" in expr and ":" in expr and not ("?[" in expr or "?." in expr or "??" in expr):
-                    return None
+                    inner_strs = [m.group(2) for m in re.finditer(r"(['\"])((?:\\.|(?!\1).)*)\1", expr)]
+                    if any(is_translatable(s) for s in inner_strs):
+                        return None
                 clean_id = re.sub(r"[^a-zA-Z0-9]", "", expr)
                 if not clean_id or clean_id[0].isdigit():
                     clean_id = f"val{len(ph_names)}"
@@ -1561,7 +2000,8 @@ def fast_translate(text, target_code, key_name="", lang_label=""):
         if (clean_input, target_code) in GLOBAL_TRANSLATION_CACHE:
             return GLOBAL_TRANSLATION_CACHE[(clean_input, target_code)]
 
-    placeholders = re.findall(r"\{[A-Za-z0-9_]+\}", clean_input)
+    placeholders = re.findall(r"'+(\{[A-Za-z0-9_]+\})'+|(\{[A-Za-z0-9_]+\})", clean_input)
+    placeholders = [ f"'{m[0]}'" if m[0] else m[1] for m in placeholders ]
     protected = clean_input
     for i, ph in enumerate(placeholders):
         protected = protected.replace(ph, f" __{i}__ ")
@@ -1629,6 +2069,51 @@ def _get_active_icu_placeholders(arb_str):
     return [p for p in phs if not p.isdigit()]
 
 
+def _sanitize_icu_value(val, fr_phs):
+    """
+    Garantit qu'une valeur ARB est 100 % valide pour le parseur ICU de `flutter gen-l10n` :
+    - Aucun placeholder numérique `{0}`, `{1}` non échappé
+    - Aucun `{` ou `}` orphelin hors des placeholders nommés actifs de `fr_phs`
+    """
+    if not isinstance(val, str):
+        return val
+    # Nettoyer les artéfacts d'Argos autour des anciens placeholders numériques (ex: "'' 0 '' {0}" -> "'{0}'")
+    for d in range(10):
+        if f"{{{d}}}" in val:
+            val = re.sub(rf"(?:''|«|\"|\s)*\b{d}\b(?:''|»|\"|\s)*(?=.*?\{{{d}\}})", "", val)
+    # 1. Protéger les séquences déjà échappées `'<h3>'` telles que `'{0}'`, `'{1}'`, `'{player}'`
+    protected = {}
+    def _prot(m):
+        tok = f"\x02P{len(protected)}\x02"
+        protected[tok] = f"'{m.group(1)}'"
+        return tok
+    s = re.sub(r"'\{'([A-Za-z0-9_]+)'\}'", r"'{\1}'", val)
+    s = re.sub(r"'+(\{[A-Za-z0-9_]+\})'+", _prot, s)
+
+    # 2. Protéger les placeholders actifs légitimes de `fr_phs`
+    for p in fr_phs:
+        tok = f"\x02A_{p}\x02"
+        protected[tok] = "{" + p + "}"
+        s = s.replace("{" + p + "}", tok)
+
+    # 3. Tout `{digits}` restant doit devenir `'{digits}'`
+    def _prot_digit(m):
+        tok = f"\x02D{len(protected)}\x02"
+        protected[tok] = f"'{{{m.group(1)}}}'"
+        return tok
+    s = re.sub(r"\{(\d+)\}", _prot_digit, s)
+
+    # 4. Supprimer ou remplacer toute accolade `{` ou `}` résiduelle non appariée/invalide
+    s = s.replace("{", "(").replace("}", ")")
+
+    # 5. S'assurer que les apostrophes simples hors jetons protégés sont doublées (`''`)
+    s = s.replace("''", "'").replace("'", "''")
+
+    for tok, orig in protected.items():
+        s = s.replace(tok, orig)
+    return s
+
+
 def _save_synced_arb(arb_file, code, data, key_to_msg, meta_tags):
     synced = {"@@locale": code}
     for k in key_to_msg:
@@ -1652,6 +2137,7 @@ def _save_synced_arb(arb_file, code, data, key_to_msg, meta_tags):
                 for new_p in fr_phs:
                     if "{" + new_p + "}" not in val:
                         val = val + " {" + new_p + "}"
+        val = _sanitize_icu_value(val, fr_phs)
         synced[k] = val
         if "@" + k in meta_tags:
             synced["@" + k] = meta_tags["@" + k]
@@ -1940,7 +2426,11 @@ def run(args):
     sig_to_key = {}
     for k, v in key_to_msg.items():
         phs = tuple(_get_active_icu_placeholders(v))
-        sig_to_key[(v.replace("''", "'"), phs)] = k
+        sig_to_key.setdefault((v.replace("''", "'"), phs), k)
+    if "rouge" in key_to_msg:
+        sig_to_key[("Rouge", ())] = "rouge"
+    if "bleue" in key_to_msg:
+        sig_to_key[("Bleue", ())] = "bleue"
 
     total_replaced_all_files = 0
     report_lines = []
@@ -1958,6 +2448,12 @@ def run(args):
             for k, v in key_to_msg.items():
                 phs = tuple(_get_active_icu_placeholders(v))
                 sig_to_key[(v.replace("''", "'"), phs)] = k
+
+        # Étape 1b (tous les fichiers Dart) : Conversion des wrappers GameContentLocalization / GameUiLocalization / const
+        content = convert_legacy_localization_wrappers(content, key_to_msg, meta_tags, ui_dict, sig_to_key)
+        for k, v in key_to_msg.items():
+            phs = tuple(_get_active_icu_placeholders(v))
+            sig_to_key[(v.replace("''", "'"), phs)] = k
 
         # Étape 2 : Scanner et internationaliser toutes les chaînes françaises restantes
         tokens = scan_dart_strings(content)

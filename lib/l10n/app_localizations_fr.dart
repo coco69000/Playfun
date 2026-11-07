@@ -1299,7 +1299,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get saReponseEtait => 'Sa réponse était : \'\'{0}\'.';
 
   @override
-  String get leMotEtait => 'Le mot était :';
+  String get leMotEtait => 'Le mot était : {0}';
 
   @override
   String get cartesRevelees => 'Cartes révélées :';
@@ -2149,7 +2149,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get totalDesMotsDansLe => 'Total des mots dans le chapeau: {0}';
 
   @override
-  String get manche => 'Manche';
+  String get manche => 'Manche {0} : {1}';
 
   @override
   String get motsDevinesCeTour => 'Mots devinés ce tour : {0}';
@@ -3373,9 +3373,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get aRelanceLesDes3 => '{pName} a relancé les dés ({3rollsLeft1}/3) !';
-
-  @override
   String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName a gardé le dé de valeur $dieVal (dé #$index1) 🔒';
   }
@@ -3425,10 +3422,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pioche3 => 'pioche';
 
   @override
-  String get wordcivilParts0TrimWordundercover =>
-      ');\r\n      wordCivil = parts[0].trim();\r\n      wordUndercover = parts[1].trim();\r\n    \'\'}\' else \'\'{\'\r\n      // Sécurité anti-doublon : si l';
-
-  @override
   String get vousNAvezPasDe => 'Vous n\'avez pas de mot';
 
   @override
@@ -3469,10 +3462,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur a le plus d\'XP ($maxXp XP) et devient Admin !';
   }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ',\r\n          ]),\r\n        \'\'}\');\r\n      \'\'}\'\r\n    \'\'}\');\r\n  \'\'}\'\r\n\r\n  /// Fin de manche (bouton admin)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\'\r\n    await _db.runTransaction((transaction) async \'\'{\'\r\n      final gameRef = _db.collection(\'games\').doc(gameCode);\r\n      final snap = await transaction.get(gameRef);\r\n      if (!snap.exists) return;\r\n\r\n      final gameData = snap.data() as Map<String, dynamic>;\r\n      final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {});\r\n\r\n      // Déterminer le gagnant (plus d\'XP)\r\n      String winnerId = \';\r\n      int maxXp = -1;\r\n      players.forEach((pId, pData) \'\'{\'\r\n        final xp = (pData[\'xp\'] as num?)?.toInt() ?? 0;\r\n        if (xp > maxXp) {\r\n          maxXp = xp;\r\n          winnerId = pId;\r\n        }\r\n      \'\'}\');\r\n\r\n      transaction.update(gameRef, \'\'{\'\r\n        \'gameState\': \'gameOver\',\r\n        \'gameWinner\': winnerId,\r\n        \'gameEndReason\':\r\n            ';
 
   @override
   String get quelquUn => 'Quelqu\\\'un';
@@ -3528,18 +3517,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get leJoueur => 'Le joueur';
 
   @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\'\r\n      List<String> questions =\r\n          _aiWordPool ??\r\n          GameWords.whoIsMostLikely[difficulty] ??\r\n          GameWords.whoIsMostLikely[';
-
-  @override
   String get honnete => 'Honnête';
 
   @override
   String get pairSplit => ') ? pair.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      ') : [pair, pair];\r\n\r\n        List<String> shuffledRoles = List.from(playerOrder)..shuffle();\r\n        String secUndercoverId = shuffledRoles[0];\r\n        String secMrWhiteId = shuffledRoles[1];\r\n\r\n        question =\r\n            \"Décrivez votre mot secret en un seul mot. Imposteurs, bluffez !\";\r\n        for (var pId in players.keys) \'\'{\'\r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3559,20 +3540,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get passeLEnchere => 'passe l\'enchère';
 
   @override
-  String get elseIfGametype =>
-      ') \'\'{\'\r\n        if (voterId == votedForId) \'\'{\'\r\n          throw Exception(\"Interdiction formelle de voter pour soi-même !\");\r\n        \'\'}\'\r\n      \'\'}\' else if (gameType == ';
-
-  @override
   String get intRequiredvotesPlayersLengthIf =>
       ') {\r\n        creditPlayerXp(\r\n          transaction,\r\n          gameRef,\r\n          gameData,\r\n          voterId,\r\n          5,\r\n          applySpeedBonus: true,\r\n        );\r\n      }\r\n\r\n      int requiredVotes = players.length;\r\n\r\n      if (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\'\r\n          final Map<String, int> voteCounts = {};\r\n          for (final target in votes.values) {\r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1;\r\n          }\r\n\r\n          int maxVotes = 0;\r\n          List<String> topVoted = [];\r\n          voteCounts.forEach((target, count) \'\'{\'\r\n            if (count > maxVotes) {\r\n              maxVotes = count;\r\n              topVoted = [target];\r\n            } else if (count == maxVotes) {\r\n              topVoted.add(target);\r\n            }\r\n          \'\'}\');\r\n\r\n          updates[';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\'\r\n        final Map<String, int> voteCounts = {};\r\n        for (final target in votes.values) {\r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1;\r\n        }\r\n\r\n        int maxVotes = 0;\r\n        List<String> topVoted = [];\r\n        voteCounts.forEach((target, count) \'\'{\'\r\n          if (count > maxVotes) {\r\n            maxVotes = count;\r\n            topVoted = [target];\r\n          } else if (count == maxVotes) {\r\n            topVoted.add(target);\r\n          }\r\n        \'\'}\');\r\n\r\n        if (topVoted.length == 1) \'\'{\'\r\n          final winner = topVoted.first;\r\n          updates[';
 
   @override
   String aRemporteTousLesJetons(Object winnerName) {
@@ -4095,10 +4064,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get styleConstTextstyleColorColors =>
-      ',\r\n                  style: const TextStyle(color: Colors.white70),\r\n                ),\r\n                SizedBox(height: 20),\r\n                Wrap(\r\n                  alignment: WrapAlignment.center,\r\n                  children:\r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(),\r\n                ),\r\n                SizedBox(height: 20),\r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text(\r\n                    AppLocalizations.of(context)!.tousLesIndicesOntEte,\r\n                    style: const TextStyle(color: Colors.red),\r\n                  ),\r\n              ],\r\n            ),\r\n          );\r\n        \'\'}\' else \'\'{\'\r\n          // C\'est au devin de jouer\r\n          return Column(\r\n            children: [\r\n              Text(\r\n                ';
-
-  @override
   String strf0868c(Object length0, Object valuescore0) {
     return '$length0: $valuescore0';
   }
@@ -4128,16 +4093,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get laVictime => 'la victime';
 
   @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      ';\r\n            centerActionWidget = Row(\r\n              mainAxisSize: MainAxisSize.min,\r\n              children: [\r\n                _buildActionButton(\r\n                  label: AppLocalizations.of(context)!.infecter,\r\n                  icon: Icons.auto_fix_high,\r\n                  color: Colors.purpleAccent,\r\n                  onPressed: () \'\'{\'\r\n                    Provider.of<PlayerState>(\r\n                      context,\r\n                      listen: false,\r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\');\r\n                    _firebaseService.loupNoirInfect(\r\n                      widget.gameCode,\r\n                      playerId,\r\n                      true,\r\n                    );\r\n                  \'\'}\',\r\n                ),\r\n                const SizedBox(width: 8),\r\n                _buildActionButton(\r\n                  label: AppLocalizations.of(context)!.devorer,\r\n                  icon: Icons.close,\r\n                  color: Colors.redAccent,\r\n                  onPressed:\r\n                      () => _firebaseService.loupNoirInfect(\r\n                        widget.gameCode,\r\n                        playerId,\r\n                        false,\r\n                      ),\r\n                ),\r\n              ],\r\n            );\r\n          \'\'}\'\r\n          break;\r\n        case \'loup_blanc_turn\':\r\n          promptText = ';
-
-  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Aucune victime cette nuit (protégée ou épargnée)';
-
-  @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ',\r\n                              style: TextStyle(\r\n                                fontWeight: FontWeight.bold,\r\n                                color:\r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'wolf\'\r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60),\r\n                              ),\r\n                            ),\r\n                            TextSpan(text: message),\r\n                          ],\r\n                        ),\r\n                      ),\r\n                    );\r\n                  \'\'}\',\r\n                );\r\n              \'\'}\',\r\n            ),\r\n          ),\r\n\r\n          // Barre d\'envoi compacte\r\n          if (canSendMessage)\r\n            Row(\r\n              children: [\r\n                Expanded(\r\n                  child: SizedBox(\r\n                    height: 32,\r\n                    child: TextField(\r\n                      controller: _chatController,\r\n                      style: const TextStyle(fontSize: 12, color: Colors.white),\r\n                      decoration: InputDecoration(\r\n                        hintText:\r\n                            AppLocalizations.of(context)!.ecrireAu,\r\n                        hintStyle: const TextStyle(\r\n                          color: Colors.white30,\r\n                          fontSize: 11,\r\n                        ),\r\n                        border: OutlineInputBorder(\r\n                          borderRadius: BorderRadius.circular(16),\r\n                          borderSide: BorderSide.none,\r\n                        ),\r\n                        filled: true,\r\n                        fillColor: Colors.white.withOpacity(0.08),\r\n                        contentPadding: const EdgeInsets.symmetric(\r\n                          horizontal: 10,\r\n                          vertical: 0,\r\n                        ),\r\n                      ),\r\n                      onSubmitted: (text) \'\'{\'\r\n                        if (text.trim().isNotEmpty) {\r\n                          _firebaseService.sendChatMessage(\r\n                            widget.gameCode,\r\n                            playerId,\r\n                            text.trim(),\r\n                            _selectedChatType,\r\n                          );\r\n                          _chatController.clear();\r\n                        }\r\n                      \'\'}\',\r\n                    ),\r\n                  ),\r\n                ),\r\n                const SizedBox(width: 4),\r\n                IconButton(\r\n                  icon: const Icon(\r\n                    Icons.send_rounded,\r\n                    size: 18,\r\n                    color: Colors.cyanAccent,\r\n                  ),\r\n                  padding: EdgeInsets.zero,\r\n                  constraints: const BoxConstraints(),\r\n                  onPressed: () \'\'{\'\r\n                    if (_chatController.text.trim().isNotEmpty) {\r\n                      _firebaseService.sendChatMessage(\r\n                        widget.gameCode,\r\n                        playerId,\r\n                        _chatController.text.trim(),\r\n                        _selectedChatType,\r\n                      );\r\n                      _chatController.clear();\r\n                    }\r\n                  \'\'}\',\r\n                ),\r\n              ],\r\n            ),\r\n        ],\r\n      ),\r\n    );\r\n  \'\'}\'\r\n\r\n  Widget _buildChatTab(String label, String type, Color activeColor) {\r\n    final bool isSelected = _selectedChatType == type;\r\n    return GestureDetector(\r\n      onTap: () => setState(() => _selectedChatType = type),\r\n      child: Container(\r\n        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),\r\n        decoration: BoxDecoration(\r\n          color:\r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04),\r\n          borderRadius: BorderRadius.circular(10),\r\n          border: Border.all(\r\n            color:\r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent,\r\n          ),\r\n        ),\r\n        child: Text(\r\n          label,\r\n          style: TextStyle(\r\n            fontSize: 10,\r\n            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,\r\n            color: isSelected ? activeColor : Colors.white60,\r\n          ),\r\n        ),\r\n      ),\r\n    );\r\n  }\r\n\r\n  // --- MISE À JOUR DE L\'AVATAR POUR LE RENDRE INTERACTIF ---\r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\'\r\n    if (startTime == null) return const SizedBox.shrink();\r\n\r\n    // TweenAnimationBuilder permet un chrono visuel super fluide sans Timer bloquant et setState manuel, ce qui allège grandement le thread (Point 4)\r\n    final endTime = startTime.toDate().add(\r\n      Duration(seconds: durationInSeconds),\r\n    );\r\n    final remaining = endTime.difference(DateTime.now());\r\n\r\n    if (remaining.isNegative)\r\n      return Text(\r\n        AppLocalizations.of(context)!.k0S,\r\n        style: Theme.of(\r\n          context,\r\n        ).textTheme.headlineSmall?.copyWith(color: Colors.redAccent),\r\n      );\r\n\r\n    return TweenAnimationBuilder<Duration>(\r\n      duration: remaining,\r\n      tween: Tween(begin: remaining, end: Duration.zero),\r\n      builder: (BuildContext context, Duration value, Widget? child) {\r\n        final seconds = value.inSeconds;\r\n        return Text(\r\n          AppLocalizations.of(context)!.tempsRestantS,\r\n          style: Theme.of(context).textTheme.headlineSmall?.copyWith(\r\n            color: seconds < 20 ? Colors.redAccent : Colors.amberAccent,\r\n          ),\r\n        );\r\n      },\r\n    );\r\n  \'\'}\'\r\n\r\n  Widget _buildPetitsChevauxUI(\r\n    BuildContext context,\r\n    Map<String, dynamic> gameData,\r\n    String playerId,\r\n  ) \'\'{\'\r\n    final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {});\r\n    final playerOrder = List<String>.from(\r\n      gameData[\'petitsChevauxPlayerOrder\'] ?? [],\r\n    );\r\n    final positions = Map<String, dynamic>.from(\r\n      gameData[\'petitsChevauxPositions\'] ?? {},\r\n    );\r\n    final int currentIndex = gameData[\'petitsChevauxCurrentIndex\'] ?? 0;\r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty ? playerOrder[currentIndex] : \';\r\n    final bool isMyTurn = currentPlayerId == playerId;\r\n    final int dice = (gameData[\'petitsChevauxDice\'] as num?)?.toInt() ?? 0;\r\n    final bool hasRolled = gameData[\'petitsChevauxHasRolled\'] ?? false;\r\n    final bool isTeamMode = gameData[\'petitsChevauxTeamMode\'] ?? false;\r\n    final Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from(\r\n      gameData[\'petitsChevauxConsecutiveSixes\'] ?? {},\r\n    );\r\n    final int mySixStreak = consecutiveSixes[playerId] ?? 0;\r\n\r\n    // Palette moderne fluo / arcade sur fond sombre\r\n    final List<Color> playerColors = [\r\n      const Color(0xFFEF4444), // Rouge néon\r\n      const Color(0xFF38BDF8), // Bleu ciel néon\r\n      const Color(0xFF10B981), // Vert émeraude\r\n      const Color(0xFFF59E0B), // Ambre doré\r\n    ];\r\n\r\n    // --- ÉCRAN DE VICTOIRE ---\r\n    if (gameData[\'gameState\'] == \'gameOver\') \'\'{\'\r\n      return UniversalGameEndScreen(\r\n        gameTitle: ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Arrivée au centre du plateau !';
@@ -4262,10 +4219,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gagneTonSecretEstPreserve => 'GAGNÉ ! Ton secret est préservé.';
-
-  @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      ');\r\n      _wordCivil = parts[0].trim();\r\n      _wordUndercover = parts[1].trim();\r\n    \'\'}\' else \'\'{\'\r\n      int idx = wordPairs.indexOf(rawPair);\r\n      _wordCivil = rawPair.trim();\r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (Variante)\";\r\n    \'\'}\'\r\n\r\n    _playerRoles.clear();\r\n    for (var player in _activePlayers) \'\'{\'\r\n      if (player == undercover) \'\'{\'\r\n        _playerRoles[player] = \"Infiltré\";\r\n      \'\'}\' else if (player == _mrWhitePlayer) \'\'{\'\r\n        _playerRoles[player] = \"Mr. White\";\r\n      \'\'}\' else \'\'{\'\r\n        _playerRoles[player] = \"Civil\";\r\n      \'\'}\'\r\n    \'\'}\'\r\n\r\n    setState(() \'\'{\'\r\n      _gameState = UndercoverGameState.revealing;\r\n      _currentPlayerRevealIndex = 0;\r\n      _resultMessage = \"\";\r\n    \'\'}\');\r\n  \'\'}\'\r\n\r\n  void _nextPlayerReveal() \'\'{\'\r\n    if (_currentPlayerRevealIndex < _activePlayers.length - 1) {\r\n      setState(() => _currentPlayerRevealIndex++);\r\n    } else {\r\n      setState(() => _gameState = UndercoverGameState.discussing);\r\n    }\r\n  \'\'}\'\r\n\r\n  void _eliminatePlayer(String player) \'\'{\'\r\n    String role = _playerRoles[player]!;\r\n    bool impostorsWin = role == \"Civil\";\r\n\r\n    setState(() \'\'{\'\r\n      _gameState = UndercoverGameState.result;\r\n      if (impostorsWin) \'\'{\'\r\n        _resultMessage = \"{player} était un Civil ! Les Imposteurs gagnent !\";\r\n      \'\'}\' else \'\'{\'\r\n        _resultMessage = \"{player} était l';
 
   @override
   String get requiert4Joueurs => 'Requiert 4+ joueurs';
@@ -4776,11 +4729,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get leTourEstTermine1 => 'Le tour est terminé.';
 
   @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName a gagné avec sa description :AppLocalizations.of(context)!.extrainfoColumnChildrenText$winningDescription';
-  }
-
-  @override
   String get personneNAGagneCe =>
       'Personne n\'a gagné ce tour. Égalité des votes ou pas de description.';
 
@@ -4826,19 +4774,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get score => 'Score';
-
-  @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object value,
-    Object guesserName,
-    Object value2,
-    Object deckIndex,
-    Object deckTotal,
-    Object value3,
-    Object totalScore,
-  ) {
-    return '$value $guesserName :AppLocalizations.of(context)!.styleConstTextstyleColorColors$value2 $deckIndex / $deckTotal — $value3 : $totalScore';
-  }
 
   @override
   String get laNuitTombeSurLe =>
@@ -4908,14 +4843,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get leLoupNoirDecideDu => 'Le Loup Noir décide du destin de la proie';
 
   @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Infecter $targetName ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinLe Loup Blanc frappe en solitaire';
-  }
-
-  @override
   String get choisissezUneVictimeADevorer => 'Choisissez une victime à dévorer';
 
   @override
@@ -4974,14 +4901,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get amoureux => 'Amoureux';
-
-  @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName: AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldPetits Chevaux';
-  }
 
   @override
   String get courseIndividuelle => 'Course individuelle';
@@ -5114,10 +5033,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String commeConvenuTuCommences(Object mrWhitePlayer) {
     return '\n\n$mrWhitePlayer, comme convenu, tu commences !';
   }
-
-  @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft';
 
   @override
   String get votePar => 'Voté par : {0}';
@@ -5359,10 +5274,6 @@ class AppLocalizationsFr extends AppLocalizations {
       '**Objectif**\nNe pas avoir l\'appareil entre les mains lorsque la patate explose !\n\n**Déroulement**\n1. Un thème s\'affiche à l\'écran.\n2. Le joueur qui tient l\'appareil doit donner une réponse correspondant au thème.\n3. Dès qu\'il a répondu, il passe rapidement l\'appareil à son voisin.\n4. Le voisin doit à son tour trouver une nouvelle réponse et passer l\'appareil.\n5. Le temps est caché et aléatoire : la patate peut exploser à tout moment !\n6. Le joueur qui tient l\'appareil au moment de l\'explosion perd la manche et reçoit un gage.';
 
   @override
-  String get principeGeneralGribouillisEstUn =>
-      '**Principe Général**\nGribouillis est un jeu de dessin inspiré du \"téléphone arabe\", où les idées se transforment à chaque étape. Il existe 3 modes de jeu :\n\n**1. Mode Normal (Téléphone Arabe Illustré)**\n-   **Écriture** : Chaque joueur écrit une phrase.\n-   **Dessin** : Chaque joueur reçoit la phrase d\'un autre et la dessine.\n-   **Devinette** : Chaque joueur reçoit un dessin et devine ce qu\'il représente.\n-   **Alternance** : Le jeu alterne dessin et devinette jusqu\'à ce que chaque \"album\" ait fait le tour de tous les joueurs.\n-   **But** : S\'amuser en voyant comment une phrase simple se transforme en quelque chose de complètement différent !\n\n**2. Mode Complément (Dessin Collaboratif)**\n-   **Croquis** : Chaque joueur commence un dessin simple.\n-   **Complément** : Chaque joueur reçoit le dessin d\'un autre et doit l\'enrichir, sans effacer ce qui existe déjà.\n-   **Alternance** : Le dessin passe de joueur en joueur, chacun ajoutant sa touche.\n-   **Paramètre \"Ajouter 1\"** :\n    -   *Si désactivé (par défaut)* : C\'est une chaîne. Le dessin évolue à chaque étape (Joueur A -> Joueur B -> Joueur C...).\n    -   *Si activé* : Le dessin initial de chaque joueur est complété par tous les autres joueurs, créant plusieurs Å“uvres collectives en parallèle.\n-   **But** : Créer des Å“uvres d\'art collectives surprenantes et amusantes.\n\n**3. Mode Brise-Glace (Interaction Créative)**\n-   **Écriture** : Chaque joueur écrit un thème personnel (ex: AppLocalizations.of(context)!.monAnimalPrefere).\n-   **Dessin** : Chaque joueur reçoit les thèmes de **tous les autres joueurs** et doit les dessiner.\n-   **But** : Idéal pour briser la glace, découvrir les goûts des autres et lancer la créativité de manière collaborative et légère.';
-
-  @override
   String get yzObjectifAvoirLeMoins =>
       'ðŸŽ¯ Objectif\n\nAvoir le moins de points possible à la fin de la partie.\nLa partie s’arrête lorsqu’un joueur atteint 100 points ou plus, et le gagnant est celui avec le score total le plus faible.\n\nðŸ“¦ Matériel\n\n150 cartes numérotées de –2 à +12\n\nðŸƒÂ Mise en place\n\nMélangez toutes les cartes.\nChaque joueur reçoit 12 cartes, placées face cachée devant lui, en 4 colonnes × 3 rangées.\nLes autres cartes forment une pioche. Retournez la première carte pour former la défausse.\nChaque joueur retourne 2 cartes de son choix parmi ses 12.\n\nðŸâ€â€ž Déroulement d’un tour\n\nÀ votre tour, vous disposez de **30 secondes** pour choisir entre deux actions :\n\n1. Prendre la carte de la défausse\nVous devez l’échanger avec l’une de vos 12 cartes (face visible ou cachée).\nLa carte remplacée va sur la défausse.\n\n2. Piocher une carte face cachée\nVous regardez la carte :\n- soit vous la gardez et remplacez une de vos cartes (comme ci-dessus),\n- soit vous la refusez → vous la posez directement sur la défausse, et dans ce cas vous devez retourner l’une de vos cartes encore cachées.\n\n✅ Règles spéciales\n\nTrois cartes identiques dans une colonne → elles sont immédiatement défaussées (valeur 0).\n\nFin de manche :\n\nLa manche se termine lorsqu’un joueur a révélé toutes ses cartes.\nTous les autres joueurs révèlent alors leurs cartes restantes. La manche est terminée.\nTous les joueurs comptent la somme de leurs cartes.\n\n⚠ï¸Â Attention : si le joueur qui termine n’a pas le score le plus bas de la manche, il prend une pénalité de +10 points (son score de manche est doublé dans la version originale, nous utiliserons +10 pour simplifier).\n\nðŸÂâ€  Fin de partie\n\nOn joue autant de manches que nécessaire.\nDès qu’un joueur atteint 100 points ou plus, la partie s’arrête.\nLe joueur avec le plus petit score cumulé gagne.';
 
@@ -5450,10 +5361,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get principeDuJeuLeJeu =>
       '## Principe du jeu\n    * Le jeu se joue entre **3 et 10 joueurs**.\n    * Chaque joueur donne accès à une partie de sa photothèque et choisit des photos à partager.\n    * Pendant une partie, une photo est sélectionnée **aléatoirement** parmi celles de tous les joueurs, puis affichée pendant quelques secondes.\n    * Les joueurs doivent deviner **à qui appartient la photo** affichée.\n    * Le joueur qui devine correctement le plus de photos gagne la partie.\n\n    ## Déroulement\n    1.  **Sélection des photos** : Chaque joueur choisit un certain nombre de photos de sa galerie.\n    2.  **Début de la partie** : Une fois que tout le monde est prêt, l\'hôte lance la partie.\n    3.  **Tour de jeu** :\n        - Une photo aléatoire est montrée pendant 5 secondes.\n        - Tous les joueurs votent pour deviner le propriétaire.\n    4.  **Résultats** : Les scores sont mis à jour après chaque tour.\n    5.  **Fin de la partie** : Après un nombre défini de tours, le joueur avec le plus de points gagne.';
-
-  @override
-  String get butDuJeuCoulerTous =>
-      '**But du jeu**\nCouler tous les navires de l\'adversaire avant qu\'il ne coule les vôtres.\n\n**Déroulement**\n1. **Placement** : Chaque joueur place secrètement sa flotte sur une grille 10x10.\n   - Porte-avions (5 cases)\n   - Croiseur (4 cases)\n   - Sous-marin (3 cases)\n   - Destroyer (3 cases)\n   - Patrouilleur (2 cases)\n2. **Tir** : À tour de rôle, les joueurs touchent une case pour tirer.\n3. **Résultat** : AppLocalizations.of(context)!.touche, \"Coulé\" ou \"À l\'eau\". \n4. **Victoire** : Le premier joueur à couler toute la flotte adverse gagne.';
 
   @override
   String get butDuJeuEtreLe2 =>
@@ -5611,9 +5518,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vousDevezJouerUneCarte => 'Vous devez jouer une carte plus forte.';
 
   @override
-  String get aGagne1 => ']} a gagné !';
-
-  @override
   String get ceNEstPasVotre => 'Ce n\'est pas votre tour.';
 
   @override
@@ -5647,9 +5551,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get caseDejaCiblee => 'Case déjà ciblée.';
-
-  @override
-  String get aCouleTouteLaFlotte => ']} a coulé toute la flotte adverse !';
 
   @override
   String get placementAutomatiqueEffectue =>
@@ -5871,11 +5772,6 @@ class AppLocalizationsFr extends AppLocalizations {
       '--- ERREUR CRITIQUE DANS joinGame ---';
 
   @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ':AppLocalizations.of(context)!.wordcivilParts0TrimWordundercoverIA renvoie des mots simples séparés';
-
-  @override
   String get infiltre => 'Infiltré';
 
   @override
@@ -5998,9 +5894,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Carte non trouvée.';
-
-  @override
-  String get aGagneLaManche => ']} a gagné la manche !';
 
   @override
   String get desDejaLancesPourCe => 'Dés déjà lancés pour ce tour.';
@@ -6385,10 +6278,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get questionNonTrouvee => 'Question non trouvée';
 
   @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft';
-
-  @override
   String get menteur => 'Menteur';
 
   @override
@@ -6416,18 +6305,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'La surenchère doit être supérieure.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      '] ?? AppLocalizations.of(context)!.unJoueur} est le dernier survivant et remporte Skull !';
-
-  @override
-  String get applocalizationsOfContextUnjoueurA =>
-      '] ?? AppLocalizations.of(context)!.unJoueur} a remporté 2 défis et gagne la partie !';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      '] ?? AppLocalizations.of(context)!.unJoueur} remporte Skull !';
-
-  @override
   String get reponseVide => 'Réponse vide.';
 
   @override
@@ -6452,10 +6329,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Joueur ciblé introuvable.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.elseIfGametypeSynonyme ou Banni';
-
-  @override
   String get vousNePouvezPasBannir =>
       'Vous ne pouvez pas bannir votre propre synonyme !';
 
@@ -6465,14 +6338,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'Ce joueur n\'a pas soumis de réponse.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIfLe Juge';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.forFinalTargetInVotesroundState';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -6488,10 +6353,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aucuneDescriptionNAEte => 'Aucune description n\\\'a été votée.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId';
 
   @override
   String get jugeIntrouvable => 'Juge introuvable.';
@@ -6628,10 +6489,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get piquantInsolite => '🌶️ Piquant & Insolite';
 
   @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.quipourraitvotemodegrouper';
-
-  @override
   String get devineT => 'Devine T';
 
   @override
@@ -6645,10 +6502,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get exception => 'Exception:';
-
-  @override
-  String get debutDeLaConstructionDe =>
-      '--- DÉBUT DE LA CONSTRUCTION DE L\'UI DE VOTE \'Qui Pourrait le Plus ?AppLocalizations.of(context)!.printEtatDeIsactionpendingAu(_isActionPending)players\'] as Map<String, dynamic>?) ?? {};';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6669,10 +6522,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get attentionLeWidgetNEst =>
       '- ATTENTION: Le widget n\'est plus monté, setState annulé.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Qui Pourrait le Plus ?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId';
 
   @override
   String get phaseDePose => 'PHASE DE POSE';
@@ -6738,10 +6587,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get enCours => 'EN COURS : {0}';
-
-  @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"\"}\" : GameMessageLocalization.tr(context, reason),';
 
   @override
   String get jAiLanceUnePartie2 => 'J\'ai lancé une partie';
@@ -8399,4 +8244,272 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get identifiantsIncorrectsOuCompteInexistant =>
       'Identifiants incorrects ou compte inexistant.';
+
+  @override
+  String get leMotEtaitLabel => 'Le mot était :';
+
+  @override
+  String get mancheLabel => 'Manche';
+
+  @override
+  String get et => 'et';
+
+  @override
+  String pokerPlayerCheck(Object playerName) {
+    return '$playerName check.';
+  }
+
+  @override
+  String get mot1 => 'Mot:';
+
+  @override
+  String get rouges => 'Rouges';
+
+  @override
+  String get noirs => 'Noirs';
+
+  @override
+  String get crane2 => 'Crâne';
+
+  @override
+  String get enAttente2 => 'En attente';
+
+  @override
+  String get enCours1 => 'En cours';
+
+  @override
+  String aSelectionneSonPionEt1(Object playerscurrentPlay) {
+    return '$playerscurrentPlay a sélectionné son pion et réfléchit...';
+  }
+
+  @override
+  String tempsRestantS1(Object seconds) {
+    return 'Temps restant : $seconds s';
+  }
+
+  @override
+  String pack(Object wordstake2join) {
+    return 'Pack $wordstake2join';
+  }
+
+  @override
+  String variante1(Object rawPairtrim) {
+    return '$rawPairtrim (Variante)';
+  }
+
+  @override
+  String gagneAvecPoint(
+    Object winnerName,
+    Object lowestScore,
+    Object lowestScore1s,
+  ) {
+    return '$winnerName gagne avec $lowestScore point$lowestScore1s !';
+  }
+
+  @override
+  String remporteSkull1(Object playerswinnerIdnam) {
+    return '$playerswinnerIdnam remporte Skull !';
+  }
+
+  @override
+  String packIa(Object _selectedGame) {
+    return 'Pack IA $_selectedGame';
+  }
+
+  @override
+  String get standard => 'Standard';
+
+  @override
+  String get lui => 'Lui';
+
+  @override
+  String carte4(Object deckIndex, Object deckTotal) {
+    return 'Carte $deckIndex / $deckTotal';
+  }
+
+  @override
+  String get joueursBloques1 => 'Joueurs bloqués';
+
+  @override
+  String get vousNAvezBloqueAucun => 'Vous n\'avez bloqué aucun joueur.';
+
+  @override
+  String get debloquer => 'Débloquer';
+
+  @override
+  String get nouvelEmail => 'Nouvel email';
+
+  @override
+  String get motDePasseActuel => 'Mot de passe actuel';
+
+  @override
+  String get emailMisAJourAvec => 'Email mis à jour avec succès !';
+
+  @override
+  String get modifierMotDePasse => 'Modifier mot de passe';
+
+  @override
+  String get nouveauMotDePasse => 'Nouveau mot de passe';
+
+  @override
+  String get confirmerLeMotDePasse => 'Confirmer le mot de passe';
+
+  @override
+  String get motDePasseModifieAvec => 'Mot de passe modifié avec succès !';
+
+  @override
+  String get prendreUnePhoto => 'Prendre une photo';
+
+  @override
+  String get choisirDepuisLaGalerie => 'Choisir depuis la galerie';
+
+  @override
+  String get supprimerLaPhoto => 'Supprimer la photo';
+
+  @override
+  String get photoDeProfilRetiree => 'Photo de profil retirée.';
+
+  @override
+  String get pseudoMisAJour => 'Pseudo mis à jour !';
+
+  @override
+  String get compteSecurite => 'Compte & Sécurité';
+
+  @override
+  String get editeParParrelV10 => 'Édité par Parrel • v1.0.0';
+
+  @override
+  String get aucunJeuTrouve => 'Aucun jeu trouvé';
+
+  @override
+  String get essaieDAjusterTesFiltres =>
+      'Essaie d\'ajuster tes filtres ou d\'effectuer une autre recherche.';
+
+  @override
+  String get reinitialiserLesFiltres => 'Réinitialiser les filtres';
+
+  @override
+  String get nouveau => '✨ NOUVEAU';
+
+  @override
+  String get gererMonAbonnement => 'Gérer mon abonnement';
+
+  @override
+  String get mesPieces => 'Mes Pièces';
+
+  @override
+  String get rechargerLesOffresDuStore => 'Recharger les offres du Store';
+
+  @override
+  String get gererMesAbonnements => 'Gérer mes abonnements';
+
+  @override
+  String get badges => 'Badges';
+
+  @override
+  String get partiesJouees => 'Parties Jouées';
+
+  @override
+  String get xpTotalSession => 'XP Total Session';
+
+  @override
+  String get moyennePartie => 'Moyenne / Partie';
+
+  @override
+  String get detailParJeuPerformanceXp => 'Détail par Jeu & Performance XP';
+
+  @override
+  String get jouezVosPremieresPartiesPour =>
+      'Jouez vos premières parties pour voir vos stats d\'XP ici !';
+
+  @override
+  String xpAuCompteur(Object psxp) {
+    return '$psxp XP au compteur';
+  }
+
+  @override
+  String encoreXpAvantNiv(Object xpRemaining, Object pslevel1) {
+    return 'Encore $xpRemaining XP avant Niv. $pslevel1';
+  }
+
+  @override
+  String joueeVictoireXpGagnes(
+    Object played,
+    Object played1s,
+    Object won,
+    Object won1s,
+    Object gameXp,
+  ) {
+    return '$played jouée$played1s • $won victoire$won1s • ~$gameXp XP gagnés';
+  }
+
+  @override
+  String get erreurDeChargementDesDonnees =>
+      'Erreur de chargement des données utilisateur.';
+
+  @override
+  String get vousDevezAccepterLesCgu =>
+      'Vous devez accepter les CGU et la Politique de Confidentialité pour créer un compte.';
+
+  @override
+  String get miseAJourDisponible => 'Mise à jour disponible';
+
+  @override
+  String get plusTard => 'Plus tard';
+
+  @override
+  String get mettreAJour => 'Mettre à jour';
+
+  @override
+  String uneNouvelleVersionDePlayfun1(Object newVersion) {
+    return 'Une nouvelle version ($newVersion) de Playfun est disponible avec des nouveautés et corrections !';
+  }
+
+  @override
+  String get maintenanceEnCours => 'Maintenance en cours';
+
+  @override
+  String get mettreAJourMaintenant => 'Mettre à jour maintenant';
+
+  @override
+  String get motifDuSignalement => 'Motif du signalement :';
+
+  @override
+  String get tricheOuAntiJeu => 'Triche ou anti-jeu';
+
+  @override
+  String get autre => 'Autre';
+
+  @override
+  String get signaler => 'Signaler';
+
+  @override
+  String get detailParJeu => 'Détail par jeu :';
+
+  @override
+  String get ceJoueurNAPas2 =>
+      'Ce joueur n\'a pas encore de parties enregistrées.';
+
+  @override
+  String badgesDebloques(Object unlockedBadgesleng, Object appBadgesallBadges) {
+    return 'Badges débloqués : $unlockedBadgesleng / $appBadgesallBadges';
+  }
+
+  @override
+  String joueursBloques2(Object psblockedUsersleng) {
+    return 'Joueurs bloqués ($psblockedUsersleng)';
+  }
+
+  @override
+  String debloquer1(Object name) {
+    return 'Débloquer $name';
+  }
+
+  @override
+  String signalerOuBloquer(Object name) {
+    return 'Signaler ou bloquer $name';
+  }
+
+  @override
+  String get vote1 => 'vote';
 }

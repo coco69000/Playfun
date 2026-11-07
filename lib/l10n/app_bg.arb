@@ -28,7 +28,7 @@
   "elements": "'{0}' артикула",
   "prompt": "Подтик: \"'{0}'\"",
   "utiliser": "ИЗПОЛЗВАЙ",
-  "packActiveElements": "✨ Пакетът '''{0}'активиран ('{1}' предмета)!",
+  "packActiveElements": "✨ Пакетът '{0}'активиран ('{1}' предмета)!",
   "fusionner": "ОБЕДИНИ",
   "themesFusionnesLePackActif": "✨ Обединени теми! Активният пакет вече съдържа '{0}' предмета.",
   "modifierCompleter": "Редактирай / Допълни",
@@ -46,7 +46,7 @@
   "generationIa": "AI Generation: '{0}'",
   "historique": "История",
   "melangerPlusieursThemes": "Смесете няколко теми:",
-  "combineS": "✨ '{0 общо}'",
+  "combineS": "✨ ''(0 общо)''",
   "nombreDElements": "Брой елементи:",
   "minRequisRecommande": "Необходима минута: '{0}' | Препоръчително: '{1}'",
   "ambianceTonaliteDeJeu": "Атмосфера / Тон на играта:",
@@ -248,7 +248,7 @@
   "pts": "+'{0}' точки",
   "leGagnantEst": "Победителят е '{0}' !",
   "classementFinal": "Крайно класиране:",
-  "points": "'{0}'. '{1}': '{2,}' точки",
+  "points": "'{0}'. '{1}': ''(2,)'' точки",
   "retourALAccueil": "Към началото",
   "laPartieAEteTerminee": "Играта е приключила или вече не съществува.",
   "quitterLaPartie1": "Напусни играта",
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 XP {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "Няма повече карти",
-  "cartesRestantes": "'{остават 0,}' карти",
-  "jetonsMise": "Чипове: '{$0,}' | Залог: '{$1,}'",
+  "cartesRestantes": "''(остават 0,)'' карти",
+  "jetonsMise": "Чипове: ''($0,)'' | Залог: ''($1,)''",
   "totalPts": "Общо: '{0}' точки",
   "k13Remplies": "'{0}'/13 запълнени",
   "finDeLaManche": "Край на рунда!",
@@ -329,7 +329,7 @@
   "zombieEnMain": "ЗОМБИ В РЪКАТА",
   "sauve": "'{0}' (Спасено!)",
   "mainDeCartes": "Ръка от '{0}' ('{1}' карти)",
-  "votreMainDeSurvieCartes": "ВАШАТА РЪКА ЗА ОЦЕЛЯВАНЕ ('{0,}' карти)",
+  "votreMainDeSurvieCartes": "ВАШАТА РЪКА ЗА ОЦЕЛЯВАНЕ (''(0,)'' карти)",
   "lesPairesSontDefausseesAutomatiquement": "Двойките се изчистват автоматично",
   "carteSEnJeu": "Карта(и) в игра:",
   "aucuneCarteEnJeuJouez": "Няма карти в игра. Играйте каквото искате!",
@@ -341,14 +341,14 @@
   "tempsEcoule": "Времето изтече!",
   "tourSuivant": "Следващ ход",
   "enAttenteDeLHote3": "Очаква се домакинът да стартира следващия ход...",
-  "equipeAPts": "Отбор А: '{точки}' точки '{pts}'",
-  "equipeBPts": "Б отбор: '{точки}' '{pts}'",
+  "equipeAPts": "Отбор А: ''(точки)'' точки '{pts}'",
+  "equipeBPts": "Б отбор: ''(точки)'' '{pts}'",
   "cEstAToiDe": "Твой ред е да познаваш!",
   "passer1": "ПРЕСКОЧИ",
   "motsTrouves": "Намерени думи: '{0}'",
   "ecrivezIci": "Пишете тук...",
   "plierPasser": "СГЪНИ И ПРЕДАЙ",
-  "motsRediges": "✏️ '{0,}' думи написани...",
+  "motsRediges": "✏️ ''(0,)'' думи написани...",
   "leGrandDepliage": "Голямото разгръщане!",
   "voiciLesUvresCollectivesNees": "Ето колективните творби, родени от вашето въображение:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' подготвя атака ('{1}') срещу играч!",
@@ -386,7 +386,7 @@
   "distribuerLaSuite": "Раздай следващите",
   "attenteDuDonneur": "Изчакване на крупието...",
   "couche": "Фолд",
-  "miseActuelle": "Текущ залог: '{сума}' '{amount}'",
+  "miseActuelle": "Текущ залог: ''(сума)'' '{amount}'",
   "enAttente": "Изчакване...",
   "seCoucher": "Фолд",
   "checker": "Чек",
@@ -446,16 +446,16 @@
   "votes": "Гласове:",
   "aVote": "'{0}' гласували: '{1}'",
   "lesPointsOntEteDistribues": "Точките бяха разпределени според вашите гласове.",
-  "leMotDesCivilsEtait": "Думата на цивилните беше: '''{0}'''",
-  "leMotDeLInfiltre": "Думата на Инфилтратора ('{0}') беше: '''{1}'''",
+  "leMotDesCivilsEtait": "Думата на цивилните беше: '{0}'",
+  "leMotDeLInfiltre": "Думата на Инфилтратора ('{0}') беше: '{1}'",
   "mrWhiteNAvaitPas": "Г-н Уайт ('{0}') нямаше думи.",
-  "leMotATrouverEtait": "Думата, която трябваше да се измисли, беше синоним на '''{0}'''. Останалите играчи отбелязват 1 точка.",
+  "leMotATrouverEtait": "Думата, която трябваше да се измисли, беше синоним на '{0}'. Останалите играчи отбелязват 1 точка.",
   "felicitationsAuDessinateurEtA": "Поздравления на карикатуриста '{0}' и '{1}' !",
-  "saReponseEtait": "Отговорът му беше: '''{0}'''.",
-  "leMotEtait": "Думата беше: '''{0}'''.",
+  "saReponseEtait": "Отговорът му беше: '{0}'.",
+  "leMotEtait": "Думата беше: '{0}'.",
   "cartesRevelees": "Разкрити карти:",
   "erreurDeChargementDuMeme": "Грешка при зареждане на мемето.",
-  "scoreActuelDeCartes": "Текущ резултат '{0}': '{1,}' карти.",
+  "scoreActuelDeCartes": "Текущ резултат '{0}': ''(1,)'' карти.",
   "finDuTour1": "Край на хода",
   "tourSuivant1": "Следващ ход",
   "enAttenteDeLHote4": "Изчакване на хоста за следващия рунд...",
@@ -542,13 +542,13 @@
   "tempsRestantS": "Оставащо време: '{0}' с",
   "k6Consecutifs3": "6 поредни: '{streak}'/3",
   "lancerLeDe": "ХВЪРЛИ ЗАР",
-  "scorePoints": "Резултат: '{}' точки '{score}'",
-  "dominosRestants": "Останали домино: '{броят}' '{count}'",
+  "scorePoints": "Резултат: ''()'' точки '{score}'",
+  "dominosRestants": "Останали домино: ''(броят)'' '{count}'",
   "impossibleDeJouerCeDomino": "Тази плочка не може да бъде поставена тук.",
   "mancheTerminee": "Рундът приключи! ",
   "dominos": "Домино",
   "extremites": "Краища: ",
-  "pioche2": "Теглене: '{Брой}' '{count}'",
+  "pioche2": "Теглене: ''(Брой)'' '{count}'",
   "piocher": "Изтегли",
   "ficheDePts": "'{0}' рекорд ('{1}' точки)",
   "pts2": "{otherName} ({otherTotal} точки)",
@@ -563,7 +563,7 @@
     }
   },
   "clic": "КЛИК",
-  "lancersRestants": "Останали хвърляния: '{броят}' '{count}'",
+  "lancersRestants": "Останали хвърляния: ''(броят)'' '{count}'",
   "combinaison": "КОМБИНАЦИЯ",
   "grilleDePts": "МРЕЖА ОТ '{0}' ('{1}' точки)",
   "pts3": "{p} ({myTotal} точки)",
@@ -614,10 +614,10 @@
     }
   },
   "carteAPrendre": "КАРТА ЗА ВЗЕМАНЕ",
-  "votreMain": "Ръката ти ('{брои}') '{count}'",
+  "votreMain": "Ръката ти (''(брои)'') '{count}'",
   "touchezUneCartePourLa": "Докоснете карта, за да я изиграете",
   "aucuneCombinaisonEtaleeSurLa": "Все още няма комбинации на масата",
-  "etaler": "Спред ('{броят}') '{count}'",
+  "etaler": "Спред (''(броят)'') '{count}'",
   "defausserFin": "Изчистване и край",
   "pts8": "{eValue} точки",
   "@pts8": {
@@ -644,8 +644,8 @@
   "joueursNonAssignes1": "Неразпределени играчи",
   "confirmerLancer": "Потвърди и стартирай",
   "choisirUnJeuLocal": "Изберете локална игра",
-  "ilFautAuMoinsJoueurs": "За този режим ви трябват поне '{0,}' играчи!",
-  "ceModeSupporteAuMaximum": "Този режим поддържа максимум '{0,}' играчи!",
+  "ilFautAuMoinsJoueurs": "За този режим ви трябват поне ''(0,)'' играчи!",
+  "ceModeSupporteAuMaximum": "Този режим поддържа максимум ''(0,)'' играчи!",
   "parametresActionOuVerite1": "Настройки: Истина или действие",
   "parametresDeLaPartie": "Настройки на играта",
   "k1IntensiteDesDefis": "1. Интензивност на предизвикателствата",
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "Натиснете „Завърти колелото“, за да започнете!",
   "verite": "Истина",
   "action": "Действие",
-  "pts9": "'{0}' : '{1,}' точки",
+  "pts9": "'{0}' : ''(1,)'' точки",
   "parametresLeDilemme": "Настройки: Дилемата",
   "parametresDuDilemme": "Настройки на дилемата",
   "k1DifficulteDesChoix": "1. Трудност на изборите",
@@ -812,7 +812,7 @@
   "veuillezRevenirALEcran": "Моля, върнете се към екрана за настройки на играчите.",
   "retour": "Назад",
   "lEquipeAGagne": "Отборът '{0}' спечели!",
-  "points1": "'{0,}' точки",
+  "points1": "''(0,)'' точки",
   "passeLObjet": "Предай предмета",
   "passeLObjetRapidement": "Предай предмета бързо",
   "generationIaDeQuestions": "Генериране на въпроси с AI",
@@ -856,7 +856,7 @@
   "arreter": "Спри",
   "hautPasser": "Нагоре = Пас",
   "resultatsDuPassage": "Резултати от рунда",
-  "pointsMarques": "+'{0,}' точки!",
+  "pointsMarques": "+''(0,)'' точки!",
   "touchezUnMotPourModifier": "Докоснете дума, за да промените резултата при грешка на сензора:",
   "pts10": "{teamAScore} точки",
   "@pts10": {
@@ -896,7 +896,7 @@
   },
   "partieTerminee2": "КРАЙ НА ИГРАТА!",
   "victoireDe": "Победа на '{0}' !",
-  "cartes": "'{0,}' карти",
+  "cartes": "''(0,)'' карти",
   "ecrireUnMessage": "Напишете съобщение...",
   "codeDeSalonPriveIntrouvable": "Код за частна стая не е намерен.",
   "erreurLorsDeLaConnexion": "Грешка при влизане: '{0}'",
@@ -922,7 +922,7 @@
   "creerLeSalonCout5": "Създай салон (Цена: 5 монети)",
   "lancerUnJeuPourLe": "Стартирай игра за салона",
   "jouer1": "Играй",
-  "joueurSEnJeu": "'{0,}' играч(и) в игра",
+  "joueurSEnJeu": "''(0,)'' играч(и) в игра",
   "cloturerLaPartie": "Затвори играта",
   "pretS": "'{0}' заем(и)",
   "annulerLaPartie": "Отказ на играта",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "Затваряне на салона?",
   "leSalonSeraDefinitivementSupprime": "Салонът ще бъде окончателно премахнат за всички участници.",
   "aCreeUnePartieDe": "'{0}' създаде игра '{1}' !",
-  "joueurSPrets": "'{0,}' играчи готови",
+  "joueurSPrets": "''(0,)'' играчи готови",
   "cettePartieEstTermineeOu": "Тази игра е завършена или отменена.",
   "enPartie": "В ИГРА",
   "partieDeTerminee": "Играта на '{0}' приключи!",
   "statistiques": "Статистика - '{0}'",
-  "vainqueur1": "Победител: '{0}''{1}'\n",
+  "vainqueur1": "Победител: '{0}''{1}'''''''\n",
   "voirLesStats": "Виж статистиката",
   "message": "Съобщение...",
   "k0Pts": "0 Т",
@@ -969,7 +969,7 @@
   "regardezRealiserLeDefi": "Гледайте '{0}' изпълнете предизвикателството...",
   "voteDeValidation": "🗳️ ГЛАСУВАНЕ ЗА ВАЛИДИРАНЕ",
   "estCeQueAReleve": "Дали '{0}' се справи с предизвикателството?",
-  "votesRecus": "'{0}' / '{1,}' събрани гласа",
+  "votesRecus": "'{0}' / ''(1,)'' събрани гласа",
   "vosAmisVotentPourEvaluer": "Приятелите ви гласуват, за да оценят представянето ви...",
   "votreVoteABienEte": "Вашият глас беше отчетен!",
   "ouiValide": "ДА, Зачетено! 👍",
@@ -1009,11 +1009,11 @@
       }
     }
   },
-  "reflechit": "'{име}' мисли... '{name}'",
+  "reflechit": "''(име)'' мисли... '{name}'",
   "faceAFaceCoteA": "Един срещу друг (рамо до рамо)",
   "totalAdversaire": "ОБЩО СЪПЕРНИК",
   "prendreLAtoutOuPasser": "ВЗЕМИ КОЗА ИЛИ ПАСУВАЙ:",
-  "combinaisonsDe": "Комбинации от '{имена}' '{name}'",
+  "combinaisonsDe": "Комбинации от ''(имена)'' '{name}'",
   "ilDevraDonnerLePremier": "Той ще трябва да даде първата улика",
   "cetteReponseADejaEte": "Този отговор вече е даден!",
   "themePourLes25Mots": "Тема за 25-те думи",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' хвърли заровете отново ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} запази зара със стойност {dieVal} (зар #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Кирка",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' друго '''{''' \r\n      Анти-дублирана сигурност: ако",
   "vousNAvezPasDe": "Нямаш думи",
   "equipe12": "Отбор 1",
   "equipe21": "Отбор 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Край на ръкава (админ бутон)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async '''{''' \r\n    wait _db.runTransaction((transaction) async'''{''' \r\n      финална играRef = _db.collection(''games'').doc(gameCode); \r\n      финален snap = waitit transaction.get(gameRef); \r\n      ако (!snap.exists) се върне; \r\n\r\n      финална играДата = snap.data() като Map<String, динамично>; \r\n      финални играчи = Карта<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Определете победителя (повече XP)\r\n      Победител по струнаId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        краен xp = (pData[''xp''] като num?)?. toInt() ?? 0; \r\n        ако (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': победителId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Някой",
   "aAtteintPointsEtRemporte": "{winnerName} достигна {targetScore} точки и спечели мача!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Играчът",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Въпроси за списък<Низ> =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[трудност] ?? \r\n          GameWords.койНай-Вероятно[",
   "honnete": "Честно",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [четни, четни]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = разбърканРоли[1]; \r\n\r\n        Въпрос =\r\n            \"Опиши тайната си дума с една дума. Самозванци, блъф!\"; \r\n        за (var pId в players.keys) '''{''' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": ")? par. split(",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} достигна {updatedScoresoverallWinnerId} точки и спечели мача!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "поставяне на карта",
   "enchereAutomatique": "автоматично наддаване",
   "passeLEnchere": "пасува наддаването",
-  "elseIfGametype": ") '''{''' \r\n        ако (voterId == votedForId) '''{''' \r\n          throw Exception(\"Формална забрана да гласуваш за себе си!\"); \r\n        '''}''''}''' друго, ако (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          транзакция, \r\n          gameRef, \r\n          gameData, \r\n          избирател, \r\n          5, \r\n          applySpeedBonus: вярно, \r\n        ); \r\n      }' \r\n\r\n      int requiredГласове = играчи.Дължина; \r\n\r\n      ако (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          крайна Карта<Низ, int> гласовеБроя = '{}'; \r\n          за (крайна цел в гласове.стойности) '{' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxГласове = 0; \r\n          Списък<Низ> топ Гласувано = []; \r\n          voteCounts.forEach((цел, броене) '''{''' \r\n            ако (брои > maxVotes) '{' \r\n              maxVotes = брой; \r\n              topVoted = [цел]; \r\n            '}' друго, ако (брой == maxVotes) '{' \r\n              topVoted.add(целева); \r\n            '}''''}'''); \r\n\r\n          Актуализации[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        крайна Карта<Низ, int> гласовеБроя = '{}'; \r\n        за (крайна цел в гласове.стойности) '{' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxГласове = 0; \r\n        Списък<Низ> топ Гласувано = []; \r\n        voteCounts.forEach((цел, броене) '''{''' \r\n          ако (брои > maxVotes) '{' \r\n            maxVotes = брой; \r\n            topVoted = [цел]; \r\n          '}' друго, ако (брой == maxVotes) '{' \r\n            topVoted.add(целева); \r\n          '}''''}'''); \r\n\r\n        ако (topVoted.length == 1) '''{''' \r\n          краен победител = най-резултатен. Първи в гласуванията; \r\n          Актуализации[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          транзакция, \r\n          gameRef, \r\n          gameData, \r\n          избирател, \r\n          5, \r\n          applySpeedBonus: вярно, \r\n        ); \r\n      )'' \r\n\r\n      int requiredГласове = играчи.Дължина; \r\n\r\n      ако (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} спечели всички чипове на масата!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "Съдията избира в момента...",
   "coupAutomatiqueJouePourCause": "Автоматичното движение се играе поради неактивност.",
   "inactivite": "Неактивност",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0: 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0: {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Ред на противника",
   "derniereCartePosee": "Последна изиграна карта!",
   "cEstTonTour": "ТВОЙ ред е!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0: 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Грешка: Въпросът не е намерен.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0: 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(няма отговор)",
   "deuxDefisReussis": "Две успешни предизвикателства.",
   "leChallenger": "Претендентът",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": ":'{0}' '{1}'",
   "uneDescriptionHilarante": "хитроумно и смешно описание",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Колона( \r\n            Деца: [ \r\n              Текст( \r\n                ''",
   "unProblemeEstSurvenu": "Възникна проблем.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      По подразбиране: \r\n        финален кръгWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "1 / 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Виж крайния резултат",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "1 / 2 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (височина: 20), \r\n                Wrap( \r\n                  подравняване: WrapAlignment.center, \r\n                  Деца: \r\n                      justOneFilteredClues\r\n                          .map((подсказка) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (височина: 20), \r\n                ако (justOneFilteredClues.isEmpty)\r\n                  Текст( \r\n                    AppLocalizations.of(context)!. всички уликиСа били, \r\n                    стил: const TextStyle(цвят: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' друго '''{''' \r\n          Гадателят решава да играе\r\n          Return Column( \r\n            Деца: [ \r\n              Текст(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0: 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,20 +2060,18 @@
   "designez2Amoureux": "Избери 2 влюбени",
   "amoureuxUnis": "Влюбените са събрани!",
   "laVictime": "Жертвата",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Ред( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Деца: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. infect, \r\n                  Икона: Icons.auto_fix_high, \r\n                  цвят: Цветове. ЛилавоАкцент, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      контекст, \r\n                      слушай: невярно, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      вярно, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                конст SizedBox (ширина: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. поглъщане, \r\n                  икона: Icons.close, \r\n                  цвят: Цветове.червен акцент, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        невярно, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          комби; \r\n        Кутия ''loup_blanc_turn'': \r\n          promptТекст = ",
   "aucuneVictimeCetteNuitProtegee": "Нямаше жертви снощи (защитени или пощадени)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              стил: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Цвят: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''вълк'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(текст: съобщение), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Компактна лента за изпращане\r\n          ако (canSendMessage)\r\n            Row( \r\n              Деца: [ \r\n                Разширено( \r\n                  дете: SizedBox( \r\n                    височина: 32, \r\n                    дете: TextField( \r\n                      Контролер: _chatController, \r\n                      style: const TextStyle(fontSize: 12, цвят: Colors.white), \r\n                      декорация: ВходДекорация ( \r\n                        ПодсказкаТекст: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          цвят: Цветове. бяло30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        граница: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Запълнено: Вярно, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          хоризонтално: 10, \r\n                          вертикален: 0, \r\n                        ), \r\n                      ), \r\n                      onПодадено: (текст) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (ширина: 4), \r\n                IconButton( \r\n                  икона: const Icon( \r\n                    Icons.send_rounded, \r\n                    размер: 18, \r\n                    цвят: Colors.cyanAccent, \r\n                  ), \r\n                  подпълване: EdgeInsets.zero, \r\n                  ограничения: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    ако (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Етикет на низ, тип стринг, цвят activeColor) '{' \r\n    краен bool isSelected = _selectedChatType == тип; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = тип), \r\n      дете: Контейнер( \r\n        подплата: const EdgeInsets.симетрично (хоризонтално: 8, вертикално: 3), \r\n        декорация: КутияДекорация ( \r\n          Цвят: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Цвят: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        дете: Текст( \r\n          лейбъл, \r\n          стил: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor: Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- ОБНОВИХ АВАТАРА, ЗА ДА СТАНЕ ИНТЕРАКТИВЕН--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder позволява изключително плавен визуален таймер без блокиране на таймера и ръчното setState, което значително улеснява темата (Точка 4)\r\n    финален endTime = startTime.toDate().add( \r\n      Продължителност(секунди: продължителност Всекунди), \r\n    ); \r\n    окончателно оставено = крайВреме.разлика (DateTime.now()); \r\n\r\n    ако (оставащо.isNegative)\r\n      Отговор Текст( \r\n        AppLocalizations.of(context)!. k0S, \r\n        стил: Theme.of( \r\n          контекст, \r\n        ).textTheme.headlineМалък?. copyWith(цвят: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Продължителност>( \r\n      Продължителност: остава, \r\n      tween: Tween (начало: останал, край: Продължителност.нула), \r\n      builder: (БилдКонтекст контекст, стойност на продължителност, widget? child) '{' \r\n        последни секунди = стойност.всекунди; \r\n        Отговор Текст( \r\n          AppLocalizations.of(context)!. оставащо време, \r\n          стил: Тема.на(context).textТема.заглавиеМалко?. copyWith( \r\n            цвят: секунди < 20 ? Цветове. червен Акцент: Цветове. Кехлибарен акцент, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Контекст на BuildContext, \r\n    Map<String, dynamic> gameData, \r\n    СтрунникId, \r\n  ) '''{''' \r\n    финални играчи = Карта<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    финален играчРед = Списък<Низ>.от( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    крайни позиции = Map<String, dynamic>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    финален струн currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    крайният bool isMyTurn = текущPlayerId == playerId; \r\n    финален int dice = (gameData[''littleHorsesDice''] като num?)?. toInt() ?? 0; \r\n    финален bool hasRoll = gameData[''littleHorsesHasRolled''] ?? false; \r\n    крайният bool isTeamMode = gameData[''smallTeamHorses''] ?? false; \r\n    крайно Map<String, dynamic> secutiveSixes = Map<String, dynamic>.from( \r\n      gameData[''малки конеПоследователниШестици''] ?? '{}', \r\n    ); \r\n    финален int mySixStreak = последователниШести[playerId] ?? 0; \r\n\r\n    Neon Modern палитра / Аркада на тъмен фон\r\n    краен списък<Цвят> играчЦветове = [ \r\n      Конст Цвят(0xFFEF4444), // Неоново червено\r\n      конст Цвят(0xFF38BDF8), // Неоново небесносиньо\r\n      конст Цвят(0xFF10B981), // Изумрудено зелено\r\n      Конст Колор(0xFFF59E0B), // Златен кехлибар\r\n    ]; \r\n\r\n    --- ЕКРАН НА ПОБЕДАТА--- \r\n    ако (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      return UniversalGameEndScreen( \r\n        играЗаглавие:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Достигане до центъра на дъската!",
   "deplacezUnCheval": "ПРЕМЕСТЕТЕ КОН!",
   "aVousDeLancer": "ВАШ РЕД Е ДА ХВЪРЛЯТЕ!",
   "mode2v2Allies": "Режим 2в2 Съюзници",
-  "chevalSelectionneNtouchezPourAvancer": "Кон '{пешка}' избрана!\\nДокоснете, за да продължите напред '{pawn}'",
+  "chevalSelectionneNtouchezPourAvancer": "Кон ''(пешка)'' избрана!\\nДокоснете, за да продължите напред '{pawn}'",
   "touchezUnPion": "Докоснете пионка",
   "scoreLimiteAtteint": "Целевият резултат е достигнат!",
   "toutesLesGrillesSontCompletees": "Всички таблици са попълнени!",
   "cEstVotreTourTouchez": "Твой ред е! Докосни зар, за да го задържиш (златен 🔒)",
   "lancerLesDes": "Хвърли заровете",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1 / 63 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1 / 63 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "ЗАГУБА! Разкрий въпроса и отговори!",
   "gagneTonSecretEstPreserve": "ПОБЕДА! Тайната ти е запазена.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = части[1].trim(); \r\n    '''}''' друго '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (Вариант)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    за (играч на VAR в _activePlayers) '''{''' \r\n      ако (играч == под прикритие) '''{''' \r\n        _playerRoles[играч] = \"Инфилтратор\"; \r\n      '''}''' друго, ако (играч == _mrWhitePlayer) '''{''' \r\n        _playerRoles[играч] = \"Г-н Уайт\"; \r\n      '''}''' друго '''{''' \r\n        _playerRoles[играч] = \"Граждански\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  Void _nextPlayerReveal() '''{''' \r\n    ако (_currentPlayerRevealIndex < _activePlayers.дължина - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' друго '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(струнна музикантка) '''{''' \r\n    String role = _playerRoles[player]!; \r\n    bool impostorsWin = роля == \"Граждански\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      ако (импосториПобедят) '''{''' \r\n        _resultMessage = \"'{'player'}' беше цивилен! Импостърите печелят!\"; \r\n      '''}''' друго '''{''' \r\n        _resultMessage = \"'{'player'}' беше\r\n    \r\n  ",
   "requiert4Joueurs": "Изисква 4+ играчи",
   "requiert3Joueurs": "Изисква 3+ играчи",
   "genereDesCategoriesAmusantesPour": "Генерирайте забавни категории за горещия картоф. Тема: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Отбор Синьо)",
   "k2EquipesSAffrontent": "2 отбора се състезават",
   "chacunPourSoi": "Всеки за себе си",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0: {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2280,7 +2268,7 @@
   "quatre": "Четворки",
   "cinq": "Петици",
   "six": "Шестици",
-  "sectionSup": "Раздел: \"'{'''0'''}'\"",
+  "sectionSup": "Раздел: \"''(''''0'''')''\"",
   "k63Pts": "{oppUpper} / 63 ppts {value}",
   "@k63Pts": {
     "placeholders": {
@@ -2315,7 +2303,7 @@
   "moi": "Аз",
   "manche1": "Канал '{0}' / '{1}'",
   "voisin": "Съсед",
-  "aSelectionneCarte": "\"'{' ''0'''}',\" избрана карта '''{'\\ 1'''}' '''{'\\ 2'''}' ''...",
+  "aSelectionneCarte": "\"''('' ''0'''')'',\" избрана карта ''''(''\\ 1'''')'' ''''(''\\ 2'''')'' ''...",
   "jouePar": "Игра на '{0}'",
   "lAdversaire": "Противникът",
   "ecrivez": "Напиши {promptItem}",
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Ходът приключи.",
-  "aGagneAvecSaDescription": "{winnerName} спечели с описанието си:AppLocalizations.of(context)!. extrainfoColumnChildText 99999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Никой не спечели този рунд. Равенство или липса на описания.",
   "aTrouveLeSymboleIl": "{winnerName} намери символа 99999! Той печели картата. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Уликата е изпратена! Изчакване на останалите...",
   "carte3": "Карта",
   "score": "Резултат",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :appLocalizations.of(context)! .styleConstTextstyleЦвятЦвятЦвят {value2} {deckIndex} / {deckTotal} . ... {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "Нощта пада върху селото...\n\nЗатвори очи.",
   "leMomentEstVenuLe": "Дойде времето...\n\nСелото трябва да гласува.",
   "victoireDesVillageois": "Победа на Селяните!",
@@ -2548,7 +2499,7 @@
   "victoireDesAmoureux": "Победа на Влюбените!",
   "finDuJeu": "Край на играта",
   "loup": "Вълк",
-  "validerLeCouple2": "Валиден въртящ момент ('{'''0'''}'\"/2)",
+  "validerLeCouple2": "Валиден въртящ момент (''(''''0'''')''\"/2)",
   "lHeritierChoisitSonTestament": "Наследникът избира завещание",
   "selectionnezVotreTestateur": "Избери завещател",
   "leGardeProtegeUnVillageois": "Охранителят пази селянин",
@@ -2562,14 +2513,6 @@
   "votezPourDevorerUneProie": "Гласувайте за плячка",
   "espionnezUnJoueur": "Шпионирай играч...",
   "leLoupNoirDecideDu": "Черният Вълк решава съдбата на плячката",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Инфект {targetName} ?appLocalizations.of(context)!.centeractionwidgetRowMainaxisizeMainaxiszeMinThe White Wolf shaks solo",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Избери жертва за разкъсване",
   "laSorcierePrepareSesPotions": "Вещицата готви отвари",
   "cibleDesLoups": "Цел на вълците: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Вълци",
   "outreTombe": "Отвъдното",
   "amoureux": "Влюбени",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : Applocalizations.of(context) ..styleTextstyleFontweightFontweightBoldSmall Horses",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Индивидуално състезание",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 хвърляния)",
   "@k3Lancers": {
@@ -2694,8 +2629,7 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Кой може повече?AppLocalizations.of(context)!.bodyPaddingPaddingPaddingConstEdgeinssoft",
-  "votePar": "Гласувано от: \"'{'''0'''}'\"",
+  "votePar": "Гласувано от: \"''(''''0'''')''\"",
   "decisionUnanimeDuGroupePour": "Единодушно решение на групата за '{0}'!",
   "ilFautAuMoins41": "Нужни са поне 4 играчи за Codenames (2 на отбор)!",
   "impossibleDeFormerLesEquipes": "Не могат да се сформират отбори (няма достатъчно играчи). Рестартирайте с поне 4 играчи.",
@@ -2708,7 +2642,7 @@
   "maitreEspion": "'{0}' гонитба '{1}'",
   "passeLeTelephoneAuxAgents": "Подай телефона на агентите на отбора.",
   "mime": "Пантомима",
-  "cEstAuTourDe2": "Това е ред на \"'{'''0'''}'\" ('{'''1'''}')",
+  "cEstAuTourDe2": "Това е ред на \"''(''''0'''')''\" (''(''''1'''')'')",
   "genereDesQuestionsAmusantesEt": "Генерира забавни и бързи въпроси, които да зададете. Тема: '{0}'",
   "s3": "{minDuration} сек.",
   "@s3": {
@@ -2742,7 +2676,7 @@
     }
   },
   "jeu1": "Игра",
-  "partieDeEnAttente": "Част от чакащата \"'{'''0'''}'\"",
+  "partieDeEnAttente": "Част от чакащата \"''(''''0'''')''\"",
   "termine": "Терминиран: '{0}'",
   "vainqueur2": "Победител:",
   "joueurSPretS": "Играч(s) готов",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "** Цел **\nВземете карти, за да се създаде съвпадение двойки. Избягвайте да бъде играч, който държи Zombie карта в края на играта.\n**Draft **\n1. Играта започва с 33 карти (16 двойки + 1 зомби карта).\n2. Картите се разпределят на 4 играчи.\n3. Всеки завой играч взема карта от следващия играч.\n4. Ако картата създава двойка, тя автоматично се побеждава.\n5. Ръката на играча е смесена.\n6. Първият играч, който вече няма спечелени карти.\n7. Останалият играч със зомби картата загуби!",
   "butDuJeuObtenirLe": "**Игра гол **\nВземи най-високия резултат, като попълните 13 категории с 5 зарове.\n\n*Бягане на кула**\n1. *** Ланс **: Можете да хвърлите 5 зара до 3 пъти на завой.\n2. ** Keep **: След първото или второто хвърляне, можете да запазите някои зарове и да рестартирате други.\n3. *****: След поне едно хвърляне, трябва да изберете категория, за да вкара. Всяка категория може да се използва само веднъж на част.\n\n**Категория **\n- ** Що се отнася до Six **: Сума от съответните зарове. (Към 35 точки, ако горната част е 63 или повече точки).\n- ** Брелан ** (3 или повече идентични зарове): Сборът от всички зарове.\n- ** Квадрат ** (4 или повече идентични зарове): Сборът от всички зарове.\n- ** Full ** (3 зарове идентични + 1 чифт): 25 точки.\n- *** Small Suite ** (4 последователни зарове): 30 точки.\n- **Large Suite ** (5 последователни зарове): 40 точки.\n- ** Yams ** (5 еднакви зарове): 50 точки.\n- **Chance **: Сума от всички зарове.",
   "objectifNePasAvoirL": "** Цел **\nНямате устройството в ръцете си, когато картофът експлодира!\n\n**Draft **\n1. На екрана се появява тема.\n2. Играчът, държащ устройството, трябва да даде отговор, съответстващ на темата.\n3. Веднага щом отговорил, бързо предал самолета на съседа си.\n4. Съседът от своя страна трябва да намери нов отговор и да подаде устройството.\n5. Времето е скрито и случайно: картофът може да експлодира по всяко време!\n6. Играчът, който държи устройството по време на експлозията губи дръжката и получава залог.",
-  "principeGeneralGribouillisEstUn": "** Общ принцип **\nГрибуилис е игра на рисуване, вдъхновена от \"Арабски телефон,\" където идеите се променят на всеки етап. Има 3 режима на игра:\n\n**1. Нормален режим (арабски илюстрован телефон) **\nВсеки играч пише изречение.\n- **Drawing **: Всеки играч получава друго изречение и го тегли.\nВсеки играч получава рисунка и познай какво представлява.\n- ** Alternance **: Играта се редува рисува и предполагам, докато всеки \"албум\" е около всички играчи.\n- Но... Забавлявайте се, виждайки как едно просто изречение се превръща в нещо съвсем различно!\n\n**2. Режим на допълване (Колаборативен чертеж) **\n- **Croquis **: Всеки играч започва една проста рисунка.\n- **Пълен **: Всеки играч получава друг рисунка и трябва да го обогати, без да изтрива това, което вече съществува.\n- ** Alternance **: Рисунката отива от играч на играч, всеки добавя своето докосване.\n- **Параметър \"Добави 1\" **:\n- *Ако сте деактивирани (по подразбиране) *: Това е връв. Рисунката се развива на всеки етап (Player A - > Player B - > Player C...).\n*Ако е активиран*: Първоначалната рисунка на всеки играч е завършена от всички останали играчи, създавайки няколко колективни произведения паралелно.\n- *** Но **: Създаване на изненадващи и забавни колективни произведения на изкуството.\n\n**3. Brise- Glace Mode (Creative Interactions) **\n- **Писане **: Всеки играч пише лична тема (ex: Applocalizations.of(context)!.myPreference).\n- **Drawing **: Всеки играч получава темите от ** всички останали играчи ** и трябва да ги нарисува.\n- **But **: Идеално е да се разчупи леда, да се открият вкусовете на другите и да започне креативност в сътрудничество и светлина начин.",
   "yzObjectifAvoirLeMoins": "Цел\n\nИмате възможно най-малко точки в края на играта.\nИграта спира, когато играчът достигне 100 или повече точки, а победителят е този с най-нисък общ резултат.\n\nОборудване\n\n150 карти, номерирани от 2 до +12\n\nИзпълнение\n\nРазбъркай всички карти.\nВсеки играч получава 12 карти, поставени с лицето надолу пред него, в 4 колони × 3 реда.\nДругите карти образуват акции. Върнете първата карта, за да формирате отпадъците.\nВсеки играч връща 2 карти по свой избор от своите 12.\n\nКурс на обиколка\n\nНа свой ред, имате ** 30 секунди ** да изберете между две действия:\n\n1. Вземете картата за отпадъци\nТрябва да го размените с една от 12-те си карти (видима или скрита страна).\nСменената карта отива на боклука.\n\n2. Piocher карта с лице надолу\nПогледни картата:\n- или го запазвате и заменяте една от Вашите карти (както по- горе),\n- или го отказвате → го поставяте директно върху отпадъците, и в този случай трябва да върнете една от картите си все още скрита.\n\nСпециални правила\n\nТри еднакви карти в колона → са незабавно победени (стойност 0).\n\nКрай на дръжката:\n\nДръжката свършва, когато играчът разкрие всичките си карти.\nВсички останали играчи след това разкриват останалите си карти. Дръжката свърши.\nВсички играчи броят сумата на картите си.\n\nМоля, имайте предвид: ако играчът, който завършва, няма най-ниския резултат в кръга, той взема наказание от +10 точки (скорът на дръжката му се удвоява в оригиналната версия, ще използваме +10 за опростяване).\n\nКрай на играта\n\nИграем колкото си искаме ръкави.\nСлед като играч достигне 100 точки или повече, играта спира.\nИграчът с най-нисък кумулативен резултат печели.",
   "iAReglesDuPoker": "Цел\n\nСпечелете чиповете от други играчи, като:\n- най-добрата ръка от 5 карти по време на клане,\n- или като ги накараш да се откажат от залозите.\n\nРъчна класификация (от най-силната до най-слабата)\n\n1. Роял флъш: 10 год.\n2. Quint флъш: 5 карти, които следват помежду си, същия цвят\n3. Площад: 4 еднакви карти\n4. Пълен: 3 еднакви карти + 1 чифт\n5. Цвят (флуш): 5 карти от един и същи цвят (неконститутивен)\n6. Следваща (пети): 5 карти, които следват един друг (различни цветове)\n7. Брелан: 3 еднакви карти\n8. Двойна двойка\n9. Двойка\n10. Висока карта (най-висока карта, ако никой не се подобри)\n\nð\n\n1. Блиндове\nИграчът отляво на дилъра поставя малкия блинд.\nСледващият играч прави големия блинд.\n\n2. Разпределение\nВсеки играч получава 2 затворени карти (частните карти).\n\n3. Търгови кули и общи карти\n- Предфлоп: заложи трик с частни карти.\n3 общи карти. Нови залози.\nЧетвърта обща карта разкрита. Нови залози.\nПета и последна обща карта. Последен залог.\n\n4. Стрелба (показване)\nАко няколко играчи останат, всеки показва играта си.\nНай-добрата комбинация от 5 карти (между двете частни карти + 5 общини) печели пота.\n\nВъзможни действия\n\nНа свой ред играчът има **30 секунди ** за:\nНе залагай нищо, само ако никой не залага отново.\nСложи чипс в тенджерата.\n- Следвайте го.\nУвеличи залога.\n- Върви да си лягаш.\n\nКрай на играта\n\nИграта продължава толкова дълго, колкото остават най-малко 2 играчи с чипове.\nПоследният победител е този, който взима всички чипове.",
   "butDuJeuGagnerLe": "**Игра гол **\nСпечелете най-XP чрез извършване на действия и отговор на истини!\n\n**Draft **\n1. Рулетката е играчът, чийто ред е.\n2. Играчът снима \"Action\" или \"Verity.\"\n3. Класически режим: Показва се случайно предизвикателство/въпрос.\n4. Съдия режим: случаен играч пише предизвикателството, след което играчът го осъзнава.\n5. Други играчи утвърждават с гласуване Да/Не.\n6. Процентът на валидиране определя спечеления XP.\n\n** Специални правила **\n- 100% валидиране = максимум XP\n- Играч с най-много XP става администратор на играта\n- Бутонът \"Край на дръжката\" позволява затваряне на частта",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "**Игра гол **\nБъдете най-бързи да забележите единствения идентичен символ между картата в центъра и собствената си карта.\n\n**Draft (Mode ''Andernal Tower'') **\n1. Всеки играч получава карта с лицето надолу. Останалата част от картите образуват Сток в центъра, лицето видимо.\n2. В началото всеки си връща картата.\n3. Всеки играч трябва да намери възможно най-бързо единствения символ, който присъства както на картата си, така и на Stock Card.\n4. Първият играч, който намери символа, съобщението на глас, взема картата Stock и я поставя на собствената си карта.\n5. Тази нова карта става негова карта за следващия кръг. Тогава в центъра на Стока се разкрива нова карта.\n6. Играта продължава до изчерпване на запаса. Играчът, който събира най-много карти в края печели!",
   "butDuJeuSeDebarrasser": "**Игра гол **\nОтърви се от всичките му карти, като си първият!\n\n**Draft **\n1. ** Дистрибуция **: Всеки играч получава 7 карти. Останалите формират запаса. Връща се карта, за да започне купчината отпадъци.\n2. ** Play a card **: Играчът, чийто ред е **30 секунди ** да сложи карта в ръката си на купчината отпадъци. Изиграната карта трябва да съответства на горната карта на стека от:\n* **Color ** (ex: Red on Red)\n* ** Номер ** (ex: one 7 Blue on one 7 Green)\n* ** Symbol ** (ex: жълто \"+2\" върху червено \"+2\")\n* *** Special Card ** (Joker, +4 и т.н.)\n3. ** Piocher **: Ако играчът не може да играе карта в определеното време, той трябва да избере карта от пакета. Ако може да изиграе тази карта, може да го направи веднага. В противен случай, неговият ред свършва.\n4. ** Специални карти **:\n* **+2 (две карти) **: Следващият играч избира 2 карти и преминава своя ред.\n♪ ***Sens Forbidden ♪ Следващият играч преминава своя ред.\n* **Инверсия (Промяна на смисъла) **: Чувството за игра е обърнато.\n* ** Joker (Colour Change) **: Играчът избира цвета на следващата карта за игра. Може да се играе на всяка карта.\n* *** Super Joker +4 (Colour Change and Four Cards) **: Играчът избира цвета. Следващият играч избира 4 карти и преминава своя ред. Тази карта може да се играе само ако играчът няма друга карта на цвят, заявена върху купчината отпадъци (освен ако не блъфира).\n5. ** Announce \"UNO\" **: Когато играчът има само една карта в ръка, той трябва да обяви \"UNO!\" Ако той не направи това и е взето от друг играч (преди следващия играч играе или взима), той трябва да вземе 2 карти.\n6. ** Край на канал **: Дръжката свършва, когато играчът се отърве от последната си карта. Точките се броят. Играчът, който достигне 500 точки (или определена сума) печели играта.\n\n**Карта точки: **\n* Цифрови карти (0-9): Тяхната лицева стойност.\n* +2, Sens Забранено, Инверсия: 20 точки.\n* Joker, Super Joker +4: 50 точки.",
   "principeDuJeuLeJeu": "§ Принцип на играта\n* Играта се играе между **3 и 10 играчи **.\n* Всеки играч дава достъп до част от своята фото библиотека и избира снимки за споделяне.\n* По време на игра, снимка се избира ** randomly ** от всички играчи, след което се показва за няколко секунди.\n* Играчите трябва да се досетят кой притежава снимката ** показва.\n* Играчът, който правилно познае най-много снимки печели играта.\n\n§ Процедура\n1. ** Избор на снимки **: Всеки играч избира няколко снимки от галерията си.\n2. ** Начало на играта **: Когато всички са готови, домакинът започва играта.\n3. ** Play Tower **:\n- Една случайна снимка се показва за 5 секунди.\nВсички играчи гласуват за собственика.\n4. ** Results **: Резултатите се актуализират след всеки рунд.\n5. ** Край на играта **: След определен брой рундове играчът с най-много точки печели.",
-  "butDuJeuCoulerTous": "**Игра гол **\nЗаби корабите на противника, преди да потопи твоите.\n\n**Draft **\n1. ** Място **: Всеки играч тайно поставя флота си на 10x10 мрежа.\n- Самолетоносачи (5 кутии)\n- Cruiser (4 кутии)\n- Субмарин (3 клетки)\n- Унищожител (3 кутии)\n- Патрул (2 кутии)\n2. ** Tir **: На свой ред играчите докосват кутия, за да стрелят.\n3. ** Result**: Applocalizations.of(context)!.touche, \"Coulated\" или \"To water.\"\n4. ** Виктория **: Първият играч, който потопи целия противников флот печели.",
   "butDuJeuEtreLe2": "**Игра гол **\nБъдете първите, които достигат желаното разстояние (1000 км по подразбиране).\n**Draft **\nВсеки играч получава шест карти.\n- От своя страна, изиграйте карта (Разстояние, Атака, Защита, Сигурност) или се отървете от нея.\n- **Attacks ** карти (Спри, Ред, Есънс, Крейвисън, Лимит) блокират противника.\n- Карта **Защитници* (Зелен, Екстра Танк, Ремонт, Краен Лимит) контраатаки.\n- ** Сигурност ** картите отменят атака и предотвратяват нейното повторение.\n- Карти **Разстояние ** (25, 50, 75, 100, 200 km) движете автомобила си напред.\nИзбери една карта в края на реда си.",
   "butDuJeuEtreLe3": "**Игра гол **\nБъдете първи, за да се отървете от всичките си карти чрез формиране на валидни комбинации (мелди).\n\n*Бягане на кула**\n1. ** Piocher **: Вземете картата от върха на отпадъците OR Stock.\n2. ** Продажба (опционално) **: Поставете валидни комбинации на масата.\n- **Последица (Run) **: 3 или повече карти от същия цвят, които следват (напр. 5) Асото може да бъде високо или ниско.\n- **Група (Set) ***: 3 или 4 карти със същата стойност, но с различни цветове (напр. 8... 8...\n3. ** ** Понижение **: Отърви се от карта от ръката му върху отпадъците.\n\n**Край на дръжката **\nПървият играч, който вече няма карти след поражението печели. Другите броят точките на останалите си карти (фигури = 10, As = 15, други = лицева стойност). Играта спира на 100 точки.",
   "butDuJeuFaireDeviner2": "**Игра гол **\nНакарай екипа си да отгатне най-много думи преди края на времето, без да използваш забранените думи!\n\n**Draft **\n1. На всеки завой играчът се опитва да накара екипа си да отгатне дума.\n2. Говорителят никога не трябва да произнася думата, за да гадае, нито някоя от думите \"Taboo\" (без думи), показани под целевата дума. Нито може да използва преводи или думи от едно и също семейство.\n3. Ако говорителят използва дума на Табу, противниковият отбор (или съдия) докладва за грешката, картата се отменя и говорителят се премества към следващата.\n4. Всяка отгатната дума връща точка към екипа.\n5. Завоят свършва, когато времето изтече.\n\n** Краят на част **\nОтборът с най-много точки след броя на обиколки определени печели!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Трябва да изиграете същия брой карти.",
   "combinaisonDe5CartesTrop": "Комбинацията от 5 карти е твърде слаба.",
   "vousDevezJouerUneCarte": "Трябва да изиграете по-силна карта.",
-  "aGagne1": "Той спечели!",
   "ceNEstPasVotre": "Не е вашият ред.",
   "carteIntrouvableDansLaMain": "Картата не е намерена в ръката.",
   "coupInvalideSelonLesRegles": "Невалиден ход според правилата на Mille Bornes!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Времето за обявяване на истината изтече!",
   "cibleHorsDeLaGrille": "Целта е извън решетката.",
   "caseDejaCiblee": "Полето вече е прицелено.",
-  "aCouleTouteLaFlotte": "Потъна цялата вражеска флота!",
   "placementAutomatiqueEffectue": "⏱️ Автоматичното поставяне е завършено.",
   "tempsEcoulePourLaSaisie": "⏰ Времето за въвеждане на думи изтече. Играта започва с въведените думи!",
   "laPhaseDeVoteA": "Фазата на гласуване започна!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "Успешна сделка. Върни назад.",
   "debugJoingameLaPartieN": ". Играта не съществува или вече не е във фоайето. Върни се към лъжата.",
   "erreurCritiqueDansJoingame": "--- Critical ГРЕШКА В Присъединяване Game --",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizations.of(context)! . word civilParts0TrimWord undercoverIA връща отделни прости думи",
   "infiltre": "Инфилтратор",
   "civil": "Гражданин",
   "vendeurDeFalafels": "Продавач на фалафели",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Невалидна комбинация според правилата на Реми!",
   "defaussezExactement1Carte": "Изчистете точно 1 карта.",
   "carteNonTrouvee": "Картата не е намерена.",
-  "aGagneLaManche": "Той спечели рунда!",
   "desDejaLancesPourCe": "Заровете вече са пуснати за тази обиколка.",
   "vousDevezDAbordLancer": "Първо трябва да хвърлите зара.",
   "vousNePouvezPasDeplacer": "Не можете да местите пула на опонент!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Не можете да избирате цвят в момента.",
   "erreurCritiquePlayerorderEstVide": "Играчът е празен в следващия кръг. Не мога да продължа.",
   "questionNonTrouvee": "Въпросът не е намерен",
-  "quiPourraitLePlusApplocalizations1": "Кой би могъл повече?appLocalizations.of(context)!.listStringquestsAiwordpoolGamewordssoft",
   "menteur": "Лъжец.",
   "pasAssezDeJoueursPour": "Няма достатъчно играчи за тази мода.",
   "ajouteLaDescriptionLaPlus": "Добавете най-смешното описание към този мем!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Всеки активен играч трябва да постави поне една карта преди наддаване.",
   "enchereInvalide": "Невалидно наддаване.",
   "laSurenchereDoitEtreSuperieure": "Наддаването трябва да е по-високо.",
-  "applocalizationsOfContextUnjoueurEst": "AppLocalizations.of(context)!.aPlayer'}'е последният оцелял и печели Череп!",
-  "applocalizationsOfContextUnjoueurA": "AppLocalizations.of(context)!.aPlayer'}' спечели 2 предизвикателства и спечели играта!",
-  "applocalizationsOfContextUnjoueurRemporte": "? Applocalizations.of [context] !.aPlayer wins Skull!",
   "reponseVide": "Празен отговор.",
   "leJugeNePeutPas1": "Съдията не може да изпраща отговор.",
   "toutLeMondeARepondu": "Всички отговориха! Да отворим вратата.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Всички отговориха! Гласувайте.",
   "toutesLesReponsesSontRecues": "Всички отговори са получени! Съдията трябва да реши.",
   "joueurCibleIntrouvable": "Целта не е открита.",
-  "quiPourraitLePlusApplocalizations2": "Кой би могъл повече?appLocalizations.of(context)!.elseIfGametypeSynonym или Banni",
   "vousNePouvezPasBannir": "Не можете да забраните собствения си синоним!",
   "seulLeJugeEnTitre": "Само действащият Съдия може да определи победителя.",
   "ceJoueurNAPas1": "Този играч не изпрати отговор.",
-  "quiPourraitLePlusApplocalizations3": "Кой би могъл повече?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIf Съдията",
-  "quiPourraitLePlusApplocalizations4": "Кой би могъл повече?Приложение Локализации.на(контекст)!.заФиналенТаджетВот околодържавна",
   "egaliteParfaiteAucunPointAttribue": "Пълно равенство! Не се присъждат точки.",
   "egaliteDansLesVotesAucun": "Равенство в гласовете: няма изгонен играч този рунд.",
   "laDescriptionLaPlusDrole": "Беше избрано най-забавното описание!",
   "aucuneDescriptionNAEte": "Не беше гласувано описание.",
-  "quiPourraitLePlusApplocalizations5": "Кой би могъл повече?appLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Съдията не е намерен.",
   "laPartieDeZeroPointe": "Играта Нула Точки започва! Всеки играч трябва да разкрие 2 карти.",
   "toutLeMondeARevele": "Всички разкриха картите си. Играта започва!",
@@ -3164,19 +3084,16 @@
   "cultureDefi": "🧠 Култура и Предизвикателство",
   "familleToutPublic": "👨‍👩‍👧‍👦 Семейство и За всички",
   "piquantInsolite": "🌶️ Пикантно и Необичайно",
-  "quiPourraitLePlusApplocalizations6": "Кой би могъл повече?Приложение Локализации.на=контекст)! ..кой може да бъде вашата модерна група",
   "devineT": "Познай.",
   "presidente": "Председател",
   "chargement": "Зареждане...",
   "cursive": "Курсив",
   "exception": "Изключение:",
-  "debutDeLaConstructionDe": "---- Конструкцията на него на VOTE \"Кой би могъл да е най-много?appLocations.of(context)!.printIsactioning StateTo( isActionPending) players''] as Map < String, dynamic>?)? '{}';",
   "clicSurLeJoueurPname": "> > > КЛИК на играча ''$pName'' (Номер: $pId)!",
   "passageDeIsactionpendingATrue": "- Преходът от ИСАКЦИЯТА е в сила.",
   "erreurFirebaseLorsDuVote": "! EUR Пожарна база по време на гласуването: $e",
   "appelFirebaseTerminePassageDe": "- Обадиха се от пожарната. Преминаване от IsActionPending to false.",
   "attentionLeWidgetNEst": "- \"Уиджет\" го няма, \"СетСтейт\" е отменен.",
-  "quiPourraitLePlusApplocalizations7": "Кой би могъл повече?appLocalizations.of(context)!.по подразбиранеFinalRoundwinnerid GamedataroundWinnerId",
   "phaseDePose": "ПОЗИЦИЯ ФАЗА",
   "stre9f4a5": "🏆 Легендарно!",
   "str21f597": "⭐ Отлично!",
@@ -3184,7 +3101,7 @@
   "strb6f91d": "😅 Не е зле!",
   "strc0046c": "💪 Можем и по-добре!",
   "str85bff7": "Браво!",
-  "strfa1b8c": "'{'''Rate!'}'",
+  "strfa1b8c": "''(''''Rate!'')''",
   "str487ca1": "По дяволите! Затвори очи.",
   "leSoleilSeLeve": "Слънцето изгрява",
   "atout": "КОЗ: {suit}",
@@ -3204,8 +3121,7 @@
   "chill": "Релакс",
   "soiree": "Парти",
   "competition": "Състезание",
-  "enCours": "CURRENT: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \"\"'}': GameMessageLocalization.tr(context, reason),",
+  "enCours": "CURRENT: '{0}'",
   "jAiLanceUnePartie2": "Стартирах игра",
   "piedDeBiche": "Кози крак",
   "appTitle": "Игра за купон",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "Хвърлих част от 0! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Роля ( 0) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Начертай това изречение:\n\" 0 \" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "0 е била забранена за нейното предложение '' 1 ''! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 намери думата: '' 1 ''! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Никой не намери думата \"0.\" {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 намери думата: '' 1 ''! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "Революцията!",
   "tonMotEst2": "Твоята дума е: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Равенство!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "Хвърлих част от 0! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "Играта на Ямс започва!",
   "logClueGivingStart": "Играта започва! Дайте своята улика...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "Играта на Белот започва!",
   "logBlokusStart": "Играта на Blokus започва!",
   "pokerFlop": "--- ФЛОП ---",
   "pokerTurn": "--- ТЪРН ---",
   "pokerRiver": "--- РИВЪР ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "0 стреля: 1 ! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "Екип 0 разкри убиеца! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Максимална възможна: 0 карти {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 отразява предизвикателството на 1 карти... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "Твоят човек (0 карти) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 / 30 черти {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "1 / 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Избор на цвят:",
   "pokerRaiseTo": "Рейз до {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Отговор от 0: \" 1 \" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Роля:",
   "obligatoire": "Задължително",
   "aSelectionneSonPionEtReflechit": "{playerName} избра своята фигура и мисли...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0 е докладвано и скрито за вас. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Не може да се получи защитен LiveKit видео сигнал за достъп.",
+  "veuillezEntrerUneAdresseEmail": "Моля, въведете валиден имейл адрес.",
+  "veuillezEntrerVotreMotDe": "Моля въведете текущата си парола.",
+  "entrezVotreMotDePasse": "Въведете текущата си парола.",
+  "leNouveauMotDePasse": "Новата парола трябва да бъде поне 6 символа.",
+  "lesDeuxMotsDePasse": "И двете пароли не съвпадат.",
+  "photoDeProfilMiseA": "Профилна снимка обновена!",
+  "echecDuChangementDePhoto": "Промяната на снимката се провали.",
+  "k3CaracteresMinimum": "Минимални 3 знака",
+  "cePseudoEstDejaPris": "Този нож вече е заето.",
+  "unAmi": "Приятел.",
+  "ceJoueur": "Този играч",
+  "preparationDeLaRecherche": "Подготовка на търсенето...",
+  "erreurDeConnexionAuMatchmaking": "Грешка при свързване към сватосване. Моля опитайте отново.",
+  "erreurDeConnexionALa": "Грешка при свързване към стаята.",
+  "legendeVivante": "Жива легенда",
+  "grandMaitre": "Велики учителю.",
+  "stratege": "Стратегия",
+  "initie": "Начало",
+  "illimiteesVip": "Неограничен (VIP)",
+  "pieces": "0 броя {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "Несвързан потребител.",
+  "entrezUnPseudo": "Въведете псевдо",
+  "cePseudoEstDejaPris1": "Този прякор вече е заето.",
+  "pseudoDejaPrisParUn": "Псевдо вече е взето от друг играч",
+  "cetteVersionDeLApplication": "Тази версия на заявлението е остаряла. Моля инсталирайте последната версия.",
+  "playfunEstActuellementEnMaintenance": "Playfun в момента се поддържа, за да подобри вечерите си. Върни се след минута!",
+  "uneNouvelleVersionDePlayfun": "Предлага се нова версия на Playfun! Трябва да актуализирате приложението, за да продължите да играете.",
+  "derniereVersion": "Последна версия",
+  "echecDeLEnvoi": "Неуспешна доставка.",
   "demandeDAmiEnvoyeeA": "Заявката за приятелство е изпратена до {name}!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Играч (0) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Включи видео",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Псевдо наличен",
+  "entrezUnEmailValide": "Въведете валиден имейл",
+  "k6CaracteresMinimum": "Минимални 6 знака",
+  "pasDeCompteSInscrire": "Без сметка? Регистър",
+  "dejaUnCompteSeConnecter": "Вече е сметка? Влизане",
+  "conditionsGeneralesDUtilisationCgu": "Общи условия за ползване (CGU / EULA)",
+  "politiqueDeConfidentialite": "Политика за поверителност",
+  "miseAJourRequise": "Необходимо обновяване",
   "joueursBloques": "Блокирани играчи ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Невалидни идентификатори или несъществуваща сметка.",
+  "leMotEtaitLabel": "Думата беше:",
+  "mancheLabel": "Канал",
+  "et": "както и",
+  "pokerPlayerCheck": "{playerName} пасува (Check).",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Дума:",
+  "rouges": "Червени",
+  "noirs": "Черни",
+  "crane2": "Череп",
+  "enAttente2": "В очакване",
+  "enCours1": "Текущо",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} избра своята фигура и мисли...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Оставащо време: {seconds} с",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Пакет {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Вариант)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 печели с 1 точка 2 ! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Спечели Черепа! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Опаковка IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Стандартен",
+  "lui": "Него.",
+  "carte4": "Карта {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Заключени играчи",
+  "vousNAvezBloqueAucun": "Не сте блокирали нито един играч.",
+  "debloquer": "Отблокирай",
+  "nouvelEmail": "Нов имейл",
+  "motDePasseActuel": "Текуща парола",
+  "emailMisAJourAvec": "Имейлът е актуализиран успешно!",
+  "modifierMotDePasse": "Промяна на паролата",
+  "nouveauMotDePasse": "Нова парола",
+  "confirmerLeMotDePasse": "Потвърдете паролата",
+  "motDePasseModifieAvec": "Паролата е променена успешно!",
+  "prendreUnePhoto": "Снимай.",
+  "choisirDepuisLaGalerie": "Изберете от галерията",
+  "supprimerLaPhoto": "Изтриване на снимка",
+  "photoDeProfilRetiree": "Снимката е премахната.",
+  "pseudoMisAJour": "Прякорът е актуализиран!",
+  "compteSecurite": "& Сметка за сигурност",
+  "editeParParrelV10": "Edited by Parrel • v1.0.0",
+  "aucunJeuTrouve": "Няма намерени игри",
+  "essaieDAjusterTesFiltres": "Опитайте да коригирате филтрите или потърсете отново.",
+  "reinitialiserLesFiltres": "Нулирай филтрите",
+  "nouveau": "НОВО",
+  "gererMonAbonnement": "Управление на абонамента ми",
+  "mesPieces": "Моите стаи.",
+  "rechargerLesOffresDuStore": "Презареждане на оферти",
+  "gererMesAbonnements": "Управление на абонаментите ми",
+  "badges": "Значки",
+  "partiesJouees": "Изиграни игри",
+  "xpTotalSession": "Общо XP за сесията",
+  "moyennePartie": "Средно / Игра",
+  "detailParJeuPerformanceXp": "Подробности по игри и XP резултати",
+  "jouezVosPremieresPartiesPour": "Изиграйте първите си игри, за да видите своята XP статистика тук!",
+  "xpAuCompteur": "{psxp} XP на брояча",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Още {xpRemaining} XP до Ниво {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} изиграни • {won} победи • ~{gameXp} спечелени XP {played1s} {won1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Грешка при зареждане на потребителските данни.",
+  "vousDevezAccepterLesCgu": "Трябва да приемете CGU и Политиката за поверителност, за да създадете профил.",
+  "miseAJourDisponible": "Налична актуализация",
+  "plusTard": "По-късно",
+  "mettreAJour": "Актуализирай",
+  "uneNouvelleVersionDePlayfun1": "Налична е нова версия ({newVersion}) на Playfun с новости и корекции!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Текуща поддръжка",
+  "mettreAJourMaintenant": "Обновяване сега",
+  "motifDuSignalement": "Причина за сигнала:",
+  "tricheOuAntiJeu": "Измама или неспортсменска игра",
+  "autre": "Друго",
+  "signaler": "Докладвай",
+  "detailParJeu": "Подробности по игра:",
+  "ceJoueurNAPas2": "Този играч все още няма записани игри.",
+  "badgesDebloques": "Отключени значки: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Блокирани играчи ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "Отблокирай {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Докладвай или блокирай {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "глас"
 }

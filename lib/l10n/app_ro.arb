@@ -28,7 +28,7 @@
   "elements": "'{0}' elemente",
   "prompt": "Prompt: \"'{0}'\"",
   "utiliser": "UTILIZEAZĂ",
-  "packActiveElements": "✨ Pachetul '''{0}''' activat ('{1}' obiecte)!",
+  "packActiveElements": "✨ Pachetul '{0}' activat ('{1}' obiecte)!",
   "fusionner": "COMBINĂ",
   "themesFusionnesLePackActif": "✨ Teme Îmbinate! Pachetul activ conține acum '{0}' obiecte.",
   "modifierCompleter": "Modifică / Completează",
@@ -46,7 +46,7 @@
   "generationIa": "Generarea AI: '{0}'",
   "historique": "Istoric",
   "melangerPlusieursThemes": "Amestecă mai multe teme:",
-  "combineS": "✨ '{0 combinate}'",
+  "combineS": "✨ ''(0 combinate)''",
   "nombreDElements": "Număr de elemente:",
   "minRequisRecommande": "Minim necesar: '{0}' | Recomandat: '{1}'",
   "ambianceTonaliteDeJeu": "Atmosferă / Tonul jocului:",
@@ -248,7 +248,7 @@
   "pts": "+'{0}' puncte",
   "leGagnantEst": "Câștigătorul este '{0}' !",
   "classementFinal": "Clasament final:",
-  "points": "'{0}'. '{1}': '{2.}' puncte",
+  "points": "'{0}'. '{1}': ''(2.)'' puncte",
   "retourALAccueil": "Înapoi la meniu",
   "laPartieAEteTerminee": "Jocul s-a încheiat sau nu mai există.",
   "quitterLaPartie1": "Părăsește jocul",
@@ -268,7 +268,7 @@
   "conserverAvecLIa": "Păstrează cu IA",
   "expulser": "Dă afară",
   "vousAvezEteExcluDe": "Ai fost exclus pentru inactivitate. Computerul joacă în locul tău (fără recompense).",
-  "s": "'{0}' s",
+  "s": "s '{0}'",
   "pts1": "{pName}: {pScore} pacienți",
   "@pts1": {
     "placeholders": {
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 XP {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "Nu mai are cărți",
-  "cartesRestantes": "'{0.}' cărți rămase",
-  "jetonsMise": "Jetoane: '{$0,}' | Miză: '{$1,}'",
+  "cartesRestantes": "''(0.)'' cărți rămase",
+  "jetonsMise": "Jetoane: ''($0,)'' | Miză: ''($1,)''",
   "totalPts": "Total: '{0}' puncte",
   "k13Remplies": "'{0}'/13 completate",
   "finDeLaManche": "Sfârșitul Rundei!",
@@ -329,7 +329,7 @@
   "zombieEnMain": "ZOMBIE ÎN MÂNĂ",
   "sauve": "'{0}' (Salvat!)",
   "mainDeCartes": "Mâna de '{0}' ('{1}' cărți)",
-  "votreMainDeSurvieCartes": "MÂNA TA DE SUPRAVIEȚUIRE ('{0.}' cărți)",
+  "votreMainDeSurvieCartes": "MÂNA TA DE SUPRAVIEȚUIRE (''(0.)'' cărți)",
   "lesPairesSontDefausseesAutomatiquement": "Perechile sunt decartate automat",
   "carteSEnJeu": "Carte/cărți în joc:",
   "aucuneCarteEnJeuJouez": "Nicio carte în joc. Joacă ce vrei!",
@@ -342,17 +342,17 @@
   "tourSuivant": "Următorul rând",
   "enAttenteDeLHote3": "Se așteaptă gazda pentru a începe runda următoare...",
   "equipeAPts": "Echipa A: '{pts}' puncte",
-  "equipeBPts": "Echipa B: '{pacienți}' pacienți '{pts}'",
+  "equipeBPts": "Echipa B: ''(pacienți)'' pacienți '{pts}'",
   "cEstAToiDe": "E rândul TĂU să ghicești!",
   "passer1": "SKIP",
   "motsTrouves": "Cuvinte găsite: '{0}'",
   "ecrivezIci": "Scrie aici...",
   "plierPasser": "ÎMPĂTUREȘTE ȘI TRIMITE",
-  "motsRediges": "✏️ '{0.}' cuvinte scrise...",
+  "motsRediges": "✏️ ''(0.)'' cuvinte scrise...",
   "leGrandDepliage": "Marea Desfășurare!",
   "voiciLesUvresCollectivesNees": "Iată operele colective născute din imaginația voastră:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' pregătește un atac ('{1}') împotriva unui jucător!",
-  "km": "{oppDist} km",
+  "km": "0 km {oppDist}",
   "@km": {
     "placeholders": {
       "oppDist": {
@@ -360,7 +360,7 @@
       }
     }
   },
-  "km1": "{myDistance} / {targetDist} km",
+  "km1": "1 / 1 {myDistance} {targetDist}",
   "@km1": {
     "placeholders": {
       "myDistance": {
@@ -386,7 +386,7 @@
   "distribuerLaSuite": "Împarte următoarea",
   "attenteDuDonneur": "Se așteaptă dealerul...",
   "couche": "Renunțat",
-  "miseActuelle": "Pariul actual: '{sumă}' '{amount}'",
+  "miseActuelle": "Pariul actual: ''(sumă)'' '{amount}'",
   "enAttente": "În așteptare...",
   "seCoucher": "Renunță",
   "checker": "Check",
@@ -446,16 +446,16 @@
   "votes": "Voturi:",
   "aVote": "'{0}' votat: '{1}'",
   "lesPointsOntEteDistribues": "Punctele au fost acordate pe baza voturilor voastre.",
-  "leMotDesCivilsEtait": "Cuvântul civililor a fost: '''{0}'''",
-  "leMotDeLInfiltre": "Cuvântul Infiltratorului ('{0}') a fost: '''{1}'''",
+  "leMotDesCivilsEtait": "Cuvântul civililor a fost: '{0}'",
+  "leMotDeLInfiltre": "Cuvântul Infiltratorului ('{0}') a fost: '{1}'",
   "mrWhiteNAvaitPas": "Domnul White ('{0}') nu avea cuvinte.",
   "leMotATrouverEtait": "Cuvântul de găsit era sinonim pentru \"'{0}'\". Ceilalți jucători înscriu 1 punct.",
   "felicitationsAuDessinateurEtA": "Felicitări caricaturistului '{0}' și lui '{1}' !",
   "saReponseEtait": "Răspunsul său a fost: \"'{0}'\".",
-  "leMotEtait": "Cuvântul era: '''{0}'''.",
+  "leMotEtait": "Cuvântul era: '{0}'.",
   "cartesRevelees": "Cărți dezvăluite:",
   "erreurDeChargementDuMeme": "Eroare la încărcarea memei.",
-  "scoreActuelDeCartes": "Scor actual de '{0}': '{1.}' cărți.",
+  "scoreActuelDeCartes": "Scor actual de '{0}': ''(1.)'' cărți.",
   "finDuTour1": "Sfârșitul rândului",
   "tourSuivant1": "Tura următoare",
   "enAttenteDeLHote4": "În așteptarea gazdei pentru runda următoare...",
@@ -543,12 +543,12 @@
   "k6Consecutifs3": "6 la rând: '{streak}'/3",
   "lancerLeDe": "ARUNCĂ ZARUL",
   "scorePoints": "Scor: '{score}' puncte",
-  "dominosRestants": "Piese de domino rămase: '{numără}' '{count}'",
+  "dominosRestants": "Piese de domino rămase: ''(numără)'' '{count}'",
   "impossibleDeJouerCeDomino": "Nu poți juca această piesă aici.",
   "mancheTerminee": "Rundă încheiată! ",
   "dominos": "Piese domino",
   "extremites": "Capete: ",
-  "pioche2": "Remiză: '{Numărătoare}' '{count}'",
+  "pioche2": "Remiză: ''(Numărătoare)'' '{count}'",
   "piocher": "Trage",
   "ficheDePts": "'{0}' record ('{1}' puncte)",
   "pts2": "{otherName} ({otherTotal} puncte)",
@@ -563,7 +563,7 @@
     }
   },
   "clic": "CLICK",
-  "lancersRestants": "Aruncări rămase: '{numără}' '{count}'",
+  "lancersRestants": "Aruncări rămase: ''(numără)'' '{count}'",
   "combinaison": "COMBINAȚIE",
   "grilleDePts": "GRILA DE '{0}' ('{1}' puncte)",
   "pts3": "{p} ({myTotal} puncte)",
@@ -614,10 +614,10 @@
     }
   },
   "carteAPrendre": "CARTE DE LUAT",
-  "votreMain": "Mâna ta ('{numără}') '{count}'",
+  "votreMain": "Mâna ta (''(numără)'') '{count}'",
   "touchezUneCartePourLa": "Apasă o carte pentru a o juca",
   "aucuneCombinaisonEtaleeSurLa": "Nicio combinație pe masă încă",
-  "etaler": "Răspândire (număr'{}') '{count}'",
+  "etaler": "Răspândire (număr''()'') '{count}'",
   "defausserFin": "Decartează și termină",
   "pts8": "{eValue} PTS",
   "@pts8": {
@@ -644,15 +644,15 @@
   "joueursNonAssignes1": "Jucători nealocați",
   "confirmerLancer": "Confirmă și Lansează",
   "choisirUnJeuLocal": "Alegeți un Joc Local",
-  "ilFautAuMoinsJoueurs": "Ai nevoie de cel puțin '{0.}' jucători pentru acest mod!",
-  "ceModeSupporteAuMaximum": "Acest mod suportă maximum '{0.}' jucători!",
+  "ilFautAuMoinsJoueurs": "Ai nevoie de cel puțin ''(0.)'' jucători pentru acest mod!",
+  "ceModeSupporteAuMaximum": "Acest mod suportă maximum ''(0.)'' jucători!",
   "parametresActionOuVerite1": "Setări: Adevăr sau Provocare",
   "parametresDeLaPartie": "Setările jocului",
   "k1IntensiteDesDefis": "1. Intensitatea provocărilor",
   "generationIaPersonnalisee": "Generare IA personalizată",
   "exSoireePyjamaSecretsDe": "ex: Petrecere în pijamale, Secrete de cuplu, Povești de la muncă...",
   "defisIaGeneres": "✨ '{0}' provocări AI generate!",
-  "defisPrets": "✅ '{0 provocări}' pregătite!",
+  "defisPrets": "✅ ''(0 provocări)'' pregătite!",
   "commencerLaPartie": "ÎNCEPE JOCUL",
   "actionOuVerite": "Adevăr sau Provocare",
   "choisisTonDestin": "Alege-ți destinul...",
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "Apasă ''Învârte roata'' pentru a începe!",
   "verite": "Adevăr",
   "action": "Provocare",
-  "pts9": "'{0}' : '{1.}' puncte",
+  "pts9": "'{0}' : ''(1.)'' puncte",
   "parametresLeDilemme": "Setări: Dilema",
   "parametresDuDilemme": "Setările dilemei",
   "k1DifficulteDesChoix": "1. Dificultatea alegerilor",
@@ -685,7 +685,7 @@
   "generationIaDeQuestionsSecretes": "Generare IA de întrebări secrete",
   "exAmourSeductionTravailAnecdotes": "ex: Dragoste și Romantism, Muncă, Momente stânjenitoare...",
   "questionsIaGenerees": "✨ '{0}' întrebări generate de AI!",
-  "questionsPretes": "✅ '{0 întrebări}' pregătite",
+  "questionsPretes": "✅ ''(0 întrebări)'' pregătite",
   "lancerLaPiece": "ARUNCĂ MONEDA",
   "jeuDeLaPiece": "Jocul monedei",
   "tuAsChoisiLaPiece": "Ai ales '{0}'. Moneda a căzut pe... '{1}' !",
@@ -812,12 +812,12 @@
   "veuillezRevenirALEcran": "Te rugăm să revii la ecranul de configurare a jucătorilor.",
   "retour": "Înapoi",
   "lEquipeAGagne": "Echipa '{0}' câștigat!",
-  "points1": "'{0.}' puncte",
+  "points1": "''(0.)'' puncte",
   "passeLObjet": "Pasează Obiectul",
   "passeLObjetRapidement": "Pasează Obiectul Rapid",
   "generationIaDeQuestions": "Generare de întrebări prin IA",
   "exCultureGeneraleGagesDroles": "ex: Cultură generală, Provocări amuzante, Prieteni...",
-  "questionsIaPretes": "✨ '{0 întrebări}' AI pregătite!",
+  "questionsIaPretes": "✨ ''(0 întrebări)'' AI pregătite!",
   "designerUnJoueurAleatoireA": "Alege un jucător aleatoriu căruia să-i pasezi",
   "sinonPassezPhysiquementAQui": "Altfel, pasează fizic oricui dorești",
   "afficherLeChronometre": "Afișează cronometrul",
@@ -844,7 +844,7 @@
   "equipe2": "ECHIPA 2",
   "validerLesEquipes": "Confirmă echipele",
   "placezLeTelephoneSurVotre": "PUNE TELEFONUL PE FRUNTE!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 s {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -856,7 +856,7 @@
   "arreter": "Oprește",
   "hautPasser": "Sus = Pas",
   "resultatsDuPassage": "Rezultatele rundei",
-  "pointsMarques": "+'{0.}' puncte marcate!",
+  "pointsMarques": "+''(0.)'' puncte marcate!",
   "touchezUnMotPourModifier": "Atinge un cuvânt pentru a modifica rezultatul în caz de eroare de senzor:",
   "pts10": "{teamAScore} PTS",
   "@pts10": {
@@ -880,7 +880,7 @@
   "symbolesParCarte": "Simboluri pe carte:",
   "k6Facile": "6 (Ușor)",
   "k8Standard": "8 (Standard)",
-  "scoreCibleCartes": "Scor țintă: '{0 cărți}'",
+  "scoreCibleCartes": "Scor țintă: ''(0 cărți)''",
   "commencer2": "ÎNCEPE",
   "piocheBut": "EGAL ('{0}') • GOL : '{1}'",
   "pts12": "{player} ({score} puncte)",
@@ -896,7 +896,7 @@
   },
   "partieTerminee2": "JOC TERMINAT!",
   "victoireDe": "Victoria '{0}' !",
-  "cartes": "'{0.}' cărți",
+  "cartes": "''(0.)'' cărți",
   "ecrireUnMessage": "Scrie un mesaj...",
   "codeDeSalonPriveIntrouvable": "Codul camerei private nu a fost găsit.",
   "erreurLorsDeLaConnexion": "Eroare la autentificare: '{0}'",
@@ -922,7 +922,7 @@
   "creerLeSalonCout5": "Creează Salonul (Cost: 5 monede)",
   "lancerUnJeuPourLe": "Lansează un joc pentru salon",
   "jouer1": "Joacă",
-  "joueurSEnJeu": "'{0.}' jucător(i) în joc",
+  "joueurSEnJeu": "''(0.)'' jucător(i) în joc",
   "cloturerLaPartie": "Închide jocul",
   "pretS": "'{0}' împrumut(e)",
   "annulerLaPartie": "Anulează jocul",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "Închizi salonul?",
   "leSalonSeraDefinitivementSupprime": "Salonul va fi șters definitiv pentru toți participanții.",
   "aCreeUnePartieDe": "'{0}' creat un joc de '{1}' !",
-  "joueurSPrets": "'{0.}' jucători gata",
+  "joueurSPrets": "''(0.)'' jucători gata",
   "cettePartieEstTermineeOu": "Acest joc este finalizat sau anulat.",
   "enPartie": "ÎN JOC",
   "partieDeTerminee": "Jocul '{0}' terminat!",
   "statistiques": "Statistici - '{0}'",
-  "vainqueur1": "Câștigător: '{0}''{1}'\n",
+  "vainqueur1": "Câștigător: '{0}''{1}'''''''\n",
   "voirLesStats": "Vezi statisticile",
   "message": "Mesaj...",
   "k0Pts": "0 PCT",
@@ -969,7 +969,7 @@
   "regardezRealiserLeDefi": "Urmărește '{0}' să finalizezi provocarea...",
   "voteDeValidation": "🗳️ VOT DE VALIDARE",
   "estCeQueAReleve": "A răspuns '{0}' provocării?",
-  "votesRecus": "'{0}' / '{1.}' voturi primite",
+  "votesRecus": "'{0}' / ''(1.)'' voturi primite",
   "vosAmisVotentPourEvaluer": "Prietenii tăi votează pentru a-ți evalua prestația...",
   "votreVoteABienEte": "Votul tău a fost înregistrat!",
   "ouiValide": "DA, Validat! 👍",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' aruncat din nou zarurile ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} a păstrat zarul cu valoarea {dieVal} (zarul #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Târnăcop",
-  "wordcivilParts0TrimWordundercover": "); \r\n      cuvânt Civil = părți[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' altceva '''{''' \r\n      Securitate anti-duplicată: dacă",
   "vousNAvezPasDe": "Nu ai cuvinte",
   "equipe12": "Echipa 1",
   "equipe21": "Echipa 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Sfârșitul mânecii (butonul de administrare)\r\n  Future<void> aoVEndRound (String gameCode, String playerId) async '''{''' \r\n    așteaptă _db.runTransaction((transaction) async'''{''' \r\n      gameRef final = _db.collection(''games'').doc(gameCode); \r\n      snap final = await transaction.get(gameRef); \r\n      dacă (!snap.exists) revin; \r\n\r\n      final gameData = snap.data() ca Map<String, dinamic>; \r\n      jucători finali = Hartă<String, dinamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Determină câștigătorul (mai mult XP)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        final xp = (pData[''xp''] ca num?)?. toInt() ?? 0; \r\n        dacă (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Cineva",
   "aAtteintPointsEtRemporte": "{winnerName} ajuns la {targetScore} puncte și a câștigat meciul!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Jucătorul",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Listă<String> întrebări =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostProbabil[dificultate]?? \r\n          GameWords.whoIsMostProbabil[",
   "honnete": "Sincer",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [egal, egal]; \r\n\r\n        Listă<String> amestecatRoluri = List.din(playerOrder).. amestecat(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = roluriAmestecate[1]; \r\n\r\n        Întrebare =\r\n            \"Descrie-ți cuvântul secret într-un singur cuvânt. Impostori, bluf!\"; \r\n        pentru (var pId în players.keys) '''{''' \r\n          Șir pRol =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": "? par.split(",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} ajuns la {updatedScoresoverallWinnerId} puncte și a câștigat meciul!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "plasare carte",
   "enchereAutomatique": "licitație automată",
   "passeLEnchere": "pasează licitația",
-  "elseIfGametype": ") '''{''' \r\n        dacă (voterID == votedForId) '''{''' \r\n          aruncă excepția (\"Interdicție formală de a vota pentru sine!\"); \r\n        '''}''''}''' altceva dacă (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          tranzacție, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: adevărat, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          final Hart<String, int> voteCounts = '{}'; \r\n          pentru (țintă finală în votes.values) '{' \r\n            voteCounts[țintă ca String] = (voteCounts[țintă] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVoturi = 0; \r\n          Listă<String> topVoted = []; \r\n          voteCounts.forEcare((țintă, numără) '''{''' \r\n            dacă (numără > maxVotes) '{' \r\n              maxVotes = numărătoare; \r\n              Votat cel mai mult = [țintă]; \r\n            '}' altceva dacă (numără == maxVotes) '{' \r\n              topVoted.add(țintă); \r\n            '}''''}'''); \r\n\r\n          Actualizări[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        final Hart<String, int> voteCounts = '{}'; \r\n        pentru (țintă finală în votes.values) '{' \r\n          voteCounts[țintă ca String] = (voteCounts[țintă] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVoturi = 0; \r\n        Listă<String> topVoted = []; \r\n        voteCounts.forEcare((țintă, numără) '''{''' \r\n          dacă (numără > maxVotes) '{' \r\n            maxVotes = numărătoare; \r\n            Votat cel mai mult = [țintă]; \r\n          '}' altceva dacă (numără == maxVotes) '{' \r\n            topVoted.add(țintă); \r\n          '}''''}'''); \r\n\r\n        if (topVoted.length == 1) '''{''' \r\n          câștigător final = cel mai votat.primul; \r\n          Actualizări[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          tranzacție, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: adevărat, \r\n        ); \r\n      )'' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} câștigat toate jetoanele de pe masă!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "Judecătorul alege în acest moment...",
   "coupAutomatiqueJouePourCause": "Mutare automată jucată din cauza inactivității.",
   "inactivite": "Inactivitate",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0: 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0 : {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Rândul adversarului",
   "derniereCartePosee": "Ultima carte jucată!",
   "cEstTonTour": "Este rândul TĂU!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0: 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Eroare: Întrebare negăsită.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0: 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(fără răspuns)",
   "deuxDefisReussis": "Două provocări reușite.",
   "leChallenger": "Provocatorul",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": ":'{0}' '{1}'",
   "uneDescriptionHilarante": "o descriere hilară",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Column( \r\n            copii: [ \r\n              Text( \r\n                ''",
   "unProblemeEstSurvenu": "A apărut o problemă.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      Implicit: \r\n        runda finalăIdWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "1 / 2 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Vezi scorul final",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "1 / 2 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (înălțime: 20), \r\n                Wrap( \r\n                  aliniament: WrapAlignment.center, \r\n                  Copii: \r\n                      justOneFilteredClues\r\n                          .map((indiciu) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (înălțime: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text( \r\n                    AppLocalizations.of(context)!. toateIndiciiAu fost, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' altceva '''{''' \r\n          Depinde de prezicător să joace\r\n          return Column( \r\n            copii: [ \r\n              Text(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0: 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,9 +2060,7 @@
   "designez2Amoureux": "Desemnează 2 îndrăgostiți",
   "amoureuxUnis": "Îndrăgostiți uniți!",
   "laVictime": "Victima",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              copii: [ \r\n                _buildActionButton( \r\n                  etichetă: AppLocalizations.of(context)!. infectează, \r\n                  Iconă: Icons.auto_fix_high, \r\n                  culoare: Colors.purpleAccent, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      Context, \r\n                      Ascultă: fals, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Adevărat, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox(lățime: 8), \r\n                _buildActionButton( \r\n                  etichetă: AppLocalizations.of(context)!. devorează, \r\n                  iconă: Icons.close, \r\n                  culoare: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        fals, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          break; \r\n        Cutia ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Nicio victimă aseară (protejați sau cruțați)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              stil: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Culoare: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''lup'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: mesaj), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Bară de trimitere compactă\r\n          if (canSendMessage)\r\n            Row( \r\n              copii: [ \r\n                Extins( \r\n                  copil: SizedBox( \r\n                    înălțime: 32, \r\n                    copil: TextField( \r\n                      Controlor: _chatController, \r\n                      stil: const TextStyle(fontSize: 12, culoare: Colors.white), \r\n                      decorațiune: InputDecoration( \r\n                        IndiciuText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          culoare: Colors.white30, \r\n                          fontDimensiune: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Umplut: Adevărat, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          orizontală: 10, \r\n                          vertical: 0, \r\n                        ), \r\n                      ), \r\n                      onTrimis: (text) '''{''' \r\n                        dacă (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(lățime: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    mărime: 18, \r\n                    culoare: Colors.cyanAccent, \r\n                  ), \r\n                  umplutură: EdgeInsets.zero, \r\n                  constrângeri: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    if (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Etichetă șir, tip șir, culoare activăColor) '{' \r\n    bool final isSelected = _selectedChatType == tip; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = tip), \r\n      copil: Container( \r\n        padding: const EdgeInsets.symmetric (orizontal: 8, vertical: 3), \r\n        decorațiune: BoxDecoration( \r\n          Culoare: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Culoare: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        copil: Text( \r\n          label, \r\n          stil: TextStyle( \r\n            fontDimensiune: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- AVATAR ACTUALIZAT PENTRU A-L FACE INTERACTIV--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder permite un cronometru vizual extrem de fluid fără a bloca timer-ul și setState-ul manual, ceea ce ușurează mult firul (Punctul 4)\r\n    final endTimeTime = startTime.toDate().add( \r\n      Durată(secunde: durațieÎnSecunde), \r\n    ); \r\n    final rămas = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stil: Theme.of( \r\n          Context, \r\n        ).textTema.titlulMic?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Durată>( \r\n      Durată: rămasă, \r\n      tween: Tween(început: rămas, sfârșit: Durată.zero), \r\n      constructor: (BuildContext context, valoare Durată, Widget? copil) '{' \r\n        secunde finale = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(context)!. timpRămas, \r\n          stil: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            Color: secunde < 20 ? Colors.redAccent : Colors.AmberAccent, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Contextul BuildContext, \r\n    Hart<String, dinamic> gameData, \r\n    Instrumentist de coarde, \r\n  ) '''{''' \r\n    jucători finali = Hartă<String, dinamic>.from(gameData[''players''] ?? '{}'); \r\n    player final Order = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    poziții finale = Map<String, dinamic>.from( \r\n      gameData[''littleHorsesPositions''?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    bool final isMyTurn = currentPlayerId == playerId; \r\n    final int dice = (gameData[''littleHorsesDice''] ca num?)?. toInt() ?? 0; \r\n    bool final hasAruncat = gameData[''littleHorsesHasRolled''] ?? false; \r\n    bool final isTeamMode = gameData[''smallTeamHorses''] ?? false; \r\n    final Hart<String, dinamică> consecutivă Șasese = Hartă<String, dinamică>.dină( \r\n      gameData[''smallHorsesConsecutiveSixes''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = consecutiveSixes[playerId] ?? 0; \r\n\r\n    Paletă neon modernă / arcade pe fundal întunecat\r\n    final Listă<Culoare> jucătorCulori = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon cer albastru\r\n      const Color(0xFF10B981), // Verde smarald\r\n      const Color(0xFFF59E0B), // Chihlimbar auriu\r\n    ]; \r\n\r\n    --- ECRAN DE VICTORIE--- \r\n    dacă (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      returnează UniversalGameEndScreen( \r\n        Titlul jocului:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Sosire în centrul tablei!",
   "deplacezUnCheval": "MUTĂ UN CAL!",
   "aVousDeLancer": "E RÂNDUL TĂU SĂ ARUNCI!",
@@ -2082,7 +2071,7 @@
   "toutesLesGrillesSontCompletees": "Toate fișele de scor sunt complete!",
   "cEstVotreTourTouchez": "Este rândul tău! Atinge un zar pentru a-l păstra (auriu 🔒)",
   "lancerLesDes": "Aruncă zarurile",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1 / 63 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1 / 63 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "AI PIERDUT! Dezvăluie întrebarea și răspunde!",
   "gagneTonSecretEstPreserve": "AI CÂȘTIGAT! Secretul tău este în siguranță.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = părți[0].trim(); \r\n      _wordUndercover = părți[1].trim(); \r\n    '''}''' altceva '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < cuvintePairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (Variantă)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    pentru (jucător VAR în _activePlayers) '''{''' \r\n      dacă (jucător == sub acoperire) '''{''' \r\n        _playerRoles[jucător] = \"Infiltrator\"; \r\n      '''}''' altceva dacă (jucător == _mrWhitePlayer) '''{''' \r\n        _playerRoles[jucător] = \"Domnul Alb\"; \r\n      '''}''' altceva '''{''' \r\n        _playerRoles[jucător] = \"Civil\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revelator; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  void _nextPlayerReveal() '''{''' \r\n    dacă (_currentPlayerRevealIndex < _activePlayers.lungime - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' altceva '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(Instrumentist de coarde) '''{''' \r\n    Rolul șirului = _playerRoles[jucător]!; \r\n    bool impostorsWin = rol == \"Civil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      dacă (impostorsWin) '''{''' \r\n        _resultMessage = \"'{'player'}' era civil! Impostorii câștigă!\"; \r\n      '''}''' mai '''{''' \r\n        _resultMessage = \"'{'player'}' era\r\n    \r\n  ",
   "requiert4Joueurs": "Necesită 4+ jucători",
   "requiert3Joueurs": "Necesită 3+ jucători",
   "genereDesCategoriesAmusantesPour": "Generează categorii distractive pentru cartoful fierbinte. Tema: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Echipa Albastră)",
   "k2EquipesSAffrontent": "2 echipe se înfruntă",
   "chacunPourSoi": "Fiecare pentru sine",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0 : {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2241,7 +2229,7 @@
       }
     }
   },
-  "nombreDeJoueursRecherches": "Numărul de jucători percheziţionaţi: '{'''0'''}'",
+  "nombreDeJoueursRecherches": "Numărul de jucători percheziţionaţi: ''(''''0'''')''",
   "laBeloteRequiertExactement4": "Belote are nevoie de exact 4 jucători.",
   "formez2EquipesDe2": "Formaţi 2 echipe de 2 jucători în \"Echipe Compose.\"",
   "ilFautAuMoins4": "E nevoie de cel puţin patru jucători.",
@@ -2263,7 +2251,7 @@
   "ceJeuRequiertExactement4": "Acest joc necesită exact 4 jucători.",
   "auMoins3JoueursRequis": "Cel puțin 3 jucători necesari.",
   "auMoins2JoueursRequis": "Cel puțin 2 jucători necesari.",
-  "jeu": "Joc: '' ''0''}",
+  "jeu": "Joc: '' ''0'')",
   "ami": "Prieten",
   "deconnecte": "deconectat",
   "suspect": "Suspect",
@@ -2280,7 +2268,7 @@
   "quatre": "Patrari",
   "cinq": "Cincari",
   "six": "Șesari",
-  "sectionSup": "Sectiunea Sup: \"'{'\"0\"'}'\"",
+  "sectionSup": "Sectiunea Sup: \"''(''\"0\"'')''\"",
   "k63Pts": "{oppUpper} /63 ppts {value}",
   "@k63Pts": {
     "placeholders": {
@@ -2313,7 +2301,7 @@
   "commenceParUnDessin": "Începe cu un desen!",
   "orateur": "Vorbitor",
   "moi": "Eu",
-  "manche1": "Canalul \"'{'''0'''}' \" / \" '{'''1'''}' \"",
+  "manche1": "Canalul \"''(''''0'''')'' \" / \" ''(''''1'''')'' \"",
   "voisin": "Vecinătate",
   "aSelectionneCarte": "'' '' '' ''0 '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' '' ''",
   "jouePar": "Traducerea şi adaptarea:",
@@ -2338,7 +2326,7 @@
   "fin50": "SFÂRȘIT 50",
   "essence": "Benzină",
   "roueDeSecours": "Roata de\nAjutor",
-  "radarCaseCiblee": "Cazul \"'{'\"0\"'}'\" vizat!",
+  "radarCaseCiblee": "Cazul \"''(''\"0\"'')''\" vizat!",
   "ys": "ð",
   "yaaz": "ð",
   "joker": "Joker",
@@ -2367,7 +2355,7 @@
   "lesAutresJugentTonHistoire": "Ceilalți îți judecă povestea...",
   "vrai1": "Adevărat",
   "faux1": "Fals",
-  "tuAsVote": "Ai votat: \"'{'\"0\"'}'",
+  "tuAsVote": "Ai votat: \"''(''\"0\"'')''",
   "aEteChoisiPourSa": "A fost ales pentru răspunsul său şi a câştigat 1 punct!",
   "resultatsDesVotes": "Rezultatele votului",
   "leMenteurEtait": "Mincinosul a fost... {liarName}!",
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Tura s-a încheiat.",
-  "aGagneAvecSaDescription": "{winnerName} won with its description:AppLocalizations.of(context)!. extrainfoColumnChildText 99999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Nimeni nu a câștigat această rundă. Egalitate sau nicio descriere.",
   "aTrouveLeSymboleIl": "{winnerName} a găsit simbolul 99999! El câştigă cardul. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Indiciu trimis! Se așteaptă ceilalți...",
   "carte3": "Hartă",
   "score": "Scor",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of (context)! .styleConstTextstyleColors {value2} {deckIndex} / {deckTotal} {value3} {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "Noaptea cade în sat...\n\nÎnchide ochii.",
   "leMomentEstVenuLe": "A venit timpul...\n\nSatul trebuie să voteze.",
   "victoireDesVillageois": "Victorie a Sătenilor!",
@@ -2548,7 +2499,7 @@
   "victoireDesAmoureux": "Victorie a Îndrăgostiților!",
   "finDuJeu": "Sfârşitul jocului",
   "loup": "Lup",
-  "validerLeCouple2": "Cuplul valid ('{'\"0\"'}'\"/2)",
+  "validerLeCouple2": "Cuplul valid (''(''\"0\"'')''\"/2)",
   "lHeritierChoisitSonTestament": "Moștenitorul își alege testamentul",
   "selectionnezVotreTestateur": "Selectează testatorul",
   "leGardeProtegeUnVillageois": "Garda protejează un sătean",
@@ -2557,19 +2508,11 @@
   "touchezUnJoueurPourSonder": "Atinge un jucător pentru a-i afla rolul",
   "leRatMaladeRode": "Șobolanul Bolnav dă târcoale...",
   "contaminezJusquA2Joueurs": "Infectează până la 2 jucători",
-  "contaminer": "Contaminat ('{'''0'''}')",
+  "contaminer": "Contaminat (''(''''0'''')'')",
   "lesLoupsChassentEnMeute": "Lupii vânează în haită",
   "votezPourDevorerUneProie": "Votați pentru a devora o pradă",
   "espionnezUnJoueur": "Spionează un jucător...",
   "leLoupNoirDecideDu": "Lupul Negru decide soarta prăzii",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infectează {targetName} ?AppLocalizări.of(context)!.centeractionwidgetRowMainaxissizeMainaxisizareMinLupul alb loveşte solo",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Alege o victimă de devorat",
   "laSorcierePrepareSesPotions": "Vrăjitoarea își prepară poțiunile",
   "cibleDesLoups": "Ținta lupilor: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Lupi",
   "outreTombe": "Dincolo",
   "amoureux": "Îndrăgostiți",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLocalizations.of (context)!.styleTextstyleFontweightFontweightBoldSmall Horses",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Cursă individuală",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 aruncări)",
   "@k3Lancers": {
@@ -2626,7 +2561,7 @@
       }
     }
   },
-  "gardeS": "\"'{'\"0\"'}'\" păstrat",
+  "gardeS": "\"''(''\"0\"'')''\" păstrat",
   "cur": "♥ Inimă Roșie",
   "carreau": "♦ Romb",
   "trefle": "♣ Treflă",
@@ -2645,7 +2580,7 @@
   "uneQuestionDrolePourLa": "O întrebare amuzantă pentru cel care are obiectul!",
   "devinezLeMotAvecL": "Ghiciți cuvântul cu ajutorul celorlalți!",
   "reperezLeSymboleCommunLe": "Găsiți simbolul comun cât mai repede!",
-  "genereDesDilemmesAuFormat": "Generează dileme în format \"OptionA sau OptionB.\" Tema: \"'{'\"0\"'}'\"",
+  "genereDesDilemmesAuFormat": "Generează dileme în format \"OptionA sau OptionB.\" Tema: \"''(''\"0\"'')''\"",
   "jePasse": "Pas",
   "vote": "Votare",
   "votes1": "Voturi",
@@ -2694,7 +2629,6 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Cine ar putea mai mult?AppLocalizări.of (context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Votat de:",
   "decisionUnanimeDuGroupePour": "Decizia Unanimă a grupului pentru '{0}'!",
   "ilFautAuMoins41": "Sunt necesari cel puțin 4 jucători pentru Codenames (2 pe echipă)!",
@@ -2703,13 +2637,13 @@
   "bleue": "Albastru",
   "lEquipeATrouveTous": "Echipa a găsit toate cuvintele şi a câştigat!",
   "maitreEspionDeLEquipe": "Maestrul Espion al echipei '{0}'",
-  "equipeRouge1": "Red Team: '' ''0''}",
-  "equipeBleue1": "Echipa Albastră: \"'{'''0'''}' \"",
+  "equipeRouge1": "Red Team: '' ''0'')",
+  "equipeBleue1": "Echipa Albastră: \"''(''''0'''')'' \"",
   "maitreEspion": "Maestre Espion",
   "passeLeTelephoneAuxAgents": "Dă telefonul agenţilor de echipă.",
   "mime": "Mimă",
-  "cEstAuTourDe2": "Este rândul \"'{'\"0\"'}'\" (\"1\"'}'\")",
-  "genereDesQuestionsAmusantesEt": "Generează întrebări distractive și rapide pentru a pune. Tema: \"'{'\"0\"'}'\"",
+  "cEstAuTourDe2": "Este rândul \"''(''\"0\"'')''\" (\"1\"'')''\")",
+  "genereDesQuestionsAmusantesEt": "Generează întrebări distractive și rapide pentru a pune. Tema: \"''(''\"0\"'')''\"",
   "s3": "{minDuration} s",
   "@s3": {
     "placeholders": {
@@ -2727,7 +2661,7 @@
     }
   },
   "fin1": "SFÂRSIT",
-  "trouves": "Găsit: \"'{'\"0\"'}'\"",
+  "trouves": "Găsit: \"''(''\"0\"'')''\"",
   "ecurie1": "Grajd 1",
   "ecurie2": "Grajd 2",
   "ecurie3": "Grajd 3",
@@ -2742,8 +2676,8 @@
     }
   },
   "jeu1": "Joc",
-  "partieDeEnAttente": "O parte din \"'{'''0'''}' \" în curs",
-  "termine": "Terminat: '{'''0'''}'",
+  "partieDeEnAttente": "O parte din \"''(''''0'''')'' \" în curs",
+  "termine": "Terminat: ''(''''0'''')''",
   "vainqueur2": "Câştigător:",
   "joueurSPretS": "Jucător (s) gata",
   "code": "Cod: {value}",
@@ -2762,7 +2696,7 @@
   "talkie": "Stație radio",
   "tronconneuse": "Drujbă",
   "survie": "Supraviețuire",
-  "redigezLPour": "Scrie \"'{'\"0\"'}'\" pentru \"'{'\"1\"'}'\"",
+  "redigezLPour": "Scrie \"''(''\"0\"'')''\" pentru \"''(''\"1\"'')''\"",
   "rejouerGarderPts": "REJOACĂ (PĂSTREAZĂ PCT)",
   "indicesMontresA": "Indicii prezentaţi la",
   "playersWinneridname": "Numele câștigător al jucătorilor",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "** Obiectiv **\nIa cărți pentru a crea perechi de potrivire. Evitați fiind jucătorul care deține cartea Zombie la sfârșitul jocului.\n** Draft **\n1. Jocul începe cu 33 de cărți (16 perechi + 1 carte zombie).\n2. Cărţile sunt distribuite celor 4 jucători.\n3. Fiecare rândul său, un jucător ia o carte de la următorul jucător.\n4. În cazul în care cardul creează o pereche, acesta este învins automat.\n5. Mâna jucătorului este amestecată.\n6. Primul jucător care nu mai au cărți câștigate.\n7. Jucătorul rămas cu cardul Zombie pierdut!",
   "butDuJeuObtenirLe": "**Game goal**\nObține cel mai mare scor prin completarea 13 categorii cu 5 zaruri.\n\n** Rularea unui turn **\n1. ** Lance**: Puteți arunca 5 zaruri până la 3 ori pe rând.\n2. ** Keep **: După prima sau a doua aruncare, puteți păstra unele zaruri și reporni altele.\n3. **Score**: După cel puțin o aruncare, trebuie să alegeți o categorie pentru a înscrie. Fiecare categorie poate fi utilizată o singură dată pe parte.\n\n**Categoria **\nSuma zarurilor corespunzătoare. (Aproximativ 35 de puncte dacă secțiunea superioară totalizează 63 de puncte sau mai mult).\n- ** Brelan** (3 sau mai multe zaruri identice): Suma tuturor zarurilor.\n- ** Square** (4 sau mai multe zaruri identice): Suma tuturor zarurilor.\n- **Full** (3 zaruri identice + 1 pereche): 25 puncte.\n- **Small Suite** (4 zaruri consecutive): 30 puncte.\n- **Apartament mare** (5 zaruri consecutive): 40 puncte.\n- **Yams** (5 zaruri identice): 50 puncte.\n- ** Chance**: suma tuturor zarurilor.",
   "objectifNePasAvoirL": "** Obiectiv **\nNu ai dispozitivul în mâini când explodează cartoful!\n\n** Draft **\n1. O temă apare pe ecran.\n2. Jucătorul care deţine dispozitivul trebuie să dea un răspuns corespunzător temei.\n3. Imediat ce a răspuns, a trecut repede avionul aproapelui său.\n4. Vecinul trebuie la rândul său să găsească un răspuns nou şi să treacă dispozitivul.\n5. Timpul este ascuns și aleator: cartoful poate exploda în orice moment!\n6. Jucătorul care deține dispozitivul la momentul exploziei pierde mânerul și primește un gaj.",
-  "principeGeneralGribouillisEstUn": "**Principiu general**\nGribouillis este un joc de desen inspirat de \"Telefonul Arab,\" unde ideile se schimbă în fiecare etapă. Există 3 moduri de joc:\n\n**1. Mod normal (Arabic Illustrated Phone)\nFiecare jucător scrie o propoziţie.\nFiecare jucător primeşte o altă propoziţie şi o desenează.\n- ** Devinette**: Fiecare jucător primește un desen și ghicește ce reprezintă.\n- ** Alternative**: Jocul alternează desenul și ghici până când fiecare \"album\" a mers în jurul valorii de toți jucătorii.\n- ** Dar**: Distrează-te văzând cum o propoziţie simplă se transformă în ceva complet diferit!\n\n**2. Mod de completare (Desen de colaborare) **\nFiecare jucător începe un desen simplu.\n- ** Complete**: Fiecare jucător primește desenul altuia și trebuie să-l îmbogățească, fără a șterge ceea ce există deja.\n- ** Alternaţie**: Desenul trece de la jucător la jucător, fiecare adăugând atingerea sa.\n- **Parameter \"Adauga 1\"**:\n- * Dacă este dezactivat (default) *: E o sfoară. Desenul evoluează în fiecare etapă (Player A -> Player B -> Player C...).\n- * Dacă activat *: Desenul inițial al fiecărui jucător este completat de toți ceilalți jucători, creând mai multe lucrări colective în paralel.\n- ** Dar**: Creați lucrări colective surprinzătoare și distractive de artă.\n\nModul Brise-Glace ( Interacţiune Creativă)\n- ** Scriind**: Fiecare jucător scrie o temă personală (ex: AppLocalizări.of(context)!.myPreference).\n- **Drawing**: Fiecare jucător primește temele de la **toți ceilalți jucători** și trebuie să le deseneze.\n- **But**: Ideal pentru a sparge gheața, descoperi gusturile altora și pentru a lansa creativitatea într-un mod colaborativ și ușor.",
   "yzObjectifAvoirLeMoins": "Obiectiv\n\nAu cât mai puţine puncte posibil la sfârşitul jocului.\nJocul se oprește atunci când un jucător atinge 100 de puncte sau mai mult, iar câștigătorul este cel cu cel mai mic scor total.\n\nEchipament\n\n150 de cărți numerotate de la 2 la +12\n\nPunerea în aplicare\n\nAmestecă toate cărţile.\nFiecare jucător primește 12 cărți, plasate cu fața în jos în fața lui, în 4 coloane × 3 rânduri.\nCelelalte cărţi formează un stoc. Returnează prima carte pentru a forma deşeurile.\nFiecare jucător întoarce 2 cărți de alegerea sa de la 12.\n\nCursul unui tur\n\nLa rândul tău, ai 30 de secunde să alegi între două acţiuni:\n\n1. Ia cardul de deșeuri\nTrebuie să-l schimbați cu una dintre cele 12 cărți (partea vizibilă sau ascunsă).\nCardul înlocuit merge pe deşeuri.\n\n2. Piocher o carte cu fața în jos\nUită-te la hartă:\n- fie îl păstraţi şi înlocuiţi una dintre cărţile dumneavoastră (aşa cum este mai sus),\n- fie îl refuzați → îl plasați direct pe deșeuri, iar în acest caz trebuie să returnați una dintre cărțile voastre încă ascunse.\n\nNorme speciale\n\nTrei cărți identice într-o coloană → sunt imediat învinse (valoarea 0).\n\nSfârşitul mânerului:\n\nMânerul se termină când un jucător îşi dezvăluie toate cărţile.\nToți ceilalți jucători dezvăluie apoi cărțile rămase. Mânerul s-a terminat.\nToţi jucătorii numără suma cărţilor lor.\n\nVă rugăm să rețineți: dacă jucătorul care termină nu are cel mai mic scor din rundă, el ia o penalizare de +10 puncte (scorul său mâner este dublat în versiunea originală, vom folosi +10 pentru a simplifica).\n\nSfârşitul jocului\n\nJucăm câte mâneci avem nevoie.\nOdată ce un jucător ajunge la 100 de puncte sau mai mult, jocul se opreşte.\nJucătorul cu cel mai mic scor cumulativ câştigă.",
   "iAReglesDuPoker": "Obiectiv\n\nCâștigă jetoanele de la alți jucători prin:\n- cea mai bună mână de 5 cărţi în timpul sacrificării,\n- sau făcându-i să renunţe (să doarmă) datorită pariurilor.\n\nClasificarea manuală (de la cea mai puternică la cea mai slabă)\n\n1. Chintă regală : 10 \n2. Chintă Quint: 5 cărți care se urmează reciproc, aceeași culoare\n3. Piata: 4 carti identice\n4. Complet: 3 cărți identice + 1 pereche\n5. Culoare (flush): 5 cărți de aceeași culoare (neconsecutive)\n6. Următorul (al cincilea): 5 cărți care se urmează reciproc (diferite culori)\n7. Brelan: 3 cărţi identice\n8. Pereche dublă\n9. Pereche\n10. Carte de mare (cel mai mare card dacă nimeni nu devine mai bine)\n\nð\n\n1. Jaluzele\nJucătorul din stânga dealerului stabileşte blind-ul mic.\nUrmătorul jucător pune big blind-ul.\n\n2. Distribuţie\nFiecare jucător primește 2 cărți închise (cărțile private).\n\n3. Turnuri de licitație și cărți comune\n- Preflop: truc pariu cu carduri private.\n- Trei hărţi comune dezvăluite. Noi pariuri.\n- Turnul: A patra hartă comună dezvăluită. Noi pariuri.\n- River: 5 şi ultima hartă comună dezvăluită. Ultimul pariu.\n\n4. Shooting (showdown)\nDacă mai mulți jucători rămân, fiecare își arată jocul.\nCea mai bună combinație de 5 cărți (printre cele 2 cărți private + cele 5 comune) câștigă potul.\n\nAcțiuni posibile\n\nLa rândul său, un jucător are ** 30 de secunde** pentru:\n- Nu paria nimic, doar dacă nu mai pariază nimeni.\nPune nişte chipsuri în oală.\n- Urmați (Call): egal de funcționare.\n- Relansare (Raise): crește pariul.\n- Du-te la culcare (Fold): picătură cărțile și ieși din ea.\n\nSfârşitul jocului\n\nJocul continuă atâta timp cât rămân cel puțin 2 jucători cu jetoane.\nCâştigătorul final este cel care ia toate jetoanele.",
   "butDuJeuGagnerLe": "**Game goal**\nCâștigă cel mai XP prin realizarea de acțiuni și răspunsul la adevăruri!\n\n** Draft **\n1. Ruleta este jucătorul a cărui turn este.\n2. Jucătorul trage \"Action\" sau \"Verity.\"\n3. Mod clasic: O provocare / întrebare aleatoare este afișat.\n4. Judge Mode: Un jucător aleatoriu scrie provocarea, apoi jucătorul își dă seama.\n5. Alţi jucători validează cu un vot Da/Nu.\n6. Procentul de validare determină XP câștigat.\n\n** Reguli speciale **\n- 100% validare = maxim XP\n- Jucător cu cel mai XP devine admin de joc\n- Butonul \"Sfârșitul mânerului\" permite închiderea piesei",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "**Game goal**\nFiți cel mai rapid pentru a localiza singurul simbol identic dintre cardul din centru și propriul card.\n\n**Draft (Modul ''Turnul Infernal'') **\n1. Fiecare jucător primește o carte cu fața în jos. Restul cărților formează un stoc în centru, cu fața vizibilă.\n2. La început, toată lumea returnează cardul.\n3. Fiecare jucător trebuie să găsească cât mai repede posibil singurul simbol care este prezent atât pe cardul său, cât și pe cardul Stock.\n4. Primul jucător care găsește simbolul, anunțul cu voce tare, ia cardul Stock și îl plasează pe propria carte.\n5. Această nouă carte devine cartea lui pentru runda următoare. O nouă hartă este apoi dezvăluită în centrul Stock.\n6. Jocul continuă până când Stock este epuizat. Jucătorul care a colectat cele mai multe cărți la sfârșitul câștigă!",
   "butDuJeuSeDebarrasser": "**Game goal**\nScapa de toate cartile sale fiind primul!\n\n** Draft **\n1. **Distribuție**: Fiecare jucător primește 7 cărți. Restul formează stocul. Un card este returnat pentru a începe grămada de deșeuri.\n2. ** Jucaţi o carte**: Jucătorul al cărui viraj este are ** 30 secunde** pentru a pune o carte în mână pe grămada de deșeuri. Cardul jucat trebuie să se potrivească cu cardul de sus al stiva de:\n* **Color** (ex: Red on Red)\n* **Number** (ex: one 7 Blue on one 7 Green)\n* ** Symbol** (ex: un galben \"+2\" pe un roșu \"+2\")\n* ** Card special** (Joker, +4, etc.)\n3. **Piocher**: Dacă un jucător nu poate juca o carte în timpul alocat, trebuie să aleagă o carte din pachet. Dacă poate juca cartea asta, o poate face imediat. În caz contrar, rândul său se termină.\n4. **Carduri speciale**:\n* **+2 (Două cărți) **: Următorul jucător alege 2 cărți și trece rândul său.\n* **Sens Interbidden (Pass your ever) **: Următorul jucător trece de rândul său.\n* **Inversiune (Schimbarea sensului) **: Simţul jocului este inversat.\n* **Joker (Color Change) **: Jucătorul alege culoarea următoarei cărţi de jucat. Poate fi jucat pe orice carte.\n* **Super Joker +4 (Color Change and Four Cards) **: Jucătorul alege culoarea. Următorul jucător alege 4 cărți și trece rândul său. Acest card poate fi jucat numai dacă jucătorul nu are nici o altă carte de culoare solicitată pe grămada de deșeuri (dacă nu blufează).\n5. ** Anunţă \"UNO\"**: Când un jucător are o singură carte în mână, trebuie să anunţe \"UNO!\" Dacă el nu face acest lucru și este luat de un alt jucător (înainte de următorul jucător joacă sau preia), el trebuie să ia 2 cărți.\n6. **End of Channel**: Mânerul se termină când un jucător scapă de ultima carte. Punctele sunt numărate. Jucătorul care ajunge la 500 de puncte (sau un total definit) câștigă jocul.\n\n**Map Points:**\n* Carduri digitale (0-9): Valoarea lor facială.\n* +2, Sens Interzis, Inversiune: 20 puncte.\n* Joker, Super Joker +4: 50 puncte.",
   "principeDuJeuLeJeu": "## Principiu joc\n* Jocul se joacă între **3 și 10 jucători**.\n* Fiecare jucător oferă acces la o parte din biblioteca sa foto și alege fotografii pentru a partaja.\n* În timpul unui joc, o fotografie este selectată **randomly** din rândul tuturor jucătorilor, apoi afișată pentru câteva secunde.\n* Jucătorii trebuie să ghicească ** care deține fotografia** afișat.\n* Jucătorul care ghicește corect cele mai multe fotografii câștigă jocul.\n\n## Procedura\n1. ** Selecţia fotografiilor**: Fiecare jucător alege un număr de fotografii din galeria lor.\n2. ** Start of the game**: Odată ce toată lumea este gata, gazda lansează jocul.\n3. ** Play Tower**:\n- O fotografie aleatoare este afișată timp de 5 secunde.\n- Toţi jucătorii votează să-l ghicească pe proprietar.\n4. **Rezultate**: Scorurile sunt actualizate după fiecare rundă.\n5. ** Sfârşitul jocului**: După un număr set de runde, jucătorul cu cele mai multe puncte câștigă.",
-  "butDuJeuCoulerTous": "**Game goal**\nBlocat toate navele adversarului înainte de a scufunda a ta.\n\n** Draft **\n1. ** Plasament**: Fiecare jucător pune în secret flota pe o grilă 10x10.\n- Portavioane (5 cutii)\n- Cruiser (4 cutii)\n- Submarin (3 celule)\n- Distrugător (3 cutii)\n- Patrula (2 cutii)\n2. **Tir**: La rândul său, jucătorii ating o cutie pentru a trage.\n3. **Result**: AppLocalizations.of (context)!.touche, \"Couled\" sau \"To Water.\"\n4. **Victoire**: Primul jucător care a scufundat întreaga flotă adversă câștigă.",
   "butDuJeuEtreLe2": "**Game goal**\nFii primul care ajunge la distanța-țintă (1000 km implicit).\n** Draft **\n- Fiecare jucător primeşte şase cărţi.\n- La rândul său, jucaţi o carte (distanţă, atac, apărare, securitate) sau scăpaţi de ea.\n- Cardurile **Attacks** (Stop, Red, Essence, Crevaison, Limit) blochează adversarul.\n- Maps ** Defenses** (Green, Extra Tank, Repair, End Limit) contraatacuri.\n- Cardurile **Security** anulează un atac și previne repetarea acestuia.\n- Hărţi ** Distanţă** (25, 50, 75, 100, 200 km) mutaţi vehiculul înainte.\n- Alege o carte la sfârşitul rândului.",
   "butDuJeuEtreLe3": "**Game goal**\nFii primul care scapă de toate cărțile sale prin formarea de combinații valide (amestecuri).\n\n** Rularea unui turn **\n1. **Piocher**: Ia harta din partea de sus a deseurilor OR Stock.\n2. ** Vânzare (Opţională) **: Aşezaţi combinaţiile valabile pe masă.\n- **Secventa (Run) **: 3 sau mai multe carti de aceeasi culoare care urmeaza (ex. 5) Asul poate fi ridicat sau scazut.\n- **Group (Set) **: 3 sau 4 cărţi cu aceeaşi valoare, dar cu culori diferite (de exemplu 8\n3. ** Default**: Scapă de o carte de la mâna lui pe deșeuri.\n\n** Sfârşitul mânerului**\nPrimul jucător care nu mai are cărţi după înfrângere câştigă. Ceilalți numără punctele cărților rămase (Figurele = 10, As = 15, altele = valoarea nominală). Jocul se opreşte la 100 de puncte.",
   "butDuJeuFaireDeviner2": "**Game goal**\nFace echipa ta ghici un maxim de cuvinte înainte de sfârșitul timpului, fără a utiliza cuvintele interzise!\n\n** Draft **\n1. Fiecare rândul său, un jucător (\"speaker\") încearcă să facă echipa lui ghici un cuvânt.\n2. Vorbitorul nu ar trebui să ** niciodată** rosti cuvântul să ghicească, nici oricare dintre cuvintele \"Taboo\" (nici un cuvânt) afișat sub cuvântul țintă. Nici nu poate folosi traduceri sau cuvinte din aceeaşi familie.\n3. Dacă vorbitorul foloseşte un cuvânt Taboo, echipa adversă (sau judecătorul) raportează vina, cardul este anulat şi vorbitorul trece la următorul.\n4. Fiecare cuvânt ghicit întoarce un punct echipei.\n5. Turnul se termină atunci când timpul este de până.\n\n** Sfârşitul părţii **\nEchipa cu cele mai multe puncte după numărul de ture definite câștigă!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Trebuie să joci același număr de cărți.",
   "combinaisonDe5CartesTrop": "Combinația de 5 cărți este prea slabă.",
   "vousDevezJouerUneCarte": "Trebuie să joci o carte mai mare.",
-  "aGagne1": "A câştigat!",
   "ceNEstPasVotre": "Nu este rândul tău.",
   "carteIntrouvableDansLaMain": "Cartea nu a fost găsită în mână.",
   "coupInvalideSelonLesRegles": "Mutare invalidă conform regulilor Mille Bornes!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Timpul a expirat pentru a declara adevărul!",
   "cibleHorsDeLaGrille": "Țintă în afara grilei.",
   "caseDejaCiblee": "Căsuță deja vizată.",
-  "aCouleTouteLaFlotte": "A scufundat întreaga flotă inamică!",
   "placementAutomatiqueEffectue": "⏱️ Plasare automată efectuată.",
   "tempsEcoulePourLaSaisie": "⏰ Timpul pentru introducerea cuvintelor a expirat. Jocul începe cu cele introduse!",
   "laPhaseDeVoteA": "Faza de votare a început!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "Tranzacţie reuşită. Du-te înapoi adevărat.",
   "debugJoingameLaPartieN": "[DEBUG se alăture jocului] Jocul nu există sau nu mai este în hol. Întoarce-te la fals.",
   "erreurCritiqueDansJoingame": "--- EROARE CRITICA ÎN JOC ---",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizări.of (context)! .word civilParts0TrimWordundercoverIA întoarce separat cuvinte simple",
   "infiltre": "Infiltrat",
   "civil": "Civil",
   "vendeurDeFalafels": "Vânzător Falafels",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Combinație invalidă conform regulilor de Remi!",
   "defaussezExactement1Carte": "Decartează exact 1 carte.",
   "carteNonTrouvee": "Cartea nu a fost găsită.",
-  "aGagneLaManche": "A câştigat runda!",
   "desDejaLancesPourCe": "Dice a lansat deja pentru acest tur.",
   "vousDevezDAbordLancer": "Trebuie să dai cu zarul mai întâi.",
   "vousNePouvezPasDeplacer": "Nu poți muta piesa unui adversar!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Nu poți alege o culoare acum.",
   "erreurCritiquePlayerorderEstVide": "EROARE CRITICĂ: comanda jucătorului este goală în următoarea rundă. Nu mai pot continua.",
   "questionNonTrouvee": "Întrebare negăsită",
-  "quiPourraitLePlusApplocalizations1": "Cine ar putea mai mult?AppLocalizări.de(context)!.listă Întrebări stringAiwordpoolGamewordssoft",
   "menteur": "Mincinosule.",
   "pasAssezDeJoueursPour": "Nu sunt destui jucători pentru această modă.",
   "ajouteLaDescriptionLaPlus": "Adaugă cea mai amuzantă descriere la această memă!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Fiecare jucător activ trebuie să pună cel puțin o carte înainte de licitație.",
   "enchereInvalide": "Licitație invalidă.",
   "laSurenchereDoitEtreSuperieure": "Supralicitarea trebuie să fie mai mare.",
-  "applocalizationsOfContextUnjoueurEst": "AppLocalizations.of (context)!.aplayer'}' este ultimul supravieţuitor şi câştigă Skull!",
-  "applocalizationsOfContextUnjoueurA": "] ??? AppLocalizations.of(context)!.aPlayer'}' won 2 challenges and won the game!",
-  "applocalizationsOfContextUnjoueurRemporte": "AppLocalizations.of (context)!.aplayer'}' câștigă Skull!",
   "reponseVide": "Răspuns gol.",
   "leJugeNePeutPas1": "Judecătorul nu poate trimite răspuns.",
   "toutLeMondeARepondu": "Toată lumea a răspuns! Să deschidem uşa.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Toată lumea a răspuns! Vot.",
   "toutesLesReponsesSontRecues": "Toate răspunsurile sunt primite! Judecătorul trebuie să decidă.",
   "joueurCibleIntrouvable": "Jucătorul vizat nu a fost găsit.",
-  "quiPourraitLePlusApplocalizations2": "Cine ar putea mai mult?AppLocalizări.de[context]!.elseIfGametipSynonim sau Banni",
   "vousNePouvezPasBannir": "Nu poți bana propriul sinonim!",
   "seulLeJugeEnTitre": "Doar Judecătorul în exercițiu poate alege câștigătorul.",
   "ceJoueurNAPas1": "Acest jucător nu a trimis un răspuns.",
-  "quiPourraitLePlusApplocalizations3": "Cine ar putea mai mult?AppLocalizări.of (context)!.intVoturi solicitateJucătoriiLungimeDacă Judecătorul",
-  "quiPourraitLePlusApplocalizations4": "Cine ar putea mai mult?AppLocalizări.de[context)!.pentruŢinta finalăInVoteRoundState",
   "egaliteParfaiteAucunPointAttribue": "Egalitate perfectă! Niciun punct acordat.",
   "egaliteDansLesVotesAucun": "Egalitate la voturi: niciun jucător alungat în această tură.",
   "laDescriptionLaPlusDrole": "Cea mai amuzantă descriere a fost aleasă!",
   "aucuneDescriptionNAEte": "Nu s-a votat nicio descriere.",
-  "quiPourraitLePlusApplocalizations5": "Cine ar putea mai mult?AppLocalizări..de[context]!.pentruŢinta finalăÎnVote 1 rundă de WinnerId",
   "jugeIntrouvable": "Judecătorul nu a fost găsit.",
   "laPartieDeZeroPointe": "Jocul Zero Puncte începe! Fiecare jucător trebuie să dezvăluie 2 cărți.",
   "toutLeMondeARevele": "Toată lumea și-a dezvăluit cărțile. Jocul începe!",
@@ -3164,19 +3084,16 @@
   "cultureDefi": "🧠 Cultură & Provocare",
   "familleToutPublic": "👨‍👩‍👧‍👦 Familie & Toate vârstele",
   "piquantInsolite": "🌶️ Picant & Neobișnuit",
-  "quiPourraitLePlusApplocalizations6": "Cine ar putea mai mult?AppLocalizări.de[context]! . Care ar putea modegroup dvs.",
   "devineT": "Ghiceşte.",
   "presidente": "Președinte",
   "chargement": "Se încarcă...",
   "cursive": "Cursiv",
   "exception": "Excepție:",
-  "debutDeLaConstructionDe": "'{}':",
   "clicSurLeJoueurPname": "> > > > > CLIC on player ''$pName'' (ID: $ pId)!",
   "passageDeIsactionpendingATrue": "- Trecerea de la acţiune la adevăr.",
   "erreurFirebaseLorsDuVote": "! ERREUR Baza de foc în timpul votului: $e",
   "appelFirebaseTerminePassageDe": "- Pompierul s-a terminat. Trecerea de la acţiune la fals.",
   "attentionLeWidgetNEst": "Widget a dispărut.",
-  "quiPourraitLePlusApplocalizations7": "Cine ar putea mai mult?AppLocalizări.of (context)!.defaultFinalRoundwinneridJoc de dateWinnerId",
   "phaseDePose": "PHAZA POZIȚIEI",
   "stre9f4a5": "🏆 Legendar!",
   "str21f597": "⭐ Excelent!",
@@ -3185,7 +3102,7 @@
   "strc0046c": "💪 Putem mai mult!",
   "str85bff7": "Bravo!",
   "strfa1b8c": "Rate!",
-  "str487ca1": "'{'''Chut! Închide ochii.",
+  "str487ca1": "''(''''Chut! Închide ochii.",
   "leSoleilSeLeve": "Răsare soarele",
   "atout": "ATU: {suit}",
   "@atout": {
@@ -3204,8 +3121,7 @@
   "chill": "Relaxare",
   "soiree": "Petrecere",
   "competition": "Competiție",
-  "enCours": "CURRENT: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \"\"'}'\": GameMessageLocalizare.tr (context, motiv),",
+  "enCours": "CURRENT: '{0}'",
   "jAiLanceUnePartie2": "Am început un joc",
   "piedDeBiche": "Răngă",
   "appTitle": "Joc de petrecere",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "Am aruncat o parte din 0! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Roluri (0) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Trageţi această propoziţie:\n\" 0 \" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "0 a fost interzis pentru propunerea sa 1! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 a găsit cuvântul: \" 1 \"! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Nimeni nu a găsit cuvântul: \"0.\" {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 a găsit cuvântul: \" 1 \"! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "(Revoluție!",
   "tonMotEst2": "Cuvântul tău este: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Egalitate!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "Am aruncat o parte din 0! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "Jocul de Yams începe!",
   "logClueGivingStart": "Jocul începe! Dă indiciul tău...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "Începe jocul Belote!",
   "logBlokusStart": "Jocul de Blokus începe!",
   "pokerFlop": "--- FLOP ---",
   "pokerTurn": "--- TURN ---",
   "pokerRiver": "--- RIVER ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "0 a tras: 1 ! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "Echipa 0 a dezvăluit asasinul! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Maxim posibil: 0 cărți {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 reflectă pe o provocare de 1 cărți... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "OMUL TĂU (0 cărți) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 / 30 trăsături {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "15 / 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Culoare aleasă:",
   "pokerRaiseTo": "Mărește la {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Răspuns de la 0: \" 1 \" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Rol:",
   "obligatoire": "Obligatoriu",
   "aSelectionneSonPionEtReflechit": "{playerName} și-a selectat pionul și se gândește...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0 a fost raportat și ascuns pentru tine. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Nu s-a putut obține un jeton de acces video LiveKit securizat.",
+  "veuillezEntrerUneAdresseEmail": "Introduceți o adresă de email validă.",
+  "veuillezEntrerVotreMotDe": "Introduceți parola curentă.",
+  "entrezVotreMotDePasse": "Introduceți parola curentă.",
+  "leNouveauMotDePasse": "Noua parolă trebuie să fie cel puțin 6 caractere.",
+  "lesDeuxMotsDePasse": "Ambele parole nu se potrivesc.",
+  "photoDeProfilMiseA": "Fotografie profil actualizat!",
+  "echecDuChangementDePhoto": "Schimbarea foto a eșuat.",
+  "k3CaracteresMinimum": "Minimum 3 caractere",
+  "cePseudoEstDejaPris": "Această nick este deja luat.",
+  "unAmi": "Un prieten.",
+  "ceJoueur": "acest jucător",
+  "preparationDeLaRecherche": "Pregătirea căutării...",
+  "erreurDeConnexionAuMatchmaking": "Eroare la conectarea la potrivire. Vă rugăm să încercați din nou.",
+  "erreurDeConnexionALa": "Eroare la conectarea la cameră.",
+  "legendeVivante": "Legendă vie",
+  "grandMaitre": "Mare Maestru",
+  "stratege": "Strategie",
+  "initie": "Iniţiat",
+  "illimiteesVip": "Nelimitat (VIP)",
+  "pieces": "0 bucăți {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "Utilizator neconectat.",
+  "entrezUnPseudo": "Introduceți un pseudo",
+  "cePseudoEstDejaPris1": "Porecla asta e deja luată.",
+  "pseudoDejaPrisParUn": "Pseudo deja luată de un alt jucător",
+  "cetteVersionDeLApplication": "Această versiune a cererii este depășită. Vă rugăm să instalaţi ultima versiune.",
+  "playfunEstActuellementEnMaintenance": "Playfun este în prezent menţinut pentru a îmbunătăţi serile. Întoarce-te imediat!",
+  "uneNouvelleVersionDePlayfun": "O nouă versiune de Playfun este disponibil! Trebuie să actualizați aplicația pentru a continua să joace.",
+  "derniereVersion": "Ultima versiune",
+  "echecDeLEnvoi": "Livrare eşuată.",
   "demandeDAmiEnvoyeeA": "Cerere de prietenie trimisă către {name}!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Jucător (0 ) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Activare video",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Pseudo disponibil",
+  "entrezUnEmailValide": "Introduceți un e-mail valid",
+  "k6CaracteresMinimum": "Minimum 6 caractere",
+  "pasDeCompteSInscrire": "Nici un cont? Registru",
+  "dejaUnCompteSeConnecter": "Deja un cont? Autentificare",
+  "conditionsGeneralesDUtilisationCgu": "Termeni generali de utilizare (CGU / EULA)",
+  "politiqueDeConfidentialite": "Politica de confidențialitate",
+  "miseAJourRequise": "Actualizare necesară",
   "joueursBloques": "Jucători blocați ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Identificatori nevalabili sau cont inexistent.",
+  "leMotEtaitLabel": "Cuvântul era:",
+  "mancheLabel": "Canal",
+  "et": "şi",
+  "pokerPlayerCheck": "{playerName} dă check.",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Word:",
+  "rouges": "Roșii",
+  "noirs": "Negre",
+  "crane2": "Craniu",
+  "enAttente2": "În așteptare",
+  "enCours1": "În curs",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} și-a selectat pionul și se gândește...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Timp rămas: {seconds} s",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Pachet {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Variantă)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 victorii cu 1 punct 2 ! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Wins Skull! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Ambalaj IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Standard",
+  "lui": "El.",
+  "carte4": "Cartea {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Jucători blocați",
+  "vousNAvezBloqueAucun": "Nu ați blocat niciun jucător.",
+  "debloquer": "Deblochează",
+  "nouvelEmail": "E-mail nou",
+  "motDePasseActuel": "Parolă curentă",
+  "emailMisAJourAvec": "E-mail actualizat cu succes!",
+  "modifierMotDePasse": "Schimbă parola",
+  "nouveauMotDePasse": "Parolă nouă",
+  "confirmerLeMotDePasse": "Confirmă parola",
+  "motDePasseModifieAvec": "Parola modificată cu succes!",
+  "prendreUnePhoto": "Fă o poză.",
+  "choisirDepuisLaGalerie": "Alege din galerie",
+  "supprimerLaPhoto": "Șterge fotografia",
+  "photoDeProfilRetiree": "Fotografie profil eliminat.",
+  "pseudoMisAJour": "Porecla actualizată!",
+  "compteSecurite": "& Cont de securitate",
+  "editeParParrelV10": "Editat de Parrel • v1.0.0",
+  "aucunJeuTrouve": "Niciun joc găsit",
+  "essaieDAjusterTesFiltres": "Încearcă să ajustezi filtrele sau să cauți din nou.",
+  "reinitialiserLesFiltres": "Resetează filtrele",
+  "nouveau": "NOU",
+  "gererMonAbonnement": "Gestionați abonamentul meu",
+  "mesPieces": "Camerele mele.",
+  "rechargerLesOffresDuStore": "Reîncarcă ofertele magazinului",
+  "gererMesAbonnements": "Gestionați abonamentele mele",
+  "badges": "Insigne",
+  "partiesJouees": "Meciuri jucate",
+  "xpTotalSession": "Total XP sesiune",
+  "moyennePartie": "Medie / Meci",
+  "detailParJeuPerformanceXp": "Detalii pe joc și performanță XP",
+  "jouezVosPremieresPartiesPour": "Joacă primele tale meciuri pentru a-ți vedea statisticile XP aici!",
+  "xpAuCompteur": "{psxp} XP acumulat",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Încă {xpRemaining} XP până la Nivelul {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} jucate • {won} victorii • ~{gameXp} XP câștigați {played1s} {won1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Eroare la încărcarea datelor utilizatorului.",
+  "vousDevezAccepterLesCgu": "Pentru a crea un cont trebuie să acceptați UPC și Politica de confidențialitate.",
+  "miseAJourDisponible": "Actualizare disponibilă",
+  "plusTard": "Mai târziu",
+  "mettreAJour": "Actualizează",
+  "uneNouvelleVersionDePlayfun1": "O nouă versiune ({newVersion}) de Playfun este disponibilă cu noutăți și remedieri!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Întreținerea în curs",
+  "mettreAJourMaintenant": "Actualizează acum",
+  "motifDuSignalement": "Motivul raportării:",
+  "tricheOuAntiJeu": "Trișat sau joc murdar",
+  "autre": "Altele",
+  "signaler": "Raportează",
+  "detailParJeu": "Detalii pe joc:",
+  "ceJoueurNAPas2": "Acest jucător nu are încă jocuri înregistrate.",
+  "badgesDebloques": "Insigne deblocate: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Jucători blocați ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "Deblochează {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Raportează sau blochează {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "vot"
 }

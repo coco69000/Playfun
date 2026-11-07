@@ -202,8 +202,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             color: Colors.greenAccent,
                             size: 18,
                           ),
-                          label: const Text(
-                            "Gérer mon abonnement",
+                          label: Text(
+                            AppLocalizations.of(context)!.gererMonAbonnement,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -299,8 +299,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Mes Pièces",
+                              Text(
+                                AppLocalizations.of(context)!.mesPieces,
                                 style: TextStyle(
                                   color: Colors.white70,
                                   fontSize: 12,
@@ -409,8 +409,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           color: Colors.amberAccent,
                           size: 18,
                         ),
-                        label: const Text(
-                          "Recharger les offres du Store",
+                        label: Text(
+                          AppLocalizations.of(context)!.rechargerLesOffresDuStore,
                           style: TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 13,
@@ -590,8 +590,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               : 'https://play.google.com/store/account/subscriptions';
                           LegalLinks.openUrl(context, subUrl);
                         },
-                        child: const Text(
-                          "Gérer mes abonnements",
+                        child: Text(
+                          AppLocalizations.of(context)!.gererMesAbonnements,
                           style: TextStyle(
                             color: Colors.white38,
                             fontSize: 11,

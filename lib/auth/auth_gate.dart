@@ -7,6 +7,7 @@ import '../player_state.dart' as ps;
 import 'login_screen.dart';
 import '../main.dart';
 import '../services/force_update_service.dart';
+import '../l10n/app_localizations.dart';
 
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key});
@@ -49,7 +50,7 @@ class _AuthGateState extends State<AuthGate> {
             }
             if (playerStateSnapshot.hasError) {
               return Scaffold(
-                body: Center(child: Text(GameContentLocalization.ui(context, "Erreur de chargement des données utilisateur."))),
+                body: Center(child: Text(AppLocalizations.of(context)!.erreurDeChargementDesDonnees)),
               );
             }
 

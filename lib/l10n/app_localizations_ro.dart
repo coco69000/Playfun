@@ -97,8 +97,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get utiliser => 'UTILIZEAZĂ';
 
   @override
-  String get packActiveElements =>
-      '✨ Pachetul \'\'{0}\' activat ({1} obiecte)!';
+  String get packActiveElements => '✨ Pachetul {0} activat ({1} obiecte)!';
 
   @override
   String get fusionner => 'COMBINĂ';
@@ -153,7 +152,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get melangerPlusieursThemes => 'Amestecă mai multe teme:';
 
   @override
-  String get combineS => '✨ {0 combinate}';
+  String get combineS => '✨ \'(0 combinate)\'';
 
   @override
   String get nombreDElements => 'Număr de elemente:';
@@ -766,7 +765,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get classementFinal => 'Clasament final:';
 
   @override
-  String get points => '{0}. {1}: {2.} puncte';
+  String get points => '{0}. {1}: \'(2.)\' puncte';
 
   @override
   String get retourALAccueil => 'Înapoi la meniu';
@@ -831,7 +830,7 @@ class AppLocalizationsRo extends AppLocalizations {
       'Ai fost exclus pentru inactivitate. Computerul joacă în locul tău (fără recompense).';
 
   @override
-  String get s => '{0} s';
+  String get s => 's {0}';
 
   @override
   String pts1(Object pName, Object pScore) {
@@ -840,17 +839,17 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String xp(Object pXp) {
-    return '$pXp XP';
+    return '0 XP $pXp';
   }
 
   @override
   String get nAPlusDeCartes => 'Nu mai are cărți';
 
   @override
-  String get cartesRestantes => '{0.} cărți rămase';
+  String get cartesRestantes => '\'(0.)\' cărți rămase';
 
   @override
-  String get jetonsMise => 'Jetoane: {\$0,} | Miză: {\$1,}';
+  String get jetonsMise => 'Jetoane: \'(\$0,)\' | Miză: \'(\$1,)\'';
 
   @override
   String get totalPts => 'Total: {0} puncte';
@@ -969,7 +968,8 @@ class AppLocalizationsRo extends AppLocalizations {
   String get mainDeCartes => 'Mâna de {0} ({1} cărți)';
 
   @override
-  String get votreMainDeSurvieCartes => 'MÂNA TA DE SUPRAVIEȚUIRE ({0.} cărți)';
+  String get votreMainDeSurvieCartes =>
+      'MÂNA TA DE SUPRAVIEȚUIRE (\'(0.)\' cărți)';
 
   @override
   String get lesPairesSontDefausseesAutomatiquement =>
@@ -1012,7 +1012,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get equipeAPts => 'Echipa A: {pts} puncte';
 
   @override
-  String get equipeBPts => 'Echipa B: {pacienți} pacienți {pts}';
+  String get equipeBPts => 'Echipa B: \'(pacienți)\' pacienți {pts}';
 
   @override
   String get cEstAToiDe => 'E rândul TĂU să ghicești!';
@@ -1030,7 +1030,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get plierPasser => 'ÎMPĂTUREȘTE ȘI TRIMITE';
 
   @override
-  String get motsRediges => '✏️ {0.} cuvinte scrise...';
+  String get motsRediges => '✏️ \'(0.)\' cuvinte scrise...';
 
   @override
   String get leGrandDepliage => 'Marea Desfășurare!';
@@ -1045,12 +1045,12 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String km(Object oppDist) {
-    return '$oppDist km';
+    return '0 km $oppDist';
   }
 
   @override
   String km1(Object myDistance, Object targetDist) {
-    return '$myDistance / $targetDist km';
+    return '1 / 1 $myDistance $targetDist';
   }
 
   @override
@@ -1100,7 +1100,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get couche => 'Renunțat';
 
   @override
-  String get miseActuelle => 'Pariul actual: {sumă} {amount}';
+  String get miseActuelle => 'Pariul actual: \'(sumă)\' {amount}';
 
   @override
   String get enAttente => 'În așteptare...';
@@ -1266,11 +1266,10 @@ class AppLocalizationsRo extends AppLocalizations {
       'Punctele au fost acordate pe baza voturilor voastre.';
 
   @override
-  String get leMotDesCivilsEtait => 'Cuvântul civililor a fost: \'\'{0}\'';
+  String get leMotDesCivilsEtait => 'Cuvântul civililor a fost: {0}';
 
   @override
-  String get leMotDeLInfiltre =>
-      'Cuvântul Infiltratorului ({0}) a fost: \'\'{1}\'';
+  String get leMotDeLInfiltre => 'Cuvântul Infiltratorului ({0}) a fost: {1}';
 
   @override
   String get mrWhiteNAvaitPas => 'Domnul White ({0}) nu avea cuvinte.';
@@ -1287,7 +1286,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get saReponseEtait => 'Răspunsul său a fost: \"{0}\".';
 
   @override
-  String get leMotEtait => 'Cuvântul era: \'\'{0}\'.';
+  String get leMotEtait => 'Cuvântul era: {0}.';
 
   @override
   String get cartesRevelees => 'Cărți dezvăluite:';
@@ -1296,7 +1295,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get erreurDeChargementDuMeme => 'Eroare la încărcarea memei.';
 
   @override
-  String get scoreActuelDeCartes => 'Scor actual de {0}: {1.} cărți.';
+  String get scoreActuelDeCartes => 'Scor actual de {0}: \'(1.)\' cărți.';
 
   @override
   String get finDuTour1 => 'Sfârșitul rândului';
@@ -1483,7 +1482,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get scorePoints => 'Scor: {score} puncte';
 
   @override
-  String get dominosRestants => 'Piese de domino rămase: {numără} {count}';
+  String get dominosRestants => 'Piese de domino rămase: \'(numără)\' {count}';
 
   @override
   String get impossibleDeJouerCeDomino => 'Nu poți juca această piesă aici.';
@@ -1498,7 +1497,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get extremites => 'Capete: ';
 
   @override
-  String get pioche2 => 'Remiză: {Numărătoare} {count}';
+  String get pioche2 => 'Remiză: \'(Numărătoare)\' {count}';
 
   @override
   String get piocher => 'Trage';
@@ -1515,7 +1514,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get clic => 'CLICK';
 
   @override
-  String get lancersRestants => 'Aruncări rămase: {numără} {count}';
+  String get lancersRestants => 'Aruncări rămase: \'(numără)\' {count}';
 
   @override
   String get combinaison => 'COMBINAȚIE';
@@ -1555,7 +1554,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get carteAPrendre => 'CARTE DE LUAT';
 
   @override
-  String get votreMain => 'Mâna ta ({numără}) {count}';
+  String get votreMain => 'Mâna ta (\'(numără)\') {count}';
 
   @override
   String get touchezUneCartePourLa => 'Apasă o carte pentru a o juca';
@@ -1564,7 +1563,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get aucuneCombinaisonEtaleeSurLa => 'Nicio combinație pe masă încă';
 
   @override
-  String get etaler => 'Răspândire (număr{}) {count}';
+  String get etaler => 'Răspândire (număr\'()\') {count}';
 
   @override
   String get defausserFin => 'Decartează și termină';
@@ -1628,11 +1627,11 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get ilFautAuMoinsJoueurs =>
-      'Ai nevoie de cel puțin {0.} jucători pentru acest mod!';
+      'Ai nevoie de cel puțin \'(0.)\' jucători pentru acest mod!';
 
   @override
   String get ceModeSupporteAuMaximum =>
-      'Acest mod suportă maximum {0.} jucători!';
+      'Acest mod suportă maximum \'(0.)\' jucători!';
 
   @override
   String get parametresActionOuVerite1 => 'Setări: Adevăr sau Provocare';
@@ -1654,7 +1653,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get defisIaGeneres => '✨ {0} provocări AI generate!';
 
   @override
-  String get defisPrets => '✅ {0 provocări} pregătite!';
+  String get defisPrets => '✅ \'(0 provocări)\' pregătite!';
 
   @override
   String get commencerLaPartie => 'ÎNCEPE JOCUL';
@@ -1679,7 +1678,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get action => 'Provocare';
 
   @override
-  String get pts9 => '{0} : {1.} puncte';
+  String get pts9 => '{0} : \'(1.)\' puncte';
 
   @override
   String get parametresLeDilemme => 'Setări: Dilema';
@@ -1761,7 +1760,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get questionsIaGenerees => '✨ {0} întrebări generate de AI!';
 
   @override
-  String get questionsPretes => '✅ {0 întrebări} pregătite';
+  String get questionsPretes => '✅ \'(0 întrebări)\' pregătite';
 
   @override
   String get lancerLaPiece => 'ARUNCĂ MONEDA';
@@ -2160,7 +2159,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get lEquipeAGagne => 'Echipa {0} câștigat!';
 
   @override
-  String get points1 => '{0.} puncte';
+  String get points1 => '\'(0.)\' puncte';
 
   @override
   String get passeLObjet => 'Pasează Obiectul';
@@ -2176,7 +2175,7 @@ class AppLocalizationsRo extends AppLocalizations {
       'ex: Cultură generală, Provocări amuzante, Prieteni...';
 
   @override
-  String get questionsIaPretes => '✨ {0 întrebări} AI pregătite!';
+  String get questionsIaPretes => '✨ \'(0 întrebări)\' AI pregătite!';
 
   @override
   String get designerUnJoueurAleatoireA =>
@@ -2262,7 +2261,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String s1(Object secondsLeft) {
-    return '⏱️ $secondsLeft s';
+    return '0 s $secondsLeft';
   }
 
   @override
@@ -2278,7 +2277,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get resultatsDuPassage => 'Rezultatele rundei';
 
   @override
-  String get pointsMarques => '+{0.} puncte marcate!';
+  String get pointsMarques => '+\'(0.)\' puncte marcate!';
 
   @override
   String get touchezUnMotPourModifier =>
@@ -2313,7 +2312,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get k8Standard => '8 (Standard)';
 
   @override
-  String get scoreCibleCartes => 'Scor țintă: {0 cărți}';
+  String get scoreCibleCartes => 'Scor țintă: \'(0 cărți)\'';
 
   @override
   String get commencer2 => 'ÎNCEPE';
@@ -2333,7 +2332,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get victoireDe => 'Victoria {0} !';
 
   @override
-  String get cartes => '{0.} cărți';
+  String get cartes => '\'(0.)\' cărți';
 
   @override
   String get ecrireUnMessage => 'Scrie un mesaj...';
@@ -2415,7 +2414,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get jouer1 => 'Joacă';
 
   @override
-  String get joueurSEnJeu => '{0.} jucător(i) în joc';
+  String get joueurSEnJeu => '\'(0.)\' jucător(i) în joc';
 
   @override
   String get cloturerLaPartie => 'Închide jocul';
@@ -2453,7 +2452,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get aCreeUnePartieDe => '{0} creat un joc de {1} !';
 
   @override
-  String get joueurSPrets => '{0.} jucători gata';
+  String get joueurSPrets => '\'(0.)\' jucători gata';
 
   @override
   String get cettePartieEstTermineeOu => 'Acest joc este finalizat sau anulat.';
@@ -2468,7 +2467,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get statistiques => 'Statistici - {0}';
 
   @override
-  String get vainqueur1 => 'Câștigător: {0}\'{1}\n';
+  String get vainqueur1 => 'Câștigător: {0}\'{1}\'\'\'\n';
 
   @override
   String get voirLesStats => 'Vezi statisticile';
@@ -2563,7 +2562,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get estCeQueAReleve => 'A răspuns {0} provocării?';
 
   @override
-  String get votesRecus => '{0} / {1.} voturi primite';
+  String get votesRecus => '{0} / \'(1.)\' voturi primite';
 
   @override
   String get vosAmisVotentPourEvaluer =>
@@ -3357,10 +3356,6 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get aRelanceLesDes3 =>
-      '{pName} aruncat din nou zarurile ({3rollsLeft1}/3)!';
-
-  @override
   String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName a păstrat zarul cu valoarea $dieVal (zarul #$index1) 🔒';
   }
@@ -3410,10 +3405,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get pioche3 => 'Târnăcop';
 
   @override
-  String get wordcivilParts0TrimWordundercover =>
-      '); \r\n      cuvânt Civil = părți[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'}\' altceva \'\'{\' \r\n      Securitate anti-duplicată: dacă';
-
-  @override
   String get vousNAvezPasDe => 'Nu ai cuvinte';
 
   @override
@@ -3454,10 +3445,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur are cel mai mult XP ($maxXp XP) și devine Admin!';
   }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Sfârșitul mânecii (butonul de administrare)\r\n  Future<void> aoVEndRound (String gameCode, String playerId) async \'\'{\' \r\n    așteaptă _db.runTransaction((transaction) async\'\'{\' \r\n      gameRef final = _db.collection(\'games\').doc(gameCode); \r\n      snap final = await transaction.get(gameRef); \r\n      dacă (!snap.exists) revin; \r\n\r\n      final gameData = snap.data() ca Map<String, dinamic>; \r\n      jucători finali = Hartă<String, dinamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Determină câștigătorul (mai mult XP)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        final xp = (pData[\'xp\'] ca num?)?. toInt() ?? 0; \r\n        dacă (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Cineva';
@@ -3512,18 +3499,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get leJoueur => 'Jucătorul';
 
   @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\' \r\n      Listă<String> întrebări =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostProbabil[dificultate]?? \r\n          GameWords.whoIsMostProbabil[';
-
-  @override
   String get honnete => 'Sincer';
 
   @override
-  String get pairSplit => ') ? pair.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      '): [egal, egal]; \r\n\r\n        Listă<String> amestecatRoluri = List.din(playerOrder).. amestecat(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = roluriAmestecate[1]; \r\n\r\n        Întrebare =\r\n            \"Descrie-ți cuvântul secret într-un singur cuvânt. Impostori, bluf!\"; \r\n        pentru (var pId în players.keys) \'\'{\' \r\n          Șir pRol =\r\n              (pId == secUndercoverId)\r\n                  ? ';
+  String get pairSplit => '? par.split(';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3543,20 +3522,8 @@ class AppLocalizationsRo extends AppLocalizations {
   String get passeLEnchere => 'pasează licitația';
 
   @override
-  String get elseIfGametype =>
-      ') \'\'{\' \r\n        dacă (voterID == votedForId) \'\'{\' \r\n          aruncă excepția (\"Interdicție formală de a vota pentru sine!\"); \r\n        \'\'}\'\'}\' altceva dacă (gameType ==\r\n      ';
-
-  @override
   String get intRequiredvotesPlayersLengthIf =>
-      ') { \r\n        creditPlayerXp( \r\n          tranzacție, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: adevărat, \r\n        ); \r\n      } \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\' \r\n          final Hart<String, int> voteCounts = {}; \r\n          pentru (țintă finală în votes.values) { \r\n            voteCounts[țintă ca String] = (voteCounts[țintă] ?? 0) + 1; \r\n          } \r\n\r\n          int maxVoturi = 0; \r\n          Listă<String> topVoted = []; \r\n          voteCounts.forEcare((țintă, numără) \'\'{\' \r\n            dacă (numără > maxVotes) { \r\n              maxVotes = numărătoare; \r\n              Votat cel mai mult = [țintă]; \r\n            } altceva dacă (numără == maxVotes) { \r\n              topVoted.add(țintă); \r\n            }\'\'}\'); \r\n\r\n          Actualizări[\r\n          ';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\' \r\n        final Hart<String, int> voteCounts = {}; \r\n        pentru (țintă finală în votes.values) { \r\n          voteCounts[țintă ca String] = (voteCounts[țintă] ?? 0) + 1; \r\n        } \r\n\r\n        int maxVoturi = 0; \r\n        Listă<String> topVoted = []; \r\n        voteCounts.forEcare((țintă, numără) \'\'{\' \r\n          dacă (numără > maxVotes) { \r\n            maxVotes = numărătoare; \r\n            Votat cel mai mult = [țintă]; \r\n          } altceva dacă (numără == maxVotes) { \r\n            topVoted.add(țintă); \r\n          }\'\'}\'); \r\n\r\n        if (topVoted.length == 1) \'\'{\' \r\n          câștigător final = cel mai votat.primul; \r\n          Actualizări[\r\n        ';
+      ') \'( \r\n        creditPlayerXp( \r\n          tranzacție, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: adevărat, \r\n        ); \r\n      )\' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ';
 
   @override
   String aRemporteTousLesJetons(Object winnerName) {
@@ -3761,7 +3728,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String str8f522b(Object cat, Object hasScorescoreVal) {
-    return '$cat: $hasScorescoreVal';
+    return '0: 1 $cat $hasScorescoreVal';
   }
 
   @override
@@ -3874,7 +3841,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String str1e0607(Object authorName) {
-    return '$authorName : ';
+    return '0 : $authorName';
   }
 
   @override
@@ -3937,7 +3904,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String str422faa(Object valuename, Object valuescore0) {
-    return '$valuename: $valuescore0 🃏';
+    return '0: 1 $valuename $valuescore0';
   }
 
   @override
@@ -3950,7 +3917,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String str95d36e(Object valuename, Object key0) {
-    return '$valuename: $key0';
+    return '0: 1 $valuename $key0';
   }
 
   @override
@@ -4014,7 +3981,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get leChallenger => 'Provocatorul';
 
   @override
-  String get stre93cb0 => '{0} : {1}';
+  String get stre93cb0 => ':{0} {1}';
 
   @override
   String get uneDescriptionHilarante => 'o descriere hilară';
@@ -4032,7 +3999,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String str98e212(Object pName, Object count, Object length, Object isFull) {
-    return '$pName: $count/$length$isFull';
+    return '1 / 2 $pName $count $length $isFull';
   }
 
   @override
@@ -4072,16 +4039,12 @@ class AppLocalizationsRo extends AppLocalizations {
     Object score,
     Object totalScore,
   ) {
-    return '$carte $deckIndex / $deckTotal — $score : $totalScore';
+    return '1 / 2 $carte $deckIndex $deckTotal $score $totalScore';
   }
 
   @override
-  String get styleConstTextstyleColorColors =>
-      ', \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (înălțime: 20), \r\n                Wrap( \r\n                  aliniament: WrapAlignment.center, \r\n                  Copii: \r\n                      justOneFilteredClues\r\n                          .map((indiciu) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (înălțime: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text( \r\n                    AppLocalizations.of(context)!. toateIndiciiAu fost, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' altceva \'\'{\' \r\n          Depinde de prezicător să joace\r\n          return Column( \r\n            copii: [ \r\n              Text(                ';
-
-  @override
   String strf0868c(Object length0, Object valuescore0) {
-    return '$length0: $valuescore0';
+    return '0: 1 $length0 $valuescore0';
   }
 
   @override
@@ -4109,16 +4072,8 @@ class AppLocalizationsRo extends AppLocalizations {
   String get laVictime => 'Victima';
 
   @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      '; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              copii: [ \r\n                _buildActionButton( \r\n                  etichetă: AppLocalizations.of(context)!. infectează, \r\n                  Iconă: Icons.auto_fix_high, \r\n                  culoare: Colors.purpleAccent, \r\n                  onPressed: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      Context, \r\n                      Ascultă: fals, \r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Adevărat, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                const SizedBox(lățime: 8), \r\n                _buildActionButton( \r\n                  etichetă: AppLocalizations.of(context)!. devorează, \r\n                  iconă: Icons.close, \r\n                  culoare: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        fals, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          break; \r\n        Cutia \'loup_blanc_turn\': \r\n          promptText = ';
-
-  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Nicio victimă aseară (protejați sau cruțați)';
-
-  @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ', \r\n                              stil: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Culoare: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'lup\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: mesaj), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Bară de trimitere compactă\r\n          if (canSendMessage)\r\n            Row( \r\n              copii: [ \r\n                Extins( \r\n                  copil: SizedBox( \r\n                    înălțime: 32, \r\n                    copil: TextField( \r\n                      Controlor: _chatController, \r\n                      stil: const TextStyle(fontSize: 12, culoare: Colors.white), \r\n                      decorațiune: InputDecoration( \r\n                        IndiciuText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          culoare: Colors.white30, \r\n                          fontDimensiune: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Umplut: Adevărat, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          orizontală: 10, \r\n                          vertical: 0, \r\n                        ), \r\n                      ), \r\n                      onTrimis: (text) \'\'{\' \r\n                        dacă (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(lățime: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    mărime: 18, \r\n                    culoare: Colors.cyanAccent, \r\n                  ), \r\n                  umplutură: EdgeInsets.zero, \r\n                  constrângeri: const BoxConstraints(), \r\n                  onPressed: () \'\'{\' \r\n                    if (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(Etichetă șir, tip șir, culoare activăColor) { \r\n    bool final isSelected = _selectedChatType == tip; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = tip), \r\n      copil: Container( \r\n        padding: const EdgeInsets.symmetric (orizontal: 8, vertical: 3), \r\n        decorațiune: BoxDecoration( \r\n          Culoare: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Culoare: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        copil: Text( \r\n          label, \r\n          stil: TextStyle( \r\n            fontDimensiune: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- AVATAR ACTUALIZAT PENTRU A-L FACE INTERACTIV--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder permite un cronometru vizual extrem de fluid fără a bloca timer-ul și setState-ul manual, ceea ce ușurează mult firul (Punctul 4)\r\n    final endTimeTime = startTime.toDate().add( \r\n      Durată(secunde: durațieÎnSecunde), \r\n    ); \r\n    final rămas = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stil: Theme.of( \r\n          Context, \r\n        ).textTema.titlulMic?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Durată>( \r\n      Durată: rămasă, \r\n      tween: Tween(început: rămas, sfârșit: Durată.zero), \r\n      constructor: (BuildContext context, valoare Durată, Widget? copil) { \r\n        secunde finale = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(context)!. timpRămas, \r\n          stil: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            Color: secunde < 20 ? Colors.redAccent : Colors.AmberAccent, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Contextul BuildContext, \r\n    Hart<String, dinamic> gameData, \r\n    Instrumentist de coarde, \r\n  ) \'\'{\' \r\n    jucători finali = Hartă<String, dinamic>.from(gameData[\'players\'] ?? {}); \r\n    player final Order = List<String>.from( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    poziții finale = Map<String, dinamic>.from( \r\n      gameData[\'littleHorsesPositions\'?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'; \r\n    bool final isMyTurn = currentPlayerId == playerId; \r\n    final int dice = (gameData[\'littleHorsesDice\'] ca num?)?. toInt() ?? 0; \r\n    bool final hasAruncat = gameData[\'littleHorsesHasRolled\'] ?? false; \r\n    bool final isTeamMode = gameData[\'smallTeamHorses\'] ?? false; \r\n    final Hart<String, dinamică> consecutivă Șasese = Hartă<String, dinamică>.dină( \r\n      gameData[\'smallHorsesConsecutiveSixes\'] ?? {}, \r\n    ); \r\n    final int mySixStreak = consecutiveSixes[playerId] ?? 0; \r\n\r\n    Paletă neon modernă / arcade pe fundal întunecat\r\n    final Listă<Culoare> jucătorCulori = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon cer albastru\r\n      const Color(0xFF10B981), // Verde smarald\r\n      const Color(0xFFF59E0B), // Chihlimbar auriu\r\n    ]; \r\n\r\n    --- ECRAN DE VICTORIE--- \r\n    dacă (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      returnează UniversalGameEndScreen( \r\n        Titlul jocului:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Sosire în centrul tablei!';
@@ -4155,12 +4110,12 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String k1663(Object oppUpper, Object oppBonus035) {
-    return '1-6: $oppUpper/63 $oppBonus035';
+    return '1 / 63 $oppUpper $oppBonus035';
   }
 
   @override
   String k16631(Object myUpper, Object myBonus035) {
-    return '1-6: $myUpper/63 $myBonus035';
+    return '1 / 63 $myUpper $myBonus035';
   }
 
   @override
@@ -4247,10 +4202,6 @@ class AppLocalizationsRo extends AppLocalizations {
       'AI CÂȘTIGAT! Secretul tău este în siguranță.';
 
   @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      '); \r\n      _wordCivil = părți[0].trim(); \r\n      _wordUndercover = părți[1].trim(); \r\n    \'\'}\' altceva \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < cuvintePairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (Variantă)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    pentru (jucător VAR în _activePlayers) \'\'{\' \r\n      dacă (jucător == sub acoperire) \'\'{\' \r\n        _playerRoles[jucător] = \"Infiltrator\"; \r\n      \'\'}\' altceva dacă (jucător == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[jucător] = \"Domnul Alb\"; \r\n      \'\'}\' altceva \'\'{\' \r\n        _playerRoles[jucător] = \"Civil\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revelator; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  void _nextPlayerReveal() \'\'{\' \r\n    dacă (_currentPlayerRevealIndex < _activePlayers.lungime - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } altceva { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(Instrumentist de coarde) \'\'{\' \r\n    Rolul șirului = _playerRoles[jucător]!; \r\n    bool impostorsWin = rol == \"Civil\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      dacă (impostorsWin) \'\'{\' \r\n        _resultMessage = \"{player} era civil! Impostorii câștigă!\"; \r\n      \'\'}\' mai \'\'{\' \r\n        _resultMessage = \"{player} era\r\n    \r\n  ';
-
-  @override
   String get requiert4Joueurs => 'Necesită 4+ jucători';
 
   @override
@@ -4294,7 +4245,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String stre786cb(Object sender) {
-    return '$sender : ';
+    return '0 : $sender';
   }
 
   @override
@@ -4416,7 +4367,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get nombreDeJoueursRecherches =>
-      'Numărul de jucători percheziţionaţi: {\'0\'\'}';
+      'Numărul de jucători percheziţionaţi: \'(\'\'0\'\')\'';
 
   @override
   String get laBeloteRequiertExactement4 =>
@@ -4459,7 +4410,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get auMoins2JoueursRequis => 'Cel puțin 2 jucători necesari.';
 
   @override
-  String get jeu => 'Joc: \' \'0\'';
+  String get jeu => 'Joc: \' \'0\')';
 
   @override
   String get ami => 'Prieten';
@@ -4510,7 +4461,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get six => 'Șesari';
 
   @override
-  String get sectionSup => 'Sectiunea Sup: \"{\"0\"}\"';
+  String get sectionSup => 'Sectiunea Sup: \"\'(\'\"0\"\')\'\"';
 
   @override
   String k63Pts(Object oppUpper, Object value) {
@@ -4544,7 +4495,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get moi => 'Eu';
 
   @override
-  String get manche1 => 'Canalul \"{\'0\'\'} \" / \" {\'1\'\'} \"';
+  String get manche1 => 'Canalul \"\'(\'\'0\'\')\' \" / \" \'(\'\'1\'\')\' \"';
 
   @override
   String get voisin => 'Vecinătate';
@@ -4602,7 +4553,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get roueDeSecours => 'Roata de\nAjutor';
 
   @override
-  String get radarCaseCiblee => 'Cazul \"{\"0\"}\" vizat!';
+  String get radarCaseCiblee => 'Cazul \"\'(\'\"0\"\')\'\" vizat!';
 
   @override
   String get ys => 'ð';
@@ -4675,7 +4626,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get faux1 => 'Fals';
 
   @override
-  String get tuAsVote => 'Ai votat: \"{\"0\"}';
+  String get tuAsVote => 'Ai votat: \"\'(\'\"0\"\')\'';
 
   @override
   String get aEteChoisiPourSa =>
@@ -4762,11 +4713,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get leTourEstTermine1 => 'Tura s-a încheiat.';
 
   @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName won with its description:AppLocalizations.of(context)!. extrainfoColumnChildText 99999 $winningDescription';
-  }
-
-  @override
   String get personneNAGagneCe =>
       'Nimeni nu a câștigat această rundă. Egalitate sau nicio descriere.';
 
@@ -4814,19 +4760,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get score => 'Scor';
 
   @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object value,
-    Object guesserName,
-    Object value2,
-    Object deckIndex,
-    Object deckTotal,
-    Object value3,
-    Object totalScore,
-  ) {
-    return '$value $guesserName :AppLocalizations.of (context)! .styleConstTextstyleColors $value2 $deckIndex / $deckTotal $value3 $totalScore';
-  }
-
-  @override
   String get laNuitTombeSurLe => 'Noaptea cade în sat...\n\nÎnchide ochii.';
 
   @override
@@ -4849,7 +4782,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get loup => 'Lup';
 
   @override
-  String get validerLeCouple2 => 'Cuplul valid ({\"0\"}\"/2)';
+  String get validerLeCouple2 => 'Cuplul valid (\'(\'\"0\"\')\'\"/2)';
 
   @override
   String get lHeritierChoisitSonTestament =>
@@ -4878,7 +4811,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get contaminezJusquA2Joueurs => 'Infectează până la 2 jucători';
 
   @override
-  String get contaminer => 'Contaminat ({\'0\'\'})';
+  String get contaminer => 'Contaminat (\'(\'\'0\'\')\')';
 
   @override
   String get lesLoupsChassentEnMeute => 'Lupii vânează în haită';
@@ -4891,14 +4824,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get leLoupNoirDecideDu => 'Lupul Negru decide soarta prăzii';
-
-  @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Infectează $targetName ?AppLocalizări.of(context)!.centeractionwidgetRowMainaxissizeMainaxisizareMinLupul alb loveşte solo';
-  }
 
   @override
   String get choisissezUneVictimeADevorer => 'Alege o victimă de devorat';
@@ -4959,14 +4884,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get amoureux => 'Îndrăgostiți';
 
   @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName : AppLocalizations.of (context)!.styleTextstyleFontweightFontweightBoldSmall Horses';
-  }
-
-  @override
   String get courseIndividuelle => 'Cursă individuală';
 
   @override
@@ -4980,7 +4897,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get gardeS => '\"{\"0\"}\" păstrat';
+  String get gardeS => '\"\'(\'\"0\"\')\'\" păstrat';
 
   @override
   String get cur => '♥ Inimă Roșie';
@@ -5048,7 +4965,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get genereDesDilemmesAuFormat =>
-      'Generează dileme în format \"OptionA sau OptionB.\" Tema: \"{\"0\"}\"';
+      'Generează dileme în format \"OptionA sau OptionB.\" Tema: \"\'(\'\"0\"\')\'\"';
 
   @override
   String get jePasse => 'Pas';
@@ -5100,10 +5017,6 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Cine ar putea mai mult?AppLocalizări.of (context)!.bodyPaddingPaddingConstEdgeinsetssoft';
-
-  @override
   String get votePar => 'Votat de:';
 
   @override
@@ -5132,10 +5045,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get maitreEspionDeLEquipe => 'Maestrul Espion al echipei {0}';
 
   @override
-  String get equipeRouge1 => 'Red Team: \' \'0\'';
+  String get equipeRouge1 => 'Red Team: \' \'0\')';
 
   @override
-  String get equipeBleue1 => 'Echipa Albastră: \"{\'0\'\'} \"';
+  String get equipeBleue1 => 'Echipa Albastră: \"\'(\'\'0\'\')\' \"';
 
   @override
   String get maitreEspion => 'Maestre Espion';
@@ -5147,11 +5060,11 @@ class AppLocalizationsRo extends AppLocalizations {
   String get mime => 'Mimă';
 
   @override
-  String get cEstAuTourDe2 => 'Este rândul \"{\"0\"}\" (\"1\"}\")';
+  String get cEstAuTourDe2 => 'Este rândul \"\'(\'\"0\"\')\'\" (\"1\"\')\'\")';
 
   @override
   String get genereDesQuestionsAmusantesEt =>
-      'Generează întrebări distractive și rapide pentru a pune. Tema: \"{\"0\"}\"';
+      'Generează întrebări distractive și rapide pentru a pune. Tema: \"\'(\'\"0\"\')\'\"';
 
   @override
   String s3(Object minDuration) {
@@ -5167,7 +5080,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get fin1 => 'SFÂRSIT';
 
   @override
-  String get trouves => 'Găsit: \"{\"0\"}\"';
+  String get trouves => 'Găsit: \"\'(\'\"0\"\')\'\"';
 
   @override
   String get ecurie1 => 'Grajd 1';
@@ -5193,10 +5106,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get jeu1 => 'Joc';
 
   @override
-  String get partieDeEnAttente => 'O parte din \"{\'0\'\'} \" în curs';
+  String get partieDeEnAttente => 'O parte din \"\'(\'\'0\'\')\' \" în curs';
 
   @override
-  String get termine => 'Terminat: {\'0\'\'}';
+  String get termine => 'Terminat: \'(\'\'0\'\')\'';
 
   @override
   String get vainqueur2 => 'Câştigător:';
@@ -5234,7 +5147,8 @@ class AppLocalizationsRo extends AppLocalizations {
   String get survie => 'Supraviețuire';
 
   @override
-  String get redigezLPour => 'Scrie \"{\"0\"}\" pentru \"{\"1\"}\"';
+  String get redigezLPour =>
+      'Scrie \"\'(\'\"0\"\')\'\" pentru \"\'(\'\"1\"\')\'\"';
 
   @override
   String get rejouerGarderPts => 'REJOACĂ (PĂSTREAZĂ PCT)';
@@ -5340,10 +5254,6 @@ class AppLocalizationsRo extends AppLocalizations {
       '** Obiectiv **\nNu ai dispozitivul în mâini când explodează cartoful!\n\n** Draft **\n1. O temă apare pe ecran.\n2. Jucătorul care deţine dispozitivul trebuie să dea un răspuns corespunzător temei.\n3. Imediat ce a răspuns, a trecut repede avionul aproapelui său.\n4. Vecinul trebuie la rândul său să găsească un răspuns nou şi să treacă dispozitivul.\n5. Timpul este ascuns și aleator: cartoful poate exploda în orice moment!\n6. Jucătorul care deține dispozitivul la momentul exploziei pierde mânerul și primește un gaj.';
 
   @override
-  String get principeGeneralGribouillisEstUn =>
-      '**Principiu general**\nGribouillis este un joc de desen inspirat de \"Telefonul Arab,\" unde ideile se schimbă în fiecare etapă. Există 3 moduri de joc:\n\n**1. Mod normal (Arabic Illustrated Phone)\nFiecare jucător scrie o propoziţie.\nFiecare jucător primeşte o altă propoziţie şi o desenează.\n- ** Devinette**: Fiecare jucător primește un desen și ghicește ce reprezintă.\n- ** Alternative**: Jocul alternează desenul și ghici până când fiecare \"album\" a mers în jurul valorii de toți jucătorii.\n- ** Dar**: Distrează-te văzând cum o propoziţie simplă se transformă în ceva complet diferit!\n\n**2. Mod de completare (Desen de colaborare) **\nFiecare jucător începe un desen simplu.\n- ** Complete**: Fiecare jucător primește desenul altuia și trebuie să-l îmbogățească, fără a șterge ceea ce există deja.\n- ** Alternaţie**: Desenul trece de la jucător la jucător, fiecare adăugând atingerea sa.\n- **Parameter \"Adauga 1\"**:\n- * Dacă este dezactivat (default) *: E o sfoară. Desenul evoluează în fiecare etapă (Player A -> Player B -> Player C...).\n- * Dacă activat *: Desenul inițial al fiecărui jucător este completat de toți ceilalți jucători, creând mai multe lucrări colective în paralel.\n- ** Dar**: Creați lucrări colective surprinzătoare și distractive de artă.\n\nModul Brise-Glace ( Interacţiune Creativă)\n- ** Scriind**: Fiecare jucător scrie o temă personală (ex: AppLocalizări.of(context)!.myPreference).\n- **Drawing**: Fiecare jucător primește temele de la **toți ceilalți jucători** și trebuie să le deseneze.\n- **But**: Ideal pentru a sparge gheața, descoperi gusturile altora și pentru a lansa creativitatea într-un mod colaborativ și ușor.';
-
-  @override
   String get yzObjectifAvoirLeMoins =>
       'Obiectiv\n\nAu cât mai puţine puncte posibil la sfârşitul jocului.\nJocul se oprește atunci când un jucător atinge 100 de puncte sau mai mult, iar câștigătorul este cel cu cel mai mic scor total.\n\nEchipament\n\n150 de cărți numerotate de la 2 la +12\n\nPunerea în aplicare\n\nAmestecă toate cărţile.\nFiecare jucător primește 12 cărți, plasate cu fața în jos în fața lui, în 4 coloane × 3 rânduri.\nCelelalte cărţi formează un stoc. Returnează prima carte pentru a forma deşeurile.\nFiecare jucător întoarce 2 cărți de alegerea sa de la 12.\n\nCursul unui tur\n\nLa rândul tău, ai 30 de secunde să alegi între două acţiuni:\n\n1. Ia cardul de deșeuri\nTrebuie să-l schimbați cu una dintre cele 12 cărți (partea vizibilă sau ascunsă).\nCardul înlocuit merge pe deşeuri.\n\n2. Piocher o carte cu fața în jos\nUită-te la hartă:\n- fie îl păstraţi şi înlocuiţi una dintre cărţile dumneavoastră (aşa cum este mai sus),\n- fie îl refuzați → îl plasați direct pe deșeuri, iar în acest caz trebuie să returnați una dintre cărțile voastre încă ascunse.\n\nNorme speciale\n\nTrei cărți identice într-o coloană → sunt imediat învinse (valoarea 0).\n\nSfârşitul mânerului:\n\nMânerul se termină când un jucător îşi dezvăluie toate cărţile.\nToți ceilalți jucători dezvăluie apoi cărțile rămase. Mânerul s-a terminat.\nToţi jucătorii numără suma cărţilor lor.\n\nVă rugăm să rețineți: dacă jucătorul care termină nu are cel mai mic scor din rundă, el ia o penalizare de +10 puncte (scorul său mâner este dublat în versiunea originală, vom folosi +10 pentru a simplifica).\n\nSfârşitul jocului\n\nJucăm câte mâneci avem nevoie.\nOdată ce un jucător ajunge la 100 de puncte sau mai mult, jocul se opreşte.\nJucătorul cu cel mai mic scor cumulativ câştigă.';
 
@@ -5431,10 +5341,6 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get principeDuJeuLeJeu =>
       '## Principiu joc\n* Jocul se joacă între **3 și 10 jucători**.\n* Fiecare jucător oferă acces la o parte din biblioteca sa foto și alege fotografii pentru a partaja.\n* În timpul unui joc, o fotografie este selectată **randomly** din rândul tuturor jucătorilor, apoi afișată pentru câteva secunde.\n* Jucătorii trebuie să ghicească ** care deține fotografia** afișat.\n* Jucătorul care ghicește corect cele mai multe fotografii câștigă jocul.\n\n## Procedura\n1. ** Selecţia fotografiilor**: Fiecare jucător alege un număr de fotografii din galeria lor.\n2. ** Start of the game**: Odată ce toată lumea este gata, gazda lansează jocul.\n3. ** Play Tower**:\n- O fotografie aleatoare este afișată timp de 5 secunde.\n- Toţi jucătorii votează să-l ghicească pe proprietar.\n4. **Rezultate**: Scorurile sunt actualizate după fiecare rundă.\n5. ** Sfârşitul jocului**: După un număr set de runde, jucătorul cu cele mai multe puncte câștigă.';
-
-  @override
-  String get butDuJeuCoulerTous =>
-      '**Game goal**\nBlocat toate navele adversarului înainte de a scufunda a ta.\n\n** Draft **\n1. ** Plasament**: Fiecare jucător pune în secret flota pe o grilă 10x10.\n- Portavioane (5 cutii)\n- Cruiser (4 cutii)\n- Submarin (3 celule)\n- Distrugător (3 cutii)\n- Patrula (2 cutii)\n2. **Tir**: La rândul său, jucătorii ating o cutie pentru a trage.\n3. **Result**: AppLocalizations.of (context)!.touche, \"Couled\" sau \"To Water.\"\n4. **Victoire**: Primul jucător care a scufundat întreaga flotă adversă câștigă.';
 
   @override
   String get butDuJeuEtreLe2 =>
@@ -5592,9 +5498,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get vousDevezJouerUneCarte => 'Trebuie să joci o carte mai mare.';
 
   @override
-  String get aGagne1 => 'A câştigat!';
-
-  @override
   String get ceNEstPasVotre => 'Nu este rândul tău.';
 
   @override
@@ -5628,9 +5531,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get caseDejaCiblee => 'Căsuță deja vizată.';
-
-  @override
-  String get aCouleTouteLaFlotte => 'A scufundat întreaga flotă inamică!';
 
   @override
   String get placementAutomatiqueEffectue => '⏱️ Plasare automată efectuată.';
@@ -5851,11 +5751,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get erreurCritiqueDansJoingame => '--- EROARE CRITICA ÎN JOC ---';
 
   @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ':AppLocalizări.of (context)! .word civilParts0TrimWordundercoverIA întoarce separat cuvinte simple';
-
-  @override
   String get infiltre => 'Infiltrat';
 
   @override
@@ -5975,9 +5870,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Cartea nu a fost găsită.';
-
-  @override
-  String get aGagneLaManche => 'A câştigat runda!';
 
   @override
   String get desDejaLancesPourCe => 'Dice a lansat deja pentru acest tur.';
@@ -6348,10 +6240,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get questionNonTrouvee => 'Întrebare negăsită';
 
   @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Cine ar putea mai mult?AppLocalizări.de(context)!.listă Întrebări stringAiwordpoolGamewordssoft';
-
-  @override
   String get menteur => 'Mincinosule.';
 
   @override
@@ -6380,18 +6268,6 @@ class AppLocalizationsRo extends AppLocalizations {
       'Supralicitarea trebuie să fie mai mare.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      'AppLocalizations.of (context)!.aplayer} este ultimul supravieţuitor şi câştigă Skull!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurA =>
-      '] ??? AppLocalizations.of(context)!.aPlayer} won 2 challenges and won the game!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      'AppLocalizations.of (context)!.aplayer} câștigă Skull!';
-
-  @override
   String get reponseVide => 'Răspuns gol.';
 
   @override
@@ -6415,10 +6291,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Jucătorul vizat nu a fost găsit.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Cine ar putea mai mult?AppLocalizări.de[context]!.elseIfGametipSynonim sau Banni';
-
-  @override
   String get vousNePouvezPasBannir => 'Nu poți bana propriul sinonim!';
 
   @override
@@ -6427,14 +6299,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'Acest jucător nu a trimis un răspuns.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Cine ar putea mai mult?AppLocalizări.of (context)!.intVoturi solicitateJucătoriiLungimeDacă Judecătorul';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Cine ar putea mai mult?AppLocalizări.de[context)!.pentruŢinta finalăInVoteRoundState';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -6450,10 +6314,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get aucuneDescriptionNAEte => 'Nu s-a votat nicio descriere.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Cine ar putea mai mult?AppLocalizări..de[context]!.pentruŢinta finalăÎnVote 1 rundă de WinnerId';
 
   @override
   String get jugeIntrouvable => 'Judecătorul nu a fost găsit.';
@@ -6589,10 +6449,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get piquantInsolite => '🌶️ Picant & Neobișnuit';
 
   @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Cine ar putea mai mult?AppLocalizări.de[context]! . Care ar putea modegroup dvs.';
-
-  @override
   String get devineT => 'Ghiceşte.';
 
   @override
@@ -6606,9 +6462,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get exception => 'Excepție:';
-
-  @override
-  String get debutDeLaConstructionDe => '{}:';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6628,10 +6481,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get attentionLeWidgetNEst => 'Widget a dispărut.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Cine ar putea mai mult?AppLocalizări.of (context)!.defaultFinalRoundwinneridJoc de dateWinnerId';
 
   @override
   String get phaseDePose => 'PHAZA POZIȚIEI';
@@ -6658,7 +6507,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get strfa1b8c => 'Rate!';
 
   @override
-  String get str487ca1 => '{\'Chut! Închide ochii.';
+  String get str487ca1 => '\'(\'\'Chut! Închide ochii.';
 
   @override
   String get leSoleilSeLeve => 'Răsare soarele';
@@ -6697,10 +6546,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get enCours => 'CURRENT: {0}';
-
-  @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"\"}\": GameMessageLocalizare.tr (context, motiv),';
 
   @override
   String get jAiLanceUnePartie2 => 'Am început un joc';
@@ -8009,41 +7854,41 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie3(Object _selectedGame) {
-    return 'J\'ai lancé une partie de $_selectedGame !';
+    return 'Am aruncat o parte din 0! $_selectedGame';
   }
 
   @override
   String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
-    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+    return 'Roluri (0) $selectedRolesCount $playerslength';
   }
 
   @override
   String dessineCettePhrase1(Object stepToProcessconte) {
-    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+    return 'Trageţi această propoziţie:\n\" 0 \" $stepToProcessconte';
   }
 
   @override
   String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
-    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+    return '0 a fost interzis pentru propunerea sa 1! $loserName $loserAnswer';
   }
 
   @override
   String aTrouveLeMot2(Object winnerName, Object currentWord) {
-    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+    return '0 a găsit cuvântul: \" 1 \"! $winnerName $currentWord';
   }
 
   @override
   String personneNATrouveLe1(Object currentWord) {
-    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+    return 'Nimeni nu a găsit cuvântul: \"0.\" $currentWord';
   }
 
   @override
   String aTrouveLeMot3(Object guesserName, Object currentWord) {
-    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+    return '0 a găsit cuvântul: \" 1 \"! $guesserName $currentWord';
   }
 
   @override
-  String get revolution1 => '(Révolution !)';
+  String get revolution1 => '(Revoluție!';
 
   @override
   String tonMotEst2(Object _wordCivil) {
@@ -8060,7 +7905,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
-    return 'J\'ai lancé une partie de $datagameTypeGribou !';
+    return 'Am aruncat o parte din 0! $datagameTypeGribou';
   }
 
   @override
@@ -8078,7 +7923,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get logClueGivingStart => 'Jocul începe! Dă indiciul tău...';
 
   @override
-  String get logBeloteStart => 'La partie de Belote commence !';
+  String get logBeloteStart => 'Începe jocul Belote!';
 
   @override
   String get logBlokusStart => 'Jocul de Blokus începe!';
@@ -8094,12 +7939,12 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String aTireDefi(Object targetPlayerName, Object challengeLabel) {
-    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+    return '0 a tras: 1 ! $targetPlayerName $challengeLabel';
   }
 
   @override
   String lEquipeAReveleLAssassin(Object teamName) {
-    return 'L\'équipe $teamName a révélé l\'Assassin !';
+    return 'Echipa 0 a dezvăluit asasinul! $teamName';
   }
 
   @override
@@ -8107,27 +7952,27 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String maximumPossibleCartes(Object maximumBid) {
-    return 'Maximum possible : $maximumBid cartes';
+    return 'Maxim posibil: 0 cărți $maximumBid';
   }
 
   @override
   String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
-    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+    return '0 reflectă pe o provocare de 1 cărți... $bidderName $liveAmount';
   }
 
   @override
   String votreMainCartes(Object count) {
-    return 'VOTRE MAIN ($count cartes)';
+    return 'OMUL TĂU (0 cărți) $count';
   }
 
   @override
   String pictionaryStrokesCount(Object count) {
-    return '$count/30 traits';
+    return '0 / 30 trăsături $count';
   }
 
   @override
   String indicesSoumisCount(Object submitted, Object total) {
-    return 'Indices soumis : $submitted / $total';
+    return '15 / 1 $submitted $total';
   }
 
   @override
@@ -8136,7 +7981,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get couleurChoisie => 'Couleur choisie :';
+  String get couleurChoisie => 'Culoare aleasă:';
 
   @override
   String pokerRaiseTo(Object amount) {
@@ -8148,14 +7993,14 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String reponseDeJoueur(Object guesserName, Object answer) {
-    return 'Réponse de $guesserName : \"$answer\"';
+    return 'Răspuns de la 0: \" 1 \" $guesserName $answer';
   }
 
   @override
   String get carteSuivante => 'Carte suivante';
 
   @override
-  String get roleLabel => 'Rôle:';
+  String get roleLabel => 'Rol:';
 
   @override
   String get obligatoire => 'Obligatoriu';
@@ -8182,109 +8027,107 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String aEteSignaleEtMasque(Object targetName) {
-    return '$targetName a été signalé et masqué pour vous.';
+    return '0 a fost raportat și ascuns pentru tine. $targetName';
   }
 
   @override
   String get impossibleDObtenirUnJeton =>
-      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+      'Nu s-a putut obține un jeton de acces video LiveKit securizat.';
 
   @override
   String get veuillezEntrerUneAdresseEmail =>
-      'Veuillez entrer une adresse email valide.';
+      'Introduceți o adresă de email validă.';
 
   @override
-  String get veuillezEntrerVotreMotDe =>
-      'Veuillez entrer votre mot de passe actuel.';
+  String get veuillezEntrerVotreMotDe => 'Introduceți parola curentă.';
 
   @override
-  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+  String get entrezVotreMotDePasse => 'Introduceți parola curentă.';
 
   @override
   String get leNouveauMotDePasse =>
-      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+      'Noua parolă trebuie să fie cel puțin 6 caractere.';
 
   @override
-  String get lesDeuxMotsDePasse =>
-      'Les deux mots de passe ne correspondent pas.';
+  String get lesDeuxMotsDePasse => 'Ambele parole nu se potrivesc.';
 
   @override
-  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+  String get photoDeProfilMiseA => 'Fotografie profil actualizat!';
 
   @override
-  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+  String get echecDuChangementDePhoto => 'Schimbarea foto a eșuat.';
 
   @override
-  String get k3CaracteresMinimum => '3 caractères minimum';
+  String get k3CaracteresMinimum => 'Minimum 3 caractere';
 
   @override
-  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+  String get cePseudoEstDejaPris => 'Această nick este deja luat.';
 
   @override
-  String get unAmi => 'Un ami';
+  String get unAmi => 'Un prieten.';
 
   @override
-  String get ceJoueur => 'ce joueur';
+  String get ceJoueur => 'acest jucător';
 
   @override
-  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+  String get preparationDeLaRecherche => 'Pregătirea căutării...';
 
   @override
   String get erreurDeConnexionAuMatchmaking =>
-      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+      'Eroare la conectarea la potrivire. Vă rugăm să încercați din nou.';
 
   @override
-  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+  String get erreurDeConnexionALa => 'Eroare la conectarea la cameră.';
 
   @override
-  String get legendeVivante => 'Légende Vivante';
+  String get legendeVivante => 'Legendă vie';
 
   @override
-  String get grandMaitre => 'Grand Maître';
+  String get grandMaitre => 'Mare Maestru';
 
   @override
-  String get stratege => 'Stratège';
+  String get stratege => 'Strategie';
 
   @override
-  String get initie => 'Initié';
+  String get initie => 'Iniţiat';
 
   @override
-  String get illimiteesVip => 'Illimitées (VIP)';
+  String get illimiteesVip => 'Nelimitat (VIP)';
 
   @override
   String pieces(Object playerStatecoins) {
-    return '$playerStatecoins pièces';
+    return '0 bucăți $playerStatecoins';
   }
 
   @override
-  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+  String get utilisateurNonConnecte => 'Utilizator neconectat.';
 
   @override
-  String get entrezUnPseudo => 'Entrez un pseudo';
+  String get entrezUnPseudo => 'Introduceți un pseudo';
 
   @override
-  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+  String get cePseudoEstDejaPris1 => 'Porecla asta e deja luată.';
 
   @override
-  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+  String get pseudoDejaPrisParUn => 'Pseudo deja luată de un alt jucător';
 
   @override
   String get cetteVersionDeLApplication =>
-      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+      'Această versiune a cererii este depășită. Vă rugăm să instalaţi ultima versiune.';
 
   @override
   String get playfunEstActuellementEnMaintenance =>
-      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+      'Playfun este în prezent menţinut pentru a îmbunătăţi serile. Întoarce-te imediat!';
 
   @override
   String get uneNouvelleVersionDePlayfun =>
-      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+      'O nouă versiune de Playfun este disponibil! Trebuie să actualizați aplicația pentru a continua să joace.';
 
   @override
-  String get derniereVersion => 'Dernière version';
+  String get derniereVersion => 'Ultima versiune';
 
   @override
-  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+  String get echecDeLEnvoi => 'Livrare eşuată.';
 
   @override
   String demandeDAmiEnvoyeeA(Object name) {
@@ -8313,7 +8156,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String joueur1(Object bUid) {
-    return 'Joueur ($bUid)';
+    return 'Jucător (0 ) $bUid';
   }
 
   @override
@@ -8325,29 +8168,29 @@ class AppLocalizationsRo extends AppLocalizations {
   String get enableVideo => 'Activare video';
 
   @override
-  String get pseudoDisponible => '✅ Pseudo disponible';
+  String get pseudoDisponible => 'Pseudo disponibil';
 
   @override
-  String get entrezUnEmailValide => 'Entrez un email valide';
+  String get entrezUnEmailValide => 'Introduceți un e-mail valid';
 
   @override
-  String get k6CaracteresMinimum => '6 caractères minimum';
+  String get k6CaracteresMinimum => 'Minimum 6 caractere';
 
   @override
-  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+  String get pasDeCompteSInscrire => 'Nici un cont? Registru';
 
   @override
-  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+  String get dejaUnCompteSeConnecter => 'Deja un cont? Autentificare';
 
   @override
   String get conditionsGeneralesDUtilisationCgu =>
-      'Conditions Générales d\'Utilisation (CGU / EULA)';
+      'Termeni generali de utilizare (CGU / EULA)';
 
   @override
-  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+  String get politiqueDeConfidentialite => 'Politica de confidențialitate';
 
   @override
-  String get miseAJourRequise => 'Mise à jour requise';
+  String get miseAJourRequise => 'Actualizare necesară';
 
   @override
   String joueursBloques(Object blockedListlength) {
@@ -8356,5 +8199,272 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get identifiantsIncorrectsOuCompteInexistant =>
-      'Identifiants incorrects ou compte inexistant.';
+      'Identificatori nevalabili sau cont inexistent.';
+
+  @override
+  String get leMotEtaitLabel => 'Cuvântul era:';
+
+  @override
+  String get mancheLabel => 'Canal';
+
+  @override
+  String get et => 'şi';
+
+  @override
+  String pokerPlayerCheck(Object playerName) {
+    return '$playerName dă check.';
+  }
+
+  @override
+  String get mot1 => 'Word:';
+
+  @override
+  String get rouges => 'Roșii';
+
+  @override
+  String get noirs => 'Negre';
+
+  @override
+  String get crane2 => 'Craniu';
+
+  @override
+  String get enAttente2 => 'În așteptare';
+
+  @override
+  String get enCours1 => 'În curs';
+
+  @override
+  String aSelectionneSonPionEt1(Object playerscurrentPlay) {
+    return '$playerscurrentPlay și-a selectat pionul și se gândește...';
+  }
+
+  @override
+  String tempsRestantS1(Object seconds) {
+    return 'Timp rămas: $seconds s';
+  }
+
+  @override
+  String pack(Object wordstake2join) {
+    return 'Pachet $wordstake2join';
+  }
+
+  @override
+  String variante1(Object rawPairtrim) {
+    return '$rawPairtrim (Variantă)';
+  }
+
+  @override
+  String gagneAvecPoint(
+    Object winnerName,
+    Object lowestScore,
+    Object lowestScore1s,
+  ) {
+    return '0 victorii cu 1 punct 2 ! $winnerName $lowestScore $lowestScore1s';
+  }
+
+  @override
+  String remporteSkull1(Object playerswinnerIdnam) {
+    return 'Wins Skull! $playerswinnerIdnam';
+  }
+
+  @override
+  String packIa(Object _selectedGame) {
+    return 'Ambalaj IA 0 $_selectedGame';
+  }
+
+  @override
+  String get standard => 'Standard';
+
+  @override
+  String get lui => 'El.';
+
+  @override
+  String carte4(Object deckIndex, Object deckTotal) {
+    return 'Cartea $deckIndex / $deckTotal';
+  }
+
+  @override
+  String get joueursBloques1 => 'Jucători blocați';
+
+  @override
+  String get vousNAvezBloqueAucun => 'Nu ați blocat niciun jucător.';
+
+  @override
+  String get debloquer => 'Deblochează';
+
+  @override
+  String get nouvelEmail => 'E-mail nou';
+
+  @override
+  String get motDePasseActuel => 'Parolă curentă';
+
+  @override
+  String get emailMisAJourAvec => 'E-mail actualizat cu succes!';
+
+  @override
+  String get modifierMotDePasse => 'Schimbă parola';
+
+  @override
+  String get nouveauMotDePasse => 'Parolă nouă';
+
+  @override
+  String get confirmerLeMotDePasse => 'Confirmă parola';
+
+  @override
+  String get motDePasseModifieAvec => 'Parola modificată cu succes!';
+
+  @override
+  String get prendreUnePhoto => 'Fă o poză.';
+
+  @override
+  String get choisirDepuisLaGalerie => 'Alege din galerie';
+
+  @override
+  String get supprimerLaPhoto => 'Șterge fotografia';
+
+  @override
+  String get photoDeProfilRetiree => 'Fotografie profil eliminat.';
+
+  @override
+  String get pseudoMisAJour => 'Porecla actualizată!';
+
+  @override
+  String get compteSecurite => '& Cont de securitate';
+
+  @override
+  String get editeParParrelV10 => 'Editat de Parrel • v1.0.0';
+
+  @override
+  String get aucunJeuTrouve => 'Niciun joc găsit';
+
+  @override
+  String get essaieDAjusterTesFiltres =>
+      'Încearcă să ajustezi filtrele sau să cauți din nou.';
+
+  @override
+  String get reinitialiserLesFiltres => 'Resetează filtrele';
+
+  @override
+  String get nouveau => 'NOU';
+
+  @override
+  String get gererMonAbonnement => 'Gestionați abonamentul meu';
+
+  @override
+  String get mesPieces => 'Camerele mele.';
+
+  @override
+  String get rechargerLesOffresDuStore => 'Reîncarcă ofertele magazinului';
+
+  @override
+  String get gererMesAbonnements => 'Gestionați abonamentele mele';
+
+  @override
+  String get badges => 'Insigne';
+
+  @override
+  String get partiesJouees => 'Meciuri jucate';
+
+  @override
+  String get xpTotalSession => 'Total XP sesiune';
+
+  @override
+  String get moyennePartie => 'Medie / Meci';
+
+  @override
+  String get detailParJeuPerformanceXp => 'Detalii pe joc și performanță XP';
+
+  @override
+  String get jouezVosPremieresPartiesPour =>
+      'Joacă primele tale meciuri pentru a-ți vedea statisticile XP aici!';
+
+  @override
+  String xpAuCompteur(Object psxp) {
+    return '$psxp XP acumulat';
+  }
+
+  @override
+  String encoreXpAvantNiv(Object xpRemaining, Object pslevel1) {
+    return 'Încă $xpRemaining XP până la Nivelul $pslevel1';
+  }
+
+  @override
+  String joueeVictoireXpGagnes(
+    Object played,
+    Object played1s,
+    Object won,
+    Object won1s,
+    Object gameXp,
+  ) {
+    return '$played jucate • $won victorii • ~$gameXp XP câștigați $played1s $won1s';
+  }
+
+  @override
+  String get erreurDeChargementDesDonnees =>
+      'Eroare la încărcarea datelor utilizatorului.';
+
+  @override
+  String get vousDevezAccepterLesCgu =>
+      'Pentru a crea un cont trebuie să acceptați UPC și Politica de confidențialitate.';
+
+  @override
+  String get miseAJourDisponible => 'Actualizare disponibilă';
+
+  @override
+  String get plusTard => 'Mai târziu';
+
+  @override
+  String get mettreAJour => 'Actualizează';
+
+  @override
+  String uneNouvelleVersionDePlayfun1(Object newVersion) {
+    return 'O nouă versiune ($newVersion) de Playfun este disponibilă cu noutăți și remedieri!';
+  }
+
+  @override
+  String get maintenanceEnCours => 'Întreținerea în curs';
+
+  @override
+  String get mettreAJourMaintenant => 'Actualizează acum';
+
+  @override
+  String get motifDuSignalement => 'Motivul raportării:';
+
+  @override
+  String get tricheOuAntiJeu => 'Trișat sau joc murdar';
+
+  @override
+  String get autre => 'Altele';
+
+  @override
+  String get signaler => 'Raportează';
+
+  @override
+  String get detailParJeu => 'Detalii pe joc:';
+
+  @override
+  String get ceJoueurNAPas2 => 'Acest jucător nu are încă jocuri înregistrate.';
+
+  @override
+  String badgesDebloques(Object unlockedBadgesleng, Object appBadgesallBadges) {
+    return 'Insigne deblocate: $unlockedBadgesleng / $appBadgesallBadges';
+  }
+
+  @override
+  String joueursBloques2(Object psblockedUsersleng) {
+    return 'Jucători blocați ($psblockedUsersleng)';
+  }
+
+  @override
+  String debloquer1(Object name) {
+    return 'Deblochează $name';
+  }
+
+  @override
+  String signalerOuBloquer(Object name) {
+    return 'Raportează sau blochează $name';
+  }
+
+  @override
+  String get vote1 => 'vot';
 }

@@ -97,7 +97,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get utiliser => 'HASZNÁLOM';
 
   @override
-  String get packActiveElements => '✨ Pack \'\'{0}\' aktiválva ({1} tárgyat)!';
+  String get packActiveElements => '✨ Pack {0} aktiválva ({1} tárgyat)!';
 
   @override
   String get fusionner => 'EGYESÍTÉS';
@@ -152,7 +152,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get melangerPlusieursThemes => 'Több téma keverése:';
 
   @override
-  String get combineS => '✨ {0 összesen}';
+  String get combineS => '✨ \'(0 összesen)\'';
 
   @override
   String get nombreDElements => 'Elemek száma:';
@@ -834,7 +834,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'Tétlenség miatt kizártak. A számítógép játszik helyetted (nincs jutalom).';
 
   @override
-  String get s => '{0} s';
+  String get s => 's {0}';
 
   @override
   String pts1(Object pName, Object pScore) {
@@ -843,7 +843,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String xp(Object pXp) {
-    return '$pXp XP';
+    return '0 XP $pXp';
   }
 
   @override
@@ -903,13 +903,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get vernissage => 'Megnyitó!';
 
   @override
-  String get albumDe => '{0 album}';
+  String get albumDe => '\'(0 album)\'';
 
   @override
   String get prec => 'Előző';
 
   @override
-  String get album => 'Album {0} / {1}';
+  String get album => 'Album/{0} {1}';
 
   @override
   String get suiv => 'Következő';
@@ -973,7 +973,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get mainDeCartes => 'Kéz {0} ({1} kártya)';
 
   @override
-  String get votreMainDeSurvieCartes => 'A TÚLÉLŐ KEZED ({0,} lap)';
+  String get votreMainDeSurvieCartes => 'A TÚLÉLŐ KEZED (\'(0,)\' lap)';
 
   @override
   String get lesPairesSontDefausseesAutomatiquement =>
@@ -1035,7 +1035,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get plierPasser => 'HAJTOGASD BE & ADD TOVÁBB';
 
   @override
-  String get motsRediges => '✏️ {0,} szó írva...';
+  String get motsRediges => '✏️ \'(0,)\' szó írva...';
 
   @override
   String get leGrandDepliage => 'A Nagy Kiterítés!';
@@ -1050,12 +1050,12 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String km(Object oppDist) {
-    return '$oppDist km';
+    return '0 km $oppDist';
   }
 
   @override
   String km1(Object myDistance, Object targetDist) {
-    return '$myDistance / $targetDist km';
+    return '0 / 1 km $myDistance $targetDist';
   }
 
   @override
@@ -1105,7 +1105,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get couche => 'Bedobta';
 
   @override
-  String get miseActuelle => 'Jelenlegi tét: {összeg} {amount}';
+  String get miseActuelle => 'Jelenlegi tét: \'(összeg)\' {amount}';
 
   @override
   String get enAttente => 'Várakozás...';
@@ -1215,7 +1215,7 @@ class AppLocalizationsHu extends AppLocalizations {
       '(Ez a választás titokban marad a végéig)';
 
   @override
-  String get lHistoireDe => 'A {0 története}';
+  String get lHistoireDe => 'A \'(0 története)\'';
 
   @override
   String get vrai => 'IGAZ';
@@ -1271,28 +1271,27 @@ class AppLocalizationsHu extends AppLocalizations {
       'A pontok kiosztásra kerültek a szavazatok alapján.';
 
   @override
-  String get leMotDesCivilsEtait => 'A civilek szava: \'\'{0}\'';
+  String get leMotDesCivilsEtait => 'A civilek szava: {0}';
 
   @override
-  String get leMotDeLInfiltre =>
-      'Az Infiltrátor ({0}) szava így volt: \'\'{1}\'';
+  String get leMotDeLInfiltre => 'Az Infiltrátor ({0}) szava így volt: {1}';
 
   @override
   String get mrWhiteNAvaitPas => 'Mr. White ({0}) nem mondott szavakat.';
 
   @override
   String get leMotATrouverEtait =>
-      'A szó, amit ki kellett találni, az \'\'{0}\' szinonimája volt. A többi játékos 1 pontot szerez.';
+      'A szó, amit ki kellett találni, az {0} szinonimája volt. A többi játékos 1 pontot szerez.';
 
   @override
   String get felicitationsAuDessinateurEtA =>
       'Gratulálunk a képregényrajzolónak {0} -nak és {1} -jének!';
 
   @override
-  String get saReponseEtait => 'A válasza az volt: \'\'{0}\'.';
+  String get saReponseEtait => 'A válasza az volt: {0}.';
 
   @override
-  String get leMotEtait => 'A szó így volt: \'\'{0}\'.';
+  String get leMotEtait => 'A szó így volt: {0}.';
 
   @override
   String get cartesRevelees => 'Felfedett kártyák:';
@@ -1484,10 +1483,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get lancerLeDe => 'DOBÁS A KOCKÁVAL';
 
   @override
-  String get scorePoints => 'Pontszám: {} pontot szerezzenek {score}';
+  String get scorePoints => 'Pontszám: \'()\' pontot szerezzenek {score}';
 
   @override
-  String get dominosRestants => 'Megmaradt dominók: {száma} {count}';
+  String get dominosRestants => 'Megmaradt dominók: \'(száma)\' {count}';
 
   @override
   String get impossibleDeJouerCeDomino => 'Ezt a dominót nem lehet ide tenni.';
@@ -1502,7 +1501,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get extremites => 'Végek: ';
 
   @override
-  String get pioche2 => 'Döntetlen: {Számol} {count}';
+  String get pioche2 => 'Döntetlen: \'(Számol)\' {count}';
 
   @override
   String get piocher => 'Húzás';
@@ -1519,7 +1518,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get clic => 'KATTINTÁS';
 
   @override
-  String get lancersRestants => 'Hátralévő dobások: {Szám} {count}';
+  String get lancersRestants => 'Hátralévő dobások: \'(Szám)\' {count}';
 
   @override
   String get combinaison => 'KOMBINÁCIÓ';
@@ -1559,7 +1558,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get carteAPrendre => 'ELVIHETŐ KÁRTYA';
 
   @override
-  String get votreMain => 'A kezed ({számolja}) {count}';
+  String get votreMain => 'A kezed (\'(számolja)\') {count}';
 
   @override
   String get touchezUneCartePourLa => 'Koppints egy kártyára a kijátszásához';
@@ -1568,7 +1567,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get aucuneCombinaisonEtaleeSurLa => 'Még nincs kombináció az asztalon';
 
   @override
-  String get etaler => 'Terjedés ({szám}) {count}';
+  String get etaler => 'Terjedés (\'(szám)\') {count}';
 
   @override
   String get defausserFin => 'Eldobás & Vége';
@@ -1632,7 +1631,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get ilFautAuMoinsJoueurs =>
-      'Ehhez a módhoz legalább {0,} játékosra van szükséged!';
+      'Ehhez a módhoz legalább \'(0,)\' játékosra van szükséged!';
 
   @override
   String get ceModeSupporteAuMaximum =>
@@ -2028,7 +2027,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get passezLeTelephoneAPuis =>
-      'Kapcsold a telefont {0-ra}, majd nyomd meg az alább.';
+      'Kapcsold a telefont \'(0-ra)\', majd nyomd meg az alább.';
 
   @override
   String get cEstFait => 'Kész';
@@ -2140,7 +2139,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get totalDesMotsDansLe => 'A kalapban lévő összes szó: {0}';
 
   @override
-  String get manche => '{0. forduló}: {1}';
+  String get manche => '\'(0. forduló)\': {1}';
 
   @override
   String get motsDevinesCeTour => 'A szavak kitalálták ezt a kört: {0}';
@@ -2162,10 +2161,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get retour => 'Vissza';
 
   @override
-  String get lEquipeAGagne => 'A csapat 0 {} nyert!';
+  String get lEquipeAGagne => 'A csapat 0 \'()\' nyert!';
 
   @override
-  String get points1 => '{0,} pont';
+  String get points1 => '\'(0,)\' pont';
 
   @override
   String get passeLObjet => 'Tárgy átadása';
@@ -2266,7 +2265,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String s1(Object secondsLeft) {
-    return '⏱️ $secondsLeft s';
+    return '0 s $secondsLeft';
   }
 
   @override
@@ -2465,13 +2464,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get enPartie => 'JÁTÉKBAN';
 
   @override
-  String get partieDeTerminee => 'A {0-s meccs} vége!';
+  String get partieDeTerminee => 'A \'(0-s meccs)\' vége!';
 
   @override
   String get statistiques => 'Statisztikák - {0}';
 
   @override
-  String get vainqueur1 => 'Győztes: {0}\'{1}\n';
+  String get vainqueur1 => 'Győztes: {0}\'{1}\'\'\'\n';
 
   @override
   String get voirLesStats => 'Statisztikák megtekintése';
@@ -2509,7 +2508,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get terminer => 'Befejezés';
 
   @override
-  String get tour => '{kör 0}';
+  String get tour => '\'(kör 0)\'';
 
   @override
   String get toursRestants => '{0} kör hátra';
@@ -2557,7 +2556,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get regardezRealiserLeDefi =>
-      'Nézd meg {0-t} teljesítsd a kihívást...';
+      'Nézd meg \'(0-t)\' teljesítsd a kihívást...';
 
   @override
   String get voteDeValidation => '🗳️ JÓVÁHAGYÓ SZAVAZÁS';
@@ -2656,7 +2655,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get reflechit => '{a neve,} gondolja... {name}';
+  String get reflechit => '\'(a neve,)\' gondolja... {name}';
 
   @override
   String get faceAFaceCoteA => 'Párbaj (egymás mellett)';
@@ -2668,7 +2667,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get prendreLAtoutOuPasser => 'ADUT VISZEL VAGY PASSZOLSZ:';
 
   @override
-  String get combinaisonsDe => 'A {név kombinációi} {name}';
+  String get combinaisonsDe => 'A \'(név kombinációi)\' {name}';
 
   @override
   String get ilDevraDonnerLePremier => 'Neki kell adnia az első nyomot';
@@ -3363,10 +3362,6 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get aRelanceLesDes3 =>
-      '{pName} újradobta a kockákat ({3rollsLeft1}/3)!';
-
-  @override
   String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName megtartotta a(z) $dieVal értékű kockát (#$index1. kocka) 🔒';
   }
@@ -3416,10 +3411,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get pioche3 => 'Csákány';
 
   @override
-  String get wordcivilParts0TrimWordundercover =>
-      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = részek[1].trim(); \r\n    \'\'}\' más \'\'{\' \r\n      Duplikátum elleni védelem: ha a';
-
-  @override
   String get vousNAvezPasDe => 'Nincsenek szavaid';
 
   @override
@@ -3460,10 +3451,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur rendelkezik a legtöbb XP-vel ($maxXp XP-vel), és adminná válik!';
   }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  A borító vége (admin gomb)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\' \r\n    await _db.runTransaction((transaction) async\'\'{\' \r\n      final gameRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = a tranzakció várása.get(gameRef); \r\n      ha (!snap.exists) visszatér; \r\n\r\n      final gameData = snap.data() mint Map<String, dinamikus>; \r\n      final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Döntsd ki a győztest (több XP)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        final xp = (pData[\'xp\'] mint num?)?. toInt() ?? 0; \r\n        if (xp > maxXp) { \r\n          maxXp = XP; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Valaki';
@@ -3517,18 +3504,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get leJoueur => 'A játékos';
 
   @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\' \r\n      Lista<String> kérdések =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[nehézség] ?? \r\n          GameWords.whoIsMostLikely[';
-
-  @override
   String get honnete => 'Őszinte';
 
   @override
-  String get pairSplit => ') ? pair.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      '): [egyes, egyáltalán]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Kérdés =\r\n            \"Írd le a titkos szavadat egy szóban. Álmosok, blöff!\"; \r\n        for (var pId in players.keys) \'\'{\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
+  String get pairSplit => ')? par.split (';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3548,20 +3527,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get passeLEnchere => 'passzolja a licitet';
 
   @override
-  String get elseIfGametype =>
-      ') \'\'{\' \r\n        if (voterId == votedForId) \'\'{\' \r\n          throw Exception (\"Hivatalos tilom a saját szavazásnak!\"); \r\n        \'\'}\'\'}\' más, ha (gameType ==\r\n      ';
-
-  @override
   String get intRequiredvotesPlayersLengthIf =>
-      ') { \r\n        creditPlayerXp( \r\n          tranzakció, \r\n          gameRef, \r\n          gameData, \r\n          szavazóid, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      } \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\' \r\n          végső Térkép<String, int> voteCounts = {}; \r\n          for (végső cél a votes.values-ben) { \r\n            voteCounts[target mint String] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVoted = []; \r\n          voteCounts.forEach((cél, szám) \'\'{\' \r\n            if (számolja > maxVotes) { \r\n              maxVotes = szám; \r\n              topVoted = [cél]; \r\n            } más, ha (count == maxVotes) { \r\n              topVoted.add(cél); \r\n            }\'\'}\'); \r\n\r\n          Frissítések[\r\n          ';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\' \r\n        végső Térkép<String, int> voteCounts = {}; \r\n        for (végső cél a votes.values-ben) { \r\n          voteCounts[target mint String] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVoted = []; \r\n        voteCounts.forEach((cél, szám) \'\'{\' \r\n          if (számolja > maxVotes) { \r\n            maxVotes = szám; \r\n            topVoted = [cél]; \r\n          } más, ha (count == maxVotes) { \r\n            topVoted.add(cél); \r\n          }\'\'}\'); \r\n\r\n        if (topVoted.length == 1) \'\'{\' \r\n          végső győztes = topVoted.first; \r\n          Frissítések[\r\n        ';
+      ') \'( \r\n        creditPlayerXp( \r\n          tranzakció, \r\n          gameRef, \r\n          gameData, \r\n          szavazóid, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      )\' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ';
 
   @override
   String aRemporteTousLesJetons(Object winnerName) {
@@ -3766,7 +3733,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String str8f522b(Object cat, Object hasScorescoreVal) {
-    return '$cat: $hasScorescoreVal';
+    return '0: 1 $cat $hasScorescoreVal';
   }
 
   @override
@@ -3880,7 +3847,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String str1e0607(Object authorName) {
-    return '$authorName : ';
+    return '0: $authorName';
   }
 
   @override
@@ -3943,7 +3910,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String str422faa(Object valuename, Object valuescore0) {
-    return '$valuename: $valuescore0 🃏';
+    return '0: 1 $valuename $valuescore0';
   }
 
   @override
@@ -3956,7 +3923,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String str95d36e(Object valuename, Object key0) {
-    return '$valuename: $key0';
+    return '0: 1 $valuename $key0';
   }
 
   @override
@@ -4019,7 +3986,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get leChallenger => 'A Kihívó';
 
   @override
-  String get stre93cb0 => '{0} : {1}';
+  String get stre93cb0 => ':{0} {1}';
 
   @override
   String get uneDescriptionHilarante => 'egy vicces leírás';
@@ -4037,7 +4004,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String str98e212(Object pName, Object count, Object length, Object isFull) {
-    return '$pName: $count/$length$isFull';
+    return '0: 1 / 2 3 $pName $count $length $isFull';
   }
 
   @override
@@ -4077,16 +4044,12 @@ class AppLocalizationsHu extends AppLocalizations {
     Object score,
     Object totalScore,
   ) {
-    return '$carte $deckIndex / $deckTotal — $score : $totalScore';
+    return '0 1 / 2 - 3: 4 $carte $deckIndex $deckTotal $score $totalScore';
   }
 
   @override
-  String get styleConstTextstyleColorColors =>
-      ', \r\n                  style: const TextStyle (szín: Colors.white70), \r\n                ), \r\n                SizedBox (magasság: 20), \r\n                Wrap( \r\n                  alignment: WrapAlignment.center, \r\n                  gyermekek: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (magasság: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Szöveg( \r\n                    AppLocalizations.of(context)!. allCluesBeen Been \r\n                    style: const TextStyle (szín: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' más \'\'{\' \r\n          A jósnő múlik el, hogy játssza\r\n          return Column( \r\n            gyermekek: [ \r\n              Szöveg(                ';
-
-  @override
   String strf0868c(Object length0, Object valuescore0) {
-    return '$length0: $valuescore0';
+    return '0: 1 $length0 $valuescore0';
   }
 
   @override
@@ -4114,16 +4077,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get laVictime => 'Az áldozat';
 
   @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      '; \r\n            centerActionWidget = Sor( \r\n              mainAxisSize: MainAxisSize.min, \r\n              gyermekek: [ \r\n                _buildActionButton( \r\n                  címke: AppLocalizations.of(context)!. Fertőz \r\n                  ICON: Icons.auto_fix_high, \r\n                  szín: Colors.purpleAccent, \r\n                  onPressed: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      A háttér, \r\n                      HALLGASD: hamis, \r\n                    ).recordBadgeEvent (\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      igaz, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                const SizedBox (szélesség: 8), \r\n                _buildActionButton( \r\n                  címke: AppLocalizations.of(context)!. falja el, \r\n                  ikon: Icons.close, \r\n                  szín: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        hamis, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          kombi; \r\n        Box \'loup_blanc_turn\': \r\n          promptText = ';
-
-  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Tegnap este nincs áldozat (védve vagy megkímélve)';
-
-  @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ', \r\n                              stílus: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Szín: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'farkas\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(szöveg: üzenet), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Kompakt adórúd\r\n          if (canSendMessage)\r\n            Row( \r\n              gyermekek: [ \r\n                Expanded( \r\n                  gyermek: SizedBox( \r\n                    magasság: 32, \r\n                    gyermek: TextField( \r\n                      Irányító: _chatController, \r\n                      style: const TextStyle (betűméret: 12, szín: Colors.white), \r\n                      Díszítés: InputDecoration( \r\n                        hintText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          szín: Colors.white30, \r\n                          betűméret: 11, \r\n                        ), \r\n                        határ: VázlatInputHatár( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        kitöltve: igaz, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          vízszintes: 10, \r\n                          Függőleges: 0, \r\n                        ), \r\n                      ), \r\n                      onSubmitted: (szöveg) \'\'{\' \r\n                        if (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (szélesség: 4), \r\n                IconButton( \r\n                  ikon: const Icon( \r\n                    Icons.send_rounded, \r\n                    Méret: 18, \r\n                    szín: Colors.cyanAccent, \r\n                  ), \r\n                  párnázás: EdgeInsets.zero, \r\n                  Korlátozások: const BoxConstraints(), \r\n                  onPressed: () \'\'{\' \r\n                    if (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(String címke, String típus, Color activeColor) { \r\n    végső bool isSelected = _selectedChatType == típus; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      gyermek: Tartály( \r\n        párnázás: állandó EdgeInsets.symmetric (vízszintes: 8, függőleges: 3), \r\n        Díszítés: BoxDecoration( \r\n          Szín: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpcity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          határ: Border.all( \r\n            Szín: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        gyermek: Szöveg( \r\n          kiadó, \r\n          stílus: TextStyle( \r\n            betűméret: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- FRISSÍTETTE AZ AVATART, HOGY INTERAKTÍVVÁ VÁLJON--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    if (startTime == null) return vissza const SatedBox.shrink(); \r\n\r\n    A TweenAnimationBuilder szupersima vizuális időzítőt tesz lehetővé anélkül, hogy blokkolná az időzítőt és a manuális setState-et, ami jelentősen könnyíti a szálat (4. pont)\r\n    final endTime = startTime.toDate().add( \r\n      Időtartam(másodpercek: időtartamMásodpercekben), \r\n    ); \r\n    utolsó maradék = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Szöveg( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stílus: Theme.of( \r\n          A háttér, \r\n        ).textTheme.headlineSmall?. copyWith(szín: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      Időtartam: Marad, \r\n      tween: Tween (kezdő: marad, vég: Időtartam.nulla), \r\n      builder: (BuildContext kontextus, Időtartam érték, Widget? gyermek) { \r\n        final seconds = value.inSeconds; \r\n        return Szöveg( \r\n          AppLocalizations.of(context)!. időMarad, \r\n          stílus: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            szín: másodpercek < 20 ? Colors.redAccent : Colors.amberAccent, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext kontextus, \r\n    Map<String, dinamikus> gameData, \r\n    String playerId, \r\n  ) \'\'{\' \r\n    final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n    final playerOrder = List<String>.from( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    végső pozíciók = Leképezés<String, dinamikus>.from( \r\n      gameData[\'littleHorsesPozíciók\'] ?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    végső String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'; \r\n    final bool isMyTurn = currentPlayerId == playerId; \r\n    végső int dobókockák = (gameData[\'littleHorsesDice\'] mint num?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[\'littleHorsesHasRolled\'] ?? hamis; \r\n    az utolsó bool isTeamMode = gameData[\'smallTeamHorses\'] ?? hamis; \r\n    végső Leképezés<String, dinamikus> egymást követőHatos = Leképezés<String, dinamikus>.from( \r\n      gameData[\'kislovak egymást követő hatosok\'] ?? {}, \r\n    ); \r\n    final int mySixStreak = egymást követő hatos[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade sötét háttéren\r\n    végső lista<Szín> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon égkék\r\n      const Color(0xFF10B981), // Smaragdzöld\r\n      const Color(0xFFF59E0B), // Golden Amber\r\n    ]; \r\n\r\n    --- GYŐZELMI VÁSZNAP--- \r\n    if (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      return UniversalGameEndScreen( \r\n        GameCím:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Elértétek a tábla közepét!';
@@ -4159,12 +4114,12 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String k1663(Object oppUpper, Object oppBonus035) {
-    return '1-6: $oppUpper/63 $oppBonus035';
+    return '1- 6: 0 / 63 1 $oppUpper $oppBonus035';
   }
 
   @override
   String k16631(Object myUpper, Object myBonus035) {
-    return '1-6: $myUpper/63 $myBonus035';
+    return '1- 6: 0 / 63 1 $myUpper $myBonus035';
   }
 
   @override
@@ -4249,10 +4204,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get gagneTonSecretEstPreserve => 'NYERTÉL! A titkod biztonságban van.';
 
   @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      '); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = részek[1].trim(); \r\n    \'\'}\' más \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (változat)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    for (var játékos _activePlayers) \'\'{\' \r\n      if (játékos == fedőként) \'\'{\' \r\n        _playerRoles[játékos] = \"Behatoltó\"; \r\n      \'\'}\' mást, ha (játékos == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[játékos] = \"Mr. White\"; \r\n      \'\'}\' más \'\'{\' \r\n        _playerRoles[játékos] = \"Civil\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  Void _nextPlayerReveal() \'\'{\' \r\n    ha (_currentPlayerRevealIndex < _activePlayers.hosszúság - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } más { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(vonós) \'\'{\' \r\n    String role = _playerRoles[játékos]!; \r\n    bool impostorsWin = role == \"Civil\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.eredmény; \r\n      if (impoloorsWin) \'\'{\' \r\n        _resultMessage = \"{player} civil volt! Az Impostors nyertek!\"; \r\n      \'\'}\' más \'\'{\' \r\n        _resultMessage = \"{player} volt a\r\n    \r\n  ';
-
-  @override
   String get requiert4Joueurs => 'Legalább 4 játékos szükséges';
 
   @override
@@ -4296,7 +4247,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String stre786cb(Object sender) {
-    return '$sender : ';
+    return '0: $sender';
   }
 
   @override
@@ -4401,7 +4352,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get selectionnezAuMoins5Roles => 'Válasszon ki legalább 5 szerepet.';
 
   @override
-  String get petiteBlind => 'Kis vak: { 0} \'';
+  String get petiteBlind => 'Kis vak: \'( 0)\' \'';
 
   @override
   String get simpleVillageois => 'Falusi';
@@ -4415,7 +4366,8 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get nombreDeJoueursRecherches => 'A keresett játékosok száma: { 0 }';
+  String get nombreDeJoueursRecherches =>
+      'A keresett játékosok száma: \'( 0 )\'';
 
   @override
   String get laBeloteRequiertExactement4 =>
@@ -4459,7 +4411,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get auMoins2JoueursRequis => 'Legalább 2 játékosra van szükség.';
 
   @override
-  String get jeu => 'Játék: {\'0\'\'}';
+  String get jeu => 'Játék: \'(\'\'0\'\')\'';
 
   @override
   String get ami => 'Barát';
@@ -4510,7 +4462,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get six => 'Hatosok';
 
   @override
-  String get sectionSup => 'Sup section: { 0 } \"';
+  String get sectionSup => 'Sup section: \'( 0 )\' \"';
 
   @override
   String k63Pts(Object oppUpper, Object value) {
@@ -4544,17 +4496,17 @@ class AppLocalizationsHu extends AppLocalizations {
   String get moi => 'Én';
 
   @override
-  String get manche1 => 'Csatorna: { 0 } /\' {\'1\'\'} \'';
+  String get manche1 => 'Csatorna: \'(\' 0 \')\' /\' \'(\'\'1\'\')\' \'';
 
   @override
   String get voisin => 'Szomszédság';
 
   @override
   String get aSelectionneCarte =>
-      '{ 0} \'kiválasztott\' {\'1\'\'}\' térkép { 2} \'...';
+      '\'(\' 0\')\' \'kiválasztott\' \'(\'\'1\'\')\'\' térkép \'(\' 2\')\' \'...';
 
   @override
-  String get jouePar => 'Játszotta: \'\'{\' 0 \'';
+  String get jouePar => 'Játszotta: \'\'(\'\' 0 \'';
 
   @override
   String get lAdversaire => 'Az ellenfél';
@@ -4760,11 +4712,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get leTourEstTermine1 => 'A kör véget ért.';
 
   @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName nyert a leírásával: ApLocalizations.of (context)!. extrainfoColumnChildText 99999 $winningDescription';
-  }
-
-  @override
   String get personneNAGagneCe =>
       'Senki sem nyerte ezt a kört. Döntetlen vagy nem érkezett leírás.';
 
@@ -4812,19 +4759,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get score => 'Pontszám';
 
   @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object value,
-    Object guesserName,
-    Object value2,
-    Object deckIndex,
-    Object deckTotal,
-    Object value3,
-    Object totalScore,
-  ) {
-    return '$value $guesserName : ApLocalizations.of (context)! .styleConsttyleColors $value2 $deckIndex / $deckTotal - $value3 : $totalScore';
-  }
-
-  @override
   String get laNuitTombeSurLe =>
       'Az éjszaka a falura esik...\n\nCsukd be a szemed.';
 
@@ -4848,7 +4782,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get loup => 'Farkas';
 
   @override
-  String get validerLeCouple2 => 'A nyomaték jóváhagyása ({ 0} \'/ 2)';
+  String get validerLeCouple2 => 'A nyomaték jóváhagyása (\'( 0)\' \'/ 2)';
 
   @override
   String get lHeritierChoisitSonTestament => 'Az Örökös választ';
@@ -4875,7 +4809,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get contaminezJusquA2Joueurs => 'Fertőzz meg legfeljebb 2 játékost';
 
   @override
-  String get contaminer => 'Szennyezett ({ 0 })';
+  String get contaminer => 'Szennyezett (\'( 0 )\')';
 
   @override
   String get lesLoupsChassentEnMeute => 'A Farkasok falkában vadásznak';
@@ -4888,14 +4822,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get leLoupNoirDecideDu => 'A Fekete Farkas dönt a préda sorsáról';
-
-  @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Infect $targetName ? AppLocalizations.of (context)! .centeractions widgetRowMainaxisizeMainaxisizeMine The White Wolf slick solo';
-  }
 
   @override
   String get choisissezUneVictimeADevorer => 'Válassz egy áldozatot felfalásra';
@@ -4957,14 +4883,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get amoureux => 'Szerelmesek';
 
   @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName : ApLocalizations.of (context)! .stiletTextstylFontweightFontweightBoldSmall Horses';
-  }
-
-  @override
   String get courseIndividuelle => 'Egyéni verseny';
 
   @override
@@ -4978,7 +4896,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get gardeS => '{ 0 } megtartva';
+  String get gardeS => '\'( 0 )\' megtartva';
 
   @override
   String get cur => '♥ Kőr';
@@ -5046,7 +4964,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get genereDesDilemmesAuFormat =>
-      'OptionA vagy OptionB formátumban generál dilemmákat. Téma: { 0} \'';
+      'OptionA vagy OptionB formátumban generál dilemmákat. Téma: \'( 0)\' \'';
 
   @override
   String get jePasse => 'Passzolok';
@@ -5098,15 +5016,11 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Ki többet? ApLocalizations.of (kontextus)!. body PadlingPaddingConstellation Edgeinsetssoft';
-
-  @override
-  String get votePar => 'Szavazta: \"{\'0\'\'}\"';
+  String get votePar => 'Szavazta: \"\'(\'\'0\'\')\'\"';
 
   @override
   String get decisionUnanimeDuGroupePour =>
-      'A csoport élettelen döntése a \'\'{\' 0 \'-re!';
+      'A csoport élettelen döntése a \'\'(\'\' 0 \'-re!';
 
   @override
   String get ilFautAuMoins41 =>
@@ -5146,11 +5060,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String get mime => 'Mutogatás';
 
   @override
-  String get cEstAuTourDe2 => 'Most jön a \'\'{\' 0 \'(\' 1 \').';
+  String get cEstAuTourDe2 => 'Most jön a \'\'(\'\' 0 \'(\' 1 \').';
 
   @override
   String get genereDesQuestionsAmusantesEt =>
-      'Vidám és gyors kérdéseket tesz fel. Téma: { 0} \'';
+      'Vidám és gyors kérdéseket tesz fel. Téma: \'( 0)\' \'';
 
   @override
   String s3(Object minDuration) {
@@ -5166,7 +5080,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get fin1 => 'VÉGE';
 
   @override
-  String get trouves => 'Megtaláltam: { 0 }';
+  String get trouves => 'Megtaláltam: \'( 0 )\'';
 
   @override
   String get ecurie1 => '1. istálló';
@@ -5181,7 +5095,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get ecurie4 => '4. istálló';
 
   @override
-  String get nombreMaxDeJoueurs => 'A játékosok maximális száma: { 0 }';
+  String get nombreMaxDeJoueurs => 'A játékosok maximális száma: \'( 0 )\'';
 
   @override
   String jAiLanceUnePartie1(Object value) {
@@ -5192,10 +5106,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get jeu1 => 'Játék';
 
   @override
-  String get partieDeEnAttente => 'A \"{\'0\'\'}\" függőben lévő része';
+  String get partieDeEnAttente => 'A \"\'(\'\'0\'\')\'\" függőben lévő része';
 
   @override
-  String get termine => 'Végzett: { 0} \'';
+  String get termine => 'Végzett: \'( 0)\' \'';
 
   @override
   String get vainqueur2 => 'Győztes:';
@@ -5233,7 +5147,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get survie => 'Túlélés';
 
   @override
-  String get redigezLPour => 'Írja a \"{\'0\'\'}\" -t a \"{\' 1\'\'}\" -re.';
+  String get redigezLPour =>
+      'Írja a \"\'(\'\'0\'\')\'\" -t a \"\'(\'\' 1\'\')\'\" -re.';
 
   @override
   String get rejouerGarderPts => 'ÚJRAJÁTSZÁS (PONTOK MEGŐRZÉSE)';
@@ -5338,10 +5253,6 @@ class AppLocalizationsHu extends AppLocalizations {
       '* * Célkitűzés * *\nNe legyen a kezében, amikor a krumpli felrobban!\n\n* * Draft * *\n1. Egy téma jelenik meg a képernyőn.\n2. Az eszközt birtokló játékosnak a témának megfelelő választ kell adnia.\n3. Amint válaszolt, gyorsan áthaladt a gépen a szomszédjához.\n4. A szomszédnak viszont új választ kell találnia, és át kell adnia az eszközt.\n5. Az idő rejtett és véletlenszerű: a burgonya bármikor felrobbanhat!\n6. Az a játékos, aki az eszközt a robbanás idején tartja, elveszíti a fogantyút, és fogadalmat kap.';
 
   @override
-  String get principeGeneralGribouillisEstUn =>
-      '* * Általános elv * *\nA Gribouillis egy rajzjáték, amit az \"arab telefon\" ihletett, ahol az ötletek minden szakaszban változnak. 3 játékmód van:\n\n* * 1. Normál mód (Arab illusztrált telefon)\n- * * Writing * *: Minden játékos ír egy mondatot.\n- * * Rajzolás * *: Minden játékos kap egy másik mondatot, és felhívja.\n- * * Devinette * *: Minden játékos kap egy rajzot és kitalálja, mit képvisel.\n- * * Alternatív * *: A játék váltakozik rajz és találgatás, amíg minden \"album\" ment körül az összes játékos.\n- De... Jó szórakozást, hogy egy egyszerű mondatból teljesen más lesz!\n\n* * 2. Kiegészítési mód (kollaboratív rajz) * *\n- * * Croquis * *: Minden játékos elkezd egy egyszerű rajzot.\n- * * Complete * *: Minden játékos kap egy másik rajz, és meg kell gazdagítani, anélkül, hogy törölné, ami már létezik.\n- * * Alternatív * *: A rajz játékosról játékosra változik, mindegyik hozzáadja az érintést.\n- * * Parameter \"Add 1\" * *:\n- * Ha nem működik (alapértelmezés) *: Ez egy madzag. A rajz minden szakaszban fejlődik (A játékos - > B játékos - > C játékos...).\n- * If activated *: Az egyes játékosok kezdeti rajza az összes többi játékostól származik, és ezzel párhuzamosan több közös alkotást hoznak létre.\n- De... Hozzon létre meglepő és szórakoztató kollektív műalkotások.\n\n* * 3. Brise- Glace Mode (Creative Interaction) * *\n- * * Writing * *: Minden játékos személyes témát ír (ex: AppLocalizations.of (context)!. myPrecision).\n- * * Rajzolás * *: Minden játékos megkapja a témákat * * minden más játékostól * * és le kell rajzolnia őket.\n- * * De * *: Ideális, hogy megtörje a jeget, felfedezze az ízek mások, és indítsa el a kreativitás egy együttműködő és könnyű módon.';
-
-  @override
   String get yzObjectifAvoirLeMoins =>
       'Célkitűzés\n\nA játék végén a lehető legtöbb pontot.\nA játék akkor ér véget, ha a játékos eléri a 100 pontot vagy annál többet, és a győztes a legalacsonyabb összpontszámot.\n\nBerendezések\n\n150 kártya -2 és + 12 között\n\nVégrehajtás\n\nKeverjük össze az összes kártyát.\nMinden játékos kap 12 lapot, arccal lefelé előtte, 4 oszlopban x 3 sorban.\nA többi kártya részvényt képez. Adja vissza az első kártyát, hogy a hulladék keletkezzen.\nMinden játékos 2 lapot ad vissza a 12-ből.\n\nA túra menete\n\nCserébe, van * * 30 másodperc * * közül két akció:\n\n1. Vedd el a hulladékkártyát\nMeg kell cserélni az egyik a 12 kártya (látható vagy rejtett oldalon).\nA kicserélt kártya megy a hulladékba.\n\n2. Piocher egy kártya arccal lefelé\nNézd meg a térképet:\n- vagy megtartja, és kicseréli az egyik kártyáját (a fentiek szerint),\n- vagy visszautasítod → közvetlenül a hulladékra helyezed, és ebben az esetben vissza kell adnod az egyik rejtett kártyádat.\n\nKülönleges szabályok\n\nHárom azonos kártyák egy oszlopban → azonnal vereség (érték 0).\n\nA fogantyú vége:\n\nA fogantyú akkor ér véget, amikor egy játékos felfedi a lapjait.\nEzután minden más játékos felfedi a maradék lapjait. Vége a fogantyúnak.\nMinden játékos számolja a kártyái összegét.\n\nKérjük, vegye figyelembe: ha a játékos, aki befejezi, nem a legalacsonyabb pontszámot a körben, ő vesz egy büntetés + 10 pont (a fogantyú pontszám megduplázódik az eredeti verzió, fogjuk használni + 10 egyszerűsítésére).\n\nVége a játéknak\n\nAnnyit játszunk, amennyit csak akarunk.\nHa egy játékos eléri a 100 pontot vagy több, a játék megáll.\nA legalacsonyabb összesített pontszámmal rendelkező játékos nyer.';
 
@@ -5429,10 +5340,6 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get principeDuJeuLeJeu =>
       '# # Játékelv\n* A játékot 3 és 10 játékos között játsszák * *.\n* Minden játékos hozzáférést biztosít egy részét a fotókönyvtár, és úgy dönt, képeket megosztani.\n* Egy játék során egy képet választanak * * véletlenszerűen * * az összes játékos közül, majd néhány másodpercig megjelennek.\n* A játékosoknak tippelniük kell * * ki a tulaja * * megjelenik.\n* A játékos, aki a legtöbb képet helyesen találja ki, megnyeri a játékot.\n\n# # Eljárás\n1. * * Fotók kiválasztása * *: Minden játékos kiválasztott néhány képet a galériájából.\n2. * * A játék kezdete * *: Amint mindenki készen áll, a házigazda elindítja a játékot.\n3. * * Play Tower * *:\n- Egy véletlenszerű kép 5 másodpercig látható.\n- Minden játékos a tulajdonosra szavaz.\n4. * * Eredmények * *: A pontokat minden kör után frissítik.\n5. * * Vége a játéknak * *: Miután beállított számú kör, a játékos a legtöbb pontot nyer.';
-
-  @override
-  String get butDuJeuCoulerTous =>
-      '* * Game gól * *\nAz ellenfél összes hajóját beragadt, mielőtt elsüllyeszti a tiédet.\n\n* * Draft * *\n1. * * Elhelyezés * *: Minden játékos titokban egy 10x10-es rácsra helyezi a flottáját.\n- Légi fuvarozók (5 doboz)\n- Cruiser (4 doboz)\n- Tengeralattjáró (3 sejt)\n- Pusztító (3 doboz)\n- Járőr (2 doboz)\n2. * * Tir * *: Cserébe a játékosok hozzáérnek egy dobozhoz, hogy lőjenek.\n3. * * Eredmény * *: AppLocalizations.of (context)! .touche, \"Coulated\" or \"To water\".\n4. * * Victoire * *: Az első játékos, aki elsüllyeszti az egész ellentétes flottát, nyer.';
 
   @override
   String get butDuJeuEtreLe2 =>
@@ -5589,9 +5496,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get vousDevezJouerUneCarte => 'Magasabb kártyát kell kijátszanod.';
 
   @override
-  String get aGagne1 => 'Győzött!';
-
-  @override
   String get ceNEstPasVotre => 'Nem te jössz.';
 
   @override
@@ -5625,9 +5529,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get caseDejaCiblee => 'A mezőt már lőtték.';
-
-  @override
-  String get aCouleTouteLaFlotte => 'Az egész ellenséges flotta elsüllyedt!';
 
   @override
   String get placementAutomatiqueEffectue =>
@@ -5847,11 +5748,6 @@ class AppLocalizationsHu extends AppLocalizations {
       '--- KRISZTIKAI ERRÓR A JÁTÉKBAN ---';
 
   @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ': AppLocalizations.of (context)! .wordcivilParts0Trimwordundercover IA visszatér különálló egyszerű szavakat';
-
-  @override
   String get infiltre => 'Beépített ügynök';
 
   @override
@@ -5972,9 +5868,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'A kártya nem található.';
-
-  @override
-  String get aGagneLaManche => 'Megnyerte a kört!';
 
   @override
   String get desDejaLancesPourCe => 'Dice már elindult erre a túrára.';
@@ -6344,10 +6237,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get questionNonTrouvee => 'A kérdés nem található';
 
   @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Ki többet? AppLocalizations.of (kontextus)!. listStringKérdőívek Aiwordpool Gamewordssoft';
-
-  @override
   String get menteur => 'Hazudsz!';
 
   @override
@@ -6375,18 +6264,6 @@ class AppLocalizationsHu extends AppLocalizations {
       'A licitnek nagyobbnak kell lennie.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      ']? AppLocalizations.of (context)! .aPlayer} az utolsó túlélő és megnyeri a Koponya!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurA =>
-      ']? AppLocalizations.of (context)! .aPlayer} nyert 2 kihívást és megnyerte a játékot!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      ']? AppLocalizations.of (context)! .aPlayer} megnyeri a Koponya!';
-
-  @override
   String get reponseVide => 'Üres válasz.';
 
   @override
@@ -6410,10 +6287,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Célzott játékos nem található.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Ki több? ApLocalizations.of (kontextus)! .other GametypeSynonym vagy Banni';
-
-  @override
   String get vousNePouvezPasBannir => 'Nem tilthatod le a saját szinonimádat!';
 
   @override
@@ -6421,14 +6294,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'Ez a játékos nem küldött be választ.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Ki többet? AppLocalizations.of (kontextus)! .intRequiredvocesPlayersLengthIf A bíró';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Ki lehet a More? AppLocalizations.of (kontextus)! .forFinalTargetInVotesround State';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -6444,10 +6309,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get aucuneDescriptionNAEte => 'Nem szavaztak meg leírást.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Ki többet? AppLocalizations.of (kontextus)! .forFinalTargetInVotes1round WinnerIdd';
 
   @override
   String get jugeIntrouvable => 'A bíró nincs itt.';
@@ -6582,10 +6443,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get piquantInsolite => '🌶️ Pikáns & Különleges';
 
   @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Ki lehet a More? ApLocalizations.of (kontextus)! .who could your modegroup';
-
-  @override
   String get devineT => 'Tippelj!';
 
   @override
@@ -6599,10 +6456,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get exception => 'Kivétel:';
-
-  @override
-  String get debutDeLaConstructionDe =>
-      '--- A SZERZŐDÉS SZERKEZETE A \"Who Could the Most? AppLocations.of (context)! .printIsaction depending Stateto (isActionUnderstanding) Player \'-ként < String, dynamic >?? {};';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6622,10 +6475,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get attentionLeWidgetNEst => 'Widget eltűnt, SetState lemondva.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Ki többet? AppLocalizations.of (kontextus)! .defaultFinalRoundwinneridGamedataround WinnerIdd';
 
   @override
   String get phaseDePose => 'PHASE';
@@ -6652,7 +6501,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get strfa1b8c => 'Dollár!';
 
   @override
-  String get str487ca1 => '\${\'Chut! Csukd be a szemed.';
+  String get str487ca1 => '\$\'(\'\'Chut! Csukd be a szemed.';
 
   @override
   String get leSoleilSeLeve => 'Felkel a nap';
@@ -6691,10 +6540,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get enCours => '{0}';
-
-  @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"\"} \": GameMessageLocalization.tr (kontextus, ok),';
 
   @override
   String get jAiLanceUnePartie2 => 'Elindítottam egy játékot';
@@ -8004,41 +7849,41 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie3(Object _selectedGame) {
-    return 'J\'ai lancé une partie de $_selectedGame !';
+    return 'Eldobtam a 0 egy részét! $_selectedGame';
   }
 
   @override
   String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
-    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+    return 'Színsorok (0) $selectedRolesCount $playerslength';
   }
 
   @override
   String dessineCettePhrase1(Object stepToProcessconte) {
-    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+    return 'Rajzold le ezt a mondatot:\n\"0\" $stepToProcessconte';
   }
 
   @override
   String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
-    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+    return 'A 0-t betiltották az 1-es javaslatához! $loserName $loserAnswer';
   }
 
   @override
   String aTrouveLeMot2(Object winnerName, Object currentWord) {
-    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+    return '0 találta a szót: \"1\"! $winnerName $currentWord';
   }
 
   @override
   String personneNATrouveLe1(Object currentWord) {
-    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+    return 'Senki sem találta meg a \"0\" szót. $currentWord';
   }
 
   @override
   String aTrouveLeMot3(Object guesserName, Object currentWord) {
-    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+    return '0 találta a szót: \"1\"! $guesserName $currentWord';
   }
 
   @override
-  String get revolution1 => '(Révolution !)';
+  String get revolution1 => 'Forradalom!';
 
   @override
   String tonMotEst2(Object _wordCivil) {
@@ -8055,7 +7900,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
-    return 'J\'ai lancé une partie de $datagameTypeGribou !';
+    return 'Eldobtam a 0 egy részét! $datagameTypeGribou';
   }
 
   @override
@@ -8073,7 +7918,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get logClueGivingStart => 'A játék elkezdődik! Add meg a nyomot...';
 
   @override
-  String get logBeloteStart => 'La partie de Belote commence !';
+  String get logBeloteStart => 'Kezdődik a Belote játék!';
 
   @override
   String get logBlokusStart => 'A Blokus játék elkezdődik!';
@@ -8089,12 +7934,12 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String aTireDefi(Object targetPlayerName, Object challengeLabel) {
-    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+    return '1! $targetPlayerName $challengeLabel';
   }
 
   @override
   String lEquipeAReveleLAssassin(Object teamName) {
-    return 'L\'équipe $teamName a révélé l\'Assassin !';
+    return 'A 0-ás csapat felfedte az Assassint! $teamName';
   }
 
   @override
@@ -8102,27 +7947,27 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String maximumPossibleCartes(Object maximumBid) {
-    return 'Maximum possible : $maximumBid cartes';
+    return 'Maximális lehetséges: 0 kártya $maximumBid';
   }
 
   @override
   String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
-    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+    return '0 tükrözi a kihívás 1 kártya... $bidderName $liveAmount';
   }
 
   @override
   String votreMainCartes(Object count) {
-    return 'VOTRE MAIN ($count cartes)';
+    return 'AZ EMBERE (0 lap) $count';
   }
 
   @override
   String pictionaryStrokesCount(Object count) {
-    return '$count/30 traits';
+    return '0 / 30 vonások $count';
   }
 
   @override
   String indicesSoumisCount(Object submitted, Object total) {
-    return 'Indices soumis : $submitted / $total';
+    return 'A benyújtott mutatók: 0 / 1 $submitted $total';
   }
 
   @override
@@ -8131,7 +7976,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get couleurChoisie => 'Couleur choisie :';
+  String get couleurChoisie => 'Válogatott szín:';
 
   @override
   String pokerRaiseTo(Object amount) {
@@ -8143,14 +7988,14 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String reponseDeJoueur(Object guesserName, Object answer) {
-    return 'Réponse de $guesserName : \"$answer\"';
+    return 'Válasz 0: \"1\" $guesserName $answer';
   }
 
   @override
   String get carteSuivante => 'Carte suivante';
 
   @override
-  String get roleLabel => 'Rôle:';
+  String get roleLabel => 'Szerep:';
 
   @override
   String get obligatoire => 'Kötelező';
@@ -8177,109 +8022,107 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String aEteSignaleEtMasque(Object targetName) {
-    return '$targetName a été signalé et masqué pour vous.';
+    return '0-t jelentettek és rejtettek el neked. $targetName';
   }
 
   @override
   String get impossibleDObtenirUnJeton =>
-      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+      'Nem sikerült biztonságos LiveKit videoklippet szerezni.';
 
   @override
   String get veuillezEntrerUneAdresseEmail =>
-      'Veuillez entrer une adresse email valide.';
+      'Adjon meg egy érvényes e-mail címet.';
 
   @override
-  String get veuillezEntrerVotreMotDe =>
-      'Veuillez entrer votre mot de passe actuel.';
+  String get veuillezEntrerVotreMotDe => 'Kérem, adja meg jelenlegi jelszavát.';
 
   @override
-  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+  String get entrezVotreMotDePasse => 'Adja meg a jelenlegi jelszavát.';
 
   @override
   String get leNouveauMotDePasse =>
-      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+      'Az új jelszónak legalább 6 karakternek kell lennie.';
 
   @override
-  String get lesDeuxMotsDePasse =>
-      'Les deux mots de passe ne correspondent pas.';
+  String get lesDeuxMotsDePasse => 'Mindkét jelszó nem egyezik.';
 
   @override
-  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+  String get photoDeProfilMiseA => 'Profil fotó frissítve!';
 
   @override
-  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+  String get echecDuChangementDePhoto => 'A fotózás nem sikerült.';
 
   @override
-  String get k3CaracteresMinimum => '3 caractères minimum';
+  String get k3CaracteresMinimum => 'Minimum 3 karakter';
 
   @override
-  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+  String get cePseudoEstDejaPris => 'Ez már foglalt.';
 
   @override
-  String get unAmi => 'Un ami';
+  String get unAmi => 'Egy barát.';
 
   @override
-  String get ceJoueur => 'ce joueur';
+  String get ceJoueur => 'ez a játékos';
 
   @override
-  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+  String get preparationDeLaRecherche => 'A keresés előkészítése...';
 
   @override
   String get erreurDeConnexionAuMatchmaking =>
-      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+      'Hiba történt a párkereséssel. Kérem, próbálja újra.';
 
   @override
-  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+  String get erreurDeConnexionALa => 'Nem sikerült csatlakozni a szobához.';
 
   @override
-  String get legendeVivante => 'Légende Vivante';
+  String get legendeVivante => 'Élő legenda';
 
   @override
-  String get grandMaitre => 'Grand Maître';
+  String get grandMaitre => 'Nagymester';
 
   @override
-  String get stratege => 'Stratège';
+  String get stratege => 'Stratégia';
 
   @override
-  String get initie => 'Initié';
+  String get initie => 'Indítva';
 
   @override
-  String get illimiteesVip => 'Illimitées (VIP)';
+  String get illimiteesVip => 'Korlátlan (VIP)';
 
   @override
   String pieces(Object playerStatecoins) {
-    return '$playerStatecoins pièces';
+    return '0 darab $playerStatecoins';
   }
 
   @override
-  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+  String get utilisateurNonConnecte => 'Kapcsolatlan felhasználó.';
 
   @override
-  String get entrezUnPseudo => 'Entrez un pseudo';
+  String get entrezUnPseudo => 'Adja meg a pszeudo';
 
   @override
-  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+  String get cePseudoEstDejaPris1 => 'Ez a becenév már foglalt';
 
   @override
-  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+  String get pseudoDejaPrisParUn => 'Pseudo-t már elvitte egy másik játékos.';
 
   @override
   String get cetteVersionDeLApplication =>
-      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+      'A kérelem e változata elavult. Kérem telepítse a legújabb verziót.';
 
   @override
   String get playfunEstActuellementEnMaintenance =>
-      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+      'Playfun jelenleg folyamatosan javítja az estéket. Gyere vissza egy perc múlva!';
 
   @override
   String get uneNouvelleVersionDePlayfun =>
-      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+      'A Playfun új verziója áll rendelkezésre! Frissítse az alkalmazást, hogy folytathassa a játékot.';
 
   @override
-  String get derniereVersion => 'Dernière version';
+  String get derniereVersion => 'Legújabb változat';
 
   @override
-  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+  String get echecDeLEnvoi => 'Hibás szállítmány.';
 
   @override
   String demandeDAmiEnvoyeeA(Object name) {
@@ -8308,7 +8151,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String joueur1(Object bUid) {
-    return 'Joueur ($bUid)';
+    return 'Játékos (0) $bUid';
   }
 
   @override
@@ -8320,29 +8163,29 @@ class AppLocalizationsHu extends AppLocalizations {
   String get enableVideo => 'Videó bekapcsolása';
 
   @override
-  String get pseudoDisponible => '✅ Pseudo disponible';
+  String get pseudoDisponible => 'Pseudo elérhető';
 
   @override
-  String get entrezUnEmailValide => 'Entrez un email valide';
+  String get entrezUnEmailValide => 'Adjon meg egy érvényes e-mailt';
 
   @override
-  String get k6CaracteresMinimum => '6 caractères minimum';
+  String get k6CaracteresMinimum => 'Minimum 6 karakter';
 
   @override
-  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+  String get pasDeCompteSInscrire => 'Nincs számla? Nyilvántartás';
 
   @override
-  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+  String get dejaUnCompteSeConnecter => 'Máris számla? Bejelentkezés';
 
   @override
   String get conditionsGeneralesDUtilisationCgu =>
-      'Conditions Générales d\'Utilisation (CGU / EULA)';
+      'Általános használati feltételek (CGU / EULA)';
 
   @override
-  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+  String get politiqueDeConfidentialite => 'Adatvédelmi irányelvek';
 
   @override
-  String get miseAJourRequise => 'Mise à jour requise';
+  String get miseAJourRequise => 'Frissítés szükséges';
 
   @override
   String joueursBloques(Object blockedListlength) {
@@ -8351,5 +8194,274 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get identifiantsIncorrectsOuCompteInexistant =>
-      'Identifiants incorrects ou compte inexistant.';
+      'Érvénytelen azonosítók vagy nem létező számla.';
+
+  @override
+  String get leMotEtaitLabel => 'A szó:';
+
+  @override
+  String get mancheLabel => 'Csatorna';
+
+  @override
+  String get et => 'és';
+
+  @override
+  String pokerPlayerCheck(Object playerName) {
+    return '$playerName passzol (Check).';
+  }
+
+  @override
+  String get mot1 => 'Szó:';
+
+  @override
+  String get rouges => 'Pirosak';
+
+  @override
+  String get noirs => 'Feketék';
+
+  @override
+  String get crane2 => 'Koponya';
+
+  @override
+  String get enAttente2 => 'Függőben';
+
+  @override
+  String get enCours1 => 'Folyamatban';
+
+  @override
+  String aSelectionneSonPionEt1(Object playerscurrentPlay) {
+    return '$playerscurrentPlay kiválasztotta a bábuját és gondolkodik...';
+  }
+
+  @override
+  String tempsRestantS1(Object seconds) {
+    return 'Hátralévő idő: $seconds mp';
+  }
+
+  @override
+  String pack(Object wordstake2join) {
+    return 'Csomag $wordstake2join';
+  }
+
+  @override
+  String variante1(Object rawPairtrim) {
+    return '$rawPairtrim (Változat)';
+  }
+
+  @override
+  String gagneAvecPoint(
+    Object winnerName,
+    Object lowestScore,
+    Object lowestScore1s,
+  ) {
+    return '0 győzelem 1 pont 2-vel! $winnerName $lowestScore $lowestScore1s';
+  }
+
+  @override
+  String remporteSkull1(Object playerswinnerIdnam) {
+    return 'Győzelem Koponya! $playerswinnerIdnam';
+  }
+
+  @override
+  String packIa(Object _selectedGame) {
+    return 'csomagolás $_selectedGame';
+  }
+
+  @override
+  String get standard => 'Standard';
+
+  @override
+  String get lui => 'Őt.';
+
+  @override
+  String carte4(Object deckIndex, Object deckTotal) {
+    return 'Kártya $deckIndex / $deckTotal';
+  }
+
+  @override
+  String get joueursBloques1 => 'Zárolt játékosok';
+
+  @override
+  String get vousNAvezBloqueAucun => 'Nem tiltottál le egyetlen játékost sem.';
+
+  @override
+  String get debloquer => 'Feloldás';
+
+  @override
+  String get nouvelEmail => 'Új e-mail';
+
+  @override
+  String get motDePasseActuel => 'Jelenlegi jelszó';
+
+  @override
+  String get emailMisAJourAvec => 'E-mail frissítve!';
+
+  @override
+  String get modifierMotDePasse => 'A jelszó módosítása';
+
+  @override
+  String get nouveauMotDePasse => 'Új jelszó';
+
+  @override
+  String get confirmerLeMotDePasse => 'Jelszó megerősítése';
+
+  @override
+  String get motDePasseModifieAvec => 'A jelszót sikeresen módosították!';
+
+  @override
+  String get prendreUnePhoto => 'Csinálj egy képet.';
+
+  @override
+  String get choisirDepuisLaGalerie => 'Válasszon a galériából';
+
+  @override
+  String get supprimerLaPhoto => 'A kép törlése';
+
+  @override
+  String get photoDeProfilRetiree => 'Profilkép eltávolítva.';
+
+  @override
+  String get pseudoMisAJour => 'Frissített becenév!';
+
+  @override
+  String get compteSecurite => '& Biztonsági számla';
+
+  @override
+  String get editeParParrelV10 => 'Edited by Parrel • v1.0.0';
+
+  @override
+  String get aucunJeuTrouve => 'Nem található játék';
+
+  @override
+  String get essaieDAjusterTesFiltres =>
+      'Próbáld meg módosítani a szűrőket vagy keress újra.';
+
+  @override
+  String get reinitialiserLesFiltres => 'Szűrők visszaállítása';
+
+  @override
+  String get nouveau => 'ÚJ';
+
+  @override
+  String get gererMonAbonnement => 'Az előfizetésem kezelése';
+
+  @override
+  String get mesPieces => 'A szobáim.';
+
+  @override
+  String get rechargerLesOffresDuStore => 'Újratölthető áruházi ajánlatok';
+
+  @override
+  String get gererMesAbonnements => 'Az előfizetéseim kezelése';
+
+  @override
+  String get badges => 'Jelvények';
+
+  @override
+  String get partiesJouees => 'Lejátszott játékok';
+
+  @override
+  String get xpTotalSession => 'Munkamenet összes XP';
+
+  @override
+  String get moyennePartie => 'Átlag / Játék';
+
+  @override
+  String get detailParJeuPerformanceXp =>
+      'Játékonkénti részletek és XP teljesítmény';
+
+  @override
+  String get jouezVosPremieresPartiesPour =>
+      'Játssz le néhány játékot, hogy itt lásd az XP statisztikáidat!';
+
+  @override
+  String xpAuCompteur(Object psxp) {
+    return '$psxp XP a számlálón';
+  }
+
+  @override
+  String encoreXpAvantNiv(Object xpRemaining, Object pslevel1) {
+    return 'Még $xpRemaining XP a(z) $pslevel1. szintig';
+  }
+
+  @override
+  String joueeVictoireXpGagnes(
+    Object played,
+    Object played1s,
+    Object won,
+    Object won1s,
+    Object gameXp,
+  ) {
+    return '$played lejátszva • $won győzelem • ~$gameXp szerzett XP $played1s $won1s';
+  }
+
+  @override
+  String get erreurDeChargementDesDonnees =>
+      'Hiba a felhasználói adatok betöltésekor.';
+
+  @override
+  String get vousDevezAccepterLesCgu =>
+      'El kell fogadnia a CSU-kat és az Adatvédelmi irányelveket, hogy létrehozzon egy fiókot.';
+
+  @override
+  String get miseAJourDisponible => 'Frissítés elérhető';
+
+  @override
+  String get plusTard => 'Később';
+
+  @override
+  String get mettreAJour => 'Frissítés';
+
+  @override
+  String uneNouvelleVersionDePlayfun1(Object newVersion) {
+    return 'Új verzió ($newVersion) érhető el a Playfunból újdonságokkal és javításokkal!';
+  }
+
+  @override
+  String get maintenanceEnCours => 'Folyamatban lévő karbantartás';
+
+  @override
+  String get mettreAJourMaintenant => 'Frissítés';
+
+  @override
+  String get motifDuSignalement => 'Bejelentés oka:';
+
+  @override
+  String get tricheOuAntiJeu => 'Csalás vagy sportszerűtlen játék';
+
+  @override
+  String get autre => 'Egyéb';
+
+  @override
+  String get signaler => 'Jelentés';
+
+  @override
+  String get detailParJeu => 'Játékonkénti részletek:';
+
+  @override
+  String get ceJoueurNAPas2 =>
+      'Ennek a játékosnak még nincsenek rögzített játékai.';
+
+  @override
+  String badgesDebloques(Object unlockedBadgesleng, Object appBadgesallBadges) {
+    return 'Feloldott jelvények: $unlockedBadgesleng / $appBadgesallBadges';
+  }
+
+  @override
+  String joueursBloques2(Object psblockedUsersleng) {
+    return 'Letiltott játékosok ($psblockedUsersleng)';
+  }
+
+  @override
+  String debloquer1(Object name) {
+    return '$name feloldása';
+  }
+
+  @override
+  String signalerOuBloquer(Object name) {
+    return 'Jelentés vagy letiltás: $name';
+  }
+
+  @override
+  String get vote1 => 'szavazat';
 }

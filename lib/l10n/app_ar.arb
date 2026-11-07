@@ -28,7 +28,7 @@
   "elements": "'{0}' عناصر",
   "prompt": "الموضوع: \"'{0}'\"",
   "utiliser": "الاستخدام",
-  "packActiveElements": "✨ تم تفعيل الحزمة '''{0}''' ('{1}' العناصر)!",
+  "packActiveElements": "✨ تم تفعيل الحزمة '{0}' ('{1}' العناصر)!",
   "fusionner": "الاندماج",
   "themesFusionnesLePackActif": "✨ مواضيع مدمجة! الحزمة النشطة الآن تحتوي على '{0}' عناصر.",
   "modifierCompleter": "تعديل / اكتمال",
@@ -46,7 +46,7 @@
   "generationIa": "توليد الذكاء الاصطناعي: '{0}'",
   "historique": "التاريخ",
   "melangerPlusieursThemes": "امزج عدة مواضيع:",
-  "combineS": "✨ '{0 مجتمعة}'",
+  "combineS": "✨ ''(0 مجتمعة)''",
   "nombreDElements": "عدد العناصر:",
   "minRequisRecommande": "الحد الأدنى المطلوب: '{0}' | الموصى به: '{1}'",
   "ambianceTonaliteDeJeu": "المزاج / نغمة اللعب:",
@@ -131,7 +131,7 @@
   "lesJoueursEcriventLesDefis": "يقوم اللاعبون بتدوين التحديات",
   "unJoueurAleatoireEcritLe": "يكتب لاعب عشوائي التحدي بدلا من تحد محدد مسبقا.",
   "nombreDeTours": "عدد اللفات: '{0}'",
-  "tours": "'{0 لفات}'",
+  "tours": "''(0 لفات)''",
   "seuilDeValidationParDefaut": "عتبة التحقق الافتراضية: '{0}'٪",
   "rolesDeBase": "الأدوار الأساسية",
   "nombreDInfiltres": "عدد المتسللين",
@@ -224,7 +224,7 @@
   "valider": "التحقق من صحتك",
   "indiceEnvoyeEnAttenteDes": "✅ تم إرسال الدليل! ننتظر لاعبين آخرين...",
   "phaseDeDiscussion": "مرحلة النقاش",
-  "soupconne": "👀 '{0 مشتبه بهم}' '{1}'",
+  "soupconne": "👀 ''(0 مشتبه بهم)'' '{1}'",
   "lancerLeVote": "ابدأ التصويت",
   "debattezLHoteLanceraLe": "مناظرة! سيبدأ المضيف التصويت.",
   "aQuiLaSentence": "لمن الحكم؟",
@@ -248,7 +248,7 @@
   "pts": "+'{0}' نقطة",
   "leGagnantEst": "الفائز هو '{0}' !",
   "classementFinal": "الترتيب النهائي:",
-  "points": "'{0}'. '{1}': '{2,}' نقطة",
+  "points": "'{0}'. '{1}': ''(2,)'' نقطة",
   "retourALAccueil": "العودة إلى المنزل",
   "laPartieAEteTerminee": "تم الانتهاء من اللعبة أو لم تعد موجودة.",
   "quitterLaPartie1": "مغادرة اللعبة",
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "لم يعد لديه بطاقات",
-  "cartesRestantes": "'{0,}' بطاقة متبقية",
-  "jetonsMise": "الرهان: '{0,}' | الرهان: '{1,}'",
+  "cartesRestantes": "''(0,)'' بطاقة متبقية",
+  "jetonsMise": "الرهان: ''(0,)'' | الرهان: ''(1,)''",
   "totalPts": "المجموع: '{0}' نقطة",
   "k13Remplies": "'{0}'/13 ملء",
   "finDeLaManche": "نهاية القناة!",
@@ -329,7 +329,7 @@
   "zombieEnMain": "زومبي في يده",
   "sauve": "'{0}' (تم الحفظ!)",
   "mainDeCartes": "يد '{0}' ('{1}' بطاقة)",
-  "votreMainDeSurvieCartes": "يدك للبقاء ('{0,}' بطاقات)",
+  "votreMainDeSurvieCartes": "يدك للبقاء (''(0,)'' بطاقات)",
   "lesPairesSontDefausseesAutomatiquement": "يتم التخلص من الأزواج تلقائيا",
   "carteSEnJeu": "الخرائط قيد اللعب:",
   "aucuneCarteEnJeuJouez": "لا توجد أوراق في اللعب. العب ما تريد!",
@@ -341,14 +341,14 @@
   "tempsEcoule": "لقد مضى الوقت!",
   "tourSuivant": "الجولة القادمة",
   "enAttenteDeLHote3": "انتظار بدء المضيف في الجولة التالية...",
-  "equipeAPts": "الفريق أ: '{نقاط}' نقاط '{pts}'",
-  "equipeBPts": "فريق B: '{نقطة}' نقاط '{pts}'",
+  "equipeAPts": "الفريق أ: ''(نقاط)'' نقاط '{pts}'",
+  "equipeBPts": "فريق B: ''(نقطة)'' نقاط '{pts}'",
   "cEstAToiDe": "الأمر متروك لك لتخمين!",
   "passer1": "تخطي",
   "motsTrouves": "الكلمات التي تم العثور عليها: '{0}'",
   "ecrivezIci": "اكتب هنا...",
   "plierPasser": "فولد & باس",
-  "motsRediges": "✏️ '{0,}' كلمة مكتوبة...",
+  "motsRediges": "✏️ ''(0,)'' كلمة مكتوبة...",
   "leGrandDepliage": "الظهور العظيم!",
   "voiciLesUvresCollectivesNees": "إليكم الأعمال الجماعية التي ولدت من خيالك:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' تستعد لهجوم ('{1}') ضد لاعب!",
@@ -386,7 +386,7 @@
   "distribuerLaSuite": "وزع الباقي",
   "attenteDuDonneur": "ينتظر المتبرع...",
   "couche": "مستلقيا",
-  "miseActuelle": "الرهان الحالي: '{المبلغ}' '{amount}'",
+  "miseActuelle": "الرهان الحالي: ''(المبلغ)'' '{amount}'",
   "enAttente": "قيد الانتظار...",
   "seCoucher": "الذهاب للنوم",
   "checker": "الداما",
@@ -446,16 +446,16 @@
   "votes": "الأصوات:",
   "aVote": "'{0}' صوت: '{1}'",
   "lesPointsOntEteDistribues": "تم توزيع النقاط بناء على أصواتكم.",
-  "leMotDesCivilsEtait": "كانت كلمة المدنيين: '''{0}'''",
-  "leMotDeLInfiltre": "كلمة المتسلل ('{0}') كانت: '''{1}'''",
+  "leMotDesCivilsEtait": "كانت كلمة المدنيين: '{0}'",
+  "leMotDeLInfiltre": "كلمة المتسلل ('{0}') كانت: '{1}'",
   "mrWhiteNAvaitPas": "لم يكن لدى السيد وايت ('{0}') أي كلمات.",
-  "leMotATrouverEtait": "الكلمة التي يجب ابتكارها كانت مرادفا ل '''{0}'''. اللاعبون الآخرون يحصلون على نقطة واحدة.",
+  "leMotATrouverEtait": "الكلمة التي يجب ابتكارها كانت مرادفا ل '{0}'. اللاعبون الآخرون يحصلون على نقطة واحدة.",
   "felicitationsAuDessinateurEtA": "مبروك للرسام '{0}' ولل '{1}' !",
-  "saReponseEtait": "وكان جوابه: '''{0}'''.",
-  "leMotEtait": "كانت الكلمة هي: '''{0}'''.",
+  "saReponseEtait": "وكان جوابه: '{0}'.",
+  "leMotEtait": "كانت الكلمة هي: '{0}'.",
   "cartesRevelees": "البطاقات التي تم الكشف عنها:",
   "erreurDeChargementDuMeme": "خطأ في تحميل الميم.",
-  "scoreActuelDeCartes": "النتيجة الحالية '{0}': '{1,}' البطاقات.",
+  "scoreActuelDeCartes": "النتيجة الحالية '{0}': ''(1,)'' البطاقات.",
   "finDuTour1": "نهاية الجولة",
   "tourSuivant1": "الجولة القادمة",
   "enAttenteDeLHote4": "انتظار المضيف للجولة التالية...",
@@ -542,15 +542,15 @@
   "tempsRestantS": "الوقت المتبقي: '{0}' ثانية",
   "k6Consecutifs3": "6 مباريات متتالية: '{streak}'/3",
   "lancerLeDe": "ارم النرد",
-  "scorePoints": "النقاط: '{}' نقطة '{score}'",
-  "dominosRestants": "الدومينو المتبقي: '{العد}' '{count}'",
+  "scorePoints": "النقاط: ''()'' نقطة '{score}'",
+  "dominosRestants": "الدومينو المتبقي: ''(العد)'' '{count}'",
   "impossibleDeJouerCeDomino": "من المستحيل أن تلعب هذه الدومينو هنا.",
   "mancheTerminee": "انتهى! ",
   "dominos": "الدومينو",
   "extremites": "الأطراف: ",
-  "pioche2": "السحب: '{العد}' '{count}'",
+  "pioche2": "السحب: ''(العد)'' '{count}'",
   "piocher": "السحب",
-  "ficheDePts": "'{0 سجل}' ('{1}' نقطة)",
+  "ficheDePts": "''(0 سجل)'' ('{1}' نقطة)",
   "pts2": "{otherName} ({otherTotal} نقطة)",
   "@pts2": {
     "placeholders": {
@@ -563,7 +563,7 @@
     }
   },
   "clic": "نقرة",
-  "lancersRestants": "الرميات المتبقية: '{عد}' '{count}'",
+  "lancersRestants": "الرميات المتبقية: ''(عد)'' '{count}'",
   "combinaison": "التركيبة",
   "grilleDePts": "شبكة '{0}' ('{1}' نقطة)",
   "pts3": "{p} ({myTotal} نقطة)",
@@ -614,10 +614,10 @@
     }
   },
   "carteAPrendre": "خريطة لأخذها",
-  "votreMain": "يدك ('{عد}') '{count}'",
+  "votreMain": "يدك (''(عد)'') '{count}'",
   "touchezUneCartePourLa": "اضغط على بطاقة لوضعها جانبا",
   "aucuneCombinaisonEtaleeSurLa": "لا توجد تركيبات موزعة على الطاولة",
-  "etaler": "التوزيع ('{العد}') '{count}'",
+  "etaler": "التوزيع (''(العد)'') '{count}'",
   "defausserFin": "التخلص والنهاية",
   "pts8": "{eValue} نقاط",
   "@pts8": {
@@ -644,15 +644,15 @@
   "joueursNonAssignes1": "اللاعبون غير المخصصين",
   "confirmerLancer": "تأكيد & الإطلاق",
   "choisirUnJeuLocal": "اختيار لعبة محلية",
-  "ilFautAuMoinsJoueurs": "تحتاج إلى '{على الأقل 0,}' لاعبين لهذا الوضع!",
-  "ceModeSupporteAuMaximum": "يدعم هذا الوضع '{0,}' لاعب كحد أقصى!",
+  "ilFautAuMoinsJoueurs": "تحتاج إلى ''(على الأقل 0,)'' لاعبين لهذا الوضع!",
+  "ceModeSupporteAuMaximum": "يدعم هذا الوضع ''(0,)'' لاعب كحد أقصى!",
   "parametresActionOuVerite1": "الإعدادات: الحقيقة أم التحدي",
   "parametresDeLaPartie": "إعدادات اللعبة",
   "k1IntensiteDesDefis": "1. شدة التحديات",
   "generationIaPersonnalisee": "توليد الذكاء الاصطناعي المخصص",
   "exSoireePyjamaSecretsDe": "مثل حفلات النوم، أسرار الأزواج، القصص في العمل...",
   "defisIaGeneres": "✨ '{0}' تحديات الذكاء الاصطناعي التي تم إنشاؤها!",
-  "defisPrets": "✅ '{0 تحديات}' جاهزة!",
+  "defisPrets": "✅ ''(0 تحديات)'' جاهزة!",
   "commencerLaPartie": "ابدأ اللعبة",
   "actionOuVerite": "الحقيقة أم التحدي",
   "choisisTonDestin": "اختر مصيرك...",
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "اضغط على ''Spin Wheel'' للبدء!",
   "verite": "الحقيقة",
   "action": "الحدث",
-  "pts9": "'{0}' : '{1,}' نقطة",
+  "pts9": "'{0}' : ''(1,)'' نقطة",
   "parametresLeDilemme": "الإعدادات: المعضلة",
   "parametresDuDilemme": "معلمات المعضلة",
   "k1DifficulteDesChoix": "1. صعوبة الخيارات",
@@ -685,7 +685,7 @@
   "generationIaDeQuestionsSecretes": "توليد الذكاء الاصطناعي للأسئلة السرية",
   "exAmourSeductionTravailAnecdotes": "مثل الحب والإغراء، العمل، القصص المحرجة...",
   "questionsIaGenerees": "✨ '{0}' أسئلة من الذكاء الاصطناعي تم توليدها!",
-  "questionsPretes": "✅ '{0 أسئلة}' جاهزة",
+  "questionsPretes": "✅ ''(0 أسئلة)'' جاهزة",
   "lancerLaPiece": "ارم العملة",
   "jeuDeLaPiece": "اللعب",
   "tuAsChoisiLaPiece": "اخترت '{0}'. سقطت العملة على... '{1}' !",
@@ -812,12 +812,12 @@
   "veuillezRevenirALEcran": "يرجى العودة إلى شاشة إعداد اللاعب.",
   "retour": "العودة",
   "lEquipeAGagne": "الفريق '{0}' فاز!",
-  "points1": "'{0,}' نقطة",
+  "points1": "''(0,)'' نقطة",
   "passeLObjet": "عنصر النجاح",
   "passeLObjetRapidement": "يمر الجسم بسرعة",
   "generationIaDeQuestions": "توليد أسئلة الذكاء الاصطناعي",
   "exCultureGeneraleGagesDroles": "مثلا: المعرفة العامة، الأجور المضحكة، الأصدقاء...",
-  "questionsIaPretes": "✨ '{0 أسئلة}' الذكاء الاصطناعي جاهزة!",
+  "questionsIaPretes": "✨ ''(0 أسئلة)'' الذكاء الاصطناعي جاهزة!",
   "designerUnJoueurAleatoireA": "خصص لاعبا عشوائيا للتبديل إليه",
   "sinonPassezPhysiquementAQui": "إذا لم يكن كذلك، انتقل فعليا إلى من تريد",
   "afficherLeChronometre": "ساعة توقيت العرض",
@@ -844,7 +844,7 @@
   "equipe2": "الفريق 2",
   "validerLesEquipes": "التحقق من صحة الفرق",
   "placezLeTelephoneSurVotre": "ضع الهاتف على جبينك!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -856,7 +856,7 @@
   "arreter": "توقف",
   "hautPasser": "الأعلى = التمرير",
   "resultatsDuPassage": "نتائج المقطع",
-  "pointsMarques": "+'{0,}' نقاط مسجلة!",
+  "pointsMarques": "+''(0,)'' نقاط مسجلة!",
   "touchezUnMotPourModifier": "انقر على كلمة لتغيير النتيجة في حال حدوث خطأ في المستشعر:",
   "pts10": "{teamAScore} نقاط",
   "@pts10": {
@@ -880,7 +880,7 @@
   "symbolesParCarte": "الرموز لكل بطاقة:",
   "k6Facile": "6 (سهل)",
   "k8Standard": "8 (قياسي)",
-  "scoreCibleCartes": "النتيجة المستهدفة: '{0 بطاقات}'",
+  "scoreCibleCartes": "النتيجة المستهدفة: ''(0 بطاقات)''",
   "commencer2": "ابدأ",
   "piocheBut": "التعادل ('{0}') • الهدف: '{1}'",
   "pts12": "{player} ({score} نقطة)",
@@ -896,7 +896,7 @@
   },
   "partieTerminee2": "انتهت اللعبة!",
   "victoireDe": "انتصار '{0}' !",
-  "cartes": "'{بطاقات 0,}'",
+  "cartes": "''(بطاقات 0,)''",
   "ecrireUnMessage": "اكتب رسالة...",
   "codeDeSalonPriveIntrouvable": "لم يتم العثور على رمز غرفة خاصة.",
   "erreurLorsDeLaConnexion": "خطأ في تسجيل الدخول: '{0}'",
@@ -922,9 +922,9 @@
   "creerLeSalonCout5": "إنشاء غرفة المعيشة (التكلفة: 5 قطع)",
   "lancerUnJeuPourLe": "أطلق لعبة لغرفة المعيشة",
   "jouer1": "اللعب",
-  "joueurSEnJeu": "'{0,}' لاعب أو لاعبين في اللعب",
+  "joueurSEnJeu": "''(0,)'' لاعب أو لاعبين في اللعب",
   "cloturerLaPartie": "إغلاق المباراة",
-  "pretS": "'{0 قرض}'",
+  "pretS": "''(0 قرض)''",
   "annulerLaPartie": "إلغاء المباراة",
   "lancer": "الإطلاق",
   "ceSalonAEteFerme": "تم إغلاق هذا العرض.",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "إغلاق الصالون؟",
   "leSalonSeraDefinitivementSupprime": "سيتم إزالة الغرفة بشكل دائم لجميع المشاركين.",
   "aCreeUnePartieDe": "'{0}' أنشأت لعبة '{1}' !",
-  "joueurSPrets": "'{0,}' لاعبين جاهزين",
+  "joueurSPrets": "''(0,)'' لاعبين جاهزين",
   "cettePartieEstTermineeOu": "هذه المباراة إما انتهت أو ألغيت.",
   "enPartie": "جزئيا",
   "partieDeTerminee": "انتهت مباراة '{0}' !",
   "statistiques": "الإحصائيات - '{0}'",
-  "vainqueur1": "الفائز: '{0}''{1}'\n",
+  "vainqueur1": "الفائز: '{0}''{1}'''''''\n",
   "voirLesStats": "اطلع على الإحصائيات",
   "message": "رسالة...",
   "k0Pts": "0 نقطة",
@@ -952,7 +952,7 @@
   "voulezVousCloturerLaManche": "هل تريد إغلاق الجولة فورا؟ اللاعب الذي لديه أكبر عدد من نقاط الخبرة سيصبح المسؤول.",
   "terminer": "النهاية",
   "tour": "الجولة '{0}'",
-  "toursRestants": "'{0 لفة}' متبقية",
+  "toursRestants": "''(0 لفة)'' متبقية",
   "finManche": "نهاية المقبض",
   "quiVaReleverLeDefi": "🎰 من سيتولى التحدي؟",
   "faitesTournerLaRoulettePour": "قم بتدوير العجلة لتحديد اللاعب التالي.",
@@ -969,7 +969,7 @@
   "regardezRealiserLeDefi": "شاهد '{0}' إكمال التحدي...",
   "voteDeValidation": "🗳️ تصويت التحقق",
   "estCeQueAReleve": "هل '{0}' على مستوى التحدي؟",
-  "votesRecus": "'{0}' / '{1,}' أصوات تم استلامها",
+  "votesRecus": "'{0}' / ''(1,)'' أصوات تم استلامها",
   "vosAmisVotentPourEvaluer": "أصدقاؤك يصوتون لتقييم أدائك...",
   "votreVoteABienEte": "تم تسجيل تصويتك!",
   "ouiValide": "نعم، تم التحقق منها! 👍",
@@ -1009,11 +1009,11 @@
       }
     }
   },
-  "reflechit": "'{الاسم}' يعتقد... '{name}'",
+  "reflechit": "''(الاسم)'' يعتقد... '{name}'",
   "faceAFaceCoteA": "وجها لوجه (جنبا إلى جنب)",
   "totalAdversaire": "الخصم الكامل",
   "prendreLAtoutOuPasser": "خذ الورقة الرابحة أو تجاوز:",
-  "combinaisonsDe": "تركيبات من '{}' '{name}'",
+  "combinaisonsDe": "تركيبات من ''()'' '{name}'",
   "ilDevraDonnerLePremier": "سيتعين عليه إعطاء الدليل الأول",
   "cetteReponseADejaEte": "تم إعطاء هذا الجواب بالفعل!",
   "themePourLes25Mots": "موضوع ال 25 كلمة",
@@ -1379,7 +1379,7 @@
   "timesUpModeFree": "وصف مجاني",
   "timesUpModeOneWord": "كلمة واحدة",
   "timesUpModeMime": "الصامت والصوتيات",
-  "dtGuessedWords": "{count} كلمة (كلمات) وجدت! {count} {count} {count} {count}",
+  "dtGuessedWords": "{count} كلمة (كلمات) وجدت! {count} {count} {count} {count} {count} {count}",
   "@dtGuessedWords": {
     "placeholders": {
       "name": {
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' أعادت رمي النرد ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} احتفظ بقيمة النرد {dieVal} (#{index1}نرد) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "المعول",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' '''{''' \r\n      الأمان المضاد للتكرار: إذا كان",
   "vousNAvezPasDe": "ليس لديك كلمات",
   "equipe12": "الفريق 1",
   "equipe21": "الفريق 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  نهاية الكم (زر الإدارة)\r\n  مستقبل<فراغ> aoVEndRound (رمز لعبة السلسلة، معرف لاعب السلسلة) غير متزامن '''{''' \r\n    انتظر _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      snap النهائي = انتظار المعاملة.get(gameRef)؛ \r\n      إذا (!snap.exists) أعد؛ \r\n\r\n      final gameData = snap.data() كخريطة <سلسلة نصية، ديناميكية>; \r\n      اللاعبون النهائيون = الخريطة<السلسلة، ديناميكي>.from(gameData[''لاعبين''] ?? '{}'); \r\n\r\n      تحديد الفائز (المزيد من نقاط الخبرة)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        الخبرة النهائية = (pData[''xp''] as num?)?. toInt() ?? 0; \r\n        إذا (xp >maxXp) '{' \r\n          maxXp = خبرة؛ \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''الهدف النهائي لللعبة'':\r\n    \r\n      ",
   "quelquUn": "شخص ما",
   "aAtteintPointsEtRemporte": "{winnerName} وصلت إلى {targetScore} نقطة وفازت بالمباراة!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "اللاعب",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      أسئلة القائمة<السلسلة> =\r\n          _aiWordPool؟؟ \r\n          GameWords.whoIsMostMostLike[صعوبة] ؟؟ \r\n          GameWords.whoIsMostMostLikely[",
   "honnete": "بصدق",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [زوجي، زوجي]; \r\n\r\n        List<String> ShuffledRoles = List.from(playerOrder).. Shuffle(); \r\n        String secUndercoverId = الأدوار المخططة[0]; \r\n        String secMrWhiteId = الأدوار المختلطة[1]; \r\n\r\n        السؤال =\r\n            \"صف كلمتك السرية بكلمة واحدة. المحتالون، الخداع!\"; \r\n        ل (var pLåid في player.keys) '''{''' \r\n          السلسلة pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": ")ب(",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} وصلت إلى {updatedScoresoverallWinnerId} نقطة وفازت بالمباراة!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "ترتيب البطاقات",
   "enchereAutomatique": "المزايدة التلقائية",
   "passeLEnchere": "اجتاز المزاد",
-  "elseIfGametype": ") '''{''' \r\n        إذا (اسم الناخب == صوت للهوية) '''{''' \r\n          استثناء (\"حظر رسمي للتصويت للشخص!\"); \r\n        '''}''''}''' إذا (نوع اللعبة ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          المعاملة، \r\n          gameRef, \r\n          gameData، \r\n          التعريف الناخب، \r\n          5, \r\n          applySpeedBonus: صحيح، \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      إذا (نوع اللعبة == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          الخرائط النهائية<السلسلة، int> voteCounts = '{}'; \r\n          ل (الهدف النهائي في votes.values) '{' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          القائمة<السلسلة> topVoted = []; \r\n          voteCounts.forEach((target, count) '''{''' \r\n            إذا (عد > maxVotes) '{' \r\n              maxVotes = العد؛ \r\n              topVoted = [target]; \r\n            '}' إذا (عد == maxVotes) '{' \r\n              topVoted.add(target)؛ \r\n            '}''''}'''); \r\n\r\n          التحديثات[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        الخرائط النهائية<السلسلة، int> voteCounts = '{}'; \r\n        ل (الهدف النهائي في votes.values) '{' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        القائمة<السلسلة> topVoted = []; \r\n        voteCounts.forEach((target, count) '''{''' \r\n          إذا (عد > maxVotes) '{' \r\n            maxVotes = العد؛ \r\n            topVoted = [target]; \r\n          '}' إذا (عد == maxVotes) '{' \r\n            topVoted.add(target)؛ \r\n          '}''''}'''); \r\n\r\n        إذا (topVoted.length == 1) '''{''' \r\n          الفائز النهائي = topVoted.first; \r\n          التحديثات[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          المعاملة، \r\n          gameRef, \r\n          gameData، \r\n          التعريف الناخب، \r\n          5, \r\n          applySpeedBonus: صحيح، \r\n        ); \r\n      )'' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      إذا (نوع اللعبة == ",
   "aRemporteTousLesJetons": "{winnerName} فاز بكل الرقائق على الطاولة!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "القاضي يختار...",
   "coupAutomatiqueJouePourCause": "تم تنفيذ الحركة التلقائية بسبب عدم النشاط.",
   "inactivite": "عدم النشاط",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "صفر: 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0: {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "برج الخصم",
   "derniereCartePosee": "آخر ورقة وضعت!",
   "cEstTonTour": "دورك الآن!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "صفر: 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "خطأ: لم يتم العثور على سؤال.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "صفر: 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(لا يوجد رد)",
   "deuxDefisReussis": "نجح تحديان.",
   "leChallenger": "المتحدي",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": "'{0}' '{1}'",
   "uneDescriptionHilarante": "وصف مضحك جدا",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = عمود( \r\n            الأطفال: [ \r\n              النص( \r\n                ''",
   "unProblemeEstSurvenu": "حدثت مشكلة.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      الافتراضي: \r\n        الجولة النهائي معرف الفائز = بياناتاللعبة",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "صفر: 1/ 2 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "انظر النتيجة النهائية",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "١/٢ - ٣: ٤ {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  الأسلوب: const TextStyle(اللون: Colors.white70), \r\n                ), \r\n                SizedBox (الطول: 20)، \r\n                لف( \r\n                  المحاذاة: WrapAlignment.center, \r\n                  الأبناء: \r\n                      justOneFilteredClues\r\n                          .map((دليل) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (الطول: 20)، \r\n                إذا (justOneFilteredClues.isEmpty)\r\n                  النص( \r\n                    AppLocalizations.of(context)!. كل الأدلة كانت، \r\n                    الأسلوب: const TextStyle(اللون: Colors.red)، \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' '''{''' \r\n          الأمر متروك للعراف ليلعب\r\n          عمود الإرجاع( \r\n            الأطفال: [ \r\n              النص(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "صفر: 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,20 +2060,18 @@
   "designez2Amoureux": "حدد عاشقين اثنين",
   "amoureuxUnis": "العشاق متحدون!",
   "laVictime": "الضحية",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = صف( \r\n              mainAxisSize: MainAxisSize.min, \r\n              الأطفال: [ \r\n                _buildActionButton( \r\n                  التصنيف: AppLocalizations.of(context)!. إصابة، \r\n                  الأيقونة: Icons.auto_fix_high، \r\n                  اللون: Colors.PurpleAccent, \r\n                  على المنشور: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      السياق، \r\n                      اسمع: خطأ، \r\n                    ).record BadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      صحيح، \r\n                    ); \r\n                  '''}'''، \r\n                ), \r\n                const SizedBox (العرض: 8)، \r\n                _buildActionButton( \r\n                  التصنيف: AppLocalizations.of(context)!. ابتلع، \r\n                  أيقونة: الأيقونات.قريب، \r\n                  اللون: Colors.redAccent, \r\n                  على المنشور: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        خطأ، \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          ستيشن واجن؛ \r\n        الصندوق ''loup_blanc_turn'': \r\n          نص التوجيه = ",
   "aucuneVictimeCetteNuitProtegee": "لم يكن هناك أي إصابات الليلة الماضية (محمية أو بسلام)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              الأسلوب: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                اللون: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''ذئب'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : colors.white60)، \r\n                              ), \r\n                            ), \r\n                            TextSpan(نص: رسالة)، \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}'''، \r\n                ); \r\n              '''}'''، \r\n            ), \r\n          ), \r\n\r\n          قضيب الإرسال المدمج\r\n          إذا (canSendMessage)\r\n            تجديف( \r\n              الأطفال: [ \r\n                موسعت( \r\n                  الطفل: SizedBox( \r\n                    الطول: 32, \r\n                    الطفل: TextField( \r\n                      المراقب: _chatController، \r\n                      الأسلوب: const TextStyle(fontSize: 12، اللون: Colors.white)، \r\n                      الزينة: InputDecoration( \r\n                        نص تلميح: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        تلميح: أسلوب النص الأساسي( \r\n                          اللون: Colors.white30, \r\n                          الخط الحجم: 11, \r\n                        ), \r\n                        الحدود: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16)، \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        مملوء: صحيح، \r\n                        التعبئة اللون: Colors.white.withOpacity (0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          أفقيا: 10، \r\n                          عمودي: 0, \r\n                        ), \r\n                      ), \r\n                      تم الإرسال على الإنترنت: (نص) '''{''' \r\n                        إذا كان (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType، \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}'''، \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (العرض: 4)، \r\n                أيقوني بوتر( \r\n                  أيقونة: أيقونة الكونست( \r\n                    Icons.send_rounded، \r\n                    الحجم: 18, \r\n                    اللون: Colors.cyanAccent, \r\n                  ), \r\n                  الحشو: EdgeInsets.zero, \r\n                  القيود: const BoxConstraints(), \r\n                  على المنشور: () '''{''' \r\n                    إذا كان (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType، \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}'''، \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  الأداة _buildChatTab(تسمية النص، نوع السلسلة، اللون النشط) '{' \r\n    البول النهائي هو Selected = _selectedChatType == النوع; \r\n    إرجاع GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = نوع)، \r\n      الطفل: الحاوية( \r\n        الحشوة: const EdgeInsets.symmemetric (أفقي: 8، عمودي: 3)، \r\n        الزينة: BoxDecoration( \r\n          اللون: \r\n              isSelected\r\n                  ? activeColor.withOpacity (0.25)\r\n                  : Colors.white.withOpacity (0.04), \r\n          borderRadius: BorderRadius.circular(10)، \r\n          الحدود: border.all( \r\n            اللون: \r\n                isSelected ؟ activeColor.withOpacity (0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        طفل: نص (نص) \r\n          العلامة، \r\n          الأسلوب: TextStyle( \r\n            الخط الحجم: 10, \r\n            fontWeight: isSelected؟ FontWeight.bold: FontWeight.normal, \r\n            اللون: isSelected ؟ activeColor : colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- تحديث أفاتار ليصبح تفاعليا--- \r\n\r\n  _buildSyncTimer الويدجت (الطابع الزمني؟ وقت البدء، مدة الداخليةInSeconds) '''{''' \r\n    إذا كان (startTime == null) يعيد const SizedBox.shrink(); \r\n\r\n    يتيح TweenAnimationBuilder مؤقت بصري سلس للغاية دون حجب المؤقت ووضع الوضع اليدوي، مما يخفف الخيط بشكل كبير (النقطة 4)\r\n    نهاية الوقت النهائي = startTime.toDate().add( \r\n      المدة (ثواني: المدة في الثانية)، \r\n    ); \r\n    النهائي المتبقي = endTime.difference (DateTime.now()); \r\n\r\n    إذا (remaining.isNegative)\r\n      النص الإرجاعي( \r\n        AppLocalizations.of(context)!. k0S, \r\n        الأسلوب: موضوع. \r\n          السياق، \r\n        ).نصثيم.العنوان صغير؟. نسخ مع(اللون: Colors.redAccent)، \r\n      ); \r\n\r\n    إرجاع TweenAnimationBuilder<Duration>( \r\n      المدة: المتبقية، \r\n      المراهق: توين (البدء: الباقي، النهاية: المدة.صفر)، \r\n      البناء: (BuildContext context، قيمة Period، Widget؟ الطفل) '{' \r\n        الثواني النهائية = value.inSeconds; \r\n        النص الإرجاعي( \r\n          AppLocalizations.of(context)!. timeRemaining, \r\n          الأسلوب: موضوع(السياق).نص_العنوان.العنوانصغير؟. نسخ مع( \r\n            اللون: ثوان < 20؟ اللون.الأحمرالتأكيد: الألوان.الكهمانية، \r\n          ), \r\n        ); \r\n      '}'، \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext Context, \r\n    خريطة<نصية، ديناميكية> gameData, \r\n    معرف عازف الأوتار، \r\n  ) '''{''' \r\n    اللاعبون النهائيون = خريطة<سلسلة، ديناميكية>.from(gameData[''players''] ?? '{}'); \r\n    اللاعب النهائي = القائمة<السلسلة>.من( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    المواقع النهائية = خريطة <سلسلة وترية، ديناميكية>.من( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    السلسلة النهائية currentPlayerId =\r\n        playerOrder.isNotEmpty؟ playerOrder[currentIndex]: ''; \r\n    الفاينل بول isMyTurn = currentPlayerId == playerId; \r\n    النرد النهائي int = (gameData[''littleHorsesDice''] as num?)?. toInt() ?? 0; \r\n    اللعبة النهائية hasRolled = gameData[''littleHorsesHasRolled''] ?? false; \r\n    الاختبار النهائي هو TeamMode = gameData[''smallTeamHorses''] ?? false; \r\n    خريطة نهائية<وتر، ديناميكي> متتاليةSixes = خريطة < وتر، ديناميكي>.from( \r\n      gameData[''smallHorsesConsetive Sixes''] ?? '{}', \r\n    ); \r\n    الint النهائي mySixStreak = ستات متتالية[playerId] ?? 0; \r\n\r\n    لوحة ألوان نيون مودرن / أركيد على خلفية داكنة\r\n    القائمة<اللون> اللاعب النهائي الألوان = [ \r\n      كونست كولور (0xFFEF4444)، // الأحمر النيون\r\n      كونست كولور (0xFF38BDF8)، // أزرق نيون سماوي\r\n      لون المحافظة (0xFF10B981)، // الأخضر الزمردي\r\n      كونست كولور (0xFFF59E0B)، // جولدن أمبر\r\n    ]; \r\n\r\n    --- شاشة النصر--- \r\n    إذا (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      إرجاع UniversalGameEndScreen ( \r\n        عنوان اللعبة:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "الوصول إلى وسط اللوحة!",
   "deplacezUnCheval": "حرك حصانا!",
   "aVousDeLancer": "الأمر متروك لك لتطلق!",
   "mode2v2Allies": "وضع الحلفاء 2 ضد 2",
-  "chevalSelectionneNtouchezPourAvancer": "'''}''' اختيار '''{'''البيادق الحصان!\\nاضغط للتقدم '{pawn}'",
+  "chevalSelectionneNtouchezPourAvancer": "'''')'''' اختيار ''''(''''البيادق الحصان!\\nاضغط للتقدم '{pawn}'",
   "touchezUnPion": "اضرب رمز",
   "scoreLimiteAtteint": "تم تحقيق الحد من الدرجة!",
   "toutesLesGrillesSontCompletees": "جميع الشبكات مكتملة!",
   "cEstVotreTourTouchez": "دورك! المس النرد للحفاظ عليه (ذهبي 🔒)",
   "lancerLesDes": "ارم النرد",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1-6: صفر/63 1 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1-6: صفر/63 1 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "ضائع! كشف السؤال وأجب عليه!",
   "gagneTonSecretEstPreserve": "فزت! سرك محفوظ.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = قطع[0].trim(); \r\n      _wordUndercover = قطع[1].trim(); \r\n    '''}''' '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (متغير)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    ل (لاعب VAR في _activePlayers) '''{''' \r\n      إذا (لاعب == متخفي) '''{''' \r\n        _playerRoles[لاعب] = \"متسلل\"; \r\n      '''}''' إذا (لاعب == _mrWhitePlayer) '''{''' \r\n        _playerRoles[لاعب] = \"السيد وايت\"; \r\n      '''}''' '''{''' \r\n        _playerRoles[لاعب] = \"مدني\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.كشف؛ \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  الفراغ _nextPlayerReveal() '''{''' \r\n    إذا (_currentPlayerRevealIndex < _activePlayers.طول - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' '{' \r\n      setState(() => _gameState = UndercoverGameState.discusing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(عازف وتر) '''{''' \r\n    دور الوتر = _playerRoles[لاعب]!; \r\n    bool impostorsWin = الدور == \"مدني\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      إذا (فوز المحتالون) '''{''' \r\n        _resultMessage = \"'{'player'}' كان مدنيا! المحتالون ينتصرون!\"; \r\n      '''}''' '''{''' \r\n        _resultMessage = \"'{'player'}' كان\r\n    \r\n  ",
   "requiert4Joueurs": "يتطلب 4+ لاعبين",
   "requiert3Joueurs": "يتطلب 3+ لاعبين",
   "genereDesCategoriesAmusantesPour": "إنشاء فئات ممتعة للبطاطا الساخنة. الموضوع: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (الفريق الأزرق)",
   "k2EquipesSAffrontent": "يتنافس فريقان",
   "chacunPourSoi": "كل رجل لنفسه",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0: {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2313,7 +2301,7 @@
   "commenceParUnDessin": "ابدأ بالرسم",
   "orateur": "المتكلم",
   "moi": "أنا",
-  "manche1": "القناة '{'0'}'''''''''''''''''''''''''''''''''''''''''''''''''''''''",
+  "manche1": "القناة '{0}'",
   "voisin": "الجوار",
   "aSelectionneCarte": "''لا''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''",
   "jouePar": "♪",
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "لقد انتهى",
-  "aGagneAvecSaDescription": "{winnerName} فاز بمواصفاته: extrainfoColumnChildText 99999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "لا أحد ربح هذه الجولة مساواة الأصوات أو الوصف.",
   "aTrouveLeSymboleIl": "{winnerName} وجدت الرمز 999 إنه يفوز بالبطاقة {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "تم إرسال الفهرس في انتظار الآخرين...",
   "carte3": "خريطة",
   "score": "سكوير",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} : AppLocalizations.of(context) نموذج ConstTextstyleColors {value2} {deckIndex} / {deckTotal} - {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "الليل يقع على القرية\n\nأغلق عينيك",
   "leMomentEstVenuLe": "لقد حان الوقت\n\nالقرية يجب أن تصوت",
   "victoireDesVillageois": "!",
@@ -2562,14 +2513,6 @@
   "votezPourDevorerUneProie": "صوت لأكل الفريسة",
   "espionnezUnJoueur": "آمل أن يكون لاعباً",
   "leLoupNoirDecideDu": "الذئب الأسود يقرر مصير الفريسة",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "في {targetName} ؟",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "اختر ضحية للأكل",
   "laSorcierePrepareSesPotions": "الساحرة تجهز اثارها",
   "cibleDesLoups": "هدف الذئب: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "الذئاب",
   "outreTombe": "ما وراء البحار",
   "amoureux": "الحب",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "990 : AppLocalizations.of (context) {senderName}",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "العنصر الفردي",
   "k3Lancers": "{lastHoldAction} ( {value} /3)",
   "@k3Lancers": {
@@ -2626,7 +2561,7 @@
       }
     }
   },
-  "gardeS": "'' '{'''0'' ''أبقى",
+  "gardeS": "'' ''(''''0'' ''أبقى",
   "cur": "القلب",
   "carreau": "♦ كاريل",
   "trefle": "♣ Trèfle",
@@ -2647,7 +2582,7 @@
   "reperezLeSymboleCommunLe": "اعثر على الرمز المشترك بسرعة",
   "genereDesDilemmesAuFormat": "تولد معضلات في \"الخيار ألف\" أو \"الخيار باء\" الموضوع:",
   "jePasse": "أنا أعبر",
-  "vote": "'' '{'''0'}'صوت",
+  "vote": "'' ''(''''0'')''صوت",
   "votes1": "أصوات",
   "majoritaire": "الأغلبية",
   "fin": "النهاية",
@@ -2694,12 +2629,11 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "من يستطيع المزيد؟",
   "votePar": "فوّت من قبل:",
   "decisionUnanimeDuGroupePour": "قرار واحد للمجموعة",
   "ilFautAuMoins41": "يَأْخذُ ما لا يقل عن 4 لاعبينِ للرموزِ (2 لكل فريقِ!",
   "impossibleDeFormerLesEquipes": "لا يمكن تشكيل فرق (لم يصل إلى الحد الأدنى من الحجم). أعيدي العمل مع 4 لاعبين على الأقل",
-  "lEquipeAReveleL": "فريق '{'0'}'\"كشف عن \"المؤخرة الفريق يفوز",
+  "lEquipeAReveleL": "فريق '{0}'\"كشف عن \"المؤخرة الفريق يفوز",
   "bleue": "الأزرق",
   "lEquipeATrouveTous": "لقد وجد الفريق كل كلماته وفاز",
   "maitreEspionDeLEquipe": "السيد اسيون من الفريق",
@@ -2742,7 +2676,7 @@
     }
   },
   "jeu1": "اللعبة",
-  "partieDeEnAttente": "جزء من '' '{'''0'''}' في انتظار",
+  "partieDeEnAttente": "جزء من '' ''(''''0'''')'' في انتظار",
   "termine": "أنهيت",
   "vainqueur2": "الفائز:",
   "joueurSPretS": "لاعب جاهز",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "** الهدف**\nخذ البطاقات لخلق أزواج متطابقة تجنب أن تكون اللاعب الذي يحمل بطاقة الزومبي في نهاية اللعبة.\n**مشروع**\n1 - تبدأ اللعبة بـ 33 بطاقة (16 زوجا + بطاقة زومبي واحدة).\n2 - وتوزع البطاقات على اللاعبين الأربعة.\n3. Each turn a players takes a card from the next players.\n4 - إذا كانت البطاقة تخلق زوجا، فإنه يُهزم تلقائيا.\n5 - يد اللاعب مختلطة\n6. The first players to no longer have cards won.\n7 - اللاعب المتبقي مع بطاقة الزومبي الضائعة!",
   "butDuJeuObtenirLe": "** هدف الجمعية العامة**\nالحصول على أعلى درجة من خلال ملء 13 فئة مع 5 النرد.\n\n** سرقة برج**\n1 - ** لانس**: يمكنك أن ترمي النرد 5 مرات في كل مرة.\n2. **Keep**: بعد الرمية الأولى أو الثانية، يمكنك الاحتفاظ ببعض النرد واعادة تشغيل الآخرين.\n3. **Score**: After at least one throw, you have to choose a category to score. ولا يمكن استخدام كل فئة إلا مرة واحدة في كل جزء.\n\n** Category**\n- ** إلى ستة**: Sum of the corresponding dice. )٥٣ نقطة إن كان القسم الأعلى يبلغ ٦٣ نقطة أو أكثر(.\nBAR  BAR  BAR اجمع كل النرد\n- ** Square** (4 or more similar dice): اجمع كل النرد\n25 نقطة\nثلاثون نقطة\n- ** Suite Suite**\nخمسون نقطة\n-",
   "objectifNePasAvoirL": "** الهدف**\nليس لديك الجهاز في يديك عندما تنفجر البطاطا\n\n**مشروع**\n1 - يظهر موضوع على الشاشة.\n2 - ويجب على اللاعب الذي يحمل الجهاز أن يقدم جوابا يطابق الموضوع.\n3. As soon as he answered, he quickly passed the plane to his neighbours.\n٤ - ويجب على الجيران أن يجدوا بدوره إجابة جديدة وأن يعبروا الجهاز.\n5 - الوقت مخفي وعشوائي: البطاطا يمكن أن تنفجر في أي وقت!\n6. The players holding the tool at the time of the explosion loses the handle and receives a pledges.",
-  "principeGeneralGribouillisEstUn": "** مبدأ عام**\n(غريبوليس) لعبة رسم مستوحاة من \"الهاتف العربي\" حيث تتغير الأفكار في كل مرحلة هناك 3 ألعاب\n\n** النموذج المعياري (الهاتف العربي المحسوب)**\nكل لاعب يكتب جملة\n- ** سحب**: يتلقى كل لاعب جملة أخرى ويرسمها.\n- ** Devinette**: Each players receives a drawing and guesses what it represents.\n- ** بديل**: اللعبة البديلة ترسم وتخمين حتى كل \"البوم\" تدور حول كل اللاعبين\n- ** ولكن** متعة رؤية كيف تتحول الجملة البسيطة إلى شيء مختلف تماما!\n\n** نموذج تكميلي (الرسم التعاوني)**\nكل لاعب يبدأ رسم بسيط\nكل لاعب يتلقى رسمة أخرى ويجب أن يثريها بدون حذف ما يوجد بالفعل\n- ** بديل**: الرسمة تذهب من اللاعب إلى اللاعب، كل منها يضيف لمسته.\nBAR  BAR  BAR \n* إذا كان معوقاً (مقبولاً)*: إنه خيط الرسمة تتطور في كل مرحلة (البلايير A -). Player B -). Player C... )\n* إذا تم تفعيلها * ويستكمل جميع الأطراف الفاعلة الأخرى الرسم الأولي لكل لاعب، مما يخلق عدة أعمال جماعية بالتوازي.\n- ** خلق عمل جماعي مثير للدهشة والمرح\n\n** أسلوب الرشوة (التفاعل بين الأطراف)**\n- ** الكتابة**: يكتب كل لاعب موضوعاً شخصياً (مثلاً: تطبيقات (تابع)\n- ** سحب**: يتلقى كل لاعب المواضيع من ** جميع اللاعبين الآخرين** ويجب أن يرسمها.\n- ** ولكن**: حل لكسر الجليد واكتشاف طعم الآخرين وإطلاق الإبداع بطريقة تعاونية وخفيفة.",
   "yzObjectifAvoirLeMoins": "الهدف\n\nلدينا ما هو ممكن في نهاية اللعبة\nاللعبة تتوقف عندما يصل اللاعب إلى 100 نقطة أو أكثر، والفائز هو واحد مع أدنى معدل إجمالي.\n\nالمعدات\n\n150 بطاقة مرقمة من -2 إلى +12\n\nالتنفيذ\n\nأصلح كل البطاقات\nويتلقى كل لاعب 12 بطاقة، ويوجه أمامه، في 4 أعمدة × 3 صفوف.\nالبطاقات الأخرى تشكل مخزون أرجع البطاقة الأولى لتشكيل النفايات\nكل لاعب يعيد بطاقتين من اختياره من 12\n\nمسار جولة\n\nوفي المقابل، لديكم 30 ثانية** للاختيار بين إجراءين:\n\n1. Take the waste card\nيجب أن تتبادلها مع واحدة من أوراقك الـ 12 (الجانب الخفي أو الخفي)\nالبطاقة المستبدلة تذهب على النفايات.\n\n2. Piocher وجه البطاقة أسفل\nانظر إلى الخريطة:\n-إما أن تحتفظ بها وتستبدل إحدى بطاقاتك\nإما أن ترفضي وضعه مباشرة على النفايات وفي هذه الحالة يجب أن تعيدي واحدة من بطاقاتك لا تزال مخبأة\n\nالقواعد الخاصة\n\nويتم هزيمة ثلاث بطاقات متطابقة في العمود (قيمة صفر).\n\nنهاية المقبض:\n\nالمقبض ينتهي عندما يكشف اللاعب كل بطاقاته\nجميع اللاعبين الآخرين يكشفون عن بطاقاتهم المتبقية المقبض إنتهى\nجميع اللاعبين يعدون مجموع بطاقاتهم\n\nيُرجى ملاحظة: إذا لم يكن لدى اللاعب الذي يُنهى أدنى درجاته في الجولة، فإنه يُعاقب على +10 نقاط (تضاعف حصته في النسخة الأصلية، سنستخدم +10 لتبسيطها).\n\nنهاية اللعبة\n\nنلعب كم عدد الأكمام التي نحتاجها\nعندما يصل اللاعب إلى 100 نقطة أو أكثر، تتوقف اللعبة.\nاللاعب الذي لديه أدنى سجل تراكمي يفوز",
   "iAReglesDuPoker": "الهدف\n\nفوز الرقائق من لاعبين آخرين عن طريق:\nأفضل يد لخمسة بطاقات خلال الذبح\nأو بجعلهم يستسلمون (للنوم) بفضل الرهانات\n\nتصنيف اليد (من الأقوى إلى الضعف)\n\n1. Royal flush : 10 - V - D - R - A of the same colour\n2. Quint flush: 5 cards that follow each other, same color\n3 - النطاق: 4 بطاقات متطابقة\n4 - كاملة: 3 بطاقات متطابقة + زوج واحد\n5. Colour (flush): 5 cards of the same color (non-consecutive)\n6. next (Fifth): 5 cards that follow each other (different colors)\n7 - بريلان: 3 بطاقات متطابقة\n8- زوجان مزدوجان\n9. Pair\n10. High card (highest card if no one gets better)\n\n#\n\n1- الأعمى\nاللاعب إلى اليسار من التاجر يضع العمى الصغير\nاللاعب التالي يضع العمى الكبير\n\n٢ - التوزيع\nويتلقى كل لاعب ورقتين مغلقتين (البطاقات الخاصة).\n\n3. Auction towers and common cards\nخدعه مع البطاقات الخاصة\n3 خرائط مشتركة كشفت رهانات جديدة\n- برج: رهانات جديدة\n-النهر: 5 واخر خريطة مشتركة كشفت الرهان الأخير\n\n4 - إطلاق النار (الخفض)\nإذا بقي العديد من اللاعبين، كل واحد يظهر لعبتهم.\nإن أفضل مزيج من 5 بطاقات (فيما يتعلق ببطاقاتها الخاصة + البطاقات الخمس) يكسب القدر.\n\nالإجراءات الممكنة\n\nوفي المقابل، لدى اللاعب **30 ثانية** من أجل:\nلا تراهن على أي شيء فقط إذا لم يراهن أحد مجدداً\nضع بعض الرقائق في الوعاء\n-إتبعوا (الرّابط) كافئوا الركض\nزيادة الرهان\n-اذهبي إلى الفراش، اسقطي بطاقاته واخرجي منها\n\nنهاية اللعبة\n\nاللعبة تستمر طالما لا يزال هناك لاعبين على الأقل مع الرقائق.\nالفائز النهائي هو من يأخذ كل الرقائق",
   "butDuJeuGagnerLe": "** هدف الجمعية العامة**\nفوز أكثر XP عن طريق القيام بأعمال والرد على الحقائق!\n\n**مشروع**\n1. The roulette is the players whose turn it is.\n2. The players shoots \"Action\" or \"Verity\".\n3. Classic mode: A random challenge/question is displayed.\n4 - القاضي مود: لاعب عشوائي يكتب التحدي، ثم اللاعب يدرك ذلك.\n٥ - تصادق جهات فاعلة أخرى على صحة التصويت نعم/لا.\n6. The validation percentage determines the XP won.\n\n** قواعد خاصة**\n- 100٪ المصادقة = أقصى XP\n- اللاعب الأكثر XP يَصْبحُ أدمان اللعبةَ\nالزر \"نهاية المقبض\" يسمح بإغلاق الجزء",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "** هدف الجمعية العامة**\nكن أسرع لكشف الرمز المتطابق الوحيد بين البطاقة في المركز و بطاقته\n\n**\n1 - كل لاعب يتلقى وجه البطاقة. بقية البطاقات تشكل مخزوناً في المركز وجهاً مرئياً\n2. At first, everybody returns their card.\n3 - يجب على كل لاعب أن يجد بأسرع ما يمكن الرمز الوحيد الموجود على كل من بطاقته وعلى بطاقة الأسهم.\n4. The first players who find the symbol, the announcement aloud, takes the Stock card and places it on his own card.\n5. This new card becomes his card for the next round. وبعد ذلك تُكشف خريطة جديدة في وسط المخزون.\n6. The game continues until the Stock is completed. اللاعب الذي جمع أكثر البطاقات في النهاية يفوز!",
   "butDuJeuSeDebarrasser": "** هدف الجمعية العامة**\nتخلص من كل بطاقاته بكونه الأول\n\n**مشروع**\n1- ** التوزيع**: يتلقى كل لاعب 7 بطاقات. الباقي يشكل المخزون أعيدت بطاقة لبدء كومة النفايات\n2 - ** البطاقة**: اللاعب الذي يكون دوره هو **30 ثانية** لوضع بطاقة في يده على كومة النفايات. يجب أن تتطابق البطاقة مع البطاقة العلوية من قبل:\n* ** كولور** (الجنس: الأحمر على الأحمر)\n* ** الخيار** (الجنس: 1 7 أزرق على 7 أخضر)\n* **Symbol** (ex: a أصفر \"+2\" على \"حمراء +2\"\n* بطاقة خاصة** (Joker, +4, etc.)\n3- ** بيوش**: إذا كان اللاعب لا يستطيع لعب البطاقة في الوقت المخصص له، يجب أن يختار بطاقة من الطرد. إذا كان يستطيع أن يلعب هذه البطاقة، يمكنه فعلها على الفور. وإلا سينتهي دوره\n4- ** بطاقات خاصة**:\n**+2 (بطاقتان)**: اللاعب التالي يختار بطاقتين ويمرر دوره\n* ** يُحرَم حظراً (دوركم)**: اللاعب التالي يمر دوره\n* ** الترجمة التحريرية (شكل المعنى)**: الشعور بالمسرحية معكوس\n**Joker (Colour Change)**: اللاعب يختار لون البطاقة التالية للعب يمكن أن تلعب على أي بطاقة.\n** سوبر جوكر + 4 (تغيير العنب و 4 كاردز)**: اللاعب يختار اللون اللاعب التالي يختار 4 بطاقات ويمرر دوره لا يمكن لعب هذه البطاقة إلا إذا لم يكن لدى اللاعب بطاقة أخرى من اللون المطلوب على كومة النفايات (ما لم تخدع)\n5. **Announce \"UNO\"**: عندما يكون لدى اللاعب بطاقة واحدة فقط في يده يجب أن يعلن \"O\" If he does not do so and is taken by another players ( before the next players plays or picks up), he must pick 2 cards.\n6- ** نهاية القناة**: المقبض ينتهي عندما يتخلص اللاعب من بطاقته الأخيرة النقاط محسوبة اللاعب الذي يصل إلى 500 نقطة (أو المجموع المحدد) يفوز باللعبة.\n\n** النقاط الرئيسية:**\n* بطاقات رقمية (0-9): قيمتها الوجهية.\n* +2, Sens forbidden, Inversion: 20 points.\n* Joker, Super Joker +4: 50 points.",
   "principeDuJeuLeJeu": "# مبدأ اللعبة\n* اللعبة تُلعب بين **3 و10 لاعبين**.\n* يتيح كل لاعب الوصول إلى جزء من مكتبة صوره ويختار صوراً لتقاسمها.\n* خلال لعبة، يتم اختيار صورة** ** من بين جميع اللاعبين، ثم عرضها لبضع ثوان.\n* يجب على اللاعبين أن يخمنوا من يملك الصورة**\nاللاعب الذي يُخمّنُ بشكل صحيح أكثر الصور تَرْبحُ اللعبةَ.\n\nالإجراء\n1- ** اختيار الصور**: كل لاعب يختار عددا من الصور من معرضهم\n2- ** بداية اللعبة**: بمجرد أن يكون الجميع مستعداً، يبدأ المضيف اللعبة\n٣- ** برج البالاي**:\n-صورة عشوائية تظهر لخمس ثواني\nجميع اللاعبين يصوتون ليخمنوا المالك\n4- ** النتائج**: تُحدَّث النتائج بعد كل جولة.\n5- ** نهاية اللعبة**: بعد عدد من الطلقات اللاعب الذي يفوز بأكبر النقاط",
-  "butDuJeuCoulerTous": "** هدف الجمعية العامة**\nدس كل سفن الخصم قبل أن يغرق سفينتك\n\n**مشروع**\n1 -** كل لاعب يضع أسطوله سراً على شبكة 10x10\n- ناقلات الطائرات (5 صناديق)\n- كروزر (4 صناديق)\n- غواصة (3 خلايا)\n- Destroyer (3 boxes)\n- الدورية (صندوقان)\n2-**: في المقابل، يلمس اللاعبون صندوقاً للتصوير\n3- ** Result**: AppLocalizations.of(context)\n4- ** فيكتوار**: يفوز أول لاعب يغرق الأسطول المتعارض بأكمله.",
   "butDuJeuEtreLe2": "** هدف الجمعية العامة**\nيكون أول من يصل إلى المسافات المستهدفة (000 1 كيلومتر عن طريق التقصير).\n**مشروع**\nكل لاعب يحصل على ست بطاقات\n-في المقابل، ألعب بطاقة (المقاومة، الهجوم، الدفاع، الأمن) أو تخلص منها\n- البطاقات ** (التوقيف، الأحمر، النسيان، الكرفيسون، Limit) تحجب الخصم.\n- خرائط** هجمات مضادة (Green, Extra Tank, Repair, End Limit)\n- The **Security** cards abolish an attack and prevent its recurrence.\n- الخرائط ** المسافة** (25 و 50 و 75 و 100 و 200 كلم) تحرك سيارتك إلى الأمام.\nاختر بطاقة واحدة في نهاية دورك",
   "butDuJeuEtreLe3": "** هدف الجمعية العامة**\nكن أول من يتخلص من كل بطاقاته بتشكيل تركيبات صالحة (صهر)\n\n** سرقة برج**\n1. **Piocher**: Take the map from the top of the waste OR Stock.\n2- ** بيع (اختياري)**: ضع تركيبات صحيحة على الطاولة\n- ** تواتر (رون)**: 3 أو أكثر من البطاقات ذات اللون الذي يليه (مثل 5) يمكن أن يكون الجليد مرتفعا أو منخفضا.\n- ** Group (Set)**: 3 or 4 cards of the same value but of different colours (e.g. 8جم\n3. **Default**: get rid of a card from his hand on the waste.\n\n** نهاية المقبض**\nاللاعب الأول الذي لم يعد لديه بطاقات بعد الفوز بالهزيمة ويحسب الآخرون نقاط بطاقاتهم المتبقية (الرسوم = 10، و = 15، وغيرها = قيمة الوجه). اللعبة تتوقف عند 100 نقطة",
   "butDuJeuFaireDeviner2": "** هدف الجمعية العامة**\nاجعل فريقك يخمن حداً أقصى للكلمات قبل نهاية الوقت بدون استخدام الكلمات المحرمة\n\n**مشروع**\n1. Every turn, a players (the speakers) tries to make his team guess a word.\n2 - وينبغي ألا ينطق المتكلم بكلمة التخمين، ولا أي من الكلمات &quot; المحرمة &quot; (لا كلمات) التي تظهر تحت الكلمة المستهدفة. ولا يمكنه استخدام ترجمات أو كلمات من نفس العائلة.\n3 - وإذا استخدم المتكلم كلمة &quot; تابو &quot; ، فإن الفريق المعارض (أو القاضي) يبلغ عن الخطأ، تلغى البطاقة وتنتقل المتكلمة إلى العنوان التالي.\n4 - كل كلمة مُخمّنة تعود إلى الفريق.\n5. The turn ends when the time is up.\n\n** الجزء**\nالفريق الذي لديه أكثر النقاط بعد عدد النواقص المحددة",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "يجب أن تلعب نفس عدد البطاقات",
   "combinaisonDe5CartesTrop": "جمع 5 بطاقات ضعيفة جداً",
   "vousDevezJouerUneCarte": "عليك أن تلعب بطاقة أقوى",
-  "aGagne1": "لقد فاز",
   "ceNEstPasVotre": "ليس دورك",
   "carteIntrouvableDansLaMain": "الخريطة لم تجد في اليد",
   "coupInvalideSelonLesRegles": "إنقلاب لا ينفصم وفقا لقواعد ميل بورنز",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "حان الوقت لقول الحقيقة",
   "cibleHorsDeLaGrille": "الهدف خارج الشبكة",
   "caseDejaCiblee": "الصندوق مستهدف بالفعل",
-  "aCouleTouteLaFlotte": "غرق أسطول العدو بأكمله!",
   "placementAutomatiqueEffectue": "⏱️ Placement automatique effectué.",
   "tempsEcoulePourLaSaisie": "حان وقت إدخال الكلمات اللعبة تبدأ بالكلمات المضبوطة",
   "laPhaseDeVoteA": "لقد بدأت مرحلة التصويت",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "صفقة ناجحة عودوا إلى الحقيقة",
   "debugJoingameLaPartieN": "[DBUG الانضمامGame] اللعبة ليست موجودة أو لم تعد موجودة في الردهة عودي إلى الزائف",
   "erreurCritiqueDansJoingame": "---------",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ": AppLocalizations.of (context) \"السيوف الشريرة \"تريم ووردندر سريا",
   "infiltre": "متسلل",
   "civil": "المدنيون",
   "vendeurDeFalafels": "البائع",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "التجمّع غير صحيح وفقاً لقواعد رامي",
   "defaussezExactement1Carte": "هزيمة بالضبط بطاقة واحدة.",
   "carteNonTrouvee": "الخريطة لم تجد",
-  "aGagneLaManche": "لقد ربح الجولة",
   "desDejaLancesPourCe": "(دايس) بدأ بالفعل لهذه الجولة",
   "vousDevezDAbordLancer": "يجب أن تبدأ النرد أولاً",
   "vousNePouvezPasDeplacer": "لا يمكنك تحريك ثوب خصم",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "لا يمكنك اختيار لون الآن",
   "erreurCritiquePlayerorderEstVide": "اللاعب فارغ في الراوند لا أستطيع الاستمرار",
   "questionNonTrouvee": "سؤال لم يعثر عليه",
-  "quiPourraitLePlusApplocalizations1": "من يستطيع المزيد؟",
   "menteur": "Liar",
   "pasAssezDeJoueursPour": "لا يوجد لاعبين كافيين لهذه الموضة",
   "ajouteLaDescriptionLaPlus": "أضف أكثر الوصف مرحاً إلى هذه الذاكرة!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "كل لاعب نشط يجب أن يضع بطاقة واحدة على الأقل قبل بدء المزاد",
   "enchereInvalide": "مزاد غير سليم",
   "laSurenchereDoitEtreSuperieure": "المزاد يجب أن يكون أعلى.",
-  "applocalizationsOfContextUnjoueurEst": "التذبذبات الصوتية هي الناجي الأخير ويفوز بـ(سكول)",
-  "applocalizationsOfContextUnjoueurA": "فازت بتحديتين وفازت باللعبة",
-  "applocalizationsOfContextUnjoueurRemporte": "التذبذبات الصوتية تفوز بـ (سكول)",
   "reponseVide": "إجابة واضحة",
   "leJugeNePeutPas1": "ولا يستطيع القاضي تقديم رد.",
   "toutLeMondeARepondu": "الجميع أجابوا لنفتح الباب",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "الجميع أجابوا صوت",
   "toutesLesReponsesSontRecues": "جميع الإجابات واردة على القاضي أن يقرر",
   "joueurCibleIntrouvable": "لاعب مستهدف لم يعثر عليه",
-  "quiPourraitLePlusApplocalizations2": "من يستطيع المزيد؟",
   "vousNePouvezPasBannir": "لا يمكنك أن تلغي مرادفك الخاص",
   "seulLeJugeEnTitre": "فقط القاضي الحاكم يمكنه تعيين الفائز",
   "ceJoueurNAPas1": "هذا اللاعب لم يقدم إجابة",
-  "quiPourraitLePlusApplocalizations3": "من يستطيع المزيد؟ القاضي",
-  "quiPourraitLePlusApplocalizations4": "مَنْ يُمْكِنُ أَنْ أكثر؟",
   "egaliteParfaiteAucunPointAttribue": "مساواة مثالية لا نقاط مخصصة",
   "egaliteDansLesVotesAucun": "المساواة في الأصوات: لم يلغ أي لاعب هذه الجولة.",
   "laDescriptionLaPlusDrole": "أروع وصف تم اختياره",
   "aucuneDescriptionNAEte": "ولم يصوت على أي وصف.",
-  "quiPourraitLePlusApplocalizations5": "من يستطيع المزيد؟",
   "jugeIntrouvable": "لم يعثر على القاضي",
   "laPartieDeZeroPointe": "لعبة صفر بوينت تبدأ كل لاعب يجب أن يكشف عن بطاقتين",
   "toutLeMondeARevele": "الجميع كشفوا بطاقاتهم اللعبة تبدأ",
@@ -3164,21 +3084,18 @@
   "cultureDefi": "التحدي الثقافي",
   "familleToutPublic": "الأسرة",
   "piquantInsolite": "غير عادية",
-  "quiPourraitLePlusApplocalizations6": "مَنْ يُمْكِنُ أَنْ أكثر؟ من يستطيع فريقك",
   "devineT": "تخمين T",
   "presidente": "الرئيس",
   "chargement": "التعبئة...",
   "cursive": "وقف إطلاق النار",
   "exception": "الاستثناء:",
-  "debutDeLaConstructionDe": "'{'y: i'}' '{'y: i'}' '{'y: i'}' '{'y: i'}'",
   "clicSurLeJoueurPname": "? CLIC على اللاعب ''$pName'' ?",
   "passageDeIsactionpendingATrue": "-الانتقال من \"العمل\" إلى الحقيقة",
   "erreurFirebaseLorsDuVote": "! ERREUR قاعدة الإطفاء أثناء التصويت:",
   "appelFirebaseTerminePassageDe": "-المكالمة انتهت إنتقال من \"إكشن\" إلى \"كاذب\".",
   "attentionLeWidgetNEst": "الزوجة رحلت، تم إلغاء الولاية",
-  "quiPourraitLePlusApplocalizations7": "من يستطيع المزيد؟",
   "phaseDePose": "الوظيفة",
-  "stre9f4a5": "'{'$ '{'Legendary!\"",
+  "stre9f4a5": "''(''$ ''(''Legendary!\"",
   "str21f597": "ممتاز",
   "str59ee4e": "حسناً",
   "strb6f91d": "\"ليس سيئاً\"",
@@ -3204,8 +3121,7 @@
   "chill": "الدجاج",
   "soiree": "المساء",
   "competition": "المنافسة",
-  "enCours": "CURRENT: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \" '{}' : '{' : '}' : '{'y: GameMessage Localization.tr (context, reason)",
+  "enCours": "CURRENT: '{0}'",
   "jAiLanceUnePartie2": "رميت لعبة",
   "piedDeBiche": "Bishfoot",
   "appTitle": "لعبة السهرة",
@@ -3935,24 +3851,24 @@
   "miroir": "miroir",
   "magie": "magie",
   "cascade": "cascade",
-  "dragon": "dragon",
-  "boussole": "boussole",
-  "diamant": "diamant",
-  "flamme": "flamme",
-  "horloge": "horloge",
-  "pirate": "pirate",
-  "vortex": "vortex",
-  "aurore": "aurore",
-  "papillon": "papillon",
-  "bouclier": "bouclier",
-  "labyrinthe": "labyrinthe",
-  "cristal": "cristal",
-  "volcan": "volcan",
-  "mirage": "mirage",
-  "sentinelle": "sentinelle",
-  "cloche": "cloche",
-  "lanterne": "lanterne",
-  "parchemin": "parchemin",
+  "dragon": "التنين",
+  "boussole": "البوصلة",
+  "diamant": "الماس",
+  "flamme": "اللهب",
+  "horloge": "الساعة",
+  "pirate": "قرصان",
+  "vortex": "دوامة",
+  "aurore": "أورورا",
+  "papillon": "الفراشة",
+  "bouclier": "الدرع",
+  "labyrinthe": "maze",
+  "cristal": "البلورة",
+  "volcan": "بركان",
+  "mirage": "الغضب",
+  "sentinelle": "sentinel",
+  "cloche": "جرس",
+  "lanterne": "lantern",
+  "parchemin": "الفصل",
   "aGagne2": "{gameDataplayerswin} a gagné !",
   "@aGagne2": {
     "placeholders": {
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "رميت جزء من 0! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "الأدوار ( صفر) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "رسم هذه الجملة:\n\" صفر \" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "لم يُحظر على أي شيء من أجل اقتراحه {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "لا يوجد كلمة واحدة {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "لم يعثر أحد على الكلمة {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "لا يوجد كلمة واحدة {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "!",
   "tonMotEst2": "Ton mot est : {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Égalité !",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "رميت جزء من 0! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "La partie de Yams commence !",
   "logClueGivingStart": "La partie commence ! Donnez votre indice...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "لعبة البلوت تبدأ",
   "logBlokusStart": "La partie de Blokus commence !",
   "pokerFlop": "--- FLOP ---",
   "pokerTurn": "--- TURN ---",
   "pokerRiver": "--- RIVER ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "لم يفصل أحد: 1! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "الفريق 0 كشف عن المؤخرة {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "أقصى ما يمكن: صفر بطاقات {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "لا يعكس تحدي واحد من البطاقات {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "رجلك {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 /30 صفات {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "المؤشرات المقدمة: صفر/ 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "لون مختار:",
   "pokerRaiseTo": "Relancer à {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "رد من صفر: 1 {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "الدور:",
   "obligatoire": "Obligatoire",
   "aSelectionneSonPionEtReflechit": "{playerName} a sélectionné son pion et réfléchit...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "لم يتم الإبلاغ عن أي شيء من أجلك {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "لا يمكن الحصول على مقطع فيديو آمن لـ(ليف كيت)",
+  "veuillezEntrerUneAdresseEmail": "يرجى الدخول إلى عنوان بريد إلكتروني صحيح.",
+  "veuillezEntrerVotreMotDe": "من فضلك أدخل كلمة المرور الحالية",
+  "entrezVotreMotDePasse": "أدخل كلمة المرور الحالية",
+  "leNouveauMotDePasse": "كلمة السر الجديدة يجب أن تكون على الأقل 6 شخصيات",
+  "lesDeuxMotsDePasse": "كلا كلمة السر لا تتطابق",
+  "photoDeProfilMiseA": "تم تحديث الصورة",
+  "echecDuChangementDePhoto": "فشل تغيير الصورة",
+  "k3CaracteresMinimum": "الحد الأدنى 3 شخصيات",
+  "cePseudoEstDejaPris": "هذا النيك مأخوذ بالفعل",
+  "unAmi": "صديق",
+  "ceJoueur": "هذا اللاعب",
+  "preparationDeLaRecherche": "إعداد البحث...",
+  "erreurDeConnexionAuMatchmaking": "يتواصل الخطأ مع المطابقة أرجوك حاول مرة أخرى",
+  "erreurDeConnexionALa": "الخطأ يتواصل مع الغرفة",
+  "legendeVivante": "الأسطورة الحية",
+  "grandMaitre": "سيدي",
+  "stratege": "الاستراتيجية",
+  "initie": "بدأ",
+  "illimiteesVip": "غير محدود (VIP)",
+  "pieces": "قطع {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "مستعمل غير متصل",
+  "entrezUnPseudo": "ادخلي",
+  "cePseudoEstDejaPris1": "هذا اللقب مأخوذ بالفعل",
+  "pseudoDejaPrisParUn": "(بوسيدو) أخذه بالفعل لاعب آخر",
+  "cetteVersionDeLApplication": "وقد فاتت هذه الصيغة من الطلب. الرجاء تركيب آخر نسخة.",
+  "playfunEstActuellementEnMaintenance": "(بلافون) يجري حالياً تحسين مساءاتك عودي خلال دقيقة",
+  "uneNouvelleVersionDePlayfun": "نسخة جديدة من بلايفون متاحة تحتاج إلى تحديث التطبيق لمواصلة اللعب.",
+  "derniereVersion": "آخر نسخة",
+  "echecDeLEnvoi": "الشحنة الفاشلة",
   "demandeDAmiEnvoyeeA": "Demande d''ami envoyée à {name} !",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "اللاعب ( صفر) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Activer la Vidéo",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "متوفر",
+  "entrezUnEmailValide": "أدخل رسالة إلكترونية صحيحة",
+  "k6CaracteresMinimum": "الحد الأدنى 6 شخصيات",
+  "pasDeCompteSInscrire": "لا حساب؟ السجل",
+  "dejaUnCompteSeConnecter": "بالفعل حساب؟ اسحب",
+  "conditionsGeneralesDUtilisationCgu": "المصطلحات العامة للاستخدام (CGU / EULA)",
+  "politiqueDeConfidentialite": "سياسة الخصوصية",
+  "miseAJourRequise": "التحديث المطلوب",
   "joueursBloques": "Joueurs bloqués ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Invalid ident identifiers or non-existent account.",
+  "leMotEtaitLabel": "الكلمة كانت:",
+  "mancheLabel": "القناة",
+  "et": "و",
+  "pokerPlayerCheck": "تحقق {playerName}",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "كلمة:",
+  "rouges": "أحمر",
+  "noirs": "أسود",
+  "crane2": "Skull",
+  "enAttente2": "معلقة",
+  "enCours1": "جارية",
+  "aSelectionneSonPionEt1": "لم يختار أحد بيدقه و انعكس {playerscurrentPlay}",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "الوقت المتبقي: {seconds}",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Pack 0 {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "صفر (متغير) {rawPairtrim}",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "صفر يفوز مع نقطة 2 {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "(ونز سكول) {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Pack IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "المعيار",
+  "lui": "هو",
+  "carte4": "Card 0 / 1 {deckIndex} {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "اللاعبون المقفلون",
+  "vousNAvezBloqueAucun": "لم تحجب أي لاعبين",
+  "debloquer": "إفتح",
+  "nouvelEmail": "البريد الإلكتروني الجديد",
+  "motDePasseActuel": "كلمة السر الحالية",
+  "emailMisAJourAvec": "تم تحديث البريد بنجاح!",
+  "modifierMotDePasse": "تغيير كلمة السر",
+  "nouveauMotDePasse": "كلمة سر جديدة",
+  "confirmerLeMotDePasse": "كلمة السر",
+  "motDePasseModifieAvec": "تم تعديل كلمة السر بنجاح",
+  "prendreUnePhoto": "التقط صورة",
+  "choisirDepuisLaGalerie": "اختر من المعرض",
+  "supprimerLaPhoto": "تحذف الصورة",
+  "photoDeProfilRetiree": "أزيلت الصورة",
+  "pseudoMisAJour": "تم تحديث النيكان!",
+  "compteSecurite": "&quot; حساب الأمن",
+  "editeParParrelV10": "Edited by Parrel • v1.0.0",
+  "aucunJeuTrouve": "لا توجد لعبة",
+  "essaieDAjusterTesFiltres": "حاول تعديل مرشحيك أو القيام بتفتيش آخر",
+  "reinitialiserLesFiltres": "Reset Filters",
+  "nouveau": "NEW",
+  "gererMonAbonnement": "إدارة اشتراكي",
+  "mesPieces": "غرفتي",
+  "rechargerLesOffresDuStore": "Reload Store offers",
+  "gererMesAbonnements": "إدارة اشتراكاتي",
+  "badges": "Badges",
+  "partiesJouees": "اللعب",
+  "xpTotalSession": "مجموع الدورة",
+  "moyennePartie": "المتوسط/الجزء",
+  "detailParJeuPerformanceXp": "Detail by Jeu &apos; Performance XP",
+  "jouezVosPremieresPartiesPour": "ألعب ألعابك الأولى لرؤية إحصائياتك هنا",
+  "xpAuCompteur": "0 XP {psxp}",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "مرة أخرى صفر XP قبل Niv 1 {xpRemaining} {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "0 تلاعب بـ 1: 2 فزت 3. {played} {played1s} {won} {won1s} {gameXp}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "بيانات المستعمل",
+  "vousDevezAccepterLesCgu": "يجب أن تقبلي النظام المركزي و سياسة الخصوصية لخلق حساب",
+  "miseAJourDisponible": "المعلومات المتاحة",
+  "plusTard": "لاحقا",
+  "mettreAJour": "آخر",
+  "uneNouvelleVersionDePlayfun1": "وهناك نسخة جديدة (صفر) من بلايفون متاحة بملامح وتصويبات جديدة. {newVersion}",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "الصيانة الجارية",
+  "mettreAJourMaintenant": "تحديث الآن",
+  "motifDuSignalement": "سبب الإبلاغ:",
+  "tricheOuAntiJeu": "التشويه أو مكافحة الجماع",
+  "autre": "أخرى",
+  "signaler": "التقرير",
+  "detailParJeu": "تشخيص اللعبة:",
+  "ceJoueurNAPas2": "هذا اللاعب ليس لديه ألعاب مسجلة بعد",
+  "badgesDebloques": "الشارات غير المقفلة: صفر/ 1 {unlockedBadgesleng} {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "اللاعبون المحاصرون (0) {psblockedUsersleng}",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "الفتح {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Report or Block 0 {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "vote"
 }

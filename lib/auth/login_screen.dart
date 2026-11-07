@@ -177,10 +177,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         : () async {
                             if (!_isLogin && !_acceptedTerms) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                                SnackBar(
                                   backgroundColor: Colors.redAccent,
                                   content: Text(
-                                    "Vous devez accepter les CGU et la Politique de Confidentialité pour créer un compte.",
+                                    AppLocalizations.of(context)!.vousDevezAccepterLesCgu,
                                   ),
                                 ),
                               );

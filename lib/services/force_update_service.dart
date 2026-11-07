@@ -109,7 +109,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
               const Icon(Icons.system_update_rounded, color: Colors.amberAccent),
               const SizedBox(width: 10),
               Text(
-                GameContentLocalization.ui(context, "Mise à jour disponible"),
+                AppLocalizations.of(context)!.miseAJourDisponible,
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
@@ -121,7 +121,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
               Text(
                 message.isNotEmpty
                     ? message
-                    : GameContentLocalization.format(context, "Une nouvelle version ({0}) de Playfun est disponible avec des nouveautés et corrections !", [newVersion]),
+                    : AppLocalizations.of(context)!.uneNouvelleVersionDePlayfun1(newVersion),
                 style: const TextStyle(fontSize: 14, height: 1.4, color: Colors.white70),
               ),
             ],
@@ -130,7 +130,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
             TextButton(
               onPressed: () => Navigator.pop(ctx),
               child: Text(
-                GameContentLocalization.ui(context, "Plus tard"),
+                AppLocalizations.of(context)!.plusTard,
                 style: TextStyle(color: Colors.white54),
               ),
             ),
@@ -147,7 +147,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 }
               },
-              child: Text(GameContentLocalization.ui(context, "Mettre à jour"), style: const TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(AppLocalizations.of(context)!.mettreAJour, style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -300,7 +300,7 @@ class ForceUpdateScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 Text(
-                  isMaintenance ? "Maintenance en cours" : AppLocalizations.of(context)!.miseAJourRequise,
+                  isMaintenance ? AppLocalizations.of(context)!.maintenanceEnCours : AppLocalizations.of(context)!.miseAJourRequise,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 24,
@@ -339,8 +339,8 @@ class ForceUpdateScreen extends StatelessWidget {
                         Icons.download_rounded,
                         color: Colors.black,
                       ),
-                      label: const Text(
-                        "Mettre à jour maintenant",
+                      label: Text(
+                        AppLocalizations.of(context)!.mettreAJourMaintenant,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

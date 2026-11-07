@@ -28,7 +28,7 @@
   "elements": "'{0}' tárgy",
   "prompt": "Prompt: \"'{0}'\"",
   "utiliser": "HASZNÁLOM",
-  "packActiveElements": "✨ Pack '''{0}''' aktiválva ('{1}' tárgyat)!",
+  "packActiveElements": "✨ Pack '{0}' aktiválva ('{1}' tárgyat)!",
   "fusionner": "EGYESÍTÉS",
   "themesFusionnesLePackActif": "✨ Összevont témák! Az aktív csomag most már '{0}' tárgyat tartalmaz.",
   "modifierCompleter": "Szerkesztés / Befejezés",
@@ -46,7 +46,7 @@
   "generationIa": "MI generálás: '{0}'",
   "historique": "Előzmények",
   "melangerPlusieursThemes": "Több téma keverése:",
-  "combineS": "✨ '{0 összesen}'",
+  "combineS": "✨ ''(0 összesen)''",
   "nombreDElements": "Elemek száma:",
   "minRequisRecommande": "Minimum szükséges: '{0}' | Ajánlott: '{1}'",
   "ambianceTonaliteDeJeu": "Hangulat / Játékhangulat:",
@@ -268,7 +268,7 @@
   "conserverAvecLIa": "Megtartás MI-vel",
   "expulser": "Kirúgás",
   "vousAvezEteExcluDe": "Tétlenség miatt kizártak. A számítógép játszik helyetted (nincs jutalom).",
-  "s": "'{0}' s",
+  "s": "s '{0}'",
   "pts1": "{pName}: {pScore} pont",
   "@pts1": {
     "placeholders": {
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 XP {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -306,9 +306,9 @@
   "cetteCarteEstDejaVisible": "Ez a kártya már látható! Válassz egy rejtett kártyát.",
   "aucunAlbumAAfficher": "Nincsenek megjeleníthető albumok.",
   "vernissage": "Megnyitó!",
-  "albumDe": "'{0 album}'",
+  "albumDe": "''(0 album)''",
   "prec": "Előző",
-  "album": "Album '{0}' / '{1}'",
+  "album": "Album/'{0}' '{1}'",
   "suiv": "Következő",
   "devineCeQueRepresenteCe": "Találd ki, mit ábrázol ez a rajz:",
   "ecrisTaPhrase": "Írd be a mondatodat...",
@@ -329,7 +329,7 @@
   "zombieEnMain": "ZOMBI A KÉZBEN",
   "sauve": "'{0}' (Megmentve!)",
   "mainDeCartes": "Kéz '{0}' ('{1}' kártya)",
-  "votreMainDeSurvieCartes": "A TÚLÉLŐ KEZED ('{0,}' lap)",
+  "votreMainDeSurvieCartes": "A TÚLÉLŐ KEZED (''(0,)'' lap)",
   "lesPairesSontDefausseesAutomatiquement": "A párok automatikusan eldobásra kerülnek",
   "carteSEnJeu": "Kártya/kártyák játékban:",
   "aucuneCarteEnJeuJouez": "Nincs kártya játékban. Játssz bármit!",
@@ -348,11 +348,11 @@
   "motsTrouves": "Talált szavak: '{0}'",
   "ecrivezIci": "Írj ide...",
   "plierPasser": "HAJTOGASD BE & ADD TOVÁBB",
-  "motsRediges": "✏️ '{0,}' szó írva...",
+  "motsRediges": "✏️ ''(0,)'' szó írva...",
   "leGrandDepliage": "A Nagy Kiterítés!",
   "voiciLesUvresCollectivesNees": "Íme a képzeletetek szülte közös művek:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' támadást ('{1}') készít elő egy játékos ellen!",
-  "km": "{oppDist} km",
+  "km": "0 km {oppDist}",
   "@km": {
     "placeholders": {
       "oppDist": {
@@ -360,7 +360,7 @@
       }
     }
   },
-  "km1": "{myDistance} / {targetDist} km",
+  "km1": "0 / 1 km {myDistance} {targetDist}",
   "@km1": {
     "placeholders": {
       "myDistance": {
@@ -386,7 +386,7 @@
   "distribuerLaSuite": "Következő osztás",
   "attenteDuDonneur": "Várakozás az osztóra...",
   "couche": "Bedobta",
-  "miseActuelle": "Jelenlegi tét: '{összeg}' '{amount}'",
+  "miseActuelle": "Jelenlegi tét: ''(összeg)'' '{amount}'",
   "enAttente": "Várakozás...",
   "seCoucher": "Bedobás",
   "checker": "Check",
@@ -428,7 +428,7 @@
   "vraie": "IGAZ",
   "fausse": "HAMIS",
   "ceChoixResteraSecretJusqu": "(Ez a választás titokban marad a végéig)",
-  "lHistoireDe": "A '{0 története}'",
+  "lHistoireDe": "A ''(0 története)''",
   "vrai": "IGAZ",
   "faux": "HAMIS",
   "detecteurDeMensonges": "Hazugságvizsgáló",
@@ -446,13 +446,13 @@
   "votes": "Szavazatok:",
   "aVote": "'{0}' szavazott: '{1}'",
   "lesPointsOntEteDistribues": "A pontok kiosztásra kerültek a szavazatok alapján.",
-  "leMotDesCivilsEtait": "A civilek szava: '''{0}'''",
-  "leMotDeLInfiltre": "Az Infiltrátor ('{0}') szava így volt: '''{1}'''",
+  "leMotDesCivilsEtait": "A civilek szava: '{0}'",
+  "leMotDeLInfiltre": "Az Infiltrátor ('{0}') szava így volt: '{1}'",
   "mrWhiteNAvaitPas": "Mr. White ('{0}') nem mondott szavakat.",
-  "leMotATrouverEtait": "A szó, amit ki kellett találni, az '''{0}''' szinonimája volt. A többi játékos 1 pontot szerez.",
+  "leMotATrouverEtait": "A szó, amit ki kellett találni, az '{0}' szinonimája volt. A többi játékos 1 pontot szerez.",
   "felicitationsAuDessinateurEtA": "Gratulálunk a képregényrajzolónak '{0}' -nak és '{1}' -jének!",
-  "saReponseEtait": "A válasza az volt: '''{0}'''.",
-  "leMotEtait": "A szó így volt: '''{0}'''.",
+  "saReponseEtait": "A válasza az volt: '{0}'.",
+  "leMotEtait": "A szó így volt: '{0}'.",
   "cartesRevelees": "Felfedett kártyák:",
   "erreurDeChargementDuMeme": "Hiba a mém betöltésekor.",
   "scoreActuelDeCartes": "Jelenlegi pontszám '{0}': '{1}' kártya.",
@@ -542,13 +542,13 @@
   "tempsRestantS": "Hátralévő idő: '{0}' s",
   "k6Consecutifs3": "6 egymás után: '{streak}'/3",
   "lancerLeDe": "DOBÁS A KOCKÁVAL",
-  "scorePoints": "Pontszám: '{}' pontot szerezzenek '{score}'",
-  "dominosRestants": "Megmaradt dominók: '{száma}' '{count}'",
+  "scorePoints": "Pontszám: ''()'' pontot szerezzenek '{score}'",
+  "dominosRestants": "Megmaradt dominók: ''(száma)'' '{count}'",
   "impossibleDeJouerCeDomino": "Ezt a dominót nem lehet ide tenni.",
   "mancheTerminee": "A kör véget ért! ",
   "dominos": "Dominó",
   "extremites": "Végek: ",
-  "pioche2": "Döntetlen: '{Számol}' '{count}'",
+  "pioche2": "Döntetlen: ''(Számol)'' '{count}'",
   "piocher": "Húzás",
   "ficheDePts": "'{0}' rekord ('{1}' pont)",
   "pts2": "{otherName} ({otherTotal} pont)",
@@ -563,7 +563,7 @@
     }
   },
   "clic": "KATTINTÁS",
-  "lancersRestants": "Hátralévő dobások: '{Szám}' '{count}'",
+  "lancersRestants": "Hátralévő dobások: ''(Szám)'' '{count}'",
   "combinaison": "KOMBINÁCIÓ",
   "grilleDePts": "RÁCS '{0}' ('{1}' pont)",
   "pts3": "{p} ({myTotal} pont)",
@@ -614,10 +614,10 @@
     }
   },
   "carteAPrendre": "ELVIHETŐ KÁRTYA",
-  "votreMain": "A kezed ('{számolja}') '{count}'",
+  "votreMain": "A kezed (''(számolja)'') '{count}'",
   "touchezUneCartePourLa": "Koppints egy kártyára a kijátszásához",
   "aucuneCombinaisonEtaleeSurLa": "Még nincs kombináció az asztalon",
-  "etaler": "Terjedés ('{szám}') '{count}'",
+  "etaler": "Terjedés (''(szám)'') '{count}'",
   "defausserFin": "Eldobás & Vége",
   "pts8": "{eValue} pontok",
   "@pts8": {
@@ -644,7 +644,7 @@
   "joueursNonAssignes1": "Hozzá nem rendelt játékosok",
   "confirmerLancer": "Megerősítés és indítás",
   "choisirUnJeuLocal": "Válassz helyi játékot",
-  "ilFautAuMoinsJoueurs": "Ehhez a módhoz legalább '{0,}' játékosra van szükséged!",
+  "ilFautAuMoinsJoueurs": "Ehhez a módhoz legalább ''(0,)'' játékosra van szükséged!",
   "ceModeSupporteAuMaximum": "Ez a mód maximum '{0}' játékost támogat!",
   "parametresActionOuVerite1": "Beállítások: Igazság vagy merés",
   "parametresDeLaPartie": "Játékbeállítások",
@@ -769,7 +769,7 @@
   "situationSuivante": "Következő helyzet",
   "codenames": "Kódnevek",
   "passezLeTelephoneA": "Add át a telefont neki:",
-  "passezLeTelephoneAPuis": "Kapcsold a telefont '{0-ra}', majd nyomd meg az alább.",
+  "passezLeTelephoneAPuis": "Kapcsold a telefont ''(0-ra)'', majd nyomd meg az alább.",
   "cEstFait": "Kész",
   "passezLeTelephoneAuxAgents": "Add át a telefont az ügynököknek",
   "equipe1": "Csapat '{0}'",
@@ -804,15 +804,15 @@
   "jAiFiniDAjouter": "Befejeztem a szavak hozzáadását",
   "motsRestantsAAjouterPour": "A további szavak, amelyeket '{0}'hozzáadhatunk: '{1}'",
   "totalDesMotsDansLe": "A kalapban lévő összes szó: '{0}'",
-  "manche": "'{0. forduló}': '{1}'",
+  "manche": "''(0. forduló)'': '{1}'",
   "motsDevinesCeTour": "A szavak kitalálták ezt a kört: '{0}'",
   "motsRestantsDansLePaquet": "A csomagban hagyott szavak: '{0}'",
   "devine": "Eltalálva!",
   "erreurNombreDeJoueursInsuffisant": "Hiba: Nincs elég játékos",
   "veuillezRevenirALEcran": "Kérjük, térj vissza a játékosbeállításokhoz.",
   "retour": "Vissza",
-  "lEquipeAGagne": "A csapat 0 '{}' nyert!",
-  "points1": "'{0,}' pont",
+  "lEquipeAGagne": "A csapat 0 ''()'' nyert!",
+  "points1": "''(0,)'' pont",
   "passeLObjet": "Tárgy átadása",
   "passeLObjetRapidement": "Add át gyorsan a tárgyat",
   "generationIaDeQuestions": "Kérdések generálása AI-val",
@@ -844,7 +844,7 @@
   "equipe2": "2. CSAPAT",
   "validerLesEquipes": "Csapatok megerősítése",
   "placezLeTelephoneSurVotre": "HELYEZD A TELEFONT A HOMLOKODRA!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 s {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -937,9 +937,9 @@
   "joueurSPrets": "'{0}' játékos készen áll",
   "cettePartieEstTermineeOu": "Ez a játék befejeződött vagy törölve lett.",
   "enPartie": "JÁTÉKBAN",
-  "partieDeTerminee": "A '{0-s meccs}' vége!",
+  "partieDeTerminee": "A ''(0-s meccs)'' vége!",
   "statistiques": "Statisztikák - '{0}'",
-  "vainqueur1": "Győztes: '{0}''{1}'\n",
+  "vainqueur1": "Győztes: '{0}''{1}'''''''\n",
   "voirLesStats": "Statisztikák megtekintése",
   "message": "Üzenet...",
   "k0Pts": "0 PT",
@@ -951,7 +951,7 @@
   "terminerLaManche": "Kör befejezése?",
   "voulezVousCloturerLaManche": "Azonnal le akarod zárni a kört? A legtöbb XP-vel rendelkező játékos lesz az Admin.",
   "terminer": "Befejezés",
-  "tour": "'{kör 0}'",
+  "tour": "''(kör 0)''",
   "toursRestants": "'{0}' kör hátra",
   "finManche": "Kör vége",
   "quiVaReleverLeDefi": "🎰 Ki vállalja a kihívást?",
@@ -966,7 +966,7 @@
   "defiPour": "Kihívás '{0}'",
   "realisezVotreDefiEnVideo": "Teljesítsd a feladatot videón vagy mikrofonon!",
   "jAiRealiseMonDefi": "Teljesítettem a feladatomat! ✅",
-  "regardezRealiserLeDefi": "Nézd meg '{0-t}' teljesítsd a kihívást...",
+  "regardezRealiserLeDefi": "Nézd meg ''(0-t)'' teljesítsd a kihívást...",
   "voteDeValidation": "🗳️ JÓVÁHAGYÓ SZAVAZÁS",
   "estCeQueAReleve": "Fellépett '{0}' a kihívásra?",
   "votesRecus": "'{0}' / '{1}' szavazat kapott",
@@ -1009,11 +1009,11 @@
       }
     }
   },
-  "reflechit": "'{a neve,}' gondolja... '{name}'",
+  "reflechit": "''(a neve,)'' gondolja... '{name}'",
   "faceAFaceCoteA": "Párbaj (egymás mellett)",
   "totalAdversaire": "ELLENFÉL ÖSSZESEN",
   "prendreLAtoutOuPasser": "ADUT VISZEL VAGY PASSZOLSZ:",
-  "combinaisonsDe": "A '{név kombinációi}' '{name}'",
+  "combinaisonsDe": "A ''(név kombinációi)'' '{name}'",
   "ilDevraDonnerLePremier": "Neki kell adnia az első nyomot",
   "cetteReponseADejaEte": "Ez a válasz már szerepelt!",
   "themePourLes25Mots": "Téma a 25 szóhoz",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' újradobta a kockákat ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} megtartotta a(z) {dieVal} értékű kockát (#{index1}. kocka) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Csákány",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = részek[1].trim(); \r\n    '''}''' más '''{''' \r\n      Duplikátum elleni védelem: ha a",
   "vousNAvezPasDe": "Nincsenek szavaid",
   "equipe12": "1. csapat",
   "equipe21": "2. csapat",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  A borító vége (admin gomb)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = a tranzakció várása.get(gameRef); \r\n      ha (!snap.exists) visszatér; \r\n\r\n      final gameData = snap.data() mint Map<String, dinamikus>; \r\n      final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Döntsd ki a győztest (több XP)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        final xp = (pData[''xp''] mint num?)?. toInt() ?? 0; \r\n        if (xp > maxXp) '{' \r\n          maxXp = XP; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Valaki",
   "aAtteintPointsEtRemporte": "{winnerName} elérte a {targetScore} pontot és megnyerte a meccset!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "A játékos",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Lista<String> kérdések =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[nehézség] ?? \r\n          GameWords.whoIsMostLikely[",
   "honnete": "Őszinte",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [egyes, egyáltalán]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Kérdés =\r\n            \"Írd le a titkos szavadat egy szóban. Álmosok, blöff!\"; \r\n        for (var pId in players.keys) '''{''' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": ")? par.split (",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} elérte a {updatedScoresoverallWinnerId} pontot és megnyerte a meccset!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "kártya letétele",
   "enchereAutomatique": "automatikus licit",
   "passeLEnchere": "passzolja a licitet",
-  "elseIfGametype": ") '''{''' \r\n        if (voterId == votedForId) '''{''' \r\n          throw Exception (\"Hivatalos tilom a saját szavazásnak!\"); \r\n        '''}''''}''' más, ha (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          tranzakció, \r\n          gameRef, \r\n          gameData, \r\n          szavazóid, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          végső Térkép<String, int> voteCounts = '{}'; \r\n          for (végső cél a votes.values-ben) '{' \r\n            voteCounts[target mint String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVoted = []; \r\n          voteCounts.forEach((cél, szám) '''{''' \r\n            if (számolja > maxVotes) '{' \r\n              maxVotes = szám; \r\n              topVoted = [cél]; \r\n            '}' más, ha (count == maxVotes) '{' \r\n              topVoted.add(cél); \r\n            '}''''}'''); \r\n\r\n          Frissítések[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        végső Térkép<String, int> voteCounts = '{}'; \r\n        for (végső cél a votes.values-ben) '{' \r\n          voteCounts[target mint String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVoted = []; \r\n        voteCounts.forEach((cél, szám) '''{''' \r\n          if (számolja > maxVotes) '{' \r\n            maxVotes = szám; \r\n            topVoted = [cél]; \r\n          '}' más, ha (count == maxVotes) '{' \r\n            topVoted.add(cél); \r\n          '}''''}'''); \r\n\r\n        if (topVoted.length == 1) '''{''' \r\n          végső győztes = topVoted.first; \r\n          Frissítések[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          tranzakció, \r\n          gameRef, \r\n          gameData, \r\n          szavazóid, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      )'' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} nyerte az összes zsetont az asztalon!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "A Bíró éppen választ...",
   "coupAutomatiqueJouePourCause": "Automatikus lépés játszódik az inaktivitás miatt.",
   "inactivite": "Inaktivitás",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0: 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0: {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Ellenfél köre",
   "derniereCartePosee": "Utoljára kijátszott kártya!",
   "cEstTonTour": "TE következel!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0: 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Hiba: A kérdés nem található.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0: 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(nincs válasz)",
   "deuxDefisReussis": "Két kihívás sikeresen teljesítve.",
   "leChallenger": "A Kihívó",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": ":'{0}' '{1}'",
   "uneDescriptionHilarante": "egy vicces leírás",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Oszlop( \r\n            gyermekek: [ \r\n              Szöveg( \r\n                ''",
   "unProblemeEstSurvenu": "Probléma merült fel.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      Alapértelmezés: \r\n        final körWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "0: 1 / 2 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Végső pontszám megtekintése",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "0 1 / 2 - 3: 4 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle (szín: Colors.white70), \r\n                ), \r\n                SizedBox (magasság: 20), \r\n                Wrap( \r\n                  alignment: WrapAlignment.center, \r\n                  gyermekek: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (magasság: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Szöveg( \r\n                    AppLocalizations.of(context)!. allCluesBeen Been \r\n                    style: const TextStyle (szín: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' más '''{''' \r\n          A jósnő múlik el, hogy játssza\r\n          return Column( \r\n            gyermekek: [ \r\n              Szöveg(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0: 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,9 +2060,7 @@
   "designez2Amoureux": "Válassz ki 2 szerelmest",
   "amoureuxUnis": "Szerelmesek egyesültek!",
   "laVictime": "Az áldozat",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Sor( \r\n              mainAxisSize: MainAxisSize.min, \r\n              gyermekek: [ \r\n                _buildActionButton( \r\n                  címke: AppLocalizations.of(context)!. Fertőz \r\n                  ICON: Icons.auto_fix_high, \r\n                  szín: Colors.purpleAccent, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      A háttér, \r\n                      HALLGASD: hamis, \r\n                    ).recordBadgeEvent (''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      igaz, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (szélesség: 8), \r\n                _buildActionButton( \r\n                  címke: AppLocalizations.of(context)!. falja el, \r\n                  ikon: Icons.close, \r\n                  szín: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        hamis, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          kombi; \r\n        Box ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Tegnap este nincs áldozat (védve vagy megkímélve)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              stílus: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Szín: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''farkas'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(szöveg: üzenet), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Kompakt adórúd\r\n          if (canSendMessage)\r\n            Row( \r\n              gyermekek: [ \r\n                Expanded( \r\n                  gyermek: SizedBox( \r\n                    magasság: 32, \r\n                    gyermek: TextField( \r\n                      Irányító: _chatController, \r\n                      style: const TextStyle (betűméret: 12, szín: Colors.white), \r\n                      Díszítés: InputDecoration( \r\n                        hintText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          szín: Colors.white30, \r\n                          betűméret: 11, \r\n                        ), \r\n                        határ: VázlatInputHatár( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        kitöltve: igaz, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          vízszintes: 10, \r\n                          Függőleges: 0, \r\n                        ), \r\n                      ), \r\n                      onSubmitted: (szöveg) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (szélesség: 4), \r\n                IconButton( \r\n                  ikon: const Icon( \r\n                    Icons.send_rounded, \r\n                    Méret: 18, \r\n                    szín: Colors.cyanAccent, \r\n                  ), \r\n                  párnázás: EdgeInsets.zero, \r\n                  Korlátozások: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    if (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(String címke, String típus, Color activeColor) '{' \r\n    végső bool isSelected = _selectedChatType == típus; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      gyermek: Tartály( \r\n        párnázás: állandó EdgeInsets.symmetric (vízszintes: 8, függőleges: 3), \r\n        Díszítés: BoxDecoration( \r\n          Szín: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpcity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          határ: Border.all( \r\n            Szín: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        gyermek: Szöveg( \r\n          kiadó, \r\n          stílus: TextStyle( \r\n            betűméret: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- FRISSÍTETTE AZ AVATART, HOGY INTERAKTÍVVÁ VÁLJON--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    if (startTime == null) return vissza const SatedBox.shrink(); \r\n\r\n    A TweenAnimationBuilder szupersima vizuális időzítőt tesz lehetővé anélkül, hogy blokkolná az időzítőt és a manuális setState-et, ami jelentősen könnyíti a szálat (4. pont)\r\n    final endTime = startTime.toDate().add( \r\n      Időtartam(másodpercek: időtartamMásodpercekben), \r\n    ); \r\n    utolsó maradék = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Szöveg( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stílus: Theme.of( \r\n          A háttér, \r\n        ).textTheme.headlineSmall?. copyWith(szín: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      Időtartam: Marad, \r\n      tween: Tween (kezdő: marad, vég: Időtartam.nulla), \r\n      builder: (BuildContext kontextus, Időtartam érték, Widget? gyermek) '{' \r\n        final seconds = value.inSeconds; \r\n        return Szöveg( \r\n          AppLocalizations.of(context)!. időMarad, \r\n          stílus: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            szín: másodpercek < 20 ? Colors.redAccent : Colors.amberAccent, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext kontextus, \r\n    Map<String, dinamikus> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    végső pozíciók = Leképezés<String, dinamikus>.from( \r\n      gameData[''littleHorsesPozíciók''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    végső String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    final bool isMyTurn = currentPlayerId == playerId; \r\n    végső int dobókockák = (gameData[''littleHorsesDice''] mint num?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[''littleHorsesHasRolled''] ?? hamis; \r\n    az utolsó bool isTeamMode = gameData[''smallTeamHorses''] ?? hamis; \r\n    végső Leképezés<String, dinamikus> egymást követőHatos = Leképezés<String, dinamikus>.from( \r\n      gameData[''kislovak egymást követő hatosok''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = egymást követő hatos[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade sötét háttéren\r\n    végső lista<Szín> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon égkék\r\n      const Color(0xFF10B981), // Smaragdzöld\r\n      const Color(0xFFF59E0B), // Golden Amber\r\n    ]; \r\n\r\n    --- GYŐZELMI VÁSZNAP--- \r\n    if (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      return UniversalGameEndScreen( \r\n        GameCím:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Elértétek a tábla közepét!",
   "deplacezUnCheval": "MOZGASS EGY LOVAT!",
   "aVousDeLancer": "TE KÖVETKEZEL DOBNI!",
@@ -2082,7 +2071,7 @@
   "toutesLesGrillesSontCompletees": "Minden pontozólap betelt!",
   "cEstVotreTourTouchez": "Te jössz! Koppints a kockára a megtartásához (arany 🔒)",
   "lancerLesDes": "Dobás a kockákkal",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1- 6: 0 / 63 1 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1- 6: 0 / 63 1 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "VESZTETTÉL! Fedd fel a kérdést és válaszolj!",
   "gagneTonSecretEstPreserve": "NYERTÉL! A titkod biztonságban van.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = részek[1].trim(); \r\n    '''}''' más '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (változat)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    for (var játékos _activePlayers) '''{''' \r\n      if (játékos == fedőként) '''{''' \r\n        _playerRoles[játékos] = \"Behatoltó\"; \r\n      '''}''' mást, ha (játékos == _mrWhitePlayer) '''{''' \r\n        _playerRoles[játékos] = \"Mr. White\"; \r\n      '''}''' más '''{''' \r\n        _playerRoles[játékos] = \"Civil\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  Void _nextPlayerReveal() '''{''' \r\n    ha (_currentPlayerRevealIndex < _activePlayers.hosszúság - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' más '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(vonós) '''{''' \r\n    String role = _playerRoles[játékos]!; \r\n    bool impostorsWin = role == \"Civil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.eredmény; \r\n      if (impoloorsWin) '''{''' \r\n        _resultMessage = \"'{'player'}' civil volt! Az Impostors nyertek!\"; \r\n      '''}''' más '''{''' \r\n        _resultMessage = \"'{'player'}' volt a\r\n    \r\n  ",
   "requiert4Joueurs": "Legalább 4 játékos szükséges",
   "requiert3Joueurs": "Legalább 3 játékos szükséges",
   "genereDesCategoriesAmusantesPour": "Generálj szórakoztató kategóriákat a forró krumplihoz. Téma: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Kék csapat)",
   "k2EquipesSAffrontent": "2 csapat küzd meg",
   "chacunPourSoi": "Mindenki mindenki ellen",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0: {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2230,7 +2218,7 @@
   "localIndisponibleRechercheActive": "Helyi nem elérhető (Keresés aktív)",
   "rechercheRapideMonde": "Gyors keresés (Világ)",
   "selectionnezAuMoins5Roles": "Válasszon ki legalább 5 szerepet.",
-  "petiteBlind": "Kis vak: '{ 0}' ''",
+  "petiteBlind": "Kis vak: ''( 0)'' ''",
   "simpleVillageois": "Falusi",
   "capitaine": "Kapitány",
   "s2": "{hotPotatoGlobalDuration} mp",
@@ -2241,7 +2229,7 @@
       }
     }
   },
-  "nombreDeJoueursRecherches": "A keresett játékosok száma: '{ 0 }'",
+  "nombreDeJoueursRecherches": "A keresett játékosok száma: ''( 0 )''",
   "laBeloteRequiertExactement4": "A Belote pontosan 4 játékost igényel.",
   "formez2EquipesDe2": "Form 2 team of 2 player in ''Comption team''.",
   "ilFautAuMoins4": "Legalább négy játékos kell hozzá.",
@@ -2263,7 +2251,7 @@
   "ceJeuRequiertExactement4": "Ez a játék pontosan 4 játékost igényel.",
   "auMoins3JoueursRequis": "Legalább 3 játékos szükséges.",
   "auMoins2JoueursRequis": "Legalább 2 játékosra van szükség.",
-  "jeu": "Játék: '{'''0'''}'",
+  "jeu": "Játék: ''(''''0'''')''",
   "ami": "Barát",
   "deconnecte": "megszakítás",
   "suspect": "Gyanúsított",
@@ -2280,7 +2268,7 @@
   "quatre": "Négyesek",
   "cinq": "Ötösök",
   "six": "Hatosok",
-  "sectionSup": "Sup section: '{ 0 }' \"",
+  "sectionSup": "Sup section: ''( 0 )'' \"",
   "k63Pts": "{oppUpper} / 63 ppts {value}",
   "@k63Pts": {
     "placeholders": {
@@ -2313,10 +2301,10 @@
   "commenceParUnDessin": "Kezdd egy rajzzal!",
   "orateur": "Mesélő",
   "moi": "Én",
-  "manche1": "Csatorna: '{' 0 '}' /'' '{'''1'''}' ''",
+  "manche1": "Csatorna: ''('' 0 '')'' /'' ''(''''1'''')'' ''",
   "voisin": "Szomszédság",
-  "aSelectionneCarte": "'{' 0'}' ''kiválasztott'' '{'''1'''}''' térkép '{' 2'}' ''...",
-  "jouePar": "Játszotta: '''{''' 0 ''",
+  "aSelectionneCarte": "''('' 0'')'' ''kiválasztott'' ''(''''1'''')'''' térkép ''('' 2'')'' ''...",
+  "jouePar": "Játszotta: ''''('''' 0 ''",
   "lAdversaire": "Az ellenfél",
   "ecrivez": "Írj {promptItem}",
   "@ecrivez": {
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "A kör véget ért.",
-  "aGagneAvecSaDescription": "{winnerName} nyert a leírásával: ApLocalizations.of (context)!. extrainfoColumnChildText 99999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Senki sem nyerte ezt a kört. Döntetlen vagy nem érkezett leírás.",
   "aTrouveLeSymboleIl": "{winnerName} megtalálta a 99999-et! Megnyerte a kártyát. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Nyom elküldve! Várakozás a többiekre...",
   "carte3": "Térkép",
   "score": "Pontszám",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} : ApLocalizations.of (context)! .styleConsttyleColors {value2} {deckIndex} / {deckTotal} - {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "Az éjszaka a falura esik...\n\nCsukd be a szemed.",
   "leMomentEstVenuLe": "Eljött az idő...\n\nA falunak szavaznia kell.",
   "victoireDesVillageois": "A falusiak győztek!",
@@ -2548,7 +2499,7 @@
   "victoireDesAmoureux": "A Szerelmesek győztek!",
   "finDuJeu": "Vége a játéknak",
   "loup": "Farkas",
-  "validerLeCouple2": "A nyomaték jóváhagyása ('{ 0}' ''/ 2)",
+  "validerLeCouple2": "A nyomaték jóváhagyása (''( 0)'' ''/ 2)",
   "lHeritierChoisitSonTestament": "Az Örökös választ",
   "selectionnezVotreTestateur": "Válaszd ki az elődödet",
   "leGardeProtegeUnVillageois": "A Testőr megvéd valakit",
@@ -2557,19 +2508,11 @@
   "touchezUnJoueurPourSonder": "Koppints egy játékosra a szerepéért",
   "leRatMaladeRode": "A Beteg Patkány ólálkodik...",
   "contaminezJusquA2Joueurs": "Fertőzz meg legfeljebb 2 játékost",
-  "contaminer": "Szennyezett ('{ 0 }')",
+  "contaminer": "Szennyezett (''( 0 )'')",
   "lesLoupsChassentEnMeute": "A Farkasok falkában vadásznak",
   "votezPourDevorerUneProie": "Szavazzatok az áldozat felfalására",
   "espionnezUnJoueur": "Kémkedj egy játékos után...",
   "leLoupNoirDecideDu": "A Fekete Farkas dönt a préda sorsáról",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infect {targetName} ? AppLocalizations.of (context)! .centeractions widgetRowMainaxisizeMainaxisizeMine The White Wolf slick solo",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Válassz egy áldozatot felfalásra",
   "laSorcierePrepareSesPotions": "A Boszorkány bájitalokat főz",
   "cibleDesLoups": "A farkasok célpontja: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Farkasok",
   "outreTombe": "Túlvilág",
   "amoureux": "Szerelmesek",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : ApLocalizations.of (context)! .stiletTextstylFontweightFontweightBoldSmall Horses",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Egyéni verseny",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 dobás)",
   "@k3Lancers": {
@@ -2626,7 +2561,7 @@
       }
     }
   },
-  "gardeS": "'{ 0 }' megtartva",
+  "gardeS": "''( 0 )'' megtartva",
   "cur": "♥ Kőr",
   "carreau": "♦ Káró",
   "trefle": "♣ Treff",
@@ -2645,7 +2580,7 @@
   "uneQuestionDrolePourLa": "Egy vicces kérdés annak, akinél a tárgy van!",
   "devinezLeMotAvecL": "Találd ki a szót a többiek segítségével!",
   "reperezLeSymboleCommunLe": "Vedd észre a közös szimbólumot a leggyorsabban!",
-  "genereDesDilemmesAuFormat": "OptionA vagy OptionB formátumban generál dilemmákat. Téma: '{ 0}' ''",
+  "genereDesDilemmesAuFormat": "OptionA vagy OptionB formátumban generál dilemmákat. Téma: ''( 0)'' ''",
   "jePasse": "Passzolok",
   "vote": "Szavazz!",
   "votes1": "Szavak",
@@ -2694,9 +2629,8 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Ki többet? ApLocalizations.of (kontextus)!. body PadlingPaddingConstellation Edgeinsetssoft",
-  "votePar": "Szavazta: \"'{'''0'''}'\"",
-  "decisionUnanimeDuGroupePour": "A csoport élettelen döntése a '''{''' 0 ''-re!",
+  "votePar": "Szavazta: \"''(''''0'''')''\"",
+  "decisionUnanimeDuGroupePour": "A csoport élettelen döntése a ''''('''' 0 ''-re!",
   "ilFautAuMoins41": "Legalább 4 játékos szükséges a Codenameshoz (2 csapatonként)!",
   "impossibleDeFormerLesEquipes": "Nem sikerült csapatokat alkotni (nincs elég játékos). Indítsd újra legalább 4 játékossal.",
   "lEquipeAReveleL": "A csapat felfedte a bérgyilkost! A csapat nyer!",
@@ -2708,8 +2642,8 @@
   "maitreEspion": "- Espion mester.",
   "passeLeTelephoneAuxAgents": "Add át a telefont a csapatügynököknek.",
   "mime": "Mutogatás",
-  "cEstAuTourDe2": "Most jön a '''{''' 0 ''('' 1 '').",
-  "genereDesQuestionsAmusantesEt": "Vidám és gyors kérdéseket tesz fel. Téma: '{ 0}' ''",
+  "cEstAuTourDe2": "Most jön a ''''('''' 0 ''('' 1 '').",
+  "genereDesQuestionsAmusantesEt": "Vidám és gyors kérdéseket tesz fel. Téma: ''( 0)'' ''",
   "s3": "{minDuration} mp",
   "@s3": {
     "placeholders": {
@@ -2727,12 +2661,12 @@
     }
   },
   "fin1": "VÉGE",
-  "trouves": "Megtaláltam: '{ 0 }'",
+  "trouves": "Megtaláltam: ''( 0 )''",
   "ecurie1": "1. istálló",
   "ecurie2": "2. istálló",
   "ecurie3": "3. istálló",
   "ecurie4": "4. istálló",
-  "nombreMaxDeJoueurs": "A játékosok maximális száma: '{ 0 }'",
+  "nombreMaxDeJoueurs": "A játékosok maximális száma: ''( 0 )''",
   "jAiLanceUnePartie1": "Egy {value} -es meccset dobtam!",
   "@jAiLanceUnePartie1": {
     "placeholders": {
@@ -2742,8 +2676,8 @@
     }
   },
   "jeu1": "Játék",
-  "partieDeEnAttente": "A \"'{'''0'''}'\" függőben lévő része",
-  "termine": "Végzett: '{ 0}' ''",
+  "partieDeEnAttente": "A \"''(''''0'''')''\" függőben lévő része",
+  "termine": "Végzett: ''( 0)'' ''",
   "vainqueur2": "Győztes:",
   "joueurSPretS": "Játékos (k) kész",
   "code": "Kód: {value}",
@@ -2762,7 +2696,7 @@
   "talkie": "Adóvevő",
   "tronconneuse": "Láncfűrész",
   "survie": "Túlélés",
-  "redigezLPour": "Írja a \"'{'''0'''}'\" -t a \"'{''' 1'''}'\" -re.",
+  "redigezLPour": "Írja a \"''(''''0'''')''\" -t a \"''('''' 1'''')''\" -re.",
   "rejouerGarderPts": "ÚJRAJÁTSZÁS (PONTOK MEGŐRZÉSE)",
   "indicesMontresA": "Indikációk:",
   "playersWinneridname": "Játékosok nyertesneve",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "* * Célkitűzés * *\nVegye kártyák létrehozása egyező párok. Kerülje el, hogy a játékos, aki a Zombie kártyát a végén.\n* * Draft * *\n1. A játék 33 kártyával kezdődik (16 pár + 1 zombi kártya).\n2. A kártyák a 4 játékos között kerülnek kiosztásra.\n3. Minden turn egy játékos vesz egy kártyát a következő játékos.\n4. Ha a kártya létrehoz egy párt, automatikusan legyőzi.\n5. A játékos keze vegyes.\n6. Az első játékos, akinek már nincs kártyája, nyert.\n7. A Zombi kártyás játékos elveszett!",
   "butDuJeuObtenirLe": "* * Game gól * *\nA legmagasabb pontszámot 13 kategória 5 kockával való kitöltésével lehet elérni.\n\n* * Running of a town * *\n1.\n2. * * Keep * *: Az első vagy második dobás után megtarthatsz néhány kockát, és újraindíthatsz másokat.\n3. * * Pontozás * *: Legalább egy dobás után választanod kell egy kategóriát a pontszámhoz. Minden kategória csak egyszer használható részenként.\n\n* * Kategória * *\n- * * As to Six * *: Sum of the equal dice. (35 pont, ha a felső rész összesen 63 pont vagy több).\n- * * Brelan * * (3 vagy több azonos kocka): Az összes kocka összege.\n- * * Square * * (4 vagy több azonos kocka): Az összes kocka összege.\n- * * Full * * (3 kocka azonos + 1 pár): 25 pont.\n- * * Small Suite * * (4 egymást követő kocka): 30 pont.\n- * * Large Suite * * (5 egymást követő kocka): 40 pont.\n- * * Yams * * (5 kocka azonos): 50 pont.\n- * * Chance * *: Sum of all the dice.",
   "objectifNePasAvoirL": "* * Célkitűzés * *\nNe legyen a kezében, amikor a krumpli felrobban!\n\n* * Draft * *\n1. Egy téma jelenik meg a képernyőn.\n2. Az eszközt birtokló játékosnak a témának megfelelő választ kell adnia.\n3. Amint válaszolt, gyorsan áthaladt a gépen a szomszédjához.\n4. A szomszédnak viszont új választ kell találnia, és át kell adnia az eszközt.\n5. Az idő rejtett és véletlenszerű: a burgonya bármikor felrobbanhat!\n6. Az a játékos, aki az eszközt a robbanás idején tartja, elveszíti a fogantyút, és fogadalmat kap.",
-  "principeGeneralGribouillisEstUn": "* * Általános elv * *\nA Gribouillis egy rajzjáték, amit az \"arab telefon\" ihletett, ahol az ötletek minden szakaszban változnak. 3 játékmód van:\n\n* * 1. Normál mód (Arab illusztrált telefon)\n- * * Writing * *: Minden játékos ír egy mondatot.\n- * * Rajzolás * *: Minden játékos kap egy másik mondatot, és felhívja.\n- * * Devinette * *: Minden játékos kap egy rajzot és kitalálja, mit képvisel.\n- * * Alternatív * *: A játék váltakozik rajz és találgatás, amíg minden \"album\" ment körül az összes játékos.\n- De... Jó szórakozást, hogy egy egyszerű mondatból teljesen más lesz!\n\n* * 2. Kiegészítési mód (kollaboratív rajz) * *\n- * * Croquis * *: Minden játékos elkezd egy egyszerű rajzot.\n- * * Complete * *: Minden játékos kap egy másik rajz, és meg kell gazdagítani, anélkül, hogy törölné, ami már létezik.\n- * * Alternatív * *: A rajz játékosról játékosra változik, mindegyik hozzáadja az érintést.\n- * * Parameter \"Add 1\" * *:\n- * Ha nem működik (alapértelmezés) *: Ez egy madzag. A rajz minden szakaszban fejlődik (A játékos - > B játékos - > C játékos...).\n- * If activated *: Az egyes játékosok kezdeti rajza az összes többi játékostól származik, és ezzel párhuzamosan több közös alkotást hoznak létre.\n- De... Hozzon létre meglepő és szórakoztató kollektív műalkotások.\n\n* * 3. Brise- Glace Mode (Creative Interaction) * *\n- * * Writing * *: Minden játékos személyes témát ír (ex: AppLocalizations.of (context)!. myPrecision).\n- * * Rajzolás * *: Minden játékos megkapja a témákat * * minden más játékostól * * és le kell rajzolnia őket.\n- * * De * *: Ideális, hogy megtörje a jeget, felfedezze az ízek mások, és indítsa el a kreativitás egy együttműködő és könnyű módon.",
   "yzObjectifAvoirLeMoins": "Célkitűzés\n\nA játék végén a lehető legtöbb pontot.\nA játék akkor ér véget, ha a játékos eléri a 100 pontot vagy annál többet, és a győztes a legalacsonyabb összpontszámot.\n\nBerendezések\n\n150 kártya -2 és + 12 között\n\nVégrehajtás\n\nKeverjük össze az összes kártyát.\nMinden játékos kap 12 lapot, arccal lefelé előtte, 4 oszlopban x 3 sorban.\nA többi kártya részvényt képez. Adja vissza az első kártyát, hogy a hulladék keletkezzen.\nMinden játékos 2 lapot ad vissza a 12-ből.\n\nA túra menete\n\nCserébe, van * * 30 másodperc * * közül két akció:\n\n1. Vedd el a hulladékkártyát\nMeg kell cserélni az egyik a 12 kártya (látható vagy rejtett oldalon).\nA kicserélt kártya megy a hulladékba.\n\n2. Piocher egy kártya arccal lefelé\nNézd meg a térképet:\n- vagy megtartja, és kicseréli az egyik kártyáját (a fentiek szerint),\n- vagy visszautasítod → közvetlenül a hulladékra helyezed, és ebben az esetben vissza kell adnod az egyik rejtett kártyádat.\n\nKülönleges szabályok\n\nHárom azonos kártyák egy oszlopban → azonnal vereség (érték 0).\n\nA fogantyú vége:\n\nA fogantyú akkor ér véget, amikor egy játékos felfedi a lapjait.\nEzután minden más játékos felfedi a maradék lapjait. Vége a fogantyúnak.\nMinden játékos számolja a kártyái összegét.\n\nKérjük, vegye figyelembe: ha a játékos, aki befejezi, nem a legalacsonyabb pontszámot a körben, ő vesz egy büntetés + 10 pont (a fogantyú pontszám megduplázódik az eredeti verzió, fogjuk használni + 10 egyszerűsítésére).\n\nVége a játéknak\n\nAnnyit játszunk, amennyit csak akarunk.\nHa egy játékos eléri a 100 pontot vagy több, a játék megáll.\nA legalacsonyabb összesített pontszámmal rendelkező játékos nyer.",
   "iAReglesDuPoker": "Célkitűzés\n\nNyerd meg a zsetonokat más játékosoktól azáltal, hogy:\n- a vágás során 5 lap legjobb keze,\n- vagy a fogadásoknak köszönhetően feladják (aludni).\n\nKézi osztályozás (a legerősebb és a leggyengébb között)\n\n1. Royal flöss: 10 - V - D - R - A azonos színű\n2. Quint flush: 5 kártya, amelyek követik egymást, azonos színű\n3. Négyzet: 4 azonos kártyák\n4. Teljes: 3 azonos lap + 1 pár\n5. Színes (flöss): 5 azonos színű lap (nem egymást követő)\n6. Következő (Ötödik): 5 egymást követő lap (különböző színek)\n7. Brelan: 3 azonos kártyák\n8. Dupla pár\n9. Páros\n10. Magas lap (legmagasabb lap, ha senki sem lesz jobb)\n\nð\n\n1. Blinds\nAz osztó bal oldalán lévő játékos megvakítja a kicsikét.\nA következő játékos megvakítja a nagyot.\n\n2. Eloszlás\nMinden játékos kap 2 zárt kártyát (a \"privát kártyák\").\n\n3. Árverés tornyok és közös kártyák\n- Preflop: fogadási trükk privát kártyákkal.\n- Három közös térkép. Új fogadások.\n- A negyedik közös térkép. Új fogadások.\n- River: 5. és utolsó közös térkép kiderült. Utolsó fogadás.\n\n4. Lövöldözés (leszámolás)\nHa több játékos marad, mindegyik megmutatja a játékát.\nA legjobb kombinációja 5 kártya (között a 2 privát kártyák + az 5 közösség) nyer a pot.\n\nLehetséges intézkedések\n\nCserébe egy játékosnak * * 30 másodperce van * *:\n- Ne fogadj semmire, csak ha soha senki nem fogad.\nTegyél egy kis chipset az edénybe.\n- Kövesd (Hívás): egyenlő a futással.\n- Relaunch (Emelés): növelje a tétet.\n- Menj aludni (Fold): Dobd el a kártyáit, és szállj ki belőle.\n\nVége a játéknak\n\nA játék addig folytatódik, amíg legalább 2 zsetonos játékos marad.\nA végső győztes az, aki elviszi az összes zsetont.",
   "butDuJeuGagnerLe": "* * Game gól * *\nNyerd meg a legtöbb XP-t azáltal, hogy cselekszel és válaszolsz az igazságokra!\n\n* * Draft * *\n1. A rulett az a játékos, akinek a fordulója.\n2. A játékos az \"Action\" -t vagy a \"Verity\" -t használja.\n3. Klasszikus mód: Véletlenszerű kihívás / kérdés jelenik meg.\n4. Bíró Mode: Egy véletlenszerű játékos írja a kihívást, majd a játékos rájön.\n5. A többi játékos igennel / nemmel szavaz.\n6. A validálási százalék határozza meg az XP nyert.\n\n* * Különleges szabályok * *\n- 100% validálás = maximális XP\n- A játékos a legtöbb XP lesz Admin a játék\n- A \"markolat vége\" gomb lehetővé teszi a rész bezárását",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "* * Game gól * *\nLegyen a leggyorsabb, hogy kiszúrja az egyetlen azonos szimbólum a kártya közepén és a saját kártya.\n\n* * Draft (Mode ''The Infernal Tower'') * *\n1. Minden játékos kap egy kártya arccal lefelé. A többi kártya egy Stock a közepén, arc látható.\n2. Először mindenki visszaadja a kártyáját.\n3. Minden játékosnak a lehető leggyorsabban meg kell találnia az egyetlen szimbólumot, ami mind a kártyáján, mind a kártyán megtalálható.\n4. Az első játékos, aki megtalálja a szimbólumot, a bejelentést hangosan, fogja a Stock kártyát és a saját kártyájára helyezi.\n5. Ez az új kártya lesz az ő kártyája a következő körben. Ezután egy új térkép jelenik meg az Állomány közepén.\n6. A játék folytatódik, amíg a Stock kimerül. Az a játékos nyer, aki a legtöbb kártyát gyűjtötte a végén!",
   "butDuJeuSeDebarrasser": "* * Game gól * *\nSzabadulj meg az összes lapjától azzal, hogy te vagy az első!\n\n* * Draft * *\n1. * * Distribution * *: Minden játékos 7 lapot kap. A többi alkotja a részvényeket. Egy kártya a szemétkupac elindításához.\n2. * * Játssz egy kártyát * *: Annak a játékosnak, akinek a turnja * * 30 másodperc * * van, hogy kártyát tegyen a kezébe a szemétdombra. A lejátszott kártyának egyeznie kell a stack felső lapjával:\n* * * Color * * (ex: Red on Red)\n* * * Szám * * (ex: one 7 Blue on one 7 Green)\n* * * Szimbólum * * (ex: sárga \"+ 2\" a piros \"+ 2\")\n* * * Special Card * * (Joker, + 4, stb.)\n3. * * Piocher * *: Ha egy játékos a megadott időben nem tud kártyázni, akkor ki kell választania egy kártyát a csomagból. Ha ki tudja játszani ezt a kártyát, azonnal meg tudja csinálni. Különben vége.\n4. * * * Speciális kártyák * *:\n* * * + 2 (Két lap) * *: A következő játékos két lapot választ és átmegy a során.\n* * * Sens Tiltott (Pass your turn) * *: A következő játékos megy tovább.\n* * * Inversion (Change of meaning) * *: A játék értelme fordított.\n* * * Joker (Színváltozás) * *: A játékos kiválasztja a következő kártya színét. Bármelyik kártyán játszható.\n* * * Super Joker + 4 (Colour Change and Four Cards) * *: A játékos a színt választja. A következő játékos 4 lapot választ, és átmegy a során. Ez a kártya csak akkor játszható ki, ha a játékosnak nincs más színe a szemétkupacon (kivéve, ha blöfföl).\n5. Ha egy játékosnak csak egy kártyája van, be kell jelentenie az \"UNO!\" -t. Ha nem teszi meg, és egy másik játékos veszi be (mielőtt a következő játékos játszik vagy felveszi), 2 lapot kell választania.\n6. * * End of Channel * *: A fogantyú akkor ér véget, ha egy játékos megszabadul az utolsó lapjától. A pontokat számoljuk. Aki eléri az 500 pontot (vagy egy meghatározott összeget), az nyeri meg a játékot.\n\n* * Térkép: * *\n* Digitális kártyák (0- 9): Az arcuk értéke.\n* + 2, Sens Tiltott, Inversion: 20 pont.\n* Joker, Super Joker + 4: 50 pont.",
   "principeDuJeuLeJeu": "# # Játékelv\n* A játékot 3 és 10 játékos között játsszák * *.\n* Minden játékos hozzáférést biztosít egy részét a fotókönyvtár, és úgy dönt, képeket megosztani.\n* Egy játék során egy képet választanak * * véletlenszerűen * * az összes játékos közül, majd néhány másodpercig megjelennek.\n* A játékosoknak tippelniük kell * * ki a tulaja * * megjelenik.\n* A játékos, aki a legtöbb képet helyesen találja ki, megnyeri a játékot.\n\n# # Eljárás\n1. * * Fotók kiválasztása * *: Minden játékos kiválasztott néhány képet a galériájából.\n2. * * A játék kezdete * *: Amint mindenki készen áll, a házigazda elindítja a játékot.\n3. * * Play Tower * *:\n- Egy véletlenszerű kép 5 másodpercig látható.\n- Minden játékos a tulajdonosra szavaz.\n4. * * Eredmények * *: A pontokat minden kör után frissítik.\n5. * * Vége a játéknak * *: Miután beállított számú kör, a játékos a legtöbb pontot nyer.",
-  "butDuJeuCoulerTous": "* * Game gól * *\nAz ellenfél összes hajóját beragadt, mielőtt elsüllyeszti a tiédet.\n\n* * Draft * *\n1. * * Elhelyezés * *: Minden játékos titokban egy 10x10-es rácsra helyezi a flottáját.\n- Légi fuvarozók (5 doboz)\n- Cruiser (4 doboz)\n- Tengeralattjáró (3 sejt)\n- Pusztító (3 doboz)\n- Járőr (2 doboz)\n2. * * Tir * *: Cserébe a játékosok hozzáérnek egy dobozhoz, hogy lőjenek.\n3. * * Eredmény * *: AppLocalizations.of (context)! .touche, \"Coulated\" or \"To water\".\n4. * * Victoire * *: Az első játékos, aki elsüllyeszti az egész ellentétes flottát, nyer.",
   "butDuJeuEtreLe2": "* * Game gól * *\nLegyen az első, aki eléri a céltávolságot (alapértelmezés szerint 1000 km).\n* * Draft * *\n- Minden játékos hat lapot kap.\n- Cserébe játssz egy kártyát (Távolság, Támadás, Védelem, Biztonság) vagy szabadulj meg tőle.\n- A * * Attacks * * kártyák (Stop, Red, Essence, Crevaison, Limit) blokkolja az ellenfelet.\n- Térképek * * Defenses * * (Green, Extra Tank, Javítás, End Limit) ellentámadások.\n- A biztonsági kártyák törölnek egy támadást, és megakadályozzák annak megismétlődését.\n- Térképek * * Távolság * * (25, 50, 75, 100, 200 km) tolja előre a járművet.\n- Válassz egy lapot a sor végén.",
   "butDuJeuEtreLe3": "* * Game gól * *\nLegyen az első, aki megszabadul az összes lapjától érvényes kombinációk (melds) létrehozásával.\n\n* * Running of a town * *\n1. * * Piocher * *: Vedd a térképet a hulladék tetejéről OR Stock.\n2. * * Eladás (nem kötelező) * *: Helyezze az érvényes kombinációkat az asztalra.\n- * * Sequence (Run) * *: 3 vagy több azonos színű kártya (pl. 5) Az ász lehet magas vagy alacsony.\n- * * Csoport (Set) * *: 3 vagy 4 azonos értékű, de különböző színű kártya (pl. 8, 8\n3. * * Alapértelmezés * *: Szabadulj meg egy kártyától a kezétől a szeméten.\n\n* * End of handle * *\nAz első játékos, akinek nincs kártyája vereség után, nyer. A többiek a maradék kártyák pontjait számolják (Számok = 10, As = 15, mások = névérték). A játék megáll 100 pont.",
   "butDuJeuFaireDeviner2": "* * Game gól * *\nA csapat találjon ki egy maximális szavakat az idő vége előtt, a tiltott szavak használata nélkül!\n\n* * Draft * *\n1. Minden fordulóban egy játékos (\"a hangszóró\") megpróbálja a csapata kitalálni egy szót.\n2. A hangszórónak nem szabad * * soha * * kiejtenie a szót, hogy találgasson, sem a \"tabu\" szavak (szavak nélkül) nem jelenhetnek meg a célszó alatt. Nem használhat fordításokat vagy szavakat ugyanabból a családból.\n3. Ha a felszólaló tabu szót használ, az ellenfél (vagy bíró) jelenti a hibát, a kártyát törli, és a felszólaló a következőre lép.\n4. Minden kitalált szó egy pontot ad vissza a csapatnak.\n5. A fordulat akkor ér véget, amikor lejár az idő.\n\n* * End of part * *\nA csapat a legtöbb pontot után a körök meghatározott nyeremények!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Ugyanannyi kártyát kell kijátszanod.",
   "combinaisonDe5CartesTrop": "Az 5 lapos kombináció túl gyenge.",
   "vousDevezJouerUneCarte": "Magasabb kártyát kell kijátszanod.",
-  "aGagne1": "Győzött!",
   "ceNEstPasVotre": "Nem te jössz.",
   "carteIntrouvableDansLaMain": "A kártya nem található a kézben.",
   "coupInvalideSelonLesRegles": "Érvénytelen lépés a Mille Bornes szabályai szerint!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Lejárt az idő az igazság kinyilvánítására!",
   "cibleHorsDeLaGrille": "A cél a rácson kívül van.",
   "caseDejaCiblee": "A mezőt már lőtték.",
-  "aCouleTouteLaFlotte": "Az egész ellenséges flotta elsüllyedt!",
   "placementAutomatiqueEffectue": "⏱️ Automatikus elhelyezés befejezve.",
   "tempsEcoulePourLaSaisie": "⏰ Lejárt a szavak beírásának ideje. A játék a megadott szavakkal indul!",
   "laPhaseDeVoteA": "A szavazási szakasz elkezdődött!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "Sikeres tranzakció. Menj vissza.",
   "debugJoingameLaPartieN": "[DEBUG joinGame] A játék nem létezik, vagy már nincs az előtérben. Menj vissza hamisan.",
   "erreurCritiqueDansJoingame": "--- KRISZTIKAI ERRÓR A JÁTÉKBAN ---",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ": AppLocalizations.of (context)! .wordcivilParts0Trimwordundercover IA visszatér különálló egyszerű szavakat",
   "infiltre": "Beépített ügynök",
   "civil": "Civil",
   "vendeurDeFalafels": "Falafels eladó",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Érvénytelen kombináció a Römi szabályai szerint!",
   "defaussezExactement1Carte": "Dobj el pontosan 1 kártyát.",
   "carteNonTrouvee": "A kártya nem található.",
-  "aGagneLaManche": "Megnyerte a kört!",
   "desDejaLancesPourCe": "Dice már elindult erre a túrára.",
   "vousDevezDAbordLancer": "Először dobnod kell a kockával.",
   "vousNePouvezPasDeplacer": "Nem mozgathatod az ellenfél bábuját!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Most nem választhatsz színt.",
   "erreurCritiquePlayerorderEstVide": "KRISZTIKAI ERRÓR: A lejátszási sorrend üres a következő körben. Nem bírom tovább.",
   "questionNonTrouvee": "A kérdés nem található",
-  "quiPourraitLePlusApplocalizations1": "Ki többet? AppLocalizations.of (kontextus)!. listStringKérdőívek Aiwordpool Gamewordssoft",
   "menteur": "Hazudsz!",
   "pasAssezDeJoueursPour": "Nincs elég játékos ehhez a divathoz.",
   "ajouteLaDescriptionLaPlus": "Add hozzá a legviccesebb leírást ehhez a mémhez!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Minden aktív játékosnak legalább 1 lapot le kell tennie a licitálás előtt.",
   "enchereInvalide": "Érvénytelen licit.",
   "laSurenchereDoitEtreSuperieure": "A licitnek nagyobbnak kell lennie.",
-  "applocalizationsOfContextUnjoueurEst": "]? AppLocalizations.of (context)! .aPlayer'}' az utolsó túlélő és megnyeri a Koponya!",
-  "applocalizationsOfContextUnjoueurA": "]? AppLocalizations.of (context)! .aPlayer'}' nyert 2 kihívást és megnyerte a játékot!",
-  "applocalizationsOfContextUnjoueurRemporte": "]? AppLocalizations.of (context)! .aPlayer'}' megnyeri a Koponya!",
   "reponseVide": "Üres válasz.",
   "leJugeNePeutPas1": "A Bíró nem küldhet be választ.",
   "toutLeMondeARepondu": "Mindenki válaszolt! Nyissuk ki az ajtót.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Mindenki válaszolt! Szavazz!",
   "toutesLesReponsesSontRecues": "Minden válasz megérkezett! A bírónak kell döntenie.",
   "joueurCibleIntrouvable": "Célzott játékos nem található.",
-  "quiPourraitLePlusApplocalizations2": "Ki több? ApLocalizations.of (kontextus)! .other GametypeSynonym vagy Banni",
   "vousNePouvezPasBannir": "Nem tilthatod le a saját szinonimádat!",
   "seulLeJugeEnTitre": "Csak a bíró nevezheti meg a győztest.",
   "ceJoueurNAPas1": "Ez a játékos nem küldött be választ.",
-  "quiPourraitLePlusApplocalizations3": "Ki többet? AppLocalizations.of (kontextus)! .intRequiredvocesPlayersLengthIf A bíró",
-  "quiPourraitLePlusApplocalizations4": "Ki lehet a More? AppLocalizations.of (kontextus)! .forFinalTargetInVotesround State",
   "egaliteParfaiteAucunPointAttribue": "Tökéletes döntetlen! Nem jár pont.",
   "egaliteDansLesVotesAucun": "Szavazategyenlőség: egyetlen játékos sem lett száműzve.",
   "laDescriptionLaPlusDrole": "A legviccesebb leírás lett kiválasztva!",
   "aucuneDescriptionNAEte": "Nem szavaztak meg leírást.",
-  "quiPourraitLePlusApplocalizations5": "Ki többet? AppLocalizations.of (kontextus)! .forFinalTargetInVotes1round WinnerIdd",
   "jugeIntrouvable": "A bíró nincs itt.",
   "laPartieDeZeroPointe": "A Nulla Pont játék elkezdődik! Minden játékosnak fel kell fednie 2 kártyát.",
   "toutLeMondeARevele": "Mindenki felfedte a lapjait. A játék elkezdődik!",
@@ -3164,19 +3084,16 @@
   "cultureDefi": "🧠 Műveltség & Kihívás",
   "familleToutPublic": "👨‍👩‍👧‍👦 Család & Minden korosztály",
   "piquantInsolite": "🌶️ Pikáns & Különleges",
-  "quiPourraitLePlusApplocalizations6": "Ki lehet a More? ApLocalizations.of (kontextus)! .who could your modegroup",
   "devineT": "Tippelj!",
   "presidente": "elnök",
   "chargement": "Betöltés...",
   "cursive": "Írás",
   "exception": "Kivétel:",
-  "debutDeLaConstructionDe": "--- A SZERZŐDÉS SZERKEZETE A \"Who Could the Most? AppLocations.of (context)! .printIsaction depending Stateto (isActionUnderstanding) Player ''-ként < String, dynamic >?? '{}';",
   "clicSurLeJoueurPname": "> > > Válasz a $pName lejátszón (ID: $pl)!",
   "passageDeIsactionpendingATrue": "- Áttérés az IzAction-ből igazzá.",
   "erreurFirebaseLorsDuVote": "! ERREUR Tűzoltóság a szavazás során: $e",
   "appelFirebaseTerminePassageDe": "- A tűzbázisnak vége. Áttérés az ISActionUndering-ből a Hamisra.",
   "attentionLeWidgetNEst": "Widget eltűnt, SetState lemondva.",
-  "quiPourraitLePlusApplocalizations7": "Ki többet? AppLocalizations.of (kontextus)! .defaultFinalRoundwinneridGamedataround WinnerIdd",
   "phaseDePose": "PHASE",
   "stre9f4a5": "🏆 Legendás!",
   "str21f597": "⭐ Kiváló!",
@@ -3185,7 +3102,7 @@
   "strc0046c": "💪 Lehet még jobb is!",
   "str85bff7": "Bravó!",
   "strfa1b8c": "Dollár!",
-  "str487ca1": "$'{'''Chut! Csukd be a szemed.",
+  "str487ca1": "$''(''''Chut! Csukd be a szemed.",
   "leSoleilSeLeve": "Felkel a nap",
   "atout": "ADU: {suit}",
   "@atout": {
@@ -3204,8 +3121,7 @@
   "chill": "Nyugis",
   "soiree": "Buli",
   "competition": "Verseny",
-  "enCours": "'{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \"\"'}' \": GameMessageLocalization.tr (kontextus, ok),",
+  "enCours": "'{0}'",
   "jAiLanceUnePartie2": "Elindítottam egy játékot",
   "piedDeBiche": "Feszítővas",
   "appTitle": "Partijáték",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "Eldobtam a 0 egy részét! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Színsorok (0) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Rajzold le ezt a mondatot:\n\"0\" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "A 0-t betiltották az 1-es javaslatához! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 találta a szót: \"1\"! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Senki sem találta meg a \"0\" szót. {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 találta a szót: \"1\"! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "Forradalom!",
   "tonMotEst2": "A szavad: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Döntetlen!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "Eldobtam a 0 egy részét! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "A Kockapóker játék elkezdődik!",
   "logClueGivingStart": "A játék elkezdődik! Add meg a nyomot...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "Kezdődik a Belote játék!",
   "logBlokusStart": "A Blokus játék elkezdődik!",
   "pokerFlop": "--- FLOP ---",
   "pokerTurn": "--- TURN ---",
   "pokerRiver": "--- RIVER ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "1! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "A 0-ás csapat felfedte az Assassint! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Maximális lehetséges: 0 kártya {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 tükrözi a kihívás 1 kártya... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "AZ EMBERE (0 lap) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 / 30 vonások {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "A benyújtott mutatók: 0 / 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Válogatott szín:",
   "pokerRaiseTo": "Emelés erre: {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Válasz 0: \"1\" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Szerep:",
   "obligatoire": "Kötelező",
   "aSelectionneSonPionEtReflechit": "{playerName} kiválasztotta a bábuját és gondolkodik...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0-t jelentettek és rejtettek el neked. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Nem sikerült biztonságos LiveKit videoklippet szerezni.",
+  "veuillezEntrerUneAdresseEmail": "Adjon meg egy érvényes e-mail címet.",
+  "veuillezEntrerVotreMotDe": "Kérem, adja meg jelenlegi jelszavát.",
+  "entrezVotreMotDePasse": "Adja meg a jelenlegi jelszavát.",
+  "leNouveauMotDePasse": "Az új jelszónak legalább 6 karakternek kell lennie.",
+  "lesDeuxMotsDePasse": "Mindkét jelszó nem egyezik.",
+  "photoDeProfilMiseA": "Profil fotó frissítve!",
+  "echecDuChangementDePhoto": "A fotózás nem sikerült.",
+  "k3CaracteresMinimum": "Minimum 3 karakter",
+  "cePseudoEstDejaPris": "Ez már foglalt.",
+  "unAmi": "Egy barát.",
+  "ceJoueur": "ez a játékos",
+  "preparationDeLaRecherche": "A keresés előkészítése...",
+  "erreurDeConnexionAuMatchmaking": "Hiba történt a párkereséssel. Kérem, próbálja újra.",
+  "erreurDeConnexionALa": "Nem sikerült csatlakozni a szobához.",
+  "legendeVivante": "Élő legenda",
+  "grandMaitre": "Nagymester",
+  "stratege": "Stratégia",
+  "initie": "Indítva",
+  "illimiteesVip": "Korlátlan (VIP)",
+  "pieces": "0 darab {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "Kapcsolatlan felhasználó.",
+  "entrezUnPseudo": "Adja meg a pszeudo",
+  "cePseudoEstDejaPris1": "Ez a becenév már foglalt",
+  "pseudoDejaPrisParUn": "Pseudo-t már elvitte egy másik játékos.",
+  "cetteVersionDeLApplication": "A kérelem e változata elavult. Kérem telepítse a legújabb verziót.",
+  "playfunEstActuellementEnMaintenance": "Playfun jelenleg folyamatosan javítja az estéket. Gyere vissza egy perc múlva!",
+  "uneNouvelleVersionDePlayfun": "A Playfun új verziója áll rendelkezésre! Frissítse az alkalmazást, hogy folytathassa a játékot.",
+  "derniereVersion": "Legújabb változat",
+  "echecDeLEnvoi": "Hibás szállítmány.",
   "demandeDAmiEnvoyeeA": "Barátkérelem elküldve {name} részére!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Játékos (0) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Videó bekapcsolása",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Pseudo elérhető",
+  "entrezUnEmailValide": "Adjon meg egy érvényes e-mailt",
+  "k6CaracteresMinimum": "Minimum 6 karakter",
+  "pasDeCompteSInscrire": "Nincs számla? Nyilvántartás",
+  "dejaUnCompteSeConnecter": "Máris számla? Bejelentkezés",
+  "conditionsGeneralesDUtilisationCgu": "Általános használati feltételek (CGU / EULA)",
+  "politiqueDeConfidentialite": "Adatvédelmi irányelvek",
+  "miseAJourRequise": "Frissítés szükséges",
   "joueursBloques": "Letiltott játékosok ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Érvénytelen azonosítók vagy nem létező számla.",
+  "leMotEtaitLabel": "A szó:",
+  "mancheLabel": "Csatorna",
+  "et": "és",
+  "pokerPlayerCheck": "{playerName} passzol (Check).",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Szó:",
+  "rouges": "Pirosak",
+  "noirs": "Feketék",
+  "crane2": "Koponya",
+  "enAttente2": "Függőben",
+  "enCours1": "Folyamatban",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} kiválasztotta a bábuját és gondolkodik...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Hátralévő idő: {seconds} mp",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Csomag {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Változat)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 győzelem 1 pont 2-vel! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Győzelem Koponya! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "csomagolás {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Standard",
+  "lui": "Őt.",
+  "carte4": "Kártya {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Zárolt játékosok",
+  "vousNAvezBloqueAucun": "Nem tiltottál le egyetlen játékost sem.",
+  "debloquer": "Feloldás",
+  "nouvelEmail": "Új e-mail",
+  "motDePasseActuel": "Jelenlegi jelszó",
+  "emailMisAJourAvec": "E-mail frissítve!",
+  "modifierMotDePasse": "A jelszó módosítása",
+  "nouveauMotDePasse": "Új jelszó",
+  "confirmerLeMotDePasse": "Jelszó megerősítése",
+  "motDePasseModifieAvec": "A jelszót sikeresen módosították!",
+  "prendreUnePhoto": "Csinálj egy képet.",
+  "choisirDepuisLaGalerie": "Válasszon a galériából",
+  "supprimerLaPhoto": "A kép törlése",
+  "photoDeProfilRetiree": "Profilkép eltávolítva.",
+  "pseudoMisAJour": "Frissített becenév!",
+  "compteSecurite": "& Biztonsági számla",
+  "editeParParrelV10": "Edited by Parrel • v1.0.0",
+  "aucunJeuTrouve": "Nem található játék",
+  "essaieDAjusterTesFiltres": "Próbáld meg módosítani a szűrőket vagy keress újra.",
+  "reinitialiserLesFiltres": "Szűrők visszaállítása",
+  "nouveau": "ÚJ",
+  "gererMonAbonnement": "Az előfizetésem kezelése",
+  "mesPieces": "A szobáim.",
+  "rechargerLesOffresDuStore": "Újratölthető áruházi ajánlatok",
+  "gererMesAbonnements": "Az előfizetéseim kezelése",
+  "badges": "Jelvények",
+  "partiesJouees": "Lejátszott játékok",
+  "xpTotalSession": "Munkamenet összes XP",
+  "moyennePartie": "Átlag / Játék",
+  "detailParJeuPerformanceXp": "Játékonkénti részletek és XP teljesítmény",
+  "jouezVosPremieresPartiesPour": "Játssz le néhány játékot, hogy itt lásd az XP statisztikáidat!",
+  "xpAuCompteur": "{psxp} XP a számlálón",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Még {xpRemaining} XP a(z) {pslevel1}. szintig",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} lejátszva • {won} győzelem • ~{gameXp} szerzett XP {played1s} {won1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Hiba a felhasználói adatok betöltésekor.",
+  "vousDevezAccepterLesCgu": "El kell fogadnia a CSU-kat és az Adatvédelmi irányelveket, hogy létrehozzon egy fiókot.",
+  "miseAJourDisponible": "Frissítés elérhető",
+  "plusTard": "Később",
+  "mettreAJour": "Frissítés",
+  "uneNouvelleVersionDePlayfun1": "Új verzió ({newVersion}) érhető el a Playfunból újdonságokkal és javításokkal!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Folyamatban lévő karbantartás",
+  "mettreAJourMaintenant": "Frissítés",
+  "motifDuSignalement": "Bejelentés oka:",
+  "tricheOuAntiJeu": "Csalás vagy sportszerűtlen játék",
+  "autre": "Egyéb",
+  "signaler": "Jelentés",
+  "detailParJeu": "Játékonkénti részletek:",
+  "ceJoueurNAPas2": "Ennek a játékosnak még nincsenek rögzített játékai.",
+  "badgesDebloques": "Feloldott jelvények: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Letiltott játékosok ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "{name} feloldása",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Jelentés vagy letiltás: {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "szavazat"
 }

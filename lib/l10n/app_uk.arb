@@ -28,7 +28,7 @@
   "elements": "'{0}' пунктів",
   "prompt": "Запит: \"'{0}'\"",
   "utiliser": "ВИКОРИСТАТИ",
-  "packActiveElements": "✨ Пакуйте '''{0}''' активовано ('{1}' предметів)!",
+  "packActiveElements": "✨ Пакуйте '{0}' активовано ('{1}' предметів)!",
   "fusionner": "ОБ''ЄДНАТИ",
   "themesFusionnesLePackActif": "✨ Об''єднані теми! Активний пак тепер містить '{0}' предмети.",
   "modifierCompleter": "Змінити / Доповнити",
@@ -46,7 +46,7 @@
   "generationIa": "Генерація ШІ: '{0}'",
   "historique": "Історія",
   "melangerPlusieursThemes": "Змішати кілька тем:",
-  "combineS": "✨ '{0 разом}'",
+  "combineS": "✨ ''(0 разом)''",
   "nombreDElements": "Кількість елементів:",
   "minRequisRecommande": "Потрібна мінімум: '{0}' | Рекомендовано: '{1}'",
   "ambianceTonaliteDeJeu": "Атмосфера / Тон гри:",
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 км {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "Немає карт",
-  "cartesRestantes": "'{залишилося 0}' карт",
-  "jetonsMise": "Фішки: '{$0,}' | Ставка: '{$1,}'",
+  "cartesRestantes": "''(залишилося 0)'' карт",
+  "jetonsMise": "Фішки: ''($0,)'' | Ставка: ''($1,)''",
   "totalPts": "Всього: '{0}' очок",
   "k13Remplies": "'{0}'/13 заповнено",
   "finDeLaManche": "Кінець раунду!",
@@ -341,14 +341,14 @@
   "tempsEcoule": "Час вийшов!",
   "tourSuivant": "Наступний хід",
   "enAttenteDeLHote3": "Очікування хоста для початку наступного ходу...",
-  "equipeAPts": "Команда А: '{очок}' очок '{pts}'",
-  "equipeBPts": "Команда B: '{очок}' очок '{pts}'",
+  "equipeAPts": "Команда А: ''(очок)'' очок '{pts}'",
+  "equipeBPts": "Команда B: ''(очок)'' очок '{pts}'",
   "cEstAToiDe": "Ваша черга відгадувати!",
   "passer1": "ПРОПУСТИТИ",
   "motsTrouves": "Знайдені слова: '{0}'",
   "ecrivezIci": "Пишіть тут...",
   "plierPasser": "ЗГОРНУТИ І ПЕРЕДАТИ",
-  "motsRediges": "✏️ '{написано 0}' слів...",
+  "motsRediges": "✏️ ''(написано 0)'' слів...",
   "leGrandDepliage": "Велике розгортання!",
   "voiciLesUvresCollectivesNees": "Ось колективні твори вашої уяви:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' готує атаку ('{1}'проти гравця!",
@@ -386,7 +386,7 @@
   "distribuerLaSuite": "Роздати наступну",
   "attenteDuDonneur": "Очікування дилера...",
   "couche": "Скинув",
-  "miseActuelle": "Поточна ставка: '{сума}' '{amount}'",
+  "miseActuelle": "Поточна ставка: ''(сума)'' '{amount}'",
   "enAttente": "Очікування...",
   "seCoucher": "Пас",
   "checker": "Чек",
@@ -394,7 +394,7 @@
   "choisirLeMontantDeLa": "Виберіть суму підвищення",
   "x2": "x2",
   "pot": "Банк",
-  "allIn": "All-in",
+  "allIn": "Всі",
   "hesiteEtChoisitLaCouleur": "🌈 '{0}' вагатися і вибрати колір...",
   "vousNAvezPlusDe": "У вас більше немає карт!",
   "garderPasser": "Залишити і пропустити",
@@ -446,13 +446,13 @@
   "votes": "Голоси:",
   "aVote": "'{0}' голосував: '{1}'",
   "lesPointsOntEteDistribues": "Очки нараховано на основі ваших голосів.",
-  "leMotDesCivilsEtait": "Слово цивільних було: '''{0}'''",
-  "leMotDeLInfiltre": "Слово Інфільтратора ('{0}') було: '''{1}'''",
+  "leMotDesCivilsEtait": "Слово цивільних було: '{0}'",
+  "leMotDeLInfiltre": "Слово Інфільтратора ('{0}') було: '{1}'",
   "mrWhiteNAvaitPas": "Пан Вайт ('{0}') не мав слів.",
   "leMotATrouverEtait": "Слово було синонімом «'{0}'». Інші гравці набирають 1 очко.",
   "felicitationsAuDessinateurEtA": "Вітаємо карикатуриста '{0}' та '{1}' !",
   "saReponseEtait": "Він відповів: «'{0}'».",
-  "leMotEtait": "Слово було: '''{0}'''.",
+  "leMotEtait": "Слово було: '{0}'.",
   "cartesRevelees": "Відкриті карти:",
   "erreurDeChargementDuMeme": "Помилка завантаження мему.",
   "scoreActuelDeCartes": "Поточний рахунок '{0}': '{1}' карт.",
@@ -542,13 +542,13 @@
   "tempsRestantS": "Залишився час: '{0}' с",
   "k6Consecutifs3": "6 поспіль: '{streak}'/3",
   "lancerLeDe": "КИНУТИ КУБИК",
-  "scorePoints": "Бал: '{набрати}' бали '{score}'",
-  "dominosRestants": "Залишки доміно: '{}' '{count}'",
+  "scorePoints": "Бал: ''(набрати)'' бали '{score}'",
+  "dominosRestants": "Залишки доміно: ''()'' '{count}'",
   "impossibleDeJouerCeDomino": "Цю кісточку не можна сюди покласти.",
   "mancheTerminee": "Раунд завершено! ",
   "dominos": "Доміно",
   "extremites": "Кінці: ",
-  "pioche2": "Дрота: '{Рахунок}' '{count}'",
+  "pioche2": "Дрота: ''(Рахунок)'' '{count}'",
   "piocher": "Взяти",
   "ficheDePts": "'{0}' рекорд ('{1}' очок)",
   "pts2": "{otherName} ({otherTotal} очко)",
@@ -563,7 +563,7 @@
     }
   },
   "clic": "КЛІК",
-  "lancersRestants": "Залишкові кидки: '{Рахунок}' '{count}'",
+  "lancersRestants": "Залишкові кидки: ''(Рахунок)'' '{count}'",
   "combinaison": "КОМБІНАЦІЯ",
   "grilleDePts": "СІТКА '{0}' ('{1}' очок)",
   "pts3": "{p} ({myTotal} очко)",
@@ -614,10 +614,10 @@
     }
   },
   "carteAPrendre": "КАРТА ДЛЯ ВЗЯТТЯ",
-  "votreMain": "Твоя рука ('{порахувати}') '{count}'",
+  "votreMain": "Твоя рука (''(порахувати)'') '{count}'",
   "touchezUneCartePourLa": "Торкніться карти, щоб зіграти",
   "aucuneCombinaisonEtaleeSurLa": "На столі ще немає комбінацій",
-  "etaler": "Спред ('{рахунок}') '{count}'",
+  "etaler": "Спред (''(рахунок)'') '{count}'",
   "defausserFin": "Скидання і кінець",
   "pts8": "{eValue} очок",
   "@pts8": {
@@ -812,7 +812,7 @@
   "veuillezRevenirALEcran": "Будь ласка, поверніться до екрана налаштування гравців.",
   "retour": "Назад",
   "lEquipeAGagne": "Команда '{0}' виграла!",
-  "points1": "'{0,}' очок",
+  "points1": "''(0,)'' очок",
   "passeLObjet": "Передай предмет",
   "passeLObjetRapidement": "Швидко передай предмет",
   "generationIaDeQuestions": "Генерація запитань через ШІ",
@@ -844,7 +844,7 @@
   "equipe2": "КОМАНДА 2",
   "validerLesEquipes": "Підтвердити команди",
   "placezLeTelephoneSurVotre": "ПРИКЛАДІТЬ ТЕЛЕФОН ДО ЛОБА!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 р. {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -856,7 +856,7 @@
   "arreter": "Зупинити",
   "hautPasser": "Вгору = Пас",
   "resultatsDuPassage": "Результати раунду",
-  "pointsMarques": "+'{0,}' набраних балів!",
+  "pointsMarques": "+''(0,)'' набраних балів!",
   "touchezUnMotPourModifier": "Натисніть на слово, щоб змінити результат у разі помилки датчика:",
   "pts10": "{teamAScore} очок",
   "@pts10": {
@@ -896,7 +896,7 @@
   },
   "partieTerminee2": "ГРА ЗАКІНЧЕНА!",
   "victoireDe": "Перемога '{0}' !",
-  "cartes": "'{0,}' карт",
+  "cartes": "''(0,)'' карт",
   "ecrireUnMessage": "Написати повідомлення...",
   "codeDeSalonPriveIntrouvable": "Код приватної кімнати не знайдено.",
   "erreurLorsDeLaConnexion": "Помилка входу: '{0}'",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "Закрити салон?",
   "leSalonSeraDefinitivementSupprime": "Салон буде видалено назавжди для всіх учасників.",
   "aCreeUnePartieDe": "'{0}' створили гру '{1}' !",
-  "joueurSPrets": "'{0,}' гравців готові",
+  "joueurSPrets": "''(0,)'' гравців готові",
   "cettePartieEstTermineeOu": "Ця гра завершена або скасована.",
   "enPartie": "У ГРІ",
   "partieDeTerminee": "Гра '{0}' закінчена!",
   "statistiques": "Статистика — '{0}'",
-  "vainqueur1": "Переможець: '{0}''{1}'\n",
+  "vainqueur1": "Переможець: '{0}''{1}'''''''\n",
   "voirLesStats": "Переглянути статистику",
   "message": "Повідомлення...",
   "k0Pts": "0 ОЧК",
@@ -1009,11 +1009,11 @@
       }
     }
   },
-  "reflechit": "'''{'''ім''я'''}''' думає... '{name}'",
+  "reflechit": "''''(''''ім''я'''')'''' думає... '{name}'",
   "faceAFaceCoteA": "Обличчям до обличчя (поруч)",
   "totalAdversaire": "РАЗОМ СУПЕРНИК",
   "prendreLAtoutOuPasser": "ВЗЯТИ КОЗИР ЧИ ПАСУВАТИ:",
-  "combinaisonsDe": "Комбінації назв '{}' '{name}'",
+  "combinaisonsDe": "Комбінації назв ''()'' '{name}'",
   "ilDevraDonnerLePremier": "Він повинен дати першу підказку",
   "cetteReponseADejaEte": "Ця відповідь уже була!",
   "themePourLes25Mots": "Тема для 25 слів",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' перекинув кубик ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} залишив(-ла) кубик зі значенням {dieVal} (кубик #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Кирка",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' ще '''{''' \r\n      Антидублювання безпеки: якщо",
   "vousNAvezPasDe": "У тебе немає слів",
   "equipe12": "Команда 1",
   "equipe21": "Команда 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Кінець рукава (кнопка адміністратора)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async '''{''' \r\n    чекати _db.runTransaction((transaction) async'''{''' \r\n      фінальна gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = waitit transaction.get(gameRef); \r\n      якщо (!snap.exists) поверне; \r\n\r\n      фінальна граData = snap.data() як Map<рядок, динамічний>; \r\n      фінальні гравці = Карта<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Визначте переможця (більше досвіду)\r\n      Переможець струниId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        фінальний xp = (pData[''xp''] як num?)?. toInt() ?? 0; \r\n        якщо (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Хтось",
   "aAtteintPointsEtRemporte": "{winnerName} набрав {targetScore} очок і виграв гру!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Гравець",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Питання зі списку<String> =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMost[складність]?? \r\n          GameWords.whoIsMostLikely[",
   "honnete": "Чесно",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [парні, парні]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = перемішаніРолі[1]; \r\n\r\n        Питання =\r\n            \"Опишіть своє секретне слово одним словом. Самозванці, блеф!\"; \r\n        for (var pId у players.keys) '''{''' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": ")? Пар.спліт(",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} набрав {updatedScoresoverallWinnerId} очок і виграв гру!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "викладання карти",
   "enchereAutomatique": "авто-ставка",
   "passeLEnchere": "пропускає ставку",
-  "elseIfGametype": ") '''{''' \r\n        якщо (voterId == votedForId) '''{''' \r\n          throw Exception(\"Формальна заборона голосувати за себе!\"); \r\n        '''}''''}''' інше, якщо (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          транзакція, \r\n          gameRef, \r\n          gameData, \r\n          виборець, \r\n          5, \r\n          applySpeedBonus: правда, \r\n        ); \r\n      }' \r\n\r\n      int requiredГолоси = гравці.довжина; \r\n\r\n      якщо (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          фінальна Карта<Рядок, int> voteCounts = '{}'; \r\n          для (кінцева ціль у votes.values) '{' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxГолосів = 0; \r\n          Список<Рядок> топГолосування = []; \r\n          voteCounts.forEach((ціль, рахунок) '''{''' \r\n            якщо (count > maxVotes) '{' \r\n              maxVotes = підлік; \r\n              topVoted = [ціль]; \r\n            '}' інакше, якщо (count == maxVotes) '{' \r\n              topVoted.add(ціль); \r\n            '}''''}'''); \r\n\r\n          Оновлення[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        фінальна Карта<Рядок, int> voteCounts = '{}'; \r\n        для (кінцева ціль у votes.values) '{' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxГолосів = 0; \r\n        Список<Рядок> топГолосування = []; \r\n        voteCounts.forEach((ціль, рахунок) '''{''' \r\n          якщо (count > maxVotes) '{' \r\n            maxVotes = підлік; \r\n            topVoted = [ціль]; \r\n          '}' інакше, якщо (count == maxVotes) '{' \r\n            topVoted.add(ціль); \r\n          '}''''}'''); \r\n\r\n        якщо (topVoted.length == 1) '''{''' \r\n          фінальний переможець = найкращий. Голосування. Перший; \r\n          Оновлення[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          транзакція, \r\n          gameRef, \r\n          gameData, \r\n          виборець, \r\n          5, \r\n          applySpeedBonus: правда, \r\n        ); \r\n      )'' \r\n\r\n      int requiredГолоси = гравці.довжина; \r\n\r\n      якщо (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} виграв усі фішки на столі!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "Суддя робить вибір...",
   "coupAutomatiqueJouePourCause": "Автоматичний хід відігрався через бездіяльність.",
   "inactivite": "Бездіяльність",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0 : 1 час {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0 : {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Хід суперника",
   "derniereCartePosee": "Остання зіграна карта!",
   "cEstTonTour": "ТВІЙ хід!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0 : 1 час {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Помилка: Питання не знайдено.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0 : 1 час {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(відповіді немає)",
   "deuxDefisReussis": "Два завдання виконано.",
   "leChallenger": "Претендент",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": ":'{0}' '{1}'",
   "uneDescriptionHilarante": "кумедний опис",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Колонка( \r\n            діти: [ \r\n              Текст( \r\n                ''",
   "unProblemeEstSurvenu": "Виникла проблема.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      За замовчуванням: \r\n        фінальний раундWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "0 : 1 / 2 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Переглянути фінальний рахунок",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "0 1 / 2 — 3 : 4 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (зріст: 20), \r\n                Wrap( \r\n                  вирівнювання: WrapAlignment.center, \r\n                  Діти: \r\n                      justOneFilteredClues\r\n                          .map((підказка) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (зріст: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Текст( \r\n                    AppLocalizations.of(context)!. всі підказкиБули, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' ще '''{''' \r\n          Це залежить від віщуна\r\n          Колонка повернення( \r\n            діти: [ \r\n              Текст(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0 : 1 час {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,20 +2060,18 @@
   "designez2Amoureux": "Оберіть 2 закоханих",
   "amoureuxUnis": "Закохані поєднані!",
   "laVictime": "Жертва",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Ряд( \r\n              mainAxisSize: MainAxisSize.min, \r\n              діти: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. infucate, \r\n                  іконка: Icons.auto_fix_high, \r\n                  колір: Кольори. фіолетовийАкцент, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      контекст, \r\n                      Слухай: Неправда, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Правда, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (ширина: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. поглинати, \r\n                  іконка: Icons.close, \r\n                  колір: Кольори. ЧервонийАкцент, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        неправда, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          універсал; \r\n        Коробка ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Минулої ночі жодних жертв (захищених чи пощаджених)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              стиль: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Колір: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''вовк'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Кольори.білий 60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: message), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Компактна смуга відправлення\r\n          if (canSendMessage)\r\n            Row( \r\n              діти: [ \r\n                Розширено( \r\n                  дитина: SizedBox( \r\n                    зріст: 32, \r\n                    дитина: TextField ( \r\n                      Контролер: _chatController, \r\n                      style: const TextStyle(fontSize: 12, color: Colors.white), \r\n                      Декорація: ВхідДекор ( \r\n                        підказкаТекст: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          колір: Кольори. білий 30, \r\n                          fontРозмір: 11, \r\n                        ), \r\n                        Межа: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Заповнено: Правда, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          горизонтальний: 10, \r\n                          вертикально: 0, \r\n                        ), \r\n                      ), \r\n                      onПодано: (текст) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (ширина: 4), \r\n                IconButton( \r\n                  іконка: const Icon( \r\n                    Icons.send_rounded, \r\n                    розмір: 18, \r\n                    колір: Colors.cyanAccent, \r\n                  ), \r\n                  наповнення: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    якщо (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Мітка рядка, тип рядка, колір activeColor) '{' \r\n    фінальний bool isSelected = _selectedChatType == тип; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = тип), \r\n      дитина: Контейнер( \r\n        накладка: const EdgeInsets.symmetric(горизонтально: 8, вертикально: 3), \r\n        Декорація: BoxDecoration ( \r\n          Колір: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Кольори.білий.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Колір: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        дитина: Текст( \r\n          лейбл, \r\n          стиль: TextStyle( \r\n            fontРозмір: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor: Colors. white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- ОНОВИВ АВАТАР, ЗРОБИВШИ ЙОГО ІНТЕРАКТИВНИМ--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    якщо (startTime == null) поверне const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder дозволяє використовувати надзвичайно плавний візуальний таймер без блокування таймера та ручного setState, що значно полегшує тему (пункт 4)\r\n    фінальний endTime = startTime.toDate().add( \r\n      Тривалість(секунди: тривалістьВсекунди), \r\n    ); \r\n    остаточний залишок = endTime.difference(DateTime.now()); \r\n\r\n    якщо (залишився.isNegative)\r\n      Повернути текст( \r\n        AppLocalizations.of(context)!. k0S, \r\n        стиль: Theme.of( \r\n          контекст, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    повернути TweenAnimationBuilder<Тривалість>( \r\n      тривалість: залишилося, \r\n      підлітковий: Tween (початок: залишок, кінець: Тривалість.нуль), \r\n      конструктор: (BuildContext context, значення тривалості, віджет? дочірня) '{' \r\n        останні секунди = value.inSeconds; \r\n        Повернути текст( \r\n          AppLocalizations.of(context)!. часЗалишок, \r\n          стиль: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            колір: секунди < 20 ? Кольори.червонийАкцент: Кольори.бурштиновий акцент, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Контекст BuildContext, \r\n    Map<String, dynamic> gameData, \r\n    Струнний гравецьId, \r\n  ) '''{''' \r\n    фінальні гравці = Карта<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    фінальний playerOrder = Список<Рядок>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    фінальні позиції = Відтворення<Рядок, динамічний>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    фінальний int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    фінальна струна currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    фінальний bool isMyTurn = currentPlayerId == playerId; \r\n    фінальний інтелект кубик = (gameData[''littleHorsesDice''] як num?)?. toInt() ?? 0; \r\n    фінальний bool hasRoll = gameData[''littleHorsesHasRolled''] ?? false; \r\n    фінальний bool isTeamMode = gameData[''smallTeamHorses''] ?? false; \r\n    фінальна Відображення<Рядок, динамічний> послідовнийШістки = Відображення<Рядок, динамічний>.з( \r\n      gameData[''маленькіКоніПослідовніШістки''] ?? '{}', \r\n    ); \r\n    фінальний int mySixStreak = послідовніШістки[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade на темному фоні\r\n    остаточний список<Колір> гравецьКольори = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      Колір(0xFF38BDF8), // Неоново небесно-блакитне\r\n      const Color(0xFF10B981), // Смарагдово-зелений\r\n      const Color(0xFFF59E0B), // Золотий бурштиновий\r\n    ]; \r\n\r\n    --- ЕКРАН ПЕРЕМОГИ--- \r\n    if (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      Повернути UniversalGameEndScreen( \r\n        Назва гри:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Прибуття в центр дошки!",
   "deplacezUnCheval": "ПЕРЕСУНЬТЕ КОНЯ!",
   "aVousDeLancer": "ВАША ЧЕРГА КИДАТИ!",
   "mode2v2Allies": "Режим союзників 2х2",
-  "chevalSelectionneNtouchezPourAvancer": "Кінь '{пішак}' обрано!\\nНатискайте, щоб рухатися вперед '{pawn}'",
+  "chevalSelectionneNtouchezPourAvancer": "Кінь ''(пішак)'' обрано!\\nНатискайте, щоб рухатися вперед '{pawn}'",
   "touchezUnPion": "Торкніться фішки",
   "scoreLimiteAtteint": "Досягнуто ліміту очок!",
   "toutesLesGrillesSontCompletees": "Усі таблиці заповнено!",
   "cEstVotreTourTouchez": "Ваш хід! Натисніть на кубик, щоб зафіксувати (золотий 🔒)",
   "lancerLesDes": "Кинути кубики",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1-6: 0 /63 1 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1-6: 0 /63 1 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "ПРОГРАШ! Відкрий запитання та дай відповідь!",
   "gagneTonSecretEstPreserve": "ПЕРЕМОГА! Твій секрет збережено.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    '''}''' ще '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (Варіант)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    для (гравець VAR у _activePlayers) '''{''' \r\n      якщо (гравець == під прикриттям) '{' \r\n        _playerRoles[гравець] = «Інфільтратор»; \r\n      '}' інакше, якщо (гравець == _mrWhitePlayer) '{' \r\n        _playerRoles[гравець] = «Містер Вайт»; \r\n      '}' ще '{' \r\n        _playerRoles[гравець] = «Цивільний»; \r\n      '}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  Порожнеча _nextPlayerReveal() '''{''' \r\n    якщо (_currentPlayerRevealIndex < _activePlayers.довжина - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' інакше '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(струнний виконавець) '''{''' \r\n    Роль струнки = _playerRoles[гравець]!; \r\n    bool impostorsWin = роль == «Цивільний»; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      якщо (impostorsWin) '''{''' \r\n        _resultMessage = «'{'player'}' був цивільним! Перемогли Самозванці!»; \r\n      '''}''' ще '''{''' \r\n        _resultMessage = \"'{'player'}' була\r\n    \r\n  ",
   "requiert4Joueurs": "Потрібно 4+ гравці",
   "requiert3Joueurs": "Потрібно 3+ гравці",
   "genereDesCategoriesAmusantesPour": "Створіть цікаві категорії для гарячої картоплі. Тема: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Команда Синя)",
   "k2EquipesSAffrontent": "2 команди змагаються",
   "chacunPourSoi": "Кожен сам за себе",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0 : {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Хід закінчено.",
-  "aGagneAvecSaDescription": "{winnerName} перемогла з описом:AppLocalizations.of(context)!. JavaScript licenses API Веб-сайт Go1.13.8 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Ніхто не виграв у цьому раунді. Нічия або немає підписів.",
   "aTrouveLeSymboleIl": "{winnerName} знайшли символ 99999! Він виграє картку. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Підказку надіслано! Очікування інших...",
   "carte3": "Карта сайту",
   "score": "Зареєструватися",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of(контекст)! .styleConstTextstyleColorColors {value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "Ніч падає на село...\n\nЗакрийте очі.",
   "leMomentEstVenuLe": "Час прийшов...\n\nСело повинно голосувати.",
   "victoireDesVillageois": "Перемога Селян!",
@@ -2562,14 +2513,6 @@
   "votezPourDevorerUneProie": "Голосуйте за жертву",
   "espionnezUnJoueur": "Шпигуй за гравцем...",
   "leLoupNoirDecideDu": "Чорний Вовк вирішує долю жертви",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infect {targetName} ?AppLocalizations.of(контекст)!.centeractionwidgetRowMainaxissizeMainaxisminThe White Wolf вражає соло",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Оберіть жертву",
   "laSorcierePrepareSesPotions": "Відьма варить зілля",
   "cibleDesLoups": "Ціль вовків: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Вовки",
   "outreTombe": "Потойбіччя",
   "amoureux": "Закохані",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : Застосування.of(context)!.styleTextstyleFontweightFontweightБолдМаленькі коні",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Індивідуальна гонка",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 кидків)",
   "@k3Lancers": {
@@ -2694,7 +2629,6 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Хто міг більше?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Твитнуть",
   "decisionUnanimeDuGroupePour": "Негайне рішення групи для '{0}'!",
   "ilFautAuMoins41": "Для Codenames потрібно щонайменше 4 гравці (по 2 у команді)!",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "** Мета****\nВізьміть карти, щоб створити відповідні пари. Попри те, що гравець, який тримає карту Зомбі в кінці гри.\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n1. Гра починається з 33 карт (16 пар + 1 Zombie card).\n2. Картки розподілені до 4 гравців.\n3. Кожен учасник отримує картку з наступного гравця.\n4. Якщо карта створює пару, вона автоматично розгромлюється.\n5. Рука гравця змішується.\n6. Перший програвач, який не має карток.\n7. Рештатний програвач з картою Зомбі!",
   "butDuJeuObtenirLe": "***Game Мета****\nОтримайте найвищий бал, наповнивши 13 категорій з 5 дічей.\n\n**Налаштування вежі**\n1. **Lance*** : Ви можете кинути 5 коп. до 3 разів на свою чергу.\n2****** : Після 1-го або 2-го кидання ви можете зберегти деякі діжі і перезапустити інші.\n3. **Score**: Після принаймні одного кидання вам потрібно вибрати категорію для зарахування. Кожна категорія може бути використана одноразово за одиницю.\n\n**Категорія**\n- **Ас до Шість** : Сума відповідного мангалу. (Знайдено 35 балів, якщо верхній секція складає 63 балів або більше).\n- **Брелан** (3 або більше ідентичних цифр): Сума всіх кріплень.\n- ** Квадрат** (4 або більше ідентичних дічей): Сума всіх кріплень.\n- **Повний** (3 місний ідентичний + 1 пара): 25 очок.\n- **Маленький Люкс** (4 місний номер): 30 очок.\n- **Large Suite** (5 послідовний вихід): 40 балів.\n- **Yams** (5 місний ідентичний): 50 очок.\n- **Чанс*** : Сума всіх кріплень.",
   "objectifNePasAvoirL": "** Мета****\nЧи не у вас пристрій в руках, коли картопля вибухає!\n\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n1. Тема з''являється на екрані.\n2. Гравець, що тримає пристрій, повинен дати відповідь, відповідну темі.\nЯк тільки він відповів, він швидко перейшов на літак до свого сусіда.\n4. У сусіді необхідно знайти нову відповідь і пройти пристрій.\n5. Час прихований і випадково: картопля може вибухнути в будь-який час!\n6. Гравець утримує пристрій в момент вибуху втрачає ручку і отримує заставу.",
-  "principeGeneralGribouillisEstUn": "**Загальний принцип***\nGribouillis - це гра, натхненна \"Арабським телефоном\", де ідеї змінюються на кожному етапі. Є 3 режими гри:\n\n**1. Нормальний режим (Arabic Illustrated Phone)**\n- **Writing***: Кожен гравець пише вирок.\n- **Вилучення***: Кожен гравець отримує інший вирок і виводить його.\n- **Devinette*** : Кожен гравець отримує креслення і вгадає, що він являє собою.\n**Альтернанс** : У гру чергуються малюнок і вгадайте, поки кожен \"альбом\" пішов навколо всіх гравців.\n*** : Розважатися, як простий вирок перетворюється в щось абсолютно різне!\n\n**2. Режим складання (Кольлаборативне креслення)*\n- **Croquis**: Кожен гравець запускає простий малюнок.\n- **Комплет***: Кожен гравець отримує інший малюнок і повинен збагачувати його, не видаляючи те, що вже існує.\n**Альтернанс**: Витяг йде від гравця до гравця, кожен додаючи його дотик.\n- **Параметр \"Додати 1\"*:\n- *Якщо вимкнено (default)*: Це рядок. На кожній сцені (Player A -> Player B -> Player C ...).\n- *Якщо активований*: Початковий малюнок кожного гравця завершується усіма іншими гравцями, створюючи кілька колективних творів паралельно.\n***: Створення дивовижних і веселих колективних творів мистецтва.\n\n**3. Режим Brise-Glace (реативна взаємодія)*\n- ***Writing**: Кожен гравець пише персональну тему (ex: AppLocalizations.of(context)!.myPreference).\n- **Drawing***: Кожен гравець отримує теми від **all інших гравців** і повинен їх малювати.\n- **But*** : Ідеально підходить для розбиття льоду, виявлення смаків інших і запуску креативності у співвідношенні та легкому вигляді.",
   "yzObjectifAvoirLeMoins": "Мета\n\nУ вас є кілька точок, як це можливо в кінці гри.\nГра припиняється, коли гравець досягає 100 балів або більше, і переможець є одним з найнижчих загальний бал.\n\nОбладнання\n\n150 карток, що нумеровані з -2 до +12\n\nРеалізація\n\nЗмішайте всі карти.\nКожен гравець отримує 12 карток, розміщується лицьовою стороною перед ним, в 4 стовпчики × 3 ряди.\nІнші картки формують запас. Повернути першу картку у вигляді відходів.\nКожен гравець повертає 2 карти його вибору з 12.\n\nКурс туру\n\nУ свою чергу, ви маєте **30 секунд***, щоб вибрати між двома діями:\n\n1. Візьміть відходи\nВи повинні обміняти його однією з ваших 12 карток (видима або прихована сторона).\nЗаміщена карта йде на відходи.\n\n2. Піохер карта обличчя вниз\nВи подивитеся на карті:\n- або ви зберігаєте його і замініть одну з ваших карток\n- Ви відмовляєте його → ви розміщуєте його безпосередньо на відходи, і в цьому випадку ви повинні повернути одну з ваших карток ще приховано.\n\nСпеціальні правила\n\nТри ідентичних карток в колонці → відразу поразкуються (значення 0).\n\nКінець ручки:\n\nПісля того, як гравець розкрив всі свої картки.\nВсі інші гравці, які потім відображають свої інші карти. Ручка над.\nВсі гравці підраховують суму своїх карток.\n\nБудь ласка, зауважте: якщо гравець, який закінчує, не має найнижчого балу в раунді, він займає штраф +10 бали (повідальний бал подвоюється в оригінальній версії, ми будемо використовувати +10 для спрощення).\n\nКінець гри\n\nМи граємо стільки рукавів, як нам потрібно.\nПісля того, як гравець досягає 100 балів або більше, гра припиняється.\nГравець з найнижчим балом програє.",
   "iAReglesDuPoker": "Мета\n\nВиграти чіпси з інших гравців, маючи:\n- найкраща рука 5 карток під час забою,\n- або, зробивши їх, дайте (спати) завдяки парі.\n\nКласифікація рук (від найсильніших до слабких)\n\n1. Королівський флуш : 10 – V – D – R – A з того ж кольору\n2. Переміщення флуш: 5 карток, які слідувати один одному, одного кольору\n3. Площа: 4 ідентичних карток\n4. Повний: 3 ідентичних карток + 1 пара\n5. Колір (флуш): 5 карт одного кольору (не-конкурентний)\n6. Далі (Fifth): 5 карток, які слідувати один одному (різдвяні кольори)\n7. Брелан: 3 ідентичних карток\n8. Подвійна пара\n9. Пірс\n10. Висока карта (найвища карта, якщо ніхто не отримує краще)\n\nй\n\n1. Жалюзі\nГравець зліва від дилера встановлює невелике сліпе.\nНаступний гравець встановлює великий сліпий.\n\n2. Розподіл\nКожен гравець отримує 2 замкнених карток (приватні картки).\n\n3. Аукціонні вежі та загальні картки\n- Попередньо: bet трюк з приватними картками.\n- Flop: 3 поширених карт. Нові парі.\n- Вежа: 4 поширена карта. Нові парі.\n- Річка: 5 і остання поширена карта. Остання ставка.\n\n4. Зйомка (відпустка)\nЯкщо кілька гравців залишаються, кожен показує свою гру.\nНайкраще поєднання 5 карт (понад 2 приватних карток + 5 комун) перемагає горщику.\n\nМожливі дії\n\nУ свою чергу, гравець має **30 секунд*** для:\n- Перевірка: не будьте нічого, тільки якщо ніхто не буде знову.\nПоставте деякі чіпси в горщик.\n- Виконайте (Всього): рівні роботи.\n- Релакс (Рейза): збільшення ставок.\n- Зайдіть в ліжко (Fold): опустіть свої картки і виходите з неї.\n\nКінець гри\n\nГра триває до тих пір, поки не залишиться не менше 2 гравців з чіпсами.\nЗаключний переможець – той, хто бере всі чіпси.",
   "butDuJeuGagnerLe": "***Game Мета****\nВиграйте найактуальніший XP, виконуючи дії та відповідаючи правду!\n\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n1. Рулетт – гравець, який перетворює його.\n2. Гравець пагонів \"Дія\" або \"Версіті\".\n3. Класичний режим: Виявлено випадковий виклик / пошук.\n4. Дійсність судді: випадковий гравець пише виклик, після чого гравець усвідомлює його.\n5. Інші гравці, які діють з голосом Так/No.\n6. Відсоток валідації визначає перемогу XP.\n\n**Спеціальні правила***\n- 100% перевірка = максимальний XP\n- Гравець з самим XP стає Адміністратором гри\n- Кнопка «Погляд ручки» дозволяє закрити частину",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "***Game Мета****\nМи можемо самі зателефонувати одержувачу.\n\n**Draft (Mode ''The Infernal Tower)***************************************************************************************************************************************************************************************************************************************************\n1. Кожен гравець отримує картку внизу. Решта карток формує запас в центрі, вид на обличчя.\n2. В першу чергу кожен повертає свою картку.\n3. Кожен гравець повинен знайти якомога швидше єдиний символ, який присутній як на його картці, так і на Картці.\n4. Перший гравець, який знаходить символ, оголошення проголосує, бере картку та розміщує його на власній картці.\n5. Нова картка на наступний раунд. У центрі акції знаходиться нова карта.\n6. Гра продовжується до моменту виснаження запасу. Гравець, який зібрав більшість карток в кінці виграти!",
   "butDuJeuSeDebarrasser": "***Game Мета****\nПозбутися від усіх своїх карток першими!\n\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n1. **Distribution**: Кожен гравець отримує 7 карток. Решта формує запас. Картка повертається, щоб розпочати пальчу відходи.\n2. **Програти картку**: Гравець, який перетворює його ** 30 секунд***, щоб покласти картку в руці на відходи паль. Картка, яка грає, повинна відповідати верхній карті стека:\n****************************************************************************************************************************************************************************************************************************************************************\n* **Кількість*** (ex: 1 7 Blue на одному 7 Green)\n* **Symbol** (ex: жовтий \"+2\" на червоному \"+2\")\n*******************************\n3. **Піочер**: Якщо гравець не може відтворювати картку в скороченому часі, він повинен вибрати картку з пакету. Якщо він може грати в цю картку, він може зробити це відразу. В іншому випадку його кінець.\n4. **Спеціальні картки**:\n********** Наступний гравець забирає 2 карти і передає свою чергу.\n************ : Наступний гравець переходить у свою чергу.\n* **Inversion (Зміна значення)**: Відновлено почуття гри.\n**********: Гравець обирає колір наступної картки для гри. Чи можна грати на будь-яку картку.\n**Super Joker +4 (Зміна та чотири карти)*: Гравець вибирає колір. Далі гравець забирає 4 карти і передає свою чергу. Ця картка може бути відтворена, якщо гравець не має іншої картки кольору, яка вимагається на пальці відходів (без його розмиття).\n5. **Анонсон \"UNO\"*: Коли гравець має тільки одну картку, він повинен повідомити \"UNO!\". Якщо він не так і приймається іншим гравцем (навіть наступний гравець грає або підбирає вгору), він повинен вибрати 2 карти.\n6.*****: Ручка закінчується, коли гравець позбавить від своєї останньої картки. Кількість точок. Гравець, який досягає 500 балів (або визначений загальний) перемагає гру.\n\n***Map Точки:**\n* Цифрові картки (0-9): їх значення для обличчя.\n* +2, Sens Forbidden, Inversion: 20 балів.\n* Джокер, Супер Джокер +4 : 50 точок.",
   "principeDuJeuLeJeu": "## Принцип гри\n* Гра доступна між **3 і 10 гравцями**.\n* Кожен програвач надає доступ до частини своєї фотобібліотеки та обирає фотографії для обміну.\n* Під час гри фото вибрано **randomly** з усіх гравців, потім відображається на кілька секунд.\n* Гравці повинні вгадати ** хто володіє фото*** відображається.\n* Гравець, який правильно вгадує найбільші фотографії, перемагає гру.\n\n## Порядок\n1. **Вибір фото**: Кожен гравець обирає кількість фотографій з галереї.\n2. **Старт гри**: Як тільки кожен готовий, хост запускає гру.\n3******:\n- Щоденне фото показано на 5 секунд.\n- Всі гравці голосують, щоб вгадати власника.\n4. **Результати**: Оцінюються бали після кожного туру.\n5. **Для гри**: Після набору кількості раундів гравець з найбільшою кількістю точок перемагає.",
-  "butDuJeuCoulerTous": "***Game Мета****\nЗастрягти всі кораблі супротивника, перш ніж він миється.\n\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n1*****: Кожен гравець таємно розміщує свій флот на сітці 10х10.\n- Авіаперевізники (5 ящиків)\n- Круїз (4 ящики)\n- Субмарин (3 клітини)\n- Дестройер (3 ящики)\n- Патрол (2 ящики)\n***Tir**: У свою чергу гравці торкнуться до коробки, щоб стріляти.\n3. **Result**: AppLocalizations.of(контекст)!.touche, \"Коулований\" або \"В воді\".\n4. **Victoire**: Перший гравець, щоб мити весь автопарк виграти.",
   "butDuJeuEtreLe2": "***Game Мета****\nПерш за все, щоб дістатися до цільової дистанції (1000 км за замовчуванням).\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n- Кожен гравець отримує шість карток.\n- У свою чергу, відіграйте картку (Дистанс, Атак, оборона, безпека) або позбавляйтеся від неї.\n- Картки **Attacks** (Стоп, Червоний, Esssence, Crevaison, Limit) блокують супротивника.\n- Карти***** (зелений, додатковий танк, ремонт, кінцеві ліміти) проти атак.\n- Картки **Security*** скасовують атаку та запобігають її рецидиву.\n- Карти**** (25, 50, 75, 100, 200 км) перемістити автомобіль вперед.\n- Підберіть одну картку в кінці вашого повороту.",
   "butDuJeuEtreLe3": "***Game Мета****\nПозбутися від усіх своїх карток шляхом формування дієвих комбінацій.\n\n**Налаштування вежі**\n1. **Piocher** : Візьміть карту з вершини відходів OR Stock.\n2. **Продаж (обов''язково)*: Помістіть правильні комбінації на столі.\n- **Sequence (Run)*: 3 або більше карт одного кольору, які слідують (наприклад, 5)\n- **Груп (Set)*: 3 або 4 картки однакового значення, але різних кольорів (наприклад, 8 функцій, 8\n3. **Default**: Позбутися від картки від руки на відходи.\n\n**Для ручки**\nПерший гравець, який більше не має карток після перемоги. Інші нараховують точки їх решти карток (Figures = 10, As = 15, інші = значення обличчя). Гра зупиняється на 100 пунктах.",
   "butDuJeuFaireDeviner2": "***Game Мета****\nЗробіть свою команду здогадуйте максимум слів до кінця часу, не використовуючи заборонені слова!\n\n**Draft*************************************************************************************************************************************************************************************************************************************************************\n1. Кожна черга, гравець (\"динамік\") намагається зробити свою команду вгадувати слово.\n2. Доповідач не повинен **never** викинути слово, щоб вгадати, ані будь-які слова \"Табу\" (не слів) відображаються під цільовим словом. Нор може використовувати переклади або слова з тієї ж родини.\n3. Якщо динамік використовує слово Табу, команда opposing (або судді) повідомляє про несправність, анулюється карта і динамік рухається до наступного.\n4. Кожен здогадований слово повертає точку до команди.\n5. Увімкніть закінчується, коли час вгору.\n\n**Для частини**\nКоманда з найбільшими точками після кількості прокладок, визначених перемог!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Ви повинні зіграти таку саму кількість карт.",
   "combinaisonDe5CartesTrop": "Комбінація з 5 карт занадто слабка.",
   "vousDevezJouerUneCarte": "Ви повинні зіграти старшу карту.",
-  "aGagne1": "Він завоював!",
   "ceNEstPasVotre": "Зараз не ваш хід.",
   "carteIntrouvableDansLaMain": "Карту в руці не знайдено.",
   "coupInvalideSelonLesRegles": "Неприпустимий хід за правилами Міль Борн!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Час для оголошення правди вичерпано!",
   "cibleHorsDeLaGrille": "Ціль за межами сітки.",
   "caseDejaCiblee": "Клітинка вже обстріляна.",
-  "aCouleTouteLaFlotte": "]'}' відважати весь ворожий флот!",
   "placementAutomatiqueEffectue": "⏱️ Автоматичне розміщення виконано.",
   "tempsEcoulePourLaSaisie": "⏰ Час введення слів вийшов. Гра починається з введеними словами!",
   "laPhaseDeVoteA": "Початок голосування!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "[DEBUG приєднатисяGame] Успішна угода. Повернутися до себе.",
   "debugJoingameLaPartieN": "[DEBUG приєднатисяGame] Гра не існує або більше не в лобі. Повернутися до false.",
   "erreurCritiqueDansJoingame": "--- CRITICAL ERROR INTERGame ---",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizations.of(контекст)! .wordcivilParts0TrimWordundercoverIA повертає окремі прості слова",
   "infiltre": "Інфільтрант",
   "civil": "Цивільний",
   "vendeurDeFalafels": "Продавець Falafels",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Неприпустима комбінація за правилами Рамі!",
   "defaussezExactement1Carte": "Скиньте рівно 1 карту.",
   "carteNonTrouvee": "Карту не знайдено.",
-  "aGagneLaManche": "Він завоював раунд!",
   "desDejaLancesPourCe": "Діце вже запущено для цього туру.",
   "vousDevezDAbordLancer": "Спочатку потрібно кинути кубик.",
   "vousNePouvezPasDeplacer": "Не можна ходити фішкою суперника!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Ви не можете обирати колір зараз.",
   "erreurCritiquePlayerorderEstVide": "CRITICAL ERROR: порядок плеєра порожній в наступному рядку. Я не можу піти.",
   "questionNonTrouvee": "Питання не знайдено",
-  "quiPourraitLePlusApplocalizations1": "Хто міг більше?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft",
   "menteur": "Ліар",
   "pasAssezDeJoueursPour": "Не вистачає гравців для цієї моди.",
   "ajouteLaDescriptionLaPlus": "Додати найдовший опис до цього мему!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Кожен активний гравець повинен викласти мінімум 1 карту до початку торгів.",
   "enchereInvalide": "Неприпустима ставка.",
   "laSurenchereDoitEtreSuperieure": "Ставка повинна бути вищою.",
-  "applocalizationsOfContextUnjoueurEst": "] ?? AppLocalizations.of(context)!.aPlayer'}' є останнім вижилим і виграє Skull!",
-  "applocalizationsOfContextUnjoueurA": "] ?? AppLocalizations.of(context)!.aPlayer'}' виграв 2 виклики і виграв гру!",
-  "applocalizationsOfContextUnjoueurRemporte": "] ?? AppLocalizations.of(context)!.aPlayer'}' виграє Skull!",
   "reponseVide": "Порожня відповідь.",
   "leJugeNePeutPas1": "Суддя не може надсилати відповідь.",
   "toutLeMondeARepondu": "Відповіли! Відкриваємо двері.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Відповіли! Вот.",
   "toutesLesReponsesSontRecues": "Всі відповіді приймаються! Суддя має вирішити.",
   "joueurCibleIntrouvable": "Не знайдено цільового гравця.",
-  "quiPourraitLePlusApplocalizations2": "Хто може більше?AppLocalizations.of(context)!.elseIfGametypeSynonym або Banni",
   "vousNePouvezPasBannir": "Не можна банити власний синонім!",
   "seulLeJugeEnTitre": "Лише чинний Суддя може визначити переможця.",
   "ceJoueurNAPas1": "Цей гравець не надіслав відповідь.",
-  "quiPourraitLePlusApplocalizations3": "Хто міг більше?AppLocalizations.of(context)!.intПотребуєВідгукиВідгукиВідчувають Суддя",
-  "quiPourraitLePlusApplocalizations4": "Хто міг більше?AppLocalizations.of(context)!.forFinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Абсолютна нічия! Очки не присуджено.",
   "egaliteDansLesVotesAucun": "Нічия при голосуванні: нікого не вигнано.",
   "laDescriptionLaPlusDrole": "Було обрано найсмішніший опис!",
   "aucuneDescriptionNAEte": "Не проголосовано опис.",
-  "quiPourraitLePlusApplocalizations5": "Хто може більше?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Суддя не знайдено.",
   "laPartieDeZeroPointe": "Гра в Зеро Поінт починається! Кожен гравець повинен відкрити 2 карти.",
   "toutLeMondeARevele": "Всі відкрили свої карти. Гра починається!",
@@ -3164,19 +3084,16 @@
   "cultureDefi": "🧠 Ерудиція та Виклик",
   "familleToutPublic": "👨‍👩‍👧‍👦 Сім''я та Для всіх",
   "piquantInsolite": "🌶️ Гостре та Незвичайне",
-  "quiPourraitLePlusApplocalizations6": "Хто міг більше?AppLocalizations.of(context)! .who could your modegroup",
   "devineT": "Гуси T",
   "presidente": "Президент",
   "chargement": "Завантаження",
   "cursive": "Кріплення",
   "exception": "Видача:",
-  "debutDeLaConstructionDe": "--- КОНСТРУКЦІЯ ХІМУ ВОТЕУ «Чи можу більшість?AppLocations.of(контекст)!.printIsactionStateTo( isActionPending)players''] як Map<String, динамічно>?)? '{}';",
   "clicSurLeJoueurPname": ">>> КЛІК на гравця ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Перехід від дії",
   "erreurFirebaseLorsDuVote": "Про нас ERREUR Firebase під час голосування: $e",
   "appelFirebaseTerminePassageDe": "- Пожежна база виклику. Перехід з isActionPending to false.",
   "attentionLeWidgetNEst": "- ВИСТАВКА: Зникнути Віджети, скасовувати setState.",
-  "quiPourraitLePlusApplocalizations7": "Хто може більше?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "ПОЗИЦІЙНА ФІЗА",
   "stre9f4a5": "🏆 Легендарно!",
   "str21f597": "⭐ Відмінно!",
@@ -3185,7 +3102,7 @@
   "strc0046c": "💪 Можна краще!",
   "str85bff7": "РќР°Р»Р°С‚Р°С‚Р°Р»Р°Р»Р°Р»Р°Р»РμР»Р°Р»Р°Р»Р°Р»Р°Р»РμРNoС‚Р°Р»РμР»РμР»РμР»РμР»РμР»РμР»РμР»РμР»Р»РμР»Р»РμР»РμР»РμР»РμР»Р»РμР»Р»РμР»РμР»Р»РμР»Р»Р»Р»РμР»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»РμР»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»РμР»Р»Р»РμРμР»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»РμР»Р»",
   "strfa1b8c": "РќР°Р»Р°С‚Р°С‚Р°Р»Р°Р»Р°Р»Р°Р»Р°Р»Р°Р»Р°Р»Р°Р»Р°РNoС‚Р°С‚Р°Р»Р°Р»Р»РμР»Р°Р»Р»Р°Р»Р»Р°Р»РμР»Р»Р°Р»Р»РμР»РμРNoС‚Р°Р»РμР»Р»РμР»Р»РμР»РμР»Р»РμР»Р»Р»Р»РμР»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»РμР»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»РμР»Р»Р»РμРμР»Р»Р»Р»Р»Р»Р»Р»Р»Р»Р»РμР»Р»",
-  "str487ca1": "$'{'''Чут! Закрийте очі.",
+  "str487ca1": "$''(''''Чут! Закрийте очі.",
   "leSoleilSeLeve": "Сонце сходить",
   "atout": "КОЗИР: {suit}",
   "@atout": {
@@ -3204,8 +3121,7 @@
   "chill": "Чіл",
   "soiree": "Вечірка",
   "competition": "Змагання",
-  "enCours": "СУЧАСНИЙ: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \"\"'}'\" : GameMessageLocalization.tr(контекст, причина),",
+  "enCours": "СУЧАСНИЙ: '{0}'",
   "jAiLanceUnePartie2": "Я почав гру",
   "piedDeBiche": "Лом",
   "appTitle": "Гра для вечірок",
@@ -3935,24 +3851,24 @@
   "miroir": "дзеркало",
   "magie": "магія",
   "cascade": "водоспад",
-  "dragon": "dragon",
-  "boussole": "boussole",
-  "diamant": "diamant",
-  "flamme": "flamme",
-  "horloge": "horloge",
-  "pirate": "pirate",
-  "vortex": "vortex",
-  "aurore": "aurore",
-  "papillon": "papillon",
-  "bouclier": "bouclier",
-  "labyrinthe": "labyrinthe",
-  "cristal": "cristal",
-  "volcan": "volcan",
-  "mirage": "mirage",
-  "sentinelle": "sentinelle",
-  "cloche": "cloche",
-  "lanterne": "lanterne",
-  "parchemin": "parchemin",
+  "dragon": "дракон",
+  "boussole": "компас",
+  "diamant": "ромби",
+  "flamme": "полум''я",
+  "horloge": "годинник",
+  "pirate": "Про нас",
+  "vortex": "вихрові",
+  "aurore": "Авангард",
+  "papillon": "метелик",
+  "bouclier": "шемале",
+  "labyrinthe": "Мазе",
+  "cristal": "кристал",
+  "volcan": "вулкан",
+  "mirage": "дивний",
+  "sentinelle": "Симфонія",
+  "cloche": "Дзякуй",
+  "lanterne": "ліхтар",
+  "parchemin": "пергамент",
   "aGagne2": "{gameDataplayerswin} переміг(ла)!",
   "@aGagne2": {
     "placeholders": {
@@ -3992,7 +3908,7 @@
     }
   },
   "stop": "СТОП",
-  "coupFourrePareLAttaque1": "⚡ COUP-FOURRÉ ! {playerstargetIdnam} pare l''attaque avec {matchingSafety} et prend la main !",
+  "coupFourrePareLAttaque1": "- Що? 0 запустіть атаку з 1 і візьміть руку! {playerstargetIdnam} {matchingSafety}",
   "@coupFourrePareLAttaque1": {
     "placeholders": {
       "playerstargetIdnam": {
@@ -4022,7 +3938,7 @@
       }
     }
   },
-  "aTireAutomatiquementEn": "⏱️ {shooterDataname} a tiré automatiquement en {targetIndex101}-{targetIndex1011} ({result}).",
+  "aTireAutomatiquementEn": "0 автоматично впорається в 1 - 2 ( 3 ). {shooterDataname} {targetIndex101} {targetIndex1011} {result}",
   "@aTireAutomatiquementEn": {
     "placeholders": {
       "shooterDataname": {
@@ -4050,7 +3966,7 @@
       }
     }
   },
-  "pliTermineAuTourDe3": "⏱️ Pli terminé. Au tour de {gameDataplayerspla}.",
+  "pliTermineAuTourDe3": "Я зробив. На межі 0 . {gameDataplayerspla}",
   "@pliTermineAuTourDe3": {
     "placeholders": {
       "gameDataplayerspla": {
@@ -4066,7 +3982,7 @@
       }
     }
   },
-  "egalitePersistanteLeDestinDepartage1": "Égalité persistante ! Le destin départage au hasard : {playerDatarandomEl} est éliminé.",
+  "egalitePersistanteLeDestinDepartage1": "Постійна рівноправність! Destiny починається в випадковому режимі: 0 усувається. {playerDatarandomEl}",
   "@egalitePersistanteLeDestinDepartage1": {
     "placeholders": {
       "playerDatarandomEl": {
@@ -4104,7 +4020,7 @@
       }
     }
   },
-  "leVillageDecouvreAvecEffroi1": "Le village découvre avec effroi le(s) corps de : {deadThisNightNames}.",
+  "leVillageDecouvreAvecEffroi1": "Село відкриває з жахом тіло (s): 0 . {deadThisNightNames}",
   "@leVillageDecouvreAvecEffroi1": {
     "placeholders": {
       "deadThisNightNames": {
@@ -4126,7 +4042,7 @@
       }
     }
   },
-  "etEtaitUnE": "Et {playerDataotherRev} était un(e) {otherRevealedRole} !",
+  "etEtaitUnE": "А 0 був 1 ! {playerDataotherRev} {otherRevealedRole}",
   "@etEtaitUnE": {
     "placeholders": {
       "playerDataotherRev": {
@@ -4183,8 +4099,8 @@
       }
     }
   },
-  "lAncienCapitaine1": "L''ancien Capitaine",
-  "aDit": "{playerDataplayerId} a dit : ''{cleanClue}''",
+  "lAncienCapitaine1": "Колишній капітан",
+  "aDit": "0 сказав: '' 1 '' {playerDataplayerId} {cleanClue}",
   "@aDit": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4195,7 +4111,7 @@
       }
     }
   },
-  "aDevineLeMotCivil1": "{gameDataplayerData} a deviné le mot civil (''{civilWord}'') !",
+  "aDevineLeMotCivil1": "0 вгадав цивільне слово ('' 1 '')! {gameDataplayerData} {civilWord}",
   "@aDevineLeMotCivil1": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4206,7 +4122,7 @@
       }
     }
   },
-  "aProposeMaisCeN": "{gameDataplayerData} a proposé ''{guessedWord}'', mais ce n''était pas le mot civil (''{civilWord}'') !",
+  "aProposeMaisCeN": "0 запропонував '' 1 '', але це не цивільне слово ('' 2 '')! {gameDataplayerData} {guessedWord} {civilWord}",
   "@aProposeMaisCeN": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4220,7 +4136,7 @@
       }
     }
   },
-  "flottesPlaceesCommenceATirer1": "Flottes placées ! {playerDatafirstPla} commence à tirer.",
+  "flottesPlaceesCommenceATirer1": "Флоат розміщується! 0 починається стріляти. {playerDatafirstPla}",
   "@flottesPlaceesCommenceATirer1": {
     "placeholders": {
       "playerDatafirstPla": {
@@ -4228,7 +4144,7 @@
       }
     }
   },
-  "tousLesJoueursSontPrets1": "Tous les joueurs sont prêts ! {playerDatafirstPla} commence à tirer.",
+  "tousLesJoueursSontPrets1": "Всі гравці готові! 0 починається стріляти. {playerDatafirstPla}",
   "@tousLesJoueursSontPrets1": {
     "placeholders": {
       "playerDatafirstPla": {
@@ -4236,7 +4152,7 @@
       }
     }
   },
-  "laMancheDeRamiCommence1": "La manche de Rami commence ! C''est au tour de {playersplayerIdsfi}.",
+  "laMancheDeRamiCommence1": "Рукав Рамі починається! Це поворот 0 . {playersplayerIdsfi}",
   "@laMancheDeRamiCommence1": {
     "placeholders": {
       "playersplayerIdsfi": {
@@ -4252,7 +4168,7 @@
       }
     }
   },
-  "k3SixConsecutifsLePion1": "⚠️ 3 six consécutifs ! Le pion de {playersplayerIdnam} retourne à l''écurie et son tour passe.",
+  "k3SixConsecutifsLePion1": "Три шість поспіль! Полотна 0 повертається до стабільного і його повороту. {playersplayerIdnam}",
   "@k3SixConsecutifsLePion1": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4268,7 +4184,7 @@
       }
     }
   },
-  "atteintPoints": "{playersplayerIdnam} atteint {targetScore} points !",
+  "atteintPoints": "0 досягла 1 балів! {playersplayerIdnam} {targetScore}",
   "@atteintPoints": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4279,7 +4195,7 @@
       }
     }
   },
-  "atteintPoints1": "{playerswinnerIdnam} atteint {targetScore} points !",
+  "atteintPoints1": "0 досягла 1 балів! {playerswinnerIdnam} {targetScore}",
   "@atteintPoints1": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4290,7 +4206,7 @@
       }
     }
   },
-  "mancheTermineeGagneAvecXp": "Manche terminée ! {playerswinnerIdnam} gagne avec {maxXp} XP !",
+  "mancheTermineeGagneAvecXp": "Рукав! 0 виграє з 1 XP! {playerswinnerIdnam} {maxXp}",
   "@mancheTermineeGagneAvecXp": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4404,7 +4320,7 @@
       }
     }
   },
-  "passeSonTour4": "{playersplayerIdnam} passe son tour.",
+  "passeSonTour4": "0 переходить в свою чергу. {playersplayerIdnam}",
   "@passeSonTour4": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4420,7 +4336,7 @@
       }
     }
   },
-  "votreCibleEstEliminezLe1": "Votre cible est {playerDatamercenai}. Éliminez-le(la) au Jour 1 !",
+  "votreCibleEstEliminezLe1": "Ваше завдання - 0 . Усунути його на День 1! {playerDatamercenai}",
   "@votreCibleEstEliminezLe1": {
     "placeholders": {
       "playerDatamercenai": {
@@ -4494,7 +4410,7 @@
     }
   },
   "appelUnoInvalide": "Недійсний виклик УНО.",
-  "aChoisiLaCouleur": "{playersplayerIdnam} a choisi la couleur {chosenColor} !",
+  "aChoisiLaCouleur": "0 вибрав колір 1 ! {playersplayerIdnam} {chosenColor}",
   "@aChoisiLaCouleur": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4505,7 +4421,7 @@
       }
     }
   },
-  "estLeDernierSurvivantEt": "{playerswinnerIdnam} est le dernier survivant et remporte Skull !",
+  "estLeDernierSurvivantEt": "0 - останній вижилий і виграє Skull! {playerswinnerIdnam}",
   "@estLeDernierSurvivantEt": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4513,7 +4429,7 @@
       }
     }
   },
-  "aRemporte2DefisEt": "{playerschallengerI} a remporté 2 défis et gagne la partie !",
+  "aRemporte2DefisEt": "0 виграв 2 виклики і виграв гру! {playerschallengerI}",
   "@aRemporte2DefisEt": {
     "placeholders": {
       "playerschallengerI": {
@@ -4578,7 +4494,7 @@
       }
     }
   },
-  "faitTapisAllInEn1": "{myDataname} fait tapis (all-in) en relançant à {totalBetAmount} !",
+  "faitTapisAllInEn1": "0 робить ковролін (все-в) до 1 ! {myDataname} {totalBetAmount}",
   "@faitTapisAllInEn1": {
     "placeholders": {
       "myDataname": {
@@ -4620,7 +4536,7 @@
       }
     }
   },
-  "aPrisA": "{playerDataplayerId} a pris à {suit} !",
+  "aPrisA": "0 р. {playerDataplayerId} {suit}",
   "@aPrisA": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4634,7 +4550,7 @@
   "histoireCollective": "КОЛЕКТИВНА ІСТОРІЯ",
   "distance": "ДИСТАНЦІЯ",
   "botte": "ЗАХИСТ",
-  "pneuIncrevable": "Pneu\nIncrevable",
+  "pneuIncrevable": "Шини\nНеобов''язково",
   "increvable": "НЕПРОБИВНА",
   "citerne": "ЦИСТЕРНА",
   "attaque": "АТАКА",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "Я кинув частину 0 ! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Ролі ( 0 ) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Написати цей вирок:\n\" 0\" - Інтернет-галерея даних {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "0 був заборонений за свою пропозицію '' 1 ''! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 знайшов слово: '' 1''! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Не знайдено слово: '' 0''. {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 знайшов слово: '' 1''! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "(Революція!)",
   "tonMotEst2": "Твоє слово: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Нічия!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "Я кинув частину 0 ! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "Гра в Ямс починається!",
   "logClueGivingStart": "Гра починається! Назвіть підказку...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "У гру Belote починається!",
   "logBlokusStart": "Гра в Блокус починається!",
   "pokerFlop": "--- ФЛОП ---",
   "pokerTurn": "--- ТЕРН ---",
   "pokerRiver": "--- РІВЕР ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "0 поганий: 1 ! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "Команда 0 розкриває Assassin! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Максимально можливо: 0 карт {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 відображає виклик 1 карт... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "ВАШ МАН ( 0 карт) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 / 30 рис {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "Подано індекси: 0 / 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Вибраний колір:",
   "pokerRaiseTo": "Підвищити до {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Відповідь від 0 : \" 1 \" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Роль:",
   "obligatoire": "Обов''язково",
   "aSelectionneSonPionEtReflechit": "{playerName} вибрав(-ла) фішку і думає...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0 було повідомлено і приховано для вас. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Чи не можна отримати безпечний LiveKit відеодоступ токен.",
+  "veuillezEntrerUneAdresseEmail": "Введіть адресу електронної пошти.",
+  "veuillezEntrerVotreMotDe": "Введіть пароль",
+  "entrezVotreMotDePasse": "Введіть свій поточний пароль.",
+  "leNouveauMotDePasse": "Новий пароль повинен бути не менше 6 символів.",
+  "lesDeuxMotsDePasse": "Обидва паролі не відповідають.",
+  "photoDeProfilMiseA": "Профіль фото оновлений!",
+  "echecDuChangementDePhoto": "Фото зміни не вдалося.",
+  "k3CaracteresMinimum": "мінімум 3 символів",
+  "cePseudoEstDejaPris": "Ця курка вже береться.",
+  "unAmi": "Подруга",
+  "ceJoueur": "цей гравець",
+  "preparationDeLaRecherche": "Підготовка пошуку...",
+  "erreurDeConnexionAuMatchmaking": "Помилки, що з''єднуються з відповідними роботами. Будь ласка, спробуйте знову.",
+  "erreurDeConnexionALa": "Помилка підключення до приміщення.",
+  "legendeVivante": "Жива легенда",
+  "grandMaitre": "Великий майстер",
+  "stratege": "Стратегія",
+  "initie": "Ініціюється",
+  "illimiteesVip": "Необмежена (VIP)",
+  "pieces": "0 штук {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "Відключений користувач.",
+  "entrezUnPseudo": "Введіть псевдо",
+  "cePseudoEstDejaPris1": "Цей прізвище вже прийнято",
+  "pseudoDejaPrisParUn": "Pseudo вже приймається іншим гравцем",
+  "cetteVersionDeLApplication": "Дана версія програми застаріла. Будь ласка, встановіть останні версії.",
+  "playfunEstActuellementEnMaintenance": "Playfun в даний час підтримується для поліпшення ваших вечірок. Зайдіть в хвилину!",
+  "uneNouvelleVersionDePlayfun": "Нова версія Playfun доступна! Для продовження гри потрібно оновити додаток.",
+  "derniereVersion": "Остання версія",
+  "echecDeLEnvoi": "Відправлення вантажу.",
   "demandeDAmiEnvoyeeA": "Запит у друзі надіслано {name}!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Гравець ( 0 ) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Увімкнути відео",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Pseudo доступний",
+  "entrezUnEmailValide": "Введіть адресу електронної пошти",
+  "k6CaracteresMinimum": "мінімум 6 символів",
+  "pasDeCompteSInscrire": "Немає акаунту? Реєстрація",
+  "dejaUnCompteSeConnecter": "Вже акаунт? Увійти",
+  "conditionsGeneralesDUtilisationCgu": "Загальні умови використання (CGU / EULA)",
+  "politiqueDeConfidentialite": "Політика конфіденційності",
+  "miseAJourRequise": "Подати заявку",
   "joueursBloques": "Заблоковані гравці ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Неточні ідентифікатори або неіснуючий обліковий запис.",
+  "leMotEtaitLabel": "Слово було:",
+  "mancheLabel": "Канали",
+  "et": "і",
+  "pokerPlayerCheck": "{playerName} чек.",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Слова:",
+  "rouges": "Червоні",
+  "noirs": "Чорні",
+  "crane2": "Скулл",
+  "enAttente2": "Закінчення",
+  "enCours1": "Оголошено",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} вибрав(-ла) фішку і думає...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Залишилося часу: {seconds} с",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Набір {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Варіант)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 виграє з 1 точки 2 ! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Вінс Скулл! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Пакет IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Стандартний",
+  "lui": "Хім",
+  "carte4": "Карта {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Заблоковані гравці",
+  "vousNAvezBloqueAucun": "Ви не заблокували жодного гравця.",
+  "debloquer": "Розблокувати",
+  "nouvelEmail": "Нова пошта",
+  "motDePasseActuel": "Поточний пароль",
+  "emailMisAJourAvec": "Електронний лист успішно оновлено!",
+  "modifierMotDePasse": "Зміна пароля",
+  "nouveauMotDePasse": "Новий пароль",
+  "confirmerLeMotDePasse": "Підтвердити пароль",
+  "motDePasseModifieAvec": "Збережений пароль!",
+  "prendreUnePhoto": "Візьміть фото",
+  "choisirDepuisLaGalerie": "Виберіть з галереї",
+  "supprimerLaPhoto": "Видалити фотографії",
+  "photoDeProfilRetiree": "Профіль фото видалено.",
+  "pseudoMisAJour": "Nickname оновлений!",
+  "compteSecurite": "& Облік безпеки",
+  "editeParParrelV10": "Редагування Парель • v1.0.0",
+  "aucunJeuTrouve": "Ігор не знайдено",
+  "essaieDAjusterTesFiltres": "Спробуйте змінити фільтри або ввести інший запит.",
+  "reinitialiserLesFiltres": "Скинути фільтри",
+  "nouveau": "Головна",
+  "gererMonAbonnement": "Управління підпискою",
+  "mesPieces": "Мій номер",
+  "rechargerLesOffresDuStore": "Магазини",
+  "gererMesAbonnements": "Управління підписками",
+  "badges": "Значки",
+  "partiesJouees": "Зіграні ігри",
+  "xpTotalSession": "Усього XP за сесію",
+  "moyennePartie": "Середнє / Гра",
+  "detailParJeuPerformanceXp": "Деталі за іграми та XP",
+  "jouezVosPremieresPartiesPour": "Зіграйте свої перші ігри, щоб побачити статистику XP тут!",
+  "xpAuCompteur": "{psxp} XP на лічильнику",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Ще {xpRemaining} XP до рів. {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} зіграно • {won} перемог{won1s} • ~{gameXp} XP отримано {played1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Помилка завантаження даних користувача.",
+  "vousDevezAccepterLesCgu": "Для створення облікового запису необхідно прийняти CGUs та Політику конфіденційності.",
+  "miseAJourDisponible": "Доступне оновлення",
+  "plusTard": "Пізніше",
+  "mettreAJour": "Оновити",
+  "uneNouvelleVersionDePlayfun1": "Доступна нова версія ({newVersion}) Playfun з новими функціями та виправленнями!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Обслуговування вантажу",
+  "mettreAJourMaintenant": "Оновити зараз",
+  "motifDuSignalement": "Причина скарги:",
+  "tricheOuAntiJeu": "Чітерство або неспортивна поведінка",
+  "autre": "Інше",
+  "signaler": "Поскаржитися",
+  "detailParJeu": "Деталі за іграми:",
+  "ceJoueurNAPas2": "У цього гравця ще немає збережених ігор.",
+  "badgesDebloques": "Розблоковані значки: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Заблоковані гравці ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "Розблокувати {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Поскаржитися або заблокувати {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "голос"
 }

@@ -28,7 +28,7 @@
   "elements": "'{0}' föremål",
   "prompt": "Prompt: \"'{0}'\"",
   "utiliser": "ANVÄND",
-  "packActiveElements": "✨ Packa '''{0}''' aktiverad ('{1}' föremål)!",
+  "packActiveElements": "✨ Packa '{0}' aktiverad ('{1}' föremål)!",
   "fusionner": "SLÅ IHOP",
   "themesFusionnesLePackActif": "✨ Sammanslagna teman! Det aktiva paketet innehåller nu '{0}' föremål.",
   "modifierCompleter": "Redigera / Slutför",
@@ -46,7 +46,7 @@
   "generationIa": "AI-generering: '{0}'",
   "historique": "Historik",
   "melangerPlusieursThemes": "Blanda flera teman:",
-  "combineS": "✨ '{0 sammanlagd}'",
+  "combineS": "✨ ''(0 sammanlagd)''",
   "nombreDElements": "Antal objekt:",
   "minRequisRecommande": "Minsta antal krav: '{0}' | Rekommenderat: '{1}'",
   "ambianceTonaliteDeJeu": "Stämning / Spelton:",
@@ -268,7 +268,7 @@
   "conserverAvecLIa": "Behåll med AI",
   "expulser": "Sparka ut",
   "vousAvezEteExcluDe": "Du har blivit utesluten för inaktivitet. Datorn spelar åt dig (inga belöningar).",
-  "s": "'{0}' s",
+  "s": "s '{0}'",
   "pts1": "{pName}: {pScore} patienter",
   "@pts1": {
     "placeholders": {
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 XP {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -308,7 +308,7 @@
   "vernissage": "Vernissage!",
   "albumDe": "Album med '{0}'",
   "prec": "Föreg.",
-  "album": "Album '{0}' / '{1}'",
+  "album": "Album/'{0}' '{1}'",
   "suiv": "Nästa",
   "devineCeQueRepresenteCe": "Gissa vad den här teckningen föreställer:",
   "ecrisTaPhrase": "Skriv din mening...",
@@ -341,8 +341,8 @@
   "tempsEcoule": "Tiden är ute!",
   "tourSuivant": "Nästa tur",
   "enAttenteDeLHote3": "Väntar på värden för att starta nästa tur...",
-  "equipeAPts": "Lag A: '{poäng}' poäng '{pts}'",
-  "equipeBPts": "B-lag: '{poäng}' poäng '{pts}'",
+  "equipeAPts": "Lag A: ''(poäng)'' poäng '{pts}'",
+  "equipeBPts": "B-lag: ''(poäng)'' poäng '{pts}'",
   "cEstAToiDe": "Det är DIN TUR att gissa!",
   "passer1": "HOPPA",
   "motsTrouves": "Ord funna: '{0}'",
@@ -352,7 +352,7 @@
   "leGrandDepliage": "Det stora utviket!",
   "voiciLesUvresCollectivesNees": "Här är de kollektiva verken skapade av er fantasi:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' förbereder en attack ('{1}') mot en spelare!",
-  "km": "{oppDist} km",
+  "km": "0 km {oppDist}",
   "@km": {
     "placeholders": {
       "oppDist": {
@@ -360,7 +360,7 @@
       }
     }
   },
-  "km1": "{myDistance} / {targetDist} km",
+  "km1": "0/1 km {myDistance} {targetDist}",
   "@km1": {
     "placeholders": {
       "myDistance": {
@@ -446,13 +446,13 @@
   "votes": "Röster:",
   "aVote": "'{0}' röstade: '{1}'",
   "lesPointsOntEteDistribues": "Poäng delades ut baserat på era röster.",
-  "leMotDesCivilsEtait": "Civilbefolkningens ord var: '''{0}'''",
-  "leMotDeLInfiltre": "Infiltratörens ord ('{0}') var: '''{1}'''",
+  "leMotDesCivilsEtait": "Civilbefolkningens ord var: '{0}'",
+  "leMotDeLInfiltre": "Infiltratörens ord ('{0}') var: '{1}'",
   "mrWhiteNAvaitPas": "Herr White ('{0}') hade inga ord.",
-  "leMotATrouverEtait": "Ordet som skulle komma på var en synonym för '''{0}'''. De andra spelarna får 1 poäng.",
+  "leMotATrouverEtait": "Ordet som skulle komma på var en synonym för '{0}'. De andra spelarna får 1 poäng.",
   "felicitationsAuDessinateurEtA": "Grattis till serietecknaren '{0}' och till '{1}' !",
-  "saReponseEtait": "Hans svar var: '''{0}'''.",
-  "leMotEtait": "Ordet var: '''{0}'''.",
+  "saReponseEtait": "Hans svar var: '{0}'.",
+  "leMotEtait": "Ordet var: '{0}'.",
   "cartesRevelees": "Avslöjade kort:",
   "erreurDeChargementDuMeme": "Fel vid laddning av meme.",
   "scoreActuelDeCartes": "Nuvarande poäng '{0}': '{1}' kort.",
@@ -542,13 +542,13 @@
   "tempsRestantS": "Återstående tid: '{0}' s",
   "k6Consecutifs3": "6 i rad: '{streak}'/3",
   "lancerLeDe": "SLÅ TÄRNING",
-  "scorePoints": "Poäng: '{får}' poäng '{score}'",
-  "dominosRestants": "Återstående dominoer: '{räkna}' '{count}'",
+  "scorePoints": "Poäng: ''(får)'' poäng '{score}'",
+  "dominosRestants": "Återstående dominoer: ''(räkna)'' '{count}'",
   "impossibleDeJouerCeDomino": "Kan inte lägga den här brickan här.",
   "mancheTerminee": "Rundan är över! ",
   "dominos": "Domino",
   "extremites": "Ändar: ",
-  "pioche2": "Dragning: '{Räkna}' '{count}'",
+  "pioche2": "Dragning: ''(Räkna)'' '{count}'",
   "piocher": "Dra",
   "ficheDePts": "'{0}' rekord ('{1}' poäng)",
   "pts2": "{otherName} ({otherTotal} poäng)",
@@ -563,7 +563,7 @@
     }
   },
   "clic": "KLICK",
-  "lancersRestants": "Återstående kast: '{räkna}' '{count}'",
+  "lancersRestants": "Återstående kast: ''(räkna)'' '{count}'",
   "combinaison": "KOMBINATION",
   "grilleDePts": "RUTNÄT AV '{0}' ('{1}' poäng)",
   "pts3": "{p} ({myTotal} poäng)",
@@ -614,10 +614,10 @@
     }
   },
   "carteAPrendre": "KORT ATT TA",
-  "votreMain": "Din hand ('{räkna}') '{count}'",
+  "votreMain": "Din hand (''(räkna)'') '{count}'",
   "touchezUneCartePourLa": "Tryck på ett kort för att spela det",
   "aucuneCombinaisonEtaleeSurLa": "Inga kombinationer på bordet än",
-  "etaler": "Spridning ('{räkna}') '{count}'",
+  "etaler": "Spridning (''(räkna)'') '{count}'",
   "defausserFin": "Kasta och avsluta",
   "pts8": "{eValue} PTS",
   "@pts8": {
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "Tryck på ''Snurra hjulet'' för att starta!",
   "verite": "Sanning",
   "action": "Konsekvens",
-  "pts9": "'{0}' : '{1,}' poäng",
+  "pts9": "'{0}' : ''(1,)'' poäng",
   "parametresLeDilemme": "Inställningar: Dilemmat",
   "parametresDuDilemme": "Dilemma-inställningar",
   "k1DifficulteDesChoix": "1. Valens svårighetsgrad",
@@ -844,7 +844,7 @@
   "equipe2": "LAG 2",
   "validerLesEquipes": "Bekräfta lag",
   "placezLeTelephoneSurVotre": "PLACERA TELEFONEN PÅ PANNAN!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 s {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -922,7 +922,7 @@
   "creerLeSalonCout5": "Skapa lounge (Kostnad: 5 mynt)",
   "lancerUnJeuPourLe": "Starta ett spel för loungen",
   "jouer1": "Spela",
-  "joueurSEnJeu": "'{0,}' spelare i spel",
+  "joueurSEnJeu": "''(0,)'' spelare i spel",
   "cloturerLaPartie": "Stäng spelet",
   "pretS": "'{0}' lån",
   "annulerLaPartie": "Avbryt spel",
@@ -939,7 +939,7 @@
   "enPartie": "I SPEL",
   "partieDeTerminee": "Game of '{0}' över!",
   "statistiques": "Statistik - '{0}'",
-  "vainqueur1": "Vinnare: '{0}''{1}'\n",
+  "vainqueur1": "Vinnare: '{0}''{1}'''''''\n",
   "voirLesStats": "Visa statistik",
   "message": "Meddelande...",
   "k0Pts": "0 P",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' kastade om tärningen ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} behöll tärning med värde {dieVal} (tärning #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Hacka",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' mer '''{''' \r\n      Anti-dupliceringssäkerhet: om",
   "vousNAvezPasDe": "Du har inga ord",
   "equipe12": "Lag 1",
   "equipe21": "Lag 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Änden av ärmen (adminknapp)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) asynk '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = await transaction.get(gameRef); \r\n      om (!snap.exists) återvänder; \r\n\r\n      final gameData = snap.data() som Map<String, dynamisk>; \r\n      slutgiltiga spelare = Karta<Sträng, dynamisk>.från(gameData[''players''] ?? '{}'); \r\n\r\n      Avgör vinnaren (mer XP)\r\n      SträngvinnarId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        slutgiltig xp = (pData[''xp''] som num?)?. toInt() ?? 0; \r\n        om (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Någon",
   "aAtteintPointsEtRemporte": "{winnerName} nådde {targetScore} poäng och vann matchen!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Spelaren",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      List<String> frågor =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[svårighetsgrad] ?? \r\n          GameWords.whoIsMostLikely[",
   "honnete": "Ärligt talat",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [jämnt, jämnt]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        Sträng secMrWhiteId = blandadeRoller[1]; \r\n\r\n        Fråga =\r\n            \"Beskriv ditt hemliga ord med ett ord. Bedragare, bluff!\"; \r\n        för (var pId i players.keys) '''{''' \r\n          Sträng pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": "par.split(",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} nådde {updatedScoresoverallWinnerId} poäng och vann matchen!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "lägga kort",
   "enchereAutomatique": "automatiskt bud",
   "passeLEnchere": "passar budet",
-  "elseIfGametype": ") '''{''' \r\n        om (väljarId == röstatForId) '''{''' \r\n          throw Exception(\"Formell förbud mot att rösta på sig själv!\"); \r\n        '''}''''}''' annars om (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          transaktion, \r\n          gameRef, \r\n          gameData, \r\n          väljarlegitimation, \r\n          5, \r\n          applySpeedBonus: Sant, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      om (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          slutlig Map<String, int> röstRäkningar = '{}'; \r\n          för (slutmål i votes.values) '{' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          List<Sträng> topVoted = []; \r\n          voteCounts.forEach((target, count) '''{''' \r\n            om (räkna > maxVotes) '{' \r\n              maxVotes = räkning; \r\n              topVoted = [mål]; \r\n            '}' annars om (antal == maxRöster) '{' \r\n              topVoted.add (target); \r\n            '}''''}'''); \r\n\r\n          Uppdateringar[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        slutlig Map<String, int> röstRäkningar = '{}'; \r\n        för (slutmål i votes.values) '{' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        List<Sträng> topVoted = []; \r\n        voteCounts.forEach((target, count) '''{''' \r\n          om (räkna > maxVotes) '{' \r\n            maxVotes = räkning; \r\n            topVoted = [mål]; \r\n          '}' annars om (antal == maxRöster) '{' \r\n            topVoted.add (target); \r\n          '}''''}'''); \r\n\r\n        om (topVoted.length == 1) '''{''' \r\n          slutgiltig vinnare = toppRöstad.först; \r\n          Uppdateringar[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          transaktion, \r\n          gameRef, \r\n          gameData, \r\n          väljarlegitimation, \r\n          5, \r\n          applySpeedBonus: Sant, \r\n        ); \r\n      )'' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      om (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} vann alla marker på bordet!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "Domaren väljer just nu...",
   "coupAutomatiqueJouePourCause": "Automatiskt drag spelas på grund av inaktivitet.",
   "inactivite": "Inaktivitet",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0 : 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1868,7 +1860,7 @@
   "partieTermineeAvecLeScore": "Spelet slut med lägst poäng!",
   "cEstVotreTour": "Det är din tur!",
   "auTourDe1": "Det är '{name}'",
-  "departPar": "Avresa senast 0 '{}'",
+  "departPar": "Avresa senast 0 ''()''",
   "dessinePar": "Designad av '{0}'",
   "devinePar": "Gissade av '{0}'",
   "ecrisUnThemeOuUne": "Skriv ett tema eller en mening!",
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0:0: {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Motståndarens tur",
   "derniereCartePosee": "Senast lagda kort!",
   "cEstTonTour": "Det är DIN tur!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0 : 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Fel: Frågan hittades inte.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0 : 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(inget svar)",
   "deuxDefisReussis": "Två utmaningar klara.",
   "leChallenger": "Utmanaren",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": ":'{0}' '{1}'",
   "uneDescriptionHilarante": "en hysterisk bildtext",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Kolumn( \r\n            Barn: [ \r\n              Text( \r\n                ''",
   "unProblemeEstSurvenu": "Ett problem har uppstått.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      Standard: \r\n        sista omgångenWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "0 : 1/2 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Visa slutresultat",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "0 1 / 2 - 3 : 4 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  stil: const TextStyle (färg: Colors.white70), \r\n                ), \r\n                SizedBox (höjd: 20), \r\n                Wrap( \r\n                  justering: WrapAlignment.center, \r\n                  Barn: \r\n                      justOneFilteredClues\r\n                          .map((ledtråd) => _buildEasel(ledtråd.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (höjd: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text( \r\n                    AppLokaliseringar.av(kontext)!. allCluesHave Get, \r\n                    stil: const TextStyle (färg: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' mer '''{''' \r\n          Det är upp till spåmannen att spela\r\n          returnera kolumn( \r\n            Barn: [ \r\n              Text(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0 : 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,9 +2060,7 @@
   "designez2Amoureux": "Välj 2 älskande",
   "amoureuxUnis": "De älskande förenade!",
   "laVictime": "Offret",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Barn: [ \r\n                _buildActionButton( \r\n                  etikett: AppLocalizations.of(context)!. infect, \r\n                  ikon: Icons.auto_fix_high, \r\n                  färg: Colors.purpleAccent, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      Sammanhang, \r\n                      Lyssna: falskt, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService. SvartvargInfekterar( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Sant, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (bredd: 8), \r\n                _buildActionButton( \r\n                  etikett: AppLocalizations.of(context)!. förtär, \r\n                  ikon: Icons.close, \r\n                  färg: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService. BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        falskt, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          kombi; \r\n        Ruta ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Inga förluster i natt (skyddade eller skonade)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              stil: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Färg: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''varg'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: meddelande), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Kompakt sändarstång\r\n          if (canSendMessage)\r\n            Row( \r\n              Barn: [ \r\n                Expanderad( \r\n                  barn: StorlekLåda( \r\n                    Höjd: 32, \r\n                    barn: TextField( \r\n                      Kontrollant: _chatController, \r\n                      stil: const TextStyle (fontSize: 12, color: Colors.white), \r\n                      dekoration: InputDecoration( \r\n                        TipsText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          färg: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        ram: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.cirkulär(16), \r\n                          borderside: BorderSide.none, \r\n                        ), \r\n                        fylld: sant, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          horisontellt: 10, \r\n                          vertikal: 0, \r\n                        ), \r\n                      ), \r\n                      påInskickat: (sms) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                konstt SizedBox (bredd: 4), \r\n                IconButton( \r\n                  ikon: const Icon( \r\n                    Icons.send_rounded, \r\n                    Storlek: 18, \r\n                    färg: Colors.cyanAccent, \r\n                  ), \r\n                  utfyllning: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    om (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Strängetikett, Strängtyp, Färg activeColor) '{' \r\n    slutgiltig bool isSelected = _selectedChatType == typ; \r\n    returnera Gestometer( \r\n      onTap: () => setState(() => _selectedChatType = typ), \r\n      barn: Behållare( \r\n        utfyllnad: const EdgeInsets.symmetric(horisontell: 8, vertikal: 3), \r\n        Dekoration: LådaDekoration( \r\n          Färg: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0,25)\r\n                  : Colors.white.withOpacity(0,04), \r\n          borderRadius: BorderRadius.cirkulär(10), \r\n          Border: Border.all( \r\n            Färg: \r\n                isSelected? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        barn: Text( \r\n          etikett, \r\n          stil: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            färg: ärVald? aktivFärg: Färger.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- UPPDATERADE AVATAR FÖR ATT GÖRA DEN INTERAKTIV--- \r\n\r\n  Widget _buildSyncTimer(Tidsstämpel? startTime, int durationInSeconds) '''{''' \r\n    om (startTime == null) returnerar const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder möjliggör en supersmidig visuell timer utan blockeringstimer och manuell setState, vilket gör tråden mycket lättare (punkt 4)\r\n    slutgiltig sluttid = startTid.tillDatum().add( \r\n      Varaktighet (sekunder: varaktighet i sekunder), \r\n    ); \r\n    slutliga återstående = endTime.difference(DateTime.now()); \r\n\r\n    om (remaining.isNegative)\r\n      returnera text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stil: Theme.of( \r\n          Sammanhang, \r\n        ).textTheme.headlineSmall?. copyWith(färg: Colors.redAccent), \r\n      ); \r\n\r\n    returnera TweenAnimationBuilder<Duration>( \r\n      Varaktighet: återstod, \r\n      tween: Tween (början: återstående, slut: Duration.noll), \r\n      byggare: (BuildContext-kontext, Duration-värde, Widget? barn) '{' \r\n        slutsekunder = värde.iSekunder; \r\n        returnera text( \r\n          AppLocalizations.of(context)!. TimeRemaining, \r\n          stil: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            Färg: sekunder < 20? Färger.rödAccent: Färger.amberAccent, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext kontext, \r\n    Map<String, dynamisk> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    slutgiltiga spelare = Karta<Sträng, dynamisk>.från(gameData[''players''] ?? '{}'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    slutpositioner = Map<String, dynamic>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    slutgiltig sträng currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    final bool isMyTurn = currentPlayerId == playerId; \r\n    final int dice = (gameData[''littleHorsesDice''] som num?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[''littleHorsesHasRolled''] ?? falsk; \r\n    final bool isTeamMode = gameData[''smallTeamHorses''] ?? false; \r\n    final Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from( \r\n      gameData[''smallHorsesConsecutiveSixes''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = på varandra följande sexor ?? 0; \r\n\r\n    Neon Modern Palette / Arkad på mörk bakgrund\r\n    slutgiltig lista<färg> spelareFärger = [ \r\n      konstt Color(0xFFEF4444), // Neonröd\r\n      const Color(0xFF38BDF8), // Neon himmelsblå\r\n      konst Color(0xFF10B981), // Smaragdgrön\r\n      konst Color(0xFFF59E0B), // Gyllene bärnsten\r\n    ]; \r\n\r\n    --- SEGERSKÄRM--- \r\n    om (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      återvänd till UniversalGameEndScreen( \r\n        SpelTitel:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Nått brädets mitt!",
   "deplacezUnCheval": "FLYTTA EN HÄST!",
   "aVousDeLancer": "DIN TUR ATT SLÅ!",
@@ -2082,7 +2071,7 @@
   "toutesLesGrillesSontCompletees": "Alla poängprotokoll är ifyllda!",
   "cEstVotreTourTouchez": "Det är din tur! Tryck på en tärning för att spara den (guld 🔒)",
   "lancerLesDes": "Kasta tärningarna",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1-6: 0/63 1 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1-6: 0/63 1 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "FÖRLUST! Avslöja frågan och svara!",
   "gagneTonSecretEstPreserve": "VINST! Din hemlighet är säker.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    '''}''' mer '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (variant)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    för (VAR-spelare i _activePlayers) '''{''' \r\n      om (spelare == undercover) '''{''' \r\n        _playerRoles[spelare] = \"Infiltratör\"; \r\n      '''}''' annars om (spelare == _mrWhitePlayer) '''{''' \r\n        _playerRoles[spelare] = \"Mr. White\"; \r\n      '''}''' mer '''{''' \r\n        _playerRoles[spelare] = \"Civil\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.avslöjande; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  Void _nextPlayerReveal() '''{''' \r\n    om (_currentPlayerRevealIndex < _activePlayers.längd - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' mer '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(Stråkspelare) '''{''' \r\n    Strängroll = _playerRoles[spelare]!; \r\n    bool impostorsWin = roll == \"Civil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      om (impostorsWin) '''{''' \r\n        _resultMessage = \"'{'player'}' var en civilist! Impostorerna vinner!\"; \r\n      '''}''' mer '''{''' \r\n        _resultMessage = \"'{'player'}' var den\r\n    \r\n  ",
   "requiert4Joueurs": "Kräver 4+ spelare",
   "requiert3Joueurs": "Kräver 3+ spelare",
   "genereDesCategoriesAmusantesPour": "Skapa roliga kategorier för den varma potatisen. Tema: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Blått lag)",
   "k2EquipesSAffrontent": "2 lag möts",
   "chacunPourSoi": "Alla mot alla",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0:0: {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2241,7 +2229,7 @@
       }
     }
   },
-  "nombreDeJoueursRecherches": "Antal spelare sökte: \"'{'''0'''}'\"",
+  "nombreDeJoueursRecherches": "Antal spelare sökte: \"''(''''0'''')''\"",
   "laBeloteRequiertExactement4": "Belote kräver exakt fyra spelare.",
   "formez2EquipesDe2": "Form 2 lag av 2 spelare i \"Compose lag\".",
   "ilFautAuMoins4": "Det tar minst fyra spelare.",
@@ -2263,7 +2251,7 @@
   "ceJeuRequiertExactement4": "Detta spel kräver exakt 4 spelare.",
   "auMoins3JoueursRequis": "Minst 3 spelare krävs.",
   "auMoins2JoueursRequis": "Minst 2 spelare krävs.",
-  "jeu": "Spel: \"'{'''0'''}'\"",
+  "jeu": "Spel: \"''(''''0'''')''\"",
   "ami": "Vän vän vän",
   "deconnecte": "Frånkopplad",
   "suspect": "Misstänkt",
@@ -2280,7 +2268,7 @@
   "quatre": "Fyror",
   "cinq": "Femmor",
   "six": "Sexor",
-  "sectionSup": "Sup avsnitt: \"'{'''0'''}'\"",
+  "sectionSup": "Sup avsnitt: \"''(''''0'''')''\"",
   "k63Pts": "{oppUpper} /63 ppts {value}",
   "@k63Pts": {
     "placeholders": {
@@ -2315,7 +2303,7 @@
   "moi": "Jag",
   "manche1": "Channel '{0}' / '{1}'",
   "voisin": "Grannskap",
-  "aSelectionneCarte": "\"'{'''0'''}'\" valde \"'{'''1'''}'\" karta \"'{'''2'''}'\"",
+  "aSelectionneCarte": "\"''(''''0'''')''\" valde \"''(''''1'''')''\" karta \"''(''''2'''')''\"",
   "jouePar": "Spelad av '{0}'",
   "lAdversaire": "Motståndaren",
   "ecrivez": "Skriv {promptItem}",
@@ -2338,7 +2326,7 @@
   "fin50": "SLUT 50",
   "essence": "Bensin",
   "roueDeSecours": "Wheel av\nRelief",
-  "radarCaseCiblee": "RADAR: Fall \"'{'''0'''}'\" riktad!",
+  "radarCaseCiblee": "RADAR: Fall \"''(''''0'''')''\" riktad!",
   "ys": "ð",
   "yaaz": "ð",
   "joker": "Joker",
@@ -2367,8 +2355,8 @@
   "lesAutresJugentTonHistoire": "Andra bedömer din berättelse...",
   "vrai1": "Sant",
   "faux1": "Falskt",
-  "tuAsVote": "Du röstade: '{'''0'}'",
-  "aEteChoisiPourSa": "\"'{'''0'''}'\" valdes för hans svar och vann 1 poäng!",
+  "tuAsVote": "Du röstade: ''(''''0'')''",
+  "aEteChoisiPourSa": "\"''(''''0'''')''\" valdes för hans svar och vann 1 poäng!",
   "resultatsDesVotes": "Röstresultat",
   "leMenteurEtait": "Lögnaren var... {liarName}!",
   "@leMenteurEtait": {
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Turen är över.",
-  "aGagneAvecSaDescription": "{winnerName} vann med sin beskrivning:AppLocalizations.of(context)! extrainfoColumnChildText 99999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Ingen vann den här omgången. Oavgjort eller inga bildtexter.",
   "aTrouveLeSymboleIl": "{winnerName} hittade symbolen 99999! Han vinner kortet. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Ledtråd skickad! Väntar på övriga...",
   "carte3": "Karta",
   "score": "Score",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of(context)! .styleConstTextstyleColorColors {value2} {deckIndex} / {deckTotal} - {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "Natten faller på byn...\n\nStäng dina ögon.",
   "leMomentEstVenuLe": "Tiden har kommit...\n\nByn måste rösta.",
   "victoireDesVillageois": "Bysborna vinner!",
@@ -2562,14 +2513,6 @@
   "votezPourDevorerUneProie": "Rösta för att sluka ett byte",
   "espionnezUnJoueur": "Spionera på en spelare...",
   "leLoupNoirDecideDu": "Den svarta vargen avgör offrets öde",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infektera {targetName} ?AppLocalizations.of(kontext)!.centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf slår solo",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Välj ett offer att sluka",
   "laSorcierePrepareSesPotions": "Häxan brygger sina drycker",
   "cibleDesLoups": "Vargarnas mål: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Vargar",
   "outreTombe": "Andevärlden",
   "amoureux": "Älskande",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldSmall Horses",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Individuellt lopp",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 kast)",
   "@k3Lancers": {
@@ -2626,7 +2561,7 @@
       }
     }
   },
-  "gardeS": "\"'{'''0'''}'\" hålls",
+  "gardeS": "\"''(''''0'''')''\" hålls",
   "cur": "♥ Hjärter",
   "carreau": "♦ Ruter",
   "trefle": "♣ Klöver",
@@ -2645,10 +2580,10 @@
   "uneQuestionDrolePourLa": "En rolig fråga till personen som håller föremålet!",
   "devinezLeMotAvecL": "Gissa ordet med hjälp av de andra!",
   "reperezLeSymboleCommunLe": "Hitta den gemensamma symbolen snabbast!",
-  "genereDesDilemmesAuFormat": "Genererar dilemma i \"OptionA eller OptionB\" format. Tema: \"'{'''0'''}'\"",
+  "genereDesDilemmesAuFormat": "Genererar dilemma i \"OptionA eller OptionB\" format. Tema: \"''(''''0'''')''\"",
   "jePasse": "Jag passar",
-  "vote": "\"'{'''0'''}' rösta",
-  "votes1": "\"'{'''0'''}' röster",
+  "vote": "\"''(''''0'''')'' rösta",
+  "votes1": "\"''(''''0'''')'' röster",
   "majoritaire": "Majoritet",
   "fin": "Slut",
   "pile": "Klave",
@@ -2694,22 +2629,21 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Vem kunde mer?AppLocalizations.of(kontext)!.bodyPaddingPaddingConstEdgeinsetssoft",
-  "votePar": "Röstas av: \"'{'''0'''}'\"",
-  "decisionUnanimeDuGroupePour": "Enhälligt beslut av gruppen för \"'{'''0'''}'!\"",
+  "votePar": "Röstas av: \"''(''''0'''')''\"",
+  "decisionUnanimeDuGroupePour": "Enhälligt beslut av gruppen för \"''(''''0'''')''!\"",
   "ilFautAuMoins41": "Minst 4 spelare krävs för Codenames (2 per lag)!",
   "impossibleDeFormerLesEquipes": "Kunde inte bilda lag (minimiantal ej uppnått). Starta om med minst 4 spelare.",
-  "lEquipeAReveleL": "Team '{'''0'}' avslöjade Assassin! Team '{'1'}' vinner!",
+  "lEquipeAReveleL": "Team ''(''''0'')'' avslöjade Assassin! Team '{1}' vinner!",
   "bleue": "Blå",
-  "lEquipeATrouveTous": "Team \"'{'''0\" hittade alla hans ord och vann!",
-  "maitreEspionDeLEquipe": "Master Espion från teamet \"'{'''0'''}'\"",
-  "equipeRouge1": "Red Team: \"'{'''0'''}'\"",
-  "equipeBleue1": "Blue Team: '{'''0'''}'",
-  "maitreEspion": "'{'''0'''}' - Master Espion '{'1'}'",
-  "passeLeTelephoneAuxAgents": "Lämna telefonen till lagagenter \"'{'''0'''}'\"",
+  "lEquipeATrouveTous": "Team \"''(''''0\" hittade alla hans ord och vann!",
+  "maitreEspionDeLEquipe": "Master Espion från teamet \"''(''''0'''')''\"",
+  "equipeRouge1": "Red Team: \"''(''''0'''')''\"",
+  "equipeBleue1": "Blue Team: ''(''''0'''')''",
+  "maitreEspion": "''(''''0'''')'' - Master Espion '{1}'",
+  "passeLeTelephoneAuxAgents": "Lämna telefonen till lagagenter \"''(''''0'''')''\"",
   "mime": "Mima",
-  "cEstAuTourDe2": "Det är turen av \"'{'''0'''}'\" (\"1\"'}')",
-  "genereDesQuestionsAmusantesEt": "Genererar roliga och snabba frågor att ställa. Tema: \"'{'''0'''}'\"",
+  "cEstAuTourDe2": "Det är turen av \"''(''''0'''')''\" (\"1\"'')'')",
+  "genereDesQuestionsAmusantesEt": "Genererar roliga och snabba frågor att ställa. Tema: \"''(''''0'''')''\"",
   "s3": "{minDuration} s",
   "@s3": {
     "placeholders": {
@@ -2727,12 +2661,12 @@
     }
   },
   "fin1": "END",
-  "trouves": "Hittade: \"'{'''0'''}'\"",
+  "trouves": "Hittade: \"''(''''0'''')''\"",
   "ecurie1": "Stall 1",
   "ecurie2": "Stall 2",
   "ecurie3": "Stall 3",
   "ecurie4": "Stall 4",
-  "nombreMaxDeJoueurs": "Max antal spelare: \"'{'''0'''}'\"",
+  "nombreMaxDeJoueurs": "Max antal spelare: \"''(''''0'''')''\"",
   "jAiLanceUnePartie1": "Jag kastade en {value} spel!",
   "@jAiLanceUnePartie1": {
     "placeholders": {
@@ -2742,8 +2676,8 @@
     }
   },
   "jeu1": "Spel",
-  "partieDeEnAttente": "Del av \"'{'''0'''}' i väntan",
-  "termine": "Terminerad: \"'{'''0'''}'\"",
+  "partieDeEnAttente": "Del av \"''(''''0'''')'' i väntan",
+  "termine": "Terminerad: \"''(''''0'''')''\"",
   "vainqueur2": "Vinnare:",
   "joueurSPretS": "Spelare(s) redo",
   "code": "Kod: {value}",
@@ -2762,7 +2696,7 @@
   "talkie": "Komradio",
   "tronconneuse": "Motorsåg",
   "survie": "Överlevnad",
-  "redigezLPour": "Skriv \"'{'''0'''}'\" för \"'{'''1'''}'\"",
+  "redigezLPour": "Skriv \"''(''''0'''')''\" för \"''(''''1'''')''\"",
   "rejouerGarderPts": "SPELA IGEN (BEHÅLL P)",
   "indicesMontresA": "Index som visas på",
   "playersWinneridname": "Spelare vinnareidname",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "** Objektiv****\nTa kort för att skapa matchande par. Undvik att vara den spelare som håller Zombie-kortet i slutet av spelet.\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\nSpelet börjar med 33 kort (16 par + 1 Zombie kort).\nKorten delas ut till de fyra spelarna.\nVarje tur en spelare tar ett kort från nästa spelare.\nOm kortet skapar ett par besegras det automatiskt.\nSpelarens hand är blandad.\nDen första spelaren att inte längre ha kort vann.\nDen återstående spelaren med Zombie-kortet förlorat!",
   "butDuJeuObtenirLe": "**Game mål***\nFå högsta poäng genom att fylla 13 kategorier med 5 tärningar.\n\n** Kör av ett torn***\n**Lance**: Du kan kasta 5 tärningar upp till 3 gånger per tur.\n**Keep***: Efter 1: a eller 2: a kastet kan du hålla lite tärningar och starta om andra.\n**Score**: Efter minst ett kast måste du välja en kategori för att göra poäng. Varje kategori kan endast användas en gång per del.\n\n**Kategori*******\n**Sex***: Sum av motsvarande tärningar. (Bound 35 poäng om den övre delen uppgår till 63 poäng eller mer).\n**Brelan* (3 eller mer identisk tärning): Sammanfattning av alla tärningar.\n** Kvadrat* (4 eller mer identisk tärning): Sammanfattning av alla tärningar.\n**Full** (3 tärningar identiska + 1 par): 25 poäng.\n** Små svit* (4 på varandra följande tärningar): 30 poäng.\n**Large Suite** (5 på varandra följande tärningar): 40 poäng.\n** Yams** (5 tärningar identiska): 50 poäng.\n** Chans**: Sum av alla tärningar.",
   "objectifNePasAvoirL": "** Objektiv****\nHar inte enheten i händerna när potatisen exploderar!\n\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\nEtt tema visas på skärmen.\n2. Spelaren som innehar enheten måste ge ett svar motsvarande tema.\nSå snart han svarade, passerade han snabbt planet till sin granne.\nGrannen måste i sin tur hitta ett nytt svar och passera enheten.\nTiden är dold och slumpmässig: potatisen kan explodera när som helst!\nSpelaren som håller enheten vid explosionen förlorar handtaget och får ett löfte.",
-  "principeGeneralGribouillisEstUn": "** Allmänna principen****************\nGribouillis är ett ritspel inspirerat av \"Arab-telefonen\", där idéer förändras i varje steg. Det finns 3 spellägen:\n\n**1. Normalt läge (arabisk illustrerad telefon)*********************************************************************************************************************************************************************************************************************************************\n**Writing*: Varje spelare skriver en mening.\n**Drawing*: Varje spelare får en annan mening och drar den.\nDevinette **: Varje spelare får en ritning och gissar vad den representerar.\n**Alternance***: Spelet växlar ritning och gissa tills varje \"album\" har gått runt alla spelare.\n** Men**: Ha kul att se hur en enkel mening förvandlas till något helt annat!\n\n**2. Kompletterande läge (kollaborativ ritning)***\n**Croquis*: Varje spelare börjar en enkel ritning.\n** Komplett*: Varje spelare får en annans teckning och måste berika den, utan att ta bort det som redan finns.\n**Alternance***: Ritningen går från spelare till spelare, varje lägga till dess beröring.\n**Parameter \"Lägg till 1\"*:\n*Om funktionshindrade (standard)*: Det är en sträng. Ritningen utvecklas i varje steg (Player A -> Player B -> Player C...).\n*Om aktiverat*: Den första ritningen av varje spelare slutförs av alla andra spelare, vilket skapar flera kollektiva verk parallellt.\n** Men*: Skapa överraskande och roliga kollektiva konstverk.\n\n**3. Brise-Glace Mode (Creative Interaction)\n**Writing*: Varje spelare skriver ett personligt tema (ex: AppLocalizations.of(context)!.myPreference).\n**Drawing*: Varje spelare får teman från ** alla andra spelare** och måste dra dem.\n- ** Men*: Perfekt att bryta isen, upptäcka andras smaker och starta kreativitet på ett samverkande och lätt sätt.",
   "yzObjectifAvoirLeMoins": "Objektiv\n\nHa så få poäng som möjligt i slutet av spelet.\nSpelet stannar när en spelare når 100 poäng eller mer, och vinnaren är den med den lägsta totalpoängen.\n\nUtrustning\n\n150 kort numrerade från -2 till +12\n\nImplementering\n\nBlanda alla kort.\nVarje spelare får 12 kort, placerade ansiktet framför honom, i 4 kolumner × 3 rader.\nDe andra korten bildar ett lager. Returnera det första kortet för att bilda avfallet.\nVarje spelare returnerar 2 kort av sitt val från sina 12.\n\nFörloppet av en turné\n\nI sin tur har du **30 sekunder ** att välja mellan två åtgärder:\n\n1. Ta avfallskortet\nDu måste byta ut den med ett av dina 12 kort (synlig eller dold sida).\nDet ersatta kortet går på avfallet.\n\nPiocher ett kort ansikte ner\nDu tittar på kartan:\n- antingen håller du den och ersätter ett av dina kort (som ovan),\n- antingen vägrar du det - du placerar det direkt på avfallet, och i det här fallet måste du returnera ett av dina kort fortfarande dolda.\n\nSärskilda regler\n\nTre identiska kort i en kolumn → besegras omedelbart (värde 0).\n\nSlut på handtag:\n\nHandtaget slutar när en spelare har avslöjat alla sina kort.\nAlla andra spelare avslöjar sedan sina återstående kort. Handtaget är över.\nAlla spelare räknar summan av sina kort.\n\nObservera: om spelaren som slutar inte har den lägsta poängen i rundan, tar han ett straff på +10 poäng (hans handtag poäng fördubblas i den ursprungliga versionen, kommer vi att använda +10 för att förenkla).\n\nSlut på spelet\n\nVi spelar så många ärmar som vi behöver.\nNär en spelare når 100 poäng eller mer, stannar spelet.\nSpelaren med den lägsta kumulativa poängen vinner.",
   "iAReglesDuPoker": "Objektiv\n\nVinn chips från andra spelare genom att ha:\n- den bästa handen på 5 kort under slakt,\n- eller genom att göra dem ge upp (att sova) tack vare satsningarna.\n\nHandklassificering (från starkast till svagaste)\n\nKunglig spolning: 10 – V – D – R – En av samma färg\nQuint flush: 5 kort som följer varandra, samma färg\nTorg: 4 identiska kort\nFull: 3 identiska kort + 1 par\nFärg (flush): 5 kort av samma färg (icke-följande)\nNästa (femte): 5 kort som följer varandra (olika färger)\nBrelan: 3 identiska kort\nDubbelpar\n9. Pair\nHögt kort (högst kort om ingen blir bättre)\n\nð\n\nBlinds\nSpelaren till vänster om dealern sätter den lilla blinden.\nNästa spelare sätter big blind.\n\n2. distribution\nVarje spelare får 2 slutna kort (\"privata kort\").\n\nAuktion torn och gemensamma kort\nPreflop: bet trick med privata kort.\nFlop: 3 vanliga kartor avslöjade. Nya satsningar.\nTower: 4:e gemensamma kartan avslöjad. Nya satsningar.\nFloden: 5: e och sista gemensamma kartan avslöjas. Sista satsningen.\n\nShooting (showdown)\nOm flera spelare stannar visar varje spel.\nDen bästa kombinationen av 5 kort (bland dess 2 privata kort + de 5 kommunerna) vinner potten.\n\nMöjliga åtgärder\n\nI sin tur har en spelare **30 sekunder* för:\nChecker: satsa inte någonting, bara om ingen någonsin satsar igen.\nLägg några chips i potten.\nFölj (Call): lika löpningen.\nRelaunch (Raise): Öka satsningen.\nGå till sängs (Fold): tappa sina kort och gå ut ur det.\n\nSlut på spelet\n\nSpelet fortsätter så länge det finns minst 2 spelare med marker.\nDen sista vinnaren är den som tar alla chips.",
   "butDuJeuGagnerLe": "**Game mål***\nVinn mest XP genom att utföra handlingar och svara på sanningar!\n\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\nRoulette är spelaren vars tur det är.\nSpelaren skjuter \"Action\" eller \"Verity\".\nKlassiskt läge: En slumpmässig utmaning/fråga visas.\nJudge Mode: En slumpmässig spelare skriver utmaningen, då spelaren inser det.\nAndra spelare validerar med en röst Ja/Nej.\nValideringsprocenten bestämmer XP:n som vunnits.\n\n**Särskilda regler****\n100% validering = maximal XP\nSpelare med flest XP blir Admin of the game\n- Knappen \"End of Handtag\" gör det möjligt att stänga delen",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "**Game mål***\nVar den snabbaste att upptäcka den enda identiska symbolen mellan kortet i mitten och dess eget kort.\n\nDraft (Mode ''The Infernal Tower'')\nVarje spelare får ett kort ansikte ner. Resten av korten bildar ett lager i mitten, ansikte synligt.\nFörst återvänder alla sitt kort.\nVarje spelare måste så snabbt som möjligt hitta den enda symbolen som finns både på hans kort och på aktiekortet.\nDen första spelaren som finner symbolen, tillkännagivandet högt, tar aktiekortet och placerar det på sitt eget kort.\nDetta nya kort blir hans kort för nästa omgång. En ny karta avslöjas sedan i centrum av lagret.\nSpelet fortsätter tills aktien är utmattad. Spelaren som samlade flest kort i slutet vinner!",
   "butDuJeuSeDebarrasser": "**Game mål***\nBli av med alla hans kort genom att vara den första!\n\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\n**Distribution**: Varje spelare får 7 kort. Resten bildar beståndet. Ett kort returneras för att starta spillhögen.\n** Spela ett kort**: Den spelare vars tur det är har **30 sekunder ** för att sätta ett kort i handen på avfallet högen. Kortet som spelas måste matcha toppkortet av stacken genom:\n**Color** (ex: Red on Red)\n****************************************************************************************************************************************************************************************************************************************************************\n**Symbol*** (ex: en gul \"+2\" på en röd \"+2\")\n**Special Card** (Joker, +4, etc.)\n**Piocher**: Om en spelare inte kan spela ett kort i den tilldelade tiden måste han välja ett kort från paketet. Om han kan spela detta kort kan han göra det omedelbart. Annars slutar hans tur.\n**Specialkort**:\n**+2 (Två kort)**: Nästa spelare väljer 2 kort och passerar sin tur.\n**Sens förbjudet (Pass your turn)************************************************************************************************************************************************************************************************************************************************** Nästa spelare passerar sin tur.\n**Inversion (förändring av mening)*: Känslan av spel är omvänd.\n**Joker (färgförändring)*: Spelaren väljer färgen på nästa kort att spela. Kan spelas på något kort.\n** Super Joker +4 (färgförändring och fyra kort)*: Spelaren väljer färg. Nästa spelare väljer 4 kort och passerar sin tur. Detta kort kan endast spelas om spelaren inte har något annat kort av färgen som begärs på avfallshögen (om det inte bluffar).\n** Meddela \"UNO\"*: När en spelare bara har ett kort i handen måste han meddela \"UNO!\". Om han inte gör det och tas av en annan spelare (före nästa spelare spelar eller plockar upp), måste han välja 2 kort.\n** Slut på kanal**: Handtaget slutar när en spelare blir av med sitt sista kort. Poäng räknas. Spelaren som når 500 poäng (eller en definierad summa) vinner spelet.\n\nBilliga poäng:*****\nDigitala kort (0-9): Deras ansiktsvärde.\n+2, Sens Forbidden, Inversion: 20 poäng.\nJoker, Super Joker +4: 50 poäng.",
   "principeDuJeuLeJeu": "## Spelprincip\nSpelet spelas mellan **3 och 10 spelare*.\nVarje spelare ger tillgång till en del av sitt fotobibliotek och väljer bilder att dela.\nUnder ett spel väljs ett foto ** slumpmässigt ** från alla spelare och visas sedan i några sekunder.\n* Spelare måste gissa ** vem äger bilden*** visas.\nSpelaren som korrekt gissar flest bilder vinner spelet.\n\n## Förfarande\n** Val av bilder**: Varje spelare väljer ett antal bilder från sitt galleri.\n** Starta spelet**: När alla är redo lanserar värden spelet.\n**Play Tower**:\nEtt slumpmässigt foto visas i 5 sekunder.\nAlla spelare röstar för att gissa ägaren.\n**Resultat**: Poängen uppdateras efter varje runda.\n5. ** Slut på spel*: Efter ett visst antal rundor vinner spelaren med flest poäng.",
-  "butDuJeuCoulerTous": "**Game mål***\nStuck all motståndarens skepp innan han sjunker din.\n\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\n**Placement***: Varje spelare placerar i hemlighet sin flotta på ett 10x10-nät.\n- Flygbolag (5 lådor)\nCruiser (4 lådor)\nubåt (3 celler)\nDestroyer (3 lådor)\nPatrol (2 lådor)\n**Tir***: I sin tur rör spelarna en låda för att skjuta.\n**Result**: AppLocalizations.of(context)!.touche, \"Coulated\" eller \"To water\".\n4. ** Victoire*: Den första spelaren att sjunka hela motsatta flottan vinner.",
   "butDuJeuEtreLe2": "**Game mål***\nBli först med att nå målavståndet (1000 km som standard).\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\nVarje spelare får sex kort.\nI sin tur, spela ett kort (Distance, Attack, Defense, Security) eller bli av med det.\n**Attacks** kort (Stopp, Röd, Essence, Crevaison, Limit) blockerar motståndaren.\nKartor ** Försvar*** (Grön, Extra Tank, Repair, End Limit) motattacker.\n**Säkerhet*** kort avbryter en attack och förhindrar återfall.\nKartor ** Avstånd*** (25, 50, 75, 100, 200 km) flyttar fordonet framåt.\nVälj ett kort i slutet av din tur.",
   "butDuJeuEtreLe3": "**Game mål***\nBli först med att bli av med alla hans kort genom att bilda giltiga kombinationer (medlen).\n\n** Kör av ett torn***\n**Piocher**: Ta kartan från toppen av avfallet eller lagret.\n**Sale (Optional)**: Placera giltiga kombinationer på bordet.\n**Sequence (Run)*: 3 eller fler kort av samma färg som följer (t.ex. 5) Esset kan vara högt eller lågt.\n**Grupp (Set)*: 3 eller 4 kort av samma värde men av olika färger (t.ex. 8♥, 8\n** Standard**: Bli av med ett kort från handen på avfallet.\n\n** Slut på handtag****\nDen första spelaren som inte längre har kort efter nederlag vinner. De andra räknar poängen för sina återstående kort (figurer = 10, som = 15, andra = ansiktsvärde). Spelet stannar vid 100 poäng.",
   "butDuJeuFaireDeviner2": "**Game mål***\nGör ditt lag gissa maximalt ord före tidens slut, utan att använda förbjudna ord!\n\n**Draft**************************Draft******************************************************************************************************************************************************************************************************************************\nVarje tur, en spelare (\"högtalaren\") försöker göra sitt lag gissa ett ord.\nTalaren ska inte **** yttra ordet att gissa, eller något av orden \"Taboo\" (inga ord) som visas under målordet. Han kan inte heller använda översättningar eller ord från samma familj.\n3. Om högtalaren använder ett Taboo-ord, annulleras motsatta laget (eller domaren) rapporterar felet, kortet annulleras och högtalaren flyttar till nästa.\nVarje gissade ord returnerar en poäng till laget.\nVändningen slutar när tiden är uppe.\n\n** Slut på del***\nLaget med flest poäng efter antalet varv definierade vinster!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Du måste spela samma antal kort.",
   "combinaisonDe5CartesTrop": "5-kortskombinationen är för svag.",
   "vousDevezJouerUneCarte": "Du måste spela ett högre kort.",
-  "aGagne1": "Han vann!",
   "ceNEstPasVotre": "Det är inte din tur.",
   "carteIntrouvableDansLaMain": "Kortet hittades inte på handen.",
   "coupInvalideSelonLesRegles": "Ogiltigt drag enligt Mille Bornes regler!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Tiden är ute för att förklara sanningen!",
   "cibleHorsDeLaGrille": "Mål utanför rutnätet.",
   "caseDejaCiblee": "Rutan redan beskjuten.",
-  "aCouleTouteLaFlotte": "sjönk hela fiendens flotta!",
   "placementAutomatiqueEffectue": "⏱️ Automatisk placering klar.",
   "tempsEcoulePourLaSaisie": "⏰ Tiden för att skriva ord är slut. Spelet startar med inmatade ord!",
   "laPhaseDeVoteA": "Röstfasen har börjat!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "[DEBUG joinGame] Framgångsrik transaktion. Gå tillbaka sant.",
   "debugJoingameLaPartieN": "[DEBUG joinGame] Spelet existerar inte eller finns inte längre i lobbyn. Gå tillbaka till falskt.",
   "erreurCritiqueDansJoingame": "CRITICAL ERROR IN joinGame",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": "AppLocalizations.of(context)! .wordcivilParts0TrimWordundercoverIA returnerar separata enkla ord",
   "infiltre": "Infiltratör",
   "civil": "Civilist",
   "vendeurDeFalafels": "Falafels säljare",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Ogiltig kombination enligt Rummys regler!",
   "defaussezExactement1Carte": "Släng exakt 1 kort.",
   "carteNonTrouvee": "Kortet hittades inte.",
-  "aGagneLaManche": "Han vann rundan!",
   "desDejaLancesPourCe": "Dice lanserades redan för denna turné.",
   "vousDevezDAbordLancer": "Du måste slå tärningen först.",
   "vousNePouvezPasDeplacer": "Du kan inte flytta motståndarens pjäs!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Du kan inte välja en färg nu.",
   "erreurCritiquePlayerorderEstVide": "CRITICAL ERROR: Playerorder är tom i nextRound. Jag kan inte fortsätta.",
   "questionNonTrouvee": "Frågan hittades inte",
-  "quiPourraitLePlusApplocalizations1": "Vem kunde mer?AppLocalizations.of(kontext)!.listStringQuestionsAiwordpoolGamewordssoft",
   "menteur": "Liar",
   "pasAssezDeJoueursPour": "Inte tillräckligt med spelare för detta mode.",
   "ajouteLaDescriptionLaPlus": "Lägg till den roligaste beskrivningen till denna meme!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Varje aktiv spelare måste lägga minst 1 kort innan budgivning.",
   "enchereInvalide": "Ogiltigt bud.",
   "laSurenchereDoitEtreSuperieure": "Överbudet måste vara högre.",
-  "applocalizationsOfContextUnjoueurEst": "AppLocalizations.of(context)!.aPlayer är den sista överlevaren och vinner Skull!",
-  "applocalizationsOfContextUnjoueurA": "AppLocalizations.of(context)!.aPlayer vann 2 utmaningar och vann spelet!",
-  "applocalizationsOfContextUnjoueurRemporte": "AppLocalizations.of(context)!.aPlayer vinner Skull!",
   "reponseVide": "Tomt svar.",
   "leJugeNePeutPas1": "Domaren kan inte skicka in ett svar.",
   "toutLeMondeARepondu": "Alla svarade! Låt oss öppna dörren.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Alla svarade! Rösta.",
   "toutesLesReponsesSontRecues": "Alla svar tas emot! Domaren måste besluta.",
   "joueurCibleIntrouvable": "Riktad spelare hittades inte.",
-  "quiPourraitLePlusApplocalizations2": "Vem kunde mer?AppLocalizations.of(kontext)!.elseIfGametypeSynonym eller Banni",
   "vousNePouvezPasBannir": "Du kan inte bannlysa din egen synonym!",
   "seulLeJugeEnTitre": "Bara den sittande Domaren kan utse vinnaren.",
   "ceJoueurNAPas1": "Den här spelaren skickade inte in något svar.",
-  "quiPourraitLePlusApplocalizations3": "Vem kunde mer?AppLocalizations.of(kontext)!.intRequiredvotesPlayersLengthIf Domaren",
-  "quiPourraitLePlusApplocalizations4": "Vem kunde mer?AppLocalizations.of(kontext)!.forFinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Perfekt oavgjort! Inga poäng utdelade.",
   "egaliteDansLesVotesAucun": "Lika i omröstningen: ingen spelare förvisas denna tur.",
   "laDescriptionLaPlusDrole": "Den roligaste beskrivningen valdes!",
   "aucuneDescriptionNAEte": "Ingen beskrivning röstades.",
-  "quiPourraitLePlusApplocalizations5": "Vem kunde mer?AppLocalizations.of(kontext)!.forFinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Domare hittade inte.",
   "laPartieDeZeroPointe": "Nollpoäng-spelet börjar! Varje spelare måste visa 2 kort.",
   "toutLeMondeARevele": "Alla har visat sina kort. Spelet börjar!",
@@ -3164,28 +3084,25 @@
   "cultureDefi": "🧠 Kunskap & Utmaning",
   "familleToutPublic": "👨‍👩‍👧‍👦 Familj & Alla åldrar",
   "piquantInsolite": "🌶️ Kryddigt & Udda",
-  "quiPourraitLePlusApplocalizations6": "Vem kunde mer?AppLocalizations.of(kontext)! Vem kan din modegrupp",
   "devineT": "Gissa T",
   "presidente": "President President President President President",
   "chargement": "Loading...",
   "cursive": "Cursive",
   "exception": "Undantag:",
-  "debutDeLaConstructionDe": "- THE CONSTRUCTION OF THE HIM OF VOTE ''Who Could the Most?AppLocations.of(context)!.printIsactiondepenendingStateTo( isActionPending)players''] som Map<String, dynamic>???",
   "clicSurLeJoueurPname": "> CLIC på spelaren ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "Övergång från isActionPending till true.",
   "erreurFirebaseLorsDuVote": "!!! ERREUR Firebase under omröstningen: $e",
   "appelFirebaseTerminePassageDe": "Firebase call är över. Övergång från isActionPending till false.",
   "attentionLeWidgetNEst": "- ATTENTION: Widgets borta, setState avbryts.",
-  "quiPourraitLePlusApplocalizations7": "Vem kunde mer?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "Positionsfas",
   "stre9f4a5": "🏆 Legendariskt!",
   "str21f597": "⭐ Utmärkt!",
   "str59ee4e": "👍 Bra spelat!",
   "strb6f91d": "😅 Inte illa!",
   "strc0046c": "💪 Vi kan göra bättre!",
-  "str85bff7": "'{'Bravo!'}'",
-  "strfa1b8c": "$'{'''Rate!'}'",
-  "str487ca1": "$ '{'''Chut! Stäng dina ögon.",
+  "str85bff7": "''(''Bravo!'')''",
+  "strfa1b8c": "$''(''''Rate!'')''",
+  "str487ca1": "$ ''(''''Chut! Stäng dina ögon.",
   "leSoleilSeLeve": "Solen går upp",
   "atout": "TRUMF: {suit}",
   "@atout": {
@@ -3204,8 +3121,7 @@
   "chill": "Chill",
   "soiree": "Fest",
   "competition": "Tävling",
-  "enCours": "CURRENT: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": "GameMessageLocalization.tr (kontext, förnuft)",
+  "enCours": "CURRENT: '{0}'",
   "jAiLanceUnePartie2": "Jag startade ett spel",
   "piedDeBiche": "Kofot",
   "appTitle": "Partyspel",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "Jag kastade en del av 0! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Roller (0) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Dra denna mening:\n0 \" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "0 har förbjudits för sitt förslag \"1\"! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 hittade ordet: \"1\"! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Ingen fann ordet: \"0\" {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 hittade ordet: \"1\"! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "(Revolution!)",
   "tonMotEst2": "Ditt ord är: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Oavgjort!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "Jag kastade en del av 0! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "Yatzy-spelet börjar!",
   "logClueGivingStart": "Spelet börjar! Ge din ledtråd...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "Belote spelet börjar!",
   "logBlokusStart": "Blokus-spelet börjar!",
   "pokerFlop": "--- FLOP ---",
   "pokerTurn": "--- TURN ---",
   "pokerRiver": "--- RIVER ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "0 har sparkat: 1 ! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "Team 0 avslöjade Assassin! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Maximalt möjligt: 0 kort {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 reflekterar över en utmaning på 1 kort... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "DIN MAN (0 kort) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0/30 egenskaper {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "Index som lämnats in: 0/1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Vald färg:",
   "pokerRaiseTo": "Höj till {amount}",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Svar från 0: \"1\" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Roll:",
   "obligatoire": "Obligatoriskt",
   "aSelectionneSonPionEtReflechit": "{playerName} har valt sin pjäs och funderar...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0 har rapporterats och gömts för dig. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Kunde inte få en säker LiveKit video tillgång token.",
+  "veuillezEntrerUneAdresseEmail": "Ange en giltig e-postadress.",
+  "veuillezEntrerVotreMotDe": "Ange ditt nuvarande lösenord.",
+  "entrezVotreMotDePasse": "Ange ditt nuvarande lösenord.",
+  "leNouveauMotDePasse": "Det nya lösenordet måste vara minst 6 tecken.",
+  "lesDeuxMotsDePasse": "Båda lösenorden matchar inte.",
+  "photoDeProfilMiseA": "Profilfoto uppdaterat!",
+  "echecDuChangementDePhoto": "Fotoförändring misslyckades.",
+  "k3CaracteresMinimum": "Minsta 3 tecken",
+  "cePseudoEstDejaPris": "Denna nick är redan tagen.",
+  "unAmi": "En vän",
+  "ceJoueur": "Denna spelare",
+  "preparationDeLaRecherche": "Förberedelse av sökningen...",
+  "erreurDeConnexionAuMatchmaking": "Fel anslutning till matchmaking. Försök igen.",
+  "erreurDeConnexionALa": "Fel som ansluter till rummet.",
+  "legendeVivante": "Levande legend",
+  "grandMaitre": "Grand Master",
+  "stratege": "Strategi",
+  "initie": "Initierad",
+  "illimiteesVip": "Obegränsad (VIP)",
+  "pieces": "0 bitar {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "Oansluten användare.",
+  "entrezUnPseudo": "Ange en pseudo",
+  "cePseudoEstDejaPris1": "Detta smeknamn är redan taget",
+  "pseudoDejaPrisParUn": "Pseudo har redan tagits av en annan spelare",
+  "cetteVersionDeLApplication": "Denna version av programmet är föråldrad. Vänligen installera den senaste versionen.",
+  "playfunEstActuellementEnMaintenance": "Playfun håller för närvarande på att förbättra dina kvällar. Kom tillbaka i en minut!",
+  "uneNouvelleVersionDePlayfun": "En ny version av Playfun är tillgänglig! Du måste uppdatera appen för att fortsätta spela.",
+  "derniereVersion": "Senaste versionen",
+  "echecDeLEnvoi": "Misslyckad leverans.",
   "demandeDAmiEnvoyeeA": "Vänförfrågan skickad till {name}!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Spelare (0) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Aktivera video",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Pseudo tillgänglig",
+  "entrezUnEmailValide": "Ange en giltig e-post",
+  "k6CaracteresMinimum": "Minst 6 tecken",
+  "pasDeCompteSInscrire": "Inget konto? Registrera",
+  "dejaUnCompteSeConnecter": "Redan ett konto? Logga in",
+  "conditionsGeneralesDUtilisationCgu": "Allmänna användarvillkor (CGU/EULA)",
+  "politiqueDeConfidentialite": "Integritetspolicy",
+  "miseAJourRequise": "Uppdatering krävs",
   "joueursBloques": "Blockerade spelare ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Ogiltiga identifierare eller obefintligt konto.",
+  "leMotEtaitLabel": "Ordet var:",
+  "mancheLabel": "Kanal",
+  "et": "och",
+  "pokerPlayerCheck": "{playerName} checkar.",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Ord:",
+  "rouges": "Röda",
+  "noirs": "Svarta",
+  "crane2": "Skulle",
+  "enAttente2": "I väntan",
+  "enCours1": "Pågående",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} har valt sin pjäs och funderar...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Tid kvar: {seconds} s",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Paket {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Variant)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 vinner med 1 poäng 2! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Vinn Skull! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Pack IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Standard",
+  "lui": "Honom",
+  "carte4": "Kort {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Låsta spelare",
+  "vousNAvezBloqueAucun": "Du har inte blockerat några spelare.",
+  "debloquer": "Avblockera",
+  "nouvelEmail": "Ny e-post",
+  "motDePasseActuel": "Nuvarande lösenord",
+  "emailMisAJourAvec": "E-post framgångsrikt uppdaterad!",
+  "modifierMotDePasse": "Ändra lösenord",
+  "nouveauMotDePasse": "Nytt lösenord",
+  "confirmerLeMotDePasse": "Konfirmera lösenord",
+  "motDePasseModifieAvec": "Lösenord ändras framgångsrikt!",
+  "prendreUnePhoto": "Ta ett foto",
+  "choisirDepuisLaGalerie": "Välj från galleriet",
+  "supprimerLaPhoto": "Radera foto",
+  "photoDeProfilRetiree": "Profilfoto bort.",
+  "pseudoMisAJour": "Nickname uppdaterad!",
+  "compteSecurite": "och säkerhetskonto",
+  "editeParParrelV10": "Redigerad av Parrel • v1.0.0",
+  "aucunJeuTrouve": "Inga spel hittades",
+  "essaieDAjusterTesFiltres": "Prova att justera dina filter eller sök igen.",
+  "reinitialiserLesFiltres": "Återställ filter",
+  "nouveau": "Nytt",
+  "gererMonAbonnement": "Hantera min prenumeration",
+  "mesPieces": "Mina rum",
+  "rechargerLesOffresDuStore": "Reload Store erbjuder",
+  "gererMesAbonnements": "Hantera mina prenumerationer",
+  "badges": "Märken",
+  "partiesJouees": "Spelade matcher",
+  "xpTotalSession": "Total sessions-XP",
+  "moyennePartie": "Genomsnitt / Match",
+  "detailParJeuPerformanceXp": "Detaljer per spel och XP-prestanda",
+  "jouezVosPremieresPartiesPour": "Spela dina första matcher för att se din XP-statistik här!",
+  "xpAuCompteur": "{psxp} XP samlade",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Ytterligare {xpRemaining} XP innan Niv. {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} spelade • {won} vinst{won1s} • ~{gameXp} intjänade XP {played1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Fel vid inläsning av användardata.",
+  "vousDevezAccepterLesCgu": "Du måste acceptera CGU och sekretesspolicyn för att skapa ett konto.",
+  "miseAJourDisponible": "Uppdatering tillgänglig",
+  "plusTard": "Senare",
+  "mettreAJour": "Uppdatera",
+  "uneNouvelleVersionDePlayfun1": "En ny version ({newVersion}) av Playfun är tillgänglig med nyheter och buggfixar!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Pågående underhåll",
+  "mettreAJourMaintenant": "Uppdatera nu",
+  "motifDuSignalement": "Orsak till anmälan:",
+  "tricheOuAntiJeu": "Fusk eller osportsligt beteende",
+  "autre": "Annat",
+  "signaler": "Rapportera",
+  "detailParJeu": "Detaljer per spel:",
+  "ceJoueurNAPas2": "Den här spelaren har inga registrerade spel ännu.",
+  "badgesDebloques": "Upplåsta märken: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Blockerade spelare ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "Avblockera {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Rapportera eller blockera {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "röst"
 }

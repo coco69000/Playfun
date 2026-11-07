@@ -28,7 +28,7 @@
   "elements": "'{0}' eşya",
   "prompt": "Prompt: \"'{0}'\"",
   "utiliser": "KULLAN",
-  "packActiveElements": "✨ Pack '''{0}''' aktif oldu ('{1}' eşyası)!",
+  "packActiveElements": "✨ Pack '{0}' aktif oldu ('{1}' eşyası)!",
   "fusionner": "BİRLEŞTİR",
   "themesFusionnesLePackActif": "✨ Birleştirilmiş Temalar! Aktif paket artık '{0}' eşya içeriyor.",
   "modifierCompleter": "Düzenle / Tamamla",
@@ -46,7 +46,7 @@
   "generationIa": "Yapay Zeka Üretimi: '{0}'",
   "historique": "Geçmiş",
   "melangerPlusieursThemes": "Birden fazla temayı karıştırın:",
-  "combineS": "✨ '{0 birleşik}'",
+  "combineS": "✨ ''(0 birleşik)''",
   "nombreDElements": "Öğe sayısı:",
   "minRequisRecommande": "Minimum gerekli: '{0}' | Önerilen: '{1}'",
   "ambianceTonaliteDeJeu": "Ortam / Oyun tonu:",
@@ -248,11 +248,11 @@
   "pts": "+'{0}' puan",
   "leGagnantEst": "Kazanan '{0}' !",
   "classementFinal": "Nihai Sıralama:",
-  "points": "'{0}'. '{1}': '{2.}' puan",
+  "points": "'{0}'. '{1}': ''(2.)'' puan",
   "retourALAccueil": "Ana Sayfaya Dön",
   "laPartieAEteTerminee": "Oyun sona erdi veya artık mevcut değil.",
   "quitterLaPartie1": "Oyundan Ayrıl",
-  "jeuDe": "'{0 Oyunu}'",
+  "jeuDe": "''(0 Oyunu)''",
   "objectifPts": "Gol: '{0}' puan",
   "blancMangerCoco": "BLANC MANGER COCO",
   "enAttenteDesCartesDes": "Oyuncuların kartları bekleniyor...",
@@ -268,7 +268,7 @@
   "conserverAvecLIa": "Yapay Zeka ile Tut",
   "expulser": "At",
   "vousAvezEteExcluDe": "Hareketsizlik nedeniyle oyundan çıkarıldınız. Bilgisayar yerinize oynuyor (kazanç yok).",
-  "s": "'{0}' s",
+  "s": "s '{0}'",
   "pts1": "{pName}: {pScore} puan",
   "@pts1": {
     "placeholders": {
@@ -280,7 +280,7 @@
       }
     }
   },
-  "xp": "{pXp} XP",
+  "xp": "0 XP {pXp}",
   "@xp": {
     "placeholders": {
       "pXp": {
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "Kartı kalmadı",
-  "cartesRestantes": "'{0.}' kart kaldı",
-  "jetonsMise": "Fişler: '{$0,}' | Bahis: '{$1,}'",
+  "cartesRestantes": "''(0.)'' kart kaldı",
+  "jetonsMise": "Fişler: ''($0,)'' | Bahis: ''($1,)''",
   "totalPts": "Toplam: '{0}' puan",
   "k13Remplies": "'{0}'/13 dolu",
   "finDeLaManche": "Tur Bitti!",
@@ -306,7 +306,7 @@
   "cetteCarteEstDejaVisible": "Bu kart zaten açık! Kapalı bir kart seçin.",
   "aucunAlbumAAfficher": "Görüntülenecek albüm yok.",
   "vernissage": "Sergi Açılışı!",
-  "albumDe": "'{0 albümü}'",
+  "albumDe": "''(0 albümü)''",
   "prec": "Önceki",
   "album": "Albüm '{0}' / '{1}'",
   "suiv": "Sonraki",
@@ -328,8 +328,8 @@
   "retourAuSalon": "Lobiye Dön",
   "zombieEnMain": "ELDE ZOMBİ VAR",
   "sauve": "'{0}' (Kaydedildi!)",
-  "mainDeCartes": "'{eli 0}' ('{1}' kart)",
-  "votreMainDeSurvieCartes": "HAYATTA KALMA ELİNİZ ('{0,}' kart)",
+  "mainDeCartes": "''(eli 0)'' ('{1}' kart)",
+  "votreMainDeSurvieCartes": "HAYATTA KALMA ELİNİZ (''(0,)'' kart)",
   "lesPairesSontDefausseesAutomatiquement": "Çiftler otomatik olarak atılır",
   "carteSEnJeu": "Oyundaki kart(lar):",
   "aucuneCarteEnJeuJouez": "Oyunda kart yok. İstediğinizi oynayın!",
@@ -348,11 +348,11 @@
   "motsTrouves": "Bulunan kelimeler: '{0}'",
   "ecrivezIci": "Buraya yazın...",
   "plierPasser": "KATLA VE GEÇ",
-  "motsRediges": "✏️ '{0,}' kelime yazıyor...",
+  "motsRediges": "✏️ ''(0,)'' kelime yazıyor...",
   "leGrandDepliage": "Büyük Açılış!",
   "voiciLesUvresCollectivesNees": "İşte hayal gücünüzden doğan ortak eserler:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' bir oyuncuya karşı bir saldırı ('{1}') hazırlıyor!",
-  "km": "{oppDist} km",
+  "km": "0 km {oppDist}",
   "@km": {
     "placeholders": {
       "oppDist": {
@@ -360,7 +360,7 @@
       }
     }
   },
-  "km1": "{myDistance} / {targetDist} km",
+  "km1": "0 / 1 km {myDistance} {targetDist}",
   "@km1": {
     "placeholders": {
       "myDistance": {
@@ -428,7 +428,7 @@
   "vraie": "DOĞRU",
   "fausse": "YANLIŞ",
   "ceChoixResteraSecretJusqu": "(Bu seçim sonuna kadar gizli kalacaktır)",
-  "lHistoireDe": "'''{'''0''ın hikayesi'''}'''",
+  "lHistoireDe": "''''(''''0''ın hikayesi'''')''''",
   "vrai": "DOĞRU",
   "faux": "YANLIŞ",
   "detecteurDeMensonges": "Yalan Dedektörü",
@@ -442,20 +442,20 @@
   "vainqueur": "Kazanan: '{0}'",
   "voulezVousRejouer": "Tekrar oynamak ister misiniz?",
   "siUnJoueurNeRepond": "Bir oyuncu yanıt vermez veya ayrılırsa oyun yedek arayacaktır.",
-  "histoireDeEtait": "'{0}' tarihçesi (1 '{}'tarihiydi)",
+  "histoireDeEtait": "'{0}' tarihçesi (1 ''()''tarihiydi)",
   "votes": "Oylar:",
   "aVote": "'{0}' oy kullanan: '{1}'",
   "lesPointsOntEteDistribues": "Puanlar oylarınıza göre dağıtıldı.",
-  "leMotDesCivilsEtait": "Sivillerin sözü şuydu: '''{0}'''",
-  "leMotDeLInfiltre": "Sızıcının ('{0}') sözü şuydu: '''{1}'''",
+  "leMotDesCivilsEtait": "Sivillerin sözü şuydu: '{0}'",
+  "leMotDeLInfiltre": "Sızıcının ('{0}') sözü şuydu: '{1}'",
   "mrWhiteNAvaitPas": "Bay White ('{0}') kelimeler bulamadı.",
-  "leMotATrouverEtait": "Bululacak kelime '''{0}''' ile eşanlamlıydı. Diğer oyuncular 1 puan kazanıyordu.",
+  "leMotATrouverEtait": "Bululacak kelime '{0}' ile eşanlamlıydı. Diğer oyuncular 1 puan kazanıyordu.",
   "felicitationsAuDessinateurEtA": "Karikatürist '{0}' ''ı ve '{1}' ''i tebrikler!",
-  "saReponseEtait": "Cevabı şuydu: '''{0}'''.",
-  "leMotEtait": "Kelime şuydu: '''{0}'''.",
+  "saReponseEtait": "Cevabı şuydu: '{0}'.",
+  "leMotEtait": "Kelime şuydu: '{0}'.",
   "cartesRevelees": "Açılan kartlar:",
   "erreurDeChargementDuMeme": "Meme yüklenirken hata oluştu.",
-  "scoreActuelDeCartes": "Mevcut puan '{0}': '{1.}' kart.",
+  "scoreActuelDeCartes": "Mevcut puan '{0}': ''(1.)'' kart.",
   "finDuTour1": "Tur bitti",
   "tourSuivant1": "Sonraki sıra",
   "enAttenteDeLHote4": "Sonraki tur için kurucu bekleniyor...",
@@ -543,12 +543,12 @@
   "k6Consecutifs3": "6 üst üste: '{streak}'/3",
   "lancerLeDe": "ZAR AT",
   "scorePoints": "Puan: '{score}' puan",
-  "dominosRestants": "Kalan domino taşları: '{sayı}' '{count}'",
+  "dominosRestants": "Kalan domino taşları: ''(sayı)'' '{count}'",
   "impossibleDeJouerCeDomino": "Bu domino buraya oynanamaz.",
   "mancheTerminee": "Tur sona erdi! ",
   "dominos": "Domino",
   "extremites": "Uçlar: ",
-  "pioche2": "Beraberlik: '{Sayım}' '{count}'",
+  "pioche2": "Beraberlik: ''(Sayım)'' '{count}'",
   "piocher": "Çek",
   "ficheDePts": "'{0}' rekor ('{1}' puan)",
   "pts2": "{otherName} ({otherTotal} hasta)",
@@ -563,7 +563,7 @@
     }
   },
   "clic": "TIK",
-  "lancersRestants": "Kalan Atışlar: '{Sayı}' '{count}'",
+  "lancersRestants": "Kalan Atışlar: ''(Sayı)'' '{count}'",
   "combinaison": "KOMBİNASYON",
   "grilleDePts": "'{0}' GRID ('{1}' puan)",
   "pts3": "{p} ({myTotal} hasta)",
@@ -617,7 +617,7 @@
   "votreMain": "Elin ('{count}')",
   "touchezUneCartePourLa": "Oynamak için bir karta dokunun",
   "aucuneCombinaisonEtaleeSurLa": "Masada henüz kombinasyon yok",
-  "etaler": "Yayılma ('{sayısı}') '{count}'",
+  "etaler": "Yayılma (''(sayısı)'') '{count}'",
   "defausserFin": "At ve bitir",
   "pts8": "{eValue} puanlar",
   "@pts8": {
@@ -644,8 +644,8 @@
   "joueursNonAssignes1": "Atanmamış oyuncular",
   "confirmerLancer": "Onayla ve Başlat",
   "choisirUnJeuLocal": "Yerel Bir Oyun Seçin",
-  "ilFautAuMoinsJoueurs": "Bu mod için en az '{0.}' oyuncuya ihtiyacınız var!",
-  "ceModeSupporteAuMaximum": "Bu mod maksimum '{0.}' oyuncuyu destekliyor!",
+  "ilFautAuMoinsJoueurs": "Bu mod için en az ''(0.)'' oyuncuya ihtiyacınız var!",
+  "ceModeSupporteAuMaximum": "Bu mod maksimum ''(0.)'' oyuncuyu destekliyor!",
   "parametresActionOuVerite1": "Ayarlar: Doğruluk mu Cesaret mi",
   "parametresDeLaPartie": "Oyun Ayarları",
   "k1IntensiteDesDefis": "1. Görevlerin zorluğu",
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "Başlamak için ''Çarkı Çevir'' butonuna bas!",
   "verite": "Doğruluk",
   "action": "Cesaret",
-  "pts9": "'{0}' : '{1.}' puan",
+  "pts9": "'{0}' : ''(1.)'' puan",
   "parametresLeDilemme": "Ayarlar: İkilem",
   "parametresDuDilemme": "İkilem Ayarları",
   "k1DifficulteDesChoix": "1. Seçimlerin zorluğu",
@@ -758,7 +758,7 @@
   "pourraitLePlus": "... Çoğu '{0}'",
   "lancerLesVotes": "Oylamayı başlat!",
   "situation": "Durum:",
-  "quiPourraitLePlus1": "Kim 0 '{}'",
+  "quiPourraitLePlus1": "Kim 0 ''()''",
   "votezTousEnsemble": "Hep birlikte oy verin!",
   "designezLaPersonneChoisiePar": "Grubun seçtiği kişiyi belirle:",
   "passezLAppareilA": "Cihazı şuna ver:",
@@ -802,7 +802,7 @@
   "mot5": "Kelime '{0}' / 5",
   "ajouterCeMot": "Bu kelimeyi ekle",
   "jAiFiniDAjouter": "Kelimelerimi eklemeyi bitirdim",
-  "motsRestantsAAjouterPour": "'{0 için eklenecek kalan kelimeler}': '{1}'",
+  "motsRestantsAAjouterPour": "''(0 için eklenecek kalan kelimeler)'': '{1}'",
   "totalDesMotsDansLe": "Şapkadaki toplam kelime: '{0}'",
   "manche": "Tur '{0}' : '{1}'",
   "motsDevinesCeTour": "Bu turda tahmin edilen kelimeler: '{0}'",
@@ -811,8 +811,8 @@
   "erreurNombreDeJoueursInsuffisant": "Hata: Yetersiz oyuncu sayısı",
   "veuillezRevenirALEcran": "Lütfen oyuncu ayarları ekranına geri dönün.",
   "retour": "Geri",
-  "lEquipeAGagne": "Takım 0 '{}' kazandı!",
-  "points1": "'{0,}' puan",
+  "lEquipeAGagne": "Takım 0 ''()'' kazandı!",
+  "points1": "''(0,)'' puan",
   "passeLObjet": "Nesneyi Geçir",
   "passeLObjetRapidement": "Nesneyi Hızlıca Geçir",
   "generationIaDeQuestions": "Yapay Zekâ ile soru üretimi",
@@ -844,7 +844,7 @@
   "equipe2": "TAKIM 2",
   "validerLesEquipes": "Takımları onayla",
   "placezLeTelephoneSurVotre": "TELEFONU ALNINIZA YERLEŞTİRİN!",
-  "s1": "⏱️ {secondsLeft} s",
+  "s1": "0 {secondsLeft}",
   "@s1": {
     "placeholders": {
       "secondsLeft": {
@@ -856,7 +856,7 @@
   "arreter": "Durdur",
   "hautPasser": "Yukarı = Pas",
   "resultatsDuPassage": "Tur Sonuçları",
-  "pointsMarques": "+'{0,}' puan kazandı!",
+  "pointsMarques": "+''(0,)'' puan kazandı!",
   "touchezUnMotPourModifier": "Sensör hatası durumunda sonucu değiştirmek için bir kelimeye dokunun:",
   "pts10": "{teamAScore} puanlar",
   "@pts10": {
@@ -895,8 +895,8 @@
     }
   },
   "partieTerminee2": "OYUN BİTTİ!",
-  "victoireDe": "'{zaferi 0}'!",
-  "cartes": "'{0,}' kart",
+  "victoireDe": "''(zaferi 0)''!",
+  "cartes": "''(0,)'' kart",
   "ecrireUnMessage": "Bir mesaj yazın...",
   "codeDeSalonPriveIntrouvable": "Özel oda kodu bulunamadı.",
   "erreurLorsDeLaConnexion": "Giriş hatası: '{0}'",
@@ -922,7 +922,7 @@
   "creerLeSalonCout5": "Salonu Oluştur (Maliyet: 5 jeton)",
   "lancerUnJeuPourLe": "Salon için oyun başlat",
   "jouer1": "Oyna",
-  "joueurSEnJeu": "'{oyunda 0,}' oyuncu(lar)",
+  "joueurSEnJeu": "''(oyunda 0,)'' oyuncu(lar)",
   "cloturerLaPartie": "Oyunu Kapat",
   "pretS": "'{0}' kredi(ler)",
   "annulerLaPartie": "Oyunu iptal et",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "Salon kapatılsın mı?",
   "leSalonSeraDefinitivementSupprime": "Salon tüm katılımcılar için kalıcı olarak silinecektir.",
   "aCreeUnePartieDe": "'{0}' '{1}' oyununu yarattı!",
-  "joueurSPrets": "'{0.}' oyuncu hazır",
+  "joueurSPrets": "''(0.)'' oyuncu hazır",
   "cettePartieEstTermineeOu": "Bu oyun bitti veya iptal edildi.",
   "enPartie": "OYUNDA",
-  "partieDeTerminee": "'{0 maçı}' bitti!",
+  "partieDeTerminee": "''(0 maçı)'' bitti!",
   "statistiques": "İstatistikler - '{0}'",
-  "vainqueur1": "Kazanan: '{0}''{1}'\n",
+  "vainqueur1": "Kazanan: '{0}''{1}'''''''\n",
   "voirLesStats": "İstatistikleri Gör",
   "message": "Mesaj...",
   "k0Pts": "0 PUAN",
@@ -960,16 +960,16 @@
   "joueurSelectionne": "🎯 SEÇİLEN OYUNCU",
   "cEstAVotreTour": "Sıra sizde! Kaderinizi seçin:",
   "tirerActionOuVerite": "🎲 DOĞRULUK veya CESARET çek",
-  "enAttenteDuTirageDe": "'{0 çekilişini bekliyor}'...",
+  "enAttenteDuTirageDe": "''(0 çekilişini bekliyor)''...",
   "aTire": "🔥 '{0}' ateşlendi: '{1}' !",
   "estEnTrainDEcrire": "'{0}' meydan okumayı yazıyor...",
   "defiPour": "'{0}' için meydan okuma",
   "realisezVotreDefiEnVideo": "Görevinizi videoda veya mikrofonda tamamlayın!",
   "jAiRealiseMonDefi": "Görevimi tamamladım! ✅",
-  "regardezRealiserLeDefi": "Meydan okumayı tamamla '{}' izleyin...",
+  "regardezRealiserLeDefi": "Meydan okumayı tamamla ''()'' izleyin...",
   "voteDeValidation": "🗳️ ONAY OYLAMASI",
   "estCeQueAReleve": "'{0}' bu zorluğun üstesinden geldi mi?",
-  "votesRecus": "'{0}' / '{1.}' oy alındı",
+  "votesRecus": "'{0}' / ''(1.)'' oy alındı",
   "vosAmisVotentPourEvaluer": "Arkadaşlarınız performansınızı değerlendirmek için oy veriyor...",
   "votreVoteABienEte": "Oyunuz kaydedildi!",
   "ouiValide": "EVET, Onaylandı! 👍",
@@ -1009,11 +1009,11 @@
       }
     }
   },
-  "reflechit": "'{}' sanıyor... '{name}'",
+  "reflechit": "''()'' sanıyor... '{name}'",
   "faceAFaceCoteA": "Birebir (yan yana)",
   "totalAdversaire": "RAKİP TOPLAM",
   "prendreLAtoutOuPasser": "KOZU AL VEYA PAS GEÇ:",
-  "combinaisonsDe": "'{isimlerinin birleşimleri}' '{name}'",
+  "combinaisonsDe": "''(isimlerinin birleşimleri)'' '{name}'",
   "ilDevraDonnerLePremier": "İlk ipucunu onun vermesi gerekecek",
   "cetteReponseADejaEte": "Bu cevap zaten verildi!",
   "themePourLes25Mots": "25 kelime için tema",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' zarı yeniden attı ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} {dieVal} değerli zarı tuttu (zar #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Kazma",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parçalar[1].trim(); \r\n    '''}''' başka '''{''' \r\n      Tekrarlanma karşıtı güvenlik: eğer",
   "vousNAvezPasDe": "Sözün yok",
   "equipe12": "Takım 1",
   "equipe21": "Takım 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Kapak Sonu (yönetici düğme)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) asenkron '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = bekleyin transaction.get(gameRef); \r\n      eğer (!snap.exists) geri döner; \r\n\r\n      final gameData = snap.data() Harita<String, dinamik> olarak; \r\n      final players = Harita<Dizi, dinamik>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Kazananı belirleyin (daha fazla XP)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        final xp = (pData[''xp''] num?)?. toInt() ?? 0; \r\n        if (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''GameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Birisi",
   "aAtteintPointsEtRemporte": "{winnerName} {targetScore} puana ulaştı ve maçı kazandı!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Oyuncu",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Liste<Dizi> sorular =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[zorluk] ?? \r\n          GameWords.whoIsMostLikely[",
   "honnete": "Dürüst",
-  "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [hatta, hatta]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Soru =\r\n            \"Gizli kelimeni tek kelimeyle anlat. Sahtekarlar, blöf!\"; \r\n        for (var pId in players.keys) '''{''' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
+  "pairSplit": ")",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} {updatedScoresoverallWinnerId} puana ulaştı ve maçı kazandı!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "kart oynama",
   "enchereAutomatique": "otomatik teklif",
   "passeLEnchere": "teklifi pas geçiyor",
-  "elseIfGametype": ") '''{''' \r\n        if (voterId == votedForId) '''{''' \r\n          throw Exception (\"Kendi adına oy kullanmanın resmi yasaklanması!\"); \r\n        '''}''''}''' başka bir durum (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          işlem, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: doğru, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          final Harita<Dizisi, int> voteCounts = '{}'; \r\n          for (votes.values içindeki nihai hedef) '{' \r\n            voteCounts[hedef Dizisi olarak] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVoted = []; \r\n          voteCounts.forEach((hedef, sayı) '''{''' \r\n            if (> maxVotes say) '{' \r\n              maxVotes = sayım; \r\n              topVoted = [hedef]; \r\n            '}' başka bir şey varsa (sayı == maxVotes) '{' \r\n              topVoted.add(hedef); \r\n            '}''''}'''); \r\n\r\n          güncellemeler[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        final Harita<Dizisi, int> voteCounts = '{}'; \r\n        for (votes.values içindeki nihai hedef) '{' \r\n          voteCounts[hedef Dizisi olarak] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVoted = []; \r\n        voteCounts.forEach((hedef, sayı) '''{''' \r\n          if (> maxVotes say) '{' \r\n            maxVotes = sayım; \r\n            topVoted = [hedef]; \r\n          '}' başka bir şey varsa (sayı == maxVotes) '{' \r\n            topVoted.add(hedef); \r\n          '}''''}'''); \r\n\r\n        if (topVoted.length == 1) '''{''' \r\n          final kazanan = topVoted.first; \r\n          güncellemeler[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          işlem, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: doğru, \r\n        ); \r\n      )'' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} masadaki tüm fişleri kazandı!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -1853,7 +1845,7 @@
   "leJugeEstEnTrain": "Yargıç şu anda seçim yapıyor...",
   "coupAutomatiqueJouePourCause": "Hareketsizlik nedeniyle otomatik hamle oynanıyor.",
   "inactivite": "Hareketsizlik",
-  "str8f522b": "{cat}: {hasScorescoreVal}",
+  "str8f522b": "0: 1 {cat} {hasScorescoreVal}",
   "@str8f522b": {
     "placeholders": {
       "cat": {
@@ -1868,8 +1860,8 @@
   "partieTermineeAvecLeScore": "En düşük skorla oyun bitti!",
   "cEstVotreTour": "Sıra sende!",
   "auTourDe1": "Sorun '{name}'",
-  "departPar": "Saat 0 '{kalkış}'",
-  "dessinePar": "'{0 tarafından tasarlandı}'",
+  "departPar": "Saat 0 ''(kalkış)''",
+  "dessinePar": "''(0 tarafından tasarlandı)''",
   "devinePar": "Tahmin '{0}'",
   "ecrisUnThemeOuUne": "Bir tema veya cümle yaz!",
   "imagineUnePhrase": "Bir cümle hayal et!",
@@ -1911,7 +1903,7 @@
       }
     }
   },
-  "str1e0607": "{authorName} : ",
+  "str1e0607": "0: {authorName}",
   "@str1e0607": {
     "placeholders": {
       "authorName": {
@@ -1938,7 +1930,7 @@
   "tourAdverse": "Rakibin sırası",
   "derniereCartePosee": "Son oynanan kart!",
   "cEstTonTour": "SENİN sıran!",
-  "str422faa": "{valuename}: {valuescore0} 🃏",
+  "str422faa": "0: 1 {valuename} {valuescore0}",
   "@str422faa": {
     "placeholders": {
       "valuename": {
@@ -1958,7 +1950,7 @@
     }
   },
   "erreurQuestionNonTrouvee": "Hata: Soru bulunamadı.",
-  "str95d36e": "{valuename}: {key0}",
+  "str95d36e": "0: 1 {valuename} {key0}",
   "@str95d36e": {
     "placeholders": {
       "valuename": {
@@ -1988,12 +1980,12 @@
   "pasDeReponse": "(cevap yok)",
   "deuxDefisReussis": "İki görev tamamlandı.",
   "leChallenger": "Meydan Okuyan",
-  "stre93cb0": "'{0}' : '{1}'",
+  "stre93cb0": ":'{0}' '{1}'",
   "uneDescriptionHilarante": "komik bir açıklama",
   "extrainfoColumnChildrenText": "; \r\n          extraInfo = Sütun( \r\n            çocuklar: [ \r\n              Metin( \r\n                ''",
   "unProblemeEstSurvenu": "Bir sorun ortaya çıktı.",
   "defaultFinalRoundwinneridGamedata": ": \r\n      Varsayılan: \r\n        final turWinnerId = gameData[",
-  "str98e212": "{pName}: {count}/{length}{isFull}",
+  "str98e212": "0: 1 / 2 3 {pName} {count} {length} {isFull}",
   "@str98e212": {
     "placeholders": {
       "pName": {
@@ -2029,7 +2021,7 @@
     }
   },
   "voirLeScoreFinal": "Son skoru gör",
-  "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "str6bd6b6": "0 1 / 2 - 3 : 4 {carte} {deckIndex} {deckTotal} {score} {totalScore}",
   "@str6bd6b6": {
     "placeholders": {
       "carte": {
@@ -2049,8 +2041,7 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  stil: sürekli TextStyle (renk: Colors.white70), \r\n                ), \r\n                SizedBox (yükseklik: 20), \r\n                Wrap( \r\n                  hizalama: WrapAlignment.center, \r\n                  Çocuklar: \r\n                      justOneFilteredClues\r\n                          .map((ipucu) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (yükseklik: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Metin( \r\n                    AppLocalizations.of(bağlam)!. allCluesHave Been Edilmiş, \r\n                    style: const TextStyle (renk: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' başka '''{''' \r\n          Oyun kahinin kalması\r\n          dönüş Sütun( \r\n            çocuklar: [ \r\n              Metin(                ",
-  "strf0868c": "{length0}: {valuescore0}",
+  "strf0868c": "0: 1 {length0} {valuescore0}",
   "@strf0868c": {
     "placeholders": {
       "length0": {
@@ -2069,20 +2060,18 @@
   "designez2Amoureux": "2 aşık seçin",
   "amoureuxUnis": "Aşıklar birleşti!",
   "laVictime": "Kurban",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              çocuklar: [ \r\n                _buildActionButton( \r\n                  etiket: AppLocalizations.of(bağlam)!. enfekte eder, \r\n                  Simge: Icons.auto_fix_high, \r\n                  renk: Colors.purpleAccent, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      bağlam, \r\n                      dinle: yanlış, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      doğru, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox(genişlik: 8), \r\n                _buildActionButton( \r\n                  etiket: AppLocalizations.of(bağlam)!. yut, \r\n                  icon: Icons.close, \r\n                  color: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        yanlış, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          station wagon; \r\n        Kutu ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Dün gece kayıp yok (korunan ya da korunan değil)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              Stil: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Renk: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''kurt'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(metin: mesaj), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Kompakt gönderme çubuğu\r\n          if (canSendMessage)\r\n            Row( \r\n              çocuklar: [ \r\n                Genişletildi( \r\n                  çocuk: SizedBox( \r\n                    boy: 32, \r\n                    child: TextField( \r\n                      Kontrolör: _chatController, \r\n                      style: const TextStyle(fontSize: 12, color: Colors.white), \r\n                      süsleme: InputDecoration( \r\n                        hintMetin: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          renk: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        sınır: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        dolu: doğru, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          yatay: 10, \r\n                          Diki: 0, \r\n                        ), \r\n                      ), \r\n                      onGönderildi: (metin) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(genişlik: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    Beden: 18, \r\n                    renk: Colors.cyanAccent, \r\n                  ), \r\n                  Padding: EdgeInsets.zero, \r\n                  kısıtlamalar: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    if (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(String etiketi, String type, Color activeColor) '{' \r\n    final bool isChosen = _selectedChatType == type; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      çocuk: Konteyner( \r\n        dolgu: sürekli EdgeInsets.simetrik (yatay: 8, diki: 3), \r\n        süs: BoxDecoration( \r\n          Renk: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          sınır: Border.all( \r\n            Renk: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        çocuk: Metin( \r\n          etiket, \r\n          Stil: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isChosen ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- AVATAR''I ETKILEŞIMLI HALE GETIRMEK IÇIN GÜNCELLENDI--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder, zamanlayıcı ve manuel setState''i engellemeden süper akıcı görsel zamanlayıcı sağlar, bu da iş parçacığını büyük ölçüde hafifler (Nokta 4)\r\n    final endTime = startTime.toDate().add( \r\n      Süre(saniye: süreSaniyelerde), \r\n    ); \r\n    son kalan = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Metin( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stil: Theme.of( \r\n          bağlam, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      Süre: kalan, \r\n      tween: Tween (başlangıç: kalan, bitiş: Süre.sıfır), \r\n      builder: (BuildContext bağlamı, Süre değeri, Widget? çocuğu) '{' \r\n        son saniyeler = value.inSeconds; \r\n        return Metin( \r\n          AppLocalizations.of(bağlam)!. zaman kalan, \r\n          style: Theme.of(bağlam).textTheme.headlineSmall?. copyWith( \r\n            Renk: saniye < 20 ? Renkler.kırmızıAccent : Renkler.kehribar Aksan, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext bağlamı, \r\n    Harita<String, dinamik> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    final players = Harita<Dizgi, dinamik>.from(gameData[''players''] ?? '{}'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    final pozisyonları = Harita<Dizi, dinamik>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty mi? playerOrder[currentIndex]: ''; \r\n    son bool isMyTurn = currentPlayerId == playerId; \r\n    final int zar = (gameData[''littleHorsesDice''] num?)?. toInt() ?? 0; \r\n    final bool hasRoll = gameData[''littleHorsesHasRolled''] ?? yanlış; \r\n    final bool isTeamMode = gameData[''smallTeamHorses''] ?? yanlış; \r\n    final Harita<Dizi, dinamik> ardışıkSixes = Harita<Dizi, dinamik>.from( \r\n      gameData[''smallHorsesArdışık Altılar''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = ardışık Altılar[playerId] ?? 0; \r\n\r\n    Neon Modern Palet / Koyu Arka Planda Arcade\r\n    final Liste<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Kırmızı\r\n      const Color(0xFF38BDF8), // Neon gökyüzü mavisi\r\n      const Color(0xFF10B981), // Zümrüt Yeşili\r\n      const Color(0xFFF59E0B), // Altın Kehribar\r\n    ]; \r\n\r\n    --- ZAFER EKRANI--- \r\n    if (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      return UniversalGameEndScreen( \r\n        OyunBaşlık:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Tahtanın merkezine ulaşıldı!",
   "deplacezUnCheval": "BİR AT OYNATIN!",
   "aVousDeLancer": "ATMA SIRASI SENDE!",
   "mode2v2Allies": "2v2 Müttefik Modu",
-  "chevalSelectionneNtouchezPourAvancer": "At '{piyon seçil}' di!\\nİÖne gitmek için dokun '{pawn}'",
+  "chevalSelectionneNtouchezPourAvancer": "At ''(piyon seçil)'' di!\\nİÖne gitmek için dokun '{pawn}'",
   "touchezUnPion": "Bir taşa dokunun",
   "scoreLimiteAtteint": "Hedef puana ulaşıldı!",
   "toutesLesGrillesSontCompletees": "Tüm puan tabloları dolduruldu!",
   "cEstVotreTourTouchez": "Sıra sende! Tutmak için bir zara dokun (altın 🔒)",
   "lancerLesDes": "Zarları At",
-  "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "k1663": "1-6: 0 /63 1 {oppUpper} {oppBonus035}",
   "@k1663": {
     "placeholders": {
       "oppUpper": {
@@ -2093,7 +2082,7 @@
       }
     }
   },
-  "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "k16631": "1-6: 0 /63 1 {myUpper} {myBonus035}",
   "@k16631": {
     "placeholders": {
       "myUpper": {
@@ -2130,7 +2119,7 @@
   "choixEnregistre": "Seçim kaydedildi!",
   "dilemmePourFaisTonChoix": "'{0}' için ikilem: seçimini yap!",
   "tousLesVotesSontEnregistres": "Tüm oylar kaydedildi!",
-  "cEstAuTourDe1": "Oy kullanma '{}' sırası geldi!",
+  "cEstAuTourDe1": "Oy kullanma ''()'' sırası geldi!",
   "lancerLeDilemme": "İkilemi Çevir",
   "genererLesQuestionsIa": "Yapay Zekâ ile sorular üret",
   "genereDesQuestionsIndiscretesEt": "Düşüncesiz ve eğlenceli sorular üretir. Tema: {trim}",
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "KAYBETTİN! Soruyu aç ve cevapla!",
   "gagneTonSecretEstPreserve": "KAZANDIN! Sırrın güvende.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parçalar[0].trim(); \r\n      _wordUndercover = parçalar[1].trim(); \r\n    '''}''' başka '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (Varyant)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    (_activePlayers''de VAR oyuncusu) '''{''' \r\n      if (oyuncu == gizli) '''{''' \r\n        _playerRoles[oyuncu] = \"Sızıcı\"; \r\n      '''}''' başka bir şey varsa (oyuncu == _mrWhitePlayer) '''{''' \r\n        _playerRoles[oyuncu] = \"Bay Beyaz\"; \r\n      '''}''' başka '''{''' \r\n        _playerRoles[oyuncu] = \"Medeni\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  void _nextPlayerReveal() '''{''' \r\n    eğer (_currentPlayerRevealIndex < _activePlayers.uzunluk - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' başka '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(Yaylı) '''{''' \r\n    String role = _playerRoles[oyuncu]!; \r\n    bool sahtekarlarıWin = rol == \"Sivil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      if (sahtekarlarWin) '''{''' \r\n        _resultMessage = \"'{'player'}' bir sivildi! Sahtekarlar kazandı!\"; \r\n      '''}''' başka '''{''' \r\n        _resultMessage = \"'{'player'}'\r\n    \r\n  ",
   "requiert4Joueurs": "En az 4 oyuncu gerekir",
   "requiert3Joueurs": "En az 3 oyuncu gerekir",
   "genereDesCategoriesAmusantesPour": "Sıcak patates için eğlenceli kategoriler oluşturun. Tema: {trim}",
@@ -2164,7 +2152,7 @@
   "equipeBleue": "'{0}' (Mavi Takım)",
   "k2EquipesSAffrontent": "2 takım yarışıyor",
   "chacunPourSoi": "Herkes tek başına",
-  "stre786cb": "{sender} : ",
+  "stre786cb": "0: {sender}",
   "@stre786cb": {
     "placeholders": {
       "sender": {
@@ -2315,8 +2303,8 @@
   "moi": "Ben",
   "manche1": "Channel '{0}' / '{1}'",
   "voisin": "Komşuluk",
-  "aSelectionneCarte": "\"'{'''0'''}'\" seçildi \"'{'''1'''}'\" haritası.\"",
-  "jouePar": "\"'{'\"0\" ile oynayın.",
+  "aSelectionneCarte": "\"''(''''0'''')''\" seçildi \"''(''''1'''')''\" haritası.\"",
+  "jouePar": "\"''(''\"0\" ile oynayın.",
   "lAdversaire": "Rakip",
   "ecrivez": "{promptItem} yaz",
   "@ecrivez": {
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Sıra bitti.",
-  "aGagneAvecSaDescription": "{winnerName} onun açıklamasıyla kazandı:AppLocalizations.of(context)! ekstrainfoColumn çocukText 99999 {winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Bu turda kazanan olmadı. Beraberlik veya açıklama yok.",
   "aTrouveLeSymboleIl": "{winnerName} sembolü 99999 buldu! Kartı kazanır. {commonSym}",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "İpucu gönderildi! Diğerleri bekleniyor...",
   "carte3": "Map Map Map Map Map",
   "score": "Puan",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of(context)! .styleConstTextstyleRenk Renkleri {value2} {deckIndex} {deckIndex} / {deckTotal} - {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "Gece köye düşüyor...\n\nGözlerinizi kapatın.",
   "leMomentEstVenuLe": "Zaman geldi...\n\nKöy oy kullanmalıdır.",
   "victoireDesVillageois": "Köylüler Kazandı!",
@@ -2562,14 +2513,6 @@
   "votezPourDevorerUneProie": "Bir avı yemek için oy verin",
   "espionnezUnJoueur": "Bir oyuncuyu gözetle...",
   "leLoupNoirDecideDu": "Kara Kurt avın kaderini belirliyor",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infect {targetName} ?AppLocalizations.of(context)!centeractionwidgetRowMainaxissizeMainaxisMinThe White Wolf, solo",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Yenecek bir kurban seçin",
   "laSorcierePrepareSesPotions": "Cadı iksirlerini hazırlıyor",
   "cibleDesLoups": "Kurtların hedefi: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Kurtlar",
   "outreTombe": "Öbür Dünya",
   "amoureux": "Aşıklar",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLocalizations.of(context)!.styleTextstyleFontweightBold Little Horses",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Bireysel Yarış",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 atış)",
   "@k3Lancers": {
@@ -2694,9 +2629,8 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Kim daha fazla olabilir?AppLocalizations.of(context)!bodyPaddingConstEdgeinsetssoft",
   "votePar": "Oylama: '{0}'",
-  "decisionUnanimeDuGroupePour": "Gruptan \"'{'''0\" için kesin bir karar!",
+  "decisionUnanimeDuGroupePour": "Gruptan \"''(''''0\" için kesin bir karar!",
   "ilFautAuMoins41": "Codenames için en az 4 oyuncu gereklidir (takım başına 2)!",
   "impossibleDeFormerLesEquipes": "Takımlar oluşturulamadı (yetersiz oyuncu sayısı). En az 4 oyuncuyla yeniden başlatın.",
   "lEquipeAReveleL": "Team '{0}' Assassin''ı ortaya çıkardı! Team '{1}' kazanır!",
@@ -2705,8 +2639,8 @@
   "maitreEspionDeLEquipe": "Master Espion of team '{0}'",
   "equipeRouge1": "Red Team: '{0}'",
   "equipeBleue1": "Blue Team: '{0}'",
-  "maitreEspion": "'{'''0'''}' - Master Espion '{'1'}'",
-  "passeLeTelephoneAuxAgents": "Telefonu takım ajanlara gönder ‘'{'''0'''}'",
+  "maitreEspion": "''(''''0'''')'' - Master Espion '{1}'",
+  "passeLeTelephoneAuxAgents": "Telefonu takım ajanlara gönder ‘''(''''0'''')''",
   "mime": "Pandomim",
   "cEstAuTourDe2": "'{0}' ('{1}')",
   "genereDesQuestionsAmusantesEt": "Sormak için eğlenceli ve hızlı sorular. Tema: '{0}'",
@@ -2742,7 +2676,7 @@
     }
   },
   "jeu1": "Oyun",
-  "partieDeEnAttente": "Bölüm \"'{'\"0\"",
+  "partieDeEnAttente": "Bölüm \"''(''\"0\"",
   "termine": "Terminated: '{0}'",
   "vainqueur2": "Kazanan:",
   "joueurSPretS": "Oyuncu(s) hazır",
@@ -2795,7 +2729,6 @@
   "objectifPrenezDesCartesPour": "**\nEşleme çiftleri oluşturmak için kartları alın. Oyunun sonunda Zombie kartı tutan oyuncu olmaktan kaçının.\n**Draft**\n1. Oyun 33 kartla başlar (16 çift + 1 Zombi kartı).\n2. Kartlar 4 oyuncuya dağıtılır.\n3. Her bir oyuncu bir sonraki oyuncudan bir kart alır.\n4. Kart bir çift yaratırsa, otomatik olarak yenilir.\n5. Oyuncunun eli karışık.\n6. Artık kartların kazanamadığı ilk oyuncu.\n7. Zombi kartı ile kalan oyuncu kaybetti!",
   "butDuJeuObtenirLe": "**Game hedefi**\nEn yüksek puanı 5 dice ile 13 kategori doldurarak alın.\n\n**Running of a tower**\n1. **Lance **: 5 dice up to 3 kez sırayla atabilirsiniz.\n2. ** Keep** : 1. veya 2. attan sonra, bazı işaretleri tutabilir ve başkalarını yeniden başlatabilirsiniz.\n3. **Score**: En az bir attan sonra, puan almak için bir kategori seçmek zorundasınız. Her kategori sadece bir kez kısmen kullanılabilir.\n\n**Kategori**\n- ** Six**''e gelince: İlgili işaretlerin Sum. (Üst bölümün toplam 63 puan veya daha fazla olması durumunda 35 puan).\n**Brelan** (3 veya daha aynı indeks): Tüm dice sum.\n** Square** (4 veya daha aynı indeks): Tüm dice sum.\n**Full** (3 aynı + 1 çift): 25 puan.\n* **Küçük Suite** (4 ardı ardıl indeks): 30 puan.\n**Large Suite** (5 ardıl indeks): 40 puan.\n**Yams ** (5 aynısı): 50 puan.\n- **Chance **: Tüm işaretlerin Sum.",
   "objectifNePasAvoirL": "**\nPatates patladığında elinizdeki cihazınız yok!\n\n**Draft**\n1. Ekranda bir tema görünür.\n2. Cihazı tutan oyuncu temaya karşılık gelen bir cevap vermelidir.\n3. En kısa sürede, uçağın komşuna hızlı bir şekilde geçti.\n4. Komşu yeni bir cevap bulmak ve cihazı geçmek zorundadır.\n5. Zaman gizli ve rastgele: patates herhangi bir zamanda patlayabilir!\n6. Patlama zamanında cihazı tutan oyuncu işi kaybeder ve bir rehin alır.",
-  "principeGeneralGribouillisEstUn": "**Genel prensip**\nGribouillis, her aşamada fikirlerin değiştiği \"Arap telefon\" tarafından ilham verilen bir çizim oyunudur. 3 oyun modları var:\n\n**1. Normal Mode (Arapça Illustrated Phone)**\n**Writing**: Her oyuncu bir cümle yazar.\n**Drawing**: Her oyuncu başka bir cümle alır ve çizer.\n**Devinette**: Her oyuncu bir çizim alır ve neyi temsil ettiğini tahmin eder.\n**Alternance** : Oyun çizimi değiştirir ve her \"album\" tüm oyunculara kadar tahmin eder.\n**Ama** : Basit bir cümlenin tamamen farklı bir şeye nasıl dönüşeceğini görmek eğlenceli!\n\n**2. Complement Mode (Collaborative Drawing)**\n**Croquis **: Her oyuncu basit bir çizim başlatır.\n**Complete**: Her oyuncu başka bir çizimi alır ve onu zenginleştirmeli, zaten var olan şeyleri bozmadan.\n**Alternance**: Çizim oyuncudan oyuncuya gider, her biri dokunuşunu ekliyor.\n**Parameter \"Add 1\"**:\n- * Eğer engelli (default)*: Bir dizedir. Çizim her aşamada gelişti (Oyuncu A -> Oyuncu B -> Oyuncu C...).\n* etkinleştirilirse *: Her oyuncunun ilk çizimi diğer tüm oyuncular tarafından tamamlandı, paralel olarak birkaç kolektif iş yaratıyor.\n**Ama**: Sanatın şaşırtıcı ve eğlenceli kolektif eserlerini oluşturun.\n\n**3. Brise-Glace Mode (Creative Interaction)**\n**Writing**: Her oyuncu kişisel bir tema yazar (ex: AppLocalizations.of(context)!\n**Drawing**: Her oyuncu ** diğer tüm oyunculardan gelen temaları alır ve bunları çizmelidir.\n**Ama **: Buzu kırmak için ideal, başkalarının zevklerini keşfedin ve işbirliği ve ışık bir şekilde yaratıcılığı başlatın.",
   "yzObjectifAvoirLeMoins": "Objektif Hedef\n\nOyunun sonunda mümkün olduğunca az puan var.\nOyun bir oyuncunun 100 puan veya daha fazla ulaştığında durur ve kazanan en düşük toplam puanla biridir.\n\nEkipman\n\n150 kart -2 ila +12\n\nUygulama Uygulama Uygulama Uygulama\n\nTüm kartları karıştırın.\nHer oyuncu 12 kart alır, önünde yüz çevirir, 4 sütunda × 3 sıra.\nDiğer kartlar bir stok oluşturur. Atıkları oluşturmak için ilk kartı döndürür.\nHer oyuncu 12''den seçimlerini 2 kart döndürür.\n\nBir tur kursu\n\nBuna karşılık, iki eylem arasında seçim yapmak için **30 saniyeniz var:\n\n1. Atık kartı alın\n12 kartınızla değiştirmeniz gerekir (göremez veya gizli taraf).\nDeğiştirilen kart boşa gider.\n\n2. Piocher bir kart yüz aşağı\nHaritaya bakıyorsunuz:\n- ya bunu tutarsınız ve kartlarınızın birini değiştirirsiniz (yukarıdaki gibi),\n- ya da bunu reddediyorsunuz - doğrudan atıkta yersiniz ve bu durumda kartlarınızdan birini hala gizli bırakmanız gerekir.\n\nÖzel kurallar\n\nBir sütunda üç aynı kart hemen yenilir (değer 0).\n\nİşin Sonu:\n\nBir oyuncu tüm kartlarını açığa çıkardığında iş biter.\nDiğer tüm oyuncular daha sonra kalan kartlarını ortaya koyarlar. İş bitti.\nTüm oyuncular kartlarının toplamını sayıyorlar.\n\nLütfen dikkat: Eğer bitiren oyuncu yuvarlak en düşük puana sahip değilse, +10 puan cezası alır (iş puanı orijinal sürümde iki katına çıkarılır, +10''u basitleştirmek için kullanacağız).\n\nOyun Sonu\n\nİhtiyacımız olduğu kadar birçok kol yapıyoruz.\nBir oyuncu 100 puan veya daha fazla ulaştığında, oyun durur.\nEn düşük genel puanla oyuncu kazanır.",
   "iAReglesDuPoker": "Objektif Hedef\n\nDiğer oyunculardan gelen fişleri sahip olmak:\n- Katlanma sırasında en iyi 5 kart,\n- veya onlara bahis sayesinde pes ederler.\n\nEl sınıflandırması (en güçlüten en zayıfına)\n\n1. Kraliyet Ayakkabıları: 10 – V – D – R – Aynı renkte A\n2. Quint kızar: birbirlerini takip eden 5 kart, aynı renkte\n3. Square: 4 aynı kart\n4. Full: 3 aynı kart + 1 çift\n5. Renk (flush): Aynı renkte 5 kart (konsecutive)\n6. Sonraki (Fifth): birbirini takip eden 5 kart (farklı renkler)\n7. Brelan: 3 aynı kart\n8. Çift çift çift çifti\n9. Pair\n10. Yüksek kart (en yüksek kart eğer kimse daha iyi olursa)\n\nð\n\n1. Körler\nSatıcının soluna oyuncu küçük körü ayarlar.\nBir sonraki oyuncu büyük körü ayarlar.\n\n2. Dağıtım Dağıtım\nHer oyuncu 2 kapalı kart alır (özel kartlar).\n\n3. Auction kuleleri ve ortak kartları\n- Preflop: özel kartlarla hile yapın.\nFlop: 3 ortak harita ortaya çıktı. Yeni bahisler.\nKule: 4. ortak harita ortaya çıktı. Yeni bahisler.\nNehri: 5. ve son ortak harita ortaya çıktı. Son bahis.\n\n4. atış (düşük)\nBirkaç oyuncu kalırsa, her biri oyunlarını gösterir.\n5 karttan en iyi kombinasyonu ( 2 özel kart + 5 komün) kupayı kazanır.\n\nOlası eylemler\n\nBuna karşılık, bir oyuncu **30 saniye ** için:\n- Checker: hiçbir şey bahsetmiyor, sadece kimse tekrar bahsetmezse.\ntencerede bazı cips koyun.\n- Takip (Call): koşuya eşit.\n- Restart (Raise): bahis artışı.\n- Yataka git (Fold): kartlarını bırakın ve ondan çıkar.\n\nOyun Sonu\n\nOyun, en az 2 oyuncuyu cipsle kaldığı sürece devam ediyor.\nNihai kazanan tüm çipleri alan kişidir.",
   "butDuJeuGagnerLe": "**Game hedefi**\nHareketleri gerçekleştirmek ve gerçeğe cevap vererek en XP''yi kazanın!\n\n**Draft**\n1. rulet, onu açan oyuncudur.\n2. Oyuncu \"Action\" veya \"Verity\" vurur.\n3. Klasik mod: rastgele bir meydan okuma / soru gösteriliyor.\n4. Yargıç Mode: rastgele bir oyuncu meydan okumayı yazar, sonra oyuncu bunu fark eder.\n5. Diğer oyuncular Evet / Hayır oyu ile doğrulanır.\n6. Geçerlilik yüzdesi XP''nin kazandığını belirler.\n\n**Özel kurallar**\n-% 100 doğrulama = maksimum XP\n- En XP ile oyuncu oyun yöneticisi olur\n- \"Son of handle\" düğmesine basmak için izin verir",
@@ -2822,7 +2755,6 @@
   "butDuJeuEtreLe1": "**Game hedefi**\nMerkezdeki kart ile kendi kartı arasındaki tek aynı sembolü bulmak için en hızlı olun.\n\n**Draft (Mode ‘The Infernal Tower’)**\n1. Her oyuncu bir kart yüzünü alır. Kartların geri kalanı merkezde bir Borsa oluşturur, görünür.\n2. İlk başta herkes kartlarını döndürür.\n3. Her oyuncu hem kartında hem de Borsada bulunan tek sembolü mümkün olduğunca çabuk bulmak zorundadır.\n4. sembolü bulur ilk oyuncu, duyuru aloud, Stock kartı alır ve kendi kartında yer alır.\n5. Bu yeni kart bir sonraki tur için kartı haline gelir. Daha sonra Borsa''nın merkezinde yeni bir harita ortaya çıktı.\n6. Oyun Borsa tükeninceye kadar devam ediyor. Sonunda en çok kartları toplayan oyuncu kazanır!",
   "butDuJeuSeDebarrasser": "**Game hedefi**\nİlk olarak tüm kartlarından kurtulun!\n\n**Draft**\n1. **Distribution**: Her oyuncu 7 kart alır. Geri kalanlar borsayı oluşturur. Bir kart atık yığınına başlamak için geri döndü.\n2. ** Bir kart **: Döndüren oyuncu, **30 saniye**''in elini çöp yığınına koymak için var. Oynanmış kart, yığının en üst kartıyla eşleştirmelidir:\n* **Renk** (ex: Red on Red)\n* **Number ** (ex: one 7 Blue on one 7 Green)\n* **Symbol ** (ex: a yellow \"+2\" on a red \"+2\")\n* **Özel Kart** (Joker, +4, vb.)\n3. **Piocher**: Bir oyuncu bütün zamanların bir kart oynayamazsa, paketten bir kart almalıdır. Bu kartı oynayabilirse hemen yapabilir. Aksi takdirde, onun dönüşü biter.\n4. **Özel kartlar**:\n* **+2 (İki kart)**: Bir sonraki oyuncu 2 kart alır ve dönüşünü geçer.\n* **Senler İzinsiz (Hareketinizi Geçin)** : Bir sonraki oyuncu dönüşünü geçer.\n* **Invers ( anlamını değiştir)**: Oyun duygusu tersine döndü.\n* **Joker (Colour Change)**: Oyuncu bir sonraki kartın rengini oynamak için seçer. Herhangi bir kartta oynatılabilir.\n* **Super Joker +4 (Colour Change and Four Cards)**: Oyuncu renk seçer. Sonraki oyuncu 4 kart alır ve dönüşünü geçer. Bu kart sadece oyuncunun atık yığını üzerinde talep edilen rengin başka kartı varsa oynatılabilir (bu bluffs).\n5. **Announce \"UNO\"**: Bir oyuncunun elinde sadece bir kart olduğu zaman, \"UNO!\" duyurmalıdır. Eğer bunu yapmazsa ve başka bir oyuncu tarafından alınırsa (Bir sonraki oyuncu oynanmadan önce), 2 kart almalıdır.\n6. ** Kanalın Sonu**: Bir oyuncu son kartından kurtulduğunda iş biter. Puanlar sayılıyor. 500 puana ulaşan oyuncu (veya tanımlanmış bir toplam) oyunu kazanır.\n\n**Map Noktaları:**\n* Dijital kartlar (0-9): Yüz değeri.\n* +2, Sens İzinsiz, Invers: 20 puan.\n* Joker, Super Joker +4: 50 puan.",
   "principeDuJeuLeJeu": "## Game prensibi\n* Oyun **3 ve 10 oyuncu arasında oynanır**.\n* Her oyuncu fotoğraf kütüphanesinin bir parçasına erişim sağlar ve paylaşmak için fotoğraflar seçer.\n* Bir oyun sırasında, bir fotoğraf seçilir **randomly ** tüm oyuncular arasında, sonra birkaç saniye boyunca görüntülenir.\n* Oyuncular tahmin etmelidir ** fotoğrafa sahip kim.\n* En fotoğrafları doğru tahmin eden oyuncu oyunu kazanır.\n\n## Prosedür\n1. **Fotoğrafların Seçilmesi**: Her oyuncu galerilerinden birkaç fotoğraf seçer.\n2. **Oyuna başlayın**: Herkes hazır olduğunda, ev sahibi oyunu başlatır.\n3. ** Play Tower**:\n- 5 saniye boyunca rastgele bir fotoğraf gösteriliyor.\n- Tüm oyuncular sahibi tahmin etmeye oy verirler.\n4. **Results**: Her turdan sonra puanlar güncellenir.\n5. **Oyunun Sonu**: Bir dizi turdan sonra, oyuncu en puanlarla kazanır.",
-  "butDuJeuCoulerTous": "**Game hedefi**\nStuck tüm rakibin gemilerini batırmadan önce.\n\n**Draft**\n1. **Placement**: Her oyuncu kendi filosunu 10x10 bir ızgara üzerinde gizlice yerleştirir.\nUçak taşıyıcıları (5 kutu)\nCruiser (4 kutu)\n- Denizaltı (3 hücre)\n- Destroyer (3 kutu)\n- Guard (2 kutu)\n2. **Tir**: Buna karşılık, oyuncular vurmak için bir kutuya dokunurlar.\n3. **Result**: AppLocalizations.of(context)! touche, \"Coated\" veya \"To water\".\n4. **Victoire**: İlk oyuncu tüm karşıt filosunu batırmak için.",
   "butDuJeuEtreLe2": "**Game hedefi**\nHedef mesafeye ulaşmak için ilk olun (1000 km varsayılan).\n**Draft**\n- Her oyuncu altı kart alır.\n- Dönüşte, bir kart (Distance, Attack, Defense, Security) oynayın veya ondan kurtulun.\n**Attacks** kartları ( Dur, Red, Essence, Crevaison, Limit) rakibi engeller.\nHaritalar **Defenses ** (Yeşil, Ekstra Tank, Onarım, End Limit) karşı saldırılar.\n- ** Güvenlik** kartları bir saldırıyı iptal eder ve recurrence''ı önler.\n- Haritalar **Distance ** (25, 50, 75, 100, 200 km) aracınızı ileriye taşır.\n- Dönüşünüzün sonunda bir kart seçin.",
   "butDuJeuEtreLe3": "**Game hedefi**\nGeçerli kombinasyonlar (melds) yaratarak tüm kartlarından kurtulmak için ilk olun.\n\n**Running of a tower**\n1. **Piocher **: Atıkların üst kısmından haritayı alın OR Stock.\n2. **Sale (Okul)**: Masada geçerli kombinasyonlar yerleştirin.\n**Sequence (Run)**: Takip eden aynı renkte 3 veya daha fazla kart (örneğin 5) Ace yüksek veya düşük olabilir.\n- ** Grup (Set)**: Aynı değerin 3 veya 4 kartı ama farklı renkler (e.g. 8♥, 8\n3. **Default **: Bir karttan bir karttan kurtulun.\n\n**Son of handle**\nArtık yendikten sonra kartları olmayan ilk oyuncu kazanır. Diğerleri kalan kartlarının puanlarını sayıyor (Figures = 10, as = 15, diğerleri = yüz değeri). Oyun 100 noktada durur.",
   "butDuJeuFaireDeviner2": "**Game hedefi**\nEkibinizi zaman sonuna kadar en fazla kelime tahmin edin, yasak kelimeleri kullanmadan!\n\n**Draft**\n1. Her dönüş, bir oyuncu (\" hoparlör\") ekibini bir kelime tahmin etmeye çalışır.\n2. konuşmacı, tahmin etmek için kelimeyi ya da hedef kelime altında gösterilen \"Taboo\" kelimesinin herhangi birini belirtmemelidir. Aynı aileden çevirileri veya kelimeleri kullanamaz.\n3. Eğer konuşmacı bir Taboo kelimesini kullanıyorsa, karşıt takım (veya yargı) hatayı bildiriyorsa, kart iptal edilir ve konuşmacı bir sonrakiye taşınır.\n4. Her tahmin edilen kelime takıma bir noktayı döndürür.\n5. dönüş zamanı geldiğinde sona erer.\n\n**Katın Sonu**\nTurların sayısına göre en çok puanla takım kazanır!",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Aynı sayıda kart oynamalısınız.",
   "combinaisonDe5CartesTrop": "5 kartlık kombinasyon çok zayıf.",
   "vousDevezJouerUneCarte": "Daha yüksek bir kart oynamalısınız.",
-  "aGagne1": "kazandı!",
   "ceNEstPasVotre": "Sıra sende değil.",
   "carteIntrouvableDansLaMain": "Kart elde bulunamadı.",
   "coupInvalideSelonLesRegles": "Mille Bornes kurallarına göre geçersiz hamle!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Gerçeği açıklamak için süre doldu!",
   "cibleHorsDeLaGrille": "Hedef ızgara dışında.",
   "caseDejaCiblee": "Kare zaten hedef alındı.",
-  "aCouleTouteLaFlotte": "] Tüm düşman filosunu cezalandırın!",
   "placementAutomatiqueEffectue": "⏱️ Otomatik yerleştirme tamamlandı.",
   "tempsEcoulePourLaSaisie": "⏰ Kelime girişi için süre doldu. Oyun girilen kelimelerle başlıyor!",
   "laPhaseDeVoteA": "Oy aşaması başladı!",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "[DEBUG PlayGame] Başarılı işlem. Gerçek geri dönün.",
   "debugJoingameLaPartieN": "[DEBUG joinGame] Oyun mevcut değildir veya lobide artık yoktur. Yanlışlara geri dönün.",
   "erreurCritiqueDansJoingame": "--- katılmak için CRITICAL ERROR –",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizations.of(context)! .wordcivilParts0TrimWordundercoverIA ayrı basit kelimeler döndürür",
   "infiltre": "Köstebek",
   "civil": "Sivil",
   "vendeurDeFalafels": "Falafels satıcı",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Rummy kurallarına göre geçersiz kombinasyon!",
   "defaussezExactement1Carte": "Tam olarak 1 kart atın.",
   "carteNonTrouvee": "Kart bulunamadı.",
-  "aGagneLaManche": "O yuvarlak kazandı!",
   "desDejaLancesPourCe": "Dice zaten bu tur için başlattı.",
   "vousDevezDAbordLancer": "Önce zarı atmalısınız.",
   "vousNePouvezPasDeplacer": "Rakibin taşını hareket ettiremezsiniz!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Şu anda renk seçemezsiniz.",
   "erreurCritiquePlayerorderEstVide": "CRITICAL ERROR: oyuncu sipariş sonraki Round''da boş. Ben devam edemiyorum.",
   "questionNonTrouvee": "Soru bulunamadı",
-  "quiPourraitLePlusApplocalizations1": "Kim daha fazla olabilir?AppLocalizations.of(context)!listStringQuestionsAiwordpoolGamewordssoft",
   "menteur": "Liar Liar",
   "pasAssezDeJoueursPour": "Bu moda için yeterli oyuncu değil.",
   "ajouteLaDescriptionLaPlus": "Bu meme için en komik açıklama ekleyin!",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Her aktif oyuncu teklif vermeden önce en az bir kart koymalıdır.",
   "enchereInvalide": "Geçersiz teklif.",
   "laSurenchereDoitEtreSuperieure": "Teklif önceki tekliften daha yüksek olmalıdır.",
-  "applocalizationsOfContextUnjoueurEst": "]? AppLocalizations.of(context)!.aPlayer'}' son kurtulan ve Skull kazanır!",
-  "applocalizationsOfContextUnjoueurA": "]? AppLocalizations.of(context)!.aPlayer'}' 2 zorluk kazandı ve oyunu kazandı!",
-  "applocalizationsOfContextUnjoueurRemporte": "]? AppLocalizations.of(context)!.aPlayer'}' Skull kazanır!",
   "reponseVide": "Boş cevap.",
   "leJugeNePeutPas1": "Yargıç cevap gönderemez.",
   "toutLeMondeARepondu": "Herkes cevap verdi! Kapıyı açalım.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Herkes cevap verdi! Oy.",
   "toutesLesReponsesSontRecues": "Tüm cevaplar alınır! Yargıç karar vermek zorundadır.",
   "joueurCibleIntrouvable": "Hedeflenen oyuncu bulunamadı.",
-  "quiPourraitLePlusApplocalizations2": "Kim daha fazla olabilir?AppLocalizations.of(context)!elseGametypeSynonym veya Banni",
   "vousNePouvezPasBannir": "Kendi eşanlamlınızı yasaklayamazsınız!",
   "seulLeJugeEnTitre": "Yalnızca mevcut Yargıç kazananı seçebilir.",
   "ceJoueurNAPas1": "Bu oyuncu bir cevap göndermedi.",
-  "quiPourraitLePlusApplocalizations3": "Kim daha fazla olabilir?AppLocalizations.of(context)!.intRequiredvotesPlayersLength if Yargıç",
-  "quiPourraitLePlusApplocalizations4": "Kim daha fazlasını yapabilir?AppLocalizations.of(context)!ForFinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Tam beraberlik! Puan verilmedi.",
   "egaliteDansLesVotesAucun": "Oylarda eşitlik: bu tur hiçbir oyuncu sürgün edilmedi.",
   "laDescriptionLaPlusDrole": "En komik açıklama seçildi!",
   "aucuneDescriptionNAEte": "Hiçbir açıklama oy kullanmadı.",
-  "quiPourraitLePlusApplocalizations5": "Kim daha fazla olabilir?AppLocalizations.of(context)!ForSonTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Yargıç bulunamadı.",
   "laPartieDeZeroPointe": "Sıfır Puan oyunu başlıyor! Her oyuncu 2 kart açmalıdır.",
   "toutLeMondeARevele": "Herkes kartlarını açtı. Oyun başlıyor!",
@@ -3164,19 +3084,16 @@
   "cultureDefi": "🧠 Kültür & Meydan Okuma",
   "familleToutPublic": "👨‍👩‍👧‍👦 Aile & Her Yaş",
   "piquantInsolite": "🌶️ Baharatlı & Sıra Dışı",
-  "quiPourraitLePlusApplocalizations6": "Kim daha fazla?AppLocalizations.of(context)! . Who could your mode group",
   "devineT": "Tahmin T",
   "presidente": "Başkan Başkan",
   "chargement": "Yükleniyor...",
   "cursive": "Cursive",
   "exception": "İstiklal:",
-  "debutDeLaConstructionDe": "--- THE HIM OF VOTE''NİN YARATICI YARATICI YARATICI YARATICI YARATICI KAYNAKLARI: '{}'; '{}'?",
   "clicSurLeJoueurPname": ">>> KC oyuncu ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Gerçekliğe geçiş.",
   "erreurFirebaseLorsDuVote": "!!! ERR EUR Oy sırasında Firebase: $e",
   "appelFirebaseTerminePassageDe": "- Firebase call''s over. Transition from isActionPending to false.",
   "attentionLeWidgetNEst": "- ATTENTION: Widget''s gitti, devlet iptal etti.",
-  "quiPourraitLePlusApplocalizations7": "Kim daha fazla olabilir?AppLocalizations.of(context)!defaultFinalRoundwinneridGamedat aroundWinnerId",
   "phaseDePose": "POSITION PHASE",
   "stre9f4a5": "🏆 Efsanevi!",
   "str21f597": "⭐ Mükemmel!",
@@ -3185,7 +3102,7 @@
   "strc0046c": "💪 Daha iyisini yapabiliriz!",
   "str85bff7": "$ \"Bravo!\"",
   "strfa1b8c": "$ \"Rate!\"",
-  "str487ca1": "$'{'''Chut! Gözlerinizi kapatın.",
+  "str487ca1": "$''(''''Chut! Gözlerinizi kapatın.",
   "leSoleilSeLeve": "Güneş doğuyor",
   "atout": "KOZ: {suit}",
   "@atout": {
@@ -3204,8 +3121,7 @@
   "chill": "Sakin",
   "soiree": "Parti",
   "competition": "Rekabet",
-  "enCours": "CURRENT: '{'0'}'",
-  "gamemessagelocalizationTrContextReason": "\"\": GameMessageLocalization.tr(context, reason)",
+  "enCours": "CURRENT: '{0}'",
   "jAiLanceUnePartie2": "Bir oyun başlattım",
   "piedDeBiche": "Levye",
   "appTitle": "Parti Oyunu",
@@ -3935,24 +3851,24 @@
   "miroir": "ayna",
   "magie": "büyü",
   "cascade": "şelale",
-  "dragon": "dragon",
-  "boussole": "boussole",
-  "diamant": "diamant",
-  "flamme": "flamme",
-  "horloge": "horloge",
-  "pirate": "pirate",
+  "dragon": "Ejderha",
+  "boussole": "compass",
+  "diamant": "elmas elmas",
+  "flamme": "alev alev",
+  "horloge": "Saat Saat Saat Saat Saat Saat",
+  "pirate": "korsan korsan korsan",
   "vortex": "vortex",
-  "aurore": "aurore",
-  "papillon": "papillon",
-  "bouclier": "bouclier",
-  "labyrinthe": "labyrinthe",
-  "cristal": "cristal",
-  "volcan": "volcan",
-  "mirage": "mirage",
-  "sentinelle": "sentinelle",
-  "cloche": "cloche",
-  "lanterne": "lanterne",
-  "parchemin": "parchemin",
+  "aurore": "Aurora Aurora",
+  "papillon": "kelebek",
+  "bouclier": "kalkan kalkan",
+  "labyrinthe": "maze",
+  "cristal": "kristal kristal kristal kristal kristal",
+  "volcan": "volkan volkan",
+  "mirage": "mi",
+  "sentinelle": "sentinel",
+  "cloche": "zil",
+  "lanterne": "lantern",
+  "parchemin": "parchment",
   "aGagne2": "{gameDataplayerswin} kazandı!",
   "@aGagne2": {
     "placeholders": {
@@ -3992,7 +3908,7 @@
     }
   },
   "stop": "DUR",
-  "coupFourrePareLAttaque1": "⚡ COUP-FOURRÉ ! {playerstargetIdnam} pare l''attaque avec {matchingSafety} et prend la main !",
+  "coupFourrePareLAttaque1": "- What? 0 1 ile saldırıyı önleyin ve el ele alın! {playerstargetIdnam} {matchingSafety}",
   "@coupFourrePareLAttaque1": {
     "placeholders": {
       "playerstargetIdnam": {
@@ -4022,7 +3938,7 @@
       }
     }
   },
-  "aTireAutomatiquementEn": "⏱️ {shooterDataname} a tiré automatiquement en {targetIndex101}-{targetIndex1011} ({result}).",
+  "aTireAutomatiquementEn": "0 otomatik olarak 1 - 2 ( 3)''te kovuldu. {shooterDataname} {targetIndex101} {targetIndex1011} {result}",
   "@aTireAutomatiquementEn": {
     "placeholders": {
       "shooterDataname": {
@@ -4050,7 +3966,7 @@
       }
     }
   },
-  "pliTermineAuTourDe3": "⏱️ Pli terminé. Au tour de {gameDataplayerspla}.",
+  "pliTermineAuTourDe3": "Ben yaptım. 0 karşılığında. {gameDataplayerspla}",
   "@pliTermineAuTourDe3": {
     "placeholders": {
       "gameDataplayerspla": {
@@ -4066,7 +3982,7 @@
       }
     }
   },
-  "egalitePersistanteLeDestinDepartage1": "Égalité persistante ! Le destin départage au hasard : {playerDatarandomEl} est éliminé.",
+  "egalitePersistanteLeDestinDepartage1": "Kalıcı eşitlik! Destiny rastgele başlar: 0 yok edilir. {playerDatarandomEl}",
   "@egalitePersistanteLeDestinDepartage1": {
     "placeholders": {
       "playerDatarandomEl": {
@@ -4104,7 +4020,7 @@
       }
     }
   },
-  "leVillageDecouvreAvecEffroi1": "Le village découvre avec effroi le(s) corps de : {deadThisNightNames}.",
+  "leVillageDecouvreAvecEffroi1": "Köy vücut (s) korku ile keşfeder: 0 . {deadThisNightNames}",
   "@leVillageDecouvreAvecEffroi1": {
     "placeholders": {
       "deadThisNightNames": {
@@ -4126,7 +4042,7 @@
       }
     }
   },
-  "etEtaitUnE": "Et {playerDataotherRev} était un(e) {otherRevealedRole} !",
+  "etEtaitUnE": "Ve 0 1 oldu! {playerDataotherRev} {otherRevealedRole}",
   "@etEtaitUnE": {
     "placeholders": {
       "playerDataotherRev": {
@@ -4183,8 +4099,8 @@
       }
     }
   },
-  "lAncienCapitaine1": "L''ancien Capitaine",
-  "aDit": "{playerDataplayerId} a dit : ''{cleanClue}''",
+  "lAncienCapitaine1": "Eski Kaptan",
+  "aDit": "0 dedi: \" 1\" {playerDataplayerId} {cleanClue}",
   "@aDit": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4195,7 +4111,7 @@
       }
     }
   },
-  "aDevineLeMotCivil1": "{gameDataplayerData} a deviné le mot civil (''{civilWord}'') !",
+  "aDevineLeMotCivil1": "0, iç kelimeyi tahmin edin ( 1 '')! {gameDataplayerData} {civilWord}",
   "@aDevineLeMotCivil1": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4206,7 +4122,7 @@
       }
     }
   },
-  "aProposeMaisCeN": "{gameDataplayerData} a proposé ''{guessedWord}'', mais ce n''était pas le mot civil (''{civilWord}'') !",
+  "aProposeMaisCeN": "0 önerilen '' 1 '', ama sivil kelime değildi ('' 2 '')! {gameDataplayerData} {guessedWord} {civilWord}",
   "@aProposeMaisCeN": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4220,7 +4136,7 @@
       }
     }
   },
-  "flottesPlaceesCommenceATirer1": "Flottes placées ! {playerDatafirstPla} commence à tirer.",
+  "flottesPlaceesCommenceATirer1": "Yüzler yerleştirildi! 0 ateş etmeye başlar. {playerDatafirstPla}",
   "@flottesPlaceesCommenceATirer1": {
     "placeholders": {
       "playerDatafirstPla": {
@@ -4228,7 +4144,7 @@
       }
     }
   },
-  "tousLesJoueursSontPrets1": "Tous les joueurs sont prêts ! {playerDatafirstPla} commence à tirer.",
+  "tousLesJoueursSontPrets1": "Tüm oyuncular hazır! 0 ateş etmeye başlar. {playerDatafirstPla}",
   "@tousLesJoueursSontPrets1": {
     "placeholders": {
       "playerDatafirstPla": {
@@ -4236,7 +4152,7 @@
       }
     }
   },
-  "laMancheDeRamiCommence1": "La manche de Rami commence ! C''est au tour de {playersplayerIdsfi}.",
+  "laMancheDeRamiCommence1": "Rami''nin kolu başlıyor! 0''ın dönüşü. {playersplayerIdsfi}",
   "@laMancheDeRamiCommence1": {
     "placeholders": {
       "playersplayerIdsfi": {
@@ -4252,7 +4168,7 @@
       }
     }
   },
-  "k3SixConsecutifsLePion1": "⚠️ 3 six consécutifs ! Le pion de {playersplayerIdnam} retourne à l''écurie et son tour passe.",
+  "k3SixConsecutifsLePion1": "Üç altı ardıl! 0''ın piyonu stabil ve onun dönüşüne geri döner. {playersplayerIdnam}",
   "@k3SixConsecutifsLePion1": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4268,7 +4184,7 @@
       }
     }
   },
-  "atteintPoints": "{playersplayerIdnam} atteint {targetScore} points !",
+  "atteintPoints": "0 1 puana ulaştı! {playersplayerIdnam} {targetScore}",
   "@atteintPoints": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4279,7 +4195,7 @@
       }
     }
   },
-  "atteintPoints1": "{playerswinnerIdnam} atteint {targetScore} points !",
+  "atteintPoints1": "0 1 puana ulaştı! {playerswinnerIdnam} {targetScore}",
   "@atteintPoints1": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4290,7 +4206,7 @@
       }
     }
   },
-  "mancheTermineeGagneAvecXp": "Manche terminée ! {playerswinnerIdnam} gagne avec {maxXp} XP !",
+  "mancheTermineeGagneAvecXp": "Kollar! 0 1 XP ile kazanır! {playerswinnerIdnam} {maxXp}",
   "@mancheTermineeGagneAvecXp": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4404,7 +4320,7 @@
       }
     }
   },
-  "passeSonTour4": "{playersplayerIdnam} passe son tour.",
+  "passeSonTour4": "0 dönüşünü geçer. {playersplayerIdnam}",
   "@passeSonTour4": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4420,7 +4336,7 @@
       }
     }
   },
-  "votreCibleEstEliminezLe1": "Votre cible est {playerDatamercenai}. Éliminez-le(la) au Jour 1 !",
+  "votreCibleEstEliminezLe1": "Hedefiniz 0 . 1 Günü''nde Eliminate! {playerDatamercenai}",
   "@votreCibleEstEliminezLe1": {
     "placeholders": {
       "playerDatamercenai": {
@@ -4494,7 +4410,7 @@
     }
   },
   "appelUnoInvalide": "Geçersiz UNO çağrısı.",
-  "aChoisiLaCouleur": "{playersplayerIdnam} a choisi la couleur {chosenColor} !",
+  "aChoisiLaCouleur": "0 1 rengini seçti! {playersplayerIdnam} {chosenColor}",
   "@aChoisiLaCouleur": {
     "placeholders": {
       "playersplayerIdnam": {
@@ -4505,7 +4421,7 @@
       }
     }
   },
-  "estLeDernierSurvivantEt": "{playerswinnerIdnam} est le dernier survivant et remporte Skull !",
+  "estLeDernierSurvivantEt": "0 son kurtulan ve Skull kazanır! {playerswinnerIdnam}",
   "@estLeDernierSurvivantEt": {
     "placeholders": {
       "playerswinnerIdnam": {
@@ -4513,7 +4429,7 @@
       }
     }
   },
-  "aRemporte2DefisEt": "{playerschallengerI} a remporté 2 défis et gagne la partie !",
+  "aRemporte2DefisEt": "0 2 zorluk kazandı ve oyunu kazandı! {playerschallengerI}",
   "@aRemporte2DefisEt": {
     "placeholders": {
       "playerschallengerI": {
@@ -4578,7 +4494,7 @@
       }
     }
   },
-  "faitTapisAllInEn1": "{myDataname} fait tapis (all-in) en relançant à {totalBetAmount} !",
+  "faitTapisAllInEn1": "0 halıyı (tüm-in) 1''e yeniden başlatarak yapar! {myDataname} {totalBetAmount}",
   "@faitTapisAllInEn1": {
     "placeholders": {
       "myDataname": {
@@ -4620,7 +4536,7 @@
       }
     }
   },
-  "aPrisA": "{playerDataplayerId} a pris à {suit} !",
+  "aPrisA": "0 1 aldı! {playerDataplayerId} {suit}",
   "@aPrisA": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4634,7 +4550,7 @@
   "histoireCollective": "ORTAK HİKAYE",
   "distance": "MESAFE",
   "botte": "GÜVENLİK",
-  "pneuIncrevable": "Pneu\nIncrevable",
+  "pneuIncrevable": "Tekerlek\nIneable",
   "increvable": "PATLAMAZ",
   "citerne": "YAKIT TANKI",
   "attaque": "SALDIRI",
@@ -4666,7 +4582,7 @@
       }
     }
   },
-  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "jAiLanceUnePartie3": "0''ın bir parçası attım! {_selectedGame}",
   "@jAiLanceUnePartie3": {
     "placeholders": {
       "_selectedGame": {
@@ -4674,7 +4590,7 @@
       }
     }
   },
-  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "rolesJoueurs1": "Roller ( 0 ) {selectedRolesCount} {playerslength}",
   "@rolesJoueurs1": {
     "placeholders": {
       "selectedRolesCount": {
@@ -4685,7 +4601,7 @@
       }
     }
   },
-  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "dessineCettePhrase1": "Bu cümleyi çizin:\n\" 0 \" {stepToProcessconte}",
   "@dessineCettePhrase1": {
     "placeholders": {
       "stepToProcessconte": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "0 önerisi için yasaklandı '' 1 ''! {loserName} {loserAnswer}",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "0 kelimeyi buldu: '' 1 ''! {winnerName} {currentWord}",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Hiç kimse kelimeyi bulamadı: '' 0 ''. {currentWord}",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "0 kelimeyi buldu: '' 1 ''! {guesserName} {currentWord}",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -4734,7 +4650,7 @@
       }
     }
   },
-  "revolution1": "(Révolution !)",
+  "revolution1": "(Revolution!)",
   "tonMotEst2": "Kelimeniz: {_wordCivil}",
   "@tonMotEst2": {
     "placeholders": {
@@ -4752,7 +4668,7 @@
     }
   },
   "egalite1": "Berabere!",
-  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "jAiLanceUnePartie4": "0''ın bir parçası attım! {datagameTypeGribou}",
   "@jAiLanceUnePartie4": {
     "placeholders": {
       "datagameTypeGribou": {
@@ -4771,12 +4687,12 @@
   },
   "logYamsStart": "Yatzy oyunu başlıyor!",
   "logClueGivingStart": "Oyun başlıyor! İpucunuzu verin...",
-  "logBeloteStart": "La partie de Belote commence !",
+  "logBeloteStart": "Belote oyunu başlıyor!",
   "logBlokusStart": "Blokus oyunu başlıyor!",
   "pokerFlop": "--- FLOP ---",
   "pokerTurn": "--- TURN ---",
   "pokerRiver": "--- RIVER ---",
-  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "aTireDefi": "0 kovuldu: 1! {targetPlayerName} {challengeLabel}",
   "@aTireDefi": {
     "placeholders": {
       "targetPlayerName": {
@@ -4787,7 +4703,7 @@
       }
     }
   },
-  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "lEquipeAReveleLAssassin": "Team 0 Assassin''ı ortaya çıkardı! {teamName}",
   "@lEquipeAReveleLAssassin": {
     "placeholders": {
       "teamName": {
@@ -4796,7 +4712,7 @@
     }
   },
   "lancerLeDefi": "LANCER LE DÉFI",
-  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "maximumPossibleCartes": "Maksimum mümkün: 0 kart {maximumBid}",
   "@maximumPossibleCartes": {
     "placeholders": {
       "maximumBid": {
@@ -4804,7 +4720,7 @@
       }
     }
   },
-  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "reflechitAUnDefiDeCartes": "0 1 karttan bir meydan okuma üzerinde duruyor... {bidderName} {liveAmount}",
   "@reflechitAUnDefiDeCartes": {
     "placeholders": {
       "bidderName": {
@@ -4815,7 +4731,7 @@
       }
     }
   },
-  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "votreMainCartes": "MAN ( 0 kart) {count}",
   "@votreMainCartes": {
     "placeholders": {
       "count": {
@@ -4823,7 +4739,7 @@
       }
     }
   },
-  "pictionaryStrokesCount": "{count}/30 traits",
+  "pictionaryStrokesCount": "0 /30 özellikleri {count}",
   "@pictionaryStrokesCount": {
     "placeholders": {
       "count": {
@@ -4831,7 +4747,7 @@
       }
     }
   },
-  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "indicesSoumisCount": "Indices sunuldu: 0 / 1 {submitted} {total}",
   "@indicesSoumisCount": {
     "placeholders": {
       "submitted": {
@@ -4850,7 +4766,7 @@
       }
     }
   },
-  "couleurChoisie": "Couleur choisie :",
+  "couleurChoisie": "Seçilmiş renk:",
   "pokerRaiseTo": "{amount} tutarına yükselt",
   "@pokerRaiseTo": {
     "placeholders": {
@@ -4860,7 +4776,7 @@
     }
   },
   "enchere": "ENCHÈRE",
-  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "reponseDeJoueur": "Cevap 0: \" 1 \" {guesserName} {answer}",
   "@reponseDeJoueur": {
     "placeholders": {
       "guesserName": {
@@ -4872,7 +4788,7 @@
     }
   },
   "carteSuivante": "Carte suivante",
-  "roleLabel": "Rôle:",
+  "roleLabel": "Rol:",
   "obligatoire": "Zorunlu",
   "aSelectionneSonPionEtReflechit": "{playerName} piyonunu seçti ve düşünüyor...",
   "@aSelectionneSonPionEtReflechit": {
@@ -4906,7 +4822,7 @@
       }
     }
   },
-  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "aEteSignaleEtMasque": "0 sizin için rapor edildi ve gizlenmiştir. {targetName}",
   "@aEteSignaleEtMasque": {
     "placeholders": {
       "targetName": {
@@ -4914,27 +4830,27 @@
       }
     }
   },
-  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
-  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
-  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
-  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
-  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
-  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
-  "photoDeProfilMiseA": "Photo de profil mise à jour !",
-  "echecDuChangementDePhoto": "Échec du changement de photo.",
-  "k3CaracteresMinimum": "3 caractères minimum",
-  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
-  "unAmi": "Un ami",
-  "ceJoueur": "ce joueur",
-  "preparationDeLaRecherche": "Préparation de la recherche...",
-  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
-  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
-  "legendeVivante": "Légende Vivante",
-  "grandMaitre": "Grand Maître",
-  "stratege": "Stratège",
-  "initie": "Initié",
-  "illimiteesVip": "Illimitées (VIP)",
-  "pieces": "{playerStatecoins} pièces",
+  "impossibleDObtenirUnJeton": "Güvenli bir LiveKit video erişimi token alamaz.",
+  "veuillezEntrerUneAdresseEmail": "Lütfen geçerli bir e-posta adresi girin.",
+  "veuillezEntrerVotreMotDe": "Lütfen mevcut şifrenize girin.",
+  "entrezVotreMotDePasse": "Mevcut şifrenizi girin.",
+  "leNouveauMotDePasse": "Yeni şifre en az 6 karakter olmalıdır.",
+  "lesDeuxMotsDePasse": "Her iki şifre de eşleşmez.",
+  "photoDeProfilMiseA": "Profil fotoğrafı güncellendi!",
+  "echecDuChangementDePhoto": "Fotoğraf değişikliği başarısız oldu.",
+  "k3CaracteresMinimum": "Minimum 3 karakter",
+  "cePseudoEstDejaPris": "Bu nick zaten alınır.",
+  "unAmi": "Bir arkadaş",
+  "ceJoueur": "Bu oyuncu",
+  "preparationDeLaRecherche": "Aramanın Hazırlanması...",
+  "erreurDeConnexionAuMatchmaking": "Eşleşmeye bağlanan hata. Lütfen tekrar deneyin.",
+  "erreurDeConnexionALa": "Odaya bağlanan hata.",
+  "legendeVivante": "Living Legend",
+  "grandMaitre": "Büyük Usta",
+  "stratege": "Strateji Stratejisi",
+  "initie": "Initiated",
+  "illimiteesVip": "Sınırsız (VIP)",
+  "pieces": "0 parça parça {playerStatecoins}",
   "@pieces": {
     "placeholders": {
       "playerStatecoins": {
@@ -4942,15 +4858,15 @@
       }
     }
   },
-  "utilisateurNonConnecte": "Utilisateur non connecté.",
-  "entrezUnPseudo": "Entrez un pseudo",
-  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
-  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
-  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
-  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
-  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
-  "derniereVersion": "Dernière version",
-  "echecDeLEnvoi": "Échec de l''envoi.",
+  "utilisateurNonConnecte": "Bağlantısız kullanıcı.",
+  "entrezUnPseudo": "Bir yalancı girin",
+  "cePseudoEstDejaPris1": "Bu takma zaten alındı",
+  "pseudoDejaPrisParUn": "Pseudo zaten başka bir oyuncu tarafından alındı",
+  "cetteVersionDeLApplication": "Uygulamanın bu versiyonu eskidir. Lütfen en son sürümü yükleyin.",
+  "playfunEstActuellementEnMaintenance": "Playfun şu anda akşamlarınızı geliştirmek için korunuyor. Bir dakika içinde geri gel!",
+  "uneNouvelleVersionDePlayfun": "Playfun yeni bir versiyonu mevcuttur! oynamaya devam etmek için uygulamayı güncellemeniz gerekir.",
+  "derniereVersion": "Son sürüm",
+  "echecDeLEnvoi": "Başarısız nakliye.",
   "demandeDAmiEnvoyeeA": "{name} adlı kullanıcıya arkadaşlık isteği gönderildi!",
   "@demandeDAmiEnvoyeeA": {
     "placeholders": {
@@ -4978,7 +4894,7 @@
       }
     }
   },
-  "joueur1": "Joueur ({bUid})",
+  "joueur1": "Oyuncu ( 0 ) {bUid}",
   "@joueur1": {
     "placeholders": {
       "bUid": {
@@ -4995,14 +4911,14 @@
     }
   },
   "enableVideo": "Videoyu Etkinleştir",
-  "pseudoDisponible": "✅ Pseudo disponible",
-  "entrezUnEmailValide": "Entrez un email valide",
-  "k6CaracteresMinimum": "6 caractères minimum",
-  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
-  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
-  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
-  "politiqueDeConfidentialite": "Politique de Confidentialité",
-  "miseAJourRequise": "Mise à jour requise",
+  "pseudoDisponible": "Pseudo mevcut",
+  "entrezUnEmailValide": "Geçerli bir e-posta girin",
+  "k6CaracteresMinimum": "Minimum 6 karakter",
+  "pasDeCompteSInscrire": "Hesap yok mu? Register Register Register Register",
+  "dejaUnCompteSeConnecter": "Zaten bir hesap? Giriş yapın",
+  "conditionsGeneralesDUtilisationCgu": "Genel Kullanım Şartları (CGU / EULA)",
+  "politiqueDeConfidentialite": "Gizlilik Politikası",
+  "miseAJourRequise": "Güncelleme Gerekli Güncelleme Gerekli Güncelleme",
   "joueursBloques": "Engellenen oyuncular ({blockedListlength})",
   "@joueursBloques": {
     "placeholders": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Invalid tanımlayıcıları veya mevcut olmayan hesabı.",
+  "leMotEtaitLabel": "Kelimeydi:",
+  "mancheLabel": "Channel Channel",
+  "et": "ve",
+  "pokerPlayerCheck": "{playerName} kontrol etti (Check).",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Kelime:",
+  "rouges": "Kırmızılar",
+  "noirs": "Siyahlar",
+  "crane2": "Skull",
+  "enAttente2": "Pending Pending",
+  "enCours1": "Ongoing",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} piyonunu seçti ve düşünüyor...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Kalan süre: {seconds} sn",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Paket {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Varyasyon)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "0 1 puan 2 ile kazanır! {winnerName} {lowestScore} {lowestScore1s}",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "Wins Skull! {playerswinnerIdnam}",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Pack IA 0 {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Standart",
+  "lui": "O''na",
+  "carte4": "Kart {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Locked oyuncuları",
+  "vousNAvezBloqueAucun": "Hiçbir oyuncuyu engellemediniz.",
+  "debloquer": "Engeli Kaldır",
+  "nouvelEmail": "Yeni e-posta",
+  "motDePasseActuel": "Mevcut şifre",
+  "emailMisAJourAvec": "E-posta başarıyla güncellendi!",
+  "modifierMotDePasse": "Change Password",
+  "nouveauMotDePasse": "Yeni şifre",
+  "confirmerLeMotDePasse": "Şifreyi Onaylayın",
+  "motDePasseModifieAvec": "Şifre başarıyla değiştirildi!",
+  "prendreUnePhoto": "Bir fotoğraf alın",
+  "choisirDepuisLaGalerie": "Galeriden seçin",
+  "supprimerLaPhoto": "Delete Photo",
+  "photoDeProfilRetiree": "Profil fotoğrafı kaldırıldı.",
+  "pseudoMisAJour": "Nickname güncellendi!",
+  "compteSecurite": "Güvenlik Hesabı",
+  "editeParParrelV10": "Parrel tarafından Düzenle - v1.0.0",
+  "aucunJeuTrouve": "Oyun bulunamadı",
+  "essaieDAjusterTesFiltres": "Filtrelerinizi ayarlamayı veya başka bir arama yapmayı deneyin.",
+  "reinitialiserLesFiltres": "Filtreleri sıfırla",
+  "nouveau": "YENİ YENİ YENİ YENİ YENİ",
+  "gererMonAbonnement": "Aboneliğimi Yönetin",
+  "mesPieces": "Odalar My rooms",
+  "rechargerLesOffresDuStore": "Reload Store teklifleri",
+  "gererMesAbonnements": "Aboneliğimi Yönetin",
+  "badges": "Rozetler",
+  "partiesJouees": "Oynanan Oyunlar",
+  "xpTotalSession": "Oturum Toplam XP",
+  "moyennePartie": "Ortalama / Oyun",
+  "detailParJeuPerformanceXp": "Oyun Başına Ayrıntı ve XP Performansı",
+  "jouezVosPremieresPartiesPour": "XP istatistiklerinizi burada görmek için ilk oyunlarınızı oynayın!",
+  "xpAuCompteur": "{psxp} XP sayacı",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Seviye {pslevel1} için {pslevel1} XP kaldı",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} oynandı • {won} galibiyet • ~{gameXp} kazanılan XP {played1s} {won1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Kullanıcı verileri yüklenirken hata oluştu.",
+  "vousDevezAccepterLesCgu": "CGU''ları ve Gizlilik Politikası''nı bir hesap oluşturmak için kabul etmelisiniz.",
+  "miseAJourDisponible": "Güncelleme mevcut",
+  "plusTard": "Daha sonra",
+  "mettreAJour": "Güncelle",
+  "uneNouvelleVersionDePlayfun1": "Playfun''ın yenilikler ve düzeltmeler içeren yeni bir sürümü ({newVersion}) mevcut!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Devamlı bakım",
+  "mettreAJourMaintenant": "Update Now Update Now",
+  "motifDuSignalement": "Bildirme nedeni:",
+  "tricheOuAntiJeu": "Hile veya oyunbozanlık",
+  "autre": "Diğer",
+  "signaler": "Bildir",
+  "detailParJeu": "Oyun başına ayrıntı:",
+  "ceJoueurNAPas2": "Bu oyuncunun henüz kayıtlı oyunu yok.",
+  "badgesDebloques": "Açılan rozetler: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Engellenen oyuncular ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "{name} engellemesini kaldır",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "{name} adlı kişiyi bildir veya engelle",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "oy"
 }

@@ -28,7 +28,7 @@
   "elements": "'{0}' predmeta",
   "prompt": "Zadatak: \"'{0}'\"",
   "utiliser": "KORISTI",
-  "packActiveElements": "✨ Paket '''{0}''' aktiviran ('{1}' predmeta)!",
+  "packActiveElements": "✨ Paket '{0}' aktiviran ('{1}' predmeta)!",
   "fusionner": "SPOJI",
   "themesFusionnesLePackActif": "✨ Spojene teme! Aktivni paket sada sadrži '{0}' predmeta.",
   "modifierCompleter": "Uredi / Dovrši",
@@ -46,7 +46,7 @@
   "generationIa": "Generiranje umjetne inteligencije: '{0}'",
   "historique": "Povijest",
   "melangerPlusieursThemes": "Pomiješaj više tema:",
-  "combineS": "✨ '{0 kombiniranih}'",
+  "combineS": "✨ ''(0 kombiniranih)''",
   "nombreDElements": "Broj stavki:",
   "minRequisRecommande": "Potrebna minuta: '{0}' | Preporučeno: '{1}'",
   "ambianceTonaliteDeJeu": "Atmosfera / Ton igre:",
@@ -248,7 +248,7 @@
   "pts": "+'{0}' bodova",
   "leGagnantEst": "Pobjednik je '{0}' !",
   "classementFinal": "Konačni poredak:",
-  "points": "'{0}'. '{1}': '{2.}' bodova",
+  "points": "'{0}'. '{1}': ''(2.)'' bodova",
   "retourALAccueil": "Povratak na početnu",
   "laPartieAEteTerminee": "Igra je završena ili više ne postoji.",
   "quitterLaPartie1": "Napusti igru",
@@ -289,8 +289,8 @@
     }
   },
   "nAPlusDeCartes": "Nema više karata",
-  "cartesRestantes": "'{preostalo 0.}' karata",
-  "jetonsMise": "Žetoni: '{$0,}' | Ulog: '{$1,}'",
+  "cartesRestantes": "''(preostalo 0.)'' karata",
+  "jetonsMise": "Žetoni: ''($0,)'' | Ulog: ''($1,)''",
   "totalPts": "Ukupno: '{0}' bodova",
   "k13Remplies": "'{0}'/13 ispunjeno",
   "finDeLaManche": "Kraj Runde!",
@@ -329,7 +329,7 @@
   "zombieEnMain": "ZOMBI U RUCI",
   "sauve": "'{0}' (Spremljeno!)",
   "mainDeCartes": "Ruka '{0}' ('{1}' karte)",
-  "votreMainDeSurvieCartes": "VAŠA RUKA ZA PREŽIVLJAVANJE ('{0.}' karata)",
+  "votreMainDeSurvieCartes": "VAŠA RUKA ZA PREŽIVLJAVANJE (''(0.)'' karata)",
   "lesPairesSontDefausseesAutomatiquement": "Parovi se automatski odbacuju",
   "carteSEnJeu": "Karta/karte u igri:",
   "aucuneCarteEnJeuJouez": "Nema karata u igri. Igrajte što želite!",
@@ -348,7 +348,7 @@
   "motsTrouves": "Pronađene riječi: '{0}'",
   "ecrivezIci": "Pišite ovdje...",
   "plierPasser": "PRELOŽI I PROSLIJEDI",
-  "motsRediges": "✏️ '{0,}' riječi napisano...",
+  "motsRediges": "✏️ ''(0,)'' riječi napisano...",
   "leGrandDepliage": "Veliko odmotavanje!",
   "voiciLesUvresCollectivesNees": "Evo zajedničkih djela rođenih iz vaše mašte:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' priprema napad ('{1}') protiv igrača!",
@@ -442,20 +442,20 @@
   "vainqueur": "Pobjednik: '{0}'",
   "voulezVousRejouer": "Želite li igrati ponovno?",
   "siUnJoueurNeRepond": "Ako igrač ne odgovori ili izađe, igra će potražiti zamjenu.",
-  "histoireDeEtait": "Povijest '{0}' (bio '{1.}')",
+  "histoireDeEtait": "Povijest '{0}' (bio ''(1.)'')",
   "votes": "Glasovi:",
   "aVote": "'{0}' glasovalo: '{1}'",
   "lesPointsOntEteDistribues": "Bodovi su dodijeljeni na temelju vaših glasova.",
-  "leMotDesCivilsEtait": "Riječ civila bila je: '''{0}'''",
-  "leMotDeLInfiltre": "Riječ Infiltratora ('{0}') bila je: '''{1}'''",
+  "leMotDesCivilsEtait": "Riječ civila bila je: '{0}'",
+  "leMotDeLInfiltre": "Riječ Infiltratora ('{0}') bila je: '{1}'",
   "mrWhiteNAvaitPas": "Gospodin White ('{0}') nije imao riječi.",
-  "leMotATrouverEtait": "Riječ koju treba smisliti bila je sinonim za '''{0}'''. Ostali igrači osvajaju 1 bod.",
+  "leMotATrouverEtait": "Riječ koju treba smisliti bila je sinonim za '{0}'. Ostali igrači osvajaju 1 bod.",
   "felicitationsAuDessinateurEtA": "Čestitke crtaču '{0}' i '{1}' !",
-  "saReponseEtait": "Njegov odgovor bio je: '''{0}'''.",
-  "leMotEtait": "Riječ je bila: '''{0}'''.",
+  "saReponseEtait": "Njegov odgovor bio je: '{0}'.",
+  "leMotEtait": "Riječ je bila: '{0}'.",
   "cartesRevelees": "Otkrivene karte:",
   "erreurDeChargementDuMeme": "Pogreška pri učitavanju mema.",
-  "scoreActuelDeCartes": "Trenutni rezultat je '{0}': '{1.}' karata.",
+  "scoreActuelDeCartes": "Trenutni rezultat je '{0}': ''(1.)'' karata.",
   "finDuTour1": "Kraj poteza",
   "tourSuivant1": "Sljedeći potez",
   "enAttenteDeLHote4": "Čekanje domaćina za sljedeći krug...",
@@ -644,8 +644,8 @@
   "joueursNonAssignes1": "Nedodijeljeni igrači",
   "confirmerLancer": "Potvrdi i pokreni",
   "choisirUnJeuLocal": "Odaberite lokalnu igru",
-  "ilFautAuMoinsJoueurs": "Za ovaj mod trebaš barem '{0.}' igrača!",
-  "ceModeSupporteAuMaximum": "Ovaj način podržava maksimalno '{0.}' igrača!",
+  "ilFautAuMoinsJoueurs": "Za ovaj mod trebaš barem ''(0.)'' igrača!",
+  "ceModeSupporteAuMaximum": "Ovaj način podržava maksimalno ''(0.)'' igrača!",
   "parametresActionOuVerite1": "Postavke: Istina ili izazov",
   "parametresDeLaPartie": "Postavke igre",
   "k1IntensiteDesDefis": "1. Intenzitet izazova",
@@ -660,7 +660,7 @@
   "appuyezSurLancerLaRoue": "Pritisni ''Zavrti kotač'' za početak!",
   "verite": "Istina",
   "action": "Izazov",
-  "pts9": "'{0}' : '{1.}' bodova",
+  "pts9": "'{0}' : ''(1.)'' bodova",
   "parametresLeDilemme": "Postavke: Dilema",
   "parametresDuDilemme": "Postavke dileme",
   "k1DifficulteDesChoix": "1. Težina izbora",
@@ -812,7 +812,7 @@
   "veuillezRevenirALEcran": "Molimo vratite se na zaslon za postavljanje igrača.",
   "retour": "Natrag",
   "lEquipeAGagne": "Tim '{0}' pobijedio!",
-  "points1": "'{0.}' bodova",
+  "points1": "''(0.)'' bodova",
   "passeLObjet": "Dodaj predmet",
   "passeLObjetRapidement": "Brzo dodaj predmet",
   "generationIaDeQuestions": "AI generiranje pitanja",
@@ -856,7 +856,7 @@
   "arreter": "Zaustavi",
   "hautPasser": "Gore = Preskoči",
   "resultatsDuPassage": "Rezultati kruga",
-  "pointsMarques": "+'{0,}' bodova osvojeno!",
+  "pointsMarques": "+''(0,)'' bodova osvojeno!",
   "touchezUnMotPourModifier": "Dodirnite riječ za izmjenu rezultata u slučaju pogreške senzora:",
   "pts10": "{teamAScore} PTS",
   "@pts10": {
@@ -896,7 +896,7 @@
   },
   "partieTerminee2": "KRAJ IGRE!",
   "victoireDe": "Pobjeda '{0}' !",
-  "cartes": "'{0.}' karata",
+  "cartes": "''(0.)'' karata",
   "ecrireUnMessage": "Napiši poruku...",
   "codeDeSalonPriveIntrouvable": "Kod privatne sobe nije pronađen.",
   "erreurLorsDeLaConnexion": "Pogreška pri prijavi: '{0}'",
@@ -922,7 +922,7 @@
   "creerLeSalonCout5": "Stvori Salon (Cijena: 5 novčića)",
   "lancerUnJeuPourLe": "Pokreni igru za salon",
   "jouer1": "Igraj",
-  "joueurSEnJeu": "'{0.}' igrača u igri",
+  "joueurSEnJeu": "''(0.)'' igrača u igri",
   "cloturerLaPartie": "Zatvori igru",
   "pretS": "'{0}' kredit(e)",
   "annulerLaPartie": "Otkaži igru",
@@ -934,12 +934,12 @@
   "fermerLeSalon1": "Zatvoriti salon?",
   "leSalonSeraDefinitivementSupprime": "Salon će biti trajno obrisan za sve sudionike.",
   "aCreeUnePartieDe": "'{0}' je stvorio igru '{1}' !",
-  "joueurSPrets": "'{0.}' igrača spremnih",
+  "joueurSPrets": "''(0.)'' igrača spremnih",
   "cettePartieEstTermineeOu": "Ova igra je završena ili otkazana.",
   "enPartie": "U IGRI",
   "partieDeTerminee": "Igra '{0}' gotova!",
   "statistiques": "Statistika - '{0}'",
-  "vainqueur1": "Pobjednik: '{0}''{1}'\n",
+  "vainqueur1": "Pobjednik: '{0}''{1}'''''''\n",
   "voirLesStats": "Pogledaj statistiku",
   "message": "Poruka...",
   "k0Pts": "0 BOD",
@@ -969,7 +969,7 @@
   "regardezRealiserLeDefi": "Pogledajte '{0}' završite izazov...",
   "voteDeValidation": "🗳️ GLASANJE ZA POTVRDU",
   "estCeQueAReleve": "Je li '{0}' odgovorio na izazov?",
-  "votesRecus": "'{0}' / '{1.}' primljenih glasova",
+  "votesRecus": "'{0}' / ''(1.)'' primljenih glasova",
   "vosAmisVotentPourEvaluer": "Tvoji prijatelji glasaju kako bi ocijenili tvoj nastup...",
   "votreVoteABienEte": "Vaš glas je zabilježen!",
   "ouiValide": "DA, Potvrđeno! 👍",
@@ -1583,7 +1583,6 @@
       }
     }
   },
-  "aRelanceLesDes3": "'{'pName'}' je ponovno bacio kockice ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} je zadržao/zadržala kockicu vrijednosti {dieVal} (kockica #{index1}) 🔒",
   "@aGardeLeDeDe": {
     "placeholders": {
@@ -1656,7 +1655,6 @@
     }
   },
   "pioche3": "Kramp",
-  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' još '''{''' \r\n      Sigurnost protiv duplikata: ako je",
   "vousNAvezPasDe": "Nemaš riječi",
   "equipe12": "Tim 1",
   "equipe21": "Tim 2",
@@ -1693,7 +1691,6 @@
       }
     }
   },
-  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Kraj rukava (admin gumb)\r\n  Future<void> aoVEndRound(String gameCode, string playerId) async '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = čekaj transaction.get(gameRef); \r\n      ako (!snap.exists) return; \r\n\r\n      final gameData = snap.data() kao Map<String, dynamic>; \r\n      final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Odredite pobjednika (više XP-a)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        konačni xp = (pData[''xp''] kao broj?)?. toInt() ?? 0; \r\n        ako (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Netko",
   "aAtteintPointsEtRemporte": "{winnerName} je dosegao {targetScore} bodova i pobijedio u utakmici!",
   "@aAtteintPointsEtRemporte": {
@@ -1745,10 +1742,8 @@
     }
   },
   "leJoueur": "Igrač",
-  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      List<String> pitanja =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[difficulty] ?? \r\n          GameWords.tkoJeVjerojatno[",
   "honnete": "Iskreno",
   "pairSplit": ") ? pair.split(",
-  "pairPairListStringShuffledroles": "): [parno, parno]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Pitanje =\r\n            \"Opiši svoju tajnu riječ jednom riječju. Prevaranti, blef!\"; \r\n        za (var pId u players.keys) '''{''' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} je dosegao {updatedScoresoverallWinnerId} bodova i pobijedio u utakmici!",
   "@aAtteintPointsEtGagne": {
     "placeholders": {
@@ -1763,10 +1758,7 @@
   "poseDeCarte": "odlaganje karte",
   "enchereAutomatique": "automatska ponuda",
   "passeLEnchere": "preskače ponudu",
-  "elseIfGametype": ") '''{''' \r\n        ako (voteterId == votedForId) '''{''' \r\n          throw Exception(\"Formalna zabrana glasanja za sebe!\"); \r\n        '''}''''}''' ako (gameType ==\r\n      ",
-  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          transakcija, \r\n          gameRef, \r\n          gameData, \r\n          glasač, \r\n          5, \r\n          applySpeedBonus: točno, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = igrači.duljina; \r\n\r\n      ako (gameType == ",
-  "forFinalTargetInVotes": ") '''{''' \r\n          konačna Map<String, int> voteCounts = '{}'; \r\n          za (konačni cilj u votes.values) '{' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVote = []; \r\n          voteCounts.forEach((target, count) '''{''' \r\n            ako (count > maxVotes) '{' \r\n              maxVotes = brojanje; \r\n              topVoted = [meta]; \r\n            '}' ako (count == maxVotes) '{' \r\n              topVoted.add(target); \r\n            '}''''}'''); \r\n\r\n          Ažuriranja[\r\n          ",
-  "forFinalTargetInVotes1": ") '''{''' \r\n        konačna Map<String, int> voteCounts = '{}'; \r\n        za (konačni cilj u votes.values) '{' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVote = []; \r\n        voteCounts.forEach((target, count) '''{''' \r\n          ako (count > maxVotes) '{' \r\n            maxVotes = brojanje; \r\n            topVoted = [meta]; \r\n          '}' ako (count == maxVotes) '{' \r\n            topVoted.add(target); \r\n          '}''''}'''); \r\n\r\n        ako (topVoted.length == 1) '''{''' \r\n          konačni pobjednik = topVoted.first; \r\n          Ažuriranja[\r\n        ",
+  "intRequiredvotesPlayersLengthIf": ") ''( \r\n        creditPlayerXp( \r\n          transakcija, \r\n          gameRef, \r\n          gameData, \r\n          glasač, \r\n          5, \r\n          applySpeedBonus: točno, \r\n        ); \r\n      )'' \r\n\r\n      int requiredVotes = igrači.duljina; \r\n\r\n      ako (gameType == ",
   "aRemporteTousLesJetons": "{winnerName} je osvojio sve žetone na stolu!",
   "@aRemporteTousLesJetons": {
     "placeholders": {
@@ -2049,7 +2041,6 @@
       }
     }
   },
-  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (visina: 20), \r\n                Wrap( \r\n                  poravnanje: WrapAlignment.center, \r\n                  Djeca: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (visina: 20), \r\n                ako (justOneFilteredClues.isEmpty)\r\n                  Tekst( \r\n                    AppLocalizations.of(context)!. svi tragoviSu bili, \r\n                    style: const TextStyle(boja: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' još '''{''' \r\n          Na proročanu je da igra\r\n          return Stupac( \r\n            Djeca: [ \r\n              Tekst(                ",
   "strf0868c": "{length0}: {valuescore0}",
   "@strf0868c": {
     "placeholders": {
@@ -2069,14 +2060,12 @@
   "designez2Amoureux": "Odaberite 2 ljubavnika",
   "amoureuxUnis": "Ljubavnici ujedinjeni!",
   "laVictime": "Žrtva",
-  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Djeca: [ \r\n                _buildActionButton( \r\n                  oznaka: AppLocalizations.of(context)!. Zaraziti \r\n                  IKONA: Icons.auto_fix_high, \r\n                  boja: Boje.ljubičastiNaglasak, \r\n                  naPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      kontekst, \r\n                      slušaj: netočno, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Istina, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (širina: 8), \r\n                _buildActionButton( \r\n                  oznaka: AppLocalizations.of(context)!. proždrljati, \r\n                  ikona: Icons.close, \r\n                  boja: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        netočno, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          karavan; \r\n        Kutija ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Nije bilo žrtava prošle noći (zaštićeni ili pošteđeni)",
-  "styleTextstyleFontweightFontweightBold": ", \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                BOJA: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''vuk'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(tekst: poruka), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Kompaktna šalna šipka\r\n          if (canSendMessage)\r\n            Row( \r\n              Djeca: [ \r\n                Prošireno( \r\n                  dijete: SizedBox( \r\n                    Visina: 32, \r\n                    dijete: TextField( \r\n                      KONTROLOR: _chatController, \r\n                      stil: const TextStyle(fontSize: 12, boja: Colors.white), \r\n                      dekoracija: InputDecoration( \r\n                        hintText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          boja: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        ispunjeno: istina, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          horizontalno: 10, \r\n                          vertikalno: 0, \r\n                        ), \r\n                      ), \r\n                      Podnesen: (tekst) '''{''' \r\n                        ako (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (širina: 4), \r\n                IconButton( \r\n                  ikona: const Icon( \r\n                    Icons.send_rounded, \r\n                    Veličina: 18, \r\n                    boja: Colors.cyanAccent, \r\n                  ), \r\n                  popunjavanje: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  naPressed: () '''{''' \r\n                    ako (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(oznaka stringa, vrsta stringa, boja activeColor) '{' \r\n    final bool isSelected = _selectedChatType == tip; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      dijete: Spremnik( \r\n        popunjavanje: const EdgeInsets.symmetric (horizontalno: 8, vertikalno: 3), \r\n        dekoracija: BoxDecoration( \r\n          BOJA: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            BOJA: \r\n                isSelected? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        dijete: Tekst( \r\n          izdavača, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- AŽURIRANI AVATAR KAKO BI BIO INTERAKTIVAN--- \r\n\r\n  Widget _buildSyncTimer(Vremenska oznaka? početakVrijeme, int trajanjeInSeconds) '''{''' \r\n    ako (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder omogućuje izuzetno glatki vizualni tajmer bez blokiranja tajmera i ručnog setStatea, što znatno olakšava nit (Točka 4)\r\n    final endTime = startTime.toDate().add( \r\n      Trajanje(sekunde: trajanjeUSekunde), \r\n    ); \r\n    final remaining = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stil: Theme.of( \r\n          kontekst, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    vrati TweenAnimationBuilder<Trajanje>( \r\n      Trajanje: preostalo, \r\n      predtinejdžer: Tween (početak: preostali, kraj: Trajanje.nula), \r\n      graditelj: (BuildContext kontekst, vrijednost trajanja, widget? dijete) '{' \r\n        posljednje sekunde = vrijednost.uSekundama; \r\n        return Text( \r\n          AppLocalizations.of(context)!. timeRemaining, \r\n          stil: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            boja: sekunde < 20 ? Boje.redAccent : Colors.amberAccent, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext kontekst, \r\n    Map<String, dinamički> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    konačne pozicije = Map<String, dynamic>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    završni niz currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    završni bool isMyTurn = currentPlayerId == playerId; \r\n    konačni int dice = (gameData[''littleHorsesDice''] kao broj?)?. toInt() ?? 0; \r\n    final bool hasRoll = gameData[''littleHorsesHasRolled''] ?? netočno; \r\n    završni bool isTeamMode = gameData[''smallTeamHorses''] ?? netočno; \r\n    final Map<String, dynamic> consequenceSixes = Map<String, dynamic>.from( \r\n      gameData[''smallHorsesConsequenceSixes''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = uzastopniŠestice[playerId] ?? 0; \r\n\r\n    Neon Modern paleta / arkada na tamnoj pozadini\r\n    konačni List<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon nebesko plava\r\n      const Color(0xFF10B981), // Emerald Green\r\n      const Color(0xFFF59E0B), // Golden Amber\r\n    ]; \r\n\r\n    --- EKRAN POBJEDE--- \r\n    ako (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      return UniversalGameEndScreen( \r\n        naslov igre:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Dolazak u središte ploče!",
   "deplacezUnCheval": "POMAKNITE KONJA!",
   "aVousDeLancer": "VI STE NA REDU ZA BACANJE!",
   "mode2v2Allies": "Saveznički način 2v2",
-  "chevalSelectionneNtouchezPourAvancer": "Konj '{pješak}' odabran!\\nTapni za kretanje naprijed '{pawn}'",
+  "chevalSelectionneNtouchezPourAvancer": "Konj ''(pješak)'' odabran!\\nTapni za kretanje naprijed '{pawn}'",
   "touchezUnPion": "Dodirnite figuru",
   "scoreLimiteAtteint": "Ciljni rezultat postignut!",
   "toutesLesGrillesSontCompletees": "Sve su tablice popunjene!",
@@ -2143,7 +2132,6 @@
   },
   "perduReveleLaQuestionEt": "IZGUBIO/LA SI! Otkrij pitanje i odgovori!",
   "gagneTonSecretEstPreserve": "POBJEDA! Tvoja je tajna sigurna.",
-  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    '''}''' još '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (varijanta)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    za (VAR igrač u _activePlayers) '''{''' \r\n      ako (igrač == pod krinkom) '''{''' \r\n        _playerRoles[igrač] = \"Infiltrator\"; \r\n      '''}''' ako (igrač == _mrWhitePlayer) '''{''' \r\n        _playerRoles[igrač] = \"Gospodin Bijeli\"; \r\n      '''}''' još '''{''' \r\n        _playerRoles[igrač] = \"Civilno\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.otkrivajući; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  praznina _nextPlayerReveal() '''{''' \r\n    ako (_currentPlayerRevealIndex < _activePlayers.duljina - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' još '{' \r\n      setState(() => _gameState = UndercoverGameState.discussionussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(gudač) '''{''' \r\n    String role = _playerRoles[player]!; \r\n    bool impostorsWin = uloga == \"Civil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      ako (varalice Win) '''{''' \r\n        _resultMessage = \"'{'player'}' je bio civil! Lažnjaci pobjeđuju!\"; \r\n      '''}''' još '''{''' \r\n        _resultMessage = \"'{'player'}' je bio\r\n    \r\n  ",
   "requiert4Joueurs": "Zahtijeva 4+ igrača",
   "requiert3Joueurs": "Zahtijeva 3+ igrača",
   "genereDesCategoriesAmusantesPour": "Generirajte zabavne kategorije za vrući krumpir. Tema: {trim}",
@@ -2396,7 +2384,7 @@
     }
   },
   "leTourEstTermine": "Le tour est terminé !",
-  "aEteBanniPourSa": "{loserName} a été banni pour sa proposition '''{loserAnswer}' !",
+  "aEteBanniPourSa": "{loserName} a été banni pour sa proposition '{loserAnswer}' !",
   "@aEteBanniPourSa": {
     "placeholders": {
       "loserName": {
@@ -2417,7 +2405,7 @@
     }
   },
   "egalitePersonneNePrendDe": "Égalité ! Personne ne prend de point ce tour-ci.",
-  "aTrouveLeMot": "{winnerName} a trouvé le mot : '''{currentWord}' !",
+  "aTrouveLeMot": "{winnerName} a trouvé le mot : '{currentWord}' !",
   "@aTrouveLeMot": {
     "placeholders": {
       "winnerName": {
@@ -2425,7 +2413,7 @@
       }
     }
   },
-  "personneNATrouveLe": "Personne n''a trouvé le mot : '''{currentWord}'.",
+  "personneNATrouveLe": "Personne n''a trouvé le mot : '{currentWord}'.",
   "@personneNATrouveLe": {
     "placeholders": {
       "currentWord": {
@@ -2433,7 +2421,7 @@
       }
     }
   },
-  "aTrouveLeMot1": "{guesserName} a trouvé le mot : '''{currentWord}' !",
+  "aTrouveLeMot1": "{guesserName} a trouvé le mot : '{currentWord}' !",
   "@aTrouveLeMot1": {
     "placeholders": {
       "guesserName": {
@@ -2474,17 +2462,6 @@
     }
   },
   "leTourEstTermine1": "Krug je završen.",
-  "aGagneAvecSaDescription": "{winnerName} a gagné avec sa description :AppLocalizations.of(context)!.extrainfoColumnChildrenText{winningDescription}",
-  "@aGagneAvecSaDescription": {
-    "placeholders": {
-      "winnerName": {
-        "type": "Object"
-      },
-      "winningDescription": {
-        "type": "Object"
-      }
-    }
-  },
   "personneNAGagneCe": "Nitko nije pobijedio u ovoj rundi. Izjednačenje ili nema opisa.",
   "aTrouveLeSymboleIl": "{winnerName} a trouvé le symbole {commonSym} ! Il gagne la carte.",
   "@aTrouveLeSymboleIl": {
@@ -2515,32 +2492,6 @@
   "indiceEnvoyeEnAttenteDes1": "Trag poslan! Čekaju se ostali...",
   "carte3": "Carte",
   "score": "Score",
-  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of(context)!.styleConstTextstyleColorColors{value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}",
-  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
-    "placeholders": {
-      "value": {
-        "type": "Object"
-      },
-      "guesserName": {
-        "type": "Object"
-      },
-      "value2": {
-        "type": "Object"
-      },
-      "deckIndex": {
-        "type": "Object"
-      },
-      "deckTotal": {
-        "type": "Object"
-      },
-      "value3": {
-        "type": "Object"
-      },
-      "totalScore": {
-        "type": "Object"
-      }
-    }
-  },
   "laNuitTombeSurLe": "La nuit tombe sur le village...\n\nFermez les yeux.",
   "leMomentEstVenuLe": "Le moment est venu...\n\nLe village doit voter.",
   "victoireDesVillageois": "Pobjeda Mještana!",
@@ -2562,14 +2513,6 @@
   "votezPourDevorerUneProie": "Glasajte koga proždrijeti",
   "espionnezUnJoueur": "Špijunirajte igrača...",
   "leLoupNoirDecideDu": "Crni Vuk odlučuje o sudbini plijena",
-  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infecter {targetName} ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinLe Loup Blanc frappe en solitaire",
-  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
-    "placeholders": {
-      "targetName": {
-        "type": "Object"
-      }
-    }
-  },
   "choisissezUneVictimeADevorer": "Odaberite žrtvu za proždiranje",
   "laSorcierePrepareSesPotions": "Vještica priprema napitke",
   "cibleDesLoups": "Meta vukova: {victimeName}",
@@ -2595,14 +2538,6 @@
   "loups": "Vukovi",
   "outreTombe": "Onostranost",
   "amoureux": "Ljubavnici",
-  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName}: AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldPetits Chevaux",
-  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
-    "placeholders": {
-      "senderName": {
-        "type": "Object"
-      }
-    }
-  },
   "courseIndividuelle": "Pojedinačna utrka",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 bacanja)",
   "@k3Lancers": {
@@ -2694,7 +2629,6 @@
       }
     }
   },
-  "quiPourraitLePlusApplocalizations": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Voté par : '{0}'",
   "decisionUnanimeDuGroupePour": "Décision unanime du groupe pour '{0}' !",
   "ilFautAuMoins41": "Potrebna su najmanje 4 igrača za Codenames (2 po timu)!",
@@ -2762,7 +2696,7 @@
   "talkie": "Voki-toki",
   "tronconneuse": "Motorna pila",
   "survie": "Preživljavanje",
-  "redigezLPour": "Rédigez l'''{0}' pour '{1}'",
+  "redigezLPour": "Rédigez l'{0}' pour '{1}'",
   "rejouerGarderPts": "PONOVI (ZADRŽI BODOVE)",
   "indicesMontresA": "Indices montrés à",
   "playersWinneridname": "Players winneridname",
@@ -2791,19 +2725,18 @@
   "chosesRondes": "Okrugle stvari",
   "chosesRouges": "Crvene stvari",
   "marquesDeVetements": "Marke odjeće",
-  "butDuJeuEtreLe": "**But du jeu**\nÊtre le joueur avec le plus de points en fin de partie.\n\n**Déroulement**\n1. Chaque joueur reçoit **7 cartes-réponse** en main.\n2. Un joueur est désigné **Juge** (le rôle tourne à chaque manche).\n3. Le Juge lit la **carte-question** à voix haute.\n4. Tous les **autres joueurs** choisissent secrètement **1 carte-réponse** de leur main et la soumettent.\n5. Le Juge lit toutes les réponses et désigne **la plus drôle**.\n6. Le gagnant de la manche marque **1 point**.\n7. Chaque joueur **pioche** une nouvelle carte pour revenir à 7.\n8. Le rôle de Juge passe au joueur suivant.\n\n**Règles importantes**\n- Le Juge **ne joue pas** de carte pendant son tour.\n- Les réponses sont **anonymes** : le Juge ne sait pas qui a écrit quoi.\n- On ne peut jouer qu''**une seule carte** par manche.",
-  "objectifPrenezDesCartesPour": "**Objectif**\nPrenez des cartes pour créer des paires assorties. Évitez d''être le joueur qui tient la carte Zombie à la fin du jeu.\n**Déroulement**\n1. Le jeu commence avec 33 cartes (16 paires + 1 carte Zombie).\n2. Les cartes sont distribuées aux 4 joueurs.\n3. À chaque tour, un joueur prend une carte au joueur suivant.\n4. Si la carte crée une paire, elle est automatiquement défaussée.\n5. La main du joueur est mélangée.\n6. Le premier joueur à ne plus avoir de cartes a gagné.\n7. Le joueur restant avec la carte Zombie a perdu !",
-  "butDuJeuObtenirLe": "**But du jeu**\nObtenir le score le plus élevé en remplissant 13 catégories avec 5 dés.\n\n**Déroulement d''un tour**\n1. **Lancer** : Vous pouvez lancer les 5 dés jusqu''à 3 fois par tour.\n2. **Garder** : Après le 1er ou 2ème lancer, vous pouvez garder certains dés et relancer les autres.\n3. **Score** : Après au moins un lancer, vous devez choisir une catégorie pour scorer. Chaque catégorie ne peut être utilisée qu''une seule fois par partie.\n\n**Catégories**\n- **As à Six** : Somme des dés correspondants. (Bonus de 35 points si la section supérieure totalise 63 points ou plus).\n- **Brelan** (3 dés identiques ou plus) : Somme de tous les dés.\n- **Carré** (4 dés identiques ou plus) : Somme de tous les dés.\n- **Full** (3 dés identiques + 1 paire) : 25 points.\n- **Petite Suite** (4 dés consécutifs) : 30 points.\n- **Grande Suite** (5 dés consécutifs) : 40 points.\n- **Yams** (5 dés identiques) : 50 points.\n- **Chance** : Somme de tous les dés.",
-  "objectifNePasAvoirL": "**Objectif**\nNe pas avoir l''appareil entre les mains lorsque la patate explose !\n\n**Déroulement**\n1. Un thème s''affiche à l''écran.\n2. Le joueur qui tient l''appareil doit donner une réponse correspondant au thème.\n3. Dès qu''il a répondu, il passe rapidement l''appareil à son voisin.\n4. Le voisin doit à son tour trouver une nouvelle réponse et passer l''appareil.\n5. Le temps est caché et aléatoire : la patate peut exploser à tout moment !\n6. Le joueur qui tient l''appareil au moment de l''explosion perd la manche et reçoit un gage.",
-  "principeGeneralGribouillisEstUn": "**Principe Général**\nGribouillis est un jeu de dessin inspiré du \"téléphone arabe\", où les idées se transforment à chaque étape. Il existe 3 modes de jeu :\n\n**1. Mode Normal (Téléphone Arabe Illustré)**\n-   **Écriture** : Chaque joueur écrit une phrase.\n-   **Dessin** : Chaque joueur reçoit la phrase d''un autre et la dessine.\n-   **Devinette** : Chaque joueur reçoit un dessin et devine ce qu''il représente.\n-   **Alternance** : Le jeu alterne dessin et devinette jusqu''à ce que chaque \"album\" ait fait le tour de tous les joueurs.\n-   **But** : S''amuser en voyant comment une phrase simple se transforme en quelque chose de complètement différent !\n\n**2. Mode Complément (Dessin Collaboratif)**\n-   **Croquis** : Chaque joueur commence un dessin simple.\n-   **Complément** : Chaque joueur reçoit le dessin d''un autre et doit l''enrichir, sans effacer ce qui existe déjà.\n-   **Alternance** : Le dessin passe de joueur en joueur, chacun ajoutant sa touche.\n-   **Paramètre \"Ajouter 1\"** :\n    -   *Si désactivé (par défaut)* : C''est une chaîne. Le dessin évolue à chaque étape (Joueur A -> Joueur B -> Joueur C...).\n    -   *Si activé* : Le dessin initial de chaque joueur est complété par tous les autres joueurs, créant plusieurs Å“uvres collectives en parallèle.\n-   **But** : Créer des Å“uvres d''art collectives surprenantes et amusantes.\n\n**3. Mode Brise-Glace (Interaction Créative)**\n-   **Écriture** : Chaque joueur écrit un thème personnel (ex: AppLocalizations.of(context)!.monAnimalPrefere).\n-   **Dessin** : Chaque joueur reçoit les thèmes de **tous les autres joueurs** et doit les dessiner.\n-   **But** : Idéal pour briser la glace, découvrir les goûts des autres et lancer la créativité de manière collaborative et légère.",
-  "yzObjectifAvoirLeMoins": "ðŸŽ¯ Objectif\n\nAvoir le moins de points possible à la fin de la partie.\nLa partie s’arrête lorsqu’un joueur atteint 100 points ou plus, et le gagnant est celui avec le score total le plus faible.\n\nðŸ“¦ Matériel\n\n150 cartes numérotées de –2 à +12\n\nðŸƒÂ Mise en place\n\nMélangez toutes les cartes.\nChaque joueur reçoit 12 cartes, placées face cachée devant lui, en 4 colonnes × 3 rangées.\nLes autres cartes forment une pioche. Retournez la première carte pour former la défausse.\nChaque joueur retourne 2 cartes de son choix parmi ses 12.\n\nðŸâ€â€ž Déroulement d’un tour\n\nÀ votre tour, vous disposez de **30 secondes** pour choisir entre deux actions :\n\n1. Prendre la carte de la défausse\nVous devez l’échanger avec l’une de vos 12 cartes (face visible ou cachée).\nLa carte remplacée va sur la défausse.\n\n2. Piocher une carte face cachée\nVous regardez la carte :\n- soit vous la gardez et remplacez une de vos cartes (comme ci-dessus),\n- soit vous la refusez → vous la posez directement sur la défausse, et dans ce cas vous devez retourner l’une de vos cartes encore cachées.\n\n✅ Règles spéciales\n\nTrois cartes identiques dans une colonne → elles sont immédiatement défaussées (valeur 0).\n\nFin de manche :\n\nLa manche se termine lorsqu’un joueur a révélé toutes ses cartes.\nTous les autres joueurs révèlent alors leurs cartes restantes. La manche est terminée.\nTous les joueurs comptent la somme de leurs cartes.\n\n⚠ï¸Â Attention : si le joueur qui termine n’a pas le score le plus bas de la manche, il prend une pénalité de +10 points (son score de manche est doublé dans la version originale, nous utiliserons +10 pour simplifier).\n\nðŸÂâ€  Fin de partie\n\nOn joue autant de manches que nécessaire.\nDès qu’un joueur atteint 100 points ou plus, la partie s’arrête.\nLe joueur avec le plus petit score cumulé gagne.",
-  "iAReglesDuPoker": "♠ï¸Â Règles du Poker – Texas Hold’em\nðŸŽ¯ Objectif\n\nGagner les jetons des autres joueurs en ayant :\n- la meilleure main de 5 cartes lors de l’abattage,\n- ou en les faisant abandonner (se coucher) grâce aux mises.\n\nðŸƒÂ Classement des mains (du plus fort au plus faible)\n\n1. Quinte flush royale : 10 – V – D – R – As de la même couleur\n2. Quinte flush : 5 cartes qui se suivent, même couleur\n3. Carré : 4 cartes identiques\n4. Plein : 3 cartes identiques + 1 paire\n5. Couleur (flush) : 5 cartes de la même couleur (non consécutives)\n6. Suite (quinte) : 5 cartes qui se suivent (couleurs différentes)\n7. Brelan : 3 cartes identiques\n8. Double paire\n9. Paire\n10. Carte haute (la plus forte carte si personne n’a mieux)\n\nðŸâ€â€ž Déroulement d’un coup\n\n1. Blinds\nLe joueur à gauche du donneur pose la petite blind.\nLe joueur suivant pose la grosse blind.\n\n2. Distribution\nChaque joueur reçoit 2 cartes fermées (les « cartes privées »).\n\n3. Tours d’enchères et cartes communes\n- Préflop : tour de mises avec les cartes privées.\n- Flop : 3 cartes communes révélées. Nouveau tour de mises.\n- Tour : 4e carte commune révélée. Nouveau tour de mises.\n- Rivière : 5e et dernière carte commune révélée. Dernier tour de mises.\n\n4. Abattage (showdown)\nSi plusieurs joueurs restent, chacun montre son jeu.\nLa meilleure combinaison de 5 cartes (parmi ses 2 cartes privées + les 5 communes) gagne le pot.\n\nðŸ’° Actions possibles\n\nÀ son tour, un joueur dispose de **30 secondes** pour :\n- Checker (Parole) : ne rien miser, seulement si personne n’a encore misé.\n- Miser : poser des jetons dans le pot.\n- Suivre (Call) : égaler la mise en cours.\n- Relancer (Raise) : augmenter la mise.\n- Se coucher (Fold) : abandonner ses cartes et sortir du coup.\n\nðŸÂâ€  Fin de partie\n\nLe jeu continue tant qu’il reste au moins 2 joueurs avec des jetons.\nLe gagnant final est celui qui prend tous les jetons.",
-  "butDuJeuGagnerLe": "**But du jeu**\nGagner le plus d''XP en réalisant des actions et en répondant à des vérités !\n\n**Déroulement**\n1. La roulette désigne le joueur dont c''est le tour.\n2. Le joueur tire \"Action\" ou \"Vérité\".\n3. Mode Classique : Un défi/question aléatoire est affiché.\n4. Mode Juges : Un joueur aléatoire écrit le défi, puis le joueur le réalise.\n5. Les autres joueurs valident avec un vote Oui/Non.\n6. Le pourcentage de validation détermine l''XP gagné.\n\n**Règles spéciales**\n- 100% de validation = XP maximum\n- Le joueur avec le plus d''XP devient Admin de la partie\n- Le bouton \"Fin de manche\" permet de clôturer la partie",
-  "butDuJeuLeBut": "**But du jeu**\nLe but est d’être le premier à se débarrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.\n\n**Matériel et Joueurs**\n-   **Cartes** : Un jeu de 52 cartes.\n-   **Joueurs** : 3 à 6 joueurs.\n\n**Valeur des Cartes**\nL''ordre des cartes, de la plus faible à la plus forte, est :\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Dame, Roi, As, 2.**\nLe **2** est la carte la plus forte et peut battre n''importe quelle autre carte ou combinaison.\n\n**Déroulement d''une Manche**\n1.  **Distribution** : Toutes les cartes sont distribuées équitablement entre les joueurs.\n2.  **Premier Tour** :\n    -   Pour la toute première partie, le joueur qui possède le **3 de Trèfle (♣3)** commence. Il doit obligatoirement jouer cette carte (seule ou avec d''autres 3).\n    -   Pour les manches suivantes, le **Trou du cul** de la manche précédente commence.\n3.  **Jouer des cartes** : Le premier joueur pose sur la table :\n    -   Une seule carte (ex: un 7).\n    -   Une paire (ex: deux 8).\n    -   Un brelan (ex: trois Valets).\n    -   Un carré (ex: quatre 5).\n4.  **Suite du tour** : Le joueur suivant (dans le sens des aiguilles d''une montre) dispose de **30 secondes** pour jouer le **même nombre de cartes** mais d''une **valeur supérieure**.\n    -   _Exemple : Si un joueur pose une paire de 6, le suivant doit poser une paire de 7, de Dames, d''As, etc._\n5.  **Passer son tour** : Si un joueur ne peut ou ne veut pas jouer, il doit passer son tour. Une fois qu''un joueur a passé, il ne peut plus rejouer jusqu''à la fin du pli en cours.\n6.  **Fin d''un pli** : Le pli se termine quand tous les joueurs ont passé leur tour. Le dernier joueur à avoir posé des cartes remporte le pli, ramasse les cartes de la table (les met de côté) et commence le pli suivant en jouant ce qu''il souhaite.\n7.  **Le pouvoir du 2** : Jouer un ou plusieurs **2** bat n''importe quelle combinaison et met fin au pli instantanément. La personne qui a joué le 2 remporte le pli et recommence à jouer.\n    -   _Attention : pour battre une paire, il faut jouer une paire de 2 !_\n\n**Fin de la Manche et Rôles**\n-   Dès qu''un joueur n''a plus de cartes, il a terminé. La partie continue jusqu''à ce qu''il ne reste plus qu''un seul joueur.\n-   L''ordre de fin détermine les rôles pour la prochaine manche :\n    -   **1er** : Président\n    -   **2ème** : Vice-Président\n    -   **Dernier** : Trou du cul\n    -   **Avant-dernier** : Vice-Trou du cul\n    -   **Les autres** (s''il y en a) : Neutres\n\n**Manche Suivante : L''échange des cartes !**\nAvant de commencer la nouvelle manche, les joueurs échangent des cartes :\n-   Le **Trou du cul** donne ses **deux meilleures cartes** au **Président**.\n-   Le **Président** lui donne en retour les **deux cartes de son choix** (généralement ses plus mauvaises).\n-   S''il y a 4 joueurs ou plus, le **Vice-Trou du cul** donne sa **meilleure carte** au **Vice-Président**.\n-   Le **Vice-Président** lui donne en retour la **carte de son choix**.\n\n**Règles Spéciales**\n-   â›â€ **Interdiction de finir par un 2** : Un joueur n''a pas le droit de se débarrasser de sa dernière carte si c''est un 2. Ce coup est considéré comme invalide.\n-   ✊ **Variante Révolution (optionnelle)** : Si un joueur pose un carré (4 cartes identiques), il peut annoncer \"Révolution !\". L''ordre de valeur des cartes est alors inversé jusqu''à la fin de la manche (le 3 devient la plus forte, et le 2 la plus faible).",
-  "butDuJeuReussirDeux": "**But du jeu**\nRéussir deux défis avant les autres joueurs.\n\n**Mise en place**\n- Chaque joueur commence avec 4 cartes : 3 Roses et 1 Crâne.\n- Chaque carte posée sur le tapis reste liée à son propriétaire.\n\n**Déroulement**\n1. À son tour, un joueur peut poser une carte face cachée sur son tapis.\n2. Quand il ne veut plus poser, il lance un défi en annonçant le nombre de cartes qu''il pense pouvoir retourner.\n3. Les autres joueurs peuvent surenchérir ou passer.\n4. Le plus haut enchérisseur devient le challenger et retourne les cartes annoncées.\n5. Il retourne d''abord ses propres cartes posées, puis celles des autres joueurs si nécessaire.\n\n**Résolution**\n- Si un Crâne apparaît, le défi est perdu.\n- Si le défi est gagné, le joueur marque un point. Le premier à 2 points gagne la partie.\n- Si un défi est perdu, le joueur perd une carte au hasard de sa main restante. S''il perd son Crâne, il doit en défausser une autre immédiatement.",
-  "butDuJeuFaireDeviner": "**But du jeu**\nFaire deviner un mot en dessinant, avant la fin du temps imparti.\n\n**Déroulement**\n1.  **Sélection du Dessinateur/Mot** : Un joueur est désigné pour dessiner, et un mot lui est secrètement attribué.\n2.  **Dessin** : Le dessinateur a un temps limité pour faire deviner le mot en dessinant. Il ne peut ni parler, ni mimer, ni écrire des lettres ou chiffres.\n3.  **Devinettes** : Les autres joueurs proposent des mots dans un tchat.\n4.  **Validation** : Le dessinateur voit les propositions dans le tchat et clique sur un bouton \"Trouvé !\" à côté du bon message pour désigner le gagnant.\n5.  **Points** : Le joueur qui a trouvé et le dessinateur gagnent un point.\n6.  **Tour Suivant** : Un nouveau dessinateur est désigné.\n\n**Options**\n-   **Seulement 30 traits** : Le dessinateur est limité à 30 traits maximum.",
-  "butDuJeuFaireDeviner1": "**But du jeu**\nFaire deviner un maximum de mots mystères à votre coéquipier, en écrivant chacun un indice d''un seul mot. Les indices identiques ou invalides sont éliminés.\n\n**Déroulement**\n1.  **Sélection du Devin** : Un joueur est désigné comme le \"Devin\" pour le tour. Il ne voit pas le mot mystère.\n2.  **Choix du Mot Mystère** : Le Devin choisit un mot parmi une liste (ou le maître du jeu en choisit un).\n3.  **Écriture des Indices** : Tous les autres joueurs (\"Indices\") écrivent secrètement UN seul mot-indice qui aidera le Devin à trouver le mot mystère.\n4.  **Filtrage des Indices** : Tous les indices sont révélés. Les indices identiques (même si orthographiés différemment, ex: \"chat\" et \"chats\") ou invalides (très proches du mot mystère, inventés, etc.) sont éliminés. Seuls les indices uniques et valides sont montrés au Devin.\n5.  **Devinette** : Le Devin regarde les indices restants et tente de deviner le mot mystère. Il n''a qu''UNE seule tentative.\n6.  **Score** :\n    -   Si le Devin trouve le mot mystère : L''équipe gagne 1 point.\n    -   Si le Devin ne trouve pas le mot mystère : 0 point.\n    -   Si le Devin ne donne pas de réponse : 0 point.\n\n**Exemples d''indices invalides :**\n-   Mot mystère: \"Chat\". Indices invalides: \"chaton\", \"félin\", \"miaou\", \"minou\".\n-   Indices identiques: Si 2 joueurs écrivent \"animal\" pour \"Chat\", \"animal\" est éliminé.",
-  "butDuJeuPourLes": "**But du jeu**\n-   Pour les **Villageois** : Éliminer tous les Loups-Garous, le Loup Blanc, le Rat Malade (sauf le Mercenaire s''il gagne).\n-   Pour les **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard) : Éliminer tous les Villageois.\n-   Pour les **Solitaires** : Objectif spécifique à chacun (Loup Blanc : être seul ; Mercenaire : tuer sa cible au J1 ; Rat Malade : contaminer tous).\n-   Pour les **Amoureux** (si Loup + Villageois) : Être les deux seuls survivants.\n\n**Déroulement**\nLe jeu alterne entre des phases de **nuit** et de **jour**.\n\n**La Nuit**\n1.  Le meneur de jeu (l''application) annonce que le village s''endort.\n2.  Différents personnages se réveillent tour à tour pour utiliser leurs pouvoirs :\n    -   **Cupidon** (première nuit seulement) : Désigne deux joueurs qui tomberont amoureux. S''ils sont un Loup et un Villageois, leur objectif change.\n    -   L''**Héritier** (première nuit seulement) : Désigne un testateur.\n    -   La **Voyante** se réveille et désigne un joueur pour découvrir son vrai rôle. (Ne détecte pas l''infection du Loup Noir).\n    -   Le **Mentaliste** (passif) perçoit l''issue du vote du village.\n    -   Le **Rat Malade** : Contamine deux joueurs (qui connaîtront les autres contaminés).\n    -   Les **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - votent ensemble) se réveillent, se concertent et désignent une victime à dévorer.\n        -   Le **Loup Noir** peut, une fois, transformer la victime en Loup-Garou infecté (qui garde ses pouvoirs et devient Loup). Le Mentaliste et Fossoyeur peuvent détecter l''infecté, la Voyante non.\n    -   Le **Loup Blanc** (une nuit sur deux) : Dévore un joueur de son choix (traverse les protections).\n    -   La **Sorcière** se réveille. Elle voit la victime des loups et peut utiliser une de ses deux potions (une seule fois par partie) : une potion de **guérison** pour sauver la victime, ou une potion d''**empoisonnement** pour tuer quelqu’un.\n    -   Le **Pyromancien** : Choisit d''entreposer un tonneau de feu grégeois ou de faire exploser ceux déjà placés (doit être vivant au matin).\n    -   Le **Nécromancien** : Peut communiquer avec les morts.\n\n**Le Jour**\n1.  Le village se réveille. L''application annonce qui est mort pendant la nuit.\n2.  Les joueurs morts révèlent leur rôle et sont éliminés (ils ne peuvent plus communiquer, sauf le Nécromancien avec les morts).\n    -   Le **Loup Bavard** : Doit prononcer un mot secret sous peine de mourir au coucher du soleil (sauf si Dictateur prend le pouvoir).\n3.  Les survivants débattent pour essayer de démasquer les imposteurs.\n4.  Après les discussions, tous les joueurs votent pour éliminer un suspect.\n    -   Le **Dictateur** (une fois) : Peut s''emparer du vote. S''il élimine un loup, il devient Maire ; sinon, il meurt.\n    -   Le **Capitaine** : Son vote compte double. S''il est éliminé, il doit désigner un successeur avant de mourir.\n    -   Le **Mercenaire** : Si sa cible est éliminée le premier jour, il gagne seul. Sinon, il devient Villageois.\n5.  Le joueur qui reçoit le plus de votes est éliminé, révèle son rôle, et est hors du jeu.\n    -   Le **Chasseur** : S''il est éliminé (de jour comme de nuit), il a le pouvoir d''amener un autre joueur avec lui.\n    -   Le **Fossoyeur** : À sa mort, il désigne deux joueurs (un du camp opposé, un de son camp).\n    -   Les **Amoureux** : Si l''un meurt, l''autre le suit de chagrin.\n    -   L''**Héritier** : Si son testateur meurt, il prend son rôle (sauf si mort ou contaminé).\n6.  Une nouvelle nuit commence.\n\n**Conditions de Victoire**\n-   **Villageois** : Éliminer tous les Loups-Garous, Loup Blanc, Rat Malade.\n-   **Loups-Garous** (meute) : Être égal ou supérieur en nombre aux Villageois.\n-   **Loup Blanc** : Être le seul survivant.\n-   **Mercenaire** : Tuer sa cible le premier jour.\n-   **Rat Malade** : Contaminer tous les joueurs vivants.\n-   **Amoureux** (Loup + Villageois) : Être les deux seuls survivants.\n\n**Notes importantes**\n-   Le **Chaperon Rouge** est protégé par le Chasseur contre les Loups-Garous tant que le Chasseur est en vie.\n-   Le **Garde** protège une cible des Loups-Garous (ne peut pas protéger deux fois la même personne).\n-   Les pouvoirs du Loup Blanc ignorent les protections.\n-   Le Pyromancien doit être vivant au matin pour que ses tonneaux explosent.",
+  "butDuJeuEtreLe": "**Objective**\nBe the player with the most points at the end of the game!\n\n**How to Play**\n1. Each player receives **7 answer cards**.\n2. One player is chosen as the **Judge** (rotates each round).\n3. The Judge reads the **question card** aloud.\n4. All other players secretly choose and submit **1 answer card** from their hand.\n5. The Judge reads all responses aloud and picks the **funniest one**.\n6. The winner of the round scores **1 point**.\n7. Everyone draws back up to 7 cards.\n8. The Judge role passes to the next player.\n\n**Key Rules**\n- The Judge does not play a card on their turn.\n- Submissions are **anonymous**.\n- You may only play **one card** per round.",
+  "objectifPrenezDesCartesPour": "**Objective**\nDraw cards to make matching pairs. Avoid holding the Zombie card when the game ends!\n\n**How to Play**\n1. The deck has 33 cards (16 pairs + 1 Zombie card).\n2. Cards are dealt to players.\n3. On your turn, take a card from the next player.\n4. Matching pairs are automatically discarded.\n5. Your hand is shuffled.\n6. The first player to run out of cards wins.\n7. The last player stuck with the Zombie card loses!",
+  "butDuJeuObtenirLe": "**Objective**\nScore the most points by filling 13 scoring categories with 5 dice.\n\n**Turn Structure**\n1. **Roll**: You can roll the 5 dice up to 3 times per turn.\n2. **Keep**: After roll 1 or 2, keep whichever dice you like and re-roll the rest.\n3. **Score**: Choose an available scoring category. Each can only be used once per game.\n\n**Categories**\n- **Aces to Sixes**: Sum of matching dice (35-point bonus if Upper Section totals 63+).\n- **Three of a Kind**: Sum of all 5 dice.\n- **Four of a Kind**: Sum of all 5 dice.\n- **Full House**: 3 of a kind + pair (25 pts).\n- **Small Straight**: 4 sequential dice (30 pts).\n- **Large Straight**: 5 sequential dice (40 pts).\n- **Yams (Yahtzee)**: 5 identical dice (50 pts).\n- **Chance**: Sum of all dice.",
+  "objectifNePasAvoirL": "**Objective**\nDon''t be holding the device when the hot potato explodes!\n\n**How to Play**\n1. A topic appears on screen.\n2. The player holding the device must name a valid answer matching the topic.\n3. As soon as answered, pass the phone quickly to the next player.\n4. The next player must give a new unique answer and pass it along.\n5. The countdown timer is secret and random: it can blow up at any second!\n6. Whoever holds the phone when it explodes loses the round and takes a penalty!",
+  "yzObjectifAvoirLeMoins": "**Objective**\nHave the lowest cumulative score. The game ends when a player hits 100 points; the player with the lowest score wins!\n\n**Setup**\nEach player has a 3x4 grid of 12 cards face down. Reveal 2 cards of your choice at start.\n\n**Turn Actions**\n1. **Take from Discard pile**: Swap it with any of your 12 cards (face up or face down).\n2. **Draw from Draw pile**: Keep it and swap with one of your cards, or discard it and reveal one of your hidden cards.\n\n**Column Rule**\nThree identical cards in the same vertical column cancel out (worth 0 points).",
+  "iAReglesDuPoker": "**Texas Hold''em - Objective**\nWin your opponents'' chips by building the strongest 5-card poker hand or by bluffing them into folding.\n\n**Hand Rankings (High to Low)**\n1. Royal Flush\n2. Straight Flush\n3. Four of a Kind\n4. Full House\n5. Flush\n6. Straight\n7. Three of a Kind\n8. Two Pair\n9. One Pair\n10. High Card\n\n**Rounds**\nEach player receives 2 private hole cards. 5 community cards are revealed in phases: Flop (3), Turn (1), River (1). Betting rounds allow you to Check, Bet, Call, Raise, or Fold.",
+  "butDuJeuGagnerLe": "**Objective**\nEarn the most XP by taking on bold dares or answering revealing truths!\n\n**How to Play**\n1. The roulette picks the active player.\n2. Choose ''Truth'' or ''Dare''.\n3. Complete the prompt. Other players vote Yes or No to validate.\n4. Your approval rating determines how much XP you gain!",
+  "butDuJeuLeBut": "**Objective**\nShed all your cards first to become President. The last player holding cards becomes the Asshole!\n\n**Card Rank (Low to High)**\n3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace, **2** (highest).\n\n**Rules**\n- Play single cards, pairs, triples, or 4-of-a-kinds of equal or higher value.\n- Playing a **2** clears the pile immediately and gives you the lead.\n- Next round, the Asshole must trade their 2 best cards to the President!",
+  "butDuJeuReussirDeux": "**Objective**\nWin 2 bid challenges without ever flipping a Skull!\n\n**How to Play**\n1. Each player holds 4 cards: 3 Roses and 1 Skull.\n2. Players take turns playing cards face down.\n3. Any player can start a bid declaring how many cards they can flip safely.\n4. Highest bidder must flip their own cards first, then rivals'' cards.\n5. Hit a skull and you lose a card permanently; succeed twice and you win!",
+  "butDuJeuFaireDeviner": "**Objective**\nDraw and have your friends guess the secret word before time runs out!\n- No letters, numbers, or spoken clues allowed.\n- Players type their guesses in the chat. The artist approves the winner!",
+  "butDuJeuFaireDeviner1": "**Objective**\nCooperative word game where everyone helps one guesser discover a mystery word.\n\n**How to Play**\n1. The guesser cannot see the mystery word.\n2. All teammates secretly write a one-word clue.\n3. **The catch**: Identical clues are removed before the guesser sees them!\n4. The guesser views the remaining clues and gets one shot to guess the word.",
+  "butDuJeuPourLes": "**Objective**\n- **Villagers**: Identify and eliminate all Werewolves.\n- **Werewolves**: Eliminate all villagers without getting caught.\n\n**Cycle**\nThe game alternates between Night (special roles and werewolves strike in secret) and Day (village debate and public vote to execute a suspect).",
   "loupNoir": "Crni vuk",
   "loupBavard": "Brbljavi vuk",
   "loupBlanc": "Bijeli vuk",
@@ -2819,19 +2752,18 @@
   "dictateur": "Diktator",
   "chaperonRouge": "Crvenkapica",
   "pyromancien": "Piromant",
-  "butDuJeuEtreLe1": "**But du jeu**\nÊtre le plus rapide à repérer l''unique symbole identique entre la carte au centre et sa propre carte.\n\n**Déroulement (Mode ''La Tour Infernale'')**\n1.  Chaque joueur reçoit une carte face cachée. Le reste des cartes forme une pioche au centre, face visible.\n2.  Au début, tout le monde retourne sa carte.\n3.  Chaque joueur doit trouver le plus vite possible l''unique symbole qui est présent à la fois sur sa carte et sur la carte de la pioche.\n4.  Le premier joueur qui trouve le symbole, l''annonce à haute voix, prend la carte de la pioche et la place sur sa propre carte.\n5.  Cette nouvelle carte devient sa carte pour le tour suivant. Une nouvelle carte est alors révélée au centre de la pioche.\n6.  La partie continue jusqu''à ce que la pioche soit épuisée. Le joueur qui a amassé le plus de cartes à la fin gagne !",
-  "butDuJeuSeDebarrasser": "**But du jeu**\nSe débarrasser de toutes ses cartes en étant le premier !\n\n**Déroulement**\n1.  **Distribution** : Chaque joueur reçoit 7 cartes. Le reste forme la pioche. Une carte est retournée pour commencer la pile de défausse.\n2.  **Jouer une carte** : Le joueur dont c''est le tour dispose de **30 secondes** pour poser une carte de sa main sur la pile de défausse. La carte jouée doit correspondre à la carte du dessus de la pile par :\n    *   **Couleur** (ex: Rouge sur Rouge)\n    *   **Numéro** (ex: un 7 Bleu sur un 7 Vert)\n    *   **Symbole** (ex: un \"+2\" Jaune sur un \"+2\" Rouge)\n    *   **Carte Spéciale** (Joker, +4, etc.)\n3.  **Piocher** : Si un joueur ne peut pas jouer de carte dans le temps imparti, il doit piocher une carte du paquet. S''il peut jouer cette carte, il peut le faire immédiatement. Sinon, son tour se termine.\n4.  **Cartes Spéciales** :\n    *   **+2 (Deux cartes)** : Le joueur suivant pioche 2 cartes et passe son tour.\n    *   **Sens Interdit (Passe ton tour)** : Le joueur suivant passe son tour.\n    *   **Inversion (Changement de sens)** : Le sens de jeu est inversé.\n    *   **Joker (Changement de couleur)** : Le joueur choisit la couleur de la prochaine carte à jouer. Peut être jouée sur n''importe quelle carte.\n    *   **Super Joker +4 (Changement de couleur et Quatre cartes)** : Le joueur choisit la couleur. Le joueur suivant pioche 4 cartes ET passe son tour. Cette carte ne peut être jouée que si le joueur n''a AUCUNE autre carte de la couleur demandée sur la pile de défausse (sauf s''il bluffe).\n5.  **Annoncer \"UNO\"** : Quand un joueur n''a plus qu''une seule carte en main, il doit annoncer \"UNO !\". S''il ne le fait pas et est pris par un autre joueur (avant que le joueur suivant ne joue ou ne pioche), il doit piocher 2 cartes.\n6.  **Fin de Manche** : La manche se termine lorsqu''un joueur se débarrasse de sa dernière carte. Les points sont comptés. Le joueur qui atteint 500 points (ou un total défini) gagne la partie.\n\n**Points des cartes :**\n*   Cartes numériques (0-9) : Leur valeur faciale.\n*   +2, Sens Interdit, Inversion : 20 points.\n*   Joker, Super Joker +4 : 50 points.",
-  "principeDuJeuLeJeu": "## Principe du jeu\n    * Le jeu se joue entre **3 et 10 joueurs**.\n    * Chaque joueur donne accès à une partie de sa photothèque et choisit des photos à partager.\n    * Pendant une partie, une photo est sélectionnée **aléatoirement** parmi celles de tous les joueurs, puis affichée pendant quelques secondes.\n    * Les joueurs doivent deviner **à qui appartient la photo** affichée.\n    * Le joueur qui devine correctement le plus de photos gagne la partie.\n\n    ## Déroulement\n    1.  **Sélection des photos** : Chaque joueur choisit un certain nombre de photos de sa galerie.\n    2.  **Début de la partie** : Une fois que tout le monde est prêt, l''hôte lance la partie.\n    3.  **Tour de jeu** :\n        - Une photo aléatoire est montrée pendant 5 secondes.\n        - Tous les joueurs votent pour deviner le propriétaire.\n    4.  **Résultats** : Les scores sont mis à jour après chaque tour.\n    5.  **Fin de la partie** : Après un nombre défini de tours, le joueur avec le plus de points gagne.",
-  "butDuJeuCoulerTous": "**But du jeu**\nCouler tous les navires de l''adversaire avant qu''il ne coule les vôtres.\n\n**Déroulement**\n1. **Placement** : Chaque joueur place secrètement sa flotte sur une grille 10x10.\n   - Porte-avions (5 cases)\n   - Croiseur (4 cases)\n   - Sous-marin (3 cases)\n   - Destroyer (3 cases)\n   - Patrouilleur (2 cases)\n2. **Tir** : À tour de rôle, les joueurs touchent une case pour tirer.\n3. **Résultat** : AppLocalizations.of(context)!.touche, \"Coulé\" ou \"À l''eau\". \n4. **Victoire** : Le premier joueur à couler toute la flotte adverse gagne.",
-  "butDuJeuEtreLe2": "**But du jeu**\nÊtre le premier à atteindre la distance cible (1000 km par défaut).\n**Déroulement**\n- Chaque joueur reçoit 6 cartes.\n- À son tour, jouez une carte (Distance, Attaque, Défense, Sécurité) ou défaussez-vous.\n- Les cartes **Attaques** (Stop, Rouge, Essence, Crevaison, Limite) bloquent l''adversaire.\n- Les cartes **Défenses** (Vert, Extra Tank, Réparation, Fin Limite) contrent les attaques.\n- Les cartes **Sécurité** annulent une attaque et empêchent qu''elle se reproduise.\n- Les cartes **Distance** (25, 50, 75, 100, 200 km) font avancer votre véhicule.\n- Piochez 1 carte à la fin de votre tour.",
-  "butDuJeuEtreLe3": "**But du jeu**\nÊtre le premier à se débarrasser de toutes ses cartes en formant des combinaisons valides (melds).\n\n**Déroulement d''un tour**\n1. **Piocher** : Prendre la carte du dessus de la défausse OU de la pioche.\n2. **Étaler (Optionnel)** : Poser des combinaisons valides sur la table.\n   - **Séquence (Run)** : 3 cartes ou plus de la même couleur qui se suivent (ex: 5♠, 6♠, 7♠). L''As peut être haut ou bas.\n   - **Groupe (Set)** : 3 ou 4 cartes de même valeur mais de couleurs différentes (ex: 8♥, 8♣, 8♦).\n3. **Défausser** : Se défaire d''une carte de sa main sur la défausse.\n\n**Fin de la manche**\nLe premier joueur qui n''a plus de cartes après avoir défaussé gagne. Les autres comptent les points de leurs cartes restantes (Figures = 10, As = 15, autres = valeur faciale). La partie s''arrête à 100 points.",
-  "butDuJeuFaireDeviner2": "**But du jeu**\nFaire deviner un maximum de mots à votre équipe avant la fin du temps imparti, sans utiliser les mots interdits !\n\n**Déroulement**\n1. À chaque tour, un joueur (\"l''orateur\") tente de faire deviner un mot à son équipe.\n2. L''orateur ne doit **jamais** prononcer le mot à deviner, ni aucun des mots \"Taboo\" (mots interdits) affichés sous le mot cible. Il ne peut pas non plus utiliser de traductions ou des mots de la même famille.\n3. Si l''orateur utilise un mot Taboo, l''équipe adverse (ou le juge) signale la faute, la carte est annulée et l''orateur passe à la suivante.\n4. Chaque mot deviné rapporte un point à l''équipe.\n5. Le tour se termine quand le temps est écoulé.\n\n**Fin de partie**\nL''équipe avec le plus de points après le nombre de tours défini remporte la victoire !",
-  "butDuJeuAmenerVos": "**But du jeu**\nAmener vos chevaux au centre du plateau en contournant vos adversaires.\n\n**Règles Classiques**\n1. **Sortie de base** : Il faut faire un **1** ou un **6** pour sortir un pion.\n2. **Tour bonus** : Faire un **6**, capturer un pion ou terminer le parcours permet de rejouer. (Attention : faire 3 fois un 6 consécutif annule votre tour !).\n3. **Capture** : Tomber sur un pion adverse le renvoie à sa base (impossible sur les cases protégées \"Étoiles\" ou sur la case de départ de ce joueur).\n4. **Arrivée** : Il faut un score exact pour avancer dans l''escalier final.\n\n**Mode Équipes (2v2)**\nNécessite exactement 4 joueurs. Vous êtes allié avec le joueur face à vous.\n- **Victoire partagée** : La première équipe qui amène un total de 4 pions au centre remporte la partie (ex: 3 pions pour vous et 1 pour votre allié).\n- **Entraide** : Vous pouvez utiliser votre lancer pour déplacer le pion de votre allié, mais *uniquement* pour le sortir de sa base (avec un 1 ou 6) ou l''avancer dans son escalier d''arrivée.\n- **Blocage allié** : Il est impossible de capturer le pion de votre coéquipier. Si votre mouvement vous fait atterrir sur lui, le coup est invalide.",
-  "principeJeuSurrealisteDEcriture": "**Principe**\nJeu surréaliste d''écriture collective.\n**Variantes**\n- Classique : Chacun écrit un élément de la phrase (Substantif, Adjectif, Verbe, etc.) sans voir les précédents.\n- Continuation : Chacun voit les 3 derniers mots et complète la phrase.\n**Déroulement**\nLes feuilles tournent jusqu''à ce que tout le monde ait participé.",
-  "butDuJeuPlacerLe": "**But du jeu**\nPlacer le plus grand nombre de ses pièces sur le plateau.\n**Règle d''or**\nChaque nouvelle pièce doit toucher au moins une autre pièce de la même couleur par un coin, mais jamais par un côté.\n**Déroulement**\n1. Le premier tour se joue obligatoirement dans le coin du plateau de votre couleur.\n2. Les tours suivants respectent la règle d''or.\n3. Si vous ne pouvez plus jouer, vous passez votre tour.\n**Score**\n-1 point par carré non placé.\n+15 points si toutes les pièces sont placées.\n+5 points bonus si la dernière pièce posée est le carré unique (1x1).",
-  "objectifEtreLePremierA": "**Objectif**\nÊtre le premier à atteindre le score cible (20, 50 ou 100 points).\n\n**Déroulement**\nChaque joueur reçoit 7 dominos. À son tour, il doit poser un domino correspondant à l''une des extrémités de la chaîne. Les doubles se jouent en croix.\n\n**Modes de jeu**\n- **Pioche** : Si vous ne pouvez pas jouer, vous piochez jusqu''à avoir une pièce jouable.\n- **Bloqué** : Pas de pioche. Si vous ne pouvez pas jouer, vous passez votre tour.\n- **Tous les Cinq** : Le premier double joué est le \"Spinner\" (jouable sur 4 côtés). Vous marquez des points à chaque coup si la somme des extrémités est un multiple de 5.\n\n**Fin de tour**\nSi personne ne peut jouer, le tour est bloqué. Les joueurs révèlent leurs mains. Le joueur avec le moins de points remporte le tour et marque la somme des points des mains adverses.",
-  "objectifEtreLePremierJoueur": "**Objectif**\nÊtre le premier joueur à se débarrasser de toutes ses cartes.\n\n**Règles**\n- Le jeu se joue avec un jeu de 52 cartes.\n- Ordre des cartes (de la plus faible à la plus forte) : 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Ordre des couleurs (de la plus faible à la plus forte) : Carreaux ♦ (D), Trèfles ♣ (C), Cœurs ♥ (H), Piques ♠ (S).\n- Le joueur qui a le 3 de Carreaux commence la partie.\n\n**Combinaisons**\n- **Simple** : 1 carte.\n- **Paire** : 2 cartes de même rang.\n- **Triple** : 3 cartes de même rang.\n- **Suite** : 5 cartes de rangs consécutifs (couleurs mélangées).\n- **Couleur** : 5 cartes de la même couleur.\n- **Full** : 3 cartes d''un rang + 2 cartes d''un autre rang.\n- **Carré** : 4 cartes de même rang + 1 carte quelconque.\n- **Quinte Flush** : 5 cartes consécutives de la même couleur.\n\n**Hiérarchie des combinaisons de 5 cartes**\nQuinte Flush > Carré > Full > Couleur > Suite.\nUne combinaison ne peut être battue que par une combinaison de même taille et de valeur supérieure.",
-  "objectifCapturerToutesLesPieces": "**Objectif**\nCapturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.\n**Règles**\n- Se joue sur un damier 8x8, exclusivement sur les cases sombres.\n- Les pièces avancent en diagonale d''une case.\n- Les captures sont **obligatoires** et se font en sautant par-dessus une pièce ennemie.\n- Plusieurs captures peuvent être enchaînées en un seul tour.\n- Lorsqu''une pièce atteint la rangée opposée, elle est promue en \"Dame\" et peut se déplacer et capturer en arrière.",
+  "butDuJeuEtreLe1": "Spot the single matching symbol between your card and the center deck card as fast as you can!",
+  "butDuJeuSeDebarrasser": "**Objective**\nBe the first player to empty your hand of all cards!\n- Match the top discard card by color, number, or action symbol.\n- Use Action cards (+2, Skip, Reverse, Wild, Wild Draw 4) to hinder opponents.\n- Never forget to hit ''UNO'' when down to your last card!",
+  "principeDuJeuLeJeu": "A random picture from a player''s camera roll flashes on screen. Guess whose photo it is as fast as you can!",
+  "butDuJeuEtreLe2": "**Objective**\nRace across the board to be the first driver to reach 1000 Kilometers!\n- Play Distance cards (25, 50, 75, 100, 200 km) to progress.\n- Attack rivals with Hazards (Red Light, Flat Tire, Out of Gas, Accident).\n- Defend with Remedies or achieve permanent immunity with the 4 Safety cards!",
+  "butDuJeuEtreLe3": "Meld your cards into runs (same suit in sequence) or sets (same rank, different suits) to be the first to empty your hand and win the round!",
+  "butDuJeuFaireDeviner2": "Describe the target word to your teammates without uttering the word itself or any of the 5 forbidden Taboo buzzwords on the card!",
+  "butDuJeuAmenerVos": "Roll the dice (roll a 6 to exit your stable), circle the board, and climb all four of your pawns up the final home stretch staircase!",
+  "principeJeuSurrealisteDEcriture": "Collaborative surrealist writing where each player writes part of a sentence without seeing earlier words, creating hilarious surprise stories!",
+  "butDuJeuPlacerLe": "Place geometric polyomino pieces on the board. Each new piece must touch at least one of your own pieces corner-to-corner, but never edge-to-edge!",
+  "objectifEtreLePremierA": "Match open domino ends with equal pip values. The first player to play all their dominoes takes the round!",
+  "objectifEtreLePremierJoueur": "Popular climbing card game where 2 is highest. Discard combinations (singles, pairs, full houses, flushes) to beat the current trick and empty your hand!",
+  "objectifCapturerToutesLesPieces": "Move diagonally across dark squares. Jumping over enemy pieces to capture them is mandatory. Reach the opposite side to crown a King!",
   "unSubstantifExLeChat": "imenica (npr. mačka)",
   "unAdjectifExMignon": "pridjev (npr. sladak)",
   "unVerbeExMange": "glagol (npr. jede)",
@@ -2870,7 +2802,6 @@
   "vousDevezJouerLeMeme": "Moraš odigrati isti broj karata.",
   "combinaisonDe5CartesTrop": "Kombinacija od 5 karata je preslaba.",
   "vousDevezJouerUneCarte": "Moraš odigrati jaču kartu.",
-  "aGagne1": "]'}' a gagné !",
   "ceNEstPasVotre": "Nisi na redu.",
   "carteIntrouvableDansLaMain": "Karta nije pronađena u ruci.",
   "coupInvalideSelonLesRegles": "Nevažeći potez prema pravilima Mille Bornesa!",
@@ -2881,7 +2812,6 @@
   "leTempsEstEcoulePour": "Vrijeme za izjavu istine je isteklo!",
   "cibleHorsDeLaGrille": "Meta izvan mreže.",
   "caseDejaCiblee": "Polje je već gađano.",
-  "aCouleTouteLaFlotte": "]'}' a coulé toute la flotte adverse !",
   "placementAutomatiqueEffectue": "⏱️ Automatsko postavljanje završeno.",
   "tempsEcoulePourLaSaisie": "⏰ Vrijeme za unos riječi je isteklo. Igra započinje s unesenim riječima!",
   "laPhaseDeVoteA": "La phase de vote a commencé !",
@@ -2944,7 +2874,6 @@
   "debugJoingameTransactionReussieRetourne": "[DEBUG joinGame] Transaction réussie. Retourne true.",
   "debugJoingameLaPartieN": "[DEBUG joinGame] La partie n''existe pas ou n''est plus en lobby. Retourne false.",
   "erreurCritiqueDansJoingame": "--- ERREUR CRITIQUE DANS joinGame ---",
-  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizations.of(context)!.wordcivilParts0TrimWordundercoverIA renvoie des mots simples séparés",
   "infiltre": "Ubačeni agent",
   "civil": "Civil",
   "vendeurDeFalafels": "Vendeur de Falafels",
@@ -2983,7 +2912,6 @@
   "combinaisonInvalideSelonLesRegles": "Nevažeća kombinacija prema pravilima Remija!",
   "defaussezExactement1Carte": "Odbaci točno 1 kartu.",
   "carteNonTrouvee": "Karta nije pronađena.",
-  "aGagneLaManche": "]'}' a gagné la manche !",
   "desDejaLancesPourCe": "Dés déjà lancés pour ce tour.",
   "vousDevezDAbordLancer": "Prvo moraš baciti kockicu.",
   "vousNePouvezPasDeplacer": "Ne možeš pomicati protivničku figuru!",
@@ -3093,7 +3021,6 @@
   "vousNePouvezPasChoisir": "Ne možeš odabrati boju sada.",
   "erreurCritiquePlayerorderEstVide": "ERREUR CRITIQUE: playerOrder est vide dans nextRound. Impossible de continuer.",
   "questionNonTrouvee": "Pitanje nije pronađeno",
-  "quiPourraitLePlusApplocalizations1": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft",
   "menteur": "Menteur",
   "pasAssezDeJoueursPour": "Pas assez de joueurs pour ce mode.",
   "ajouteLaDescriptionLaPlus": "Ajoute la description la plus drôle à ce mème !",
@@ -3102,9 +3029,6 @@
   "chaqueJoueurActifDoitPoser": "Svaki aktivni igrač mora položiti barem jednu kartu prije licitacije.",
   "enchereInvalide": "Nevažeća ponuda.",
   "laSurenchereDoitEtreSuperieure": "Podizanje uloga mora biti veće.",
-  "applocalizationsOfContextUnjoueurEst": "] ?? AppLocalizations.of(context)!.unJoueur'}' est le dernier survivant et remporte Skull !",
-  "applocalizationsOfContextUnjoueurA": "] ?? AppLocalizations.of(context)!.unJoueur'}' a remporté 2 défis et gagne la partie !",
-  "applocalizationsOfContextUnjoueurRemporte": "] ?? AppLocalizations.of(context)!.unJoueur'}' remporte Skull !",
   "reponseVide": "Prazan odgovor.",
   "leJugeNePeutPas1": "Sudac ne može podnijeti odgovor.",
   "toutLeMondeARepondu": "Tout le monde a répondu ! Place au dévoilement.",
@@ -3112,17 +3036,13 @@
   "toutLeMondeARepondu1": "Tout le monde a répondu ! Place au vote.",
   "toutesLesReponsesSontRecues": "Toutes les réponses sont reçues ! Le Juge doit trancher.",
   "joueurCibleIntrouvable": "Joueur ciblé introuvable.",
-  "quiPourraitLePlusApplocalizations2": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.elseIfGametypeSynonyme ou Banni",
   "vousNePouvezPasBannir": "Ne možeš zabraniti vlastiti sinonim!",
   "seulLeJugeEnTitre": "Samo trenutni Sudac može odrediti pobjednika.",
   "ceJoueurNAPas1": "Ovaj igrač nije podnio odgovor.",
-  "quiPourraitLePlusApplocalizations3": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIfLe Juge",
-  "quiPourraitLePlusApplocalizations4": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.forFinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Savršeno izjednačeno! Bodovi nisu dodijeljeni.",
   "egaliteDansLesVotesAucun": "Izjednačeni glasovi: nijedan igrač nije prognan ovog kruga.",
   "laDescriptionLaPlusDrole": "Odabran je najsmješniji opis!",
   "aucuneDescriptionNAEte": "Aucune description n\\''a été votée.",
-  "quiPourraitLePlusApplocalizations5": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Juge introuvable.",
   "laPartieDeZeroPointe": "Igra Nula Bodova počinje! Svaki igrač mora otkriti 2 karte.",
   "toutLeMondeARevele": "Svi su otkrili svoje karte. Igra počinje!",
@@ -3164,28 +3084,25 @@
   "cultureDefi": "🧠 Znanje i izazov",
   "familleToutPublic": "👨‍👩‍👧‍👦 Obitelj i za sve uzraste",
   "piquantInsolite": "🌶️ Pikantno i neobično",
-  "quiPourraitLePlusApplocalizations6": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.quipourraitvotemodegrouper",
   "devineT": "Devine T",
   "presidente": "Présidente",
   "chargement": "Chargement...",
   "cursive": "Cursive",
   "exception": "Exception:",
-  "debutDeLaConstructionDe": "--- DÉBUT DE LA CONSTRUCTION DE L''UI DE VOTE ''Qui Pourrait le Plus ?AppLocalizations.of(context)!.printEtatDeIsactionpendingAu(_isActionPending)players''] as Map<String, dynamic>?) ?? '{}';",
   "clicSurLeJoueurPname": ">>> CLIC sur le joueur ''$pName'' (ID: $pId) !",
   "passageDeIsactionpendingATrue": "- Passage de _isActionPending à true.",
   "erreurFirebaseLorsDuVote": "!!! ERREUR Firebase lors du vote: $e",
   "appelFirebaseTerminePassageDe": "- Appel Firebase terminé. Passage de _isActionPending à false.",
   "attentionLeWidgetNEst": "- ATTENTION: Le widget n''est plus monté, setState annulé.",
-  "quiPourraitLePlusApplocalizations7": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "PHASE DE POSE",
   "stre9f4a5": "🏆 Legendarno!",
   "str21f597": "⭐ Izvrsno!",
   "str59ee4e": "👍 Dobro odigrano!",
   "strb6f91d": "😅 Nije loše!",
   "strc0046c": "💪 Možemo i bolje!",
-  "str85bff7": "✅ $'{'''Bravo !'''}'",
-  "strfa1b8c": "❌ $'{'''Raté !'''}'",
-  "str487ca1": "🤫 $'{'''Chut ! Ferme les yeux'''}' 🙈",
+  "str85bff7": "✅ $''(''''Bravo !'''')''",
+  "strfa1b8c": "❌ $''(''''Raté !'''')''",
+  "str487ca1": "🤫 $''(''''Chut ! Ferme les yeux'''')'' 🙈",
   "leSoleilSeLeve": "Sunce izlazi",
   "atout": "ADUT: {suit}",
   "@atout": {
@@ -3204,8 +3121,7 @@
   "chill": "Opuštanje",
   "soiree": "Tulum",
   "competition": "Natjecanje",
-  "enCours": "EN COURS : '{'0'}'",
-  "gamemessagelocalizationTrContextReason": ": \"\"'}'\" : GameMessageLocalization.tr(context, reason),",
+  "enCours": "EN COURS : '{0}'",
   "jAiLanceUnePartie2": "Pokrenuo sam igru",
   "piedDeBiche": "Pajser",
   "appTitle": "Igra za zabavu",
@@ -3819,7 +3735,7 @@
       }
     }
   },
-  "mrWhiteADevineLe1": "Mr. White a deviné le mot secret : ''{civilianWord}'' !",
+  "mrWhiteADevineLe1": "Mr. White a deviné le mot secret : '{civilianWord}' !",
   "@mrWhiteADevineLe1": {
     "placeholders": {
       "civilianWord": {
@@ -3827,7 +3743,7 @@
       }
     }
   },
-  "mrWhiteAEchoueA1": "Mr. White a échoué à deviner le mot (c''était ''{civilianWord}'').",
+  "mrWhiteAEchoueA1": "Mr. White a échoué à deviner le mot (c''était '{civilianWord}').",
   "@mrWhiteAEchoueA1": {
     "placeholders": {
       "civilianWord": {
@@ -4184,7 +4100,7 @@
     }
   },
   "lAncienCapitaine1": "L''ancien Capitaine",
-  "aDit": "{playerDataplayerId} a dit : ''{cleanClue}''",
+  "aDit": "{playerDataplayerId} a dit : '{cleanClue}'",
   "@aDit": {
     "placeholders": {
       "playerDataplayerId": {
@@ -4195,7 +4111,7 @@
       }
     }
   },
-  "aDevineLeMotCivil1": "{gameDataplayerData} a deviné le mot civil (''{civilWord}'') !",
+  "aDevineLeMotCivil1": "{gameDataplayerData} a deviné le mot civil ('{civilWord}') !",
   "@aDevineLeMotCivil1": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4206,7 +4122,7 @@
       }
     }
   },
-  "aProposeMaisCeN": "{gameDataplayerData} a proposé ''{guessedWord}'', mais ce n''était pas le mot civil (''{civilWord}'') !",
+  "aProposeMaisCeN": "{gameDataplayerData} a proposé '{guessedWord}', mais ce n''était pas le mot civil ('{civilWord}') !",
   "@aProposeMaisCeN": {
     "placeholders": {
       "gameDataplayerData": {
@@ -4693,7 +4609,7 @@
       }
     }
   },
-  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition '{loserAnswer}' !",
   "@aEteBanniPourSa1": {
     "placeholders": {
       "loserName": {
@@ -4704,7 +4620,7 @@
       }
     }
   },
-  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot2": "{winnerName} a trouvé le mot : '{currentWord}' !",
   "@aTrouveLeMot2": {
     "placeholders": {
       "winnerName": {
@@ -4715,7 +4631,7 @@
       }
     }
   },
-  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "personneNATrouveLe1": "Personne n''a trouvé le mot : '{currentWord}'.",
   "@personneNATrouveLe1": {
     "placeholders": {
       "currentWord": {
@@ -4723,7 +4639,7 @@
       }
     }
   },
-  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "aTrouveLeMot3": "{guesserName} a trouvé le mot : '{currentWord}' !",
   "@aTrouveLeMot3": {
     "placeholders": {
       "guesserName": {
@@ -5011,5 +4927,224 @@
       }
     }
   },
-  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
+  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant.",
+  "leMotEtaitLabel": "Le mot était :",
+  "mancheLabel": "Manche",
+  "et": "et",
+  "pokerPlayerCheck": "{playerName} provjerava (Check).",
+  "@pokerPlayerCheck": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mot1": "Mot:",
+  "rouges": "Crvene",
+  "noirs": "Crne",
+  "crane2": "Crâne",
+  "enAttente2": "En attente",
+  "enCours1": "En cours",
+  "aSelectionneSonPionEt1": "{playerscurrentPlay} je odabrao/odabrala pijuna i razmišlja...",
+  "@aSelectionneSonPionEt1": {
+    "placeholders": {
+      "playerscurrentPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "tempsRestantS1": "Preostalo vrijeme: {seconds} s",
+  "@tempsRestantS1": {
+    "placeholders": {
+      "seconds": {
+        "type": "Object"
+      }
+    }
+  },
+  "pack": "Paket {wordstake2join}",
+  "@pack": {
+    "placeholders": {
+      "wordstake2join": {
+        "type": "Object"
+      }
+    }
+  },
+  "variante1": "{rawPairtrim} (Varijanta)",
+  "@variante1": {
+    "placeholders": {
+      "rawPairtrim": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneAvecPoint": "{winnerName} gagne avec {lowestScore} point{lowestScore1s} !",
+  "@gagneAvecPoint": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "lowestScore": {
+        "type": "Object"
+      },
+      "lowestScore1s": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull1": "{playerswinnerIdnam} remporte Skull !",
+  "@remporteSkull1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
+  "packIa": "Pack IA {_selectedGame}",
+  "@packIa": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "standard": "Standardno",
+  "lui": "Lui",
+  "carte4": "Karta {deckIndex} / {deckTotal}",
+  "@carte4": {
+    "placeholders": {
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques1": "Joueurs bloqués",
+  "vousNAvezBloqueAucun": "Niste blokirali nijednog igrača.",
+  "debloquer": "Odblokiraj",
+  "nouvelEmail": "Nouvel email",
+  "motDePasseActuel": "Mot de passe actuel",
+  "emailMisAJourAvec": "Email mis à jour avec succès !",
+  "modifierMotDePasse": "Modifier mot de passe",
+  "nouveauMotDePasse": "Nouveau mot de passe",
+  "confirmerLeMotDePasse": "Confirmer le mot de passe",
+  "motDePasseModifieAvec": "Mot de passe modifié avec succès !",
+  "prendreUnePhoto": "Prendre une photo",
+  "choisirDepuisLaGalerie": "Choisir depuis la galerie",
+  "supprimerLaPhoto": "Supprimer la photo",
+  "photoDeProfilRetiree": "Photo de profil retirée.",
+  "pseudoMisAJour": "Pseudo mis à jour !",
+  "compteSecurite": "Compte & Sécurité",
+  "editeParParrelV10": "Édité par Parrel • v1.0.0",
+  "aucunJeuTrouve": "Nema pronađenih igara",
+  "essaieDAjusterTesFiltres": "Pokušajte prilagoditi filtre ili ponovno pretražiti.",
+  "reinitialiserLesFiltres": "Poništi filtre",
+  "nouveau": "✨ NOUVEAU",
+  "gererMonAbonnement": "Gérer mon abonnement",
+  "mesPieces": "Mes Pièces",
+  "rechargerLesOffresDuStore": "Recharger les offres du Store",
+  "gererMesAbonnements": "Gérer mes abonnements",
+  "badges": "Značke",
+  "partiesJouees": "Odigrane igre",
+  "xpTotalSession": "Ukupno XP sesije",
+  "moyennePartie": "Prosjek / Igra",
+  "detailParJeuPerformanceXp": "Pojedinosti po igri i izvedba XP",
+  "jouezVosPremieresPartiesPour": "Odigrajte svoje prve igre da biste ovdje vidjeli svoju XP statistiku!",
+  "xpAuCompteur": "{psxp} XP prikupljeno",
+  "@xpAuCompteur": {
+    "placeholders": {
+      "psxp": {
+        "type": "Object"
+      }
+    }
+  },
+  "encoreXpAvantNiv": "Još {xpRemaining} XP do Razine {pslevel1}",
+  "@encoreXpAvantNiv": {
+    "placeholders": {
+      "xpRemaining": {
+        "type": "Object"
+      },
+      "pslevel1": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueeVictoireXpGagnes": "{played} odigrano • {won} pobjeda • ~{gameXp} osvojenih XP {played1s} {won1s}",
+  "@joueeVictoireXpGagnes": {
+    "placeholders": {
+      "played": {
+        "type": "Object"
+      },
+      "played1s": {
+        "type": "Object"
+      },
+      "won": {
+        "type": "Object"
+      },
+      "won1s": {
+        "type": "Object"
+      },
+      "gameXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "erreurDeChargementDesDonnees": "Pogreška pri učitavanju korisničkih podataka.",
+  "vousDevezAccepterLesCgu": "Vous devez accepter les CGU et la Politique de Confidentialité pour créer un compte.",
+  "miseAJourDisponible": "Dostupno ažuriranje",
+  "plusTard": "Kasnije",
+  "mettreAJour": "Ažuriraj",
+  "uneNouvelleVersionDePlayfun1": "Dostupna je nova verzija ({newVersion}) aplikacije Playfun s novostima i popravcima!",
+  "@uneNouvelleVersionDePlayfun1": {
+    "placeholders": {
+      "newVersion": {
+        "type": "Object"
+      }
+    }
+  },
+  "maintenanceEnCours": "Maintenance en cours",
+  "mettreAJourMaintenant": "Mettre à jour maintenant",
+  "motifDuSignalement": "Razlog prijave:",
+  "tricheOuAntiJeu": "Varanje ili nesportska igra",
+  "autre": "Ostalo",
+  "signaler": "Prijavi",
+  "detailParJeu": "Pojedinosti po igri:",
+  "ceJoueurNAPas2": "Ovaj igrač još nema zabilježenih igara.",
+  "badgesDebloques": "Otključane značke: {unlockedBadgesleng} / {appBadgesallBadges}",
+  "@badgesDebloques": {
+    "placeholders": {
+      "unlockedBadgesleng": {
+        "type": "Object"
+      },
+      "appBadgesallBadges": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursBloques2": "Blokirani igrači ({psblockedUsersleng})",
+  "@joueursBloques2": {
+    "placeholders": {
+      "psblockedUsersleng": {
+        "type": "Object"
+      }
+    }
+  },
+  "debloquer1": "Deblokiraj {name}",
+  "@debloquer1": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "signalerOuBloquer": "Prijavi ili blokiraj {name}",
+  "@signalerOuBloquer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "vote1": "glas"
 }

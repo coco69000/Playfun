@@ -175,11 +175,11 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
           tabs: [
             Tab(
               icon: const Icon(Icons.military_tech),
-              text: "${l10n?.tabBadges ?? GameContentLocalization.ui(context, 'Badges')} (${ps.totalUnlockedBadgesCount}/${AppBadges.allBadges.length})",
+              text: "${l10n?.tabBadges ?? AppLocalizations.of(context)!.badges} (${ps.totalUnlockedBadgesCount}/${AppBadges.allBadges.length})",
             ),
             Tab(
               icon: const Icon(Icons.bar_chart),
-              text: l10n?.tabStats ?? GameContentLocalization.ui(context, "Statistiques"),
+              text: l10n?.tabStats ?? AppLocalizations.of(context)!.tabStats,
             ),
           ],
         ),
@@ -376,11 +376,11 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              GameContentLocalization.format(context, "{0} XP au compteur", [ps.xp]),
+                              AppLocalizations.of(context)!.xpAuCompteur(ps.xp),
                               style: const TextStyle(color: Color(0xFF67E8F9), fontWeight: FontWeight.w600, fontSize: 13),
                             ),
                             Text(
-                              GameContentLocalization.format(context, "Encore {0} XP avant Niv. {1}", [xpRemaining, ps.level + 1]),
+                              AppLocalizations.of(context)!.encoreXpAvantNiv(xpRemaining, ps.level + 1),
                               style: const TextStyle(color: Colors.white70, fontSize: 12),
                             ),
                           ],
@@ -396,7 +396,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                   children: [
                     Expanded(
                       child: _buildCounterCard(
-                        l10n?.gamesPlayed ?? GameContentLocalization.ui(context, "Parties Jouées"),
+                        l10n?.gamesPlayed ?? AppLocalizations.of(context)!.partiesJouees,
                         "$totalPlayed",
                         Icons.sports_esports,
                         Colors.blueAccent,
@@ -405,7 +405,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     const SizedBox(width: 10),
                     Expanded(
                       child: _buildCounterCard(
-                        l10n?.gamesWon ?? GameContentLocalization.ui(context, "Victoires"),
+                        l10n?.gamesWon ?? AppLocalizations.of(context)!.gamesWon,
                         "$totalWon",
                         Icons.emoji_events,
                         Colors.amberAccent,
@@ -418,7 +418,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                   children: [
                     Expanded(
                       child: _buildCounterCard(
-                        GameContentLocalization.ui(context, "XP Total Session"),
+                        AppLocalizations.of(context)!.xpTotalSession,
                         "${ps.xp} XP",
                         Icons.military_tech_rounded,
                         const Color(0xFF67E8F9),
@@ -427,7 +427,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     const SizedBox(width: 10),
                     Expanded(
                       child: _buildCounterCard(
-                        GameContentLocalization.ui(context, "Moyenne / Partie"),
+                        AppLocalizations.of(context)!.moyennePartie,
                         "${avgXpPerGame.toStringAsFixed(1)} XP",
                         Icons.auto_graph_rounded,
                         Colors.purpleAccent,
@@ -439,7 +439,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
 
                 // 3. STATISTIQUES DÉTAILLÉES PAR JEU AVEC GAINS D'XP
                 Text(
-                  GameContentLocalization.ui(context, "Détail par Jeu & Performance XP"),
+                  AppLocalizations.of(context)!.detailParJeuPerformanceXp,
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
@@ -449,7 +449,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     child: Padding(
                       padding: const EdgeInsets.all(32.0),
                       child: Text(
-                        GameContentLocalization.ui(context, "Jouez vos premières parties pour voir vos stats d'XP ici !"),
+                        AppLocalizations.of(context)!.jouezVosPremieresPartiesPour,
                         style: const TextStyle(color: Colors.white54),
                       ),
                     ),
@@ -486,17 +486,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            GameContentLocalization.format(
-                              context,
-                              "{0} jouée{1} • {2} victoire{3} • ~{4} XP gagnés",
-                              [
-                                played,
-                                played > 1 ? 's' : '',
-                                won,
-                                won > 1 ? 's' : '',
-                                gameXp,
-                              ],
-                            ),
+                            AppLocalizations.of(context)!.joueeVictoireXpGagnes(played, played > 1 ? 's' : '', won, won > 1 ? 's' : '', gameXp),
                           ),
                           trailing: Container(
                             padding: const EdgeInsets.symmetric(

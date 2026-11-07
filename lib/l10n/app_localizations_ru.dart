@@ -97,7 +97,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get utiliser => 'ИСПОЛЬЗОВАТЬ';
 
   @override
-  String get packActiveElements => '✨ Пак \'\'{0}активирован ({1} предметов)!';
+  String get packActiveElements => '✨ Пак {0}активирован ({1} предметов)!';
 
   @override
   String get fusionner => 'ОБЪЕДИНИТЬ';
@@ -152,7 +152,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get melangerPlusieursThemes => 'Смешать несколько тем:';
 
   @override
-  String get combineS => '✨ {0 вместе}';
+  String get combineS => '✨ \'(0 вместе)\'';
 
   @override
   String get nombreDElements => 'Количество элементов:';
@@ -839,17 +839,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String xp(Object pXp) {
-    return '$pXp XP';
+    return '0 XP $pXp';
   }
 
   @override
   String get nAPlusDeCartes => 'Нет карт';
 
   @override
-  String get cartesRestantes => '{осталось 0} карт';
+  String get cartesRestantes => '\'(осталось 0)\' карт';
 
   @override
-  String get jetonsMise => 'Фишки: {\$0,} | Ставка: {\$1,}';
+  String get jetonsMise => 'Фишки: \'(\$0,)\' | Ставка: \'(\$1,)\'';
 
   @override
   String get totalPts => 'Всего: {0} очков';
@@ -1008,10 +1008,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Ожидание хоста для начала следующего хода...';
 
   @override
-  String get equipeAPts => 'Команда А: {очков} очков {pts}';
+  String get equipeAPts => 'Команда А: \'(очков)\' очков {pts}';
 
   @override
-  String get equipeBPts => 'Команда B: {очков} очков {pts}';
+  String get equipeBPts => 'Команда B: \'(очков)\' очков {pts}';
 
   @override
   String get cEstAToiDe => 'Вам отгадывать!';
@@ -1099,7 +1099,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get couche => 'Сбросил';
 
   @override
-  String get miseActuelle => 'Текущая ставка: {сумма} {amount}';
+  String get miseActuelle => 'Текущая ставка: \'(сумма)\' {amount}';
 
   @override
   String get enAttente => 'Ожидание...';
@@ -1284,7 +1284,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get saReponseEtait => 'Он ответил: «{0}».';
 
   @override
-  String get leMotEtait => 'Слово было: \'\'{0}\'.';
+  String get leMotEtait => 'Слово было: {0}.';
 
   @override
   String get cartesRevelees => 'Открытые карты:';
@@ -1475,10 +1475,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get lancerLeDe => 'БРОСИТЬ КУБИК';
 
   @override
-  String get scorePoints => 'Счёт: {набрал} очков {score}';
+  String get scorePoints => 'Счёт: \'(набрал)\' очков {score}';
 
   @override
-  String get dominosRestants => 'Оставшиеся домино: {считают} {count}';
+  String get dominosRestants => 'Оставшиеся домино: \'(считают)\' {count}';
 
   @override
   String get impossibleDeJouerCeDomino => 'Эту костяшку нельзя сюда положить.';
@@ -1493,7 +1493,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get extremites => 'Концы: ';
 
   @override
-  String get pioche2 => 'Ничья: {Счёт} {count}';
+  String get pioche2 => 'Ничья: \'(Счёт)\' {count}';
 
   @override
   String get piocher => 'Взять';
@@ -1510,7 +1510,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get clic => 'КЛИК';
 
   @override
-  String get lancersRestants => 'Оставшиеся броски: {Считать} {count}';
+  String get lancersRestants => 'Оставшиеся броски: \'(Считать)\' {count}';
 
   @override
   String get combinaison => 'КОМБИНАЦИЯ';
@@ -1550,7 +1550,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get carteAPrendre => 'КАРТА ДЛЯ ВЗЯТИЯ';
 
   @override
-  String get votreMain => 'Твоя рука ({считай}) {count}';
+  String get votreMain => 'Твоя рука (\'(считай)\') {count}';
 
   @override
   String get touchezUneCartePourLa => 'Коснитесь карты, чтобы сыграть';
@@ -1559,7 +1559,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get aucuneCombinaisonEtaleeSurLa => 'На столе пока нет комбинаций';
 
   @override
-  String get etaler => 'Спред ({счёт}) {count}';
+  String get etaler => 'Спред (\'(счёт)\') {count}';
 
   @override
   String get defausserFin => 'Сброс и конец';
@@ -2151,7 +2151,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get lEquipeAGagne => 'Команда {0} победила!';
 
   @override
-  String get points1 => '{0,} очков';
+  String get points1 => '\'(0,)\' очков';
 
   @override
   String get passeLObjet => 'Передай предмет';
@@ -2268,7 +2268,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get resultatsDuPassage => 'Результаты раунда';
 
   @override
-  String get pointsMarques => '+{набрано 0,} очков!';
+  String get pointsMarques => '+\'(набрано 0,)\' очков!';
 
   @override
   String get touchezUnMotPourModifier =>
@@ -2455,7 +2455,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get statistiques => 'Статистика — {0}';
 
   @override
-  String get vainqueur1 => 'Победитель: {0}\'{1}\n';
+  String get vainqueur1 => 'Победитель: {0}\'{1}\'\'\'\n';
 
   @override
   String get voirLesStats => 'Посмотреть статистику';
@@ -2638,7 +2638,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get reflechit => '{имя} думает... {name}';
+  String get reflechit => '\'(имя)\' думает... {name}';
 
   @override
   String get faceAFaceCoteA => 'Лицом к лицу (рядом)';
@@ -2650,7 +2650,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get prendreLAtoutOuPasser => 'ВЗЯТЬ КОЗЫРЬ ИЛИ ПАСОВАТЬ:';
 
   @override
-  String get combinaisonsDe => 'Комбинации {названия} {name}';
+  String get combinaisonsDe => 'Комбинации \'(названия)\' {name}';
 
   @override
   String get ilDevraDonnerLePremier => 'Он должен дать первую подсказку';
@@ -3340,9 +3340,6 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get aRelanceLesDes3 => '{pName} перебросил кости ({3rollsLeft1}/3)!';
-
-  @override
   String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName оставил(а) кубик со значением $dieVal (кубик #$index1) 🔒';
   }
@@ -3392,10 +3389,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get pioche3 => 'Кирка';
 
   @override
-  String get wordcivilParts0TrimWordundercover =>
-      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'}\' ещё \'\'{\' \r\n      Анти-дублирующея безопасность: если';
-
-  @override
   String get vousNAvezPasDe => 'У тебя нет слов';
 
   @override
@@ -3436,10 +3429,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur набирает больше всего опыта ($maxXp опыта) и становится админом!';
   }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Конец рукава (кнопка администратора)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\' \r\n    ожидать _db.runTransaction((transaction) async\'\'{\' \r\n      финальная играRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = waitit transaction.get(gameRef); \r\n      если (!snap.exists) return; \r\n\r\n      финальная играData = snap.data() как Map<String, динамический>; \r\n      финальные игроки = Карта<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Определить победителя (больше опыта)\r\n      Победитель струныId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        final xp = (pData[\'xp\'] as num?)?. toInt() ?? 0; \r\n        если (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Кто-то';
@@ -3492,18 +3481,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get leJoueur => 'Игрок';
 
   @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\' \r\n      Вопросы по списку<String> =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[сложность]?? \r\n          GameWords.whoIsMostLikely[';
-
-  @override
   String get honnete => 'Честно';
 
   @override
-  String get pairSplit => ') ? pair.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      '): [чётные, чётные]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = перетасованныеРоли[1]; \r\n\r\n        Вопрос =\r\n            «Опиши своё секретное слово одним словом. Самозванцы, блеф!»; \r\n        для (var pId в players.keys) \'\'{\' \r\n          Строка pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
+  String get pairSplit => '? par.split()';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3523,20 +3504,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get passeLEnchere => 'пропускает ставку';
 
   @override
-  String get elseIfGametype =>
-      ') \'\'{\' \r\n        если (voterId == votedForId) { \r\n          бросить исключение («Формальный запрет голосовать за себя!»); \r\n        }\'\'}\' другое, если (gameType ==\r\n      ';
-
-  @override
   String get intRequiredvotesPlayersLengthIf =>
-      ') { \r\n        creditPlayerXp( \r\n          транзакция, \r\n          gameRef, \r\n          gameData, \r\n          избиратель, \r\n          5, \r\n          applySpeedBonus: верно, \r\n        ); \r\n      } \r\n\r\n      int requiredГолоса = игроки.Длина; \r\n\r\n      если (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\' \r\n          итоговая карта<Строка, int> voteCounts = {}; \r\n          для (окончательная цель в голосах.значениях) { \r\n            voteCounts[цель как строка] = (voteCounts[цель] ?? 0) + 1; \r\n          } \r\n\r\n          int maxГолосов = 0; \r\n          Список<Строка> верх Голосовали = []; \r\n          voteCounts.forEach((цель, подсчёт) \'\'{\' \r\n            если (считать > maxVotes) { \r\n              maxVotes = count; \r\n              topVoted = [цель]; \r\n            } еще, если (count == maxVotes) { \r\n              topVoted.add(цель); \r\n            }\'\'}\'); \r\n\r\n          Обновления[\r\n          ';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\' \r\n        итоговая карта<Строка, int> voteCounts = {}; \r\n        для (окончательная цель в голосах.значениях) { \r\n          voteCounts[цель как строка] = (voteCounts[цель] ?? 0) + 1; \r\n        } \r\n\r\n        int maxГолосов = 0; \r\n        Список<Строка> верх Голосовали = []; \r\n        voteCounts.forEach((цель, подсчёт) \'\'{\' \r\n          если (считать > maxVotes) { \r\n            maxVotes = count; \r\n            topVoted = [цель]; \r\n          } еще, если (count == maxVotes) { \r\n            topVoted.add(цель); \r\n          }\'\'}\'); \r\n\r\n        если (topVoted.length == 1) \'\'{\' \r\n          финальный победитель = лучший. Первое место; \r\n          Обновления[\r\n        ';
+      ') \'( \r\n        creditPlayerXp( \r\n          транзакция, \r\n          gameRef, \r\n          gameData, \r\n          избиратель, \r\n          5, \r\n          applySpeedBonus: верно, \r\n        ); \r\n      )\' \r\n\r\n      int requiredГолоса = игроки.Длина; \r\n\r\n      если (gameType == ';
 
   @override
   String aRemporteTousLesJetons(Object winnerName) {
@@ -3739,7 +3708,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String str8f522b(Object cat, Object hasScorescoreVal) {
-    return '$cat: $hasScorescoreVal';
+    return '0: 1 $cat $hasScorescoreVal';
   }
 
   @override
@@ -3846,12 +3815,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String strb74c15(Object fullText) {
-    return '« $fullText »';
+    return '\"0\" $fullText';
   }
 
   @override
   String str1e0607(Object authorName) {
-    return '$authorName : ';
+    return '0: $authorName';
   }
 
   @override
@@ -3914,7 +3883,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String str422faa(Object valuename, Object valuescore0) {
-    return '$valuename: $valuescore0 🃏';
+    return '0: 1 $valuename $valuescore0';
   }
 
   @override
@@ -3927,7 +3896,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String str95d36e(Object valuename, Object key0) {
-    return '$valuename: $key0';
+    return '0: 1 $valuename $key0';
   }
 
   @override
@@ -3990,7 +3959,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get leChallenger => 'Претендент';
 
   @override
-  String get stre93cb0 => '{0} : {1}';
+  String get stre93cb0 => ':{0} {1}';
 
   @override
   String get uneDescriptionHilarante => 'уморительная подпись';
@@ -4008,7 +3977,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String str98e212(Object pName, Object count, Object length, Object isFull) {
-    return '$pName: $count/$length$isFull';
+    return '0: 1/2 3 $pName $count $length $isFull';
   }
 
   @override
@@ -4048,12 +4017,8 @@ class AppLocalizationsRu extends AppLocalizations {
     Object score,
     Object totalScore,
   ) {
-    return '$carte $deckIndex / $deckTotal — $score : $totalScore';
+    return '0 1/2 - 3:4 $carte $deckIndex $deckTotal $score $totalScore';
   }
-
-  @override
-  String get styleConstTextstyleColorColors =>
-      ',\nстиль: const TextStyle (цвет: Colors.white70),\n),\nSizeBox (высота: 20),\nОбертывание()\nИсполнитель: WrapAlignment.center\nДети:\nOneFilteredClues\n.map((clue) => buildEasel(clue.toString()))\n.toList(),\n),\nSizeBox (высота: 20),\nЕсли (только OneFilteredClues.isEmpty)\nТекст\nAppLocalizations.of(context)!.allIndicesOntEte\nстиль: const TextStyle (цвет: Colors.red),\n),\n]\n),\n);\n\"Еще один\"\nОригинальное название: It\'s the guess to play\nОбратная колонка()\nДети: [\nТекст';
 
   @override
   String strf0868c(Object length0, Object valuescore0) {
@@ -4085,16 +4050,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get laVictime => 'жертва';
 
   @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      ';\nДеятельность центра Виджет = ряд()\nmainAxisSize: MainAxisSize.min\nДети: [\nРазработчик:ActionButton\nЯрлык: AppLocalizations.of(context)!.infect\nиконка: Icons.auto fix high\nЦвет: Colors.purpleAccess\nнажатый: () \'\'{\nПровайдер.of<PlayerState>()\nконтекст,\nЛожный, ложный,\n)recordBadgeEvent(\'lg loup noir infect\');\nFirebaseService.loupNoirInfect\nwidget.gameCode,\nИгрок Id,\nПравда.\n);\n\',\n),\nConst SizedBox (ширина: 8),\nРазработчик:ActionButton\nЯрлык: AppLocalizations.of(контекст)! выкупщик,\nИкона: Icons.close\nЦвет: Colors.redAccess\nПод давлением:\n() => FirebaseService.loupNoirInfect()\nwidget.gameCode,\nИгрок Id,\nложный,\n),\n),\n]\n);\n\'\nСломать.\nОригинальное название: Loup Blanc Turn\nБыстрый текст =';
-
-  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Никаких жертв сегодня (защищенных или спасенных)';
-
-  @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ',\nСтиль: TextStyle()\nИсточник: FontWeight.bold\nЦвет:\nмой\nColors.cyanAccess\n(выбранный ChatType == \"волк\")\nЦвета.redAccess.shade100\nЦвета: White60,\n),\n),\nTextSpan (текст: сообщение),\n]\n),\n),\n);\n\',\n);\n\',\n),\n),\n\n// Компактная коробка передач\nЕсли (может отправить сообщение)\nРоу.\nДети: [\nРасширенный()\nРебенок: SizeBox\nвысота: 32,\nРебенок: TextField()\nКонтроллер: ChatController\nстиль: const TextStyle (размер шрифта: 12, цвет: Colors.white),\nУкрашение: InputDecoration()\nhintText:\nAppLocalizations.of(context)!.writeTo,\nТекстовый стиль Const TextStyle\nЦвет: Colors.white30,\nРазмер шрифта: 11,\n),\nГраница: OutlineInputBorder()\nBorderRadius: BorderRadius.circulal(16)\nBorderSide.none, BorderSide.none\n),\nДочь: Правда,\nfillColor: Colors.white.withOpacity (0.08),\nContentPadding: const EdgeInsets.symmetric\nгоризонтальный: 10,\nвертикально: 0,\n),\n),\nonSubmitted: (текст) \'\'{\'\nЕсли (text.trim(.isNotEmpty))\nFirebaseService.sendChatMessage\nwidget.gameCode,\nИгрок Id,\ntext.trim(),\nвыбранный ЧатТип,\n);\nchatController.clear();\n\'\n\',\n),\n),\n),\nconst SizedBox (ширина: 4),\nIconButton\nИкона: Const Icon\nIcons.send округлен,\nРазмер: 18,\nЦвет: Colors.cyanAccent,\n),\nEdgeInsets.zero,\nОграничения: Const BoxConstraints(),\nнажатый: () \'\'{\n(chatController.text.trim(.isNotEmpty))\nFirebaseService.sendChatMessage\nwidget.gameCode,\nИгрок Id,\nchatController.text.trim(),\nвыбранный ЧатТип,\n);\nchatController.clear();\n\'\n\',\n),\n]\n),\n]\n),\n);\n\'\n\nВиджетная сборкаChatTab (String label, String type, Color activeColor)\nконечный бул выбран = выбран тип чата == тип;\nОбратный гестадетектор()\nonTap: () => setState(() => selectedChatType = type),\nРебенок: контейнер\nпрокладка: const EdgeInsets.symmetric (горизонтальный: 8, вертикальный: 3),\nУкрашение: BoxDecoration()\nЦвет:\nИзбранный\nActiveColor.withOpacity (0,25)\n: Colors.white.withOpacity(0.04),\nBorderRadius: BorderRadius.circulal(10)\nГраница: Border.all\nЦвет:\nИзбранный? ActiveColor.withOpacity(0.6): Colors.transparent\n),\n),\nРебенок: текст()\nэтикетка,\nСтиль: TextStyle()\nРазмер шрифта: 10,\nШрифт Вес: выбран? FontWeight.bold: FontWeight.normal\nЦвет: выбран? Активный цвет: Colors.white60\n),\n),\n),\n);\n\'\n\nОБНОВЛЕНИЕ АВАТАРА ДЛЯ МЕЖДУНАРОДНОЙ -\n\nWidget buildSyncTimer (Timestamp? startTime, интеграцияInSeconds)\nесли (startTime) null return const SizedBox.shrink();\n\n// TweenAnimationBuilder позволяет сверхтекучее визуальное время без блокировщика таймера и ручного набораState, что значительно облегчает резьбу (Точка 4)\nFinal endTime = startTime.toDate().add()\nДлительность (секунды: продолжительность)\n);\nОкончательный остаток = endTime.difference (DateTime.now()).\n\nЕсли (remaining.isNegative)\nВозвращать текст\nAppLocalizations.of(context)!.k0S\nНазвание: Theme.of()\nконтекст,\n)textTheme.headlineSmall?.copyWith(цвет: Colors.redAccess),\n);\n\n(перенаправлено с «TweenAnimationBuilder»)\nпродолжительность: оставшаяся,\nTween (начало: остаток, конец: Duration.zero)\nРазработчик: (BuildContext context, Duration value, Widget? child)\nконечные секунды = значение.inSeconds;\nВозвращать текст\nAppLocalizations.of(context)!.timeRestantS\nСтиль: Theme.of(context.textTheme.headlineSmall?.copyWith)\nЦвет: второй < 20? Colors.redAccess: Colors.amberAccess,\n),\n);\n\',\n);\n\'\n\nWidget buildSmallChevauxUI\nСоздайте контекст,\nMap<String, Dynamic> GameData\nСтрунный игрок,\n) \'\'{\nконечные игроки = Map<String, dynamic>.from(gameData[\'players\']?? \'\'{\')\nПоследний заказ игрока = List<String>.from()\nGameData [\'LittleChevauxPlayerOrder\']?\n);\nОкончательные позиции = Map<String, dynamic>.from()\nGameData[\'smallChevauxPositions\']??\n);\nFinal int currentIndex = gameData[\'smallChevauxCurrentIndex\']? 0;\nПоследний струнный токPlayerId =\nplayerOrder.isNotEmpty? playerOrder[currentIndex] :\';\nFinal bool isMyTurn = currentPlayerId ==playerId;\nFinal intice = (gameData [\'smallChevauxDice\'] как число??.toInt()??? 0;\nFinal bool hasRolled = gameData[\'littleChevauxHasRolled\']?? false;\nFinal bool isTeamMode = gameData[\'smallChevauxTeamMode\']?? false;\nFinal Map<String, dynamic> consecutiveSixs = Map<String, dynamic>.from()\nGameData[\'smallChevauxConsecutiveSixes\']??\n);\nПоследний int mySixStreak = последовательные Sixes[playerId]??? 0;\n\n// Современный флуопаллет / аркада на темном фоне\nЗаключительный список <Color> PlayerColors =\nconst Color (0xFFEF4444) // Неоновый красный\nconst Color (0xFF38BDF8) // Неоново-голубое небо\nconst Color(0xFF10B981) // Изумрудно-зеленый\nconst Color(0xFFF59E0B), // Золотой янтарь\n]\n\n//-- Виктория КРИН ----\nесли (gameData [\'gameState\'] == \'gameOver\')\nВозвращение UniversalGameEndScreen\nНазвание игры:';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Прибытие в центр доски!';
@@ -4130,12 +4087,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String k1663(Object oppUpper, Object oppBonus035) {
-    return '1-6: $oppUpper/63 $oppBonus035';
+    return '1-6: 0/63 1 $oppUpper $oppBonus035';
   }
 
   @override
   String k16631(Object myUpper, Object myBonus035) {
-    return '1-6: $myUpper/63 $myBonus035';
+    return '1-6: 0/63 1 $myUpper $myBonus035';
   }
 
   @override
@@ -4220,10 +4177,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get gagneTonSecretEstPreserve => 'ПОБЕДА! Твой секрет сохранён.';
 
   @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      '); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    \'\'}\' ещё \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : «{trim} (вариант)»; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    для (игрок VAR в _activePlayers) \'\'{\' \r\n      if (игрок == под прикрытием) { \r\n        _playerRoles[игрок] = «Инфильтратор»; \r\n      } еще, если (игрок == _mrWhitePlayer) { \r\n        _playerRoles[игрок] = «Мистер Уайт»; \r\n      } ещё { \r\n        _playerRoles[игрок] = «Гражданский»; \r\n      }\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  пустота _nextPlayerReveal() \'\'{\' \r\n    если (_currentPlayerRevealIndex < _activePlayers.длина - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } ещё { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(Струнник) \'\'{\' \r\n    String role = _playerRoles[игрок]!; \r\n    bool impostorsWin = роль == «Гражданский»; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      если (самозванцыПобеда) \'\'{\' \r\n        _resultMessage = «{player} был гражданским! Победили самозванцы!»; \r\n      \'\'}\' ещё \'\'{\' \r\n        _resultMessage = \"{player} был\r\n    \r\n  ';
-
-  @override
   String get requiert4Joueurs => 'Требуется 4+ игрока';
 
   @override
@@ -4267,7 +4220,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String stre786cb(Object sender) {
-    return '$sender : ';
+    return '0: $sender';
   }
 
   @override
@@ -4327,12 +4280,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String strc1ea47(Object p) {
-    return '« $p »';
+    return '\"0\" $p';
   }
 
   @override
   String str5dd9e1(Object currentChallenge) {
-    return '« $currentChallenge »';
+    return '\"0\" $currentChallenge';
   }
 
   @override
@@ -4519,7 +4472,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get voisin => 'соседство';
 
   @override
-  String get aSelectionneCarte => '{0} выбрана \'\'{\'1\'\' карта \'\'{\'2\'\'';
+  String get aSelectionneCarte =>
+      '{0} выбрана \'\'(\'\'1\'\' карта \'\'(\'\'2\'\'';
 
   @override
   String get jouePar => 'Игры издательства {0}';
@@ -4728,11 +4682,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get leTourEstTermine1 => 'Ход окончен.';
 
   @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName выиграл с его описанием:AppLocalizations.of(контекст)! Исполнитель: 99999 $winningDescription';
-  }
-
-  @override
   String get personneNAGagneCe =>
       'Никто не выиграл в этом раунде. Ничья или нет подписей.';
 
@@ -4778,19 +4727,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get score => 'счет';
-
-  @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object value,
-    Object guesserName,
-    Object value2,
-    Object deckIndex,
-    Object deckTotal,
-    Object value3,
-    Object totalScore,
-  ) {
-    return '$value $guesserName :AppLocalizations.of(контекст)! .styleConstTextstyleColorColors $value2 $deckIndex / $deckTotal — $value3 : $totalScore';
-  }
 
   @override
   String get laNuitTombeSurLe => 'Ночь выпадает на деревню...\n\nЗакрой глаза.';
@@ -4858,14 +4794,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get leLoupNoirDecideDu => 'Чёрный Волк решает судьбу жертвы';
 
   @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Infect $targetName ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf поражает соло';
-  }
-
-  @override
   String get choisissezUneVictimeADevorer => 'Выберите жертву';
 
   @override
@@ -4923,14 +4851,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get amoureux => 'Влюблённые';
 
   @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName : AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldSmall Horses';
-  }
-
-  @override
   String get courseIndividuelle => 'Индивидуальная гонка';
 
   @override
@@ -4944,7 +4864,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get gardeS => '{\'0\'\'} сохранено';
+  String get gardeS => '\'(\'\'0\'\')\' сохранено';
 
   @override
   String get cur => '♥ Червы';
@@ -5062,10 +4982,6 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Кто может больше?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft';
-
-  @override
   String get votePar => 'Проголосовано: {0}';
 
   @override
@@ -5111,7 +5027,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mime => 'Пантомима';
 
   @override
-  String get cEstAuTourDe2 => 'Это поворот {0} (\'\'{\'1\')\'';
+  String get cEstAuTourDe2 => 'Это поворот {0} (\'\'(\'\'1\')\'';
 
   @override
   String get genereDesQuestionsAmusantesEt =>
@@ -5157,7 +5073,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get jeu1 => 'Игра';
 
   @override
-  String get partieDeEnAttente => 'Часть \"{\'0\'\'}\" в ожидании';
+  String get partieDeEnAttente => 'Часть \"\'(\'\'0\'\')\'\" в ожидании';
 
   @override
   String get termine => 'Прекращено: {0}';
@@ -5198,7 +5114,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get survie => 'Выживание';
 
   @override
-  String get redigezLPour => 'Напишите \'\'{\'0\'\' для \'\'{\'1\'\'';
+  String get redigezLPour => 'Напишите \'\'(\'\'0\'\' для \'\'(\'\'1\'\'';
 
   @override
   String get rejouerGarderPts => 'ПЕРЕИГРАТЬ (СОХРАНИТЬ ОЧК)';
@@ -5303,10 +5219,6 @@ class AppLocalizationsRu extends AppLocalizations {
       '** Цель**\nНе держите устройство в руках, когда картофель взорвется.\n\n**Проект**\n1.На экране появляется тема.\n2 Игрок, удерживающий устройство, должен дать ответ, соответствующий теме.\n3.Как только он ответил, он быстро передал самолет соседу.\n4.Сосед должен, в свою очередь, найти новый ответ и передать устройство.\n5.Время скрыто и случайно: картофель может взорваться в любой момент!\n6.Игрок, удерживающий устройство в момент взрыва, теряет ручку и получает залог.';
 
   @override
-  String get principeGeneralGribouillisEstUn =>
-      '** Общий принцип**\nGribouillis — это игра в жанре рисунка, вдохновленная «арабским телефоном», где идеи меняются на каждом этапе. Существует 3 режима игры:\n\n**1. Обычный режим (арабский иллюстрированный телефон)**\n**Письмо**: Каждый игрок пишет предложение.\nРисунок: каждый игрок получает другое предложение и рисует его.\nДевинетт: Каждый игрок получает рисунок и угадывает, что он представляет.\n**Альтернатива** Игра чередуется рисованием и угадыванием, пока каждый «альбом» не обойдет всех игроков.\n- **Но** Забавно видеть, как простое предложение превращается во что-то совершенно другое!\n\n**2. Режим дополнения (совместное рисование)**\nКрокиз: Каждый игрок начинает простой рисунок.\n**Завершение**: каждый игрок получает чужой рисунок и должен его обогатить, не удаляя то, что уже существует.\n- **Альтернатива** Рисунок переходит от игрока к игроку, каждый добавляет свое прикосновение.\n**Параметр \"Добавить 1\"**:\n* Если отключен (по умолчанию): Это веревка. Рисунок развивается на каждом этапе (Игрок A -> Игрок B -> Игрок C...).\n*Если активировано*: Первоначальный рисунок каждого игрока завершается всеми остальными игроками, создавая параллельно несколько коллективных работ.\n- **Но**: Создавайте удивительные и веселые коллективные произведения искусства.\n\n**3. Режим Бриз-Глейс (творческое взаимодействие)**\n**Письмо**: Каждый игрок пишет персональную тему (например: AppLocalizations.of(context)!.myPreference).\nРисование: каждый игрок получает темы от всех других игроков и должен их рисовать.\nИдеально, чтобы разбить лед, открыть вкусы других и запустить творчество в совместной и легкой форме.';
-
-  @override
   String get yzObjectifAvoirLeMoins =>
       'Цель\n\nВ конце игры наберите как можно меньше очков.\nИгра останавливается, когда игрок достигает 100 очков или более, а победителем является тот, у кого наименьший общий счет.\n\nоборудование\n\n150 карт с номерами от -2 до +12\n\nОсуществление\n\nСмешайте все карты.\nКаждый игрок получает 12 карт, размещенных лицом вниз перед ним, в 4 столбцах × 3 ряда.\nОстальные карты образуют запас. Верните первую карту, чтобы сформировать отходы.\nКаждый игрок возвращает 2 карты по своему выбору из 12.\n\nКурс экскурсии\n\nВ свою очередь, у вас есть 30 секунд, чтобы выбрать между двумя действиями:\n\n1. Возьмите карту отходов\nВы должны обменять его на одну из 12 карт (видимую или скрытую).\nЗаменяемая карточка идет на отходы.\n\n2. Пиохер карточка лицом вниз\nПосмотрите на карту:\nлибо вы его сохраните и замените одну из своих карточек (как указано выше),\n- либо вы откажетесь от него, вы поместите его прямо на отходы, и в этом случае вы должны вернуть одну из ваших карт, все еще скрытых.\n\nСпециальные правила\n\nТри одинаковые карты в столбце → сразу побеждены (значение 0).\n\nКонец рукоятки:\n\nРукоятка заканчивается, когда игрок раскрывает все свои карты.\nВсе остальные игроки раскрывают оставшиеся карты. Ручка окончена.\nВсе игроки подсчитывают сумму своих карт.\n\nОбратите внимание: если игрок, который финиширует, не имеет наименьшего счета в раунде, он берет штраф в размере +10 очков (его счет ручки удваивается в оригинальной версии, мы будем использовать +10 для упрощения).\n\nКонец игры\n\nМы играем столько, сколько нам нужно.\nКак только игрок достигает 100 или более очков, игра прекращается.\nИгрок с наименьшим кумулятивным счетом выигрывает.';
 
@@ -5394,10 +5306,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get principeDuJeuLeJeu =>
       '## Игровой принцип\nИгра проводится между **3 и 10 игроками*.\nКаждый игрок предоставляет доступ к части своей фотобиблиотеки и выбирает фотографии для совместного использования.\nВо время игры выбирается фотография **случайно** из числа всех игроков, затем отображается в течение нескольких секунд.\nИгроки должны угадать, кому принадлежит отображаемая фотография.\nИгрок, который правильно угадывает большинство фотографий, выигрывает игру.\n\n## Процедура\n1.** Подборка фотографий**: Каждый игрок выбирает несколько фотографий из своей галереи.\n2.** Начало игры**: Как только все будут готовы, хозяин запускает игру.\n3. ** Игровая башня**:\nСлучайная фотография показывается в течение 5 секунд.\nВсе игроки голосуют, чтобы угадать владельца.\n4. **Результаты**: Оценки обновляются после каждого раунда.\n5.** Конец игры**: После установленного количества раундов игрок с наибольшим количеством очков выигрывает.';
-
-  @override
-  String get butDuJeuCoulerTous =>
-      '**Игровой гол**\nЗастряли все корабли противника, прежде чем он потопит ваши.\n\n**Проект**\n1. ** Место**: Каждый игрок тайно размещает свой флот на сетке 10х10.\n- Авианосцы (5 ящиков)\nКрейсер (4 коробки)\nПодводная лодка (3 клетки)\nРазрушитель (3 коробки)\nПатруль (2 коробки)\n2. **Тир**: В свою очередь, игроки прикасаются к коробке, чтобы выстрелить.\n3. **Результат**: AppLocalizations.of(context)!.touche, \"Coulated\" или \"To water\".\n4. **Виктуар**: побеждает первый игрок, потопивший весь противостоящий флот.';
 
   @override
   String get butDuJeuEtreLe2 =>
@@ -5553,9 +5461,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get vousDevezJouerUneCarte => 'Вы должны сыграть карту старше.';
 
   @override
-  String get aGagne1 => 'Он победил!';
-
-  @override
   String get ceNEstPasVotre => 'Сейчас не ваш ход.';
 
   @override
@@ -5587,9 +5492,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get caseDejaCiblee => 'Клетка уже обстреляна.';
-
-  @override
-  String get aCouleTouteLaFlotte => 'Потопил весь вражеский флот!';
 
   @override
   String get placementAutomatiqueEffectue =>
@@ -5805,11 +5707,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get erreurCritiqueDansJoingame => 'Критическая ошибка в игре';
 
   @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ':AppLocalizations.of(контекст)! .wordcivilParts0TrimWordundercoverIA возвращает отдельные простые слова';
-
-  @override
   String get infiltre => 'Инфильтрант';
 
   @override
@@ -5934,9 +5831,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Карта не найдена.';
-
-  @override
-  String get aGagneLaManche => 'Он выиграл раунд!';
 
   @override
   String get desDejaLancesPourCe => 'Dice уже приступили к этому туру.';
@@ -6312,10 +6206,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get questionNonTrouvee => 'Вопрос не найден';
 
   @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Кто может больше?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft';
-
-  @override
   String get menteur => 'лжец';
 
   @override
@@ -6342,18 +6232,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get laSurenchereDoitEtreSuperieure => 'Ставка должна быть выше.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      'AppLocalizations.of (context)!.aPlayer - последний выживший и побеждает Черепа!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurA =>
-      '??? AppLocalizations.of(context)!.aPlayer выиграла 2 задания и выиграла игру!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      '?? AppLocalizations.of (context)!.aPlayer выигрывает Skull!';
-
-  @override
   String get reponseVide => 'Пустой ответ.';
 
   @override
@@ -6377,10 +6255,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Целевой игрок не найден.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Кто может больше?AppLocalizations.of(context)!.elseIfGametypeSynonym или Banni';
-
-  @override
   String get vousNePouvezPasBannir => 'Нельзя банить собственный синоним!';
 
   @override
@@ -6389,14 +6263,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'Этот игрок не отправил ответ.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Кто может больше?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIf Судья';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Кто может больше?AppLocalizations.of(context)!.forFinalTargetInVotesroundState';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -6412,10 +6278,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get aucuneDescriptionNAEte =>
       'Никакое описание не было проголосовано.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Кто может больше?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId';
 
   @override
   String get jugeIntrouvable => 'Судья не найден.';
@@ -6550,10 +6412,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get piquantInsolite => '🌶️ Острое и Необычное';
 
   @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Кто может больше?AppLocalizations.of(контекст)! Кто может быть вашим модемом';
-
-  @override
   String get devineT => 'Угадай Т';
 
   @override
@@ -6567,10 +6425,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get exception => 'Исключение:';
-
-  @override
-  String get debutDeLaConstructionDe =>
-      '--- СОТРУДНИЧЕСТВО ЕГО ГОЛОСА «Кто мог бы больше всего?AppLocations.of(context)!.printIsactiondependingStateTo( isActionPending)players)» как Map<String, dynamic>??';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6591,10 +6445,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get attentionLeWidgetNEst => 'Внимание: Виджет ушел, штат отменили.';
 
   @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Кто может больше?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId';
-
-  @override
   String get phaseDePose => 'Фаза позиции';
 
   @override
@@ -6613,13 +6463,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get strc0046c => '💪 Можно и лучше!';
 
   @override
-  String get str85bff7 => '\${\'Браво!\'\'}';
+  String get str85bff7 => '\$\'(\'\'Браво!\'\')\'';
 
   @override
-  String get strfa1b8c => '\${\'Rate!\'\'}';
+  String get strfa1b8c => '\$\'(\'\'Rate!\'\')\'';
 
   @override
-  String get str487ca1 => '\${\'Хватит! Закрой глаза.';
+  String get str487ca1 => '\$\'(\'\'Хватит! Закрой глаза.';
 
   @override
   String get leSoleilSeLeve => 'Солнце восходит';
@@ -6658,10 +6508,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get enCours => 'Источник: {0}';
-
-  @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"\"} : GameMessageLocalization.tr (контекст, причина),';
 
   @override
   String get jAiLanceUnePartie2 => 'Я начал игру';
@@ -7461,58 +7307,58 @@ class AppLocalizationsRu extends AppLocalizations {
   String get cascade => 'водопад';
 
   @override
-  String get dragon => 'dragon';
+  String get dragon => 'дракон';
 
   @override
-  String get boussole => 'boussole';
+  String get boussole => 'компас';
 
   @override
-  String get diamant => 'diamant';
+  String get diamant => 'алмаз';
 
   @override
-  String get flamme => 'flamme';
+  String get flamme => 'огонь';
 
   @override
-  String get horloge => 'horloge';
+  String get horloge => 'часы';
 
   @override
-  String get pirate => 'pirate';
+  String get pirate => 'пират';
 
   @override
-  String get vortex => 'vortex';
+  String get vortex => 'вихрь';
 
   @override
-  String get aurore => 'aurore';
+  String get aurore => 'Аврора';
 
   @override
-  String get papillon => 'papillon';
+  String get papillon => 'бабочка';
 
   @override
-  String get bouclier => 'bouclier';
+  String get bouclier => 'щит';
 
   @override
-  String get labyrinthe => 'labyrinthe';
+  String get labyrinthe => 'лабиринт';
 
   @override
-  String get cristal => 'cristal';
+  String get cristal => 'хруст';
 
   @override
-  String get volcan => 'volcan';
+  String get volcan => 'вулкан';
 
   @override
-  String get mirage => 'mirage';
+  String get mirage => 'мираж';
 
   @override
-  String get sentinelle => 'sentinelle';
+  String get sentinelle => 'часовой';
 
   @override
-  String get cloche => 'cloche';
+  String get cloche => 'колокол';
 
   @override
-  String get lanterne => 'lanterne';
+  String get lanterne => 'фонарь';
 
   @override
-  String get parchemin => 'parchemin';
+  String get parchemin => 'пергамент';
 
   @override
   String aGagne2(Object gameDataplayerswin) {
@@ -7542,7 +7388,7 @@ class AppLocalizationsRu extends AppLocalizations {
     Object playerstargetIdnam,
     Object matchingSafety,
   ) {
-    return '⚡ COUP-FOURRÉ ! $playerstargetIdnam pare l\'attaque avec $matchingSafety et prend la main !';
+    return '- Что? 0 Подготовьте атаку с 1 и возьмите руку! $playerstargetIdnam $matchingSafety';
   }
 
   @override
@@ -7562,7 +7408,7 @@ class AppLocalizationsRu extends AppLocalizations {
     Object targetIndex1011,
     Object result,
   ) {
-    return '⏱️ $shooterDataname a tiré automatiquement en $targetIndex101-$targetIndex1011 ($result).';
+    return '0 автоматически выстреливают в 1 - 2 ( 3 ). $shooterDataname $targetIndex101 $targetIndex1011 $result';
   }
 
   @override
@@ -7572,7 +7418,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String pliTermineAuTourDe3(Object gameDataplayerspla) {
-    return '⏱️ Pli terminé. Au tour de $gameDataplayerspla.';
+    return 'Я закончил. На повороте 0. $gameDataplayerspla';
   }
 
   @override
@@ -7582,7 +7428,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String egalitePersistanteLeDestinDepartage1(Object playerDatarandomEl) {
-    return 'Égalité persistante ! Le destin départage au hasard : $playerDatarandomEl est éliminé.';
+    return 'Устойчивое равенство! Судьба начинается случайным образом: 0 устраняется. $playerDatarandomEl';
   }
 
   @override
@@ -7606,7 +7452,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String leVillageDecouvreAvecEffroi1(Object deadThisNightNames) {
-    return 'Le village découvre avec effroi le(s) corps de : $deadThisNightNames.';
+    return 'Деревня с ужасом обнаруживает тело: 0. $deadThisNightNames';
   }
 
   @override
@@ -7620,7 +7466,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String etEtaitUnE(Object playerDataotherRev, Object otherRevealedRole) {
-    return 'Et $playerDataotherRev était un(e) $otherRevealedRole !';
+    return '0 было равно 1! $playerDataotherRev $otherRevealedRole';
   }
 
   @override
@@ -7653,16 +7499,16 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get lAncienCapitaine1 => 'L\'ancien Capitaine';
+  String get lAncienCapitaine1 => 'Бывший капитан';
 
   @override
   String aDit(Object playerDataplayerId, Object cleanClue) {
-    return '$playerDataplayerId a dit : \'$cleanClue\'';
+    return '0 сказал: 1. $playerDataplayerId $cleanClue';
   }
 
   @override
   String aDevineLeMotCivil1(Object gameDataplayerData, Object civilWord) {
-    return '$gameDataplayerData a deviné le mot civil (\'$civilWord\') !';
+    return '0 угадал гражданское слово (1)! $gameDataplayerData $civilWord';
   }
 
   @override
@@ -7671,22 +7517,22 @@ class AppLocalizationsRu extends AppLocalizations {
     Object guessedWord,
     Object civilWord,
   ) {
-    return '$gameDataplayerData a proposé \'$guessedWord\', mais ce n\'était pas le mot civil (\'$civilWord\') !';
+    return '0 предложил 1, но это не было гражданским словом 2. $gameDataplayerData $guessedWord $civilWord';
   }
 
   @override
   String flottesPlaceesCommenceATirer1(Object playerDatafirstPla) {
-    return 'Flottes placées ! $playerDatafirstPla commence à tirer.';
+    return 'Размещены поплавки! 0 начинает стрелять. $playerDatafirstPla';
   }
 
   @override
   String tousLesJoueursSontPrets1(Object playerDatafirstPla) {
-    return 'Tous les joueurs sont prêts ! $playerDatafirstPla commence à tirer.';
+    return 'Все игроки готовы! 0 начинает стрелять. $playerDatafirstPla';
   }
 
   @override
   String laMancheDeRamiCommence1(Object playersplayerIdsfi) {
-    return 'La manche de Rami commence ! C\'est au tour de $playersplayerIdsfi.';
+    return 'Рукав Рами начинается! Теперь очередь 0. $playersplayerIdsfi';
   }
 
   @override
@@ -7696,7 +7542,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String k3SixConsecutifsLePion1(Object playersplayerIdnam) {
-    return '⚠️ 3 six consécutifs ! Le pion de $playersplayerIdnam retourne à l\'écurie et son tour passe.';
+    return 'Три шесть подряд! Пешка 0 возвращается в конюшню и ее очередь проходит. $playersplayerIdnam';
   }
 
   @override
@@ -7706,17 +7552,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String atteintPoints(Object playersplayerIdnam, Object targetScore) {
-    return '$playersplayerIdnam atteint $targetScore points !';
+    return '0 достиг 1 очка! $playersplayerIdnam $targetScore';
   }
 
   @override
   String atteintPoints1(Object playerswinnerIdnam, Object targetScore) {
-    return '$playerswinnerIdnam atteint $targetScore points !';
+    return '0 достиг 1 очка! $playerswinnerIdnam $targetScore';
   }
 
   @override
   String mancheTermineeGagneAvecXp(Object playerswinnerIdnam, Object maxXp) {
-    return 'Manche terminée ! $playerswinnerIdnam gagne avec $maxXp XP !';
+    return 'Пристегнись! 0 побед с 1 XP! $playerswinnerIdnam $maxXp';
   }
 
   @override
@@ -7776,7 +7622,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String passeSonTour4(Object playersplayerIdnam) {
-    return '$playersplayerIdnam passe son tour.';
+    return '0 проходит свою очередь. $playersplayerIdnam';
   }
 
   @override
@@ -7786,7 +7632,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String votreCibleEstEliminezLe1(Object playerDatamercenai) {
-    return 'Votre cible est $playerDatamercenai. Éliminez-le(la) au Jour 1 !';
+    return 'Ваша цель 0. Устраните ее на 1-й день! $playerDatamercenai';
   }
 
   @override
@@ -7832,17 +7678,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String aChoisiLaCouleur(Object playersplayerIdnam, Object chosenColor) {
-    return '$playersplayerIdnam a choisi la couleur $chosenColor !';
+    return '0 выбрал цвет 1! $playersplayerIdnam $chosenColor';
   }
 
   @override
   String estLeDernierSurvivantEt(Object playerswinnerIdnam) {
-    return '$playerswinnerIdnam est le dernier survivant et remporte Skull !';
+    return '0 - последний выживший и побеждает Черепа! $playerswinnerIdnam';
   }
 
   @override
   String aRemporte2DefisEt(Object playerschallengerI) {
-    return '$playerschallengerI a remporté 2 défis et gagne la partie !';
+    return '0 выиграл 2 вызова и выиграл игру! $playerschallengerI';
   }
 
   @override
@@ -7883,7 +7729,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String faitTapisAllInEn1(Object myDataname, Object totalBetAmount) {
-    return '$myDataname fait tapis (all-in) en relançant à $totalBetAmount !';
+    return '0 делает ковер (all-in) путем повторного запуска до 1! $myDataname $totalBetAmount';
   }
 
   @override
@@ -7906,7 +7752,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String aPrisA(Object playerDataplayerId, Object suit) {
-    return '$playerDataplayerId a pris à $suit !';
+    return '0 взял 1! $playerDataplayerId $suit';
   }
 
   @override
@@ -7919,7 +7765,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get botte => 'ЗАЩИТА';
 
   @override
-  String get pneuIncrevable => 'Pneu\nIncrevable';
+  String get pneuIncrevable => 'Шина\nнепригодный';
 
   @override
   String get increvable => 'НЕПРОБИВАЕМАЯ';
@@ -7969,41 +7815,41 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie3(Object _selectedGame) {
-    return 'J\'ai lancé une partie de $_selectedGame !';
+    return 'Я выбросил часть 0! $_selectedGame';
   }
 
   @override
   String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
-    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+    return 'Роли (0) $selectedRolesCount $playerslength';
   }
 
   @override
   String dessineCettePhrase1(Object stepToProcessconte) {
-    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+    return 'Нарисуйте это предложение:\n\"0\" $stepToProcessconte';
   }
 
   @override
   String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
-    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+    return '0 было запрещено за предложение 1! $loserName $loserAnswer';
   }
 
   @override
   String aTrouveLeMot2(Object winnerName, Object currentWord) {
-    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+    return '0 нашел слово: 1! $winnerName $currentWord';
   }
 
   @override
   String personneNATrouveLe1(Object currentWord) {
-    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+    return 'Никто не нашел слова: 0. $currentWord';
   }
 
   @override
   String aTrouveLeMot3(Object guesserName, Object currentWord) {
-    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+    return '0 нашел слово: 1! $guesserName $currentWord';
   }
 
   @override
-  String get revolution1 => '(Révolution !)';
+  String get revolution1 => '(Революция!)';
 
   @override
   String tonMotEst2(Object _wordCivil) {
@@ -8020,7 +7866,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
-    return 'J\'ai lancé une partie de $datagameTypeGribou !';
+    return 'Я выбросил часть 0! $datagameTypeGribou';
   }
 
   @override
@@ -8038,7 +7884,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get logClueGivingStart => 'Игра начинается! Назовите подсказку...';
 
   @override
-  String get logBeloteStart => 'La partie de Belote commence !';
+  String get logBeloteStart => 'Игра Belote начинается!';
 
   @override
   String get logBlokusStart => 'Игра в Блокус начинается!';
@@ -8054,12 +7900,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String aTireDefi(Object targetPlayerName, Object challengeLabel) {
-    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+    return '0 выстрелил: 1! $targetPlayerName $challengeLabel';
   }
 
   @override
   String lEquipeAReveleLAssassin(Object teamName) {
-    return 'L\'équipe $teamName a révélé l\'Assassin !';
+    return 'Команда 0 раскрыла убийцу! $teamName';
   }
 
   @override
@@ -8067,27 +7913,27 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String maximumPossibleCartes(Object maximumBid) {
-    return 'Maximum possible : $maximumBid cartes';
+    return 'Максимально возможно: 0 карт $maximumBid';
   }
 
   @override
   String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
-    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+    return '0 отражает вызов 1 карты... $bidderName $liveAmount';
   }
 
   @override
   String votreMainCartes(Object count) {
-    return 'VOTRE MAIN ($count cartes)';
+    return 'Твой человек (0 карт) $count';
   }
 
   @override
   String pictionaryStrokesCount(Object count) {
-    return '$count/30 traits';
+    return '0/30 признаков $count';
   }
 
   @override
   String indicesSoumisCount(Object submitted, Object total) {
-    return 'Indices soumis : $submitted / $total';
+    return 'Представленные индексы: 0/1 $submitted $total';
   }
 
   @override
@@ -8096,7 +7942,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get couleurChoisie => 'Couleur choisie :';
+  String get couleurChoisie => 'Выбранный цвет:';
 
   @override
   String pokerRaiseTo(Object amount) {
@@ -8108,14 +7954,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String reponseDeJoueur(Object guesserName, Object answer) {
-    return 'Réponse de $guesserName : \"$answer\"';
+    return 'Ответ от 0: \"1\" $guesserName $answer';
   }
 
   @override
   String get carteSuivante => 'Carte suivante';
 
   @override
-  String get roleLabel => 'Rôle:';
+  String get roleLabel => 'Роль:';
 
   @override
   String get obligatoire => 'Обязательно';
@@ -8142,109 +7988,108 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String aEteSignaleEtMasque(Object targetName) {
-    return '$targetName a été signalé et masqué pour vous.';
+    return '0 было сообщено и скрыто для вас. $targetName';
   }
 
   @override
   String get impossibleDObtenirUnJeton =>
-      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+      'Не удалось получить безопасный видео-токен LiveKit.';
 
   @override
   String get veuillezEntrerUneAdresseEmail =>
-      'Veuillez entrer une adresse email valide.';
+      'Пожалуйста, введите действительный адрес электронной почты.';
 
   @override
   String get veuillezEntrerVotreMotDe =>
-      'Veuillez entrer votre mot de passe actuel.';
+      'Пожалуйста, введите свой текущий пароль.';
 
   @override
-  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+  String get entrezVotreMotDePasse => 'Введите свой текущий пароль.';
 
   @override
   String get leNouveauMotDePasse =>
-      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+      'Новый пароль должен быть не менее 6 символов.';
 
   @override
-  String get lesDeuxMotsDePasse =>
-      'Les deux mots de passe ne correspondent pas.';
+  String get lesDeuxMotsDePasse => 'Оба пароля не совпадают.';
 
   @override
-  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+  String get photoDeProfilMiseA => 'Фото профиля обновлено!';
 
   @override
-  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+  String get echecDuChangementDePhoto => 'Смена фотографий провалилась.';
 
   @override
-  String get k3CaracteresMinimum => '3 caractères minimum';
+  String get k3CaracteresMinimum => 'Минимум 3 персонажа';
 
   @override
-  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+  String get cePseudoEstDejaPris => 'Этот ник уже занят.';
 
   @override
-  String get unAmi => 'Un ami';
+  String get unAmi => 'Друг';
 
   @override
-  String get ceJoueur => 'ce joueur';
+  String get ceJoueur => 'этот игрок';
 
   @override
-  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+  String get preparationDeLaRecherche => 'Подготовка к поиску...';
 
   @override
   String get erreurDeConnexionAuMatchmaking =>
-      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+      'Ошибка, связанная с сватовством. Пожалуйста, попробуйте еще раз.';
 
   @override
-  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+  String get erreurDeConnexionALa => 'Ошибка подключения к комнате.';
 
   @override
-  String get legendeVivante => 'Légende Vivante';
+  String get legendeVivante => 'Живая легенда';
 
   @override
-  String get grandMaitre => 'Grand Maître';
+  String get grandMaitre => 'Великий Мастер';
 
   @override
-  String get stratege => 'Stratège';
+  String get stratege => 'Стратегия';
 
   @override
-  String get initie => 'Initié';
+  String get initie => 'Инициированный';
 
   @override
-  String get illimiteesVip => 'Illimitées (VIP)';
+  String get illimiteesVip => 'Неограниченный (VIP)';
 
   @override
   String pieces(Object playerStatecoins) {
-    return '$playerStatecoins pièces';
+    return '0 штук $playerStatecoins';
   }
 
   @override
-  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+  String get utilisateurNonConnecte => 'Неподключенный пользователь.';
 
   @override
-  String get entrezUnPseudo => 'Entrez un pseudo';
+  String get entrezUnPseudo => 'Введите псевдо';
 
   @override
-  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+  String get cePseudoEstDejaPris1 => 'Это прозвище уже принято';
 
   @override
-  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+  String get pseudoDejaPrisParUn => 'Псевдо уже взято другим игроком';
 
   @override
   String get cetteVersionDeLApplication =>
-      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+      'Данная версия приложения устарела. Пожалуйста, установите последнюю версию.';
 
   @override
   String get playfunEstActuellementEnMaintenance =>
-      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+      'В настоящее время Playfun поддерживается, чтобы улучшить ваши вечера. Вернись через минуту!';
 
   @override
   String get uneNouvelleVersionDePlayfun =>
-      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+      'Доступна новая версия Playfun! Вам нужно обновить приложение, чтобы продолжить играть.';
 
   @override
-  String get derniereVersion => 'Dernière version';
+  String get derniereVersion => 'Последняя версия';
 
   @override
-  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+  String get echecDeLEnvoi => 'Неудачная поставка.';
 
   @override
   String demandeDAmiEnvoyeeA(Object name) {
@@ -8273,7 +8118,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String joueur1(Object bUid) {
-    return 'Joueur ($bUid)';
+    return 'Игрок (0) $bUid';
   }
 
   @override
@@ -8285,29 +8130,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get enableVideo => 'Включить видео';
 
   @override
-  String get pseudoDisponible => '✅ Pseudo disponible';
+  String get pseudoDisponible => 'Pseudo доступно';
 
   @override
-  String get entrezUnEmailValide => 'Entrez un email valide';
+  String get entrezUnEmailValide => 'Введите действительный email';
 
   @override
-  String get k6CaracteresMinimum => '6 caractères minimum';
+  String get k6CaracteresMinimum => 'Минимум 6 символов';
 
   @override
-  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+  String get pasDeCompteSInscrire => 'Нет счета? регистрировать';
 
   @override
-  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+  String get dejaUnCompteSeConnecter => 'Уже есть счет? Входите.';
 
   @override
   String get conditionsGeneralesDUtilisationCgu =>
-      'Conditions Générales d\'Utilisation (CGU / EULA)';
+      'Общие условия использования (CGU / EULA)';
 
   @override
-  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+  String get politiqueDeConfidentialite => 'Политика конфиденциальности';
 
   @override
-  String get miseAJourRequise => 'Mise à jour requise';
+  String get miseAJourRequise => 'Обновление требуется';
 
   @override
   String joueursBloques(Object blockedListlength) {
@@ -8316,5 +8161,272 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get identifiantsIncorrectsOuCompteInexistant =>
-      'Identifiants incorrects ou compte inexistant.';
+      'Недействительные идентификаторы или несуществующий аккаунт.';
+
+  @override
+  String get leMotEtaitLabel => 'Слово было:';
+
+  @override
+  String get mancheLabel => 'Канал';
+
+  @override
+  String get et => 'и';
+
+  @override
+  String pokerPlayerCheck(Object playerName) {
+    return '$playerName пропускает (Check).';
+  }
+
+  @override
+  String get mot1 => 'Слово:';
+
+  @override
+  String get rouges => 'Красные';
+
+  @override
+  String get noirs => 'Чёрные';
+
+  @override
+  String get crane2 => 'череп';
+
+  @override
+  String get enAttente2 => 'В ожидании';
+
+  @override
+  String get enCours1 => 'Продолжающийся';
+
+  @override
+  String aSelectionneSonPionEt1(Object playerscurrentPlay) {
+    return '$playerscurrentPlay выбрал(а) фишку и думает...';
+  }
+
+  @override
+  String tempsRestantS1(Object seconds) {
+    return 'Осталось времени: $seconds с';
+  }
+
+  @override
+  String pack(Object wordstake2join) {
+    return 'Набор $wordstake2join';
+  }
+
+  @override
+  String variante1(Object rawPairtrim) {
+    return '$rawPairtrim (Вариант)';
+  }
+
+  @override
+  String gagneAvecPoint(
+    Object winnerName,
+    Object lowestScore,
+    Object lowestScore1s,
+  ) {
+    return '0 побед с 1 очком 2! $winnerName $lowestScore $lowestScore1s';
+  }
+
+  @override
+  String remporteSkull1(Object playerswinnerIdnam) {
+    return 'Выиграй Черепа! $playerswinnerIdnam';
+  }
+
+  @override
+  String packIa(Object _selectedGame) {
+    return 'Пакет IA 0 $_selectedGame';
+  }
+
+  @override
+  String get standard => 'Стандартный';
+
+  @override
+  String get lui => 'Он';
+
+  @override
+  String carte4(Object deckIndex, Object deckTotal) {
+    return 'Карта $deckIndex / $deckTotal';
+  }
+
+  @override
+  String get joueursBloques1 => 'Запертые игроки';
+
+  @override
+  String get vousNAvezBloqueAucun => 'Вы не заблокировали ни одного игрока.';
+
+  @override
+  String get debloquer => 'Разблокировать';
+
+  @override
+  String get nouvelEmail => 'Новая электронная почта';
+
+  @override
+  String get motDePasseActuel => 'Текущий пароль';
+
+  @override
+  String get emailMisAJourAvec => 'Электронная почта успешно обновлена!';
+
+  @override
+  String get modifierMotDePasse => 'Изменить пароль';
+
+  @override
+  String get nouveauMotDePasse => 'Новый пароль';
+
+  @override
+  String get confirmerLeMotDePasse => 'Подтвердить пароль';
+
+  @override
+  String get motDePasseModifieAvec => 'Пароль успешно изменен!';
+
+  @override
+  String get prendreUnePhoto => 'Сделай фото';
+
+  @override
+  String get choisirDepuisLaGalerie => 'Выберите из галереи';
+
+  @override
+  String get supprimerLaPhoto => 'Удалить фото';
+
+  @override
+  String get photoDeProfilRetiree => 'Фотография профиля удалена.';
+
+  @override
+  String get pseudoMisAJour => 'Прозвище обновлено!';
+
+  @override
+  String get compteSecurite => 'Счет безопасности';
+
+  @override
+  String get editeParParrelV10 => 'Отредактировано Parrel • v1.0.0';
+
+  @override
+  String get aucunJeuTrouve => 'Игры не найдены';
+
+  @override
+  String get essaieDAjusterTesFiltres =>
+      'Попробуйте изменить фильтры или ввести другой запрос.';
+
+  @override
+  String get reinitialiserLesFiltres => 'Сбросить фильтры';
+
+  @override
+  String get nouveau => 'НОВОСТИ';
+
+  @override
+  String get gererMonAbonnement => 'Управляйте моей подпиской';
+
+  @override
+  String get mesPieces => 'Мои комнаты';
+
+  @override
+  String get rechargerLesOffresDuStore => 'Reload Store предлагает';
+
+  @override
+  String get gererMesAbonnements => 'Управляйте моими подписками';
+
+  @override
+  String get badges => 'Значки';
+
+  @override
+  String get partiesJouees => 'Сыгранные игры';
+
+  @override
+  String get xpTotalSession => 'Всего XP за сессию';
+
+  @override
+  String get moyennePartie => 'Среднее / Игра';
+
+  @override
+  String get detailParJeuPerformanceXp => 'Детали по играм и XP';
+
+  @override
+  String get jouezVosPremieresPartiesPour =>
+      'Сыграйте свои первые игры, чтобы увидеть статистику XP здесь!';
+
+  @override
+  String xpAuCompteur(Object psxp) {
+    return '$psxp XP на счетчике';
+  }
+
+  @override
+  String encoreXpAvantNiv(Object xpRemaining, Object pslevel1) {
+    return 'Ещё $xpRemaining XP до ур. $pslevel1';
+  }
+
+  @override
+  String joueeVictoireXpGagnes(
+    Object played,
+    Object played1s,
+    Object won,
+    Object won1s,
+    Object gameXp,
+  ) {
+    return '$played сыграно • $won побед$won1s • ~$gameXp XP получено $played1s';
+  }
+
+  @override
+  String get erreurDeChargementDesDonnees =>
+      'Ошибка загрузки данных пользователя.';
+
+  @override
+  String get vousDevezAccepterLesCgu =>
+      'Вы должны принять CGU и Политику конфиденциальности для создания учетной записи.';
+
+  @override
+  String get miseAJourDisponible => 'Доступно обновление';
+
+  @override
+  String get plusTard => 'Позже';
+
+  @override
+  String get mettreAJour => 'Обновить';
+
+  @override
+  String uneNouvelleVersionDePlayfun1(Object newVersion) {
+    return 'Доступна новая версия ($newVersion) Playfun с новыми функциями и исправлениями!';
+  }
+
+  @override
+  String get maintenanceEnCours => 'Текущее техническое обслуживание';
+
+  @override
+  String get mettreAJourMaintenant => 'Обновление сейчас';
+
+  @override
+  String get motifDuSignalement => 'Причина жалобы:';
+
+  @override
+  String get tricheOuAntiJeu => 'Чит или неспортивное поведение';
+
+  @override
+  String get autre => 'Другое';
+
+  @override
+  String get signaler => 'Пожаловаться';
+
+  @override
+  String get detailParJeu => 'Детали по играм:';
+
+  @override
+  String get ceJoueurNAPas2 => 'У этого игрока пока нет записанных игр.';
+
+  @override
+  String badgesDebloques(Object unlockedBadgesleng, Object appBadgesallBadges) {
+    return 'Разблокированные значки: $unlockedBadgesleng / $appBadgesallBadges';
+  }
+
+  @override
+  String joueursBloques2(Object psblockedUsersleng) {
+    return 'Заблокированные игроки ($psblockedUsersleng)';
+  }
+
+  @override
+  String debloquer1(Object name) {
+    return 'Разблокировать $name';
+  }
+
+  @override
+  String signalerOuBloquer(Object name) {
+    return 'Пожаловаться или заблокировать $name';
+  }
+
+  @override
+  String get vote1 => 'голос';
 }

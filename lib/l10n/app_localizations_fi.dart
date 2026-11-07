@@ -97,7 +97,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get utiliser => 'KÄYTÄ';
 
   @override
-  String get packActiveElements => '✨ Pack \'\'{0}\' aktivoitu ({1} esinettä)!';
+  String get packActiveElements => '✨ Pack {0} aktivoitu ({1} esinettä)!';
 
   @override
   String get fusionner => 'YHDISTÄ';
@@ -152,7 +152,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get melangerPlusieursThemes => 'Sekoita useita teemoja:';
 
   @override
-  String get combineS => '✨ {0 yhteensä}';
+  String get combineS => '✨ \'(0 yhteensä)\'';
 
   @override
   String get nombreDElements => 'Kohteiden määrä:';
@@ -829,7 +829,7 @@ class AppLocalizationsFi extends AppLocalizations {
       'Sinut poistettiin toimettomuuden vuoksi. Tietokone pelaa puolestasi (ei palkintoja).';
 
   @override
-  String get s => '{0} s';
+  String get s => 's {0}';
 
   @override
   String pts1(Object pName, Object pScore) {
@@ -838,7 +838,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String xp(Object pXp) {
-    return '$pXp XP';
+    return '0 XP $pXp';
   }
 
   @override
@@ -848,7 +848,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get cartesRestantes => '{0} korttia jäljellä';
 
   @override
-  String get jetonsMise => 'Pelimerkit: {\$0,} | Panokset: {\$1,}';
+  String get jetonsMise => 'Pelimerkit: \'(\$0,)\' | Panokset: \'(\$1,)\'';
 
   @override
   String get totalPts => 'Yhteensä: {0} pistettä';
@@ -968,7 +968,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get mainDeCartes => 'Käsi {0} ({1} korttia)';
 
   @override
-  String get votreMainDeSurvieCartes => 'SELVIYTYMISKÄTESI ({0,} korttia)';
+  String get votreMainDeSurvieCartes => 'SELVIYTYMISKÄTESI (\'(0,)\' korttia)';
 
   @override
   String get lesPairesSontDefausseesAutomatiquement =>
@@ -1009,10 +1009,10 @@ class AppLocalizationsFi extends AppLocalizations {
       'Odotetaan huoneen ylläpitäjää seuraavan vuoron aloittamiseksi...';
 
   @override
-  String get equipeAPts => 'Joukkue A: {pistettä} pistettä {pts}';
+  String get equipeAPts => 'Joukkue A: \'(pistettä)\' pistettä {pts}';
 
   @override
-  String get equipeBPts => 'B-joukkue: {pistettä} pistettä {pts}';
+  String get equipeBPts => 'B-joukkue: \'(pistettä)\' pistettä {pts}';
 
   @override
   String get cEstAToiDe => 'On SINUN VUOROSI arvata!';
@@ -1045,12 +1045,12 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String km(Object oppDist) {
-    return '$oppDist km';
+    return '0 km $oppDist';
   }
 
   @override
   String km1(Object myDistance, Object targetDist) {
-    return '$myDistance / $targetDist km';
+    return '0 / 1 km $myDistance $targetDist';
   }
 
   @override
@@ -1209,7 +1209,7 @@ class AppLocalizationsFi extends AppLocalizations {
       '(Tämä valinta pysyy salassa loppuun asti)';
 
   @override
-  String get lHistoireDe => '{0:n tarina}';
+  String get lHistoireDe => '\'(0:n tarina)\'';
 
   @override
   String get vrai => 'TOSI';
@@ -1265,27 +1265,27 @@ class AppLocalizationsFi extends AppLocalizations {
       'Pisteet jaettiin annettujen äänten perusteella.';
 
   @override
-  String get leMotDesCivilsEtait => 'Siviilien sana oli: \'\'{0}\'';
+  String get leMotDesCivilsEtait => 'Siviilien sana oli: {0}';
 
   @override
-  String get leMotDeLInfiltre => 'Infiltratorin ({0}) sana oli: \'\'{1}\'';
+  String get leMotDeLInfiltre => 'Infiltratorin ({0}) sana oli: {1}';
 
   @override
   String get mrWhiteNAvaitPas => 'Herra White ({0}) ei saanut sanoja.';
 
   @override
   String get leMotATrouverEtait =>
-      'Sana, joka keksittiin, oli synonyymi \'\'{0}\'. Muut pelaajat saavat 1 pisteen.';
+      'Sana, joka keksittiin, oli synonyymi {0}. Muut pelaajat saavat 1 pisteen.';
 
   @override
   String get felicitationsAuDessinateurEtA =>
       'Onnittelut sarjakuvataiteilijalle {0} ja {1} !';
 
   @override
-  String get saReponseEtait => 'Hänen vastauksensa oli: \'\'{0}\'.';
+  String get saReponseEtait => 'Hänen vastauksensa oli: {0}.';
 
   @override
-  String get leMotEtait => 'Sana kuului: \'\'{0}\'.';
+  String get leMotEtait => 'Sana kuului: {0}.';
 
   @override
   String get cartesRevelees => 'Paljastetut kortit:';
@@ -1562,7 +1562,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get aucuneCombinaisonEtaleeSurLa => 'Ei yhdistelmiä pöydällä vielä';
 
   @override
-  String get etaler => 'Levitys ({}) {count}';
+  String get etaler => 'Levitys (\'()\') {count}';
 
   @override
   String get defausserFin => 'Heitä pois ja lopeta';
@@ -2256,7 +2256,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String s1(Object secondsLeft) {
-    return '⏱️ $secondsLeft s';
+    return '0 s $secondsLeft';
   }
 
   @override
@@ -2453,13 +2453,13 @@ class AppLocalizationsFi extends AppLocalizations {
   String get enPartie => 'PELISSÄ';
 
   @override
-  String get partieDeTerminee => '{0 peli} ohi!';
+  String get partieDeTerminee => '\'(0 peli)\' ohi!';
 
   @override
   String get statistiques => 'Tilastot - {0}';
 
   @override
-  String get vainqueur1 => 'Voittaja: {0}\'{1}\n';
+  String get vainqueur1 => 'Voittaja: {0}\'{1}\'\'\'\n';
 
   @override
   String get voirLesStats => 'Katso tilastot';
@@ -2655,7 +2655,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get prendreLAtoutOuPasser => 'OTA VALTTI TAI PASSAA:';
 
   @override
-  String get combinaisonsDe => 'Yhdistelmät {nimistä} {name}';
+  String get combinaisonsDe => 'Yhdistelmät \'(nimistä)\' {name}';
 
   @override
   String get ilDevraDonnerLePremier => 'Hänen on annettava ensimmäinen vihje';
@@ -3346,10 +3346,6 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get aRelanceLesDes3 =>
-      '{pName} heitti nopat uudelleen ({3rollsLeft1}/3)!';
-
-  @override
   String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName piti nopan arvolla $dieVal (noppa #$index1) 🔒';
   }
@@ -3399,10 +3395,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get pioche3 => 'Haku';
 
   @override
-  String get wordcivilParts0TrimWordundercover =>
-      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = osat[1].trim(); \r\n    \'\'}\' muuta \'\'{\' \r\n      Kaksoisrinnan suojaus: jos';
-
-  @override
   String get vousNAvezPasDe => 'Sinulla ei ole sanoja';
 
   @override
@@ -3443,10 +3435,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur on eniten XP:tä ($maxXp XP) ja hänestä tulee Admin!';
   }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Suojan loppu (admin-nappi)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\' \r\n    await _db.runTransaction((transaction) async\'\'{\' \r\n      final gameRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = odota transaction.get(gameRef); \r\n      jos (!snap.exists) palautetaan; \r\n\r\n      final gameData = snap.data() karttana<merkkijonona, dynaamisena>; \r\n      final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Ratkaise voittaja (enemmän XP:tä)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        final xp = (pData[\'xp\'] numerona?)?. toInt() ?? 0; \r\n        jos (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Joku';
@@ -3501,18 +3489,10 @@ class AppLocalizationsFi extends AppLocalizations {
   String get leJoueur => 'Pelaaja';
 
   @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\' \r\n      Lista<Merkkijono> kysymykset =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely [vaikeustaso] ?? \r\n          GameWords.whoIsMostTodennäköisesti[';
-
-  @override
   String get honnete => 'Rehellisesti';
 
   @override
   String get pairSplit => ') ? pari.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      '): [jopa, jopa]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Kysymys =\r\n            \"Kuvaile salainen sanasi yhdellä sanalla. Huijarit, bluffakaa!\"; \r\n        for (var pId in players.keys) \'\'{\' \r\n          Merkkijono pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3532,20 +3512,8 @@ class AppLocalizationsFi extends AppLocalizations {
   String get passeLEnchere => 'passaa huudon';
 
   @override
-  String get elseIfGametype =>
-      ') \'\'{\' \r\n        if (voterId == votedForId) \'\'{\' \r\n          throw Exception (\"Virallinen kielto äänestää itse!\"); \r\n        \'\'}\'\'}\' muuten, jos (gameType ==\r\n      ';
-
-  @override
   String get intRequiredvotesPlayersLengthIf =>
-      ') { \r\n        creditPlayerXp( \r\n          Kauppa, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: totta, \r\n        ); \r\n      } \r\n\r\n      int vaaditaanÄänet = pelaajat.pituus; \r\n\r\n      if (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\' \r\n          final Map<String, int> voteCounts = {}; \r\n          for (lopullinen kohde votes.valuesissa) { \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxVotes = 0; \r\n          Lista<Merkkijono> topVoted = []; \r\n          voteCounts.forEach((target, count) \'\'{\' \r\n            if (laske > maxVotes) { \r\n              maxVotes = laskenta; \r\n              topVoted = [kohde]; \r\n            } muuten, jos (count == maxVotes) { \r\n              topVoted.add(target); \r\n            }\'\'}\'); \r\n\r\n          Päivitykset[\r\n          ';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\' \r\n        final Map<String, int> voteCounts = {}; \r\n        for (lopullinen kohde votes.valuesissa) { \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxVotes = 0; \r\n        Lista<Merkkijono> topVoted = []; \r\n        voteCounts.forEach((target, count) \'\'{\' \r\n          if (laske > maxVotes) { \r\n            maxVotes = laskenta; \r\n            topVoted = [kohde]; \r\n          } muuten, jos (count == maxVotes) { \r\n            topVoted.add(target); \r\n          }\'\'}\'); \r\n\r\n        if (topVoted.length == 1) \'\'{\' \r\n          lopullinen voittaja = topVoted.first; \r\n          Päivitykset[\r\n        ';
+      ') \'( \r\n        creditPlayerXp( \r\n          Kauppa, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: totta, \r\n        ); \r\n      )\' \r\n\r\n      int vaaditaanÄänet = pelaajat.pituus; \r\n\r\n      if (gameType == ';
 
   @override
   String aRemporteTousLesJetons(Object winnerName) {
@@ -3748,7 +3716,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String str8f522b(Object cat, Object hasScorescoreVal) {
-    return '$cat: $hasScorescoreVal';
+    return '0: 1 $cat $hasScorescoreVal';
   }
 
   @override
@@ -3862,7 +3830,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String str1e0607(Object authorName) {
-    return '$authorName : ';
+    return '0: $authorName';
   }
 
   @override
@@ -3925,7 +3893,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String str422faa(Object valuename, Object valuescore0) {
-    return '$valuename: $valuescore0 🃏';
+    return '0: 1 $valuename $valuescore0';
   }
 
   @override
@@ -3938,7 +3906,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String str95d36e(Object valuename, Object key0) {
-    return '$valuename: $key0';
+    return '0: 1 $valuename $key0';
   }
 
   @override
@@ -4001,7 +3969,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get leChallenger => 'Haastaja';
 
   @override
-  String get stre93cb0 => '{0} : {1}';
+  String get stre93cb0 => ':{0} {1}';
 
   @override
   String get uneDescriptionHilarante => 'hulvaton kuvateksti';
@@ -4019,7 +3987,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String str98e212(Object pName, Object count, Object length, Object isFull) {
-    return '$pName: $count/$length$isFull';
+    return '0: 1 / 2 3 $pName $count $length $isFull';
   }
 
   @override
@@ -4059,16 +4027,12 @@ class AppLocalizationsFi extends AppLocalizations {
     Object score,
     Object totalScore,
   ) {
-    return '$carte $deckIndex / $deckTotal — $score : $totalScore';
+    return '0 1 / 2 3: 4 $carte $deckIndex $deckTotal $score $totalScore';
   }
 
   @override
-  String get styleConstTextstyleColorColors =>
-      ', \r\n                  tyyli: const TextStyle (väri: Colors.white70), \r\n                ), \r\n                SizedBox (korkeus: 20), \r\n                Wrap( \r\n                  kohdistus: WrapAlignment.center, \r\n                  Lapset: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (korkeus: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Teksti( \r\n                    AppLocalizations.of(context)!. allCluesOn ollut, \r\n                    style: const TextStyle (väri: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' muuta \'\'{\' \r\n          Ennustajan tehtävä on pelata\r\n          return Column( \r\n            lapset: [ \r\n              Teksti(                ';
-
-  @override
   String strf0868c(Object length0, Object valuescore0) {
-    return '$length0: $valuescore0';
+    return '0: 1 $length0 $valuescore0';
   }
 
   @override
@@ -4096,16 +4060,8 @@ class AppLocalizationsFi extends AppLocalizations {
   String get laVictime => 'Uhri';
 
   @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      '; \r\n            centerActionWidget = Rivi( \r\n              mainAxisSize: MainAxisSize.min, \r\n              lapset: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. Tartuttaa \r\n                  Ikoni: Icons.auto_fix_high, \r\n                  väri: Colors.purpleAccent, \r\n                  onPressed: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      Konteksti, \r\n                      Kuule: väärin, \r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      totta, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                const SizedBox (leveys: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. niele, \r\n                  ikoni: Icons.close, \r\n                  väri: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        väärin, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          farmariauto; \r\n        Laatikko \'loup_blanc_turn\': \r\n          promptText = ';
-
-  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Ei uhreja viime yönä (suojattu tai säästetty)';
-
-  @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ', \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Väri: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'susi\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan (teksti: viesti), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Kompakti lähetyspalkki\r\n          if (canSendMessage)\r\n            Row( \r\n              lapset: [ \r\n                Laajennettu( \r\n                  lapsi: SizedBox( \r\n                    Pituus: 32, \r\n                    lapsi: TextField( \r\n                      Ohjaaja: _chatController, \r\n                      style: const TextStyle (fontSize: 12, color: Colors.white), \r\n                      koriste: InputDecoration( \r\n                        vihjeTeksti: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          väri: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        raja: OutlineInputRaja( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        täytetty: totta, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          vaaka: 10, \r\n                          Pystysuora: 0, \r\n                        ), \r\n                      ), \r\n                      onLähetetty: (teksti) \'\'{\' \r\n                        if (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (leveys: 4), \r\n                IconButton( \r\n                  ikoni: const Ikon( \r\n                    Icons.send_rounded, \r\n                    Koko: 18, \r\n                    väri: Colors.cyanAccent, \r\n                  ), \r\n                  pehmustet: EdgeInsets.zero, \r\n                  rajoitteet: const BoxConstraints(), \r\n                  onPressed: () \'\'{\' \r\n                    if (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(Merkkimerkkimerkki, merkkijonotyyppi, väri activeColor) { \r\n    viimeinen bool onValittu = _selectedChatType == tyyppi; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      lapsi: Kontti( \r\n        pehmustet: jatkuu EdgeInsets.symmetric(vaakasuora: 8, pystysuora: 3), \r\n        koristelu: BoxDecoration( \r\n          Väri: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          raja: Border.all( \r\n            Väri: \r\n                isValittu ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        lapsi: Teksti( \r\n          levy-yhtiö, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isValittu ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- PÄIVITETTY AVATAR INTERAKTIIVISEKSI--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    if (startTime == null) palauta const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder mahdollistaa erittäin sulavan visuaalisen ajastimen ilman ajastinta ja manuaalista setStatea, mikä keventää säiettä huomattavasti (Kohta 4)\r\n    final endTime = startTime.toDate().add( \r\n      Kesto (sekunti: kestoInSeconds), \r\n    ); \r\n    jäljelle jäänyt = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        tyyli: Teema( \r\n          Konteksti, \r\n        ).textTheme.headlineSmall?. copyWith(väri: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      Kesto: jäljellä, \r\n      tween: Teini-ikäinen (alku: jää, loppu: Kesto.nolla), \r\n      builder: (BuildContext-konteksti, Kestoarvo, Widget? lapsi) { \r\n        viimeiset sekunnit = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(context)!. jäljellä oleva aika, \r\n          style: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            väri: sekunti < 20 ? Värit.punainenKorostus: Värit.meripihkaKorostus, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext-konteksti, \r\n    Kartta<String, dynaaminen> gameData, \r\n    String playerId, \r\n  ) \'\'{\' \r\n    final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n    final playerOrder = List<String>.from( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    final positions = Map<String, dynamic>.from( \r\n      gameData[\'littleHorsesPositions\'] ?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'; \r\n    viimeinen bool isMyTurn = currentPlayerId == playerId; \r\n    final int noppi = (gameData[\'littleHorsesDice\'] numerona?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[\'littleHorsesHasRolled\'] ?? väärin; \r\n    final bool isTeamMode = gameData[\'smallTeamHorses\'] ?? väärin; \r\n    final Map<String, dynaaminen> peräkkäinen Sixes = Map<String, dynaaminen>.from( \r\n      gameData[\'smallHorsesPeräkkäiset\'] ?? {}, \r\n    ); \r\n    final int mySixStreak = peräkkäiset kuutoset[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade tummalla taustalla\r\n    final List<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon taivaansininen\r\n      const Color(0xFF10B981), // Smaragdinvihreä\r\n      const Color(0xFFF59E0B), // Kultainen meripihka\r\n    ]; \r\n\r\n    --- VOITONNÄYTTÖ--- \r\n    if (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      return UniversalGameEndScreen( \r\n        peliOtsikko:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Saavuttu laudan keskelle!';
@@ -4142,12 +4098,12 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String k1663(Object oppUpper, Object oppBonus035) {
-    return '1-6: $oppUpper/63 $oppBonus035';
+    return '1-6: 0 /63 1 $oppUpper $oppBonus035';
   }
 
   @override
   String k16631(Object myUpper, Object myBonus035) {
-    return '1-6: $myUpper/63 $myBonus035';
+    return '1-6: 0 /63 1 $myUpper $myBonus035';
   }
 
   @override
@@ -4232,10 +4188,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get gagneTonSecretEstPreserve => 'VOITTO! Salaisuutesi on turvassa.';
 
   @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      '); \r\n      _wordCivil = osat[0].trim(); \r\n      _wordUndercover = osat[1].trim(); \r\n    \'\'}\' muuta \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (variantti)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    for (var-pelaaja _activePlayers) \'\'{\' \r\n      if (pelaaja == peitetehtävässä) \'\'{\' \r\n        _playerRoles[pelaaja] = \"Soluttautuja\"; \r\n      \'\'}\' muuten, jos (pelaaja == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[soittaja] = \"Herra White\"; \r\n      \'\'}\' muuta \'\'{\' \r\n        _playerRoles[pelaaja] = \"Siviili\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.paljastava; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  void _nextPlayerReveal() \'\'{\' \r\n    jos (_currentPlayerRevealIndex < _activePlayers.pituus - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } muuta { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(jousisoittaja) \'\'{\' \r\n    String role = _playerRoles[soittaja]!; \r\n    bool impostorsWin = rooli == \"Siviili\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      if (huijarit) \'\'{\' \r\n        _resultMessage = \"{player} oli siviili! Huijarit voittavat!\"; \r\n      \'\'}\' muuta \'\'{\' \r\n        _resultMessage = \"{player} oli\r\n    \r\n  ';
-
-  @override
   String get requiert4Joueurs => 'Vaatii vähintään 4 pelaajaa';
 
   @override
@@ -4279,7 +4231,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String stre786cb(Object sender) {
-    return '$sender : ';
+    return '0: $sender';
   }
 
   @override
@@ -4384,7 +4336,7 @@ class AppLocalizationsFi extends AppLocalizations {
       'Valitse aloitettavaksi vähintään 5 roolia.';
 
   @override
-  String get petiteBlind => 'Pieni sokea: \"{\'0\'\'}\"';
+  String get petiteBlind => 'Pieni sokea: \"\'(\'\'0\'\')\'\"';
 
   @override
   String get simpleVillageois => 'Kyläläinen';
@@ -4399,7 +4351,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get nombreDeJoueursRecherches =>
-      'Haettujen pelaajien määrä: \"{\'0\'\'}\"';
+      'Haettujen pelaajien määrä: \"\'(\'\'0\'\')\'\"';
 
   @override
   String get laBeloteRequiertExactement4 =>
@@ -4493,7 +4445,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get six => 'Kuutoset';
 
   @override
-  String get sectionSup => 'Sup-osa: \"{\'0\'\'}\"';
+  String get sectionSup => 'Sup-osa: \"\'(\'\'0\'\')\'\"';
 
   @override
   String k63Pts(Object oppUpper, Object value) {
@@ -4527,17 +4479,17 @@ class AppLocalizationsFi extends AppLocalizations {
   String get moi => 'Minä';
 
   @override
-  String get manche1 => 'Kanava \"{\'0\'\'}\" / \"{\'1\'\'}\"';
+  String get manche1 => 'Kanava \"\'(\'\'0\'\')\'\" / \"\'(\'\'1\'\')\'\"';
 
   @override
   String get voisin => 'Naapuruus';
 
   @override
   String get aSelectionneCarte =>
-      '\"{\'0\'\'}\" valittu \"{\'1\'\'}\" kartta \"{\'2\'\'} .\".';
+      '\"\'(\'\'0\'\')\'\" valittu \"\'(\'\'1\'\')\'\" kartta \"\'(\'\'2\'\')\' .\".';
 
   @override
-  String get jouePar => 'Soitti \"{\'0\'\'}';
+  String get jouePar => 'Soitti \"\'(\'\'0\'\')\'';
 
   @override
   String get lAdversaire => 'Vastustaja';
@@ -4584,7 +4536,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get roueDeSecours => 'Pyörä\nHelpotus';
 
   @override
-  String get radarCaseCiblee => 'Tapaus \"{\'0\'\'}\" kohdistettu!';
+  String get radarCaseCiblee => 'Tapaus \"\'(\'\'0\'\')\'\" kohdistettu!';
 
   @override
   String get ys => 'ð';
@@ -4659,7 +4611,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get aEteChoisiPourSa =>
-      '\"{\'0\'\'}\" valittiin hänen vastaus ja voitti 1 piste!';
+      '\"\'(\'\'0\'\')\'\" valittiin hänen vastaus ja voitti 1 piste!';
 
   @override
   String get resultatsDesVotes => 'Äänestystulokset';
@@ -4742,11 +4694,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get leTourEstTermine1 => 'Vuoro on päättynyt.';
 
   @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName voitti kuvauksellaan:AppLocalizations.of [conteksti]!. extrainfoColumnChildText 99999 $winningDescription';
-  }
-
-  @override
   String get personneNAGagneCe =>
       'Kukaan ei voittanut tätä kierrosta. Tasapeli tai ei kuvatekstejä.';
 
@@ -4791,19 +4738,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get score => 'Pistemäärä';
-
-  @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object value,
-    Object guesserName,
-    Object value2,
-    Object deckIndex,
-    Object deckTotal,
-    Object value3,
-    Object totalScore,
-  ) {
-    return '$value $guesserName :AppLocalizations.of [conteksti]! .styleConstTextstyle Värit $value2 $deckIndex / $deckTotal ... $value3 : $totalScore';
-  }
 
   @override
   String get laNuitTombeSurLe => 'Yö on kylässä.\n\nSulje silmäsi.';
@@ -4870,14 +4804,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get leLoupNoirDecideDu => 'Musta Susi päättää uhrin kohtalosta';
 
   @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Tartuta $targetName ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinValkoinen susi iskee yksin';
-  }
-
-  @override
   String get choisissezUneVictimeADevorer => 'Valitse ahmaistava uhri';
 
   @override
@@ -4935,14 +4861,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get amoureux => 'Rakastavaiset';
 
   @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName : AppLocalizations.of(context)!.tyyliTextstyleFontweightBoldSmall Hevoset';
-  }
-
-  @override
   String get courseIndividuelle => 'Yksilökilpailu';
 
   @override
@@ -4956,7 +4874,7 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get gardeS => '\"{\'0\'\'}\" pidetty';
+  String get gardeS => '\"\'(\'\'0\'\')\'\" pidetty';
 
   @override
   String get cur => '♥ Hertta';
@@ -5021,16 +4939,16 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get genereDesDilemmesAuFormat =>
-      'Luo ongelmia \"OptionA- tai OptioB\"-muodossa. Teema: \"{\'0\'\'}';
+      'Luo ongelmia \"OptionA- tai OptioB\"-muodossa. Teema: \"\'(\'\'0\'\')\'';
 
   @override
   String get jePasse => 'Passaan';
 
   @override
-  String get vote => '\"{\'0} ääni';
+  String get vote => '\"\'(\'\'0\')\' ääni';
 
   @override
-  String get votes1 => '\"{\'0} ääntä';
+  String get votes1 => '\"\'(\'\'0\')\' ääntä';
 
   @override
   String get majoritaire => 'Enemmistö';
@@ -5073,15 +4991,11 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Ketkä voisivat lisätä?Lisää paikkoja...';
-
-  @override
-  String get votePar => 'Äänesti: \"{\'0\')';
+  String get votePar => 'Äänesti: \"\'(\'\'0\')';
 
   @override
   String get decisionUnanimeDuGroupePour =>
-      'Ryhmän yksimielinen päätös \'\'{\'0\'!';
+      'Ryhmän yksimielinen päätös \'\'(\'\'0\'!';
 
   @override
   String get ilFautAuMoins41 =>
@@ -5093,7 +5007,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get lEquipeAReveleL =>
-      'Tiimi \"{\'0} paljasti salamurhaajan! Joukkue voittaa!';
+      'Tiimi \"\'(\'\'0\')\' paljasti salamurhaajan! Joukkue voittaa!';
 
   @override
   String get bleue => 'Sininen';
@@ -5103,7 +5017,8 @@ class AppLocalizationsFi extends AppLocalizations {
       'Tiimi löysi kaikki hänen sanansa ja voitti!';
 
   @override
-  String get maitreEspionDeLEquipe => 'Joukkueen \'\'{\'0} \'master Espion';
+  String get maitreEspionDeLEquipe =>
+      'Joukkueen \'\'(\'\'0\')\' \'master Espion';
 
   @override
   String get equipeRouge1 => 'Punainen ryhmä: {0}';
@@ -5112,21 +5027,21 @@ class AppLocalizationsFi extends AppLocalizations {
   String get equipeBleue1 => 'Sininen ryhmä: {0}';
 
   @override
-  String get maitreEspion => '\"{\'0\'\'}';
+  String get maitreEspion => '\"\'(\'\'0\'\')\'';
 
   @override
   String get passeLeTelephoneAuxAgents =>
-      'Syötä puhelin ryhmäagenteille \"{\'0}\"';
+      'Syötä puhelin ryhmäagenteille \"\'(\'\'0\')\'\"';
 
   @override
   String get mime => 'Pantomimi';
 
   @override
-  String get cEstAuTourDe2 => 'Käännös {\'0\'\'} ({1}})';
+  String get cEstAuTourDe2 => 'Käännös \'(\'\'0\'\')\' (\'(\'1\'))\')';
 
   @override
   String get genereDesQuestionsAmusantesEt =>
-      'Luo hauskoja ja nopeita kysymyksiä. Teema: \"{\'0\'\'}';
+      'Luo hauskoja ja nopeita kysymyksiä. Teema: \"\'(\'\'0\'\')\'';
 
   @override
   String s3(Object minDuration) {
@@ -5142,7 +5057,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get fin1 => 'LOPPU';
 
   @override
-  String get trouves => 'Löytyi: \"{\'0\'\'}\"';
+  String get trouves => 'Löytyi: \"\'(\'\'0\'\')\'\"';
 
   @override
   String get ecurie1 => 'Talli 1';
@@ -5157,7 +5072,8 @@ class AppLocalizationsFi extends AppLocalizations {
   String get ecurie4 => 'Talli 4';
 
   @override
-  String get nombreMaxDeJoueurs => 'Pelaajien enimmäismäärä: \"{\'0\'\'}\"';
+  String get nombreMaxDeJoueurs =>
+      'Pelaajien enimmäismäärä: \"\'(\'\'0\'\')\'\"';
 
   @override
   String jAiLanceUnePartie1(Object value) {
@@ -5168,10 +5084,10 @@ class AppLocalizationsFi extends AppLocalizations {
   String get jeu1 => 'Peli';
 
   @override
-  String get partieDeEnAttente => 'Osa \"{\'0\'\'} \":sta';
+  String get partieDeEnAttente => 'Osa \"\'(\'\'0\'\')\' \":sta';
 
   @override
-  String get termine => 'Päätetty: \"{\'0\'\'}\"';
+  String get termine => 'Päätetty: \"\'(\'\'0\'\')\'\"';
 
   @override
   String get vainqueur2 => 'Voittaja:';
@@ -5209,7 +5125,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get survie => 'Selviytyminen';
 
   @override
-  String get redigezLPour => 'Kirjoita \"{\'0\'\'} \" {\'1\'\'} \"';
+  String get redigezLPour => 'Kirjoita \"\'(\'\'0\'\')\' \" \'(\'\'1\'\')\' \"';
 
   @override
   String get rejouerGarderPts => 'PELAA UUDELLEEN (SÄILYTÄ P)';
@@ -5315,10 +5231,6 @@ class AppLocalizationsFi extends AppLocalizations {
       '** Tavoite\nÄlä pidä laitetta käsissäsi, kun peruna räjähtää!\n\n**Draft\n1. Teema näkyy näytöllä.\n2. Laitteen pitävän pelaajan on annettava teemaa vastaava vastaus.\n3. Heti kun hän vastasi, hän nopeasti ohitti koneen lähimmäiselleen.\n4. Naapurin on puolestaan löydettävä uusi vastaus ja läpäistävä laite.\n5. Aika on piilotettu ja sattumanvarainen: peruna voi räjähtää milloin tahansa!\n6. Laitetta räjähdyksen aikaan pitävä pelaaja menettää kahvan ja saa pantin.';
 
   @override
-  String get principeGeneralGribouillisEstUn =>
-      '**Yleisperiaate\nGribouillis on \"Arab-puhelimen\" innoittama piirustuspeli, jossa ideat muuttuvat joka vaiheessa. On olemassa 3 pelitilat:\n\n**1. Normaali tila (Arabinen kuvapuhelin)\n- Jokainen pelaaja kirjoittaa lauseen.\n- **Drawing**: Jokainen pelaaja saa toisen virkkeen ja vetää sen.\n- **Devinette **: Jokainen pelaaja saa piirustuksen ja arvaa mitä se edustaa.\n- **Vaihtoehto **: Peli varajäsenet piirustus ja arvaa, kunnes jokainen \"albumi\" on kiertänyt kaikki pelaajat.\n- Mutta... Hauskaa nähdä miten yksinkertainen lause muuttuu aivan erilaiseksi!\n\n**2. Täydennystila (yhteispiirustus)\n- Croquis**: Jokainen pelaaja aloittaa yksinkertainen piirustus.\n- **Täydellinen**: Jokainen pelaaja saa toisen piirroksen ja täytyy rikastuttaa sitä poistamatta sitä, mitä on jo olemassa.\n-Ei. Piirustus menee pelaajalta pelaajalle, jokainen lisää sen kosketus.\n- ** Parametri \"Lisää 1\" **:\n- * Jos ei käytössä (oletusarvo) *: Se on naru. Piirustus kehittyy jokaisessa vaiheessa (Player A -> Player B -> Player C...).\n- * Jos aktivoit*: Ensimmäiset piirustukset jokaisesta pelaajasta ovat kaikkien muiden pelaajien tekemiä, luoden samanaikaisesti useita kollektiivisia teoksia.\n- Mutta... Luo yllättäviä ja hauskoja kollektiivisia taideteoksia.\n\n**3. Brise-Glace-tila (luova vuorovaikutus)\n- ** Kirjoittaminen**: Jokainen pelaaja kirjoittaa henkilökohtaisen teeman (entinen: AppLocalizations.of(context)!.myPreference).\n- ** Drawing**: Jokainen pelaaja vastaanottaa teemat **kaikki muut pelaajat** ja täytyy piirtää ne.\n- ** Mutta **: Ihanteellinen rikkoa jäätä, löytää toisten makuja ja käynnistää luovuutta yhteistyöllä ja kevyellä tavalla.';
-
-  @override
   String get yzObjectifAvoirLeMoins =>
       'Tavoite\n\nOn niin vähän pisteitä kuin mahdollista pelin lopussa.\nPeli loppuu, kun pelaaja saavuttaa 100 pistettä tai enemmän, ja voittaja on yksi alhaisin kokonaispistemäärä.\n\nLaitteet\n\n150 korttia numeroituna \n\nTäytäntöönpano\n\nSekoita kaikki kortit.\nJokainen pelaaja saa 12 korttia, jotka asetetaan kasvot alas hänen eteensä, 4 saraketta × 3 riviä.\nMuut kortit muodostavat osake. Palauta ensimmäinen kortti muodostaa jäte.\nJokainen pelaaja palauttaa kaksi korttia hänen valintansa hänen 12.\n\nKiertueen kulku\n\nSinulla on **30 sekuntia** valita kahden toimen välillä:\n\n1. Ota jätekortti\nSinun täytyy vaihtaa se yksi 12 korttia (näkyvä tai piilotettu puoli).\nKorvattu kortti menee hukkaan.\n\n2. Piocher kortti kasvot alaspäin\nKatso karttaa.\n- joko pidät sen ja korvaat yhden korttisi (kuten edellä),\n- joko kieltäydyt siitä → laitat sen suoraan jätteeseen, ja tässä tapauksessa sinun täytyy palauttaa yksi kortti vielä piilossa.\n\nErityissäännöt\n\nKolme samanlaista korttia sarakkeessa → on välittömästi kukistettu (arvo 0).\n\nKäsivarren loppu:\n\nKahva päättyy, kun pelaaja on paljastanut kaikki korttinsa.\nKaikki muut pelaajat sitten paljastaa jäljellä olevat kortit. Kahva on ohi.\nKaikki pelaajat laskevat korttiensa summan.\n\nHuomaa: jos pelaaja, joka lopettaa ei ole alhaisin pisteet kierroksella, hän ottaa rangaistus +10 pistettä (hänen kahva pisteet on kaksinkertaistunut alkuperäisessä versiossa, käytämme +10 yksinkertaistaa).\n\nPeli päättyy\n\nPelaamme niin monta hihaa kuin tarvitsemme.\nKun pelaaja saavuttaa 100 pistettä tai enemmän, peli pysähtyy.\nPelaaja, jolla on pienin kumulatiivinen pisteet voittaa.';
 
@@ -5406,10 +5318,6 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get principeDuJeuLeJeu =>
       'Peliperiaate\n* Peliä pelataan välillä **3 ja 10 pelaajaa**.\n* Jokainen pelaaja antaa pääsyn osa hänen kuvakirjasto ja valitsee valokuvia jakaa.\n* Pelin aikana valitaan kuva ** satunnaisesti** kaikkien pelaajien joukosta, sitten näytetään muutaman sekunnin ajan.\n* Pelaajien täytyy arvata **Kuka omistaa kuvan** esillä.\n* Pelaaja, joka oikein arvaa eniten kuvia voittaa pelin.\n\nMenettely\n1. **Kuvien valinta**: Jokainen pelaaja valitsee useita kuvia heidän galleria.\n2. **Pelin aloitus**: Kun kaikki ovat valmiita, isäntä käynnistää pelin.\n3. **Pelaa torni**:\n- Satunnainen kuva näkyy 5 sekuntia.\n- Kaikki äänestävät omistajaa.\n4. **Tulokset**: Pisteet päivitetään jokaisen kierroksen jälkeen.\n5. **Pelin loppu**: Kun asetettu määrä kierroksia, pelaaja eniten pisteitä voittaa.';
-
-  @override
-  String get butDuJeuCoulerTous =>
-      '** Pelitavoite\nJumissa kaikki vastustajan alukset ennen kuin hän upottaa sinun.\n\n**Draft\n1. ** Paikka**: Jokainen pelaaja asettaa laivastonsa salaa 10x10 verkkoon.\n- Lentoyhtiöt (5 laatikkoa)\n- Cruiser (4 laatikkoa)\n- Sukellusvene (3 solua)\n- Tuhoaja (3 laatikkoa)\n- Partio (2 laatikkoa)\n2. Pelaajat puolestaan koskettavat laatikko ampua.\n3. **Julkaisu**: AppLocalizations.of(context)!.touche, \"Comulated\" or \"To water.\"\n4. ** Viktoire**: Ensimmäinen pelaaja upottaa koko vastustajan laivasto voittaa.';
 
   @override
   String get butDuJeuEtreLe2 =>
@@ -5566,9 +5474,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get vousDevezJouerUneCarte => 'Sinun on pelattava suurempi kortti.';
 
   @override
-  String get aGagne1 => 'Hän voitti!';
-
-  @override
   String get ceNEstPasVotre => 'Ei ole sinun vuorosi.';
 
   @override
@@ -5602,9 +5507,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get caseDejaCiblee => 'Ruutuun on jo tähdätty.';
-
-  @override
-  String get aCouleTouteLaFlotte => 'Upotin koko vihollislaivaston!';
 
   @override
   String get placementAutomatiqueEffectue => '⏱️ Automaattinen asettelu tehty.';
@@ -5821,11 +5723,6 @@ class AppLocalizationsFi extends AppLocalizations {
       '--- CRIITINEN VIRHE LIITTYESSÄPeli ---';
 
   @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ':AppLocalizations.of [conteksti]! .wordcivilParts0TrimWordundercoverIA palauttaa erilliset yksinkertaiset sanat';
-
-  @override
   String get infiltre => 'Soluttautuja';
 
   @override
@@ -5944,9 +5841,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Korttia ei löytynyt.';
-
-  @override
-  String get aGagneLaManche => 'Hän voitti kierroksen!';
 
   @override
   String get desDejaLancesPourCe => 'Dice on jo lähtenyt kiertueelle.';
@@ -6317,10 +6211,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get questionNonTrouvee => 'Kysymystä ei löytynyt';
 
   @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Ketkä voisivat lisätä?AppLocalizations.of(context)!.listStringkysymyksetAiwordpoolGamewordssoft';
-
-  @override
   String get menteur => 'Valehtelija.';
 
   @override
@@ -6347,18 +6237,6 @@ class AppLocalizationsFi extends AppLocalizations {
       'Korotuksen on oltava korkeampi.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      'AppLocalizations.of [context]!.aPlayer} on viimeinen selviytyjä ja voittaa Skull!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurA =>
-      '] ? AppLocalizations.of [context]!.aPlayer} voitti 2 haastetta ja voitti pelin!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      'AppLocalizations.of [context]!aPlayer} voittaa Kallo!';
-
-  @override
   String get reponseVide => 'Tyhjä vastaus.';
 
   @override
@@ -6382,10 +6260,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Kohdettua pelaajaa ei löytynyt.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Kuka voisi lisätä?Lisää sijaintia...jos pelityyppiSynonym tai Banni';
-
-  @override
   String get vousNePouvezPasBannir => 'Et voi kieltää omaa synonyymiäsi!';
 
   @override
@@ -6393,14 +6267,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'Tämä pelaaja ei lähettänyt vastausta.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Kenellä voisi olla enemmän?Lisää paikkakuntia.of(context)!.. Tuomari';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Kenellä voisi olla enemmän?Lisätietoja... [konteksti]!';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -6415,10 +6281,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get aucuneDescriptionNAEte => 'Kuvauksesta ei äänestetty.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Kenellä voisi olla enemmän?Lisätietoja...[konteksti]!.lopulliselle kohteelleÄänet1voittajan ympäri';
 
   @override
   String get jugeIntrouvable => 'Tuomaria ei löytynyt.';
@@ -6554,10 +6416,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get piquantInsolite => '🌶️ Pistävä & Omalaatuinen';
 
   @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Kuka voisi enemmän?AppLocalizations.of(context)! - Kuka voisi modegroupisi?';
-
-  @override
   String get devineT => 'Arvaa.';
 
   @override
@@ -6571,10 +6429,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get exception => 'Poikkeus:';
-
-  @override
-  String get debutDeLaConstructionDe =>
-      '-- ÄÄNEN HÄNEN RAKENNUS \'Kuka voisi eniten?AppLocations.of(context)!.printIsactionriippuenStateTo(onActionPending)players\'] kuten kartta <String, dynaaminen>?? {};';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6594,10 +6448,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get attentionLeWidgetNEst => '- Widget on poissa.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Kenellä voisi olla enemmän?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId';
 
   @override
   String get phaseDePose => 'KANNANVAIHE';
@@ -6663,10 +6513,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get enCours => 'CURRENT: {0}';
-
-  @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"\"}\": GameMessageLocalization.tr(conteksti, syy),';
 
   @override
   String get jAiLanceUnePartie2 => 'Aloitin pelin';
@@ -7975,41 +7821,41 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie3(Object _selectedGame) {
-    return 'J\'ai lancé une partie de $_selectedGame !';
+    return 'Heitin osan nollasta! $_selectedGame';
   }
 
   @override
   String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
-    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+    return 'Roolit (0) $selectedRolesCount $playerslength';
   }
 
   @override
   String dessineCettePhrase1(Object stepToProcessconte) {
-    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+    return 'Vedä tämä lause:\n\" 0 \" $stepToProcessconte';
   }
 
   @override
   String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
-    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+    return '0 sen ehdotus on kielletty. $loserName $loserAnswer';
   }
 
   @override
   String aTrouveLeMot2(Object winnerName, Object currentWord) {
-    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+    return '0 löysi sanan: \' 1 \'! $winnerName $currentWord';
   }
 
   @override
   String personneNATrouveLe1(Object currentWord) {
-    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+    return 'Kukaan ei löytänyt sanaa \'0\'. $currentWord';
   }
 
   @override
   String aTrouveLeMot3(Object guesserName, Object currentWord) {
-    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+    return '0 löysi sanan: \' 1 \'! $guesserName $currentWord';
   }
 
   @override
-  String get revolution1 => '(Révolution !)';
+  String get revolution1 => 'Vallankumous!';
 
   @override
   String tonMotEst2(Object _wordCivil) {
@@ -8026,7 +7872,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
-    return 'J\'ai lancé une partie de $datagameTypeGribou !';
+    return 'Heitin osan nollasta! $datagameTypeGribou';
   }
 
   @override
@@ -8044,7 +7890,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get logClueGivingStart => 'Peli alkaa! Anna vihjeesi...';
 
   @override
-  String get logBeloteStart => 'La partie de Belote commence !';
+  String get logBeloteStart => 'Belote-peli alkaa!';
 
   @override
   String get logBlokusStart => 'Blokus-peli alkaa!';
@@ -8060,12 +7906,12 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String aTireDefi(Object targetPlayerName, Object challengeLabel) {
-    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+    return '0 on ampunut: 1! $targetPlayerName $challengeLabel';
   }
 
   @override
   String lEquipeAReveleLAssassin(Object teamName) {
-    return 'L\'équipe $teamName a révélé l\'Assassin !';
+    return 'Ryhmä 0 paljasti salamurhaajan! $teamName';
   }
 
   @override
@@ -8073,27 +7919,27 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String maximumPossibleCartes(Object maximumBid) {
-    return 'Maximum possible : $maximumBid cartes';
+    return 'Maksimi mahdollinen: 0 korttia $maximumBid';
   }
 
   @override
   String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
-    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+    return '0 heijastaa haastetta 1 korttia ... $bidderName $liveAmount';
   }
 
   @override
   String votreMainCartes(Object count) {
-    return 'VOTRE MAIN ($count cartes)';
+    return 'MIES (0 korttia) $count';
   }
 
   @override
   String pictionaryStrokesCount(Object count) {
-    return '$count/30 traits';
+    return '0/30 ominaisuudet $count';
   }
 
   @override
   String indicesSoumisCount(Object submitted, Object total) {
-    return 'Indices soumis : $submitted / $total';
+    return 'Tiedot toimitettu: 0 / 1 $submitted $total';
   }
 
   @override
@@ -8102,7 +7948,7 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get couleurChoisie => 'Couleur choisie :';
+  String get couleurChoisie => 'Valittu väri:';
 
   @override
   String pokerRaiseTo(Object amount) {
@@ -8114,14 +7960,14 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String reponseDeJoueur(Object guesserName, Object answer) {
-    return 'Réponse de $guesserName : \"$answer\"';
+    return 'Vastaus 0: \" 1 \" $guesserName $answer';
   }
 
   @override
   String get carteSuivante => 'Carte suivante';
 
   @override
-  String get roleLabel => 'Rôle:';
+  String get roleLabel => 'Tehtävä:';
 
   @override
   String get obligatoire => 'Pakollinen';
@@ -8148,109 +7994,107 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String aEteSignaleEtMasque(Object targetName) {
-    return '$targetName a été signalé et masqué pour vous.';
+    return '0 on ilmoitettu ja piilotettu sinulle. $targetName';
   }
 
   @override
   String get impossibleDObtenirUnJeton =>
-      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+      'Turvallista LiveKit-videoyhteyttä ei saatu.';
 
   @override
   String get veuillezEntrerUneAdresseEmail =>
-      'Veuillez entrer une adresse email valide.';
+      'Anna kelvollinen sähköpostiosoite.';
 
   @override
-  String get veuillezEntrerVotreMotDe =>
-      'Veuillez entrer votre mot de passe actuel.';
+  String get veuillezEntrerVotreMotDe => 'Anna nykyinen salasanasi.';
 
   @override
-  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+  String get entrezVotreMotDePasse => 'Anna nykyinen salasanasi.';
 
   @override
   String get leNouveauMotDePasse =>
-      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+      'Uuden salasanan on oltava vähintään 6 merkkiä.';
 
   @override
-  String get lesDeuxMotsDePasse =>
-      'Les deux mots de passe ne correspondent pas.';
+  String get lesDeuxMotsDePasse => 'Molemmat salasanat eivät täsmää.';
 
   @override
-  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+  String get photoDeProfilMiseA => 'Profiilikuva päivitetty!';
 
   @override
-  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+  String get echecDuChangementDePhoto => 'Kuvanmuutos epäonnistui.';
 
   @override
-  String get k3CaracteresMinimum => '3 caractères minimum';
+  String get k3CaracteresMinimum => 'Vähintään 3 merkkiä';
 
   @override
-  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+  String get cePseudoEstDejaPris => 'Tämä on jo varattu.';
 
   @override
-  String get unAmi => 'Un ami';
+  String get unAmi => 'Ystävä';
 
   @override
-  String get ceJoueur => 'ce joueur';
+  String get ceJoueur => 'Tämä pelaaja';
 
   @override
-  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+  String get preparationDeLaRecherche => 'Etsinnän valmistelu...';
 
   @override
   String get erreurDeConnexionAuMatchmaking =>
-      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+      'Virhe, joka liittyy matchmakingiin. Yritä uudelleen.';
 
   @override
-  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+  String get erreurDeConnexionALa => '-En.';
 
   @override
-  String get legendeVivante => 'Légende Vivante';
+  String get legendeVivante => 'Elävä legenda';
 
   @override
-  String get grandMaitre => 'Grand Maître';
+  String get grandMaitre => 'Suurmestari';
 
   @override
-  String get stratege => 'Stratège';
+  String get stratege => 'Strategia';
 
   @override
-  String get initie => 'Initié';
+  String get initie => 'Käynnistetty';
 
   @override
-  String get illimiteesVip => 'Illimitées (VIP)';
+  String get illimiteesVip => 'Rajoittamaton (VIP)';
 
   @override
   String pieces(Object playerStatecoins) {
-    return '$playerStatecoins pièces';
+    return '0 kpl $playerStatecoins';
   }
 
   @override
-  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+  String get utilisateurNonConnecte => 'Ei yhteyttä käyttäjään.';
 
   @override
-  String get entrezUnPseudo => 'Entrez un pseudo';
+  String get entrezUnPseudo => 'Anna pseudo';
 
   @override
-  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+  String get cePseudoEstDejaPris1 => 'Tämä lempinimi on jo otettu';
 
   @override
-  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+  String get pseudoDejaPrisParUn => 'Pseudo on jo ottanut toisen pelaajan';
 
   @override
   String get cetteVersionDeLApplication =>
-      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+      'Tämä versio sovelluksesta on vanhentunut. Asenna uusin versio.';
 
   @override
   String get playfunEstActuellementEnMaintenance =>
-      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+      'Playfun on tällä hetkellä ylläpidetään parantaa iltasi. Tule pian takaisin!';
 
   @override
   String get uneNouvelleVersionDePlayfun =>
-      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+      'Uusi versio Playfun on saatavilla! Sinun täytyy päivittää sovellus jatkaa pelaamista.';
 
   @override
-  String get derniereVersion => 'Dernière version';
+  String get derniereVersion => 'Viimeisin versio';
 
   @override
-  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+  String get echecDeLEnvoi => 'Hylätty lähetys.';
 
   @override
   String demandeDAmiEnvoyeeA(Object name) {
@@ -8279,7 +8123,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String joueur1(Object bUid) {
-    return 'Joueur ($bUid)';
+    return 'Pelaaja (0) $bUid';
   }
 
   @override
@@ -8291,29 +8135,29 @@ class AppLocalizationsFi extends AppLocalizations {
   String get enableVideo => 'Ota video käyttöön';
 
   @override
-  String get pseudoDisponible => '✅ Pseudo disponible';
+  String get pseudoDisponible => 'Pseudo saatavilla';
 
   @override
-  String get entrezUnEmailValide => 'Entrez un email valide';
+  String get entrezUnEmailValide => 'Anna kelvollinen sähköposti';
 
   @override
-  String get k6CaracteresMinimum => '6 caractères minimum';
+  String get k6CaracteresMinimum => 'Vähintään 6 merkkiä';
 
   @override
-  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+  String get pasDeCompteSInscrire => 'Ei tiliä? Rekisteri';
 
   @override
-  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+  String get dejaUnCompteSeConnecter => 'Joko tili? Kirjaudu sisään';
 
   @override
   String get conditionsGeneralesDUtilisationCgu =>
-      'Conditions Générales d\'Utilisation (CGU / EULA)';
+      'Yleiset käyttöehdot (CGU / EULA)';
 
   @override
-  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+  String get politiqueDeConfidentialite => 'Yksityisyyden suoja';
 
   @override
-  String get miseAJourRequise => 'Mise à jour requise';
+  String get miseAJourRequise => 'Päivitys vaaditaan';
 
   @override
   String joueursBloques(Object blockedListlength) {
@@ -8322,5 +8166,273 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get identifiantsIncorrectsOuCompteInexistant =>
-      'Identifiants incorrects ou compte inexistant.';
+      'Virheelliset tunnisteet tai olematon tili.';
+
+  @override
+  String get leMotEtaitLabel => 'Sana oli:';
+
+  @override
+  String get mancheLabel => 'Kanava';
+
+  @override
+  String get et => 'sekä';
+
+  @override
+  String pokerPlayerCheck(Object playerName) {
+    return '$playerName sököttää (Check).';
+  }
+
+  @override
+  String get mot1 => 'Sana:';
+
+  @override
+  String get rouges => 'Punaiset';
+
+  @override
+  String get noirs => 'Mustat';
+
+  @override
+  String get crane2 => 'Kallo';
+
+  @override
+  String get enAttente2 => 'Odotetaan';
+
+  @override
+  String get enCours1 => 'Käynnissä';
+
+  @override
+  String aSelectionneSonPionEt1(Object playerscurrentPlay) {
+    return '$playerscurrentPlay valitsi nappulansa ja miettii...';
+  }
+
+  @override
+  String tempsRestantS1(Object seconds) {
+    return 'Aikaa jäljellä: $seconds s';
+  }
+
+  @override
+  String pack(Object wordstake2join) {
+    return 'Paketti $wordstake2join';
+  }
+
+  @override
+  String variante1(Object rawPairtrim) {
+    return '$rawPairtrim (Muunnelma)';
+  }
+
+  @override
+  String gagneAvecPoint(
+    Object winnerName,
+    Object lowestScore,
+    Object lowestScore1s,
+  ) {
+    return '0 voittaa 1 pisteen 2! $winnerName $lowestScore $lowestScore1s';
+  }
+
+  @override
+  String remporteSkull1(Object playerswinnerIdnam) {
+    return 'Voittaa Skull! $playerswinnerIdnam';
+  }
+
+  @override
+  String packIa(Object _selectedGame) {
+    return 'Pakkaus IA 0 $_selectedGame';
+  }
+
+  @override
+  String get standard => 'Vakio';
+
+  @override
+  String get lui => 'Hän';
+
+  @override
+  String carte4(Object deckIndex, Object deckTotal) {
+    return 'Kortti $deckIndex / $deckTotal';
+  }
+
+  @override
+  String get joueursBloques1 => 'Lukitut pelaajat';
+
+  @override
+  String get vousNAvezBloqueAucun => 'Et ole estänyt ketään pelaajaa.';
+
+  @override
+  String get debloquer => 'Poista esto';
+
+  @override
+  String get nouvelEmail => 'Uusi sähköposti';
+
+  @override
+  String get motDePasseActuel => 'Nykyinen salasana';
+
+  @override
+  String get emailMisAJourAvec => 'Sähköposti päivitetty onnistuneesti!';
+
+  @override
+  String get modifierMotDePasse => 'Vaihda salasana';
+
+  @override
+  String get nouveauMotDePasse => 'Uusi salasana';
+
+  @override
+  String get confirmerLeMotDePasse => 'Vahvista salasana';
+
+  @override
+  String get motDePasseModifieAvec => 'Salasana muokattu onnistuneesti!';
+
+  @override
+  String get prendreUnePhoto => 'Ota kuva';
+
+  @override
+  String get choisirDepuisLaGalerie => 'Valitse galleriasta';
+
+  @override
+  String get supprimerLaPhoto => 'Poista kuva';
+
+  @override
+  String get photoDeProfilRetiree => 'Profiilikuva poistettu.';
+
+  @override
+  String get pseudoMisAJour => 'Lempinimi päivitetty!';
+
+  @override
+  String get compteSecurite => '& Turvatili';
+
+  @override
+  String get editeParParrelV10 => 'Edited by Parrel • v1. 0. 0';
+
+  @override
+  String get aucunJeuTrouve => 'Pelejä ei löytynyt';
+
+  @override
+  String get essaieDAjusterTesFiltres =>
+      'Kokeile muokata suodattimia tai tehdä toinen haku.';
+
+  @override
+  String get reinitialiserLesFiltres => 'Nollaa suodattimet';
+
+  @override
+  String get nouveau => 'UUSI';
+
+  @override
+  String get gererMonAbonnement => 'Hallitse tilaustani';
+
+  @override
+  String get mesPieces => 'Huoneeni';
+
+  @override
+  String get rechargerLesOffresDuStore => 'Lataa uudelleen kaupan tarjoukset';
+
+  @override
+  String get gererMesAbonnements => 'Hallitse tilauksiani';
+
+  @override
+  String get badges => 'Merkit';
+
+  @override
+  String get partiesJouees => 'Pelatut pelit';
+
+  @override
+  String get xpTotalSession => 'Istunnon kokonais-XP';
+
+  @override
+  String get moyennePartie => 'Keskiarvo / Peli';
+
+  @override
+  String get detailParJeuPerformanceXp => 'Tiedot peleittäin ja XP-suoritus';
+
+  @override
+  String get jouezVosPremieresPartiesPour =>
+      'Pelaa ensimmäiset pelisi nähdäksesi XP-tilastosi täällä!';
+
+  @override
+  String xpAuCompteur(Object psxp) {
+    return '$psxp XP mittarissa';
+  }
+
+  @override
+  String encoreXpAvantNiv(Object xpRemaining, Object pslevel1) {
+    return 'Vielä $xpRemaining XP ennen Tasoa $pslevel1';
+  }
+
+  @override
+  String joueeVictoireXpGagnes(
+    Object played,
+    Object played1s,
+    Object won,
+    Object won1s,
+    Object gameXp,
+  ) {
+    return '$played pelattu • $won voitto$won1s • ~$gameXp ansaittua XP:tä $played1s';
+  }
+
+  @override
+  String get erreurDeChargementDesDonnees =>
+      'Virhe ladattaessa käyttäjätietoja.';
+
+  @override
+  String get vousDevezAccepterLesCgu =>
+      'Sinun täytyy hyväksyä CGU ja Privacy Policy luoda tilin.';
+
+  @override
+  String get miseAJourDisponible => 'Päivitys saatavilla';
+
+  @override
+  String get plusTard => 'Myöhemmin';
+
+  @override
+  String get mettreAJour => 'Päivitä';
+
+  @override
+  String uneNouvelleVersionDePlayfun1(Object newVersion) {
+    return 'Uusi versio ($newVersion) Playfunista on saatavilla uusilla ominaisuuksilla ja korjauksilla!';
+  }
+
+  @override
+  String get maintenanceEnCours => 'Jatkuva huolto';
+
+  @override
+  String get mettreAJourMaintenant => 'Päivitä nyt';
+
+  @override
+  String get motifDuSignalement => 'Ilmoituksen syy:';
+
+  @override
+  String get tricheOuAntiJeu => 'Huijaaminen tai epäurheilijamainen peli';
+
+  @override
+  String get autre => 'Muu';
+
+  @override
+  String get signaler => 'Ilmianna';
+
+  @override
+  String get detailParJeu => 'Tiedot peleittäin:';
+
+  @override
+  String get ceJoueurNAPas2 =>
+      'Tällä pelaajalla ei ole vielä tallennettuja pelejä.';
+
+  @override
+  String badgesDebloques(Object unlockedBadgesleng, Object appBadgesallBadges) {
+    return 'Avatut merkit: $unlockedBadgesleng / $appBadgesallBadges';
+  }
+
+  @override
+  String joueursBloques2(Object psblockedUsersleng) {
+    return 'Estetyt pelaajat ($psblockedUsersleng)';
+  }
+
+  @override
+  String debloquer1(Object name) {
+    return 'Kumoa esto: $name';
+  }
+
+  @override
+  String signalerOuBloquer(Object name) {
+    return 'Ilmianna tai estä $name';
+  }
+
+  @override
+  String get vote1 => 'ääni';
 }
