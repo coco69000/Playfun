@@ -1466,16 +1466,6 @@ class _MainScreenState extends State<MainScreen> {
                             playerState.userName ??
                                 AppLocalizations.of(context)!.joueur,
                           );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (_) => LoungeRoomScreen(
-                                    loungeId: loungeId,
-                                    playerId: playerId,
-                                  ),
-                            ),
-                          );
                           if (context.mounted) {
                             Navigator.push(
                               context,

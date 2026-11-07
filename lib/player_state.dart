@@ -807,6 +807,12 @@ class PlayerState extends ChangeNotifier {
     if (_isPremium) return true;
     if (_userId == null) return false;
 
+    // Vérification préventive immédiate pour éviter tout délai réseau si le solde est nul
+    if (_coins < amount) {
+      debugPrint("[PlayerState] Solde insuffisant : $_coins < $amount");
+      return false;
+    }
+
     try {
       final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
         'spendCoins',
@@ -814,7 +820,7 @@ class PlayerState extends ChangeNotifier {
       final result = await callable.call({
         'amount': amount,
         ...ForceUpdateService.versionPayload,
-      });
+      }).timeout(const Duration(seconds: 5));
       if (result.data != null && result.data['success'] == true) {
         _coins = (result.data['remainingCoins'] as num).toInt();
         notifyListeners();
@@ -1116,9 +1122,9 @@ class PlayerState extends ChangeNotifier {
     return true;
   }
 
-  Future<bool> purchasePackage(Package package) async {
-    final success = await PremiumService.purchasePackage(package);
-    if (success) {
+  Future<VipPurchaseResult> purchasePackage(Package package) async {
+    final result = await PremiumService.purchasePackage(package);
+    if (result.success) {
       _isPremium = true;
       if (_userId != null) {
         try {
@@ -1131,7 +1137,7 @@ class PlayerState extends ChangeNotifier {
       }
       notifyListeners();
     }
-    return success;
+    return result;
   }
 
   Future<bool> restorePurchases() async {

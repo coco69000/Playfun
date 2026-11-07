@@ -472,6 +472,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         ? null
                         : () async {
                             final messenger = ScaffoldMessenger.of(context);
+                            final reloadText = AppLocalizations.of(context)?.rechargerLesOffresDuStore ?? "Recharger les offres";
                             final successText = MatchmakingLocalization.tr(
                               context,
                               'congratsVip',
@@ -491,32 +492,36 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               if (mounted) setState(() => _isPurchasing = false);
                               messenger.showSnackBar(
                                 SnackBar(
-                                  backgroundColor: Colors.red[800],
-                                  content: Text(
-                                    failText,
-                                  ),
+                                  backgroundColor: Colors.orange[900],
+                                  content: Text(reloadText),
                                 ),
                               );
                               return;
                             }
 
-                            final success = await playerState.purchasePackage(
+                            final result = await playerState.purchasePackage(
                               _selectedPackage!,
                             );
                             if (mounted) {
                               setState(() => _isPurchasing = false);
                             }
-                            messenger.showSnackBar(
-                              SnackBar(
-                                backgroundColor:
-                                    success
-                                        ? Colors.green[800]
-                                        : Colors.red[800],
-                                content: Text(
-                                  success ? successText : failText,
+                            if (result.success) {
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.green[800],
+                                  content: Text(successText),
                                 ),
-                              ),
-                            );
+                              );
+                            } else if (!result.userCancelled) {
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.red[800],
+                                  content: Text(
+                                    result.errorMessage ?? failText,
+                                  ),
+                                ),
+                              );
+                            }
                           },
                     child:
                         _isPurchasing

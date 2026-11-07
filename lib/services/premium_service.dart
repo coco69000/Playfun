@@ -1,6 +1,19 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+
+class VipPurchaseResult {
+  final bool success;
+  final bool userCancelled;
+  final String? errorMessage;
+
+  const VipPurchaseResult({
+    required this.success,
+    this.userCancelled = false,
+    this.errorMessage,
+  });
+}
 
 class PremiumService {
   // Vos vraies clés récupérées depuis votre écran RevenueCat
@@ -104,18 +117,50 @@ class PremiumService {
   }
 
   /// Déclenche l'achat d'un package (Mensuel, Annuel...)
-  static Future<bool> purchasePackage(Package package) async {
+  static Future<VipPurchaseResult> purchasePackage(Package package) async {
     try {
+      if (!_initialized) {
+        final uid = _currentUserId;
+        if (uid != null) {
+          await init(uid);
+        } else {
+          final configuration = PurchasesConfiguration(activeApiKey);
+          await Purchases.configure(configuration);
+          _initialized = true;
+        }
+      }
       final purchaseResult = await Purchases.purchase(PurchaseParams.package(package));
       final customerInfo = purchaseResult.customerInfo;
       final isVip = customerInfo.entitlements.all[entitlementId]?.isActive == true ||
           customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
           customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.all["premium"]?.isActive == true ||
           customerInfo.entitlements.active.isNotEmpty;
-      return isVip;
+      if (isVip) {
+        return const VipPurchaseResult(success: true);
+      } else {
+        return const VipPurchaseResult(
+          success: false,
+          errorMessage: "Paiement validé par le store, mais l'accès VIP est en attente d'activation. Veuillez cliquer sur 'Restaurer mes achats'.",
+        );
+      }
+    } on PlatformException catch (e) {
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      if (errorCode == PurchasesErrorCode.purchaseCancelledError) {
+        debugPrint("[RevenueCat] Achat annulé par l'utilisateur.");
+        return const VipPurchaseResult(success: false, userCancelled: true);
+      }
+      debugPrint("[RevenueCat] Erreur PlatformException: ${e.message} (code: ${e.code})");
+      return VipPurchaseResult(
+        success: false,
+        errorMessage: e.message ?? "La transaction n'a pas pu aboutir via Google Play.",
+      );
     } catch (e) {
       debugPrint("[RevenueCat] Annulation ou erreur d'achat: $e");
-      return false;
+      return VipPurchaseResult(
+        success: false,
+        errorMessage: e.toString(),
+      );
     }
   }
 
@@ -126,6 +171,7 @@ class PremiumService {
       final isVip = customerInfo.entitlements.all[entitlementId]?.isActive == true ||
           customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
           customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.all["premium"]?.isActive == true ||
           customerInfo.entitlements.active.isNotEmpty;
       return isVip;
     } catch (e) {
@@ -141,6 +187,7 @@ class PremiumService {
       return customerInfo.entitlements.all[entitlementId]?.isActive == true ||
           customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
           customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.all["premium"]?.isActive == true ||
           customerInfo.entitlements.active.isNotEmpty;
     } catch (e) {
       return false;

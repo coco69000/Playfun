@@ -3009,14 +3009,22 @@ class FirebaseService {
     String playerName,
   ) async {
     User? currentUser = FirebaseAuth.instance.currentUser;
-    await _db.collection('lounges').doc(loungeId).update({
-      'players.$playerId': {
-        'name': playerName,
-        'joinedAt': FieldValue.serverTimestamp(),
-        'authUid': currentUser?.uid,
-        'livekitIdentity': playerId,
-      },
-    });
+    await _db
+        .collection('lounges')
+        .doc(loungeId)
+        .set({
+          'players': {
+            playerId: {
+              'name': playerName,
+              'joinedAt': FieldValue.serverTimestamp(),
+              'authUid': currentUser?.uid,
+              'livekitIdentity': playerId,
+              'isOnline': true,
+              'lastHeartbeat': FieldValue.serverTimestamp(),
+            }
+          }
+        }, SetOptions(merge: true))
+        .timeout(const Duration(seconds: 6));
   }
 
   // =========================================================================
@@ -3079,6 +3087,11 @@ class FirebaseService {
       if (pendingGame == null) return;
 
       final String gameCode = pendingGame['gameCode'] ?? '';
+      final String hostId = pendingGame['hostId'] ?? '';
+      final String status = pendingGame['status'] ?? '';
+      final now = DateTime.now();
+
+      // 1. Si le gameCode est vide
       if (gameCode.isEmpty) {
         await _db.collection('lounges').doc(loungeId).update({
           'pendingGame': FieldValue.delete(),
@@ -3096,11 +3109,13 @@ class FirebaseService {
 
       final gData = gameDoc.data() as Map<String, dynamic>;
       final String gState = gData['gameState'] ?? '';
-      final String status = pendingGame['status'] ?? '';
 
+      // 2. Si la partie est terminée ou annulée
       if (gState == 'gameOver' ||
           gState == 'finished' ||
-          status == 'cancelled') {
+          gState == 'cancelled' ||
+          status == 'cancelled' ||
+          status == 'finished') {
         String winnerName =
             gData['players']?[gData['gameWinner']]?['name'] ?? _l10n.inconnu;
         String reason = gData['gameEndReason'] ?? '';
@@ -3117,6 +3132,56 @@ class FirebaseService {
         return;
       }
 
+      // 3. Détection si l'hôte a quitté subitement ou perdu sa connexion pendant l'attente
+      if (status == 'waiting') {
+        final players = lData['players'] as Map<String, dynamic>? ?? {};
+        final hostData = players[hostId] as Map<String, dynamic>?;
+
+        bool hostMissing = !players.containsKey(hostId);
+        bool hostExplicitlyOffline = hostData != null && hostData['isOnline'] == false;
+        bool hostHeartbeatDead = false;
+
+        try {
+          final presDoc = await _db
+              .collection('lounges')
+              .doc(loungeId)
+              .collection('presences')
+              .doc(hostId)
+              .get();
+          if (presDoc.exists) {
+            final ts = presDoc.data()?['lastHeartbeat'] as Timestamp?;
+            if (ts != null && now.difference(ts.toDate()).inSeconds > 35) {
+              hostHeartbeatDead = true;
+            }
+          } else {
+            final ts = hostData?['lastHeartbeat'] as Timestamp?;
+            if (ts != null && now.difference(ts.toDate()).inSeconds > 35) {
+              hostHeartbeatDead = true;
+            }
+          }
+        } catch (_) {}
+
+        if (hostMissing || hostExplicitlyOffline || hostHeartbeatDead) {
+          await _db.collection('lounges').doc(loungeId).update({
+            'pendingGame': FieldValue.delete(),
+          });
+          await _db.collection('games').doc(gameCode).update({
+            'gameState': 'cancelled',
+            'gameEndReason': _l10n.abandonTousLesJoueursDeconnectes,
+          }).catchError((_) {});
+
+          await sendLoungeMessage(
+            loungeId,
+            'system',
+            _l10n.systeme,
+            _l10n.tousLesJoueursSeSont,
+            type: 'system',
+          );
+          return;
+        }
+      }
+
+      // 4. Détection quand la partie est commencée
       if (status == 'started') {
         final presencesSnap =
             await _db
@@ -3124,7 +3189,6 @@ class FirebaseService {
                 .doc(gameCode)
                 .collection('presences')
                 .get();
-        final now = DateTime.now();
         bool hasActivePlayer = false;
 
         for (var pDoc in presencesSnap.docs) {
@@ -31404,6 +31468,30 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   Timer? _heartbeatTimer;
   Timer? _pauseRemovalTimer;
   Timer? _stalePlayerCheckTimer;
+  DatabaseReference? _rtGamePresenceRef;
+  StreamSubscription? _rtGameConnectedSub;
+
+  void _setupRtdbGamePresence() {
+    try {
+      final connectedRef = FirebaseDatabase.instance.ref('.info/connected');
+      _rtGamePresenceRef = FirebaseDatabase.instance.ref(
+        'games/${widget.gameCode}/presence/${widget.playerId}',
+      );
+      _rtGameConnectedSub = connectedRef.onValue.listen((event) {
+        final connected = event.snapshot.value as bool? ?? false;
+        if (connected && _rtGamePresenceRef != null) {
+          _rtGamePresenceRef!.onDisconnect().set({
+            'isOnline': false,
+            'lastSeen': ServerValue.timestamp,
+          });
+          _rtGamePresenceRef!.set({
+            'isOnline': true,
+            'lastSeen': ServerValue.timestamp,
+          });
+        }
+      });
+    } catch (_) {}
+  }
 
   bool _livekitInitialized = false;
   late LivekitService _livekitService;
@@ -31459,6 +31547,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     });
 
     WidgetsBinding.instance.addObserver(this);
+    _setupRtdbGamePresence();
     _startHeartbeat();
     _startStalePlayerCheck();
   }
@@ -31467,25 +31556,52 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       // L'app est en arrière-plan â€â€ si pas de retour dans 60s, retirer le joueur
+      _rtGamePresenceRef?.set({
+        'isOnline': false,
+        'lastSeen': ServerValue.timestamp,
+      });
       _pauseRemovalTimer?.cancel();
-      _pauseRemovalTimer = Timer(Duration(seconds: 60), () {
+      _pauseRemovalTimer = Timer(const Duration(seconds: 30), () {
         _firebaseService.removePlayerFromGame(widget.gameCode, widget.playerId);
       });
     } else if (state == AppLifecycleState.resumed) {
       _pauseRemovalTimer?.cancel();
       _pauseRemovalTimer = null;
-      // Mettre à jour le heartbeat immédiatement au retour
+      _rtGamePresenceRef?.set({
+        'isOnline': true,
+        'lastSeen': ServerValue.timestamp,
+      });
       _sendHeartbeat();
     } else if (state == AppLifecycleState.detached) {
+      _rtGamePresenceRef?.set({
+        'isOnline': false,
+        'lastSeen': ServerValue.timestamp,
+      });
       if (widget.loungeId != null) {
         FirebaseFirestore.instance
             .collection('lounges')
             .doc(widget.loungeId)
-            .update({
-              'pendingGame.joinedPlayers': FieldValue.arrayRemove([
-                widget.playerId,
-              ]),
-            });
+            .get()
+            .then((snap) {
+          if (snap.exists) {
+            final data = snap.data();
+            final pg = data?['pendingGame'] as Map<String, dynamic>?;
+            if (pg != null && pg['hostId'] == widget.playerId) {
+              FirebaseFirestore.instance
+                  .collection('lounges')
+                  .doc(widget.loungeId)
+                  .update({'pendingGame': FieldValue.delete()});
+            } else {
+              FirebaseFirestore.instance
+                  .collection('lounges')
+                  .doc(widget.loungeId)
+                  .update({
+                'pendingGame.joinedPlayers':
+                    FieldValue.arrayRemove([widget.playerId]),
+              });
+            }
+          }
+        }).catchError((_) {});
       }
       _firebaseService.removePlayerFromGame(widget.gameCode, widget.playerId);
     }
@@ -31555,6 +31671,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     _heartbeatTimer?.cancel();
     _pauseRemovalTimer?.cancel();
     _stalePlayerCheckTimer?.cancel();
+    _rtGameConnectedSub?.cancel();
+    try {
+      _rtGamePresenceRef?.set({
+        'isOnline': false,
+        'lastSeen': ServerValue.timestamp,
+      });
+    } catch (_) {}
     _pictionaryDebounceTimer?.cancel();
     _timerSubscription?.cancel();
     _playerTurnTimer?.cancel();
@@ -69123,6 +69246,7 @@ class _LoungeListScreenState extends State<LoungeListScreen>
   final TextEditingController _searchCtrl = TextEditingController();
   final TextEditingController _privateCodeCtrl = TextEditingController();
   bool _isJoiningPrivate = false;
+  String? _joiningLoungeId;
 
   String _selectedTheme = _l10n.tous;
   String _sortBy = 'recent'; // 'recent', 'players', 'slots'
@@ -69864,55 +69988,90 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.people,
-                                size: 16,
-                                color: Colors.white70,
+                          if (_joiningLoungeId == doc.id)
+                            const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.amberAccent,
                               ),
-                              const SizedBox(height: 2),
-                              Text(
-                                "$activeCount / $maxPlayers",
-                                style: const TextStyle(
+                            )
+                          else ...[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.people,
+                                  size: 16,
                                   color: Colors.white70,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 8),
-                          const Icon(
-                            Icons.chevron_right_rounded,
-                            color: Colors.white38,
-                          ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  "$activeCount / $maxPlayers",
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 8),
+                            const Icon(
+                              Icons.chevron_right_rounded,
+                              color: Colors.white38,
+                            ),
+                          ],
                         ],
                       ),
-                      onTap: () async {
-                        final ps = Provider.of<PlayerState>(
-                          context,
-                          listen: false,
-                        );
-                        await FirebaseService().joinLounge(
-                          doc.id,
-                          widget.playerId,
-                          ps.userName ?? AppLocalizations.of(context)!.joueur,
-                        );
-                        if (context.mounted) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (_) => LoungeRoomScreen(
-                                    loungeId: doc.id,
-                                    playerId: widget.playerId,
-                                  ),
-                            ),
-                          );
-                        }
-                      },
+                      onTap: _joiningLoungeId != null
+                          ? null
+                          : () async {
+                              setState(() => _joiningLoungeId = doc.id);
+                              try {
+                                final ps = Provider.of<PlayerState>(
+                                  context,
+                                  listen: false,
+                                );
+                                await FirebaseService().joinLounge(
+                                  doc.id,
+                                  widget.playerId,
+                                  ps.userName ?? AppLocalizations.of(context)!.joueur,
+                                );
+                                if (context.mounted) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (_) => LoungeRoomScreen(
+                                            loungeId: doc.id,
+                                            playerId: widget.playerId,
+                                          ),
+                                    ),
+                                  );
+                                }
+                              } catch (e) {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        GameContentLocalization.format(
+                                          context,
+                                          AppLocalizations.of(context)!.erreurLorsDeLaConnexion,
+                                          [e],
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.redAccent,
+                                    ),
+                                  );
+                                }
+                              } finally {
+                                if (mounted) {
+                                  setState(() => _joiningLoungeId = null);
+                                }
+                              }
+                            },
                     ),
                   );
                 },
@@ -70413,29 +70572,39 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                           ],
                         ),
                       ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.people,
-                            size: 16,
-                            color: isFull ? Colors.redAccent : Colors.white70,
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            "${activeCount} / ${maxPlayers}",
-                            style: TextStyle(
-                              color: isFull ? Colors.redAccent : Colors.white70,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                      trailing: _joiningLoungeId == doc.id
+                          ? const SizedBox(
+                              width: 22,
+                              height: 22,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.cyanAccent,
+                              ),
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.people,
+                                  size: 16,
+                                  color: isFull ? Colors.redAccent : Colors.white70,
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  "${activeCount} / ${maxPlayers}",
+                                  style: TextStyle(
+                                    color: isFull ? Colors.redAccent : Colors.white70,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      onTap:
-                          isFull && !amIHost
-                              ? null
-                              : () async {
+                      onTap: (_joiningLoungeId != null || (isFull && !amIHost))
+                          ? null
+                          : () async {
+                              setState(() => _joiningLoungeId = doc.id);
+                              try {
                                 final ps = Provider.of<PlayerState>(
                                   context,
                                   listen: false,
@@ -70511,7 +70680,27 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                                     ),
                                   );
                                 }
-                              },
+                              } catch (e) {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        GameContentLocalization.format(
+                                          context,
+                                          AppLocalizations.of(context)!.erreurLorsDeLaConnexion,
+                                          [e],
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.redAccent,
+                                    ),
+                                  );
+                                }
+                              } finally {
+                                if (mounted) {
+                                  setState(() => _joiningLoungeId = null);
+                                }
+                              }
+                            },
                     ),
                   );
                 },
@@ -70993,8 +71182,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     _heartbeatTimer = Timer.periodic(const Duration(seconds: 10), (_) {
       _sendHeartbeat();
       _sweepCounter++;
-      // Seul l'hôte balaie l'état du jeu toutes les 40 secondes
-      if (_isHost && _sweepCounter % 4 == 0) {
+      // Balayer l'état du jeu toutes les 20 secondes pour maintenir le salon et le tchat synchronisés
+      if (_sweepCounter % 2 == 0) {
         _sweepLoungeGame();
       }
     });
@@ -72238,10 +72427,42 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               .doc(widget.loungeId)
               .snapshots(),
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            backgroundColor: Color(0xFF0F0E17),
+            body: Center(
+              child: CircularProgressIndicator(color: Colors.cyanAccent),
+            ),
+          );
+        }
         if (!snapshot.hasData || !snapshot.data!.exists) {
           return Scaffold(
+            backgroundColor: const Color(0xFF0F0E17),
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.salon),
+              backgroundColor: Colors.transparent,
+            ),
             body: Center(
-              child: Text(AppLocalizations.of(context)!.ceSalonAEteFerme),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.meeting_room_outlined,
+                    size: 48,
+                    color: Colors.white38,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    AppLocalizations.of(context)!.ceSalonAEteFerme,
+                    style: const TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(AppLocalizations.of(context)!.retourAuSalon),
+                  ),
+                ],
+              ),
             ),
           );
         }
