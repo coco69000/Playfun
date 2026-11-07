@@ -70,6 +70,15 @@ Future<void> setAppLanguage(String? code) async {
   } else {
     await prefs.setString('app_language', code);
   }
+  try {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null && code != null) {
+      await FirebaseFirestore.instance.collection('users').doc(uid).set(
+        {'language': code},
+        SetOptions(merge: true),
+      );
+    }
+  } catch (_) {}
 }
 
 void main() async {
@@ -463,14 +472,16 @@ class _MainScreenState extends State<MainScreen> {
     String? nameError;
     bool isUploadingPhoto = false;
 
-    final l10n = AppLocalizations.of(context);
-
     showDialog(
       context: context,
       builder:
-          (ctx) => StatefulBuilder(
-            builder: (context, setStateDialog) {
-              Future<void> pickProfileImage() async {
+          (dialogCtx) => ValueListenableBuilder<Locale?>(
+            valueListenable: appLocale,
+            builder: (ctx, currentLocale, _) {
+              return StatefulBuilder(
+                builder: (context, setStateDialog) {
+                  final l10n = AppLocalizations.of(context);
+                  Future<void> pickProfileImage() async {
                 final ImagePicker picker = ImagePicker();
                 showModalBottomSheet(
                   context: context,
@@ -583,7 +594,10 @@ class _MainScreenState extends State<MainScreen> {
                         Icons.language,
                         color: Colors.cyanAccent,
                       ),
-                      onSelected: (code) => setAppLanguage(code),
+                      onSelected: (code) async {
+                        await setAppLanguage(code);
+                        setStateDialog(() {});
+                      },
                       itemBuilder:
                           (_) =>
                               kAppLanguages.entries
@@ -1040,7 +1054,9 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             },
-          ),
+          );
+        },
+      ),
     );
   }
 
