@@ -858,7 +858,7 @@ class PlayerState extends ChangeNotifier {
     } else if (gameName == 'Dobble') {
       recordBadgeEvent('dobble_win_10', count: 1, targetProgress: 10);
       recordBadgeEvent('dobble_streak_5', count: 1, targetProgress: 5);
-    } else if (gameName == 'Le Roi des Mêmes') {
+    } else if (gameName == 'Le Roi des Mèmes' || gameName == 'Le Roi des Mêmes') {
       recordBadgeEvent('meme_king_1');
       recordBadgeEvent('meme_king_5', count: 1, targetProgress: 5);
     } else if (gameName == 'Bataille Navale') {

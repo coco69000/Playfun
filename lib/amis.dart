@@ -275,8 +275,12 @@ class GameData {
     'Poker': _l10n.rulesPoker,
     'Le Juge':
         _l10n.unJoueurEstDesigneComme,
-    'Qui Pourrait le Plus ?':
+    'Le Menteur':
         _l10n.modeClassiqueUneQuestionEst,
+    'Qui Pourrait le Plus ?':
+        GameRulesLocalization.getRules(null, 'Qui Pourrait le Plus ?'),
+    'Belote':
+        GameRulesLocalization.getRules(null, 'Belote'),
     'Infiltré & Mr. White':
         _l10n.laPlupartDesJoueursCivils,
     'Synonyme ou Banni':
@@ -303,6 +307,8 @@ class GameData {
     'Pictionary': _l10n.rulesPictionary,
     'Just One': _l10n.rulesJustOne,
     'Le Roi des Mèmes':
+        _l10n.chaqueJoueurRecoitLeMeme,
+    'Le Roi des Mêmes':
         _l10n.chaqueJoueurRecoitLeMeme,
 
     'Loup-Garou': _l10n.rulesLoupGarou,
@@ -560,7 +566,7 @@ class GameData {
       'description': _l10n.decouvreUnRoleParNuit,
     },
     {
-      'name': _l10n.sorciere,
+      'name': 'Sorcière',
       'camp': 'villageois',
       'minPlayers': 8,
       'description': _l10n.potionDeVieEtDe,
@@ -633,7 +639,7 @@ class GameData {
       'description': _l10n.connaitLIssueDuVote,
     },
     {
-      'name': _l10n.necromancien,
+      'name': 'Nécromancien',
       'camp': 'villageois',
       'minPlayers': 10,
       'description': _l10n.communiqueAvecLesMortsLa,
@@ -664,7 +670,7 @@ class GameData {
           _l10n.placeDesTonneauxQuiExplosent,
     },
     {
-      'name': _l10n.heritier,
+      'name': 'Héritier',
       'camp': 'villageois',
       'minPlayers': 10,
       'description': _l10n.heriteDuRoleDeSon,
@@ -2348,6 +2354,7 @@ class FirebaseService {
       case 'Qui Pourrait le Plus ?':
       case 'Le Menteur':
       case 'Synonyme ou Banni':
+      case 'Le Roi des Mèmes':
       case 'Le Roi des Mêmes':
       default:
         return 30;
@@ -25255,7 +25262,17 @@ void showGameRules(BuildContext context, String gameType) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final rules = GameData.gameRules[gameType] ?? "";
+        String rules = GameData.gameRules[gameType] ?? "";
+        if (rules.trim().isEmpty) {
+          final loc = GameRulesLocalization.getRules(context, gameType);
+          final notFound = GameRulesLocalization.tr(context, 'noRulesFound');
+          if (loc.trim().isNotEmpty && loc != notFound) {
+            rules = loc;
+          }
+        }
+        if (rules.trim().isEmpty) {
+          rules = AppLocalizations.of(context)!.noRulesFound;
+        }
         return AlertDialog(
           title: Text(AppLocalizations.of(context)!.rulesTitle),
           content: SingleChildScrollView(child: Text(rules)),
@@ -25577,15 +25594,15 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   int _aoVMaxRounds = 10;
   int _aoVVoteThreshold = 100;
   Map<String, bool> _undercoverRoleSettings = {
-    _l10n.fouDeJoie: false,
-    _l10n.boomerang: false,
-    _l10n.deesseDeLaJustice: false,
-    _l10n.fantome: false,
-    _l10n.amoureux: false,
-    _l10n.mrMeme: false,
-    _l10n.vendeurDeFalafels: false,
-    _l10n.vengeuse: false,
-    _l10n.duellistes: false,
+    'Fou de Joie': false,
+    'Boomerang': false,
+    'Déesse de la Justice': false,
+    'Fantôme': false,
+    'Amoureux': false,
+    'Mr. Mème': false,
+    'Vendeur de Falafels': false,
+    'Vengeuse': false,
+    'Duellistes': false,
   };
 
   @override
@@ -25611,8 +25628,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     }
     if (_selectedGame == 'Loup-Garou') {
       _selectedLoupGarouRoles['Loup-Garou'] = 1;
-      _selectedLoupGarouRoles[AppLocalizations.of(context)!.simpleVillageois] = 1;
-      _selectedLoupGarouRoles[AppLocalizations.of(context)!.capitaine] = 1;
+      _selectedLoupGarouRoles['Simple Villageois'] = 1;
+      _selectedLoupGarouRoles['Capitaine'] = 1;
     }
   }
 
@@ -25623,6 +25640,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       'Qui Pourrait le Plus ?',
       'Synonyme ou Banni',
       'Codenames',
+      "Time's Up",
       AppLocalizations.of(context)!.timeSUp,
       'Devine Tête',
       'Infiltré & Mr. White',
@@ -26098,7 +26116,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     final bool isCommunicationEnabled = _videoEnabled || _audioEnabled;
     // Vérifie si la recherche publique est activée pour griser Local et Privé
     final bool isPublicSearchEnabled = _enablePublicSearch;
-    final bool isDevineTete = _selectedGame.contains(AppLocalizations.of(context)!.devineT);
+    final bool isDevineTete = _selectedGame.contains('Devine Tête') ||
+        _selectedGame.contains(AppLocalizations.of(context)!.devineT);
     final bool blockOnlineForDevineTete = isDevineTete && !_videoEnabled;
 
     showModalBottomSheet(
@@ -27014,7 +27033,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     );
     final modes = gameDataInfo['modes'] as List<String>;
     final bool canLocal = modes.contains('local');
-    bool isDevineTete = _selectedGame.contains(AppLocalizations.of(context)!.devineT);
+    bool isDevineTete = _selectedGame.contains('Devine Tête') ||
+        _selectedGame.contains(AppLocalizations.of(context)!.devineT);
     bool forceVideo = false;
     final bool isAiActive =
         (_selectedAiWords != null && _selectedAiWords!.isNotEmpty) ||
@@ -28698,11 +28718,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.gagne4PointsSIl,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.fouDeJoie]!,
+                        value: _undercoverRoleSettings['Fou de Joie'] ?? false,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings[AppLocalizations.of(context)!.fouDeJoie] = val,
+                                  _undercoverRoleSettings['Fou de Joie'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28712,10 +28732,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.la1ereFoisQuIl,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.boomerang]!,
+                        value: _undercoverRoleSettings['Boomerang'] ?? false,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.boomerang] = val,
+                              () => _undercoverRoleSettings['Boomerang'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28725,11 +28745,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.trancheEnCasDEgalite,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.deesseDeLaJustice]!,
+                        value: _undercoverRoleSettings['Déesse de la Justice'] ?? false,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings[AppLocalizations.of(context)!.deesseDeLaJustice] =
+                                  _undercoverRoleSettings['Déesse de la Justice'] =
                                       val,
                             ),
                       ),
@@ -28740,10 +28760,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.peutToujoursVoterApresSon,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.fantome]!,
+                        value: _undercoverRoleSettings['Fantôme'] ?? false,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.fantome] = val,
+                              () => _undercoverRoleSettings['Fantôme'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28753,10 +28773,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.siLUnEstElimine,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.amoureux]!,
+                        value: _undercoverRoleSettings['Amoureux'] ?? false,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.amoureux] = val,
+                              () => _undercoverRoleSettings['Amoureux'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28766,10 +28786,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.unJoueurDevraMimerSon,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.mrMeme]!,
+                        value: _undercoverRoleSettings['Mr. Mème'] ?? false,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.mrMeme] = val,
+                              () => _undercoverRoleSettings['Mr. Mème'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28779,11 +28799,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.recoitUnPouvoirSpecialAleatoire,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.vendeurDeFalafels]!,
+                        value: _undercoverRoleSettings['Vendeur de Falafels'] ?? false,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings[AppLocalizations.of(context)!.vendeurDeFalafels] =
+                                  _undercoverRoleSettings['Vendeur de Falafels'] =
                                       val,
                             ),
                       ),
@@ -28794,10 +28814,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.elimineQuelquUnEnEtant,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.vengeuse]!,
+                        value: _undercoverRoleSettings['Vengeuse'] ?? false,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.vengeuse] = val,
+                              () => _undercoverRoleSettings['Vengeuse'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28807,10 +28827,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.duelSecretPourDesPoints,
                         ),
-                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.duellistes]!,
+                        value: _undercoverRoleSettings['Duellistes'] ?? false,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.duellistes] = val,
+                              () => _undercoverRoleSettings['Duellistes'] = val,
                             ),
                       ),
                     ],
@@ -29424,6 +29444,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
           bool isTeamGame =
               [
                 'Codenames',
+                "Time's Up",
                 AppLocalizations.of(context)!.timeSUp,
                 'Devine Tête',
                 'Belote',
@@ -31103,8 +31124,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final playerData = gameData['playerData'];
     String? avengerId;
     playerData.forEach((pId, data) {
-      if ((data['specialAbilities'] as List?)?.contains(AppLocalizations.of(context)!.vengeuse) ?? false)
+      final abilities = (data['specialAbilities'] as List?);
+      if (abilities != null &&
+          (abilities.contains('Vengeuse') ||
+              abilities.contains(AppLocalizations.of(context)!.vengeuse))) {
         avengerId = pId;
+      }
     });
 
     if (playerId != avengerId) {
@@ -35010,6 +35035,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
     final int playerCount = players.length;
     final isHost = gameData['hostId'] == playerId;
     final String gribouillisMode = gameData['gribouillisMode'] ?? AppLocalizations.of(context)!.normal;
+    final bool isComplementMode = gribouillisMode.toLowerCase().contains('compl') ||
+        gribouillisMode == AppLocalizations.of(context)!.complement;
+    final bool isBriseGlaceMode = gribouillisMode.toLowerCase().contains('brise') ||
+        gribouillisMode.toLowerCase().contains('ice') ||
+        gribouillisMode == AppLocalizations.of(context)!.briseGlace;
     final bool ajouter1 = gameData['gribouillisSettings']?['ajouter1'] ?? false;
     final int currentStep = gameData['currentStep'];
     final Map<String, dynamic> albums = Map.from(gameData['albums'] ?? {});
@@ -35268,8 +35298,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
     if (currentStep > 0) {
       String sourceAlbumOwnerId;
 
-      if ((gribouillisMode == AppLocalizations.of(context)!.complement && ajouter1) ||
-          gribouillisMode == AppLocalizations.of(context)!.briseGlace) {
+      if ((isComplementMode && ajouter1) || isBriseGlaceMode) {
         sourceAlbumOwnerId = playerOrder[(myIndex + currentStep) % playerCount];
       } else {
         sourceAlbumOwnerId =
@@ -35280,8 +35309,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
         gameData['albums'][sourceAlbumOwnerId] ?? [],
       );
       if (sourceAlbum.isNotEmpty) {
-        if ((gribouillisMode == AppLocalizations.of(context)!.complement && ajouter1) ||
-            gribouillisMode == AppLocalizations.of(context)!.briseGlace) {
+        if ((isComplementMode && ajouter1) || isBriseGlaceMode) {
           stepToProcess = Map<String, dynamic>.from(sourceAlbum[0]);
         } else {
           stepToProcess = Map<String, dynamic>.from(sourceAlbum.last);
@@ -35368,14 +35396,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
       String promptText;
       if (stepToProcess != null && stepToProcess['type'] == 'text') {
         promptText = AppLocalizations.of(context)!.dessineCettePhrase(stepToProcess['content']);
-      } else if (gribouillisMode == AppLocalizations.of(context)!.complement) {
+      } else if (isComplementMode) {
         promptText = AppLocalizations.of(context)!.completeCeDessin;
       } else {
         promptText = AppLocalizations.of(context)!.commenceParUnDessin;
       }
 
       final String? backgroundDrawingData =
-          (gribouillisMode == AppLocalizations.of(context)!.complement &&
+          (isComplementMode &&
                   stepToProcess != null &&
                   stepToProcess['type'] == 'drawing')
               ? stepToProcess['content'] as String?
@@ -36218,7 +36246,8 @@ AppLocalizations.of(context)!.manche1,
     List<String> targetHand = List<String>.from(hands[targetPlayerId] ?? []);
     final targetName = players[targetPlayerId]?['name'] ?? AppLocalizations.of(context)!.voisin;
 
-    final bool hasZombieInHand = myHand.contains(AppLocalizations.of(context)!.zombie1);
+    final bool hasZombieInHand = myHand.contains('Zombie') ||
+        myHand.contains(AppLocalizations.of(context)!.zombie1);
 
     return Container(
       decoration: BoxDecoration(
@@ -37479,7 +37508,9 @@ AppLocalizations.of(context)!.jouePar,
       case 'Qui Pourrait le Plus ?':
       case 'Le Juge':
       case 'Le Menteur':
+      case 'Le Roi des Mèmes':
       case 'Le Roi des Mêmes':
+      case 'Synonyme ou Banni':
         return _getWidgetForRoundState(context, gameData, playerId);
       default:
         return Center(
@@ -52285,6 +52316,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     final scores = Map<String, int>.from(gameData['dominoesScores'] ?? {});
     final bool roundOver = gameData['dominoesRoundOver'] ?? false;
     final String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
+    final bool isDrawMode = mode.toLowerCase() == 'pioche' ||
+        mode.toLowerCase() == 'draw' ||
+        mode.toLowerCase() == 'robo' ||
+        mode == AppLocalizations.of(context)!.pioche3;
 
     void _showOpponentSheet(String pId) {
       final oppName = players[pId]?['name'] ?? pId;
@@ -52589,7 +52624,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   ),
                 ),
               Spacer(),
-              if (mode == AppLocalizations.of(context)!.pioche3)
+              if (isDrawMode)
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10,
@@ -52696,7 +52731,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       // Bouton pioche
                       if (isMyTurn &&
                           !roundOver &&
-                          mode == AppLocalizations.of(context)!.pioche3 &&
+                          isDrawMode &&
                           boneyard.isNotEmpty &&
                           !hasPlayableTile())
                         TextButton(
@@ -62402,7 +62437,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, AppLocalizations.of(context)!.timeSUp),
+            onPressed: () => showGameRules(context, "Time's Up"),
           ),
         ],
       ),
@@ -69820,7 +69855,8 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isZombie = card == AppLocalizations.of(context)!.zombie1;
+    final bool isZombie =
+        card == 'Zombie' || card == AppLocalizations.of(context)!.zombie1;
 
     // --- 1. CARTE ZOMBIE TOXIQUE ET MENAÇANTE ---
     if (isZombie) {

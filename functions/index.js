@@ -1330,6 +1330,7 @@ exports.enforceStrictTimers = onSchedule(
         'Petit Bac',
         'Just One',
         'Codenames',
+        'Poker',
       ];
 
       activeGames.forEach((doc) => {

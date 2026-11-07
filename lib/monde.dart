@@ -65,6 +65,13 @@ const List<Map<String, dynamic>> worldGames = [
   {'name': 'Zombie!', 'icon': Icons.coronavirus, 'image': null},
   {'name': 'Big Two', 'icon': Icons.layers, 'image': 'bigtwo.webp'},
   {'name': 'Jeu de Dames', 'icon': Icons.grid_on, 'image': 'dames.webp'},
+  {'name': 'Synonyme ou Banni', 'icon': Icons.spellcheck, 'image': null},
+  {'name': 'Action ou Vérité', 'icon': Icons.sync_problem, 'image': 'actionetverite.webp'},
+  {'name': 'Codenames', 'icon': Icons.vpn_key, 'image': 'codenames.webp'},
+  {'name': "Time's Up", 'icon': Icons.access_time, 'image': null},
+  {'name': 'Devine Tête', 'icon': Icons.headset_mic, 'image': null},
+  {'name': 'Le Roi des Mèmes', 'icon': Icons.emoji_emotions, 'image': 'leroidesmemes.webp'},
+  {'name': 'Blanc Manger Coco', 'icon': Icons.style, 'image': null},
 ];
 
 // WorldGameScreen (inchangé)
