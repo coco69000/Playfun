@@ -1,4 +1,5 @@
 import 'package:playfun/l10n/app_localizations.dart';
+import 'matchmaking_localization.dart';
 import 'game_data_words.dart';
 import 'monde.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
@@ -69698,7 +69699,7 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        "${AppLocalizations.of(context)!.codeDeConnexion} : $joinCode (copié)",
+                                        "${AppLocalizations.of(context)!.codeDeSalonCopie} ($joinCode)",
                                       ),
                                       duration: const Duration(seconds: 2),
                                     ),

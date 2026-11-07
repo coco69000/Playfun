@@ -42,21 +42,28 @@ class _AuthGateState extends State<AuthGate> {
         User user = snapshot.data!;
 
         return FutureBuilder(
-          future: Provider.of<ps.PlayerState>(context, listen: false).loadUserData(user.uid),
+          future: Provider.of<ps.PlayerState>(
+            context,
+            listen: false,
+          ).loadUserData(user.uid),
           builder: (context, playerStateSnapshot) {
-            if (playerStateSnapshot.connectionState == ConnectionState.waiting) {
-              return const Scaffold(body: Center(child: CircularProgressIndicator()));
+            if (playerStateSnapshot.connectionState ==
+                ConnectionState.waiting) {
+              return const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              );
             }
             if (playerStateSnapshot.hasError) {
               return Scaffold(
-                body: Center(child: Text(AppLocalizations.of(context)!.erreurDeChargementDesDonnees)),
+                body: Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.erreurDeChargementDesDonnees,
+                  ),
+                ),
               );
             }
 
-            return Provider<String>.value(
-              value: user.uid,
-              child: MainScreen(),
-            );
+            return Provider<String>.value(value: user.uid, child: MainScreen());
           },
         );
       },

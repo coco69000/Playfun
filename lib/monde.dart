@@ -13,7 +13,6 @@ import 'matchmaking_localization.dart';
 import 'l10n/app_localizations.dart';
 import 'game_data_words.dart';
 
-
 AppLocalizations get _l10n {
   try {
     return lookupAppLocalizations(Locale(GameWords.currentLanguage));
@@ -21,6 +20,7 @@ AppLocalizations get _l10n {
     return lookupAppLocalizations(const Locale('fr'));
   }
 }
+
 // Liste des jeux pour le mode "Monde" (inchangée)
 const List<Map<String, dynamic>> worldGames = [
   {'name': 'Blokus', 'icon': Icons.grid_on, 'image': 'blokus.webp'},
@@ -66,11 +66,19 @@ const List<Map<String, dynamic>> worldGames = [
   {'name': 'Big Two', 'icon': Icons.layers, 'image': 'bigtwo.webp'},
   {'name': 'Jeu de Dames', 'icon': Icons.grid_on, 'image': 'dames.webp'},
   {'name': 'Synonyme ou Banni', 'icon': Icons.spellcheck, 'image': null},
-  {'name': 'Action ou Vérité', 'icon': Icons.sync_problem, 'image': 'actionetverite.webp'},
+  {
+    'name': 'Action ou Vérité',
+    'icon': Icons.sync_problem,
+    'image': 'actionetverite.webp',
+  },
   {'name': 'Codenames', 'icon': Icons.vpn_key, 'image': 'codenames.webp'},
   {'name': "Time's Up", 'icon': Icons.access_time, 'image': null},
   {'name': 'Devine Tête', 'icon': Icons.headset_mic, 'image': null},
-  {'name': 'Le Roi des Mèmes', 'icon': Icons.emoji_emotions, 'image': 'leroidesmemes.webp'},
+  {
+    'name': 'Le Roi des Mèmes',
+    'icon': Icons.emoji_emotions,
+    'image': 'leroidesmemes.webp',
+  },
   {'name': 'Blanc Manger Coco', 'icon': Icons.style, 'image': null},
 ];
 
@@ -109,14 +117,19 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                   controller: _nameController,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: MatchmakingLocalization.tr(context, 'yourUsername'),
+                    labelText: MatchmakingLocalization.tr(
+                      context,
+                      'yourUsername',
+                    ),
                     labelStyle: const TextStyle(color: Colors.white70),
                     prefixIcon: const Icon(
                       Icons.person,
                       color: Colors.cyanAccent,
                     ),
                     filled: true,
-                    fillColor: Colors.white.withValues(alpha: 0.1), // Effet verre
+                    fillColor: Colors.white.withValues(
+                      alpha: 0.1,
+                    ), // Effet verre
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -186,7 +199,12 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(MatchmakingLocalization.tr(context, 'enterUsernamePrompt')),
+                      content: Text(
+                        MatchmakingLocalization.tr(
+                          context,
+                          'enterUsernamePrompt',
+                        ),
+                      ),
                     ),
                   );
                   return;
@@ -544,7 +562,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           );
           break;
         case 'Devine Tête':
-          refillingQuery = refillingQuery.where('devineTeteUseTeams', isEqualTo: widget.devineTeteUseTeams);
+          refillingQuery = refillingQuery.where(
+            'devineTeteUseTeams',
+            isEqualTo: widget.devineTeteUseTeams,
+          );
           break;
       }
 
@@ -710,7 +731,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           );
           break;
         case 'Devine Tête':
-          query = query.where('devineTeteUseTeams', isEqualTo: widget.devineTeteUseTeams);
+          query = query.where(
+            'devineTeteUseTeams',
+            isEqualTo: widget.devineTeteUseTeams,
+          );
           break;
       }
 
@@ -740,7 +764,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             return;
           }
           final List players = List.from(roomData['players'] ?? []);
-          if (players.length >= widget.playerCount && !players.contains(playerId)) {
+          if (players.length >= widget.playerCount &&
+              !players.contains(playerId)) {
             return;
           }
           transaction.update(roomRef, {
@@ -748,7 +773,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             'playerNames.$playerId': widget.playerName,
           });
           // Si on est le dernier joueur nécessaire, on marque comme full
-          if (players.length + (players.contains(playerId) ? 0 : 1) >= widget.playerCount) {
+          if (players.length + (players.contains(playerId) ? 0 : 1) >=
+              widget.playerCount) {
             transaction.update(roomRef, {'status': 'full'});
           }
           joinedExistingRoom = true;
@@ -772,7 +798,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           );
         }
 
-        final int myLevel = Provider.of<PlayerState>(context, listen: false).level;
+        final int myLevel =
+            Provider.of<PlayerState>(context, listen: false).level;
 
         await newRoomRef.set({
           'gameName': widget.gameName,
@@ -867,7 +894,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             print("Erreur d'écoute de la salle: $error");
             if (!_isDisposed) {
               setState(
-                () => _statusMessage = AppLocalizations.of(context)!.erreurDeConnexionALa,
+                () =>
+                    _statusMessage =
+                        AppLocalizations.of(context)!.erreurDeConnexionALa,
               );
             }
           },
@@ -909,13 +938,20 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       final String firstPlayer = players.first;
       final String? secondPlayer = players.length > 1 ? players[1] : null;
 
-      Future<void> launchGame(DocumentSnapshot roomSnap, Map<String, dynamic> roomData, String creatorId) async {
+      Future<void> launchGame(
+        DocumentSnapshot roomSnap,
+        Map<String, dynamic> roomData,
+        String creatorId,
+      ) async {
         if (_isLaunchingGame) return;
         _isLaunchingGame = true;
         try {
           final gameCode = randomNumeric(6);
           Map<String, dynamic> gamePlayers = {};
-          (roomData['playerNames'] as Map<String, dynamic>).forEach((pId, pName) {
+          (roomData['playerNames'] as Map<String, dynamic>).forEach((
+            pId,
+            pName,
+          ) {
             gamePlayers[pId] = {'name': pName, 'score': 0};
           });
 
@@ -970,7 +1006,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           try {
             await roomSnap.reference.delete();
           } catch (deleteError) {
-            print("Impossible de supprimer la salle de matchmaking après erreur: $deleteError");
+            print(
+              "Impossible de supprimer la salle de matchmaking après erreur: $deleteError",
+            );
           }
         }
       }
@@ -981,9 +1019,17 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         // Secours : Si l'hôte principal n'a pas créé la partie après 4 secondes, le 2ème prend le relais
         Future.delayed(const Duration(seconds: 4), () async {
           final freshSnap = await snapshot.reference.get();
-          if (freshSnap.exists && (freshSnap.data() as Map<String, dynamic>?)?['gameCode'] == null) {
-            print("[Matchmaking] Hôte principal inactif, basculement vers l'hôte secondaire.");
-            launchGame(freshSnap, freshSnap.data() as Map<String, dynamic>, playerId);
+          if (freshSnap.exists &&
+              (freshSnap.data() as Map<String, dynamic>?)?['gameCode'] ==
+                  null) {
+            print(
+              "[Matchmaking] Hôte principal inactif, basculement vers l'hôte secondaire.",
+            );
+            launchGame(
+              freshSnap,
+              freshSnap.data() as Map<String, dynamic>,
+              playerId,
+            );
           }
         });
       }
@@ -994,16 +1040,15 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             players.where((p) => p != widget.playerId).toList();
         setState(() {
           if (otherPlayers.isNotEmpty) {
+            _statusMessage = MatchmakingLocalization.tr(context, 'roomFound', {
+              'current': '${players.length}',
+              'target': '${widget.playerCount}',
+            });
+          } else {
             _statusMessage = MatchmakingLocalization.tr(
               context,
-              'roomFound',
-              {
-                'current': '${players.length}',
-                'target': '${widget.playerCount}',
-              },
+              'waitingForOtherPlayers',
             );
-          } else {
-            _statusMessage = MatchmakingLocalization.tr(context, 'waitingForOtherPlayers');
           }
         });
       }
@@ -1017,7 +1062,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     if (_currentScope == 'pays') {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(MatchmakingLocalization.tr(context, 'searchExtendedWorldwide')),
+          content: Text(
+            MatchmakingLocalization.tr(context, 'searchExtendedWorldwide'),
+          ),
           duration: Duration(seconds: 3),
         ),
       );
@@ -1042,7 +1089,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     _searchTimer?.cancel();
     _redirectTimer?.cancel();
     setState(() {
-      _statusMessage = MatchmakingLocalization.tr(context, 'searchingWithSameOptions');
+      _statusMessage = MatchmakingLocalization.tr(
+        context,
+        'searchingWithSameOptions',
+      );
     });
     _findAndJoinGame();
     _searchTimer = Timer(Duration(seconds: 30), _handle30SecondTimeout);
@@ -1053,7 +1103,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(MatchmakingLocalization.tr(context, 'redirectingToAlmostFullRoom')),
+        content: Text(
+          MatchmakingLocalization.tr(context, 'redirectingToAlmostFullRoom'),
+        ),
         duration: Duration(seconds: 3),
       ),
     );
@@ -1103,12 +1155,16 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           final freshData = freshSnap.data() as Map<String, dynamic>?;
           if (freshData == null || freshData['status'] != 'waiting') return;
           final List currentPlayers = List.from(freshData['players'] ?? []);
-          if (currentPlayers.length >= targetCount && !currentPlayers.contains(playerId)) return;
+          if (currentPlayers.length >= targetCount &&
+              !currentPlayers.contains(playerId))
+            return;
           transaction.update(roomRef, {
             'players': FieldValue.arrayUnion([playerId]),
             'playerNames.$playerId': widget.playerName,
           });
-          if (currentPlayers.length + (currentPlayers.contains(playerId) ? 0 : 1) >= targetCount) {
+          if (currentPlayers.length +
+                  (currentPlayers.contains(playerId) ? 0 : 1) >=
+              targetCount) {
             transaction.update(roomRef, {'status': 'full'});
           }
           joinedFallback = true;
@@ -1143,18 +1199,19 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         _leaveMatchmakingQueue();
         setState(() {
           _hasStoppedSearching = true;
-          _statusMessage = MatchmakingLocalization.tr(context, 'noPlayersFound');
+          _statusMessage = MatchmakingLocalization.tr(
+            context,
+            'noPlayersFound',
+          );
         });
       }
       return;
     }
 
     setState(() {
-      _statusMessage = MatchmakingLocalization.tr(
-        context,
-        'newAttemptIn10s',
-        {'attempt': '$_searchAttempts'},
-      );
+      _statusMessage = MatchmakingLocalization.tr(context, 'newAttemptIn10s', {
+        'attempt': '$_searchAttempts',
+      });
     });
 
     Future.delayed(const Duration(seconds: 10), () {
@@ -1203,7 +1260,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                 alignment: Alignment.center,
                 children: [
                   FadeTransition(
-                    opacity: Tween(begin: 0.6, end: 0.0).animate(_animController),
+                    opacity: Tween(
+                      begin: 0.6,
+                      end: 0.0,
+                    ).animate(_animController),
                     child: ScaleTransition(
                       scale: Tween(begin: 1.0, end: 2.8).animate(
                         CurvedAnimation(
@@ -1217,7 +1277,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: AppColors.primaryAccent.withValues(alpha: 0.8),
+                            color: AppColors.primaryAccent.withValues(
+                              alpha: 0.8,
+                            ),
                             width: 2,
                           ),
                         ),
@@ -1267,7 +1329,11 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                 children: [
                   _buildCritPill(
                     icon: Icons.group,
-                    label: MatchmakingLocalization.tr(context, 'playersCountPill', {'count': '${widget.playerCount}'}),
+                    label: MatchmakingLocalization.tr(
+                      context,
+                      'playersCountPill',
+                      {'count': '${widget.playerCount}'},
+                    ),
                   ),
                   _buildCritPill(
                     icon: Icons.public,
@@ -1296,7 +1362,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
               // Status Box
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 16,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.surfaceVariant.withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(16),
@@ -1317,10 +1386,16 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.timer_outlined, size: 16, color: Colors.white54),
+                        const Icon(
+                          Icons.timer_outlined,
+                          size: 16,
+                          color: Colors.white54,
+                        ),
                         const SizedBox(width: 6),
                         Text(
-                          MatchmakingLocalization.tr(context, 'elapsedTime', {'time': _formatElapsed(_elapsedSeconds)}),
+                          MatchmakingLocalization.tr(context, 'elapsedTime', {
+                            'time': _formatElapsed(_elapsedSeconds),
+                          }),
                           style: const TextStyle(
                             color: Colors.white54,
                             fontSize: 13,
@@ -1355,7 +1430,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
               // Cancel Button
               AppSecondaryButton(
                 width: double.infinity,
-                label: _hasStoppedSearching ? MatchmakingLocalization.tr(context, 'quit') : MatchmakingLocalization.tr(context, 'cancelSearch'),
+                label:
+                    _hasStoppedSearching
+                        ? MatchmakingLocalization.tr(context, 'quit')
+                        : MatchmakingLocalization.tr(context, 'cancelSearch'),
                 icon: Icons.close,
                 borderColor: AppColors.error.withValues(alpha: 0.7),
                 onPressed: () => Navigator.of(context).pop(),
