@@ -753,175 +753,175 @@ exports.generateAiWords = onCall(
     const countToday = (lastAiDate === todayDateStr) ? (userData.aiGenerationsToday || 0) : 0;
     const MAX_DAILY_AI_GENERATIONS = 50;
 
-      if (countToday >= MAX_DAILY_AI_GENERATIONS) {
-        throw new HttpsError(
-          "resource-exhausted",
-          "Limite quotidienne de sécurité IA atteinte (50/jour). Réessayez demain !"
-        );
-      }
-
-      // Incrémenter le compteur de génération journalier
-      await userDocRef.set({
-        lastAiGenerationDate: todayDateStr,
-        aiGenerationsToday: (lastAiDate === todayDateStr) ? admin.firestore.FieldValue.increment(1) : 1,
-      }, { merge: true });
-
-      let { instructions = "", count = 20, gameType = "" } = request.data || {};
-      // Plafond calibré pour limiter les tokens et éviter toute surfacturation
-      let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 50));
-
-      const safeInstructions = String(instructions)
-        .slice(0, 350)
-        .slice(0, 600)
-        .replace(/[\r\n"`]/g, " ")
-        .replace(/[^a-zA-Z0-9À-ÿ\s,.\-':/&?+!()]/g, "")
-        .replace(/[^\p{L}\p{N}\s,.\-':/&?+!()_{}]/gu, "")
-        .trim();
-
-      const safeGameType = String(gameType)
-        .slice(0, 50)
-        .replace(/[^a-zA-Z0-9À-ÿ\s,-]/g, "")
-        .slice(0, 60)
-        .replace(/[^\p{L}\p{N}\s,'\-&!?.]/gu, "")
-        .trim();
-
-      const apiKey = getSiliconFlowApiKey();
-      if (!apiKey) {
-        throw new HttpsError("internal", "Clé API SiliconFlow non configurée.");
-      }
-
-      let systemPrompt = "Tu es un générateur de contenu pour jeux de société en français. Tu dois UNIQUEMENT répondre par un tableau JSON valide de chaînes de caractères. N'ajoute aucun texte explicatif avant ou après le JSON.";
-      let userPrompt = `Génère exactement ${parsedCount} mots en français pour le jeu ${safeGameType || 'Général'}. Thème imposé: ${safeInstructions || 'Général'}.`;
-
-      const normalizedGame = safeGameType.toLowerCase();
-
-      if (normalizedGame.includes("infiltr") || normalizedGame.includes("undercover") || normalizedGame.includes("white")) {
-        systemPrompt = "Tu es un générateur de paires de mots secrets pour le jeu Undercover / Infiltré. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères au format \"Civil:Infiltré\".";
-        userPrompt = `Génère exactement ${parsedCount} paires de mots secrets en français au format "MotCivil:MotInfiltré" (deux mots différents mais sémantiquement très proches, séparés par un deux-points ":"). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Chien:Chat", "Avion:Fusée", "Guitare:Violon", "Pomme:Poire", "Café:Thé"]`;
-      } else if (normalizedGame.includes("qui pourrait")) {
-        systemPrompt = "Tu es un générateur de propositions pour le jeu 'Qui Pourrait le Plus ?'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} situations courtes et amusantes commençant par un verbe à l'infinitif. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["oublier ses clés à l'intérieur", "dépenser tout son salaire en un week-end", "s'endormir au cinéma"]`;
-      } else if (normalizedGame.includes("juge")) {
-        systemPrompt = "Tu es un générateur de questions pour le jeu 'Le Juge'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} questions ouvertes amusantes et décalées sur un joueur (utilise impérativement la variable {player} dans chaque phrase). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Quel métier secret irait le mieux à {player} ?", "Quelle est la pire excuse que {player} pourrait inventer en retard ?"]`;
-      } else if (normalizedGame.includes("menteur")) {
-        systemPrompt = "Tu es un générateur de sujets d'anecdotes pour le jeu 'Le Menteur'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} sujets d'anecdotes stimulants pour raconter une histoire vraie ou inventée. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Ta pire honte en public", "Une rencontre improbable avec une célébrité", "Le pire cadeau qu'on t'ait offert"]`;
-      } else if (normalizedGame.includes("time's up") || normalizedGame.includes("times up") || normalizedGame === "time up") {
-        userPrompt = `Génère exactement ${parsedCount} noms de personnalités célèbres, personnages de fiction connus, ou objets emblématiques en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Albert Einstein", "Harry Potter", "Tour Eiffel", "Astronaute"]`;
-      } else if (normalizedGame.includes("codenames")) {
-        userPrompt = `Génère exactement ${parsedCount} mots simples et variés en français (un seul mot par élément, en lettres majuscules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["ESPION", "PLAGE", "CHÂTEAU", "SOLEIL", "PIRATE"]`;
-      } else if (normalizedGame.includes("synonyme") || normalizedGame.includes("banni")) {
-        userPrompt = `Génère exactement ${parsedCount} mots ou adjectifs riches en français ayant de multiples synonymes. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Rapide", "Colère", "Magnifique", "Difficile", "Courageux"]`;
-      } else if (normalizedGame.includes("pictionary") || normalizedGame.includes("gribouillis")) {
-      } else if (normalizedGame.includes("gribouillis")) {
-        systemPrompt = "Tu es un générateur d'expressions et situations visuelles amusantes à dessiner pour le jeu Gribouillis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} expressions courtes, objets ou actions drôles et visuelles faciles à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Un chat qui fait du surf", "Un astronaute au supermarché", "Un dragon qui éternue", "Château de sable"]`;
-      } else if (normalizedGame.includes("pictionary")) {
-        userPrompt = `Génère exactement ${parsedCount} mots ou concepts concrets faciles et stimulants à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Château", "Boulanger", "Fusée", "Cascade", "Parachute"]`;
-      } else if (normalizedGame.includes("just one")) {
-        userPrompt = `Génère exactement ${parsedCount} mots mystères uniques en français à faire deviner par des indices. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Chocolat", "Pyramide", "Dinosaure", "Guitare"]`;
-      } else if (normalizedGame.includes("blanc") || normalizedGame.includes("coco") || normalizedGame.includes("bmc")) {
-        systemPrompt = "Tu es un générateur de propositions pour le jeu 'Blanc Manger Coco'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} phrases courtes et amusantes à trous contenant obligatoirement "_____" (5 tirets bas) pour le jeu Blanc Manger Coco. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["La pire chose à trouver dans son lit : _____", "Pour séduire au premier rendez-vous, rien de tel que _____"]`;
-      } else if (normalizedGame.includes("devine") || normalizedGame.includes("tete") || normalizedGame.includes("tête")) {
-        systemPrompt = "Tu es un générateur de mots à deviner pour le jeu 'Devine Tête' (personnages, animaux, métiers, objets célèbres). Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} noms de personnages connus, célébrités, animaux, métiers ou objets à deviner. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Napoléon", "Astronaute", "Pikachu", "Chirurgien", "Panda"]`;
-      } else if (normalizedGame.includes("petit bac") || normalizedGame.includes("baccalaureat") || normalizedGame.includes("bac")) {
-        systemPrompt = "Tu es un générateur de catégories originales pour le jeu du Petit Bac. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} catégories originales et amusantes pour le jeu du Petit Bac. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Objet qui fait du bruit", "Métier dangereux", "Chose qu'on trouve dans un grenier", "Plat réconfortant"]`;
-      } else if (normalizedGame.includes("taboo") || normalizedGame.includes("tabou")) {
-        systemPrompt = "Tu es un générateur de cartes pour le jeu Taboo en français. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères au format \"MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5\".";
-        userPrompt = `Génère exactement ${parsedCount} cartes pour le jeu Taboo en français au format "MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5" (un mot principal à faire deviner, suivi de 5 mots interdits évidents séparés par des virgules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Paris:France,Capitale,Tour Eiffel,Seine,Ville", "Plage:Sable,Mer,Soleil,Vacances,Serviette"]`;
-      } else if (normalizedGame.includes("action") || normalizedGame.includes("vérité") || normalizedGame.includes("verite")) {
-        systemPrompt = "Tu es un générateur de défis et questions pour le jeu Action ou Vérité. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} propositions pour Action ou Vérité (répartis équitablement entre 'Action: ...' et 'Vérité: ...'). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Action: Imite un animal pendant 30 secondes", "Vérité: Quel est ton pire défaut secret ?"]`;
-      } else if (normalizedGame.includes("dilemme") || normalizedGame.includes("préfères") || normalizedGame.includes("preferes")) {
-        systemPrompt = "Tu es un générateur de dilemmes cornéliens au format 'Option A ou Option B'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} dilemmes cornéliens au format "Option A ou Option B". Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Pouvoir voler ou Être invisible", "Ne plus jamais pouvoir écouter de musique ou Ne plus jamais pouvoir regarder de film"]`;
-      } else if (normalizedGame.includes("patate") || normalizedGame.includes("catégorie") || normalizedGame.includes("categorie")) {
-        systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude / Catégories. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} catégories d'énumération rapides et accessibles pour la Patate Chaude. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Des marques de voitures", "Des choses qu'on trouve dans un frigo", "Des super-héros"]`;
-      } else if (normalizedGame.includes("mème") || normalizedGame.includes("meme")) {
-        systemPrompt = "Tu es un générateur de situations humoristiques pour Le Roi des Mèmes. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} situations humoristiques d'amorce de mème. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Quand le prof dit que l'examen sera facile", "Quand tu entends ton réveil sonner après 2h de sommeil"]`;
-      } else if (normalizedGame.includes("cadavre")) {
-        systemPrompt = "Tu es un générateur d'amorces de récits pour le jeu Cadavre Exquis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} débuts de phrases narratives intrigantes ou insolites. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Dans une ruelle sombre de Tokyo, un détective découvrit...", "Ce matin-là, la gravité terrestre s'inversa soudainement..."]`;
-      } else if (normalizedGame.includes("pièce") || normalizedGame.includes("piece") || normalizedGame.includes("objet")) {
-        systemPrompt = "Tu es un générateur de questions spontanées et amusantes pour jeu de rapidité. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
-        userPrompt = `Génère exactement ${parsedCount} questions directes, défis courts ou questions indiscrètes amusantes. Thème imposé: ${safeInstructions || 'Général'}.`;
-      }
-
-      try {
-        const calculatedMaxTokens = Math.min(900, Math.max(250, parsedCount * 22 + 80));
-        const response = await fetch("https://api.siliconflow.com/v1/chat/completions", {
-          method: "POST",
-          signal: AbortSignal.timeout(12000), // Timeout 12s pour éviter les requêtes bloquées
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`,
-          },
-          body: JSON.stringify({
-            model: "Qwen/Qwen2.5-7B-Instruct",
-            messages: [
-              { role: "system", content: systemPrompt },
-              { role: "user", content: userPrompt },
-            ],
-            max_tokens: 2500,
-            max_tokens: calculatedMaxTokens,
-            temperature: 0.7,
-          }),
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("Erreur SiliconFlow API:", errorText);
-          throw new Error("Erreur fournisseur IA SiliconFlow");
-        }
-
-        const data = await response.json();
-        const rawContent = (data.choices?.[0]?.message?.content || "")
-          .replace(/```json/gi, "")
-          .replace(/```/g, "")
-          .trim();
-        const match = rawContent.match(/\[[\s\S]*\]/);
-        if (match) {
-          const list = JSON.parse(match[0]);
-          if (Array.isArray(list)) {
-            return list
-              .map((item) => String(item).trim())
-              .filter((item) => item.length > 0)
-              .map((item) => {
-                if (normalizedGame.includes("juge") && !item.includes("{player}")) {
-                  return `${item} ({player})`;
-                }
-                if ((normalizedGame.includes("blanc") || normalizedGame.includes("coco") || normalizedGame.includes("bmc")) && !item.includes("_____")) {
-                  return `${item} : _____`;
-                }
-                return item;
-              })
-              .filter((item) => {
-                if (normalizedGame.includes("infiltr") || normalizedGame.includes("undercover") || normalizedGame.includes("white")) {
-                  const parts = item.split(":");
-                  return parts.length >= 2 && parts[0].trim().length > 0 && parts[1].trim().length > 0;
-                }
-                if (normalizedGame.includes("taboo") || normalizedGame.includes("tabou")) {
-                  const parts = item.split(":");
-                  return parts.length >= 2 && parts[0].trim().length > 0 && parts[1].trim().length > 0;
-                }
-                return true;
-              })
-              .slice(0, parsedCount);
-          }
-        }
-        return [];
-      } catch (e) {
-        console.error("Erreur IA sécurisée (SiliconFlow):", e);
-        throw new HttpsError("internal", "Impossible de générer les mots.");
-      }
+    if (countToday >= MAX_DAILY_AI_GENERATIONS) {
+      throw new HttpsError(
+        "resource-exhausted",
+        "Limite quotidienne de sécurité IA atteinte (50/jour). Réessayez demain !"
+      );
     }
+
+    // Incrémenter le compteur de génération journalier
+    await userDocRef.set({
+      lastAiGenerationDate: todayDateStr,
+      aiGenerationsToday: (lastAiDate === todayDateStr) ? admin.firestore.FieldValue.increment(1) : 1,
+    }, { merge: true });
+
+    let { instructions = "", count = 20, gameType = "" } = request.data || {};
+    // Plafond calibré pour limiter les tokens et éviter toute surfacturation
+    let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 50));
+
+    const safeInstructions = String(instructions)
+      .slice(0, 350)
+      .slice(0, 600)
+      .replace(/[\r\n"`]/g, " ")
+      .replace(/[^a-zA-Z0-9À-ÿ\s,.\-':/&?+!()]/g, "")
+      .replace(/[^\p{L}\p{N}\s,.\-':/&?+!()_{}]/gu, "")
+      .trim();
+
+    const safeGameType = String(gameType)
+      .slice(0, 50)
+      .replace(/[^a-zA-Z0-9À-ÿ\s,-]/g, "")
+      .slice(0, 60)
+      .replace(/[^\p{L}\p{N}\s,'\-&!?.]/gu, "")
+      .trim();
+
+    const apiKey = getSiliconFlowApiKey();
+    if (!apiKey) {
+      throw new HttpsError("internal", "Clé API SiliconFlow non configurée.");
+    }
+
+    let systemPrompt = "Tu es un générateur de contenu pour jeux de société en français. Tu dois UNIQUEMENT répondre par un tableau JSON valide de chaînes de caractères. N'ajoute aucun texte explicatif avant ou après le JSON.";
+    let userPrompt = `Génère exactement ${parsedCount} mots en français pour le jeu ${safeGameType || 'Général'}. Thème imposé: ${safeInstructions || 'Général'}.`;
+
+    const normalizedGame = safeGameType.toLowerCase();
+
+    if (normalizedGame.includes("infiltr") || normalizedGame.includes("undercover") || normalizedGame.includes("white")) {
+      systemPrompt = "Tu es un générateur de paires de mots secrets pour le jeu Undercover / Infiltré. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères au format \"Civil:Infiltré\".";
+      userPrompt = `Génère exactement ${parsedCount} paires de mots secrets en français au format "MotCivil:MotInfiltré" (deux mots différents mais sémantiquement très proches, séparés par un deux-points ":"). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Chien:Chat", "Avion:Fusée", "Guitare:Violon", "Pomme:Poire", "Café:Thé"]`;
+    } else if (normalizedGame.includes("qui pourrait")) {
+      systemPrompt = "Tu es un générateur de propositions pour le jeu 'Qui Pourrait le Plus ?'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} situations courtes et amusantes commençant par un verbe à l'infinitif. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["oublier ses clés à l'intérieur", "dépenser tout son salaire en un week-end", "s'endormir au cinéma"]`;
+    } else if (normalizedGame.includes("juge")) {
+      systemPrompt = "Tu es un générateur de questions pour le jeu 'Le Juge'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} questions ouvertes amusantes et décalées sur un joueur (utilise impérativement la variable {player} dans chaque phrase). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Quel métier secret irait le mieux à {player} ?", "Quelle est la pire excuse que {player} pourrait inventer en retard ?"]`;
+    } else if (normalizedGame.includes("menteur")) {
+      systemPrompt = "Tu es un générateur de sujets d'anecdotes pour le jeu 'Le Menteur'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} sujets d'anecdotes stimulants pour raconter une histoire vraie ou inventée. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Ta pire honte en public", "Une rencontre improbable avec une célébrité", "Le pire cadeau qu'on t'ait offert"]`;
+    } else if (normalizedGame.includes("time's up") || normalizedGame.includes("times up") || normalizedGame === "time up") {
+      userPrompt = `Génère exactement ${parsedCount} noms de personnalités célèbres, personnages de fiction connus, ou objets emblématiques en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Albert Einstein", "Harry Potter", "Tour Eiffel", "Astronaute"]`;
+    } else if (normalizedGame.includes("codenames")) {
+      userPrompt = `Génère exactement ${parsedCount} mots simples et variés en français (un seul mot par élément, en lettres majuscules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["ESPION", "PLAGE", "CHÂTEAU", "SOLEIL", "PIRATE"]`;
+    } else if (normalizedGame.includes("synonyme") || normalizedGame.includes("banni")) {
+      userPrompt = `Génère exactement ${parsedCount} mots ou adjectifs riches en français ayant de multiples synonymes. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Rapide", "Colère", "Magnifique", "Difficile", "Courageux"]`;
+    } else if (normalizedGame.includes("pictionary") || normalizedGame.includes("gribouillis")) {
+    } else if (normalizedGame.includes("gribouillis")) {
+      systemPrompt = "Tu es un générateur d'expressions et situations visuelles amusantes à dessiner pour le jeu Gribouillis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} expressions courtes, objets ou actions drôles et visuelles faciles à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Un chat qui fait du surf", "Un astronaute au supermarché", "Un dragon qui éternue", "Château de sable"]`;
+    } else if (normalizedGame.includes("pictionary")) {
+      userPrompt = `Génère exactement ${parsedCount} mots ou concepts concrets faciles et stimulants à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Château", "Boulanger", "Fusée", "Cascade", "Parachute"]`;
+    } else if (normalizedGame.includes("just one")) {
+      userPrompt = `Génère exactement ${parsedCount} mots mystères uniques en français à faire deviner par des indices. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Chocolat", "Pyramide", "Dinosaure", "Guitare"]`;
+    } else if (normalizedGame.includes("blanc") || normalizedGame.includes("coco") || normalizedGame.includes("bmc")) {
+      systemPrompt = "Tu es un générateur de propositions pour le jeu 'Blanc Manger Coco'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} phrases courtes et amusantes à trous contenant obligatoirement "_____" (5 tirets bas) pour le jeu Blanc Manger Coco. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["La pire chose à trouver dans son lit : _____", "Pour séduire au premier rendez-vous, rien de tel que _____"]`;
+    } else if (normalizedGame.includes("devine") || normalizedGame.includes("tete") || normalizedGame.includes("tête")) {
+      systemPrompt = "Tu es un générateur de mots à deviner pour le jeu 'Devine Tête' (personnages, animaux, métiers, objets célèbres). Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} noms de personnages connus, célébrités, animaux, métiers ou objets à deviner. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Napoléon", "Astronaute", "Pikachu", "Chirurgien", "Panda"]`;
+    } else if (normalizedGame.includes("petit bac") || normalizedGame.includes("baccalaureat") || normalizedGame.includes("bac")) {
+      systemPrompt = "Tu es un générateur de catégories originales pour le jeu du Petit Bac. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} catégories originales et amusantes pour le jeu du Petit Bac. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Objet qui fait du bruit", "Métier dangereux", "Chose qu'on trouve dans un grenier", "Plat réconfortant"]`;
+    } else if (normalizedGame.includes("taboo") || normalizedGame.includes("tabou")) {
+      systemPrompt = "Tu es un générateur de cartes pour le jeu Taboo en français. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères au format \"MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5\".";
+      userPrompt = `Génère exactement ${parsedCount} cartes pour le jeu Taboo en français au format "MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5" (un mot principal à faire deviner, suivi de 5 mots interdits évidents séparés par des virgules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Paris:France,Capitale,Tour Eiffel,Seine,Ville", "Plage:Sable,Mer,Soleil,Vacances,Serviette"]`;
+    } else if (normalizedGame.includes("action") || normalizedGame.includes("vérité") || normalizedGame.includes("verite")) {
+      systemPrompt = "Tu es un générateur de défis et questions pour le jeu Action ou Vérité. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} propositions pour Action ou Vérité (répartis équitablement entre 'Action: ...' et 'Vérité: ...'). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Action: Imite un animal pendant 30 secondes", "Vérité: Quel est ton pire défaut secret ?"]`;
+    } else if (normalizedGame.includes("dilemme") || normalizedGame.includes("préfères") || normalizedGame.includes("preferes")) {
+      systemPrompt = "Tu es un générateur de dilemmes cornéliens au format 'Option A ou Option B'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} dilemmes cornéliens au format "Option A ou Option B". Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Pouvoir voler ou Être invisible", "Ne plus jamais pouvoir écouter de musique ou Ne plus jamais pouvoir regarder de film"]`;
+    } else if (normalizedGame.includes("patate") || normalizedGame.includes("catégorie") || normalizedGame.includes("categorie")) {
+      systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude / Catégories. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} catégories d'énumération rapides et accessibles pour la Patate Chaude. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Des marques de voitures", "Des choses qu'on trouve dans un frigo", "Des super-héros"]`;
+    } else if (normalizedGame.includes("mème") || normalizedGame.includes("meme")) {
+      systemPrompt = "Tu es un générateur de situations humoristiques pour Le Roi des Mèmes. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} situations humoristiques d'amorce de mème. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Quand le prof dit que l'examen sera facile", "Quand tu entends ton réveil sonner après 2h de sommeil"]`;
+    } else if (normalizedGame.includes("cadavre")) {
+      systemPrompt = "Tu es un générateur d'amorces de récits pour le jeu Cadavre Exquis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} débuts de phrases narratives intrigantes ou insolites. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Dans une ruelle sombre de Tokyo, un détective découvrit...", "Ce matin-là, la gravité terrestre s'inversa soudainement..."]`;
+    } else if (normalizedGame.includes("pièce") || normalizedGame.includes("piece") || normalizedGame.includes("objet")) {
+      systemPrompt = "Tu es un générateur de questions spontanées et amusantes pour jeu de rapidité. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} questions directes, défis courts ou questions indiscrètes amusantes. Thème imposé: ${safeInstructions || 'Général'}.`;
+    }
+
+    try {
+      const calculatedMaxTokens = Math.min(900, Math.max(250, parsedCount * 22 + 80));
+      const response = await fetch("https://api.siliconflow.com/v1/chat/completions", {
+        method: "POST",
+        signal: AbortSignal.timeout(12000), // Timeout 12s pour éviter les requêtes bloquées
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: "Qwen/Qwen2.5-7B-Instruct",
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt },
+          ],
+          max_tokens: 2500,
+          max_tokens: calculatedMaxTokens,
+          temperature: 0.7,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Erreur SiliconFlow API:", errorText);
+        throw new Error("Erreur fournisseur IA SiliconFlow");
+      }
+
+      const data = await response.json();
+      const rawContent = (data.choices?.[0]?.message?.content || "")
+        .replace(/```json/gi, "")
+        .replace(/```/g, "")
+        .trim();
+      const match = rawContent.match(/\[[\s\S]*\]/);
+      if (match) {
+        const list = JSON.parse(match[0]);
+        if (Array.isArray(list)) {
+          return list
+            .map((item) => String(item).trim())
+            .filter((item) => item.length > 0)
+            .map((item) => {
+              if (normalizedGame.includes("juge") && !item.includes("{player}")) {
+                return `${item} ({player})`;
+              }
+              if ((normalizedGame.includes("blanc") || normalizedGame.includes("coco") || normalizedGame.includes("bmc")) && !item.includes("_____")) {
+                return `${item} : _____`;
+              }
+              return item;
+            })
+            .filter((item) => {
+              if (normalizedGame.includes("infiltr") || normalizedGame.includes("undercover") || normalizedGame.includes("white")) {
+                const parts = item.split(":");
+                return parts.length >= 2 && parts[0].trim().length > 0 && parts[1].trim().length > 0;
+              }
+              if (normalizedGame.includes("taboo") || normalizedGame.includes("tabou")) {
+                const parts = item.split(":");
+                return parts.length >= 2 && parts[0].trim().length > 0 && parts[1].trim().length > 0;
+              }
+              return true;
+            })
+            .slice(0, parsedCount);
+        }
+      }
+      return [];
+    } catch (e) {
+      console.error("Erreur IA sécurisée (SiliconFlow):", e);
+      throw new HttpsError("internal", "Impossible de générer les mots.");
+    }
+  }
 );
 
 exports.validateJustOneClue = onCall(
