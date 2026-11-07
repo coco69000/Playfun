@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'l10n/app_localizations.dart';
 import 'matchmaking_localization.dart';
 import 'game_content_localization.dart';
@@ -73,10 +75,9 @@ Future<void> setAppLanguage(String? code) async {
   try {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid != null && code != null) {
-      await FirebaseFirestore.instance.collection('users').doc(uid).set(
-        {'language': code},
-        SetOptions(merge: true),
-      );
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'language': code,
+      }, SetOptions(merge: true));
     }
   } catch (_) {}
 }
@@ -105,6 +106,8 @@ void main() async {
     await FirebaseAppCheck.instance.activate(
       androidProvider: AndroidProvider.debug,
       appleProvider: AppleProvider.debug,
+      providerAndroid: AndroidProvider.debug,
+      providerApple: AppleProvider.debug,
     );
   } catch (e) {
     print("[AppCheck] Activation note: $e");
@@ -257,91 +260,148 @@ class _MainScreenState extends State<MainScreen> {
 
     showDialog(
       context: context,
-      builder: (dlgCtx) => StatefulBuilder(
-        builder: (context, setDlgState) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          backgroundColor: const Color(0xFF1E1B2E),
-          title: Row(
-            children: [
-              const Icon(Icons.email_outlined, color: Colors.cyanAccent),
-              const SizedBox(width: 8),
-              Text(AppLocalizations.of(context)!.changeEmailTitle, style: const TextStyle(color: Colors.white, fontSize: 18)),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.nouvelEmail,
-                  prefixIcon: Icon(Icons.alternate_email, color: Colors.cyanAccent),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.motDePasseActuel,
-                  prefixIcon: Icon(Icons.lock_outline, color: Colors.cyanAccent),
-                ),
-              ),
-              if (errorText != null) ...[
-                const SizedBox(height: 10),
-                Text(errorText!, style: const TextStyle(color: Colors.redAccent, fontSize: 12)),
-              ],
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
-              child: Text(AppLocalizations.of(context)!.cancel),
-            ),
-            ElevatedButton(
-              onPressed: isLoading ? null : () async {
-                final newEmail = emailController.text.trim();
-                final pwd = passwordController.text.trim();
-                if (!newEmail.contains('@') || newEmail.length < 5) {
-                  setDlgState(() => errorText = AppLocalizations.of(context)!.veuillezEntrerUneAdresseEmail);
-                  return;
-                }
-                if (pwd.isEmpty) {
-                  setDlgState(() => errorText = AppLocalizations.of(context)!.veuillezEntrerVotreMotDe);
-                  return;
-                }
-                setDlgState(() {
-                  isLoading = true;
-                  errorText = null;
-                });
-                try {
-                  await auth.updateEmail(newEmail, pwd);
-                  if (dlgCtx.mounted) Navigator.pop(dlgCtx);
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(AppLocalizations.of(context)!.emailMisAJourAvec),
-                        backgroundColor: Colors.green,
+      builder:
+          (dlgCtx) => StatefulBuilder(
+            builder:
+                (context, setDlgState) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  backgroundColor: const Color(0xFF1E1B2E),
+                  title: Row(
+                    children: [
+                      const Icon(
+                        Icons.email_outlined,
+                        color: Colors.cyanAccent,
                       ),
-                    );
-                  }
-                } catch (e) {
-                  setDlgState(() {
-                    isLoading = false;
-                    errorText = e.toString().replaceAll(RegExp(r'\[.*?\]'), '').trim();
-                  });
-                }
-              },
-              child: isLoading
-                  ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                  : Text(AppLocalizations.of(context)!.confirm),
-            ),
-          ],
-        ),
-      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        AppLocalizations.of(context)!.changeEmailTitle,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.nouvelEmail,
+                          prefixIcon: Icon(
+                            Icons.alternate_email,
+                            color: Colors.cyanAccent,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      TextField(
+                        controller: passwordController,
+                        obscureText: true,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText:
+                              AppLocalizations.of(context)!.motDePasseActuel,
+                          prefixIcon: Icon(
+                            Icons.lock_outline,
+                            color: Colors.cyanAccent,
+                          ),
+                        ),
+                      ),
+                      if (errorText != null) ...[
+                        const SizedBox(height: 10),
+                        Text(
+                          errorText!,
+                          style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
+                      child: Text(AppLocalizations.of(context)!.cancel),
+                    ),
+                    ElevatedButton(
+                      onPressed:
+                          isLoading
+                              ? null
+                              : () async {
+                                final newEmail = emailController.text.trim();
+                                final pwd = passwordController.text.trim();
+                                if (!newEmail.contains('@') ||
+                                    newEmail.length < 5) {
+                                  setDlgState(
+                                    () =>
+                                        errorText =
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.veuillezEntrerUneAdresseEmail,
+                                  );
+                                  return;
+                                }
+                                if (pwd.isEmpty) {
+                                  setDlgState(
+                                    () =>
+                                        errorText =
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.veuillezEntrerVotreMotDe,
+                                  );
+                                  return;
+                                }
+                                setDlgState(() {
+                                  isLoading = true;
+                                  errorText = null;
+                                });
+                                try {
+                                  await auth.updateEmail(newEmail, pwd);
+                                  if (dlgCtx.mounted) Navigator.pop(dlgCtx);
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.emailMisAJourAvec,
+                                        ),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  }
+                                } catch (e) {
+                                  setDlgState(() {
+                                    isLoading = false;
+                                    errorText =
+                                        e
+                                            .toString()
+                                            .replaceAll(RegExp(r'\[.*?\]'), '')
+                                            .trim();
+                                  });
+                                }
+                              },
+                      child:
+                          isLoading
+                              ? const SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                              : Text(AppLocalizations.of(context)!.confirm),
+                    ),
+                  ],
+                ),
+          ),
     );
   }
 
@@ -354,108 +414,173 @@ class _MainScreenState extends State<MainScreen> {
 
     showDialog(
       context: context,
-      builder: (dlgCtx) => StatefulBuilder(
-        builder: (context, setDlgState) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          backgroundColor: const Color(0xFF1E1B2E),
-          title: Row(
-            children: [
-              Icon(Icons.lock_reset_rounded, color: Colors.amberAccent),
-              SizedBox(width: 8),
-              Text(AppLocalizations.of(context)!.modifierMotDePasse, style: TextStyle(color: Colors.white, fontSize: 18)),
-            ],
-          ),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: currentPwdController,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.motDePasseActuel,
-                    prefixIcon: Icon(Icons.lock_outline, color: Colors.amberAccent),
+      builder:
+          (dlgCtx) => StatefulBuilder(
+            builder:
+                (context, setDlgState) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
                   ),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: newPwdController,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.nouveauMotDePasse,
-                    prefixIcon: Icon(Icons.vpn_key_outlined, color: Colors.amberAccent),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: confirmPwdController,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.confirmerLeMotDePasse,
-                    prefixIcon: Icon(Icons.check_circle_outline, color: Colors.amberAccent),
-                  ),
-                ),
-                if (errorText != null) ...[
-                  const SizedBox(height: 10),
-                  Text(errorText!, style: const TextStyle(color: Colors.redAccent, fontSize: 12)),
-                ],
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
-              child: Text(AppLocalizations.of(context)!.cancel),
-            ),
-            ElevatedButton(
-              onPressed: isLoading ? null : () async {
-                final cur = currentPwdController.text.trim();
-                final next = newPwdController.text.trim();
-                final conf = confirmPwdController.text.trim();
-                if (cur.isEmpty) {
-                  setDlgState(() => errorText = AppLocalizations.of(context)!.entrezVotreMotDePasse);
-                  return;
-                }
-                if (next.length < 6) {
-                  setDlgState(() => errorText = AppLocalizations.of(context)!.leNouveauMotDePasse);
-                  return;
-                }
-                if (next != conf) {
-                  setDlgState(() => errorText = AppLocalizations.of(context)!.lesDeuxMotsDePasse);
-                  return;
-                }
-                setDlgState(() {
-                  isLoading = true;
-                  errorText = null;
-                });
-                try {
-                  await auth.updatePassword(cur, next);
-                  if (dlgCtx.mounted) Navigator.pop(dlgCtx);
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(AppLocalizations.of(context)!.motDePasseModifieAvec),
-                        backgroundColor: Colors.green,
+                  backgroundColor: const Color(0xFF1E1B2E),
+                  title: Row(
+                    children: [
+                      Icon(Icons.lock_reset_rounded, color: Colors.amberAccent),
+                      SizedBox(width: 8),
+                      Text(
+                        AppLocalizations.of(context)!.modifierMotDePasse,
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                    );
-                  }
-                } catch (e) {
-                  setDlgState(() {
-                    isLoading = false;
-                    errorText = e.toString().replaceAll(RegExp(r'\[.*?\]'), '').trim();
-                  });
-                }
-              },
-              child: isLoading
-                  ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                  : Text(AppLocalizations.of(context)!.changeButton),
-            ),
-          ],
-        ),
-      ),
+                    ],
+                  ),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          controller: currentPwdController,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText:
+                                AppLocalizations.of(context)!.motDePasseActuel,
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        TextField(
+                          controller: newPwdController,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText:
+                                AppLocalizations.of(context)!.nouveauMotDePasse,
+                            prefixIcon: Icon(
+                              Icons.vpn_key_outlined,
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        TextField(
+                          controller: confirmPwdController,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.confirmerLeMotDePasse,
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ),
+                        if (errorText != null) ...[
+                          const SizedBox(height: 10),
+                          Text(
+                            errorText!,
+                            style: const TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
+                      child: Text(AppLocalizations.of(context)!.cancel),
+                    ),
+                    ElevatedButton(
+                      onPressed:
+                          isLoading
+                              ? null
+                              : () async {
+                                final cur = currentPwdController.text.trim();
+                                final next = newPwdController.text.trim();
+                                final conf = confirmPwdController.text.trim();
+                                if (cur.isEmpty) {
+                                  setDlgState(
+                                    () =>
+                                        errorText =
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.entrezVotreMotDePasse,
+                                  );
+                                  return;
+                                }
+                                if (next.length < 6) {
+                                  setDlgState(
+                                    () =>
+                                        errorText =
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.leNouveauMotDePasse,
+                                  );
+                                  return;
+                                }
+                                if (next != conf) {
+                                  setDlgState(
+                                    () =>
+                                        errorText =
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.lesDeuxMotsDePasse,
+                                  );
+                                  return;
+                                }
+                                setDlgState(() {
+                                  isLoading = true;
+                                  errorText = null;
+                                });
+                                try {
+                                  await auth.updatePassword(cur, next);
+                                  if (dlgCtx.mounted) Navigator.pop(dlgCtx);
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.motDePasseModifieAvec,
+                                        ),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  }
+                                } catch (e) {
+                                  setDlgState(() {
+                                    isLoading = false;
+                                    errorText =
+                                        e
+                                            .toString()
+                                            .replaceAll(RegExp(r'\[.*?\]'), '')
+                                            .trim();
+                                  });
+                                }
+                              },
+                      child:
+                          isLoading
+                              ? const SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                              : Text(
+                                AppLocalizations.of(context)!.changeButton,
+                              ),
+                    ),
+                  ],
+                ),
+          ),
     );
   }
 
@@ -482,581 +607,755 @@ class _MainScreenState extends State<MainScreen> {
                 builder: (context, setStateDialog) {
                   final l10n = AppLocalizations.of(context);
                   Future<void> pickProfileImage() async {
-                final ImagePicker picker = ImagePicker();
-                showModalBottomSheet(
-                  context: context,
-                  backgroundColor: const Color(0xFF1E1B2E),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  ),
-                  builder: (bottomSheetCtx) {
-                    return SafeArea(
-                      child: Wrap(
-                        children: [
-                          ListTile(
-                            leading: const Icon(Icons.photo_camera_rounded, color: Colors.amberAccent),
-                            title: Text(AppLocalizations.of(context)!.prendreUnePhoto, style: TextStyle(color: Colors.white)),
-                            onTap: () async {
-                              Navigator.pop(bottomSheetCtx);
-                              try {
-                                final XFile? image = await picker.pickImage(
-                                  source: ImageSource.camera,
-                                  maxWidth: 600,
-                                  maxHeight: 600,
-                                  imageQuality: 85,
-                                );
-                                if (image != null) {
-                                  setStateDialog(() => isUploadingPhoto = true);
-                                  final ok = await ps.uploadProfilePhoto(image);
-                                  setStateDialog(() => isUploadingPhoto = false);
-                                  if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(ok ? AppLocalizations.of(context)!.photoDeProfilMiseA : AppLocalizations.of(context)!.echecDuChangementDePhoto),
-                                        backgroundColor: ok ? Colors.green[800] : Colors.red[800],
-                                      ),
-                                    );
-                                  }
-                                }
-                              } catch (e) {
-                                setStateDialog(() => isUploadingPhoto = false);
-                              }
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.photo_library_rounded, color: Colors.cyanAccent),
-                            title: Text(AppLocalizations.of(context)!.choisirDepuisLaGalerie, style: TextStyle(color: Colors.white)),
-                            onTap: () async {
-                              Navigator.pop(bottomSheetCtx);
-                              try {
-                                final XFile? image = await picker.pickImage(
-                                  source: ImageSource.gallery,
-                                  maxWidth: 600,
-                                  maxHeight: 600,
-                                  imageQuality: 85,
-                                );
-                                if (image != null) {
-                                  setStateDialog(() => isUploadingPhoto = true);
-                                  final ok = await ps.uploadProfilePhoto(image);
-                                  setStateDialog(() => isUploadingPhoto = false);
-                                  if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(ok ? AppLocalizations.of(context)!.photoDeProfilMiseA : AppLocalizations.of(context)!.echecDuChangementDePhoto),
-                                        backgroundColor: ok ? Colors.green[800] : Colors.red[800],
-                                      ),
-                                    );
-                                  }
-                                }
-                              } catch (e) {
-                                setStateDialog(() => isUploadingPhoto = false);
-                              }
-                            },
-                          ),
-                          if (ps.photoUrl != null && ps.photoUrl!.isNotEmpty)
-                            ListTile(
-                              leading: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent),
-                              title: Text(AppLocalizations.of(context)!.supprimerLaPhoto, style: TextStyle(color: Colors.redAccent)),
-                              onTap: () async {
-                                Navigator.pop(bottomSheetCtx);
-                                setStateDialog(() => isUploadingPhoto = true);
-                                await ps.deleteProfilePhoto();
-                                setStateDialog(() => isUploadingPhoto = false);
-                                if (context.mounted) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(AppLocalizations.of(context)!.photoDeProfilRetiree)),
-                                  );
-                                }
-                              },
-                            ),
-                        ],
+                    final ImagePicker picker = ImagePicker();
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: const Color(0xFF1E1B2E),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                        ),
                       ),
-                    );
-                  },
-                );
-              }
-              return AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                title: Row(
-                  children: [
-                    const SizedBox(width: 40),
-                    Expanded(
-                      child: Text(
-                        l10n?.profileTitle ?? "Profil & Paramètres",
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    PopupMenuButton<String>(
-                      tooltip: l10n?.languageTooltip ?? 'Langue',
-                      icon: const Icon(
-                        Icons.language,
-                        color: Colors.cyanAccent,
-                      ),
-                      onSelected: (code) async {
-                        await setAppLanguage(code);
-                        setStateDialog(() {});
-                      },
-                      itemBuilder:
-                          (_) =>
-                              kAppLanguages.entries
-                                  .map(
-                                    (e) => PopupMenuItem<String>(
-                                      value: e.key,
-                                      child: Text(e.value),
-                                    ),
-                                  )
-                                  .toList(),
-                    ),
-                  ],
-                ),
-                content: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CircleAvatar(
-                            radius: 42,
-                            backgroundColor:
-                                ps.isPremium
-                                    ? Colors.amber[700]
-                                    : Colors.deepPurpleAccent,
-                            backgroundImage:
-                                (ps.photoUrl != null && ps.photoUrl!.isNotEmpty)
-                                    ? NetworkImage(ps.photoUrl!)
-                                    : null,
-                            child:
-                                isUploadingPhoto
-                                    ? const SizedBox(
-                                      width: 24,
-                                      height: 24,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
-                                        strokeWidth: 2.5,
-                                      ),
-                                    )
-                                    : ((ps.photoUrl == null ||
-                                            ps.photoUrl!.isEmpty)
-                                        ? Text(
-                                          ps.userName != null &&
-                                                  ps.userName!.isNotEmpty
-                                              ? ps.userName![0].toUpperCase()
-                                              : "?",
-                                          style: const TextStyle(
-                                            fontSize: 32,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                        : null),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: isUploadingPhoto ? null : pickProfileImage,
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber[600],
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(0xFF1E1B2E),
-                                      width: 2.5,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withValues(alpha: 0.4),
-                                        blurRadius: 4,
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.camera_alt_rounded,
-                                    size: 16,
-                                    color: Colors.black,
-                                  ),
+                      builder: (bottomSheetCtx) {
+                        return SafeArea(
+                          child: Wrap(
+                            children: [
+                              ListTile(
+                                leading: const Icon(
+                                  Icons.photo_camera_rounded,
+                                  color: Colors.amberAccent,
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 15),
-
-                      if (isEditingName)
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    controller: nameController,
-                                    decoration: InputDecoration(
-                                      hintText:
-                                          l10n?.newUsernameHint ?? "Nouveau pseudo",
-                                      isDense: true,
-                                      errorText: nameError,
-                                    ),
-                                  ),
+                                title: Text(
+                                  AppLocalizations.of(context)!.prendreUnePhoto,
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                                if (isCheckingName)
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 10),
-                                    child: SizedBox(
-                                      width: 18,
-                                      height: 18,
-                                      child: CircularProgressIndicator(strokeWidth: 2),
-                                    ),
-                                  )
-                                else ...[
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.check,
-                                      color: Colors.green,
-                                    ),
-                                    onPressed: () async {
-                                      final newName = nameController.text.trim();
-                                      if (newName.isEmpty || newName == ps.userName) {
-                                        setStateDialog(() {
-                                          isEditingName = false;
-                                          nameError = null;
-                                        });
-                                        return;
-                                      }
-                                      if (newName.length < 3) {
-                                        setStateDialog(() => nameError = AppLocalizations.of(context)!.k3CaracteresMinimum);
-                                        return;
-                                      }
-                                      setStateDialog(() {
-                                        isCheckingName = true;
-                                        nameError = null;
-                                      });
-                                      final success = await ps.updateUserName(newName);
-                                      if (!context.mounted) return;
-                                      if (success) {
-                                        setStateDialog(() {
-                                          isCheckingName = false;
-                                          isEditingName = false;
-                                          nameError = null;
-                                        });
-                                        ScaffoldMessenger.of(context).showSnackBar(
+                                onTap: () async {
+                                  Navigator.pop(bottomSheetCtx);
+                                  try {
+                                    final XFile? image = await picker.pickImage(
+                                      source: ImageSource.camera,
+                                      maxWidth: 600,
+                                      maxHeight: 600,
+                                      imageQuality: 85,
+                                    );
+                                    if (image != null) {
+                                      setStateDialog(
+                                        () => isUploadingPhoto = true,
+                                      );
+                                      final ok = await ps.uploadProfilePhoto(
+                                        image,
+                                      );
+                                      setStateDialog(
+                                        () => isUploadingPhoto = false,
+                                      );
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
                                           SnackBar(
-                                            content: Text(AppLocalizations.of(context)!.pseudoMisAJour),
-                                            backgroundColor: Colors.green,
+                                            content: Text(
+                                              ok
+                                                  ? AppLocalizations.of(
+                                                    context,
+                                                  )!.photoDeProfilMiseA
+                                                  : AppLocalizations.of(
+                                                    context,
+                                                  )!.echecDuChangementDePhoto,
+                                            ),
+                                            backgroundColor:
+                                                ok
+                                                    ? Colors.green[800]
+                                                    : Colors.red[800],
                                           ),
                                         );
-                                      } else {
-                                        setStateDialog(() {
-                                          isCheckingName = false;
-                                          nameError = AppLocalizations.of(context)!.cePseudoEstDejaPris;
-                                        });
                                       }
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.close, color: Colors.white54, size: 18),
-                                    onPressed: () => setStateDialog(() {
-                                      isEditingName = false;
-                                      nameError = null;
-                                      nameController.text = ps.userName ?? '';
-                                    }),
-                                  ),
-                                ],
-                              ],
-                            ),
-                          ],
-                        )
-                      else
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              ps.userName ?? AppLocalizations.of(context)!.joueur,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                                    }
+                                  } catch (e) {
+                                    setStateDialog(
+                                      () => isUploadingPhoto = false,
+                                    );
+                                  }
+                                },
                               ),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 18,
-                                color: Colors.white54,
-                              ),
-                              onPressed:
-                                  () => setStateDialog(
-                                    () {
-                                      isEditingName = true;
-                                      nameError = null;
-                                      nameController.text = ps.userName ?? '';
-                                    },
-                                  ),
-                            ),
-                          ],
-                        ),
-
-                      const SizedBox(height: 5),
-                      Text(
-                        "${l10n?.level ?? 'Niveau'} ${ps.level}",
-                        style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        "${ps.xp} / ${ps.xpForNextLevel} XP",
-                        style: const TextStyle(color: Colors.white70),
-                      ),
-                      const Divider(height: 24),
-                      Text(
-                        "${l10n?.gamesPlayed ?? 'Parties jouées'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['played'] as int? ?? 0))}",
-                      ),
-                      Text(
-                        "${l10n?.gamesWon ?? 'Victoires'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['won'] as int? ?? 0))}",
-                      ),
-                      const Divider(height: 24),
-                      Row(
-                        children: [
-                          Icon(Icons.security, size: 16, color: Colors.cyanAccent),
-                          SizedBox(width: 8),
-                          Text(
-                            AppLocalizations.of(context)!.compteSecurite,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                                side: const BorderSide(color: Colors.cyanAccent, width: 0.8),
-                              ),
-                              icon: const Icon(Icons.email_outlined, size: 15, color: Colors.cyanAccent),
-                              label: Text(l10n?.email ?? "Email", style: const TextStyle(color: Colors.cyanAccent, fontSize: 12)),
-                              onPressed: () => _showChangeEmailDialog(context, auth),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                                side: const BorderSide(color: Colors.amberAccent, width: 0.8),
-                              ),
-                              icon: const Icon(Icons.lock_reset_rounded, size: 15, color: Colors.amberAccent),
-                              label: Text(AppLocalizations.of(context)!.password, style: TextStyle(color: Colors.amberAccent, fontSize: 12)),
-                              onPressed: () => _showChangePasswordDialog(context, auth),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      OutlinedButton.icon(
-                        icon: const Icon(Icons.school, size: 18),
-                        label: Text(
-                          MatchmakingLocalization.tr(context, 'reviewTutorial'),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(ctx);
-                          AppRouter.push(
-                            context,
-                            OnboardingScreen(
-                              onFinish: () => Navigator.pop(context),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      // Bouton Joueurs bloqués
-                      TextButton.icon(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 6,
-                          ),
-                          backgroundColor: Colors.white.withOpacity(0.05),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        icon: const Icon(
-                          Icons.block,
-                          color: Colors.white60,
-                          size: 15,
-                        ),
-                        label: Text(
-                          ps.blockedUsers.isNotEmpty
-                              ? "${AppLocalizations.of(context)!.joueursBloques1} (${ps.blockedUsers.length})"
-                              : AppLocalizations.of(context)!.joueursBloques1,
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                          ),
-                        ),
-                        onPressed: () => _showBlockedUsersDialog(context, ps),
-                      ),
-                      const Divider(height: 24),
-                      Text(
-                        MatchmakingLocalization.tr(
-                          context,
-                          'legalSectionTitle',
-                        ),
-                        style: const TextStyle(
-                          color: Colors.white54,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        spacing: 8,
-                        children: [
-                          TextButton.icon(
-                            icon: const Icon(
-                              Icons.description_outlined,
-                              size: 16,
-                              color: Colors.cyanAccent,
-                            ),
-                            label: Text(
-                              MatchmakingLocalization.tr(context, 'termsOfUse'),
-                              style: const TextStyle(
-                                color: Colors.cyanAccent,
-                                fontSize: 13,
-                              ),
-                            ),
-                            onPressed:
-                                () => LegalLinks.openUrl(
-                                  context,
-                                  LegalLinks.cguUrl,
+                              ListTile(
+                                leading: const Icon(
+                                  Icons.photo_library_rounded,
+                                  color: Colors.cyanAccent,
                                 ),
-                          ),
-                          TextButton.icon(
-                            icon: const Icon(
-                              Icons.privacy_tip_outlined,
-                              size: 16,
-                              color: Colors.cyanAccent,
-                            ),
-                            label: Text(
-                              MatchmakingLocalization.tr(
-                                context,
-                                'privacyPolicy',
-                              ),
-                              style: const TextStyle(
-                                color: Colors.cyanAccent,
-                                fontSize: 13,
-                              ),
-                            ),
-                            onPressed:
-                                () => LegalLinks.openUrl(
-                                  context,
-                                  LegalLinks.privacyUrl,
+                                title: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.choisirDepuisLaGalerie,
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.editeParParrelV10,
-                        style: TextStyle(color: Colors.white38, fontSize: 11),
-                      ),
-                      const SizedBox(height: 14),
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.logout),
-                        label: Text(l10n?.logout ?? "Se déconnecter"),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.error,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(ctx);
-                          auth.signOut();
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      TextButton.icon(
-                        icon: const Icon(
-                          Icons.delete_forever,
-                          color: Colors.redAccent,
-                          size: 18,
-                        ),
-                        label: Text(
-                          l10n?.deleteAccount ?? "Supprimer mon compte",
-                          style: const TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 12.5,
-                          ),
-                        ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder:
-                                (confirmCtx) => AlertDialog(
-                                  title: Text(
-                                    MatchmakingLocalization.tr(
-                                      context,
-                                      'deleteAccountTitle',
-                                    ),
-                                  ),
-                                  content: Text(
-                                    MatchmakingLocalization.tr(
-                                      context,
-                                      'deleteAccountDesc',
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed:
-                                          () => Navigator.pop(confirmCtx),
-                                      child: Text(
-                                        l10n?.cancel ??
-                                            AppLocalizations.of(context)!.cancel,
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.red,
-                                      ),
-                                      onPressed: () async {
-                                        Navigator.pop(confirmCtx);
-                                        Navigator.pop(ctx);
-                                        await ps.deleteAccount();
-                                        await auth.deleteCurrentUser();
-                                      },
-                                      child: Text(
-                                        MatchmakingLocalization.tr(
+                                onTap: () async {
+                                  Navigator.pop(bottomSheetCtx);
+                                  try {
+                                    final XFile? image = await picker.pickImage(
+                                      source: ImageSource.gallery,
+                                      maxWidth: 600,
+                                      maxHeight: 600,
+                                      imageQuality: 85,
+                                    );
+                                    if (image != null) {
+                                      setStateDialog(
+                                        () => isUploadingPhoto = true,
+                                      );
+                                      final ok = await ps.uploadProfilePhoto(
+                                        image,
+                                      );
+                                      setStateDialog(
+                                        () => isUploadingPhoto = false,
+                                      );
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(
                                           context,
-                                          'deleteAccountConfirmBtn',
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              ok
+                                                  ? AppLocalizations.of(
+                                                    context,
+                                                  )!.photoDeProfilMiseA
+                                                  : AppLocalizations.of(
+                                                    context,
+                                                  )!.echecDuChangementDePhoto,
+                                            ),
+                                            backgroundColor:
+                                                ok
+                                                    ? Colors.green[800]
+                                                    : Colors.red[800],
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  } catch (e) {
+                                    setStateDialog(
+                                      () => isUploadingPhoto = false,
+                                    );
+                                  }
+                                },
+                              ),
+                              if (ps.photoUrl != null &&
+                                  ps.photoUrl!.isNotEmpty)
+                                ListTile(
+                                  leading: const Icon(
+                                    Icons.delete_outline_rounded,
+                                    color: Colors.redAccent,
+                                  ),
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.supprimerLaPhoto,
+                                    style: TextStyle(color: Colors.redAccent),
+                                  ),
+                                  onTap: () async {
+                                    Navigator.pop(bottomSheetCtx);
+                                    setStateDialog(
+                                      () => isUploadingPhoto = true,
+                                    );
+                                    await ps.deleteProfilePhoto();
+                                    setStateDialog(
+                                      () => isUploadingPhoto = false,
+                                    );
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.photoDeProfilRetiree,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    title: Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            l10n?.profileTitle ?? "Profil & Paramètres",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        PopupMenuButton<String>(
+                          tooltip: l10n?.languageTooltip ?? 'Langue',
+                          icon: const Icon(
+                            Icons.language,
+                            color: Colors.cyanAccent,
+                          ),
+                          onSelected: (code) async {
+                            await setAppLanguage(code);
+                            setStateDialog(() {});
+                          },
+                          itemBuilder:
+                              (_) =>
+                                  kAppLanguages.entries
+                                      .map(
+                                        (e) => PopupMenuItem<String>(
+                                          value: e.key,
+                                          child: Text(e.value),
+                                        ),
+                                      )
+                                      .toList(),
+                        ),
+                      ],
+                    ),
+                    content: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 42,
+                                backgroundColor:
+                                    ps.isPremium
+                                        ? Colors.amber[700]
+                                        : Colors.deepPurpleAccent,
+                                backgroundImage:
+                                    (ps.photoUrl != null &&
+                                            ps.photoUrl!.isNotEmpty)
+                                        ? NetworkImage(ps.photoUrl!)
+                                        : null,
+                                child:
+                                    isUploadingPhoto
+                                        ? const SizedBox(
+                                          width: 24,
+                                          height: 24,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2.5,
+                                          ),
+                                        )
+                                        : ((ps.photoUrl == null ||
+                                                ps.photoUrl!.isEmpty)
+                                            ? Text(
+                                              ps.userName != null &&
+                                                      ps.userName!.isNotEmpty
+                                                  ? ps.userName![0]
+                                                      .toUpperCase()
+                                                  : "?",
+                                              style: const TextStyle(
+                                                fontSize: 32,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                            : null),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap:
+                                        isUploadingPhoto
+                                            ? null
+                                            : pickProfileImage,
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        color: Colors.amber[600],
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: const Color(0xFF1E1B2E),
+                                          width: 2.5,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withValues(
+                                              alpha: 0.4,
+                                            ),
+                                            blurRadius: 4,
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.camera_alt_rounded,
+                                        size: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+
+                          if (isEditingName)
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller: nameController,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              l10n?.newUsernameHint ??
+                                              "Nouveau pseudo",
+                                          isDense: true,
+                                          errorText: nameError,
                                         ),
                                       ),
                                     ),
+                                    if (isCheckingName)
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                        ),
+                                        child: SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
+                                        ),
+                                      )
+                                    else ...[
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.check,
+                                          color: Colors.green,
+                                        ),
+                                        onPressed: () async {
+                                          final newName =
+                                              nameController.text.trim();
+                                          if (newName.isEmpty ||
+                                              newName == ps.userName) {
+                                            setStateDialog(() {
+                                              isEditingName = false;
+                                              nameError = null;
+                                            });
+                                            return;
+                                          }
+                                          if (newName.length < 3) {
+                                            setStateDialog(
+                                              () =>
+                                                  nameError =
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.k3CaracteresMinimum,
+                                            );
+                                            return;
+                                          }
+                                          setStateDialog(() {
+                                            isCheckingName = true;
+                                            nameError = null;
+                                          });
+                                          final success = await ps
+                                              .updateUserName(newName);
+                                          if (!context.mounted) return;
+                                          if (success) {
+                                            setStateDialog(() {
+                                              isCheckingName = false;
+                                              isEditingName = false;
+                                              nameError = null;
+                                            });
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.pseudoMisAJour,
+                                                ),
+                                                backgroundColor: Colors.green,
+                                              ),
+                                            );
+                                          } else {
+                                            setStateDialog(() {
+                                              isCheckingName = false;
+                                              nameError =
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.cePseudoEstDejaPris;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.white54,
+                                          size: 18,
+                                        ),
+                                        onPressed:
+                                            () => setStateDialog(() {
+                                              isEditingName = false;
+                                              nameError = null;
+                                              nameController.text =
+                                                  ps.userName ?? '';
+                                            }),
+                                      ),
+                                    ],
                                   ],
                                 ),
-                          );
-                        },
+                              ],
+                            )
+                          else
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  ps.userName ??
+                                      AppLocalizations.of(context)!.joueur,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 18,
+                                    color: Colors.white54,
+                                  ),
+                                  onPressed:
+                                      () => setStateDialog(() {
+                                        isEditingName = true;
+                                        nameError = null;
+                                        nameController.text = ps.userName ?? '';
+                                      }),
+                                ),
+                              ],
+                            ),
+
+                          const SizedBox(height: 5),
+                          Text(
+                            "${l10n?.level ?? 'Niveau'} ${ps.level}",
+                            style: const TextStyle(
+                              color: Colors.amber,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            "${ps.xp} / ${ps.xpForNextLevel} XP",
+                            style: const TextStyle(color: Colors.white70),
+                          ),
+                          const Divider(height: 24),
+                          Text(
+                            "${l10n?.gamesPlayed ?? 'Parties jouées'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['played'] as int? ?? 0))}",
+                          ),
+                          Text(
+                            "${l10n?.gamesWon ?? 'Victoires'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['won'] as int? ?? 0))}",
+                          ),
+                          const Divider(height: 24),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.security,
+                                size: 16,
+                                color: Colors.cyanAccent,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                AppLocalizations.of(context)!.compteSecurite,
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: OutlinedButton.icon(
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    side: const BorderSide(
+                                      color: Colors.cyanAccent,
+                                      width: 0.8,
+                                    ),
+                                  ),
+                                  icon: const Icon(
+                                    Icons.email_outlined,
+                                    size: 15,
+                                    color: Colors.cyanAccent,
+                                  ),
+                                  label: Text(
+                                    l10n?.email ?? "Email",
+                                    style: const TextStyle(
+                                      color: Colors.cyanAccent,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  onPressed:
+                                      () =>
+                                          _showChangeEmailDialog(context, auth),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: OutlinedButton.icon(
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    side: const BorderSide(
+                                      color: Colors.amberAccent,
+                                      width: 0.8,
+                                    ),
+                                  ),
+                                  icon: const Icon(
+                                    Icons.lock_reset_rounded,
+                                    size: 15,
+                                    color: Colors.amberAccent,
+                                  ),
+                                  label: Text(
+                                    AppLocalizations.of(context)!.password,
+                                    style: TextStyle(
+                                      color: Colors.amberAccent,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  onPressed:
+                                      () => _showChangePasswordDialog(
+                                        context,
+                                        auth,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          OutlinedButton.icon(
+                            icon: const Icon(Icons.school, size: 18),
+                            label: Text(
+                              MatchmakingLocalization.tr(
+                                context,
+                                'reviewTutorial',
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(ctx);
+                              AppRouter.push(
+                                context,
+                                OnboardingScreen(
+                                  onFinish: () => Navigator.pop(context),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          // Bouton Joueurs bloqués
+                          TextButton.icon(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 6,
+                              ),
+                              backgroundColor: Colors.white.withOpacity(0.05),
+                              backgroundColor: Colors.white.withValues(
+                                alpha: 0.05,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            icon: const Icon(
+                              Icons.block,
+                              color: Colors.white60,
+                              size: 15,
+                            ),
+                            label: Text(
+                              ps.blockedUsers.isNotEmpty
+                                  ? "${AppLocalizations.of(context)!.joueursBloques1} (${ps.blockedUsers.length})"
+                                  : AppLocalizations.of(
+                                    context,
+                                  )!.joueursBloques1,
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                              ),
+                            ),
+                            onPressed:
+                                () => _showBlockedUsersDialog(context, ps),
+                          ),
+                          const Divider(height: 24),
+                          Text(
+                            MatchmakingLocalization.tr(
+                              context,
+                              'legalSectionTitle',
+                            ),
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 8,
+                            children: [
+                              TextButton.icon(
+                                icon: const Icon(
+                                  Icons.description_outlined,
+                                  size: 16,
+                                  color: Colors.cyanAccent,
+                                ),
+                                label: Text(
+                                  MatchmakingLocalization.tr(
+                                    context,
+                                    'termsOfUse',
+                                  ),
+                                  style: const TextStyle(
+                                    color: Colors.cyanAccent,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                onPressed:
+                                    () => LegalLinks.openUrl(
+                                      context,
+                                      LegalLinks.cguUrl,
+                                    ),
+                              ),
+                              TextButton.icon(
+                                icon: const Icon(
+                                  Icons.privacy_tip_outlined,
+                                  size: 16,
+                                  color: Colors.cyanAccent,
+                                ),
+                                label: Text(
+                                  MatchmakingLocalization.tr(
+                                    context,
+                                    'privacyPolicy',
+                                  ),
+                                  style: const TextStyle(
+                                    color: Colors.cyanAccent,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                onPressed:
+                                    () => LegalLinks.openUrl(
+                                      context,
+                                      LegalLinks.privacyUrl,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.editeParParrelV10,
+                            style: TextStyle(
+                              color: Colors.white38,
+                              fontSize: 11,
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          ElevatedButton.icon(
+                            icon: const Icon(Icons.logout),
+                            label: Text(l10n?.logout ?? "Se déconnecter"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.error,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(ctx);
+                              auth.signOut();
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          TextButton.icon(
+                            icon: const Icon(
+                              Icons.delete_forever,
+                              color: Colors.redAccent,
+                              size: 18,
+                            ),
+                            label: Text(
+                              l10n?.deleteAccount ?? "Supprimer mon compte",
+                              style: const TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 12.5,
+                              ),
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (confirmCtx) => AlertDialog(
+                                      title: Text(
+                                        MatchmakingLocalization.tr(
+                                          context,
+                                          'deleteAccountTitle',
+                                        ),
+                                      ),
+                                      content: Text(
+                                        MatchmakingLocalization.tr(
+                                          context,
+                                          'deleteAccountDesc',
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed:
+                                              () => Navigator.pop(confirmCtx),
+                                          child: Text(
+                                            l10n?.cancel ??
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.cancel,
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red,
+                                          ),
+                                          onPressed: () async {
+                                            Navigator.pop(confirmCtx);
+                                            Navigator.pop(ctx);
+                                            await ps.deleteAccount();
+                                            await auth.deleteCurrentUser();
+                                          },
+                                          child: Text(
+                                            MatchmakingLocalization.tr(
+                                              context,
+                                              'deleteAccountConfirmBtn',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               );
             },
-          );
-        },
-      ),
+          ),
     );
   }
 
@@ -1108,7 +1407,8 @@ class _MainScreenState extends State<MainScreen> {
 
                           final success = await FirebaseService().joinGame(
                             code,
-                            playerState.userName ?? AppLocalizations.of(context)!.joueur,
+                            playerState.userName ??
+                                AppLocalizations.of(context)!.joueur,
                             playerId,
                           );
 
@@ -1153,7 +1453,8 @@ class _MainScreenState extends State<MainScreen> {
       for (var invite in playerState.loungeInvites) {
         String loungeId = invite['loungeId'];
         String host = invite['hostName'] ?? AppLocalizations.of(context)!.unAmi;
-        String loungeName = invite['loungeName'] ?? AppLocalizations.of(context)!.salon;
+        String loungeName =
+            invite['loungeName'] ?? AppLocalizations.of(context)!.salon;
 
         if (!_processedInvites.contains(loungeId)) {
           _processedInvites.add(loungeId);
@@ -1189,7 +1490,8 @@ class _MainScreenState extends State<MainScreen> {
                           await FirebaseService().joinLounge(
                             loungeId,
                             playerId,
-                            playerState.userName ?? AppLocalizations.of(context)!.joueur,
+                            playerState.userName ??
+                                AppLocalizations.of(context)!.joueur,
                           );
                           Navigator.push(
                             context,
@@ -1201,6 +1503,18 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                             ),
                           );
+                          if (context.mounted) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (_) => LoungeRoomScreen(
+                                      loungeId: loungeId,
+                                      playerId: playerId,
+                                    ),
+                              ),
+                            );
+                          }
                         },
                         child: Text(
                           MatchmakingLocalization.tr(context, 'joinLounge'),
@@ -1233,10 +1547,7 @@ class _MainScreenState extends State<MainScreen> {
         titleSpacing: 16.0,
         title: Text(
           l10n?.appTitle ?? 'PlayFun',
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         actions: [
           GestureDetector(
@@ -1250,9 +1561,11 @@ class _MainScreenState extends State<MainScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
                 color: Colors.amber.withOpacity(0.15),
+                color: Colors.amber.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: Colors.amberAccent.withOpacity(0.6),
+                  color: Colors.amberAccent.withValues(alpha: 0.6),
                   width: 1,
                 ),
               ),
@@ -1284,7 +1597,9 @@ class _MainScreenState extends State<MainScreen> {
                   context,
                   MaterialPageRoute(builder: (_) => const PremiumScreen()),
                 ),
-            tooltip: AppLocalizations.of(context)?.vipPremiumTooltip ?? "VIP / Premium",
+            tooltip:
+                AppLocalizations.of(context)?.vipPremiumTooltip ??
+                "VIP / Premium",
           ),
           GestureDetector(
             onTap: () => _showProfileDialog(context, playerState, authService),
