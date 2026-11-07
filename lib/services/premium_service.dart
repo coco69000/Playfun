@@ -62,7 +62,40 @@ class PremiumService {
   /// Récupère l'offre active contenant vos abonnements
   static Future<Offering?> getCurrentOffering() async {
     try {
+      if (!_initialized) {
+        final uid = _currentUserId;
+        if (uid != null) {
+          await init(uid);
+        } else {
+          final configuration = PurchasesConfiguration(activeApiKey);
+          await Purchases.configure(configuration);
+          _initialized = true;
+        }
+      }
       final offerings = await Purchases.getOfferings();
+      debugPrint(
+        "[RevenueCat] Offerings reçus : current=${offerings.current?.identifier}, all=${offerings.all.keys.toList()}",
+      );
+
+      // 1. Si l'offre current est définie et possède des packages
+      if (offerings.current != null &&
+          offerings.current!.availablePackages.isNotEmpty) {
+        return offerings.current;
+      }
+
+      // 2. Si une autre offre dans all contient des packages (ex: nom personnalisé)
+      if (offerings.all.isNotEmpty) {
+        for (final off in offerings.all.values) {
+          if (off.availablePackages.isNotEmpty) {
+            debugPrint(
+              "[RevenueCat] Offre sélectionnée depuis all : ${off.identifier}",
+            );
+            return off;
+          }
+        }
+        return offerings.current ?? offerings.all.values.first;
+      }
+
       return offerings.current;
     } catch (e) {
       debugPrint("[RevenueCat] Erreur getOfferings: $e");

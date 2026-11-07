@@ -14,7 +14,6 @@ import 'l10n/app_localizations.dart';
 import 'dart:ui' show Locale;
 import 'game_data_words.dart';
 
-
 AppLocalizations get _l10n {
   try {
     return lookupAppLocalizations(Locale(GameWords.currentLanguage));
@@ -22,6 +21,7 @@ AppLocalizations get _l10n {
     return lookupAppLocalizations(const Locale('fr'));
   }
 }
+
 class PlayerState extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -48,7 +48,8 @@ class PlayerState extends ChangeNotifier {
   List<String> _friends = [];
   List<Map<String, dynamic>> _friendRequests = []; // {uid, name}
   List<Map<String, dynamic>> _gameInvites = []; // {gameCode, hostName}
-  List<Map<String, dynamic>> _loungeInvites = []; // {loungeId, loungeName, hostName}
+  List<Map<String, dynamic>> _loungeInvites =
+      []; // {loungeId, loungeName, hostName}
   List<String> _blockedUsers = [];
   Map<String, String> _friendNamesCache = {}; // Cache pour afficher les noms
   StreamSubscription<DocumentSnapshot>? _userSubscription;
@@ -69,11 +70,15 @@ class PlayerState extends ChangeNotifier {
       _blockedUsers.add(uid);
       notifyListeners();
     }
-    await _db.collection('users').doc(_userId!).set({
-      'blockedUsers': FieldValue.arrayUnion([uid]),
-    }, SetOptions(merge: true)).catchError((e) {
-      debugPrint("Error blockUser: $e");
-    });
+    await _db
+        .collection('users')
+        .doc(_userId!)
+        .set({
+          'blockedUsers': FieldValue.arrayUnion([uid]),
+        }, SetOptions(merge: true))
+        .catchError((e) {
+          debugPrint("Error blockUser: $e");
+        });
   }
 
   Future<void> unblockUser(String uid) async {
@@ -81,12 +86,17 @@ class PlayerState extends ChangeNotifier {
     if (_blockedUsers.remove(uid)) {
       notifyListeners();
     }
-    await _db.collection('users').doc(_userId!).update({
-      'blockedUsers': FieldValue.arrayRemove([uid]),
-    }).catchError((e) {
-      debugPrint("Error unblockUser: $e");
-    });
+    await _db
+        .collection('users')
+        .doc(_userId!)
+        .update({
+          'blockedUsers': FieldValue.arrayRemove([uid]),
+        })
+        .catchError((e) {
+          debugPrint("Error unblockUser: $e");
+        });
   }
+
   int get multiplayerGamesLeft =>
       isPremium ? 999 : (20 - _multiplayerGamesPlayedToday);
   int get videoGamesLeftToday => isPremium ? 999 : (4 - _videoGamesPlayedToday);
@@ -125,9 +135,16 @@ class PlayerState extends ChangeNotifier {
 
         // Récompense XP selon la rareté
         int xpReward = 50;
-        if (badge.maxProgress >= 100 || badge.id == 'lvl_100' || badge.id == 'games_500' || badge.id == 'wins_100') {
+        if (badge.maxProgress >= 100 ||
+            badge.id == 'lvl_100' ||
+            badge.id == 'games_500' ||
+            badge.id == 'wins_100') {
           xpReward = 500;
-        } else if (badge.maxProgress >= 25 || badge.id == 'lvl_50' || badge.id == 'games_200' || badge.id == 'wins_50' || badge.id == 'social_versatile_25') {
+        } else if (badge.maxProgress >= 25 ||
+            badge.id == 'lvl_50' ||
+            badge.id == 'games_200' ||
+            badge.id == 'wins_50' ||
+            badge.id == 'social_versatile_25') {
           xpReward = 250;
         }
         totalXpReward += xpReward;
@@ -136,7 +153,10 @@ class PlayerState extends ChangeNotifier {
     }
 
     if (changed) {
-      await _db.collection('users').doc(_userId!).set(updates, SetOptions(merge: true));
+      await _db
+          .collection('users')
+          .doc(_userId!)
+          .set(updates, SetOptions(merge: true));
       notifyListeners();
 
       if (totalXpReward > 0) {
@@ -157,26 +177,37 @@ class PlayerState extends ChangeNotifier {
     } else if (badgeId.startsWith('games_')) {
       final totalPlayed = _gameStats.values.fold<int>(
         0,
-        (acc, stat) => acc + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
+        (acc, stat) =>
+            acc + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
       );
       raw = raw > totalPlayed ? raw : totalPlayed;
     } else if (badgeId.startsWith('wins_')) {
       final totalWon = _gameStats.values.fold<int>(
         0,
-        (acc, stat) => acc + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
+        (acc, stat) =>
+            acc + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
       );
       raw = raw > totalWon ? raw : totalWon;
     } else if (badgeId.startsWith('social_versatile_')) {
       final gamesCount = _gameStats.keys.length;
       raw = raw > gamesCount ? raw : gamesCount;
     } else if (badgeId == 'uno_win_10') {
-      final unoWon = (_gameStats['Uno'] is Map ? (_gameStats['Uno']['won'] as num? ?? 0).toInt() : 0);
+      final unoWon =
+          (_gameStats['Uno'] is Map
+              ? (_gameStats['Uno']['won'] as num? ?? 0).toInt()
+              : 0);
       raw = raw > unoWon ? raw : unoWon;
     } else if (badgeId == 'dobble_win_10') {
-      final dobbleWon = (_gameStats['Dobble'] is Map ? (_gameStats['Dobble']['won'] as num? ?? 0).toInt() : 0);
+      final dobbleWon =
+          (_gameStats['Dobble'] is Map
+              ? (_gameStats['Dobble']['won'] as num? ?? 0).toInt()
+              : 0);
       raw = raw > dobbleWon ? raw : dobbleWon;
     } else if (badgeId == 'meme_king_5') {
-      final memeWon = (_gameStats['Le Roi des Mèmes'] is Map ? (_gameStats['Le Roi des Mèmes']['won'] as num? ?? 0).toInt() : 0);
+      final memeWon =
+          (_gameStats['Le Roi des Mèmes'] is Map
+              ? (_gameStats['Le Roi des Mèmes']['won'] as num? ?? 0).toInt()
+              : 0);
       raw = raw > memeWon ? raw : memeWon;
     }
 
@@ -289,7 +320,12 @@ class PlayerState extends ChangeNotifier {
 
     // 3. Écouter les changements en temps réel (renouvellement, expiration)
     Purchases.addCustomerInfoUpdateListener((customerInfo) {
-      final active = customerInfo.entitlements.all[PremiumService.entitlementId]?.isActive == true ||
+      final active =
+          customerInfo
+                  .entitlements
+                  .all[PremiumService.entitlementId]
+                  ?.isActive ==
+              true ||
           customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
           customerInfo.entitlements.all["vip"]?.isActive == true ||
           customerInfo.entitlements.active.isNotEmpty;
@@ -322,6 +358,9 @@ class PlayerState extends ChangeNotifier {
         'hasCompletedOnboarding': false,
         'multiplayerGamesPlayedToday': 0,
         'videoGamesPlayedToday': 0,
+        'lastDailyCoinGrant': FieldValue.serverTimestamp(),
+        'lastMultiplayerReset': FieldValue.serverTimestamp(),
+        'lastVideoGamesReset': FieldValue.serverTimestamp(),
       });
     } else {
       var data = initialDoc.data() as Map<String, dynamic>;
@@ -346,9 +385,7 @@ class PlayerState extends ChangeNotifier {
       _friendRequests = List<Map<String, dynamic>>.from(
         data['friendRequests'] ?? [],
       );
-      _gameInvites = List<Map<String, dynamic>>.from(
-        data['gameInvites'] ?? [],
-      );
+      _gameInvites = List<Map<String, dynamic>>.from(data['gameInvites'] ?? []);
       _loungeInvites = List<Map<String, dynamic>>.from(
         data['loungeInvites'] ?? [],
       );
@@ -387,9 +424,7 @@ class PlayerState extends ChangeNotifier {
       _friendRequests = List<Map<String, dynamic>>.from(
         data['friendRequests'] ?? [],
       );
-      _gameInvites = List<Map<String, dynamic>>.from(
-        data['gameInvites'] ?? [],
-      );
+      _gameInvites = List<Map<String, dynamic>>.from(data['gameInvites'] ?? []);
       _loungeInvites = List<Map<String, dynamic>>.from(
         data['loungeInvites'] ?? [],
       );
@@ -405,11 +440,7 @@ class PlayerState extends ChangeNotifier {
   Future<void> _initFcm(String uid) async {
     try {
       final messaging = FirebaseMessaging.instance;
-      await messaging.requestPermission(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
+      await messaging.requestPermission(alert: true, badge: true, sound: true);
 
       // Permet d'afficher la bannière même quand l'application est ouverte
       await messaging.setForegroundNotificationPresentationOptions(
@@ -432,17 +463,23 @@ class PlayerState extends ChangeNotifier {
 
       // Écoute des notifications push reçues lorsque l'application est au premier plan
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        debugPrint("Push message reçu au premier plan : ${message.notification?.title} / ${message.data}");
+        debugPrint(
+          "Push message reçu au premier plan : ${message.notification?.title} / ${message.data}",
+        );
       });
 
       // Gestion des interactions lors du clic sur une notification push
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        debugPrint("Notification push ouverte (arrière-plan) : ${message.data}");
+        debugPrint(
+          "Notification push ouverte (arrière-plan) : ${message.data}",
+        );
       });
 
       final initialMessage = await messaging.getInitialMessage();
       if (initialMessage != null) {
-        debugPrint("Application ouverte depuis une notification push : ${initialMessage.data}");
+        debugPrint(
+          "Application ouverte depuis une notification push : ${initialMessage.data}",
+        );
       }
     } catch (e) {
       debugPrint("Erreur initialisation FCM: $e");
@@ -511,8 +548,9 @@ class PlayerState extends ChangeNotifier {
     if (clean.length < 3) return false;
 
     try {
-      final HttpsCallable callable =
-          FirebaseFunctions.instance.httpsCallable('updateUserUsername');
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+        'updateUserUsername',
+      );
       final res = await callable.call({'username': clean});
       if (res.data is Map && res.data['success'] == true) {
         _userName = clean;
@@ -542,9 +580,7 @@ class PlayerState extends ChangeNotifier {
         'photoUrl': FieldValue.delete(),
       });
     } else {
-      await _db.collection('users').doc(_userId!).update({
-        'photoUrl': newUrl,
-      });
+      await _db.collection('users').doc(_userId!).update({'photoUrl': newUrl});
     }
     _photoUrl = newUrl;
     notifyListeners();
@@ -566,7 +602,8 @@ class PlayerState extends ChangeNotifier {
       await storageRef.putData(bytes, metadata);
       final downloadUrl = await storageRef.getDownloadURL();
       // Ajout d'un timestamp pour forcer le rafraîchissement d'image côté client
-      final versionedUrl = "$downloadUrl${downloadUrl.contains('?') ? '&' : '?'}v=${DateTime.now().millisecondsSinceEpoch}";
+      final versionedUrl =
+          "$downloadUrl${downloadUrl.contains('?') ? '&' : '?'}v=${DateTime.now().millisecondsSinceEpoch}";
       await updatePhotoUrl(versionedUrl);
       return true;
     } catch (e) {
@@ -630,29 +667,36 @@ class PlayerState extends ChangeNotifier {
     final clean = query.trim().toLowerCase();
     if (clean.isEmpty) return [];
 
-    var snap = await _db
-        .collection('users')
-        .where('nameLower', isGreaterThanOrEqualTo: clean)
-        .where('nameLower', isLessThanOrEqualTo: '$clean\uf8ff')
-        .limit(10)
-        .get();
+    var snap =
+        await _db
+            .collection('users')
+            .where('nameLower', isGreaterThanOrEqualTo: clean)
+            .where('nameLower', isLessThanOrEqualTo: '$clean\uf8ff')
+            .limit(10)
+            .get();
 
     return snap.docs
-        .map((doc) => {
-              'uid': doc.id,
-              'name': doc.data()['name'] ?? _l10n.joueur,
-              'level': doc.data()['level'] ?? 1,
-            })
+        .map(
+          (doc) => {
+            'uid': doc.id,
+            'name': doc.data()['name'] ?? _l10n.joueur,
+            'level': doc.data()['level'] ?? 1,
+          },
+        )
         .toList();
   }
 
   Future<void> sendFriendRequest(String targetUid, String targetName) async {
-    if (_userId == null || targetUid == _userId || _friends.contains(targetUid)) {
+    if (_userId == null ||
+        targetUid == _userId ||
+        _friends.contains(targetUid)) {
       return;
     }
 
     try {
-      final callable = FirebaseFunctions.instance.httpsCallable('sendFriendRequest');
+      final callable = FirebaseFunctions.instance.httpsCallable(
+        'sendFriendRequest',
+      );
       await callable.call({
         'targetUid': targetUid,
         ...ForceUpdateService.versionPayload,
@@ -686,7 +730,7 @@ class PlayerState extends ChangeNotifier {
       final myDocRef = _db.collection('users').doc(_userId);
       final myUpdates = <String, dynamic>{
         'friendRequests': FieldValue.arrayRemove([
-          {'uid': senderUid, 'name': senderName}
+          {'uid': senderUid, 'name': senderName},
         ]),
       };
       if (accept) {
@@ -695,7 +739,9 @@ class PlayerState extends ChangeNotifier {
       await myDocRef.update(myUpdates);
 
       // Appel de la Cloud Function sécurisée pour synchroniser la liste d'amis côté expéditeur
-      final callable = FirebaseFunctions.instance.httpsCallable('respondToFriendRequest');
+      final callable = FirebaseFunctions.instance.httpsCallable(
+        'respondToFriendRequest',
+      );
       await callable.call({
         'senderUid': senderUid,
         'senderName': senderName,
@@ -732,7 +778,9 @@ class PlayerState extends ChangeNotifier {
     if (_userId == null) return;
 
     try {
-      final callable = FirebaseFunctions.instance.httpsCallable('sendGameInvite');
+      final callable = FirebaseFunctions.instance.httpsCallable(
+        'sendGameInvite',
+      );
       await callable.call({
         'friendUid': friendUid,
         'gameCode': gameCode,
@@ -753,7 +801,10 @@ class PlayerState extends ChangeNotifier {
       if (snap.exists) {
         final rawList = snap.data()?['gameInvites'];
         if (rawList is List) {
-          final updated = rawList.where((i) => i is Map && i['gameCode'] != gameCode).toList();
+          final updated =
+              rawList
+                  .where((i) => i is Map && i['gameCode'] != gameCode)
+                  .toList();
           await docRef.update({'gameInvites': updated});
         }
       }
@@ -764,10 +815,16 @@ class PlayerState extends ChangeNotifier {
 
   // --- LOGIQUE DES INVITATIONS AU SALON ---
 
-  Future<void> sendLoungeInvite(String friendUid, String loungeId, String loungeName) async {
+  Future<void> sendLoungeInvite(
+    String friendUid,
+    String loungeId,
+    String loungeName,
+  ) async {
     if (_userId == null) return;
     try {
-      final callable = FirebaseFunctions.instance.httpsCallable('sendLoungeInvite');
+      final callable = FirebaseFunctions.instance.httpsCallable(
+        'sendLoungeInvite',
+      );
       await callable.call({
         'friendUid': friendUid,
         'loungeId': loungeId,
@@ -789,7 +846,10 @@ class PlayerState extends ChangeNotifier {
       if (snap.exists) {
         final rawList = snap.data()?['loungeInvites'];
         if (rawList is List) {
-          final updated = rawList.where((i) => i is Map && i['loungeId'] != loungeId).toList();
+          final updated =
+              rawList
+                  .where((i) => i is Map && i['loungeId'] != loungeId)
+                  .toList();
           await docRef.update({'loungeInvites': updated});
         }
       }
@@ -883,7 +943,8 @@ class PlayerState extends ChangeNotifier {
       recordBadgeEvent('uno_win_10', count: 1, targetProgress: 10);
     } else if (gameName == 'Dobble') {
       recordBadgeEvent('dobble_win_10', count: 1, targetProgress: 10);
-    } else if (gameName == 'Le Roi des Mèmes' || gameName == 'Le Roi des Mêmes') {
+    } else if (gameName == 'Le Roi des Mèmes' ||
+        gameName == 'Le Roi des Mêmes') {
       recordBadgeEvent('meme_king_1');
       recordBadgeEvent('meme_king_5', count: 1, targetProgress: 5);
     }
@@ -908,7 +969,11 @@ class PlayerState extends ChangeNotifier {
   }
 
   // Déblocage ou progression manuelle d'un badge in-game avec récompense XP
-  Future<void> recordBadgeEvent(String badgeId, {int count = 1, int? targetProgress}) async {
+  Future<void> recordBadgeEvent(
+    String badgeId, {
+    int count = 1,
+    int? targetProgress,
+  }) async {
     if (_userId == null) return;
 
     final currentUnlocked = _unlockedBadges.containsKey(badgeId);
@@ -917,17 +982,17 @@ class PlayerState extends ChangeNotifier {
     int currentProgress = (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
     if (badgeId.startsWith('lvl_') && _level > currentProgress) {
       currentProgress = _level;
-    } else if (badgeId.startsWith('social_friends_') && _friends.length > currentProgress) {
+    } else if (badgeId.startsWith('social_friends_') &&
+        _friends.length > currentProgress) {
       currentProgress = _friends.length;
     }
 
-    final newProgress = badgeId.startsWith('lvl_')
-        ? currentProgress
-        : (currentProgress + count);
+    final newProgress =
+        badgeId.startsWith('lvl_')
+            ? currentProgress
+            : (currentProgress + count);
 
-    Map<String, dynamic> updates = {
-      'badgeProgress.$badgeId': newProgress,
-    };
+    Map<String, dynamic> updates = {'badgeProgress.$badgeId': newProgress};
 
     final badgeDef = AppBadges.getById(badgeId);
     final effectiveTarget = targetProgress ?? badgeDef?.maxProgress ?? 1;
@@ -941,9 +1006,16 @@ class PlayerState extends ChangeNotifier {
 
       xpReward = 50; // Palier Bronze / standard (+50 XP)
       if (badgeDef != null) {
-        if (badgeDef.maxProgress >= 100 || badgeId == 'lvl_100' || badgeId == 'games_500' || badgeId == 'wins_100') {
+        if (badgeDef.maxProgress >= 100 ||
+            badgeId == 'lvl_100' ||
+            badgeId == 'games_500' ||
+            badgeId == 'wins_100') {
           xpReward = 500; // Palier Or / Légendaire (+500 XP)
-        } else if (badgeDef.maxProgress >= 25 || badgeId == 'lvl_50' || badgeId == 'games_200' || badgeId == 'wins_50' || badgeId == 'social_versatile_25') {
+        } else if (badgeDef.maxProgress >= 25 ||
+            badgeId == 'lvl_50' ||
+            badgeId == 'games_200' ||
+            badgeId == 'wins_50' ||
+            badgeId == 'social_versatile_25') {
           xpReward = 250; // Palier Argent / Vétéran (+250 XP)
         }
       }
@@ -952,7 +1024,10 @@ class PlayerState extends ChangeNotifier {
     _badgeProgress[badgeId] = newProgress;
     notifyListeners();
 
-    await _db.collection('users').doc(_userId!).set(updates, SetOptions(merge: true));
+    await _db
+        .collection('users')
+        .doc(_userId!)
+        .set(updates, SetOptions(merge: true));
 
     // Si le déblocage rapporte de l'XP, on le crédite proprement via addXp
     if (xpReward > 0) {
@@ -963,7 +1038,7 @@ class PlayerState extends ChangeNotifier {
   // 1. Crédit direct d'XP pour les modes locaux et actions instantanées (avec boost VIP +50%)
   Future<int> addXp(int amount) async {
     if (_userId == null || amount <= 0) return 0;
-    
+
     // Avantage VIP : Boost de +50% d'XP sur tous les gains
     final int effectiveAmount = _isPremium ? (amount * 1.5).round() : amount;
     _xp += effectiveAmount;
@@ -1002,7 +1077,8 @@ class PlayerState extends ChangeNotifier {
 
     final userDoc = await _db.collection('users').doc(_userId!).get();
     final data = userDoc.data() ?? {};
-    int currentStreak = isWin ? ((data['winStreak'] as num?)?.toInt() ?? 0) + 1 : 0;
+    int currentStreak =
+        isWin ? ((data['winStreak'] as num?)?.toInt() ?? 0) + 1 : 0;
 
     int baseXp = baseGameXp ?? (isWin ? 50 : 15);
 
@@ -1059,11 +1135,9 @@ class PlayerState extends ChangeNotifier {
   }) async {
     if (_userId == null) return;
 
-    final currentStats = Map<String, dynamic>.from(_gameStats[gameName] ?? {
-      'played': 0,
-      'won': 0,
-      'xp': 0,
-    });
+    final currentStats = Map<String, dynamic>.from(
+      _gameStats[gameName] ?? {'played': 0, 'won': 0, 'xp': 0},
+    );
 
     currentStats['played'] =
         ((currentStats['played'] as num?)?.toInt() ?? 0) + 1;

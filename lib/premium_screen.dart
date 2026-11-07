@@ -18,6 +18,7 @@ class PremiumScreen extends StatefulWidget {
 class _PremiumScreenState extends State<PremiumScreen> {
   Offering? _offering;
   Package? _selectedPackage;
+  bool _selectedFallbackIsAnnual = true;
   bool _isLoading = true;
   bool _isPurchasing = false;
 
@@ -27,6 +28,34 @@ class _PremiumScreenState extends State<PremiumScreen> {
     _loadOfferings();
   }
 
+  bool _isPackageAnnual(Package p) {
+    final id = p.identifier.toLowerCase();
+    final prodId = p.storeProduct.identifier.toLowerCase();
+    final pType = p.packageType;
+    return pType == PackageType.annual ||
+        id.contains('annual') ||
+        id.contains('annuel') ||
+        id.contains('year') ||
+        id.contains('12_month') ||
+        prodId.contains('annual') ||
+        prodId.contains('annuel') ||
+        prodId.contains('year');
+  }
+
+  bool _isPackageMonthly(Package p) {
+    final id = p.identifier.toLowerCase();
+    final prodId = p.storeProduct.identifier.toLowerCase();
+    final pType = p.packageType;
+    return pType == PackageType.monthly ||
+        id.contains('month') ||
+        id.contains('mensuel') ||
+        id.contains('mois') ||
+        id.contains('1_month') ||
+        prodId.contains('month') ||
+        prodId.contains('mensuel') ||
+        prodId.contains('mois');
+  }
+
   Future<void> _loadOfferings() async {
     final off = await PremiumService.getCurrentOffering();
     if (mounted) {
@@ -34,13 +63,19 @@ class _PremiumScreenState extends State<PremiumScreen> {
         _offering = off;
         final pkgs = _displayPackages;
         if (pkgs.isNotEmpty) {
-          // Sélectionne l'offre annuelle par défaut si disponible
-          _selectedPackage = pkgs.firstWhere(
-            (p) =>
-                p.packageType == PackageType.annual ||
-                p.identifier.toLowerCase().contains('annual'),
-            orElse: () => pkgs.first,
-          );
+          Package? target;
+          if (_selectedFallbackIsAnnual) {
+            target = pkgs.firstWhere(
+              (p) => _isPackageAnnual(p),
+              orElse: () => pkgs.first,
+            );
+          } else {
+            target = pkgs.firstWhere(
+              (p) => _isPackageMonthly(p),
+              orElse: () => pkgs.last,
+            );
+          }
+          _selectedPackage = target;
         }
         _isLoading = false;
       });
@@ -58,14 +93,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
     Package? monthlyPkg;
 
     for (final p in pkgs) {
-      final id = p.identifier.toLowerCase();
-      final pType = p.packageType;
-      final bool isAnnual =
-          pType == PackageType.annual ||
-          id.contains('annual') ||
-          id.contains('year');
-      final bool isMonthly =
-          pType == PackageType.monthly || id.contains('month');
+      final bool isAnnual = _isPackageAnnual(p);
+      final bool isMonthly = _isPackageMonthly(p);
 
       if (isAnnual && annualPkg == null) {
         annualPkg = p;
@@ -187,7 +216,10 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         const SizedBox(height: 18),
                         OutlinedButton.icon(
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.greenAccent, width: 1.2),
+                            side: const BorderSide(
+                              color: Colors.greenAccent,
+                              width: 1.2,
+                            ),
                             padding: const EdgeInsets.symmetric(
                               horizontal: 18,
                               vertical: 12,
@@ -195,7 +227,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
                             ),
-                            backgroundColor: Colors.black.withValues(alpha: 0.25),
+                            backgroundColor: Colors.black.withValues(
+                              alpha: 0.25,
+                            ),
                           ),
                           icon: const Icon(
                             Icons.settings_outlined,
@@ -211,9 +245,10 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             ),
                           ),
                           onPressed: () {
-                            final String subUrl = Platform.isIOS
-                                ? 'https://apps.apple.com/account/subscriptions'
-                                : 'https://play.google.com/store/account/subscriptions';
+                            final String subUrl =
+                                Platform.isIOS
+                                    ? 'https://apps.apple.com/account/subscriptions'
+                                    : 'https://play.google.com/store/account/subscriptions';
                             LegalLinks.openUrl(context, subUrl);
                           },
                         ),
@@ -308,8 +343,12 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               ),
                               Text(
                                 playerState.isPremium
-                                    ? AppLocalizations.of(context)!.illimiteesVip
-                                    : AppLocalizations.of(context)!.pieces(playerState.coins),
+                                    ? AppLocalizations.of(
+                                      context,
+                                    )!.illimiteesVip
+                                    : AppLocalizations.of(
+                                      context,
+                                    )!.pieces(playerState.coins),
                                 style: const TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 16,
@@ -381,7 +420,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     // Carte par défaut si le store met du temps à répondre
                     _buildPlaceholderCard(
                       isAnnual: true,
-                      isSelected: true,
+                      isSelected: _selectedFallbackIsAnnual,
                       title: l10n?.annualSubscription ?? "Abonnement Annuel",
                       subtitle: MatchmakingLocalization.tr(
                         context,
@@ -389,10 +428,13 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         {'price': '47,99 €', 'monthly': '3,99 €'},
                       ),
                       price: "47,99 €",
+                      onTap:
+                          () =>
+                              setState(() => _selectedFallbackIsAnnual = true),
                     ),
                     _buildPlaceholderCard(
                       isAnnual: false,
-                      isSelected: false,
+                      isSelected: !_selectedFallbackIsAnnual,
                       title: l10n?.monthlySubscription ?? "Abonnement Mensuel",
                       subtitle: MatchmakingLocalization.tr(
                         context,
@@ -400,6 +442,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         {'price': '4,99 €'},
                       ),
                       price: "4,99 €",
+                      onTap:
+                          () =>
+                              setState(() => _selectedFallbackIsAnnual = false),
                     ),
                     const SizedBox(height: 8),
                     Center(
@@ -410,13 +455,18 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           size: 18,
                         ),
                         label: Text(
-                          AppLocalizations.of(context)!.rechargerLesOffresDuStore,
-                          style: TextStyle(
+                          AppLocalizations.of(
+                            context,
+                          )!.rechargerLesOffresDuStore,
+                          style: const TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 13,
                           ),
                         ),
-                        onPressed: _loadOfferings,
+                        onPressed: () {
+                          setState(() => _isLoading = true);
+                          _loadOfferings();
+                        },
                       ),
                     ),
                   ],
@@ -435,7 +485,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       elevation: 6,
                     ),
                     onPressed:
-                        (_isPurchasing || _selectedPackage == null)
+                        _isPurchasing
                             ? null
                             : () async {
                               final messenger = ScaffoldMessenger.of(context);
@@ -448,11 +498,30 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                 'paymentFailed',
                               );
                               setState(() => _isPurchasing = true);
+
+                              // Si le package n'était pas encore chargé, tenter de le recharger maintenant
+                              if (_selectedPackage == null) {
+                                await _loadOfferings();
+                              }
+
+                              if (_selectedPackage == null) {
+                                if (mounted)
+                                  setState(() => _isPurchasing = false);
+                                messenger.showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.red[800],
+                                    content: Text(failText),
+                                  ),
+                                );
+                                return;
+                              }
+
                               final success = await playerState.purchasePackage(
                                 _selectedPackage!,
                               );
-                              if (mounted)
+                              if (mounted) {
                                 setState(() => _isPurchasing = false);
+                              }
                               messenger.showSnackBar(
                                 SnackBar(
                                   backgroundColor:
@@ -477,8 +546,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             )
                             : Text(
                               _selectedPackage != null
-                                  ? (_selectedPackage!.packageType ==
-                                          PackageType.annual
+                                  ? (_isPackageAnnual(_selectedPackage!)
                                       ? MatchmakingLocalization.tr(
                                         context,
                                         'subscribeAnnual',
@@ -499,10 +567,17 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                                   .priceString,
                                         },
                                       ))
-                                  : MatchmakingLocalization.tr(
-                                    context,
-                                    'subscribeNow',
-                                  ),
+                                  : (_selectedFallbackIsAnnual
+                                      ? MatchmakingLocalization.tr(
+                                        context,
+                                        'subscribeAnnual',
+                                        {'price': '47,99 €'},
+                                      )
+                                      : MatchmakingLocalization.tr(
+                                        context,
+                                        'subscribeMonthly',
+                                        {'price': '4,99 €'},
+                                      )),
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w900,
@@ -540,8 +615,12 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                     SnackBar(
                                       content: Text(
                                         success
-                                            ? AppLocalizations.of(context)!.purchasesRestored
-                                            : AppLocalizations.of(context)!.noPurchasesFound,
+                                            ? AppLocalizations.of(
+                                              context,
+                                            )!.purchasesRestored
+                                            : AppLocalizations.of(
+                                              context,
+                                            )!.noPurchasesFound,
                                       ),
                                     ),
                                   );
@@ -585,9 +664,10 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          final String subUrl = Platform.isIOS
-                              ? 'https://apps.apple.com/account/subscriptions'
-                              : 'https://play.google.com/store/account/subscriptions';
+                          final String subUrl =
+                              Platform.isIOS
+                                  ? 'https://apps.apple.com/account/subscriptions'
+                                  : 'https://play.google.com/store/account/subscriptions';
                           LegalLinks.openUrl(context, subUrl);
                         },
                         child: Text(
@@ -642,11 +722,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
   /// Carte d'abonnement construite avec la devise et le prix réel de l'utilisateur
   Widget _buildPackageCard(Package package) {
-    final bool isSelected = _selectedPackage == package;
-    final bool isAnnual =
-        package.packageType == PackageType.annual ||
-        package.identifier.toLowerCase().contains('annual') ||
-        package.identifier.toLowerCase().contains('year');
+    final bool isSelected = _selectedPackage?.identifier == package.identifier;
+    final bool isAnnual = _isPackageAnnual(package);
     final l10n = AppLocalizations.of(context);
     final String title =
         isAnnual
@@ -670,7 +747,12 @@ class _PremiumScreenState extends State<PremiumScreen> {
     }
 
     return GestureDetector(
-      onTap: () => setState(() => _selectedPackage = package),
+      behavior: HitTestBehavior.opaque,
+      onTap:
+          () => setState(() {
+            _selectedPackage = package;
+            _selectedFallbackIsAnnual = isAnnual;
+          }),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
@@ -761,80 +843,85 @@ class _PremiumScreenState extends State<PremiumScreen> {
     required String title,
     required String subtitle,
     required String price,
+    required VoidCallback onTap,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF261E38) : const Color(0xFF161522),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: isSelected ? Colors.amberAccent : Colors.white12,
-          width: isSelected ? 2.5 : 1,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF261E38) : const Color(0xFF161522),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: isSelected ? Colors.amberAccent : Colors.white12,
+            width: isSelected ? 2.5 : 1,
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-            color: isSelected ? Colors.amberAccent : Colors.white38,
-            size: 22,
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (isAnnual)
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 4),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 7,
-                      vertical: 2,
+        child: Row(
+          children: [
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: isSelected ? Colors.amberAccent : Colors.white38,
+              size: 22,
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (isAnnual)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 7,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        MatchmakingLocalization.tr(
+                          context,
+                          'recommendedDiscount',
+                        ),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
-                      ),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      MatchmakingLocalization.tr(
-                        context,
-                        'recommendedDiscount',
-                      ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.w900,
-                      ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.5,
+                      color: isSelected ? Colors.white : Colors.white70,
                     ),
                   ),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.5,
-                    color: isSelected ? Colors.white : Colors.white70,
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(color: Colors.white38, fontSize: 11),
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  subtitle,
-                  style: const TextStyle(color: Colors.white38, fontSize: 11),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Text(
-            price,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.w900,
+            Text(
+              price,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.w900,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
