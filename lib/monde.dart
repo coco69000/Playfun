@@ -348,6 +348,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseService _firebaseService = FirebaseService();
   bool _isMatchFound = false;
+  bool _isLaunchingGame = false;
 
   @override
   void initState() {
@@ -759,6 +760,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           );
         }
 
+        final int myLevel = Provider.of<PlayerState>(context, listen: false).level;
+
         await newRoomRef.set({
           'gameName': widget.gameName,
           'targetPlayerCount': widget.playerCount,
@@ -771,6 +774,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           'difficulty': widget.difficulty,
           'videoEnabled': widget.videoEnabled,
           'audioEnabled': widget.audioEnabled,
+          'isRanked': widget.isRanked,
+          'level': myLevel,
 
           // Paramètres spécifiques
           'gribouillisMode': widget.gribouillisMode,
@@ -893,6 +898,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       final String? secondPlayer = players.length > 1 ? players[1] : null;
 
       Future<void> launchGame(DocumentSnapshot roomSnap, Map<String, dynamic> roomData, String creatorId) async {
+        if (_isLaunchingGame) return;
+        _isLaunchingGame = true;
         try {
           final gameCode = randomNumeric(6);
           Map<String, dynamic> gamePlayers = {};
@@ -908,17 +915,20 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             difficulty: widget.difficulty,
             playerCount: widget.playerCount,
             scope: _currentScope,
+            isRanked: widget.isRanked,
             videoEnabled: widget.videoEnabled,
             audioEnabled: widget.audioEnabled,
             dobbleSymbolsPerCard: widget.dobbleSymbolsPerCard,
             isSimplifiedLiar: widget.isSimplifiedLiar,
             liarVoteMode: widget.liarVoteMode,
+            quiPourraitVoteMode: widget.quiPourraitVoteMode,
             petitBacCategories: widget.petitBacCategories,
             petitBacTime: widget.petitBacTime,
             presidentRevolution: widget.presidentRevolution,
             pictionaryOnly30Strokes: widget.pictionaryOnly30Strokes,
             pictionaryUseTeams: widget.pictionaryUseTeams,
             justOneAllowInvalidClues: widget.justOneAllowInvalidClues,
+            devineTeteUseTeams: widget.devineTeteUseTeams,
             selectedLoupGarouRoles: widget.selectedLoupGarouRoles,
             unoStartingCards: widget.unoStartingCards,
             unoStackDraws: widget.unoStackDraws,
@@ -936,11 +946,14 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             aiInstructions: widget.aiInstructions,
             aiWords: widget.aiWords,
             timesUpTotalRounds: widget.timesUpTotalRounds,
+            dominoesMode: widget.dominoesMode,
+            dominoesTargetScore: widget.dominoesTargetScore,
           );
 
           await roomSnap.reference.update({'gameCode': gameCode});
           await _firebaseService.startGame(gameCode);
         } catch (e) {
+          _isLaunchingGame = false;
           print("Erreur à la création de la partie: $e");
           try {
             await roomSnap.reference.delete();
