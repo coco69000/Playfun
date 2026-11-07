@@ -14,7 +14,7 @@ env:
 
 jobs:
   build-ios:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 45
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
