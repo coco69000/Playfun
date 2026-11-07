@@ -252,11 +252,11 @@ class _MainScreenState extends State<MainScreen> {
         builder: (context, setDlgState) => AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
           backgroundColor: const Color(0xFF1E1B2E),
-          title: const Row(
+          title: Row(
             children: [
-              Icon(Icons.email_outlined, color: Colors.cyanAccent),
-              SizedBox(width: 8),
-              Text("Changer d'email", style: TextStyle(color: Colors.white, fontSize: 18)),
+              const Icon(Icons.email_outlined, color: Colors.cyanAccent),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context)!.changeEmailTitle, style: const TextStyle(color: Colors.white, fontSize: 18)),
             ],
           ),
           content: Column(
@@ -328,7 +328,7 @@ class _MainScreenState extends State<MainScreen> {
               },
               child: isLoading
                   ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                  : Text("Confirmer"),
+                  : Text(AppLocalizations.of(context)!.confirm),
             ),
           ],
         ),
@@ -442,7 +442,7 @@ class _MainScreenState extends State<MainScreen> {
               },
               child: isLoading
                   ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                  : const Text("Changer"),
+                  : Text(AppLocalizations.of(context)!.changeButton),
             ),
           ],
         ),
@@ -578,7 +578,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                     ),
                     PopupMenuButton<String>(
-                      tooltip: 'Language',
+                      tooltip: l10n?.languageTooltip ?? 'Langue',
                       icon: const Icon(
                         Icons.language,
                         color: Colors.cyanAccent,
@@ -834,7 +834,7 @@ class _MainScreenState extends State<MainScreen> {
                                 side: const BorderSide(color: Colors.cyanAccent, width: 0.8),
                               ),
                               icon: const Icon(Icons.email_outlined, size: 15, color: Colors.cyanAccent),
-                              label: const Text("Email", style: TextStyle(color: Colors.cyanAccent, fontSize: 12)),
+                              label: Text(l10n?.email ?? "Email", style: const TextStyle(color: Colors.cyanAccent, fontSize: 12)),
                               onPressed: () => _showChangeEmailDialog(context, auth),
                             ),
                           ),
@@ -1268,7 +1268,7 @@ class _MainScreenState extends State<MainScreen> {
                   context,
                   MaterialPageRoute(builder: (_) => const PremiumScreen()),
                 ),
-            tooltip: "VIP / Premium",
+            tooltip: AppLocalizations.of(context)?.vipPremiumTooltip ?? "VIP / Premium",
           ),
           GestureDetector(
             onTap: () => _showProfileDialog(context, playerState, authService),

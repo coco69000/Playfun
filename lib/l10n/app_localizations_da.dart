@@ -8564,4 +8564,48 @@ class AppLocalizationsDa extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Venter ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player var $role. Spillet fortsætter!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Indtast venligst et navn til loungen.';
+
+  @override
+  String get createSpaceTitle => 'Opret rum';
+
+  @override
+  String get changeEmailTitle => 'Skift e-mail';
+
+  @override
+  String get changeButton => 'Skift';
+
+  @override
+  String get languageTooltip => 'Sprog';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Påkrævet version: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count medlemmer';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count online';
+  }
+
+  @override
+  String get themeGeneral => 'Generelt';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTIV';
 }

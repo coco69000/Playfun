@@ -289,7 +289,10 @@ class PlayerState extends ChangeNotifier {
 
     // 3. Écouter les changements en temps réel (renouvellement, expiration)
     Purchases.addCustomerInfoUpdateListener((customerInfo) {
-      final active = customerInfo.entitlements.all[PremiumService.entitlementId]?.isActive == true;
+      final active = customerInfo.entitlements.all[PremiumService.entitlementId]?.isActive == true ||
+          customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
+          customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.active.isNotEmpty;
       if (_isPremium != active) {
         _isPremium = active;
         setPremiumStatus(active);

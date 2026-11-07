@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} oli {role}. Peli jatkuu!",
+  "pleaseEnterLoungeName": "Syötä loungen nimi.",
+  "createSpaceTitle": "Luo tila",
+  "changeEmailTitle": "Vaihda sähköposti",
+  "changeButton": "Vaihda",
+  "languageTooltip": "Kieli",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Vaadittu versio: {version}",
+  "membersCountLabel": "{count} jäsentä",
+  "loungeOnlineInfo": "{theme} • {count} paikalla",
+  "themeGeneral": "Yleinen",
+  "vipActiveBadge": "VIP AKTIIVINEN"
 }

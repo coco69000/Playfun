@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "Ο/Η {player} ήταν {role}. Το παιχνίδι συνεχίζεται!",
+  "pleaseEnterLoungeName": "Εισαγάγετε ένα όνομα για το σαλόνι.",
+  "createSpaceTitle": "Δημιουργία χώρου",
+  "changeEmailTitle": "Αλλαγή email",
+  "changeButton": "Αλλαγή",
+  "languageTooltip": "Γλώσσα",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Απαιτούμενη έκδοση: {version}",
+  "membersCountLabel": "{count} μέλη",
+  "loungeOnlineInfo": "{theme} • {count} συνδεδεμένοι",
+  "themeGeneral": "Γενικά",
+  "vipActiveBadge": "VIP ΕΝΕΡΓΟ"
 }

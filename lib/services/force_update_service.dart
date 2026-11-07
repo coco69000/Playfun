@@ -322,7 +322,7 @@ class ForceUpdateScreen extends StatelessWidget {
                 if (!isMaintenance)
                   Chip(
                     label: Text(
-                      "Version requise : $minVersion",
+                      AppLocalizations.of(context)!.requiredVersion(minVersion),
                       style: const TextStyle(color: Colors.amberAccent, fontSize: 12),
                     ),
                     backgroundColor: Colors.amber.withValues(alpha: 0.12),

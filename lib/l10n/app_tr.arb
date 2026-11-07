@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} {role} idi. Oyun devam ediyor!",
+  "pleaseEnterLoungeName": "Lütfen oda için bir isim girin.",
+  "createSpaceTitle": "Alan Oluştur",
+  "changeEmailTitle": "E-postayı Değiştir",
+  "changeButton": "Değiştir",
+  "languageTooltip": "Dil",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Gerekli sürüm: {version}",
+  "membersCountLabel": "{count} üye",
+  "loungeOnlineInfo": "{theme} • {count} çevrimiçi",
+  "themeGeneral": "Genel",
+  "vipActiveBadge": "VIP AKTİF"
 }

@@ -5264,5 +5264,79 @@
         "type": "Object"
       }
     }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} était {role}. La partie continue !",
+  "@undercoverPlayerWasRoleGameContinues": {
+    "description": "Undercover player role revealed and game continues",
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
+  "pleaseEnterLoungeName": "Veuillez saisir un nom pour le salon.",
+  "@pleaseEnterLoungeName": {
+    "description": "Validation message when lounge name is empty"
+  },
+  "createSpaceTitle": "Création d''espace",
+  "@createSpaceTitle": {
+    "description": "Title for creating space / lounge"
+  },
+  "changeEmailTitle": "Changer d''email",
+  "@changeEmailTitle": {
+    "description": "Dialog title for changing email"
+  },
+  "changeButton": "Changer",
+  "@changeButton": {
+    "description": "Button label for changing password or other setting"
+  },
+  "languageTooltip": "Langue",
+  "@languageTooltip": {
+    "description": "Tooltip for language menu"
+  },
+  "vipPremiumTooltip": "VIP / Premium",
+  "@vipPremiumTooltip": {
+    "description": "Tooltip for VIP Premium button"
+  },
+  "requiredVersion": "Version requise : {version}",
+  "@requiredVersion": {
+    "description": "Badge showing required app version",
+    "placeholders": {
+      "version": {
+        "type": "Object"
+      }
+    }
+  },
+  "membersCountLabel": "{count} membres",
+  "@membersCountLabel": {
+    "description": "Label showing number of members",
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "loungeOnlineInfo": "{theme} • {count} en ligne",
+  "@loungeOnlineInfo": {
+    "description": "Theme and number of online users",
+    "placeholders": {
+      "theme": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "themeGeneral": "Général",
+  "@themeGeneral": {
+    "description": "Default theme General"
+  },
+  "vipActiveBadge": "VIP ACTIF",
+  "@vipActiveBadge": {
+    "description": "Badge indicating VIP is active"
   }
 }

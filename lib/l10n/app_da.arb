@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} var {role}. Spillet fortsætter!",
+  "pleaseEnterLoungeName": "Indtast venligst et navn til loungen.",
+  "createSpaceTitle": "Opret rum",
+  "changeEmailTitle": "Skift e-mail",
+  "changeButton": "Skift",
+  "languageTooltip": "Sprog",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Påkrævet version: {version}",
+  "membersCountLabel": "{count} medlemmer",
+  "loungeOnlineInfo": "{theme} • {count} online",
+  "themeGeneral": "Generelt",
+  "vipActiveBadge": "VIP AKTIV"
 }

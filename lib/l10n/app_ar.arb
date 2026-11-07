@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "كان {player} هو {role}. اللعبة مستمرة!",
+  "pleaseEnterLoungeName": "يرجى إدخال اسم للغرفة.",
+  "createSpaceTitle": "إنشاء مساحة",
+  "changeEmailTitle": "تغيير البريد الإلكتروني",
+  "changeButton": "تغيير",
+  "languageTooltip": "اللغة",
+  "vipPremiumTooltip": "VIP / بريميوم",
+  "requiredVersion": "الإصدار المطلوب: {version}",
+  "membersCountLabel": "{count} أعضاء",
+  "loungeOnlineInfo": "{theme} • {count} متصل",
+  "themeGeneral": "عام",
+  "vipActiveBadge": "VIP نشط"
 }

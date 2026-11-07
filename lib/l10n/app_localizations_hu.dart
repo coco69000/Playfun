@@ -8601,4 +8601,49 @@ class AppLocalizationsHu extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Várakozás ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player $role volt. A játék folytatódik!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName =>
+      'Kérlek, adj meg egy nevet a társalgónak.';
+
+  @override
+  String get createSpaceTitle => 'Tér létrehozása';
+
+  @override
+  String get changeEmailTitle => 'Email megváltoztatása';
+
+  @override
+  String get changeButton => 'Módosítás';
+
+  @override
+  String get languageTooltip => 'Nyelv';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Prémium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Szükséges verzió: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count tag';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count elérhető';
+  }
+
+  @override
+  String get themeGeneral => 'Általános';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTÍV';
 }

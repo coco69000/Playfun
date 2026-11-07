@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} a fost {role}. Jocul continuă!",
+  "pleaseEnterLoungeName": "Vă rugăm să introduceți un nume pentru salon.",
+  "createSpaceTitle": "Creare spațiu",
+  "changeEmailTitle": "Schimbă emailul",
+  "changeButton": "Modifică",
+  "languageTooltip": "Limbă",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Versiune necesară: {version}",
+  "membersCountLabel": "{count} membri",
+  "loungeOnlineInfo": "{theme} • {count} online",
+  "themeGeneral": "General",
+  "vipActiveBadge": "VIP ACTIV"
 }

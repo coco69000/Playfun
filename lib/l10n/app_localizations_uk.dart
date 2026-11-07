@@ -8556,4 +8556,48 @@ class AppLocalizationsUk extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Очікування ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player був $role. Гра продовжується!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Будь ласка, введіть назву кімнати.';
+
+  @override
+  String get createSpaceTitle => 'Створення простору';
+
+  @override
+  String get changeEmailTitle => 'Змінити email';
+
+  @override
+  String get changeButton => 'Змінити';
+
+  @override
+  String get languageTooltip => 'Мова';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Преміум';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Необхідна версія: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count учасників';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count онлайн';
+  }
+
+  @override
+  String get themeGeneral => 'Загальний';
+
+  @override
+  String get vipActiveBadge => 'VIP АКТИВНИЙ';
 }

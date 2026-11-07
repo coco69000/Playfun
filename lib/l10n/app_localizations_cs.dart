@@ -8539,4 +8539,48 @@ class AppLocalizationsCs extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Čekání ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player byl $role. Hra pokračuje!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Zadejte prosím název salonku.';
+
+  @override
+  String get createSpaceTitle => 'Vytvořit prostor';
+
+  @override
+  String get changeEmailTitle => 'Změnit email';
+
+  @override
+  String get changeButton => 'Změnit';
+
+  @override
+  String get languageTooltip => 'Jazyk';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Požadovaná verze: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count členů';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count online';
+  }
+
+  @override
+  String get themeGeneral => 'Obecné';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTIVNÍ';
 }

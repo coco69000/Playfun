@@ -623,7 +623,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                                 ),
                                               if (modes.contains('multi'))
                                                 _buildModeBadge(
-                                                  label: "Amis",
+                                                  label: AppLocalizations.of(context)!.friendsTab,
                                                   icon: Icons.people,
                                                   color: Colors.blue.shade800,
                                                 ),
@@ -668,8 +668,8 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                             ),
                                           ],
                                         ),
-                                        child: const Text(
-                                          "🔥 POPULAIRE",
+                                        child: Text(
+                                          "🔥 ${AppLocalizations.of(context)!.popularTag}",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 9,
@@ -1658,7 +1658,7 @@ class StatsEtoileScreen extends StatelessWidget {
                 children: [
                   const Icon(Icons.star_rounded, size: 70, color: Colors.amber),
                   Text(
-                    "Niveau ${playerState.level}",
+                    "${AppLocalizations.of(context)!.level} ${playerState.level}",
                     style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,

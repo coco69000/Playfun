@@ -59661,7 +59661,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("$player était $role. La partie continue !"),
+            content: Text(AppLocalizations.of(context)!.undercoverPlayerWasRoleGameContinues(player, role)),
           ),
         );
       }
@@ -67867,7 +67867,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
   void _createLounge() async {
     if (_nameCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Veuillez saisir un nom pour le salon.")),
+        SnackBar(content: Text(AppLocalizations.of(context)!.pleaseEnterLoungeName)),
       );
       return;
     }
@@ -67986,9 +67986,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Création d'espace",
-                                  style: TextStyle(
+                                Text(
+                                  AppLocalizations.of(context)!.createSpaceTitle,
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -69194,7 +69194,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              "Au moins $minReq joueurs requis pour $gameName (${joinedPlayers.length}/$minReq prêts).",
+                              AppLocalizations.of(context)!.minPlayersToLaunchGameError(minReq, gameName, joinedPlayers.length),
                             ),
                             backgroundColor: Colors.orange.shade800,
                           ),
@@ -69641,7 +69641,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    "${data['theme'] ?? 'Général'} • ${onlineIds.length} en ligne",
+                                    AppLocalizations.of(context)!.loungeOnlineInfo(data['theme'] ?? AppLocalizations.of(context)!.themeGeneral, onlineIds.length),
                                     style: const TextStyle(color: Colors.white60, fontSize: 12),
                                   ),
                                 ],
@@ -69677,7 +69677,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                 onTap: () {
                                   Clipboard.setData(ClipboardData(text: data['joinCode'] ?? widget.loungeId));
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Code du salon copié dans le presse-papier !")),
+                                    SnackBar(content: Text(AppLocalizations.of(context)!.codeDeSalonCopie)),
                                   );
                                 },
                                 child: const Icon(Icons.copy_rounded, size: 16, color: Colors.amberAccent),
@@ -69694,7 +69694,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                             visualDensity: VisualDensity.compact,
                           ),
                           icon: const Icon(Icons.group_outlined, size: 16),
-                          label: Text("${onlineIds.length} membres"),
+                          label: Text(AppLocalizations.of(context)!.membersCountLabel(onlineIds.length)),
                           onPressed: () => _showMembersModal(context, data, players, onlineIds, isHost),
                         ),
                       ],
@@ -69993,7 +69993,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                                   ).showSnackBar(
                                                     SnackBar(
                                                       content: Text(
-                                                        "Au moins $minReq joueurs requis pour lancer $gameName (${joinedPlayers.length}/$minReq prêts).",
+                                                        AppLocalizations.of(context)!.minPlayersToLaunchGameError(minReq, gameName, joinedPlayers.length),
                                                       ),
                                                       backgroundColor:
                                                           Colors.orange.shade800,

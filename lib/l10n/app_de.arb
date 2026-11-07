@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} war {role}. Das Spiel geht weiter!",
+  "pleaseEnterLoungeName": "Bitte gib einen Namen für die Lounge ein.",
+  "createSpaceTitle": "Raum erstellen",
+  "changeEmailTitle": "E-Mail ändern",
+  "changeButton": "Ändern",
+  "languageTooltip": "Sprache",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Erforderliche Version: {version}",
+  "membersCountLabel": "{count} Mitglieder",
+  "loungeOnlineInfo": "{theme} • {count} online",
+  "themeGeneral": "Allgemein",
+  "vipActiveBadge": "VIP AKTIV"
 }

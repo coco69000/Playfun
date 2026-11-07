@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} беше {role}. Играта продължава!",
+  "pleaseEnterLoungeName": "Моля, въведете име за стаята.",
+  "createSpaceTitle": "Създаване на пространство",
+  "changeEmailTitle": "Промяна на имейл",
+  "changeButton": "Промяна",
+  "languageTooltip": "Език",
+  "vipPremiumTooltip": "VIP / Премиум",
+  "requiredVersion": "Изисквана версия: {version}",
+  "membersCountLabel": "{count} членове",
+  "loungeOnlineInfo": "{theme} • {count} на линия",
+  "themeGeneral": "Общи",
+  "vipActiveBadge": "АКТИВЕН VIP"
 }

@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} {role} volt. A játék folytatódik!",
+  "pleaseEnterLoungeName": "Kérlek, adj meg egy nevet a társalgónak.",
+  "createSpaceTitle": "Tér létrehozása",
+  "changeEmailTitle": "Email megváltoztatása",
+  "changeButton": "Módosítás",
+  "languageTooltip": "Nyelv",
+  "vipPremiumTooltip": "VIP / Prémium",
+  "requiredVersion": "Szükséges verzió: {version}",
+  "membersCountLabel": "{count} tag",
+  "loungeOnlineInfo": "{theme} • {count} elérhető",
+  "themeGeneral": "Általános",
+  "vipActiveBadge": "VIP AKTÍV"
 }

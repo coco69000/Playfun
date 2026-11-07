@@ -8566,4 +8566,48 @@ class AppLocalizationsRu extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Ожидание ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player был $role. Игра продолжается!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Пожалуйста, введите название комнаты.';
+
+  @override
+  String get createSpaceTitle => 'Создание пространства';
+
+  @override
+  String get changeEmailTitle => 'Изменить email';
+
+  @override
+  String get changeButton => 'Изменить';
+
+  @override
+  String get languageTooltip => 'Язык';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Премиум';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Требуемая версия: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count участников';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count онлайн';
+  }
+
+  @override
+  String get themeGeneral => 'Общий';
+
+  @override
+  String get vipActiveBadge => 'VIP АКТИВЕН';
 }

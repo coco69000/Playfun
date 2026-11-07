@@ -8571,4 +8571,48 @@ class AppLocalizationsFi extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Odottaa ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player oli $role. Peli jatkuu!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Syötä loungen nimi.';
+
+  @override
+  String get createSpaceTitle => 'Luo tila';
+
+  @override
+  String get changeEmailTitle => 'Vaihda sähköposti';
+
+  @override
+  String get changeButton => 'Vaihda';
+
+  @override
+  String get languageTooltip => 'Kieli';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Vaadittu versio: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count jäsentä';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count paikalla';
+  }
+
+  @override
+  String get themeGeneral => 'Yleinen';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTIIVINEN';
 }

@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} был {role}. Игра продолжается!",
+  "pleaseEnterLoungeName": "Пожалуйста, введите название комнаты.",
+  "createSpaceTitle": "Создание пространства",
+  "changeEmailTitle": "Изменить email",
+  "changeButton": "Изменить",
+  "languageTooltip": "Язык",
+  "vipPremiumTooltip": "VIP / Премиум",
+  "requiredVersion": "Требуемая версия: {version}",
+  "membersCountLabel": "{count} участников",
+  "loungeOnlineInfo": "{theme} • {count} онлайн",
+  "themeGeneral": "Общий",
+  "vipActiveBadge": "VIP АКТИВЕН"
 }

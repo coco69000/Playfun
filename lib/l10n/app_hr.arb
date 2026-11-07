@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} je bio {role}. Igra se nastavlja!",
+  "pleaseEnterLoungeName": "Unesite naziv sobe.",
+  "createSpaceTitle": "Stvori prostor",
+  "changeEmailTitle": "Promijeni email",
+  "changeButton": "Promijeni",
+  "languageTooltip": "Jezik",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Potrebna verzija: {version}",
+  "membersCountLabel": "{count} članova",
+  "loungeOnlineInfo": "{theme} • {count} na mreži",
+  "themeGeneral": "Općenito",
+  "vipActiveBadge": "VIP AKTIVAN"
 }

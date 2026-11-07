@@ -14944,6 +14944,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Waiting ({joined}/{min})'**
   String waitingQuorumProgress(Object joined, Object min);
+
+  /// Undercover player role revealed and game continues
+  ///
+  /// In en, this message translates to:
+  /// **'{player} was {role}. The game continues!'**
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role);
+
+  /// Validation message when lounge name is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name for the lounge.'**
+  String get pleaseEnterLoungeName;
+
+  /// Title for creating space / lounge
+  ///
+  /// In en, this message translates to:
+  /// **'Create Space'**
+  String get createSpaceTitle;
+
+  /// Dialog title for changing email
+  ///
+  /// In en, this message translates to:
+  /// **'Change Email'**
+  String get changeEmailTitle;
+
+  /// Button label for changing password or other setting
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeButton;
+
+  /// Tooltip for language menu
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageTooltip;
+
+  /// Tooltip for VIP Premium button
+  ///
+  /// In en, this message translates to:
+  /// **'VIP / Premium'**
+  String get vipPremiumTooltip;
+
+  /// Badge showing required app version
+  ///
+  /// In en, this message translates to:
+  /// **'Required version: {version}'**
+  String requiredVersion(Object version);
+
+  /// Label showing number of members
+  ///
+  /// In en, this message translates to:
+  /// **'{count} members'**
+  String membersCountLabel(Object count);
+
+  /// Theme and number of online users
+  ///
+  /// In en, this message translates to:
+  /// **'{theme} • {count} online'**
+  String loungeOnlineInfo(Object theme, Object count);
+
+  /// Default theme General
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get themeGeneral;
+
+  /// Badge indicating VIP is active
+  ///
+  /// In en, this message translates to:
+  /// **'VIP ACTIVE'**
+  String get vipActiveBadge;
 }
 
 class _AppLocalizationsDelegate

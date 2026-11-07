@@ -8554,4 +8554,48 @@ class AppLocalizationsTr extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Bekleniyor ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player $role idi. Oyun devam ediyor!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Lütfen oda için bir isim girin.';
+
+  @override
+  String get createSpaceTitle => 'Alan Oluştur';
+
+  @override
+  String get changeEmailTitle => 'E-postayı Değiştir';
+
+  @override
+  String get changeButton => 'Değiştir';
+
+  @override
+  String get languageTooltip => 'Dil';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Gerekli sürüm: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count üye';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count çevrimiçi';
+  }
+
+  @override
+  String get themeGeneral => 'Genel';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTİF';
 }

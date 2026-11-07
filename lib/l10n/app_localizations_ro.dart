@@ -8604,4 +8604,49 @@ class AppLocalizationsRo extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Așteptare ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player a fost $role. Jocul continuă!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName =>
+      'Vă rugăm să introduceți un nume pentru salon.';
+
+  @override
+  String get createSpaceTitle => 'Creare spațiu';
+
+  @override
+  String get changeEmailTitle => 'Schimbă emailul';
+
+  @override
+  String get changeButton => 'Modifică';
+
+  @override
+  String get languageTooltip => 'Limbă';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Versiune necesară: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count membri';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count online';
+  }
+
+  @override
+  String get themeGeneral => 'General';
+
+  @override
+  String get vipActiveBadge => 'VIP ACTIV';
 }

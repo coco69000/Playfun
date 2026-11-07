@@ -4,7 +4,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PremiumService {
   // Vos vraies clés récupérées depuis votre écran RevenueCat
-  static const String _googleApiKey = "goog_pSOoDGbmVHmYQosrJibzHKpnFYX";
+  static const String _googleApiKey = "goog_pSOoDGbmVHmyQosrJibzHKpnFYX";
   // Clé Apple (à renseigner dès que l'app iOS est ajoutée sur RevenueCat)
   static const String _appleApiKey = "appl_VOTRE_CLE_APPLE_ICI";
 
@@ -74,7 +74,11 @@ class PremiumService {
   static Future<bool> purchasePackage(Package package) async {
     try {
       final purchaseResult = await Purchases.purchase(PurchaseParams.package(package));
-      final isVip = purchaseResult.customerInfo.entitlements.all[entitlementId]?.isActive == true;
+      final customerInfo = purchaseResult.customerInfo;
+      final isVip = customerInfo.entitlements.all[entitlementId]?.isActive == true ||
+          customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
+          customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.active.isNotEmpty;
       return isVip;
     } catch (e) {
       debugPrint("[RevenueCat] Annulation ou erreur d'achat: $e");
@@ -86,7 +90,10 @@ class PremiumService {
   static Future<bool> restorePurchases() async {
     try {
       final customerInfo = await Purchases.restorePurchases();
-      final isVip = customerInfo.entitlements.all[entitlementId]?.isActive == true;
+      final isVip = customerInfo.entitlements.all[entitlementId]?.isActive == true ||
+          customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
+          customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.active.isNotEmpty;
       return isVip;
     } catch (e) {
       debugPrint("[RevenueCat] Erreur restauration: $e");
@@ -98,7 +105,10 @@ class PremiumService {
   static Future<bool> isUserVip() async {
     try {
       final customerInfo = await Purchases.getCustomerInfo();
-      return customerInfo.entitlements.all[entitlementId]?.isActive == true;
+      return customerInfo.entitlements.all[entitlementId]?.isActive == true ||
+          customerInfo.entitlements.all["playfun_vip"]?.isActive == true ||
+          customerInfo.entitlements.all["vip"]?.isActive == true ||
+          customerInfo.entitlements.active.isNotEmpty;
     } catch (e) {
       return false;
     }

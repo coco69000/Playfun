@@ -8541,4 +8541,48 @@ class AppLocalizationsSk extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Čakanie ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player bol $role. Hra pokračuje!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Zadajte prosím názov salónika.';
+
+  @override
+  String get createSpaceTitle => 'Vytvoriť priestor';
+
+  @override
+  String get changeEmailTitle => 'Zmeniť email';
+
+  @override
+  String get changeButton => 'Zmeniť';
+
+  @override
+  String get languageTooltip => 'Jazyk';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Požadovaná verzia: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count členov';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count online';
+  }
+
+  @override
+  String get themeGeneral => 'Všeobecné';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTÍVNY';
 }

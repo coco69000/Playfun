@@ -8671,4 +8671,48 @@ class AppLocalizationsEl extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Αναμονή ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return 'Ο/Η $player ήταν $role. Το παιχνίδι συνεχίζεται!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Εισαγάγετε ένα όνομα για το σαλόνι.';
+
+  @override
+  String get createSpaceTitle => 'Δημιουργία χώρου';
+
+  @override
+  String get changeEmailTitle => 'Αλλαγή email';
+
+  @override
+  String get changeButton => 'Αλλαγή';
+
+  @override
+  String get languageTooltip => 'Γλώσσα';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Απαιτούμενη έκδοση: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count μέλη';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count συνδεδεμένοι';
+  }
+
+  @override
+  String get themeGeneral => 'Γενικά';
+
+  @override
+  String get vipActiveBadge => 'VIP ΕΝΕΡΓΟ';
 }

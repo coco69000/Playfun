@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} was {role}. Het spel gaat door!",
+  "pleaseEnterLoungeName": "Voer een naam in voor de lounge.",
+  "createSpaceTitle": "Ruimte aanmaken",
+  "changeEmailTitle": "E-mail wijzigen",
+  "changeButton": "Wijzigen",
+  "languageTooltip": "Taal",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Vereiste versie: {version}",
+  "membersCountLabel": "{count} leden",
+  "loungeOnlineInfo": "{theme} • {count} online",
+  "themeGeneral": "Algemeen",
+  "vipActiveBadge": "VIP ACTIEF"
 }

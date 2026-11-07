@@ -8565,4 +8565,48 @@ class AppLocalizationsSv extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Väntar ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player var $role. Spelet fortsätter!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Ange ett namn för loungen.';
+
+  @override
+  String get createSpaceTitle => 'Skapa rum';
+
+  @override
+  String get changeEmailTitle => 'Ändra e-post';
+
+  @override
+  String get changeButton => 'Ändra';
+
+  @override
+  String get languageTooltip => 'Språk';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Obligatorisk version: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count medlemmar';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count online';
+  }
+
+  @override
+  String get themeGeneral => 'Allmänt';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTIV';
 }

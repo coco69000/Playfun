@@ -8570,4 +8570,48 @@ class AppLocalizationsHr extends AppLocalizations {
   String waitingQuorumProgress(Object joined, Object min) {
     return 'Čekanje ($joined/$min)';
   }
+
+  @override
+  String undercoverPlayerWasRoleGameContinues(Object player, Object role) {
+    return '$player je bio $role. Igra se nastavlja!';
+  }
+
+  @override
+  String get pleaseEnterLoungeName => 'Unesite naziv sobe.';
+
+  @override
+  String get createSpaceTitle => 'Stvori prostor';
+
+  @override
+  String get changeEmailTitle => 'Promijeni email';
+
+  @override
+  String get changeButton => 'Promijeni';
+
+  @override
+  String get languageTooltip => 'Jezik';
+
+  @override
+  String get vipPremiumTooltip => 'VIP / Premium';
+
+  @override
+  String requiredVersion(Object version) {
+    return 'Potrebna verzija: $version';
+  }
+
+  @override
+  String membersCountLabel(Object count) {
+    return '$count članova';
+  }
+
+  @override
+  String loungeOnlineInfo(Object theme, Object count) {
+    return '$theme • $count na mreži';
+  }
+
+  @override
+  String get themeGeneral => 'Općenito';
+
+  @override
+  String get vipActiveBadge => 'VIP AKTIVAN';
 }

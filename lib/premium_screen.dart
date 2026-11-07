@@ -329,9 +329,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               color: Colors.amber,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Text(
-                              "VIP ACTIF",
-                              style: TextStyle(
+                            child: Text(
+                              AppLocalizations.of(context)!.vipActiveBadge,
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 11,

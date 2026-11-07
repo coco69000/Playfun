@@ -5264,5 +5264,17 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "undercoverPlayerWasRoleGameContinues": "{player} bol {role}. Hra pokračuje!",
+  "pleaseEnterLoungeName": "Zadajte prosím názov salónika.",
+  "createSpaceTitle": "Vytvoriť priestor",
+  "changeEmailTitle": "Zmeniť email",
+  "changeButton": "Zmeniť",
+  "languageTooltip": "Jazyk",
+  "vipPremiumTooltip": "VIP / Premium",
+  "requiredVersion": "Požadovaná verzia: {version}",
+  "membersCountLabel": "{count} členov",
+  "loungeOnlineInfo": "{theme} • {count} online",
+  "themeGeneral": "Všeobecné",
+  "vipActiveBadge": "VIP AKTÍVNY"
 }
