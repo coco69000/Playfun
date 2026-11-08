@@ -1109,17 +1109,21 @@ class GameData {
     List<List<int>> piece =
         blokusPieces[pieceId]!.map((p) => List<int>.from(p)).toList();
 
+    // 1. Miroir horizontal (si flipped)
     if (flipped) {
       int maxC = piece.map((p) => p[1]).reduce((a, b) => a > b ? a : b);
       piece = piece.map((p) => [p[0], maxC - p[1]]).toList();
     }
 
-    for (int i = 0; i < rotation % 4; i++) {
-      int maxR = piece.map((p) => p[0]).reduce((a, b) => a > b ? a : b);
-      piece = piece.map((p) => [p[1], maxR - p[0]]).toList();
+    // 2. Rotations successives de 90° dans le sens horaire : (r, c) -> (c, -r)
+    for (int i = 0; i < (rotation % 4); i++) {
+      piece = piece.map((p) => [p[1], -p[0]]).toList();
     }
+
+    // 3. Normalisation stricte : translation pour caler le coin supérieur gauche à (0, 0)
     int minR = piece.map((p) => p[0]).reduce((a, b) => a < b ? a : b);
     int minC = piece.map((p) => p[1]).reduce((a, b) => a < b ? a : b);
+
     return piece.map((p) => [p[0] - minR, p[1] - minC]).toList();
   }
 }
@@ -2429,7 +2433,9 @@ class FirebaseService {
         gameData['botPlayers']?[playerId] == true) {
       return;
     }
-    final authUid = players[playerId]?['authUid'] ?? playerId;
+    final String? currentAuth = FirebaseAuth.instance.currentUser?.uid;
+    final String authUid = players[playerId]?['authUid'] as String? ??
+        (currentAuth != null && currentAuth.isNotEmpty ? currentAuth : playerId);
     final turnStartTime = gameData['turnStartTime'] as Timestamp?;
 
     // Détection automatique de la durée du timer réelle
@@ -3613,6 +3619,7 @@ class FirebaseService {
       // Ordres possibles de rangs : 3-4-5-6-7 (min) jusqu'à 10-J-Q-K-A, et A-2-3-4-5, 2-3-4-5-6
       List<int> ranks = cards.map((c) => c['rankInt'] as int).toList()..sort();
 
+      // 1. Suite classique consécutive (ex: 3-4-5-6-7 jusqu'à 10-J-Q-K-A)
       bool isConsecutive = true;
       for (int i = 1; i < 5; i++) {
         if (ranks[i] != ranks[i - 1] + 1) {
@@ -3621,20 +3628,31 @@ class FirebaseService {
         }
       }
 
-      // Détection de la quinte basse Wheel A-2-3-4-5 (rangs 3, 4, 5, As=14, 2=15)
-      bool isA2345 =
+      // 2. Suite basse avec As et 2 : 3-4-5-A-2 (rangs: 3, 4, 5, 14, 15)
+      bool is345A2 =
           (ranks[0] == 3 &&
               ranks[1] == 4 &&
               ranks[2] == 5 &&
               ranks[3] == 14 &&
               ranks[4] == 15);
 
-      bool isStraight = isConsecutive || isA2345;
+      // 3. Suite 3-4-5-6-2 (rangs: 3, 4, 5, 6, 15)
+      bool is34562 =
+          (ranks[0] == 3 &&
+              ranks[1] == 4 &&
+              ranks[2] == 5 &&
+              ranks[3] == 6 &&
+              ranks[4] == 15);
+
+      bool isStraight = isConsecutive || is345A2 || is34562;
 
       int straightHighVal = cards[4]['value'];
-      if (isA2345) {
-        // Dans la suite A-2-3-4-5, la carte haute pour battre une autre quinte est le 5
+      if (is345A2) {
+        // Dans la suite 3-4-5-A-2, la carte de référence est le 5
         straightHighVal = cards.firstWhere((c) => c['rankInt'] == 5)['value'];
+      } else if (is34562) {
+        // Dans la suite 3-4-5-6-2, la carte de référence est le 6
+        straightHighVal = cards.firstWhere((c) => c['rankInt'] == 6)['value'];
       }
 
       if (isStraight && isFlush) {
@@ -5115,12 +5133,8 @@ class FirebaseService {
 
     final playerInfo = players[playerId] ?? playerData[playerId];
     if (playerInfo is Map) {
-      final expectedAuthUid = playerInfo['authUid'] ?? playerId;
-      if (expectedAuthUid != currentAuthUid) {
-        throw Exception(_l10n.nonAutoriseUsurpationDIdentite);
-      }
-    } else {
-      if (playerId != currentAuthUid) {
+      final expectedAuthUid = playerInfo['authUid'];
+      if (expectedAuthUid != null && expectedAuthUid != currentAuthUid) {
         throw Exception(_l10n.nonAutoriseUsurpationDIdentite);
       }
     }
@@ -8424,13 +8438,13 @@ class FirebaseService {
       int nextIndex =
           (currentIndex + direction + playerOrder.length) % playerOrder.length;
 
-      String drawOneCard() {
+      String? drawOneCard() {
         if (deck.isEmpty && discardPile.length > 1) {
           String topCardDiscard = discardPile.removeLast();
           deck = List<String>.from(discardPile)..shuffle();
           discardPile = [topCardDiscard];
         }
-        return deck.isNotEmpty ? deck.removeAt(0) : 'red-0';
+        return deck.isNotEmpty ? deck.removeAt(0) : null;
       }
 
       String determineBestUnoColor(List<String> hand) {
@@ -8516,7 +8530,10 @@ class FirebaseService {
           } else {
             final victimId = playerOrder[nextIndex];
             final victimHand = List<String>.from(hands[victimId] ?? []);
-            for (int i = 0; i < 2; i++) victimHand.add(drawOneCard());
+            for (int i = 0; i < 2; i++) {
+              final drawn = drawOneCard();
+              if (drawn != null) victimHand.add(drawn);
+            }
             hands[victimId] = victimHand;
             step = 2;
           }
@@ -8526,7 +8543,10 @@ class FirebaseService {
           } else {
             final victimId = playerOrder[nextIndex];
             final victimHand = List<String>.from(hands[victimId] ?? []);
-            for (int i = 0; i < 4; i++) victimHand.add(drawOneCard());
+            for (int i = 0; i < 4; i++) {
+              final drawn = drawOneCard();
+              if (drawn != null) victimHand.add(drawn);
+            }
             hands[victimId] = victimHand;
             step = 2;
           }
@@ -8568,7 +8588,8 @@ class FirebaseService {
           }
         }
         for (int i = 0; i < pendingDraw; i++) {
-          myHand.add(drawOneCard());
+          final drawn = drawOneCard();
+          if (drawn != null) myHand.add(drawn);
         }
         hands[playerId] = myHand;
         transaction.update(gameRef, {
@@ -8628,7 +8649,8 @@ class FirebaseService {
       }
       // 3. Piocher
       else {
-        myHand.add(drawOneCard());
+        final drawn = drawOneCard();
+        if (drawn != null) myHand.add(drawn);
         hands[playerId] = myHand;
         transaction.update(gameRef, {
           'unoPlayerHands': hands,
@@ -12856,7 +12878,7 @@ class FirebaseService {
           'name': playerName,
           'score': 0,
           'xp': 0,
-          'authUid': FirebaseAuth.instance.currentUser?.uid,
+          'authUid': FirebaseAuth.instance.currentUser?.uid ?? playerId,
           'livekitIdentity': playerId,
           'isReady': true,
           'isOnline': true,
@@ -13191,11 +13213,11 @@ class FirebaseService {
           playerOrder.add(playerId);
         }
 
+        // CORRECTION : On met à jour uniquement les champs racine (players et playerOrder),
+        // sans ajouter 'players.$playerId.*' qui rentre en conflit avec 'players'.
         final Map<String, dynamic> updates = {
           'players': players,
           'playerOrder': playerOrder,
-          'players.$playerId.isOnline': true,
-          'players.$playerId.name': cleanName,
         };
 
         if (data['gameType'] == 'Petit Bac') {
@@ -31557,6 +31579,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   bool _justOneHasSubmittedGuess = false;
 
   bool _isActionPending = false;
+
+  void _safeAction(Future<void> Function() action) async {
+    if (_isActionPending) return;
+    setState(() => _isActionPending = true);
+    try {
+      await action();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception:', '').trim()),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isActionPending = false);
+      }
+    }
+  }
   bool _xpAwarded = false; // AJOUT : Empêcher de donner l'XP plusieurs fois
 
   StreamSubscription? _timerSubscription;
@@ -51200,31 +51242,29 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                                           .currentContext
                                                           ?.findRenderObject()
                                                       as RenderRepaintBoundary?;
-                                              if (boundary != null) {
-                                                final image = await boundary
-                                                    .toImage(pixelRatio: 1.0);
-                                                final bytes = await image
-                                                    .toByteData(
-                                                      format:
-                                                          ui
-                                                              .ImageByteFormat
-                                                              .png,
+                                              if (boundary == null || !boundary.attached) return;
+                                              if (boundary.debugNeedsPaint || boundary.size.isEmpty) return;
+
+                                              final image = await boundary.toImage(pixelRatio: 1.0);
+                                              final bytes = await image.toByteData(
+                                                format: ui.ImageByteFormat.png,
+                                              );
+                                              if (bytes != null && mounted) {
+                                                final base64Image =
+                                                    base64Encode(
+                                                      bytes.buffer
+                                                          .asUint8List(),
                                                     );
-                                                if (bytes != null && mounted) {
-                                                  final base64Image =
-                                                      base64Encode(
-                                                        bytes.buffer
-                                                            .asUint8List(),
-                                                      );
-                                                  await _firebaseService
-                                                      .updatePictionaryDrawing(
-                                                        widget.gameCode,
-                                                        base64Image,
-                                                        _pictionaryStrokeCount,
-                                                      );
-                                                }
+                                                await _firebaseService
+                                                    .updatePictionaryDrawing(
+                                                      widget.gameCode,
+                                                      base64Image,
+                                                      _pictionaryStrokeCount,
+                                                    );
                                               }
-                                            } catch (_) {}
+                                            } catch (e) {
+                                              debugPrint("Erreur capture Pictionary protégée: $e");
+                                            }
                                           },
                                   child: CustomPaint(
                                     foregroundPainter: _StraightLinePainter(
@@ -52693,145 +52733,148 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             });
             break;
           case 'heritier_turn':
-            setState(() => _isActionPending = true);
-            await _firebaseService.heritierChooseTestateur(
-              widget.gameCode,
-              playerId,
-              targetId,
-            );
-            setState(() => _isActionPending = false);
+            _safeAction(() async {
+              await _firebaseService.heritierChooseTestateur(
+                widget.gameCode,
+                playerId,
+                targetId,
+              );
+            });
             break;
           case 'garde_turn':
-            setState(() => _isActionPending = true);
-            await _firebaseService.gardeProtect(
-              widget.gameCode,
-              playerId,
-              targetId,
-            );
-            setState(() => _isActionPending = false);
+            _safeAction(() async {
+              await _firebaseService.gardeProtect(
+                widget.gameCode,
+                playerId,
+                targetId,
+              );
+            });
             break;
           case 'voyante_turn':
-            setState(() => _isActionPending = true);
-            await _firebaseService.voyanteSee(
-              widget.gameCode,
-              playerId,
-              targetId,
-            );
-            setState(() => _isActionPending = false);
+            _safeAction(() async {
+              await _firebaseService.voyanteSee(
+                widget.gameCode,
+                playerId,
+                targetId,
+              );
+            });
             break;
           case 'loups_turn':
-            setState(() => _isActionPending = true);
-            if (amILoup) {
-              _firebaseService.updateLoupGarouLiveTarget(
-                widget.gameCode,
-                playerId,
-                targetId,
-              );
-              await _firebaseService.loupGarouVote(
-                widget.gameCode,
-                playerId,
-                targetId,
-              );
-            }
-            if (myRole == AppLocalizations.of(context)!.petiteFille)
-              await _firebaseService.petiteFilleSpy(
-                widget.gameCode,
-                playerId,
-                targetId,
-              );
-            setState(() => _isActionPending = false);
+            _safeAction(() async {
+              if (amILoup) {
+                _firebaseService.updateLoupGarouLiveTarget(
+                  widget.gameCode,
+                  playerId,
+                  targetId,
+                );
+                await _firebaseService.loupGarouVote(
+                  widget.gameCode,
+                  playerId,
+                  targetId,
+                );
+              }
+              if (myRole == AppLocalizations.of(context)!.petiteFille) {
+                await _firebaseService.petiteFilleSpy(
+                  widget.gameCode,
+                  playerId,
+                  targetId,
+                );
+              }
+            });
             break;
           case 'loup_blanc_turn':
-            setState(() => _isActionPending = true);
-            await _firebaseService.loupBlancDevour(
-              widget.gameCode,
-              playerId,
-              targetId,
-            );
-            setState(() => _isActionPending = false);
+            _safeAction(() async {
+              await _firebaseService.loupBlancDevour(
+                widget.gameCode,
+                playerId,
+                targetId,
+              );
+            });
             break;
           case 'sorciere_turn':
             if (_lgActionMode == 'poison') {
-              setState(() => _isActionPending = true);
-              await _firebaseService.sorciereUsePotion(
-                widget.gameCode,
-                playerId,
-                'poison',
-                targetId,
-              );
-              setState(() {
-                _isActionPending = false;
-                _lgActionMode = 'normal';
+              _safeAction(() async {
+                await _firebaseService.sorciereUsePotion(
+                  widget.gameCode,
+                  playerId,
+                  'poison',
+                  targetId,
+                );
+                if (mounted) {
+                  setState(() => _lgActionMode = 'normal');
+                }
               });
             }
             break;
           case 'pyromancien_turn':
             if (_lgActionMode == 'placer_tonneau') {
-              setState(() => _isActionPending = true);
-              await _firebaseService.pyromancienAct(
-                widget.gameCode,
-                playerId,
-                'place',
-                targetId,
-              );
-              setState(() {
-                _isActionPending = false;
-                _lgActionMode = 'normal';
+              _safeAction(() async {
+                await _firebaseService.pyromancienAct(
+                  widget.gameCode,
+                  playerId,
+                  'place',
+                  targetId,
+                );
+                if (mounted) {
+                  setState(() => _lgActionMode = 'normal');
+                }
               });
             }
             break;
         }
       } else if (phase == 'jour_discussion') {
-        setState(() => _isActionPending = true);
-        if (subPhase == 'captain_designate')
-          await _firebaseService.captainDesignate(
-            widget.gameCode,
-            playerId,
-            targetId,
-          );
-        if (subPhase == 'chasseur_revenge') {
-          final targetRole = playerData[targetId]?['role'];
-          if (GameData.roleCamps[targetRole] == 'loups') {
-            Provider.of<PlayerState>(
-              context,
-              listen: false,
-            ).recordBadgeEvent('lg_chasseur_revenge');
+        _safeAction(() async {
+          if (subPhase == 'captain_designate') {
+            await _firebaseService.captainDesignate(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
           }
-          await _firebaseService.chasseurShoot(
-            widget.gameCode,
-            playerId,
-            targetId,
-          );
-        }
-        if (subPhase == 'fossoyeur_reveal')
-          await _firebaseService.fossoyeurReveal(
-            widget.gameCode,
-            playerId,
-            targetId,
-          );
-        if (subPhase == 'dictateur_coup') {
-          final targetRole = playerData[targetId]?['role'];
-          if (GameData.roleCamps[targetRole] == 'loups') {
-            Provider.of<PlayerState>(
-              context,
-              listen: false,
-            ).recordBadgeEvent('lg_dictateur_coup');
+          if (subPhase == 'chasseur_revenge') {
+            final targetRole = playerData[targetId]?['role'];
+            if (GameData.roleCamps[targetRole] == 'loups') {
+              Provider.of<PlayerState>(
+                context,
+                listen: false,
+              ).recordBadgeEvent('lg_chasseur_revenge');
+            }
+            await _firebaseService.chasseurShoot(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
           }
-          await _firebaseService.dictateurCoup(
-            widget.gameCode,
-            playerId,
-            targetId,
-          );
-        }
-        setState(() => _isActionPending = false);
+          if (subPhase == 'fossoyeur_reveal') {
+            await _firebaseService.fossoyeurReveal(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
+          }
+          if (subPhase == 'dictateur_coup') {
+            final targetRole = playerData[targetId]?['role'];
+            if (GameData.roleCamps[targetRole] == 'loups') {
+              Provider.of<PlayerState>(
+                context,
+                listen: false,
+              ).recordBadgeEvent('lg_dictateur_coup');
+            }
+            await _firebaseService.dictateurCoup(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
+          }
+        });
       } else if (phase == 'jour_vote') {
-        setState(() => _isActionPending = true);
-        await _firebaseService.submitDayVote(
-          widget.gameCode,
-          playerId,
-          targetId,
-        );
-        setState(() => _isActionPending = false);
+        _safeAction(() async {
+          await _firebaseService.submitDayVote(
+            widget.gameCode,
+            playerId,
+            targetId,
+          );
+        });
       }
     }
 
@@ -58313,9 +58356,11 @@ class _DrawingScreenState extends State<DrawingScreen> {
 
   Future<Uint8List?> _captureCanvas() async {
     try {
-      RenderRepaintBoundary boundary =
-          _canvasKey.currentContext!.findRenderObject()
-              as RenderRepaintBoundary;
+      final boundary =
+          _canvasKey.currentContext?.findRenderObject()
+              as RenderRepaintBoundary?;
+      if (boundary == null || !boundary.attached) return null;
+      if (boundary.debugNeedsPaint || boundary.size.isEmpty) return null;
 
       ui.Image image = await boundary.toImage(pixelRatio: 1.0);
       ByteData? byteData = await image.toByteData(
@@ -58324,7 +58369,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
 
       return byteData?.buffer.asUint8List();
     } catch (e) {
-      print('Erreur lors de la capture: $e');
+      debugPrint('Erreur lors de la capture: $e');
       return null;
     }
   }

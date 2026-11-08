@@ -1977,6 +1977,7 @@ exports.onPlayerPresenceChanged = onValueWritten(
     const presenceData = event.data.after.val();
 
     // Si le nœud a été supprimé ou si isOnline est passé à false via onDisconnect()
+    // Si le nœud a été supprimé ou si isOnline passe à false
     if (!event.data.after.exists() || (presenceData && presenceData.isOnline === false)) {
       const gameRef = db.collection("games").doc(gameCode);
 
@@ -1993,6 +1994,7 @@ exports.onPlayerPresenceChanged = onValueWritten(
           const gameState = data.gameState || "lobby";
 
           // Dans le lobby : on retire le joueur pour libérer sa place
+          // Dans le lobby : retrait direct pour libérer la place
           if (gameState === "lobby") {
             const updates = {};
             updates[`players.${playerId}`] = admin.firestore.FieldValue.delete();
@@ -2009,6 +2011,7 @@ exports.onPlayerPresenceChanged = onValueWritten(
           }
 
           // En pleine partie : marquer déconnecté et vérifier si forfait
+          // En pleine partie : on marque seulement déconnecté SANS arrêter la partie immédiatement
           const updates = {};
           updates[`players.${playerId}.isOnline`] = false;
           updates[`players.${playerId}.disconnectedAt`] = admin.firestore.FieldValue.serverTimestamp();
@@ -2036,7 +2039,15 @@ exports.onPlayerPresenceChanged = onValueWritten(
         });
       } catch (err) {
         console.error(`Erreur onPlayerPresenceChanged pour ${playerId} dans ${gameCode}:`, err);
+        console.error(`Erreur onPlayerPresenceChanged (${playerId} / ${gameCode}):`, err);
       }
+    } else if (presenceData && presenceData.isOnline === true) {
+      // Reconnexion du joueur : annuler l'horodatage de déconnexion
+      const gameRef = db.collection("games").doc(gameCode);
+      await gameRef.update({
+        [`players.${playerId}.isOnline`]: true,
+        [`players.${playerId}.disconnectedAt`]: admin.firestore.FieldValue.delete(),
+      }).catch(() => { });
     }
   }
 );
@@ -2054,13 +2065,21 @@ exports.onLoungePlayerPresenceChanged = onValueWritten(
       const loungeRef = db.collection("lounges").doc(loungeId);
       try {
         await loungeRef.collection("presences").doc(playerId).delete().catch(() => { });
+        await loungeRef.collection("presences").doc(playerId).delete().catch(() => { });
+        // S'assurer que l'update n'échoue pas si le salon est inexistant
         await loungeRef.update({
           [`players.${playerId}.isOnline`]: false,
           streamers: admin.firestore.FieldValue.arrayRemove(playerId),
         }).catch(() => { });
+      }).catch((err) => {
+        // Ignorer l'erreur NOT_FOUND (code 5) si le salon est déjà détruit
+        if (err.code !== 5) {
+          console.warn(`Lounge ${loungeId} update ignoré:`, err.message);
+        }
+      });
       } catch (err) {
-        console.error(`Erreur onLoungePlayerPresenceChanged (${playerId}):`, err);
-      }
+  console.error(`Erreur onLoungePlayerPresenceChanged (${playerId}):`, err);
+}
     }
   }
 );
