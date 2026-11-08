@@ -2031,3 +2031,28 @@ exports.onPlayerPresenceChanged = onValueWritten(
     }
   }
 );
+
+exports.onLoungePlayerPresenceChanged = onValueWritten(
+  {
+    ref: "/lounges/{loungeId}/presence/{playerId}",
+    region: "us-central1",
+  },
+  async (event) => {
+    const { loungeId, playerId } = event.params;
+    const presenceData = event.data.after.val();
+
+    if (!event.data.after.exists() || (presenceData && presenceData.isOnline === false)) {
+      const loungeRef = db.collection("lounges").doc(loungeId);
+      try {
+        await loungeRef.collection("presences").doc(playerId).delete().catch(() => { });
+        await loungeRef.update({
+          [`players.${playerId}.isOnline`]: false,
+          streamers: admin.firestore.FieldValue.arrayRemove(playerId),
+        }).catch(() => { });
+      } catch (err) {
+        console.error(`Erreur onLoungePlayerPresenceChanged (${playerId}):`, err);
+      }
+    }
+  }
+);
+

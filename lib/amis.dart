@@ -71412,31 +71412,37 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       _rtLoungePresenceRef = FirebaseDatabase.instance.ref(
         'lounges/$safeLoungeId/presence/$safePlayerId',
       );
-      _rtConnectedSub = connectedRef.onValue.listen((event) async {
+      _rtConnectedSub = connectedRef.onValue.listen((event) {
         try {
           final connected = event.snapshot.value as bool? ?? false;
           if (connected && _rtLoungePresenceRef != null) {
-            _rtLoungePresenceRef!.onDisconnect().set({
-              'isOnline': false,
-              'lastSeen': ServerValue.timestamp,
-            }).catchError((e) {
-              debugPrint("RTDB lounge onDisconnect error: $e");
-            });
-            _rtLoungePresenceRef!.set({
-              'isOnline': true,
-              'lastSeen': ServerValue.timestamp,
-            }).catchError((e) {
-              debugPrint("RTDB lounge set presence error: $e");
-            });
+            _rtLoungePresenceRef!
+                .onDisconnect()
+                .set({
+                  'isOnline': false,
+                  'lastSeen': ServerValue.timestamp,
+                })
+                .catchError((e) {
+                  debugPrint("RTDB Lounge onDisconnect error ignored: $e");
+                });
+
+            _rtLoungePresenceRef!
+                .set({
+                  'isOnline': true,
+                  'lastSeen': ServerValue.timestamp,
+                })
+                .catchError((e) {
+                  debugPrint("RTDB Lounge set error ignored: $e");
+                });
           }
         } catch (e) {
-          debugPrint("Erreur stream RTDB lounge: $e");
+          debugPrint("RTDB Lounge stream error: $e");
         }
       }, onError: (e) {
-        debugPrint("Erreur listener RTDB lounge: $e");
+        debugPrint("RTDB Lounge listener error ignored: $e");
       });
     } catch (e) {
-      debugPrint("Erreur _setupRtdbPresence lounge: $e");
+      debugPrint("Erreur _setupRtdbPresence: $e");
     }
   }
 

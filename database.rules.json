@@ -1,15 +1,9 @@
 {
   "rules": {
+    ".read": false,
+    ".write": false,
     "games": {
       "$gameCode": {
-        "pictionary": {
-          ".read": "auth != null",
-          ".write": "auth != null && (data.val() == null || newData.child('timestamp').val() != null)"
-        },
-        "$live": {
-          ".read": "auth != null && $live != 'pictionary'",
-          ".write": "auth != null && $live != 'pictionary'"
-        }
         ".read": "auth != null",
         ".write": "auth != null"
       }

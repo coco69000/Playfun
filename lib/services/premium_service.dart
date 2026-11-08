@@ -17,7 +17,7 @@ class VipPurchaseResult {
 
 class PremiumService {
   // Vos vraies clés récupérées depuis votre écran RevenueCat
-  static const String _googleApiKey = "goog_pSOoDGbmVHmyQosrJibzHKpnFYX";
+  static const String _googleApiKey = "goog_pSOoDGbmVHmYQosrJibzHKpnFYX";
   // Clé Apple (à renseigner dès que l'app iOS est ajoutée sur RevenueCat)
   static const String _appleApiKey = "appl_VOTRE_CLE_APPLE_ICI";
 
