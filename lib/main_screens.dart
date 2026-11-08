@@ -1173,13 +1173,19 @@ class _FriendsScreenState extends State<FriendsScreen> {
                     stream: FirebaseFirestore.instance
                         .collection('direct_chats')
                         .where('participants', arrayContains: widget.playerId)
-                        .orderBy('lastMessageTime', descending: true)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      final chats = snapshot.data!.docs;
+                      final chats = snapshot.data!.docs.toList();
+                      chats.sort((a, b) {
+                        final aData = a.data() as Map<String, dynamic>;
+                        final bData = b.data() as Map<String, dynamic>;
+                        final aTime = (aData['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime(0);
+                        final bTime = (bData['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime(0);
+                        return bTime.compareTo(aTime);
+                      });
                       if (chats.isEmpty) {
                         return EmptyStateView(
                           icon: Icons.chat_bubble_outline_rounded,

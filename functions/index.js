@@ -216,15 +216,30 @@ exports.respondToFriendRequest = onCall(
 
       const userData = userSnap.data() || {};
       const friendRequests = userData.friendRequests || [];
-      const matchingReq = friendRequests.find((r) => r && r.uid === senderUid);
+      const currentFriends = userData.friends || [];
 
-      if (!matchingReq) {
-        throw new HttpsError("failed-precondition", "Cette invitation n'existe plus.");
+      // Si déjà amis, on valide sans crasher
+      if (currentFriends.includes(senderUid)) {
+        return { success: true, accepted: true, alreadyFriends: true };
       }
+
+      // Recherche tolérante (objet avec uid/senderUid/id OU simple chaîne)
+      const matchingReq = friendRequests.find((r) => {
+        if (!r) return false;
+        if (typeof r === "string") return r === senderUid;
+        return r.uid === senderUid || r.senderUid === senderUid || r.id === senderUid;
+      });
+
+      // Nettoyer la demande du tableau sans crash si déjà retirée
+      const updatedRequests = friendRequests.filter((r) => {
+        if (!r) return false;
+        const reqUid = typeof r === "string" ? r : (r.uid || r.senderUid || r.id);
+        return reqUid !== senderUid;
+      });
 
       // 🔴 ÉCRITURES APRÈS
       t.update(userRef, {
-        friendRequests: admin.firestore.FieldValue.arrayRemove(matchingReq),
+        friendRequests: updatedRequests,
       });
 
       if (accept === true && senderSnap.exists) {
@@ -814,11 +829,11 @@ exports.generateAiWords = onCall(
       userPrompt = `Génère exactement ${parsedCount} mots simples et variés en français (un seul mot par élément, en lettres majuscules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["ESPION", "PLAGE", "CHÂTEAU", "SOLEIL", "PIRATE"]`;
     } else if (normalizedGame.includes("synonyme") || normalizedGame.includes("banni")) {
       userPrompt = `Génère exactement ${parsedCount} mots ou adjectifs riches en français ayant de multiples synonymes. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Rapide", "Colère", "Magnifique", "Difficile", "Courageux"]`;
-    } else if (normalizedGame.includes("pictionary") || normalizedGame.includes("gribouillis")) {
     } else if (normalizedGame.includes("gribouillis")) {
       systemPrompt = "Tu es un générateur d'expressions et situations visuelles amusantes à dessiner pour le jeu Gribouillis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} expressions courtes, objets ou actions drôles et visuelles faciles à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Un chat qui fait du surf", "Un astronaute au supermarché", "Un dragon qui éternue", "Château de sable"]`;
     } else if (normalizedGame.includes("pictionary")) {
+      systemPrompt = "Tu es un générateur de mots stimulants à dessiner pour le jeu Pictionary. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} mots ou concepts concrets faciles et stimulants à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Château", "Boulanger", "Fusée", "Cascade", "Parachute"]`;
     } else if (normalizedGame.includes("just one")) {
       userPrompt = `Génère exactement ${parsedCount} mots mystères uniques en français à faire deviner par des indices. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Chocolat", "Pyramide", "Dinosaure", "Guitare"]`;
@@ -841,7 +856,6 @@ exports.generateAiWords = onCall(
       systemPrompt = "Tu es un générateur de dilemmes cornéliens au format 'Option A ou Option B'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} dilemmes cornéliens au format "Option A ou Option B". Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Pouvoir voler ou Être invisible", "Ne plus jamais pouvoir écouter de musique ou Ne plus jamais pouvoir regarder de film"]`;
     } else if (normalizedGame.includes("patate") || normalizedGame.includes("catégorie") || normalizedGame.includes("categorie")) {
-      systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude / Catégories. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} catégories d'énumération rapides et accessibles pour la Patate Chaude. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Des marques de voitures", "Des choses qu'on trouve dans un frigo", "Des super-héros"]`;
     } else if (normalizedGame.includes("mème") || normalizedGame.includes("meme")) {
@@ -870,7 +884,6 @@ exports.generateAiWords = onCall(
             { role: "system", content: systemPrompt },
             { role: "user", content: userPrompt },
           ],
-          max_tokens: 2500,
           max_tokens: calculatedMaxTokens,
           temperature: 0.7,
         }),
