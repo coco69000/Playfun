@@ -2557,15 +2557,19 @@ class FirebaseService {
     String playerId,
     int wordCount,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/cadavre_typing');
-    if (wordCount <= 0) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'wordCount': wordCount,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/cadavre_typing');
+      if (wordCount <= 0) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'wordCount': wordCount,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateCadavreTypingCount: $e");
     }
   }
 
@@ -2578,17 +2582,21 @@ class FirebaseService {
     String playerId,
     int? amount,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/poker_raise_preview',
-    );
-    if (amount == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'amount': amount,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/poker_raise_preview',
+      );
+      if (amount == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'amount': amount,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updatePokerRaisePreview: $e");
     }
   }
 
@@ -2603,15 +2611,19 @@ class FirebaseService {
     String playerId,
     int? amount,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/skull_live_bid');
-    if (amount == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'bidderId': playerId,
-        'amount': amount,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/skull_live_bid');
+      if (amount == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'bidderId': playerId,
+          'amount': amount,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateLiveBidOrRaise: $e");
     }
   }
 
@@ -2629,20 +2641,24 @@ class FirebaseService {
     required bool flipped,
     required bool canPlace,
   }) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/blokus_preview');
-    if (pieceId == null || row == null || col == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'pieceId': pieceId,
-        'row': row,
-        'col': col,
-        'rotation': rotation,
-        'flipped': flipped,
-        'canPlace': canPlace,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/blokus_preview');
+      if (pieceId == null || row == null || col == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'pieceId': pieceId,
+          'row': row,
+          'col': col,
+          'rotation': rotation,
+          'flipped': flipped,
+          'canPlace': canPlace,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateBlokusLivePreview: $e");
     }
   }
 
@@ -2655,15 +2671,19 @@ class FirebaseService {
     String playerId,
     int? targetCardIndex,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/zombie_hover');
-    if (targetCardIndex == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'index': targetCardIndex,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/zombie_hover');
+      if (targetCardIndex == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'index': targetCardIndex,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateZombieCardHover: $e");
     }
   }
 
@@ -2677,16 +2697,20 @@ class FirebaseService {
     String? targetOwnerId,
     int? pawnIndex,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/ludo_hover');
-    if (pawnIndex == null || targetOwnerId == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'ownerId': targetOwnerId,
-        'pawnIndex': pawnIndex,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/ludo_hover');
+      if (pawnIndex == null || targetOwnerId == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'ownerId': targetOwnerId,
+          'pawnIndex': pawnIndex,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateLudoPawnHover: $e");
     }
   }
 
@@ -2699,15 +2723,19 @@ class FirebaseService {
     String playerId,
     String? fromKey,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/checkers_live');
-    if (fromKey == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'fromKey': fromKey,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/checkers_live');
+      if (fromKey == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'fromKey': fromKey,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateCheckersSelectionLive: $e");
     }
   }
 
@@ -2720,15 +2748,19 @@ class FirebaseService {
     String playerId,
     int? endValue,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/domino_hover');
-    if (endValue == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'endValue': endValue,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/domino_hover');
+      if (endValue == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'endValue': endValue,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateDominoHoverEnd: $e");
     }
   }
 
@@ -2741,21 +2773,25 @@ class FirebaseService {
     int? tappedDieIndex,
     String? hoveredCategory,
   }) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/yams_live');
-    if (tappedDieIndex == null && hoveredCategory == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'tappedDieIndex': tappedDieIndex,
-        'hoveredCategory': hoveredCategory,
-        'timestamp': ServerValue.timestamp,
-      });
-      if (tappedDieIndex != null) {
-        Future.delayed(Duration(milliseconds: 1400), () {
-          ref.child('tappedDieIndex').remove();
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/yams_live');
+      if (tappedDieIndex == null && hoveredCategory == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'tappedDieIndex': tappedDieIndex,
+          'hoveredCategory': hoveredCategory,
+          'timestamp': ServerValue.timestamp,
         });
+        if (tappedDieIndex != null) {
+          Future.delayed(Duration(milliseconds: 1400), () {
+            ref.child('tappedDieIndex').remove().catchError((_) {});
+          });
+        }
       }
+    } catch (e) {
+      debugPrint("RTDB error in updateYamsLiveInteraction: $e");
     }
   }
 
@@ -2768,15 +2804,19 @@ class FirebaseService {
     String playerId,
     int selectedCount,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/bigtwo_live');
-    if (selectedCount <= 0) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'selectedCount': selectedCount,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/bigtwo_live');
+      if (selectedCount <= 0) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'selectedCount': selectedCount,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateBigTwoLiveSelection: $e");
     }
   }
 
@@ -2789,17 +2829,21 @@ class FirebaseService {
     String judgeId,
     String? cardText,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/judge_inspect_live',
-    );
-    if (cardText == null || cardText.isEmpty) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'judgeId': judgeId,
-        'cardText': cardText,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/judge_inspect_live',
+      );
+      if (cardText == null || cardText.isEmpty) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'judgeId': judgeId,
+          'cardText': cardText,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateJudgeCardInspectLive: $e");
     }
   }
 
@@ -2814,13 +2858,17 @@ class FirebaseService {
     String playerId,
     bool isTouching,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/taboo_buzzer_live',
-    );
-    if (!isTouching) {
-      await ref.remove();
-    } else {
-      await ref.set({'playerId': playerId, 'timestamp': ServerValue.timestamp});
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/taboo_buzzer_live',
+      );
+      if (!isTouching) {
+        await ref.remove();
+      } else {
+        await ref.set({'playerId': playerId, 'timestamp': ServerValue.timestamp});
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateTabooBuzzerLive: $e");
     }
   }
 
@@ -2835,15 +2883,19 @@ class FirebaseService {
     String playerId,
     int? targetIndex,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/naval_aim_live');
-    if (targetIndex == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'targetIndex': targetIndex,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/naval_aim_live');
+      if (targetIndex == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'targetIndex': targetIndex,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateBatailleNavaleAimLive: $e");
     }
   }
 
@@ -2856,13 +2908,17 @@ class FirebaseService {
     String playerId,
     String? targetId,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/loup_live_target/$playerId',
-    );
-    if (targetId == null) {
-      await ref.remove();
-    } else {
-      await ref.set({'targetId': targetId, 'timestamp': ServerValue.timestamp});
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/loup_live_target/$playerId',
+      );
+      if (targetId == null) {
+        await ref.remove();
+      } else {
+        await ref.set({'targetId': targetId, 'timestamp': ServerValue.timestamp});
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateLoupGarouLiveTarget: $e");
     }
   }
 
@@ -2876,17 +2932,21 @@ class FirebaseService {
     String? word,
     String teamColor,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/codenames_live/$playerId',
-    );
-    if (word == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'word': word,
-        'team': teamColor,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/codenames_live/$playerId',
+      );
+      if (word == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'word': word,
+          'team': teamColor,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateCodenamesLivePoint: $e");
     }
   }
 
@@ -2899,16 +2959,20 @@ class FirebaseService {
     String playerId,
     int filledCount,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/petit_bac_live/$playerId',
-    );
-    if (filledCount <= 0) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'filledCount': filledCount,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/petit_bac_live/$playerId',
+      );
+      if (filledCount <= 0) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'filledCount': filledCount,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updatePetitBacLiveProgress: $e");
     }
   }
 
@@ -2921,15 +2985,19 @@ class FirebaseService {
     String playerId,
     String? choosingColor,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/uno_live');
-    if (choosingColor == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'color': choosingColor,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref('games/$gameCode/uno_live');
+      if (choosingColor == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'color': choosingColor,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateUnoLiveColorChoosing: $e");
     }
   }
 
@@ -2943,18 +3011,22 @@ class FirebaseService {
     String? card,
     String? targetId,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/mille_bornes_live',
-    );
-    if (card == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'playerId': playerId,
-        'card': card,
-        'targetId': targetId,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/mille_bornes_live',
+      );
+      if (card == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'playerId': playerId,
+          'card': card,
+          'targetId': targetId,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateMilleBornesTargetLive: $e");
     }
   }
 
@@ -2969,16 +3041,20 @@ class FirebaseService {
     String playerId,
     String? suspectId,
   ) async {
-    final ref = FirebaseDatabase.instance.ref(
-      'games/$gameCode/undercover_live/$playerId',
-    );
-    if (suspectId == null) {
-      await ref.remove();
-    } else {
-      await ref.set({
-        'suspectId': suspectId,
-        'timestamp': ServerValue.timestamp,
-      });
+    try {
+      final ref = FirebaseDatabase.instance.ref(
+        'games/$gameCode/undercover_live/$playerId',
+      );
+      if (suspectId == null) {
+        await ref.remove();
+      } else {
+        await ref.set({
+          'suspectId': suspectId,
+          'timestamp': ServerValue.timestamp,
+        });
+      }
+    } catch (e) {
+      debugPrint("RTDB error in updateUndercoverLiveSuspect: $e");
     }
   }
 
@@ -20691,11 +20767,15 @@ class FirebaseService {
     int strokeCount,
   ) async {
     DocumentReference gameRef = _db.collection('games').doc(gameCode);
-    await FirebaseDatabase.instance.ref('games/$gameCode/pictionary').set({
-      'drawing': drawingContent,
-      'strokeCount': strokeCount,
-      'timestamp': ServerValue.timestamp,
-    });
+    try {
+      await FirebaseDatabase.instance.ref('games/$gameCode/pictionary').set({
+        'drawing': drawingContent,
+        'strokeCount': strokeCount,
+        'timestamp': ServerValue.timestamp,
+      });
+    } catch (e) {
+      debugPrint("Erreur submitPictionaryDrawing RTDB: $e");
+    }
     await gameRef.update({
       // On ne stocke plus l'image dans Firestore, uniquement dans RTDB
       'pictionaryDrawing': 'rtdb_used', // Flag pour indiquer qu'on utilise RTDB
@@ -30043,28 +30123,40 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
 
   void _setupRtdbPresence() {
     try {
+      final safeGameCode = widget.gameCode.replaceAll(RegExp(r'[.#$\[\]]'), '_');
+      final safePlayerId = widget.playerId.replaceAll(RegExp(r'[.#$\[\]]'), '_');
       final connectedRef = FirebaseDatabase.instance.ref('.info/connected');
       _presenceRef = FirebaseDatabase.instance.ref(
-        'games/${widget.gameCode}/presence/${widget.playerId}',
+        'games/$safeGameCode/presence/$safePlayerId',
       );
-      _connectedSub = connectedRef.onValue.listen((event) {
-        final connected = event.snapshot.value as bool? ?? false;
-        if (connected && _presenceRef != null) {
-          // IMPORTANT : OnDisconnect arme le serveur pour basculer à false dès la coupure
-          _presenceRef!.onDisconnect().update({
-            'isOnline': false,
-            'lastSeen': ServerValue.timestamp,
-          });
-          _presenceRef!.set({
-            'isOnline': true,
-            'lastSeen': ServerValue.timestamp,
-          });
-          _firebaseService.setPlayerOnlineStatusInGame(
-            widget.gameCode,
-            widget.playerId,
-            true,
-          );
+      _connectedSub = connectedRef.onValue.listen((event) async {
+        try {
+          final connected = event.snapshot.value as bool? ?? false;
+          if (connected && _presenceRef != null) {
+            // IMPORTANT : OnDisconnect arme le serveur pour basculer à false dès la coupure
+            _presenceRef!.onDisconnect().update({
+              'isOnline': false,
+              'lastSeen': ServerValue.timestamp,
+            }).catchError((e) {
+              debugPrint("RTDB game onDisconnect update error: $e");
+            });
+            _presenceRef!.set({
+              'isOnline': true,
+              'lastSeen': ServerValue.timestamp,
+            }).catchError((e) {
+              debugPrint("RTDB game presence set error: $e");
+            });
+            _firebaseService.setPlayerOnlineStatusInGame(
+              widget.gameCode,
+              widget.playerId,
+              true,
+            );
+          }
+        } catch (e) {
+          debugPrint("Erreur stream RTDB game presence: $e");
         }
+      }, onError: (e) {
+        debugPrint("Erreur listener RTDB game presence: $e");
       });
     } catch (e) {
       debugPrint("Erreur _setupRtdbPresence: $e");
@@ -30075,7 +30167,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _sendHeartbeat();
-      _presenceRef?.set({'isOnline': true, 'lastSeen': ServerValue.timestamp});
+      _presenceRef?.set({'isOnline': true, 'lastSeen': ServerValue.timestamp}).catchError((e) {
+        debugPrint("RTDB game presence resume error: $e");
+      });
       _firebaseService.setPlayerOnlineStatusInGame(
         widget.gameCode,
         widget.playerId,
@@ -30083,7 +30177,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
       );
     } else if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.detached) {
-      _presenceRef?.set({'isOnline': false, 'lastSeen': ServerValue.timestamp});
+      _presenceRef?.set({'isOnline': false, 'lastSeen': ServerValue.timestamp}).catchError((e) {
+        debugPrint("RTDB game presence pause error: $e");
+      });
       _firebaseService.setPlayerOnlineStatusInGame(
         widget.gameCode,
         widget.playerId,
@@ -30102,7 +30198,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
     _heartbeatTimer?.cancel();
     _connectedSub?.cancel();
     if (!_isTransitioningToGame) {
-      _presenceRef?.set({'isOnline': false, 'lastSeen': ServerValue.timestamp});
+      _presenceRef?.set({'isOnline': false, 'lastSeen': ServerValue.timestamp}).catchError((e) {
+        debugPrint("RTDB game presence dispose error: $e");
+      });
       _firebaseService.setPlayerOnlineStatusInGame(
         widget.gameCode,
         widget.playerId,
@@ -31486,27 +31584,39 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   void _setupRtdbGamePresence() {
     try {
+      final safeGameCode = widget.gameCode.replaceAll(RegExp(r'[.#$\[\]]'), '_');
+      final safePlayerId = widget.playerId.replaceAll(RegExp(r'[.#$\[\]]'), '_');
       final connectedRef = FirebaseDatabase.instance.ref('.info/connected');
       _rtGamePresenceRef = FirebaseDatabase.instance.ref(
-        'games/${widget.gameCode}/presence/${widget.playerId}',
+        'games/$safeGameCode/presence/$safePlayerId',
       );
-      _rtGameConnectedSub = connectedRef.onValue.listen((event) {
-        final connected = event.snapshot.value as bool? ?? false;
-        if (connected && _rtGamePresenceRef != null) {
-          _rtGamePresenceRef!.onDisconnect().update({
-            'isOnline': false,
-            'lastSeen': ServerValue.timestamp,
-          });
-          _rtGamePresenceRef!.set({
-            'isOnline': true,
-            'lastSeen': ServerValue.timestamp,
-          });
-          _firebaseService.setPlayerOnlineStatusInGame(
-            widget.gameCode,
-            widget.playerId,
-            true,
-          );
+      _rtGameConnectedSub = connectedRef.onValue.listen((event) async {
+        try {
+          final connected = event.snapshot.value as bool? ?? false;
+          if (connected && _rtGamePresenceRef != null) {
+            _rtGamePresenceRef!.onDisconnect().update({
+              'isOnline': false,
+              'lastSeen': ServerValue.timestamp,
+            }).catchError((e) {
+              debugPrint("RTDB game onDisconnect error: $e");
+            });
+            _rtGamePresenceRef!.set({
+              'isOnline': true,
+              'lastSeen': ServerValue.timestamp,
+            }).catchError((e) {
+              debugPrint("RTDB game set error: $e");
+            });
+            _firebaseService.setPlayerOnlineStatusInGame(
+              widget.gameCode,
+              widget.playerId,
+              true,
+            );
+          }
+        } catch (e) {
+          debugPrint("Erreur stream RTDB game: $e");
         }
+      }, onError: (e) {
+        debugPrint("Erreur listener RTDB game: $e");
       });
     } catch (e) {
       debugPrint("Erreur _setupRtdbGamePresence: $e");
@@ -31575,6 +31685,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       _rtGamePresenceRef?.set({
         'isOnline': false,
         'lastSeen': ServerValue.timestamp,
+      }).catchError((e) {
+        debugPrint("RTDB game pause error: $e");
       });
       _pauseRemovalTimer?.cancel();
       _pauseRemovalTimer = Timer(const Duration(seconds: 30), () {
@@ -31586,12 +31698,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       _rtGamePresenceRef?.set({
         'isOnline': true,
         'lastSeen': ServerValue.timestamp,
+      }).catchError((e) {
+        debugPrint("RTDB game resume error: $e");
       });
       _sendHeartbeat();
     } else if (state == AppLifecycleState.detached) {
       _rtGamePresenceRef?.set({
         'isOnline': false,
         'lastSeen': ServerValue.timestamp,
+      }).catchError((e) {
+        debugPrint("RTDB game detach error: $e");
       });
       if (widget.loungeId != null) {
         FirebaseFirestore.instance
@@ -31694,6 +31810,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       _rtGamePresenceRef?.set({
         'isOnline': false,
         'lastSeen': ServerValue.timestamp,
+      }).catchError((e) {
+        debugPrint("RTDB game detach error: $e");
       });
     } catch (_) {}
     _pictionaryDebounceTimer?.cancel();
@@ -71288,24 +71406,38 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
 
   void _setupRtdbPresence() {
     try {
+      final safeLoungeId = widget.loungeId.replaceAll(RegExp(r'[.#$\[\]]'), '_');
+      final safePlayerId = widget.playerId.replaceAll(RegExp(r'[.#$\[\]]'), '_');
       final connectedRef = FirebaseDatabase.instance.ref('.info/connected');
       _rtLoungePresenceRef = FirebaseDatabase.instance.ref(
-        'lounges/${widget.loungeId}/presence/${widget.playerId}',
+        'lounges/$safeLoungeId/presence/$safePlayerId',
       );
-      _rtConnectedSub = connectedRef.onValue.listen((event) {
-        final connected = event.snapshot.value as bool? ?? false;
-        if (connected && _rtLoungePresenceRef != null) {
-          _rtLoungePresenceRef!.onDisconnect().set({
-            'isOnline': false,
-            'lastSeen': ServerValue.timestamp,
-          });
-          _rtLoungePresenceRef!.set({
-            'isOnline': true,
-            'lastSeen': ServerValue.timestamp,
-          });
+      _rtConnectedSub = connectedRef.onValue.listen((event) async {
+        try {
+          final connected = event.snapshot.value as bool? ?? false;
+          if (connected && _rtLoungePresenceRef != null) {
+            _rtLoungePresenceRef!.onDisconnect().set({
+              'isOnline': false,
+              'lastSeen': ServerValue.timestamp,
+            }).catchError((e) {
+              debugPrint("RTDB lounge onDisconnect error: $e");
+            });
+            _rtLoungePresenceRef!.set({
+              'isOnline': true,
+              'lastSeen': ServerValue.timestamp,
+            }).catchError((e) {
+              debugPrint("RTDB lounge set presence error: $e");
+            });
+          }
+        } catch (e) {
+          debugPrint("Erreur stream RTDB lounge: $e");
         }
+      }, onError: (e) {
+        debugPrint("Erreur listener RTDB lounge: $e");
       });
-    } catch (_) {}
+    } catch (e) {
+      debugPrint("Erreur _setupRtdbPresence lounge: $e");
+    }
   }
 
   void _showPrivateCodeCreatedDialog(String code) {
@@ -71410,6 +71542,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       _rtLoungePresenceRef?.set({
         'isOnline': true,
         'lastSeen': ServerValue.timestamp,
+      }).catchError((e) {
+        debugPrint("RTDB lounge resume error: $e");
       });
       _firebaseService.setPlayerOnlineStatusInLounge(
         widget.loungeId,
@@ -71421,6 +71555,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       _rtLoungePresenceRef?.set({
         'isOnline': false,
         'lastSeen': ServerValue.timestamp,
+      }).catchError((e) {
+        debugPrint("RTDB lounge pause error: $e");
       });
       _firebaseService.setPlayerOnlineStatusInLounge(
         widget.loungeId,
@@ -71442,6 +71578,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     _rtLoungePresenceRef?.set({
       'isOnline': false,
       'lastSeen': ServerValue.timestamp,
+    }).catchError((e) {
+      debugPrint("RTDB lounge dispose error: $e");
     });
     _firebaseService.setPlayerOnlineStatusInLounge(
       widget.loungeId,
