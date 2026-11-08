@@ -1967,135 +1967,67 @@ exports.onPlayerPresenceChanged = onValueWritten(
     const { gameCode, playerId } = event.params;
     const presenceData = event.data.after.val();
 
-    /**
-     * Vérifie si un pseudo est disponible via Cloud Functions
-     */
-    exports.checkUsernameAvailable = onCall(
-      { region: "us-central1" },
-      async (request) => {
-        const { username } = request.data || {};
-        if (typeof username !== "string") {
-          return { available: false, reason: "Pseudo invalide." };
-        }
-        const clean = username.trim();
-        const cleanLower = clean.toLowerCase();
-        if (cleanLower.length < 3) {
-          return { available: false, reason: "Le pseudo doit comporter au moins 3 caractères." };
-        }
-        if (cleanLower.length > 25) {
-          return { available: false, reason: "Le pseudo ne doit pas dépasser 25 caractères." };
-        }
-        // Si le nœud a été supprimé ou si isOnline est passé à false via onDisconnect()
-        if (!event.data.after.exists() || (presenceData && presenceData.isOnline === false)) {
-          const gameRef = db.collection("games").doc(gameCode);
+    // Si le nœud a été supprimé ou si isOnline est passé à false via onDisconnect()
+    if (!event.data.after.exists() || (presenceData && presenceData.isOnline === false)) {
+      const gameRef = db.collection("games").doc(gameCode);
 
-          const currentUid = request.auth ? request.auth.uid : null;
-          const snap = await db.collection("users")
-            .where("nameLower", "==", cleanLower)
-            .limit(2)
-            .get();
-          try {
-            await db.runTransaction(async (t) => {
-              const snap = await t.get(gameRef);
-              if (!snap.exists) return;
+      try {
+        await db.runTransaction(async (t) => {
+          const snap = await t.get(gameRef);
+          if (!snap.exists) return;
 
-              if (snap.empty) {
-                return { available: true };
-              }
-              const data = snap.data() || {};
-              const players = data.players || {};
-              if (!players[playerId]) return;
+          const data = snap.data() || {};
+          const players = data.players || {};
+          if (!players[playerId]) return;
 
-              if (snap.size === 1 && currentUid && snap.docs[0].id === currentUid) {
-                return { available: true };
-              }
-              const playerName = players[playerId].name || "Un joueur";
-              const gameState = data.gameState || "lobby";
+          const playerName = players[playerId].name || "Un joueur";
+          const gameState = data.gameState || "lobby";
 
-              return { available: false, reason: "Ce pseudo est déjà pris." };
+          // Dans le lobby : on retire le joueur pour libérer sa place
+          if (gameState === "lobby") {
+            const updates = {};
+            updates[`players.${playerId}`] = admin.firestore.FieldValue.delete();
+            const currentOrder = (data.playerOrder || []).filter((id) => id !== playerId);
+            updates.playerOrder = currentOrder;
+
+            // Transmettre l'hôte si c'était l'hôte
+            if (data.hostId === playerId && currentOrder.length > 0) {
+              updates.hostId = currentOrder[0];
             }
-            );
-            // Dans le lobby : on retire le joueur pour libérer sa place
-            if (gameState === "lobby") {
-              const updates = {};
-              updates[`players.${playerId}`] = admin.firestore.FieldValue.delete();
-              const currentOrder = (data.playerOrder || []).filter((id) => id !== playerId);
-              updates.playerOrder = currentOrder;
 
-              /**
-               * Modifie le pseudo d'un utilisateur en vérifiant l'unicité
-               */
-              exports.updateUserUsername = onCall(
-                { region: "us-central1" },
-                async (request) => {
-                  if (!request.auth) {
-                    throw new HttpsError("unauthenticated", "Vous devez être connecté.");
-                  }
-                  const uid = request.auth.uid;
-                  const { username } = request.data || {};
-                  if (typeof username !== "string") {
-                    throw new HttpsError("invalid-argument", "Pseudo invalide.");
-                  }
-                  const clean = username.trim();
-                  const cleanLower = clean.toLowerCase();
-                  if (cleanLower.length < 3) {
-                    throw new HttpsError("invalid-argument", "Le pseudo doit comporter au moins 3 caractères.");
-                  }
-                  if (cleanLower.length > 25) {
-                    throw new HttpsError("invalid-argument", "Le pseudo ne doit pas dépasser 25 caractères.");
-                  }
-                  // Transmettre l'hôte si c'était l'hôte
-                  if (data.hostId === playerId && currentOrder.length > 0) {
-                    updates.hostId = currentOrder[0];
-                  }
+            t.update(gameRef, updates);
+            return;
+          }
 
-                  const snap = await db.collection("users")
-                    .where("nameLower", "==", cleanLower)
-                    .limit(2)
-                    .get();
-                  t.update(gameRef, updates);
-                  return;
-                }
+          // En pleine partie : marquer déconnecté et vérifier si forfait
+          const updates = {};
+          updates[`players.${playerId}.isOnline`] = false;
+          updates[`players.${playerId}.disconnectedAt`] = admin.firestore.FieldValue.serverTimestamp();
 
-    const otherUser = snap.docs.find((d) => d.id !== uid);
-              if (otherUser) {
-                throw new HttpsError("already-exists", "Ce pseudo est déjà utilisé par un autre joueur.");
-              }
-              // En pleine partie : marquer déconnecté et vérifier si forfait
-              const updates = {};
-              updates[`players.${playerId}.isOnline`] = false;
-              updates[`players.${playerId}.disconnectedAt`] = admin.firestore.FieldValue.serverTimestamp();
+          // Vérifier combien de joueurs humains restent connectés
+          const remainingConnected = Object.entries(players).filter(([id, p]) => {
+            if (id === playerId) return false;
+            return p && p.isOnline !== false && p.isBot !== true && p.replacedByBot !== true;
+          });
 
-              await db.collection("users").doc(uid).update({
-                name: clean,
-                nameLower: cleanLower,
-                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-              });
-              // Vérifier combien de joueurs humains restent connectés
-              const remainingConnected = Object.entries(players).filter(([id, p]) => {
-                if (id === playerId) return false;
-                return p && p.isOnline !== false && p.isBot !== true && p.replacedByBot !== true;
-              });
+          // Si un seul ou zéro joueur humain reste connecté -> Victoire par forfait
+          if (remainingConnected.length <= 1 && gameState === "playing") {
+            const winnerId = remainingConnected.length === 1 ? remainingConnected[0][0] : null;
+            const winnerName = winnerId ? (players[winnerId]?.name || "Joueur") : "Personne";
 
-              return { success: true, name: clean };
-              // Si un seul ou zéro joueur humain reste connecté -> Victoire par forfait
-              if (remainingConnected.length <= 1 && gameState === "playing") {
-                const winnerId = remainingConnected.length === 1 ? remainingConnected[0][0] : null;
-                const winnerName = winnerId ? (players[winnerId]?.name || "Joueur") : "Personne";
+            updates.gameState = "gameOver";
+            updates.gameWinner = winnerId;
+            updates.gameEndReason = `${playerName} s'est déconnecté. Victoire de ${winnerName} par forfait.`;
+            if (winnerId) {
+              updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
+            }
+          }
 
-                updates.gameState = "gameOver";
-                updates.gameWinner = winnerId;
-                updates.gameEndReason = `${playerName} s'est déconnecté. Victoire de ${winnerName} par forfait.`;
-                if (winnerId) {
-                  updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
-                }
-              }
-
-              t.update(gameRef, updates);
-            });
-  } catch (err) {
-    console.error(`Erreur onPlayerPresenceChanged pour ${playerId} dans ${gameCode}:`, err);
-  }
+          t.update(gameRef, updates);
+        });
+      } catch (err) {
+        console.error(`Erreur onPlayerPresenceChanged pour ${playerId} dans ${gameCode}:`, err);
+      }
     }
   }
 );
