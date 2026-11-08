@@ -8539,7 +8539,7 @@ class FirebaseService {
             hands[victimId] = victimHand;
             step = 2;
           }
-        } else if (playedCard == 'wild_draw4') {
+        } else if (playedCard.endsWith('draw4')) {
           if (stackDraws) {
             pendingDraw += 4;
           } else {
@@ -8581,7 +8581,7 @@ class FirebaseService {
           final String stackCard = myHand.firstWhere(
             (c) =>
                 (topCard.endsWith('draw2') && c.endsWith('draw2')) ||
-                (topCard == 'wild_draw4' && c == 'wild_draw4'),
+                (topCard.endsWith('draw4') && c.endsWith('draw4')),
             orElse: () => '',
           );
           if (stackCard.isNotEmpty) {
@@ -8636,8 +8636,8 @@ class FirebaseService {
       if (playableCards.isNotEmpty) {
         playableCards.sort((a, b) {
           int scoreCard(String c) {
-            if (c == 'wild_draw4') return 30;
-            if (c == 'wild') return 20;
+            if (c.endsWith('draw4')) return 30;
+            if (c.startsWith('wild')) return 20;
             if (c.endsWith('draw2') ||
                 c.endsWith('skip') ||
                 c.endsWith('reverse'))
@@ -13603,9 +13603,19 @@ class FirebaseService {
       }
     }
 
+    String stripAccents(String s) {
+      const withDia = 'àáâãäåçèéêëìíîïñòóôõöùúûüýÿ';
+      const withoutDia = 'aaaaaaceeeeiiiinooooouuuuyy';
+      String res = s.trim().toLowerCase();
+      for (int i = 0; i < withDia.length; i++) {
+        res = res.replaceAll(withDia[i], withoutDia[i]);
+      }
+      return res;
+    }
+
     bool mrWhiteWins =
         civilWord.isNotEmpty &&
-        guessedWord.trim().toLowerCase() == civilWord.trim().toLowerCase();
+        stripAccents(guessedWord) == stripAccents(civilWord);
 
     if (mrWhiteWins) {
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
@@ -14316,13 +14326,32 @@ class FirebaseService {
       }
 
       if (currentRoundNum > totalRounds) {
-        String winnerTeam =
-            (scores['team_0'] ?? 0) >= (scores['team_1'] ?? 0)
-                ? 'team_0'
-                : 'team_1';
+        int score0 = (scores['team_0'] as num?)?.toInt() ?? 0;
+        int score1 = (scores['team_1'] as num?)?.toInt() ?? 0;
+        Map<String, dynamic> scoreUpdates = {};
+
+        if (score0 == score1) {
+          for (var teamKey in ['team_0', 'team_1']) {
+            if (tabooTeams[teamKey] is List) {
+              for (var pId in (tabooTeams[teamKey] as List)) {
+                scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+              }
+            }
+          }
+          await gameRef.update({
+            'gameState': 'gameOver',
+            'gameWinner': 'equality',
+            'isTie': true,
+            'tiedWinners': ['team_0', 'team_1'],
+            'gameEndReason': _l10n.egaliteParfaite,
+            ...scoreUpdates,
+          });
+          return;
+        }
+
+        String winnerTeam = score0 > score1 ? 'team_0' : 'team_1';
         String winnerName =
             winnerTeam == 'team_0' ? _l10n.equipe12 : _l10n.equipe21;
-        Map<String, dynamic> scoreUpdates = {};
         if (tabooTeams[winnerTeam] is List) {
           for (var pId in (tabooTeams[winnerTeam] as List)) {
             scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
@@ -14883,6 +14912,7 @@ class FirebaseService {
 
         myHand.remove(cardToDiscard);
         discard.add(cardToDiscard);
+        playerHands[playerId] = myHand;
 
         if (myHand.isEmpty) {
           creditPlayerXp(
@@ -15609,7 +15639,7 @@ class FirebaseService {
         List<int> allyPos = List<int>.from(allPositions[allyId]);
         if ((myPos.where((p) => p == 56).length +
                 allyPos.where((p) => p == 56).length) >=
-            4) {
+            8) {
           won = true;
         }
       } else {
@@ -18831,7 +18861,7 @@ class FirebaseService {
     });
   }
 
-  Future<void> submitDobbleGuess(
+  Future<Map<String, dynamic>> submitDobbleGuess(
     String gameCode,
     String playerId,
     String guessedSymbol,
@@ -18839,14 +18869,14 @@ class FirebaseService {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
     if (currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
 
-    await _db.runTransaction((transaction) async {
+    final res = await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       final gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) throw Exception(_l10n.partieIntrouvable);
 
       final gameData = gameSnap.data() as Map<String, dynamic>;
       if (gameData['gameState'] != 'playing') {
-        return;
+        return {'success': false, 'reason': 'not_playing'};
       }
 
       final List<String> centerCard = List<String>.from(
@@ -18874,6 +18904,9 @@ class FirebaseService {
       }
 
       if (realCommonSymbol == null || realCommonSymbol != guessedSymbol) {
+        if (gameData['commonSymbol'] == guessedSymbol) {
+          return {'success': false, 'reason': 'already_claimed'};
+        }
         throw Exception(_l10n.symboleIncorrect);
       }
 
@@ -18963,7 +18996,9 @@ class FirebaseService {
       }
 
       transaction.update(gameRef, updates);
+      return {'success': true};
     });
+    return res ?? {'success': false};
   }
 
   // --- LOGIQUE JEU DE DAMES (CHECKERS) ---
@@ -23108,7 +23143,7 @@ class FirebaseService {
         throw Exception(_l10n.joueurCibleIntrouvable);
       }
 
-      if (gameType == 'Qui Pourrait le Plus ?') {
+      if (gameType == 'Qui Pourrait le Plus ?' || gameType == 'Le Menteur') {
         if (voterId == votedForId) {
           throw Exception(_l10n.interdictionFormelleDeVoterPour);
         }
@@ -25182,15 +25217,6 @@ class FirebaseService {
             trickPoints += _getBeloteCardValue(c, c.endsWith(trumpSuit));
           });
 
-          if (trickPoints >= 162) {
-            final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-            if (currentAuthUid != null) {
-              _db.collection('users').doc(currentAuthUid).set({
-                'unlockedBadges.belote_capot': FieldValue.serverTimestamp(),
-              }, SetOptions(merge: true));
-            }
-          }
-
           String winnerTeam = playerData[winningPlayer]['team'];
           Map<String, dynamic> teamScores = Map.from(
             gameData['beloteTeamScores'] ?? {'teamA': 0, 'teamB': 0},
@@ -25223,6 +25249,14 @@ class FirebaseService {
           if (roundOver) {
             teamScores[winnerTeam] =
                 (teamScores[winnerTeam] ?? 0) + 10; // Dix de der
+            if ((teamScores[winnerTeam] ?? 0) >= 162) {
+              final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+              if (currentAuthUid != null) {
+                _db.collection('users').doc(currentAuthUid).set({
+                  'unlockedBadges.belote_capot': FieldValue.serverTimestamp(),
+                }, SetOptions(merge: true));
+              }
+            }
             int targetScore = gameData['beloteTargetScore'] ?? 500;
             bool gameOver =
                 (teamScores['teamA'] >= targetScore) ||
@@ -36626,9 +36660,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 final ownerName =
                     players[ownerId]?['name'] ??
                     AppLocalizations.of(context)!.inconnu;
-                final albumSteps = List<Map<String, dynamic>>.from(
-                  albums[ownerId] ?? [],
-                );
+                final albumSteps = (albums[ownerId] as List? ?? [])
+                    .map((step) => Map<String, dynamic>.from(step as Map))
+                    .toList();
 
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -44725,9 +44759,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     _firebaseService
         .submitDobbleGuess(widget.gameCode, playerId, symbol)
-        .then((_) {
-          // Succès : On réinitialise le compteur d'erreur si on trouve le bon symbole
-          _lastDobbleErrorTime = null;
+        .then((result) {
+          if (result['success'] == true) {
+            // Succès : On réinitialise le compteur d'erreur si on trouve le bon symbole
+            _lastDobbleErrorTime = null;
+          }
         })
         .catchError((e) {
           // --- LOGIQUE DE PÉNALITÉ ---
@@ -60227,7 +60263,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
   List<String> _splitDilemmaOptions(String content) {
     final normalized = content.trim().replaceFirst(RegExp(r'[?]+$'), '');
     final match = RegExp(
-      r'\sou\s',
+      r'\s(ou|or|o)\s',
       caseSensitive: false,
     ).firstMatch(normalized);
 
@@ -64847,6 +64883,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
 enum TimesUpLocalGameState {
   setup,
   wordInput,
+  passPhoneBetweenTurns,
   round1,
   round2,
   round3,
@@ -64956,13 +64993,13 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
     _currentDeck = List.from(_allWords);
 
     setState(() {
-      _gameState = TimesUpLocalGameState.round1;
+      _currentRoundNumber = 1;
       _isFirstTurnOfRound = true;
-      _startTurn();
+      _prepareNextTurn();
     });
   }
 
-  void _startTurn() {
+  void _prepareNextTurn() {
     _turnTimer?.cancel();
     _discardedWords.clear();
 
@@ -64997,6 +65034,27 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         (_activeTeam == 'red' ? _redTurnIndex : _blueTurnIndex) %
         currentTeamPlayers.length;
 
+    setState(() {
+      _gameState = TimesUpLocalGameState.passPhoneBetweenTurns;
+    });
+  }
+
+  void _startTurn() {
+    _turnTimer?.cancel();
+    _discardedWords.clear();
+
+    if (_currentDeck.isEmpty) {
+      _moveToNextRoundPhase();
+      return;
+    }
+
+    TimesUpLocalGameState nextRoundState = TimesUpLocalGameState.round1;
+    if (_currentRoundNumber == 2) {
+      nextRoundState = TimesUpLocalGameState.round2;
+    } else if (_currentRoundNumber >= 3) {
+      nextRoundState = TimesUpLocalGameState.round3;
+    }
+
     _timeRemaining = 30;
     _turnTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
@@ -65009,7 +65067,9 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       });
     });
 
-    setState(() {});
+    setState(() {
+      _gameState = nextRoundState;
+    });
   }
 
   void _endTurn() {
@@ -65018,7 +65078,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
     if (_currentDeck.isEmpty) {
       _moveToNextRoundPhase();
     } else {
-      _startTurn();
+      _prepareNextTurn();
     }
   }
 
@@ -65046,17 +65106,14 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
     _activeTeam = 'red';
 
     if (_currentRoundNumber > _totalRounds) {
-      _gameState = TimesUpLocalGameState.gameOver;
+      setState(() {
+        _gameState = TimesUpLocalGameState.gameOver;
+      });
     } else {
       _currentDeck = List.from(_allWords)..shuffle();
       _discardedWords.clear();
       _isFirstTurnOfRound = true;
-      if (_currentRoundNumber == 2)
-        _gameState = TimesUpLocalGameState.round2;
-      else if (_currentRoundNumber == 3)
-        _gameState = TimesUpLocalGameState.round3;
-
-      _startTurn();
+      _prepareNextTurn();
     }
   }
 
@@ -65103,6 +65160,8 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         return _buildSetupPhase();
       case TimesUpLocalGameState.wordInput:
         return _buildWordInputPhase();
+      case TimesUpLocalGameState.passPhoneBetweenTurns:
+        return _buildPassPhoneScreen();
       case TimesUpLocalGameState.round1:
       case TimesUpLocalGameState.round2:
       case TimesUpLocalGameState.round3:
@@ -65110,6 +65169,87 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       case TimesUpLocalGameState.gameOver:
         return _buildGameOverScreen();
     }
+  }
+
+  Widget _buildPassPhoneScreen() {
+    final List<String> currentTeamPlayers =
+        (_activeTeam == 'red' ? _redTeam : _blueTeam);
+    final String currentGuesser = currentTeamPlayers.isNotEmpty &&
+            _currentPlayerIndex < currentTeamPlayers.length
+        ? currentTeamPlayers[_currentPlayerIndex]
+        : '';
+    final String teamName = _activeTeam == 'red'
+        ? AppLocalizations.of(context)!.equipeRouge
+        : AppLocalizations.of(context)!.equipeBleue;
+    final Color teamColor =
+        _activeTeam == 'red' ? Colors.redAccent : Colors.lightBlueAccent;
+
+    return Center(
+      key: ValueKey('passPhone'),
+      child: Card(
+        color: Colors.blueGrey[900],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.phone_android, size: 64, color: teamColor),
+              SizedBox(height: 20),
+              Text(
+                "${AppLocalizations.of(context)!.passezLeTelephoneA} $currentGuesser",
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                decoration: BoxDecoration(
+                  color: teamColor.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: teamColor),
+                ),
+                child: Text(
+                  teamName,
+                  style: TextStyle(
+                    color: teamColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              SizedBox(height: 12),
+              Text(
+                "Manche $_currentRoundNumber / $_totalRounds",
+                style: TextStyle(color: Colors.white70),
+              ),
+              SizedBox(height: 28),
+              ElevatedButton.icon(
+                icon: Icon(Icons.play_arrow),
+                label: Text(
+                  AppLocalizations.of(context)!.pret,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: teamColor,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: () {
+                  _startTurn();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildSetupPhase() {
@@ -65245,12 +65385,8 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                                   _currentDeck = List.from(_allWords)
                                     ..shuffle();
                                   _isFirstTurnOfRound = true;
-                                  setState(
-                                    () =>
-                                        _gameState =
-                                            TimesUpLocalGameState.round1,
-                                  );
-                                  _startTurn();
+                                  _currentRoundNumber = 1;
+                                  _prepareNextTurn();
                                   return;
                                 }
                               } catch (e) {
