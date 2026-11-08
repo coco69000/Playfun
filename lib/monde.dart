@@ -910,11 +910,12 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     final List players = data['players'] ?? [];
 
     if (data['gameCode'] != null) {
+      if (_isMatchFound) return;
+      _isMatchFound = true;
       _searchTimer?.cancel();
       _redirectTimer?.cancel();
       _matchmakingSubscription?.cancel();
       if (!_isDisposed) {
-        _isMatchFound = true;
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!_isDisposed) {
             Navigator.pushReplacement(
@@ -998,8 +999,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             dominoesTargetScore: widget.dominoesTargetScore,
           );
 
-          await roomSnap.reference.update({'gameCode': gameCode});
           await _firebaseService.startGame(gameCode);
+          await roomSnap.reference.update({'gameCode': gameCode});
         } catch (e) {
           _isLaunchingGame = false;
           print("Erreur à la création de la partie: $e");
