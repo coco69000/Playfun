@@ -6816,6 +6816,7 @@ class FirebaseService {
     if (!gameSnap.exists) return;
     final gameData = gameSnap.data() as Map<String, dynamic>;
     if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
     // Si le Maître-Espion ou l'équipe ne répond pas, on passe le tour à l'autre équipe proprement
     await passCodenamesTurn(gameCode, isAuto: true);
@@ -7004,7 +7005,7 @@ class FirebaseService {
       List<int> positions = List<int>.from(
         allPositions[currentPlayerId] ?? [-1, -1, -1, -1],
       );
-      final bool is2v2 = gameData['petitsChevauxIs2v2'] == true;
+      final bool is2v2 = gameData['petitsChevauxTeamMode'] == true;
       if (is2v2 &&
           playerOrder.length == 4 &&
           positions.every((pos) => pos == 56)) {
@@ -7139,8 +7140,9 @@ class FirebaseService {
               remainingName,
             );
             if (remainingPlayerId != null) {
-              updates['players.$remainingPlayerId.score'] =
-                  FieldValue.increment(1);
+              final currentScore =
+                  (players[remainingPlayerId]?['score'] as num?)?.toInt() ?? 0;
+              players[remainingPlayerId]['score'] = currentScore + 1;
             }
           } else {
             // Cas 2 : Transmission du rôle d'hôte
@@ -10225,6 +10227,7 @@ class FirebaseService {
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       bool isLoup =
           GameData.roleCamps[playerData[voterId]?['role']] == 'loups' ||
+          playerData[voterId]?['role'] == 'Loup Blanc' ||
           playerData[voterId]?['infectionStatus'] == 'infecte';
       if (!isLoup || playerData[voterId]?['status'] != 'vivant') return;
 
@@ -10240,6 +10243,7 @@ class FirebaseService {
               .where(
                 (e) =>
                     (GameData.roleCamps[e.value['role']] == 'loups' ||
+                        e.value['role'] == 'Loup Blanc' ||
                         e.value['infectionStatus'] == 'infecte') &&
                     e.value['status'] == 'vivant',
               )
@@ -11126,8 +11130,8 @@ class FirebaseService {
       // Amoureux mort de chagrin
       List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
       if (lovers.contains(executedId)) {
-        String partnerId = lovers.firstWhere((id) => id != executedId);
-        if (playerData[partnerId]?['status'] == 'vivant') {
+        String partnerId = lovers.firstWhere((id) => id != executedId, orElse: () => '');
+        if (partnerId.isNotEmpty && playerData[partnerId]?['status'] == 'vivant') {
           playerData[partnerId]['status'] = 'mort';
           playerData[partnerId]['revealedRole'] = playerData[partnerId]['role'];
           deaths.add(partnerId);
@@ -12175,6 +12179,7 @@ class FirebaseService {
                 .where(
                   (id) =>
                       GameData.roleCamps[playerData[id]?['role']] == 'loups' ||
+                      playerData[id]?['role'] == 'Loup Blanc' ||
                       playerData[id]?['infectionStatus'] == 'infecte',
                 )
                 .toList();
@@ -23449,19 +23454,19 @@ class FirebaseService {
         return;
       }
 
-      final votes = Map.from(gameData['votes'] as Map<String, dynamic>);
+      final votes = Map<String, dynamic>.from(gameData['votes'] as Map? ?? {});
       final gameType = gameData['gameType'];
       final updates = <String, dynamic>{};
 
       if (gameType == 'Le Menteur' && gameData['isSimplifiedLiar'] == true) {
-        final storyTruths = Map.from(
-          gameData['storyTruths'] as Map<String, dynamic>,
+        final storyTruths = Map<String, dynamic>.from(
+          gameData['storyTruths'] as Map? ?? {},
         );
-        final players = Map.from(gameData['players'] as Map<String, dynamic>);
+        final players = Map<String, dynamic>.from(gameData['players'] as Map? ?? {});
         Map<String, int> roundPoints = {for (var pId in players.keys) pId: 0};
 
         votes.forEach((storyOwnerId, storyVotesMap) {
-          final storyVotes = Map.from(storyVotesMap as Map<String, dynamic>);
+          final storyVotes = Map<String, dynamic>.from(storyVotesMap as Map? ?? {});
           final bool actualTruth = storyTruths[storyOwnerId] ?? false;
 
           storyVotes.forEach((voterId, voteValue) {
@@ -52565,6 +52570,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final myPrivateInfo = myData['privateInfo'];
     final bool amILoup =
         GameData.roleCamps[myRole] == 'loups' ||
+        myRole == 'Loup Blanc' ||
         myData['infectionStatus'] == 'infecte';
     final bool isHost = gameData['hostId'] == playerId;
     final bool isNight = phase == 'nuit';
@@ -52681,6 +52687,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           case 'loups_turn':
             bool targetIsLoup =
                 GameData.roleCamps[playerData[targetId]?['role']] == 'loups' ||
+                playerData[targetId]?['role'] == 'Loup Blanc' ||
                 playerData[targetId]?['infectionStatus'] == 'infecte';
             if (amILoup && myStatus == 'vivant') return !targetIsLoup;
             if (myRole == AppLocalizations.of(context)!.petiteFille &&
@@ -53635,7 +53642,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool isContaminated =
         contaminatedPlayers.contains(pId) &&
         contaminatedPlayers.contains(widget.playerId);
-    final bool isLoupRole = GameData.roleCamps[pData['role']] == 'loups';
+    final bool isLoupRole =
+        GameData.roleCamps[pData['role']] == 'loups' ||
+        pData['role'] == 'Loup Blanc';
     final bool showWolfGlow =
         currentRoundState == 'nuit' &&
         (amICurrentPlayerLoup || isInfected) &&
@@ -53844,6 +53853,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final myRole = myData['role'] ?? AppLocalizations.of(context)!.inconnu;
     final bool amILoup =
         GameData.roleCamps[myRole] == 'loups' ||
+        myRole == 'Loup Blanc' ||
         myData['infectionStatus'] == 'infecte';
     final bool amIDead = myStatus == 'mort';
     final bool amILover = (gameData['lovers'] ?? []).contains(playerId);
@@ -55461,7 +55471,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(5, (index) {
-                      final value = dice.isNotEmpty ? dice[index] : 0;
+                      final value = (dice.length > index) ? dice[index] : 0;
                       final isHeld = heldDice[index];
                       final isOpponentInteracting =
                           (!isMyTurn && liveTappedDie == index);
@@ -57095,7 +57105,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Color? borderColor, {
     double scale = 1.0,
   }) {
+    if (card.isEmpty) return const SizedBox.shrink();
     final String cleanC = card.split('_')[0];
+    if (cleanC.length < 2) return const SizedBox.shrink();
     final String rank = cleanC.substring(0, cleanC.length - 1);
     final String suit = cleanC.substring(cleanC.length - 1);
     final bool isRed = (suit == 'H' || suit == 'D');

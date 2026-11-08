@@ -239,20 +239,25 @@ exports.respondToFriendRequest = onCall(
 
       // 🔴 ÉCRITURES APRÈS
       t.update(userRef, {
-        friendRequests: updatedRequests,
+        const userUpdates = {
+          friendRequests: updatedRequests,
+        });
+    };
+
+    if (accept === true && senderSnap.exists) {
+      t.update(userRef, {
+        friends: admin.firestore.FieldValue.arrayUnion(senderUid),
       });
+      userUpdates.friends = admin.firestore.FieldValue.arrayUnion(senderUid);
+      t.update(senderRef, {
+        friends: admin.firestore.FieldValue.arrayUnion(uid),
+      });
+    }
 
-      if (accept === true && senderSnap.exists) {
-        t.update(userRef, {
-          friends: admin.firestore.FieldValue.arrayUnion(senderUid),
-        });
-        t.update(senderRef, {
-          friends: admin.firestore.FieldValue.arrayUnion(uid),
-        });
-      }
+    t.update(userRef, userUpdates);
 
-      return { success: true, accepted: accept === true };
-    });
+    return { success: true, accepted: accept === true };
+  });
   }
 );
 
@@ -2012,6 +2017,7 @@ exports.onPlayerPresenceChanged = onValueWritten(
 
           // En pleine partie : marquer déconnecté et vérifier si forfait
           // En pleine partie : on marque seulement déconnecté SANS arrêter la partie immédiatement
+          // Le forfait sera géré par cleanupDisconnectedPlayers après le délai de grâce
           const updates = {};
           updates[`players.${playerId}.isOnline`] = false;
           updates[`players.${playerId}.disconnectedAt`] = admin.firestore.FieldValue.serverTimestamp();
@@ -2067,6 +2073,7 @@ exports.onLoungePlayerPresenceChanged = onValueWritten(
         await loungeRef.collection("presences").doc(playerId).delete().catch(() => { });
         await loungeRef.collection("presences").doc(playerId).delete().catch(() => { });
         // S'assurer que l'update n'échoue pas si le salon est inexistant
+        await loungeRef.collection("presences").doc(playerId).delete().catch(() => { });
         await loungeRef.update({
           [`players.${playerId}.isOnline`]: false,
           streamers: admin.firestore.FieldValue.arrayRemove(playerId),
@@ -2077,9 +2084,16 @@ exports.onLoungePlayerPresenceChanged = onValueWritten(
           console.warn(`Lounge ${loungeId} update ignoré:`, err.message);
         }
       });
+        }).catch ((err) => {
+  if (err.code !== 5) { // Ignorer si NOT_FOUND
+    console.warn(`Lounge ${loungeId} update ignoré:`, err.message);
+  }
+});
       } catch (err) {
   console.error(`Erreur onLoungePlayerPresenceChanged (${playerId}):`, err);
 }
+console.error(`Erreur onLoungePlayerPresenceChanged (${playerId}):`, err);
+      }
     }
   }
 );
