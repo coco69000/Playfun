@@ -320,15 +320,23 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
   void _joinGameByCode() async {
     final code = _joinCodeController.text.trim();
     if (code.length != 6) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(MatchmakingLocalization.tr(context, 'codeMustBe6Digits'))));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            MatchmakingLocalization.tr(context, 'codeMustBe6Digits'),
+          ),
+        ),
+      );
       return;
     }
     final playerState = Provider.of<PlayerState>(context, listen: false);
     if (!await playerState.canPlayMultiplayer()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(MatchmakingLocalization.tr(context, 'dailyLimitReached'))),
+        SnackBar(
+          content: Text(
+            MatchmakingLocalization.tr(context, 'dailyLimitReached'),
+          ),
+        ),
       );
       return;
     }
@@ -359,12 +367,36 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
   // Génère la barre de filtres horizontaux
   Widget _buildFilterChips(AppLocalizations? l10n) {
     final filters = [
-      {'id': 'local', 'label': l10n?.modeLocal ?? 'Local', 'icon': Icons.phone_android},
-      {'id': 'multi', 'label': l10n?.friendsTab ?? 'Amis', 'icon': Icons.people},
-      {'id': 'monde', 'label': l10n?.modeMonde ?? 'Monde', 'icon': Icons.public},
-      {'id': 'board', 'label': MatchmakingLocalization.tr(context, 'filterBoard'), 'icon': Icons.grid_on},
-      {'id': 'card', 'label': MatchmakingLocalization.tr(context, 'filterCard'), 'icon': Icons.style},
-      {'id': 'party', 'label': MatchmakingLocalization.tr(context, 'filterParty'), 'icon': Icons.mood},
+      {
+        'id': 'local',
+        'label': l10n?.modeLocal ?? 'Local',
+        'icon': Icons.phone_android,
+      },
+      {
+        'id': 'multi',
+        'label': l10n?.friendsTab ?? 'Amis',
+        'icon': Icons.people,
+      },
+      {
+        'id': 'monde',
+        'label': l10n?.modeMonde ?? 'Monde',
+        'icon': Icons.public,
+      },
+      {
+        'id': 'board',
+        'label': MatchmakingLocalization.tr(context, 'filterBoard'),
+        'icon': Icons.grid_on,
+      },
+      {
+        'id': 'card',
+        'label': MatchmakingLocalization.tr(context, 'filterCard'),
+        'icon': Icons.style,
+      },
+      {
+        'id': 'party',
+        'label': MatchmakingLocalization.tr(context, 'filterParty'),
+        'icon': Icons.mood,
+      },
     ];
 
     return SingleChildScrollView(
@@ -411,8 +443,12 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
     List<Map<String, dynamic>> filteredGames =
         allAppGames.where((game) {
           // 1. Recherche par texte
-          final locTitle = GameRulesLocalization.getGameTitle(context, game['name'] as String);
-          final matchesSearch = game['name'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          final locTitle = GameRulesLocalization.getGameTitle(
+            context,
+            game['name'] as String,
+          );
+          final matchesSearch =
+              game['name'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
               locTitle.toLowerCase().contains(_searchQuery.toLowerCase());
           if (!matchesSearch) return false;
 
@@ -465,7 +501,8 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                     child: TextField(
                       controller: _joinCodeController,
                       decoration: InputDecoration(
-                        hintText: l10n?.gameCode ?? "Code de partie (6 chiffres)",
+                        hintText:
+                            l10n?.gameCode ?? "Code de partie (6 chiffres)",
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -511,8 +548,11 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                       icon: Icons.search_off_rounded,
                       title: AppLocalizations.of(context)!.aucunJeuTrouve,
                       subtitle:
-                          AppLocalizations.of(context)!.essaieDAjusterTesFiltres,
-                      actionLabel: AppLocalizations.of(context)!.reinitialiserLesFiltres,
+                          AppLocalizations.of(
+                            context,
+                          )!.essaieDAjusterTesFiltres,
+                      actionLabel:
+                          AppLocalizations.of(context)!.reinitialiserLesFiltres,
                       actionIcon: Icons.refresh,
                       onActionPressed: () {
                         setState(() {
@@ -579,7 +619,9 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                       sigmaY: 1.5,
                                     ),
                                     child: Container(
-                                      color: Colors.black.withValues(alpha: 0.48),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.48,
+                                      ),
                                       padding: const EdgeInsets.all(12.0),
                                       child: Column(
                                         mainAxisAlignment:
@@ -593,7 +635,10 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            GameRulesLocalization.getGameTitle(context, game['name'] as String),
+                                            GameRulesLocalization.getGameTitle(
+                                              context,
+                                              game['name'] as String,
+                                            ),
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15,
@@ -617,19 +662,28 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                             children: [
                                               if (modes.contains('local'))
                                                 _buildModeBadge(
-                                                  label: AppLocalizations.of(context)!.modeLocal,
+                                                  label:
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.modeLocal,
                                                   icon: Icons.phone_android,
                                                   color: Colors.green.shade800,
                                                 ),
                                               if (modes.contains('multi'))
                                                 _buildModeBadge(
-                                                  label: AppLocalizations.of(context)!.friendsTab,
+                                                  label:
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.friendsTab,
                                                   icon: Icons.people,
                                                   color: Colors.blue.shade800,
                                                 ),
                                               if (modes.contains('monde'))
                                                 _buildModeBadge(
-                                                  label: AppLocalizations.of(context)!.modeMonde,
+                                                  label:
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.modeMonde,
                                                   icon: Icons.public,
                                                   color: Colors.purple.shade800,
                                                 ),
@@ -772,7 +826,9 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
         MaterialPageRoute(
           builder:
               (_) => CreateGameScreen(
-                playerName: playerState.userName ?? AppLocalizations.of(context)!.joueur,
+                playerName:
+                    playerState.userName ??
+                    AppLocalizations.of(context)!.joueur,
                 initialGame: gameName,
                 playerId: widget.playerId,
                 isWorldMode: true,
@@ -853,24 +909,37 @@ class _FriendsScreenState extends State<FriendsScreen> {
                 dividerColor: Colors.transparent,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white54,
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                labelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
                 tabs: [
                   Tab(
                     icon: const Icon(Icons.people_alt_rounded, size: 20),
-                    text: friends.isNotEmpty ? "${AppLocalizations.of(context)!.friendsTab} (${friends.length})" : AppLocalizations.of(context)!.friendsTab,
+                    text:
+                        friends.isNotEmpty
+                            ? "${AppLocalizations.of(context)!.friendsTab} (${friends.length})"
+                            : AppLocalizations.of(context)!.friendsTab,
                   ),
                   Tab(
                     icon: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection('direct_chats')
-                          .where('participants', arrayContains: widget.playerId)
-                          .snapshots(),
+                      stream:
+                          FirebaseFirestore.instance
+                              .collection('direct_chats')
+                              .where(
+                                'participants',
+                                arrayContains: widget.playerId,
+                              )
+                              .snapshots(),
                       builder: (context, snap) {
                         int totalUnread = 0;
                         if (snap.hasData) {
                           for (var doc in snap.data!.docs) {
                             final m = doc.data() as Map<String, dynamic>;
-                            final count = (m['unreadCount']?[widget.playerId] as num?)?.toInt() ?? 0;
+                            final count =
+                                (m['unreadCount']?[widget.playerId] as num?)
+                                    ?.toInt() ??
+                                0;
                             totalUnread += count;
                           }
                         }
@@ -878,7 +947,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                           return Badge(
                             label: Text('$totalUnread'),
                             backgroundColor: Colors.redAccent,
-                            child: const Icon(Icons.chat_bubble_rounded, size: 20),
+                            child: const Icon(
+                              Icons.chat_bubble_rounded,
+                              size: 20,
+                            ),
                           );
                         }
                         return const Icon(Icons.chat_bubble_rounded, size: 20);
@@ -905,7 +977,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                               child: TextField(
                                 controller: _searchController,
                                 decoration: InputDecoration(
-                                  hintText: MatchmakingLocalization.tr(context, 'searchByUsername'),
+                                  hintText: MatchmakingLocalization.tr(
+                                    context,
+                                    'searchByUsername',
+                                  ),
                                   prefixIcon: const Icon(Icons.search),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -933,7 +1008,12 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                           strokeWidth: 2,
                                         ),
                                       )
-                                      : Text(MatchmakingLocalization.tr(context, 'searchButton')),
+                                      : Text(
+                                        MatchmakingLocalization.tr(
+                                          context,
+                                          'searchButton',
+                                        ),
+                                      ),
                             ),
                           ],
                         ),
@@ -944,7 +1024,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
-                            MatchmakingLocalization.tr(context, 'searchResults'),
+                            MatchmakingLocalization.tr(
+                              context,
+                              'searchResults',
+                            ),
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -958,7 +1041,9 @@ class _FriendsScreenState extends State<FriendsScreen> {
                               var user = _searchResults[index];
                               bool isFriend = friends.contains(user['uid']);
                               return Card(
-                                color: Colors.deepPurple[900]?.withValues(alpha: 0.5),
+                                color: Colors.deepPurple[900]?.withValues(
+                                  alpha: 0.5,
+                                ),
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(12),
                                   onTap: () {
@@ -972,21 +1057,37 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                     width: 150,
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         CircleAvatar(
-                                          child: Text(user['name'] != null && user['name'].toString().isNotEmpty ? user['name'][0].toUpperCase() : '?'),
+                                          child: Text(
+                                            user['name'] != null &&
+                                                    user['name']
+                                                        .toString()
+                                                        .isNotEmpty
+                                                ? user['name'][0].toUpperCase()
+                                                : '?',
+                                          ),
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
-                                          user['name'] ?? AppLocalizations.of(context)!.joueur,
+                                          user['name'] ??
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.joueur,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         const SizedBox(height: 8),
                                         isFriend
                                             ? Text(
-                                              MatchmakingLocalization.tr(context, 'alreadyFriends'),
+                                              MatchmakingLocalization.tr(
+                                                context,
+                                                'alreadyFriends',
+                                              ),
                                               style: const TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 12,
@@ -996,20 +1097,44 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                               onPressed: () {
                                                 playerState.sendFriendRequest(
                                                   user['uid'],
-                                                  user['name'] ?? AppLocalizations.of(context)!.joueur,
+                                                  user['name'] ??
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.joueur,
                                                 );
-                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                ScaffoldMessenger.of(
+                                                  context,
+                                                ).showSnackBar(
                                                   SnackBar(
-                                                    content: Text(MatchmakingLocalization.tr(context, 'requestSentTo', {'name': user['name'] ?? AppLocalizations.of(context)!.ceJoueur})),
+                                                    content: Text(
+                                                      MatchmakingLocalization.tr(
+                                                        context,
+                                                        'requestSentTo',
+                                                        {
+                                                          'name':
+                                                              user['name'] ??
+                                                              AppLocalizations.of(
+                                                                context,
+                                                              )!.ceJoueur,
+                                                        },
+                                                      ),
+                                                    ),
                                                   ),
                                                 );
                                                 setState(
-                                                  () => _searchResults.removeAt(index),
+                                                  () => _searchResults.removeAt(
+                                                    index,
+                                                  ),
                                                 );
                                               },
                                               child: Text(
-                                                MatchmakingLocalization.tr(context, 'addFriend'),
-                                                style: const TextStyle(fontSize: 12),
+                                                MatchmakingLocalization.tr(
+                                                  context,
+                                                  'addFriend',
+                                                ),
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                ),
                                               ),
                                             ),
                                       ],
@@ -1028,7 +1153,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
-                            MatchmakingLocalization.tr(context, 'requestsReceived'),
+                            MatchmakingLocalization.tr(
+                              context,
+                              'requestsReceived',
+                            ),
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -1036,49 +1164,57 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             ),
                           ),
                         ),
-                        ...requests
-                            .map(
-                              (r) => ListTile(
-                                leading: const CircleAvatar(
-                                  backgroundColor: Colors.amber,
-                                  child: Icon(Icons.person, color: Colors.black),
-                                ),
-                                title: Text(MatchmakingLocalization.tr(context, 'wantsToBeYourFriend', {'name': r['name'] ?? ''})),
-                                onTap: () {
-                                  showUserProfileDialog(
-                                    context,
-                                    targetUid: r['uid'],
-                                    currentUserId: widget.playerId,
-                                  );
-                                },
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.check_circle,
-                                        color: Colors.greenAccent,
-                                      ),
-                                      onPressed:
-                                          () => playerState.respondToFriendRequest(
-                                            r['uid'],
-                                            r['name'],
-                                            true,
-                                          ),
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.cancel, color: Colors.redAccent),
-                                      onPressed:
-                                          () => playerState.respondToFriendRequest(
-                                            r['uid'],
-                                            r['name'],
-                                            false,
-                                          ),
-                                    ),
-                                  ],
-                                ),
+                        ...requests.map(
+                          (r) => ListTile(
+                            leading: const CircleAvatar(
+                              backgroundColor: Colors.amber,
+                              child: Icon(Icons.person, color: Colors.black),
+                            ),
+                            title: Text(
+                              MatchmakingLocalization.tr(
+                                context,
+                                'wantsToBeYourFriend',
+                                {'name': r['name'] ?? ''},
                               ),
                             ),
+                            onTap: () {
+                              showUserProfileDialog(
+                                context,
+                                targetUid: r['uid'],
+                                currentUserId: widget.playerId,
+                              );
+                            },
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.check_circle,
+                                    color: Colors.greenAccent,
+                                  ),
+                                  onPressed:
+                                      () => playerState.respondToFriendRequest(
+                                        r['uid'],
+                                        r['name'],
+                                        true,
+                                      ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.cancel,
+                                    color: Colors.redAccent,
+                                  ),
+                                  onPressed:
+                                      () => playerState.respondToFriendRequest(
+                                        r['uid'],
+                                        r['name'],
+                                        false,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         const Divider(),
                       ],
 
@@ -1086,8 +1222,15 @@ class _FriendsScreenState extends State<FriendsScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          MatchmakingLocalization.tr(context, 'myFriendsCount', {'count': friends.length.toString()}),
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          MatchmakingLocalization.tr(
+                            context,
+                            'myFriendsCount',
+                            {'count': friends.length.toString()},
+                          ),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Expanded(
@@ -1095,16 +1238,22 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             friends.isEmpty
                                 ? EmptyStateView(
                                   icon: Icons.person_add_alt_1_rounded,
-                                  title: MatchmakingLocalization.tr(context, 'noFriendsYet'),
-                                  subtitle:
-                                      MatchmakingLocalization.tr(context, 'searchFriendsPrompt'),
+                                  title: MatchmakingLocalization.tr(
+                                    context,
+                                    'noFriendsYet',
+                                  ),
+                                  subtitle: MatchmakingLocalization.tr(
+                                    context,
+                                    'searchFriendsPrompt',
+                                  ),
                                 )
                                 : ListView.builder(
                                   itemCount: friends.length,
                                   itemBuilder: (context, index) {
                                     String friendId = friends[index];
                                     String friendName =
-                                        playerState.friendNamesCache[friendId] ??
+                                        playerState
+                                            .friendNamesCache[friendId] ??
                                         'Chargement...';
                                     return ListTile(
                                       leading: CircleAvatar(
@@ -1117,7 +1266,9 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                       ),
                                       title: Text(
                                         friendName,
-                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       onTap: () {
                                         showUserProfileDialog(
@@ -1134,7 +1285,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                               Icons.chat_bubble_rounded,
                                               color: Colors.cyanAccent,
                                             ),
-                                            tooltip: AppLocalizations.of(context)!.sendMessageTooltip,
+                                            tooltip:
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.sendMessageTooltip,
                                             onPressed: () {
                                               Navigator.push(
                                                 context,
@@ -1143,7 +1297,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                                       (_) => DirectChatScreen(
                                                         friendUid: friendId,
                                                         friendName: friendName,
-                                                        currentUserId: widget.playerId,
+                                                        currentUserId:
+                                                            widget.playerId,
                                                       ),
                                                 ),
                                               );
@@ -1155,9 +1310,14 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                               color: Colors.white30,
                                             ),
                                             onPressed: () {
-                                              playerState.removeFriend(friendId);
+                                              playerState.removeFriend(
+                                                friendId,
+                                              );
                                             },
-                                            tooltip: MatchmakingLocalization.tr(context, 'removeFriend'),
+                                            tooltip: MatchmakingLocalization.tr(
+                                              context,
+                                              'removeFriend',
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1170,10 +1330,14 @@ class _FriendsScreenState extends State<FriendsScreen> {
 
                   // --- ONGLET 2 : MESSAGES ---
                   StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('direct_chats')
-                        .where('participants', arrayContains: widget.playerId)
-                        .snapshots(),
+                    stream:
+                        FirebaseFirestore.instance
+                            .collection('direct_chats')
+                            .where(
+                              'participants',
+                              arrayContains: widget.playerId,
+                            )
+                            .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
@@ -1182,15 +1346,22 @@ class _FriendsScreenState extends State<FriendsScreen> {
                       chats.sort((a, b) {
                         final aData = a.data() as Map<String, dynamic>;
                         final bData = b.data() as Map<String, dynamic>;
-                        final aTime = (aData['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime(0);
-                        final bTime = (bData['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime(0);
+                        final aTime =
+                            (aData['lastMessageTime'] as Timestamp?)
+                                ?.toDate() ??
+                            DateTime(0);
+                        final bTime =
+                            (bData['lastMessageTime'] as Timestamp?)
+                                ?.toDate() ??
+                            DateTime(0);
                         return bTime.compareTo(aTime);
                       });
                       if (chats.isEmpty) {
                         return EmptyStateView(
                           icon: Icons.chat_bubble_outline_rounded,
                           title: AppLocalizations.of(context)!.noMessagesTitle,
-                          subtitle: AppLocalizations.of(context)!.noMessagesSubtitle,
+                          subtitle:
+                              AppLocalizations.of(context)!.noMessagesSubtitle,
                         );
                       }
 
@@ -1198,38 +1369,63 @@ class _FriendsScreenState extends State<FriendsScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         itemCount: chats.length,
                         itemBuilder: (context, idx) {
-                          final data = chats[idx].data() as Map<String, dynamic>;
-                          final participants = List<String>.from(data['participants'] ?? []);
+                          final data =
+                              chats[idx].data() as Map<String, dynamic>;
+                          final participants = List<String>.from(
+                            data['participants'] ?? [],
+                          );
                           final friendUid = participants.firstWhere(
                             (p) => p != widget.playerId,
                             orElse: () => '',
                           );
-                          final participantNames = (data['participantNames'] as Map<String, dynamic>?) ?? {};
-                          final friendName = participantNames[friendUid] ??
+                          final participantNames =
+                              (data['participantNames']
+                                  as Map<String, dynamic>?) ??
+                              {};
+                          final friendName =
+                              participantNames[friendUid] ??
                               playerState.friendNamesCache[friendUid] ??
                               'Ami';
                           final lastMessage = data['lastMessage'] ?? '';
-                          final unread = (data['unreadCount']?[widget.playerId] as num?)?.toInt() ?? 0;
-                          final time = (data['lastMessageTime'] as Timestamp?)?.toDate();
+                          final unread =
+                              (data['unreadCount']?[widget.playerId] as num?)
+                                  ?.toInt() ??
+                              0;
+                          final time =
+                              (data['lastMessageTime'] as Timestamp?)?.toDate();
 
                           return Card(
-                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 6,
+                            ),
                             color: const Color(0xFF1C1D2A),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                               side: BorderSide(
-                                color: unread > 0 ? Colors.cyanAccent.withOpacity(0.5) : Colors.white10,
+                                color:
+                                    unread > 0
+                                        ? Colors.cyanAccent.withOpacity(0.5)
+                                        : Colors.white10,
                               ),
                             ),
                             child: ListTile(
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
                               leading: Stack(
                                 children: [
                                   CircleAvatar(
                                     backgroundColor: AppColors.primary,
                                     child: Text(
-                                      friendName.isNotEmpty ? friendName[0].toUpperCase() : '?',
-                                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                                      friendName.isNotEmpty
+                                          ? friendName[0].toUpperCase()
+                                          : '?',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                   if (unread > 0)
@@ -1248,13 +1444,17 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                 ],
                               ),
                               title: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
                                       friendName,
                                       style: TextStyle(
-                                        fontWeight: unread > 0 ? FontWeight.bold : FontWeight.w600,
+                                        fontWeight:
+                                            unread > 0
+                                                ? FontWeight.bold
+                                                : FontWeight.w600,
                                         color: Colors.white,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -1265,7 +1465,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                       _formatMessageTime(time),
                                       style: TextStyle(
                                         fontSize: 11,
-                                        color: unread > 0 ? Colors.cyanAccent : Colors.white38,
+                                        color:
+                                            unread > 0
+                                                ? Colors.cyanAccent
+                                                : Colors.white38,
                                       ),
                                     ),
                                 ],
@@ -1280,8 +1483,14 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          color: unread > 0 ? Colors.white : Colors.white54,
-                                          fontWeight: unread > 0 ? FontWeight.w600 : FontWeight.normal,
+                                          color:
+                                              unread > 0
+                                                  ? Colors.white
+                                                  : Colors.white54,
+                                          fontWeight:
+                                              unread > 0
+                                                  ? FontWeight.w600
+                                                  : FontWeight.normal,
                                           fontSize: 13,
                                         ),
                                       ),
@@ -1289,10 +1498,15 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                     if (unread > 0)
                                       Container(
                                         margin: const EdgeInsets.only(left: 6),
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 2,
+                                        ),
                                         decoration: BoxDecoration(
                                           color: Colors.cyanAccent,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
                                         ),
                                         child: Text(
                                           '$unread',
@@ -1368,11 +1582,13 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
   }
 
   void _clearUnread() {
-    FirebaseFirestore.instance.collection('direct_chats').doc(_chatId).set({
-      'unreadCount': {
-        widget.currentUserId: 0,
-      },
-    }, SetOptions(merge: true)).catchError((_) {});
+    FirebaseFirestore.instance
+        .collection('direct_chats')
+        .doc(_chatId)
+        .set({
+          'unreadCount': {widget.currentUserId: 0},
+        }, SetOptions(merge: true))
+        .catchError((_) {});
   }
 
   @override
@@ -1393,7 +1609,9 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
       final ps = Provider.of<PlayerState>(context, listen: false);
       final myName = ps.userName ?? AppLocalizations.of(context)!.joueur;
 
-      final chatRef = FirebaseFirestore.instance.collection('direct_chats').doc(_chatId);
+      final chatRef = FirebaseFirestore.instance
+          .collection('direct_chats')
+          .doc(_chatId);
 
       // 1. Ajouter le message
       await chatRef.collection('messages').add({
@@ -1452,8 +1670,14 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
               radius: 18,
               backgroundColor: AppColors.primary,
               child: Text(
-                widget.friendName.isNotEmpty ? widget.friendName[0].toUpperCase() : '?',
-                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
+                widget.friendName.isNotEmpty
+                    ? widget.friendName[0].toUpperCase()
+                    : '?',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -1463,7 +1687,10 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                 children: [
                   Text(
                     widget.friendName,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
@@ -1477,7 +1704,10 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline_rounded, color: Colors.cyanAccent),
+            icon: const Icon(
+              Icons.info_outline_rounded,
+              color: Colors.cyanAccent,
+            ),
             tooltip: AppLocalizations.of(context)!.seeProfileTooltip,
             onPressed: () {
               showUserProfileDialog(
@@ -1493,13 +1723,14 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('direct_chats')
-                  .doc(_chatId)
-                  .collection('messages')
-                  .orderBy('timestamp', descending: true)
-                  .limit(100)
-                  .snapshots(),
+              stream:
+                  FirebaseFirestore.instance
+                      .collection('direct_chats')
+                      .doc(_chatId)
+                      .collection('messages')
+                      .orderBy('timestamp', descending: true)
+                      .limit(100)
+                      .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
@@ -1512,11 +1743,20 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.chat_bubble_outline_rounded, size: 48, color: Colors.white24),
+                          const Icon(
+                            Icons.chat_bubble_outline_rounded,
+                            size: 48,
+                            color: Colors.white24,
+                          ),
                           const SizedBox(height: 12),
                           Text(
-                            AppLocalizations.of(context)!.sayHelloToFriend(widget.friendName),
-                            style: const TextStyle(color: Colors.white54, fontSize: 15),
+                            AppLocalizations.of(
+                              context,
+                            )!.sayHelloToFriend(widget.friendName),
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              fontSize: 15,
+                            ),
                           ),
                         ],
                       ),
@@ -1527,7 +1767,10 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                 return ListView.builder(
                   controller: _scrollCtrl,
                   reverse: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   itemCount: msgs.length,
                   itemBuilder: (context, idx) {
                     final data = msgs[idx].data() as Map<String, dynamic>;
@@ -1536,27 +1779,41 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                     final time = (data['timestamp'] as Timestamp?)?.toDate();
 
                     return Align(
-                      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment:
+                          isMe ? Alignment.centerRight : Alignment.centerLeft,
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 4),
                         constraints: BoxConstraints(
                           maxWidth: MediaQuery.of(context).size.width * 0.75,
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
-                          gradient: isMe
-                              ? const LinearGradient(
-                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                )
-                              : null,
+                          gradient:
+                              isMe
+                                  ? const LinearGradient(
+                                    colors: [
+                                      Color(0xFF6A11CB),
+                                      Color(0xFF2575FC),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  )
+                                  : null,
                           color: isMe ? null : const Color(0xFF242638),
                           borderRadius: BorderRadius.only(
                             topLeft: const Radius.circular(16),
                             topRight: const Radius.circular(16),
-                            bottomLeft: isMe ? const Radius.circular(16) : const Radius.circular(4),
-                            bottomRight: isMe ? const Radius.circular(4) : const Radius.circular(16),
+                            bottomLeft:
+                                isMe
+                                    ? const Radius.circular(16)
+                                    : const Radius.circular(4),
+                            bottomRight:
+                                isMe
+                                    ? const Radius.circular(4)
+                                    : const Radius.circular(16),
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -1567,11 +1824,18 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                           ],
                         ),
                         child: Column(
-                          crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          crossAxisAlignment:
+                              isMe
+                                  ? CrossAxisAlignment.end
+                                  : CrossAxisAlignment.start,
                           children: [
                             Text(
                               text,
-                              style: const TextStyle(color: Colors.white, fontSize: 15, height: 1.3),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                height: 1.3,
+                              ),
                             ),
                             if (time != null) ...[
                               const SizedBox(height: 4),
@@ -1593,7 +1857,12 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(12, 8, 12, MediaQuery.of(context).padding.bottom + 8),
+            padding: EdgeInsets.fromLTRB(
+              12,
+              8,
+              12,
+              MediaQuery.of(context).padding.bottom + 8,
+            ),
             decoration: const BoxDecoration(
               color: Color(0xFF1E1E2F),
               border: Border(top: BorderSide(color: Colors.white10)),
@@ -1611,7 +1880,8 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                       controller: _msgCtrl,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.writeAMessageHint,
+                        hintText:
+                            AppLocalizations.of(context)!.writeAMessageHint,
                         hintStyle: const TextStyle(color: Colors.white38),
                         border: InputBorder.none,
                       ),
@@ -1628,7 +1898,11 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                     ),
                   ),
                   child: IconButton(
-                    icon: const Icon(Icons.send_rounded, color: Colors.white, size: 20),
+                    icon: const Icon(
+                      Icons.send_rounded,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                     onPressed: _sendMessage,
                   ),
                 ),
@@ -1650,9 +1924,11 @@ class StatsEtoileScreen extends StatelessWidget {
     final stats = playerState.gameStats;
     final int totalPlayed = stats.values.fold<int>(
       0,
-      (sum, stat) => sum + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
+      (sum, stat) =>
+          sum + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
     );
-    final double avgXpPerGame = totalPlayed > 0 ? (playerState.xp / totalPlayed) : 0.0;
+    final double avgXpPerGame =
+        totalPlayed > 0 ? (playerState.xp / totalPlayed) : 0.0;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -1672,14 +1948,22 @@ class StatsEtoileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF67E8F9).withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: const Color(0xFF67E8F9).withValues(alpha: 0.4)),
+                      border: Border.all(
+                        color: const Color(0xFF67E8F9).withValues(alpha: 0.4),
+                      ),
                     ),
                     child: Text(
-                      MatchmakingLocalization.tr(context, playerState.rankTitleKey),
+                      MatchmakingLocalization.tr(
+                        context,
+                        playerState.rankTitleKey,
+                      ),
                       style: const TextStyle(
                         color: Color(0xFF67E8F9),
                         fontWeight: FontWeight.bold,
@@ -1700,10 +1984,19 @@ class StatsEtoileScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${playerState.xp} / ${playerState.xpForNextLevel} XP"),
                       Text(
-                        MatchmakingLocalization.tr(context, 'xpRemaining', {'count': (playerState.xpForNextLevel - playerState.xp).toString()}),
-                        style: const TextStyle(color: Colors.white54, fontSize: 12),
+                        "${playerState.xp} / ${playerState.xpForNextLevel} XP",
+                      ),
+                      Text(
+                        MatchmakingLocalization.tr(context, 'xpRemaining', {
+                          'count':
+                              (playerState.xpForNextLevel - playerState.xp)
+                                  .toString(),
+                        }),
+                        style: const TextStyle(
+                          color: Colors.white54,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -1722,19 +2015,34 @@ class StatsEtoileScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.04),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: const Color(0xFF67E8F9).withValues(alpha: 0.3)),
+                        border: Border.all(
+                          color: const Color(0xFF67E8F9).withValues(alpha: 0.3),
+                        ),
                       ),
                       child: Column(
                         children: [
-                          const Icon(Icons.military_tech_rounded, color: Color(0xFF67E8F9), size: 22),
+                          const Icon(
+                            Icons.military_tech_rounded,
+                            color: Color(0xFF67E8F9),
+                            size: 22,
+                          ),
                           const SizedBox(height: 4),
                           Text(
                             "${playerState.totalCumulativeXp} XP",
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                           Text(
-                            MatchmakingLocalization.tr(context, 'totalAccumulated'),
-                            style: const TextStyle(fontSize: 10, color: Colors.white54),
+                            MatchmakingLocalization.tr(
+                              context,
+                              'totalAccumulated',
+                            ),
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.white54,
+                            ),
                           ),
                         ],
                       ),
@@ -1747,19 +2055,34 @@ class StatsEtoileScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.04),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.purpleAccent.withValues(alpha: 0.3)),
+                        border: Border.all(
+                          color: Colors.purpleAccent.withValues(alpha: 0.3),
+                        ),
                       ),
                       child: Column(
                         children: [
-                          const Icon(Icons.auto_graph_rounded, color: Colors.purpleAccent, size: 22),
+                          const Icon(
+                            Icons.auto_graph_rounded,
+                            color: Colors.purpleAccent,
+                            size: 22,
+                          ),
                           const SizedBox(height: 4),
                           Text(
                             "${avgXpPerGame.toStringAsFixed(1)} XP",
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                           Text(
-                            MatchmakingLocalization.tr(context, 'averagePerGame'),
-                            style: const TextStyle(fontSize: 10, color: Colors.white54),
+                            MatchmakingLocalization.tr(
+                              context,
+                              'averagePerGame',
+                            ),
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.white54,
+                            ),
                           ),
                         ],
                       ),
@@ -1776,7 +2099,10 @@ class StatsEtoileScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   MatchmakingLocalization.tr(context, 'statsPerGame'),
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -1784,46 +2110,58 @@ class StatsEtoileScreen extends StatelessWidget {
 
             stats.isEmpty
                 ? Padding(
-                    padding: const EdgeInsets.all(32.0),
-                    child: Center(
-                      child: Text(
-                        MatchmakingLocalization.tr(context, 'noGamesPlayedYet'),
-                        style: const TextStyle(color: Colors.white54),
-                      ),
+                  padding: const EdgeInsets.all(32.0),
+                  child: Center(
+                    child: Text(
+                      MatchmakingLocalization.tr(context, 'noGamesPlayedYet'),
+                      style: const TextStyle(color: Colors.white54),
                     ),
-                  )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: stats.keys.length,
-                    itemBuilder: (context, index) {
-                      String gameName = stats.keys.elementAt(index);
-                      int played = stats[gameName]['played'] ?? 0;
-                      int won = stats[gameName]['won'] ?? 0;
-                      int gameXp = (stats[gameName]['xp'] as num?)?.toInt() ?? (won * 25 + (played - won) * 8);
-
-                      return ListTile(
-                        leading: const Icon(
-                          Icons.videogame_asset,
-                          color: Colors.cyanAccent,
-                        ),
-                        title: Text(
-                          gameName,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(MatchmakingLocalization.tr(context, 'gameStatsSummary', {'played': played.toString(), 'won': won.toString(), 'xp': gameXp.toString()})),
-                        trailing: Text(
-                          played > 0
-                              ? "${((won / played) * 100).toStringAsFixed(0)} %"
-                              : "0 %",
-                          style: const TextStyle(
-                            color: Colors.greenAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      );
-                    },
                   ),
+                )
+                : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: stats.keys.length,
+                  itemBuilder: (context, index) {
+                    String gameName = stats.keys.elementAt(index);
+                    int played = stats[gameName]['played'] ?? 0;
+                    int won = stats[gameName]['won'] ?? 0;
+                    int gameXp =
+                        (stats[gameName]['xp'] as num?)?.toInt() ??
+                        (won * 25 + (played - won) * 8);
+
+                    return ListTile(
+                      leading: const Icon(
+                        Icons.videogame_asset,
+                        color: Colors.cyanAccent,
+                      ),
+                      title: Text(
+                        gameName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        MatchmakingLocalization.tr(
+                          context,
+                          'gameStatsSummary',
+                          {
+                            'played': played.toString(),
+                            'won': won.toString(),
+                            'xp': gameXp.toString(),
+                          },
+                        ),
+                      ),
+                      trailing: Text(
+                        played > 0
+                            ? "${((won / played) * 100).toStringAsFixed(0)} %"
+                            : "0 %",
+                        style: const TextStyle(
+                          color: Colors.greenAccent,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  },
+                ),
           ],
         ),
       ),

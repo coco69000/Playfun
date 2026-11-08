@@ -31681,26 +31681,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
-      // L'app est en arrière-plan â€â€ si pas de retour dans 60s, retirer le joueur
-      _rtGamePresenceRef?.set({
-        'isOnline': false,
-        'lastSeen': ServerValue.timestamp,
-      }).catchError((e) {
-        debugPrint("RTDB game pause error: $e");
-      });
+      // Ne PAS mettre isOnline: false immédiatement pour éviter un forfait instantané
+      // si le joueur baisse le panneau de notifications ou reçoit un appel/SMS.
+      // On lance un compte à rebours de grâce de 40 secondes :
       _pauseRemovalTimer?.cancel();
-      _pauseRemovalTimer = Timer(const Duration(seconds: 30), () {
+      _pauseRemovalTimer = Timer(const Duration(seconds: 40), () {
+        _rtGamePresenceRef?.set({
+          'isOnline': false,
+          'lastSeen': ServerValue.timestamp,
+        }).catchError((_) {});
         _firebaseService.removePlayerFromGame(widget.gameCode, widget.playerId);
       });
     } else if (state == AppLifecycleState.resumed) {
+      // Le joueur est revenu à temps : on annule l'expulsion
       _pauseRemovalTimer?.cancel();
       _pauseRemovalTimer = null;
       _rtGamePresenceRef?.set({
         'isOnline': true,
         'lastSeen': ServerValue.timestamp,
-      }).catchError((e) {
-        debugPrint("RTDB game resume error: $e");
-      });
+      }).catchError((_) {});
       _sendHeartbeat();
     } else if (state == AppLifecycleState.detached) {
       _rtGamePresenceRef?.set({
@@ -33685,7 +33684,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     baseGameXp: xpEarned,
                   );
                 } else {
-                  finalAwardedXp = await ps.addXp(xpEarned);
+                  // La Cloud Function sécurisée s'occupe d'ajouter les pièces, l'XP et les badges
                   await ps.claimGameReward(widget.gameCode);
                 }
 
@@ -62404,7 +62403,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                 onSelectionChanged:
                     (s) => setState(() => _turnDuration = s.first),
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.resolveWith<Color?>((
+                  foregroundColor: WidgetStateProperty.resolveWith<Color?>((
                     states,
                   ) {
                     return _useGlobalTimer ? Colors.grey : null;

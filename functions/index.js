@@ -787,17 +787,13 @@ exports.generateAiWords = onCall(
     let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 50));
 
     const safeInstructions = String(instructions)
-      .slice(0, 350)
-      .slice(0, 600)
+      .slice(0, 500)
       .replace(/[\r\n"`]/g, " ")
-      .replace(/[^a-zA-Z0-9À-ÿ\s,.\-':/&?+!()]/g, "")
       .replace(/[^\p{L}\p{N}\s,.\-':/&?+!()_{}]/gu, "")
       .trim();
 
     const safeGameType = String(gameType)
       .slice(0, 50)
-      .replace(/[^a-zA-Z0-9À-ÿ\s,-]/g, "")
-      .slice(0, 60)
       .replace(/[^\p{L}\p{N}\s,'\-&!?.]/gu, "")
       .trim();
 

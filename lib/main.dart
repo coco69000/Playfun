@@ -83,23 +83,11 @@ Future<void> setAppLanguage(String? code) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    final saved = (await SharedPreferences.getInstance()).getString(
-      'app_language',
-    );
-    if (saved != null) {
-      appLocale.value = Locale(saved);
-      GameWords.setLanguage(saved);
-    }
-  } catch (_) {}
-  ForceUpdateService.navigatorKey = GlobalKey<NavigatorState>();
-  await ForceUpdateService.init();
-  await Supabase.initialize(
-    url: 'https://sarxmbhxptzrsahuymhr.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhcnhtYmh4cHR6cnNhaHV5bWhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzMzQ1OTgsImV4cCI6MjA3NDkxMDU5OH0.HBNOwCyDNQoPgkzxMEubkMARsWulUS7NcJs_Mg83WVg',
-  );
+
+  // 1. Initialiser Firebase d'abord
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // 2. App Check
   try {
     // Mode permissif pour éviter tout blocage d'attestation sur les builds Sideloadly et debug
     await FirebaseAppCheck.instance.activate(
@@ -109,6 +97,25 @@ void main() async {
   } catch (e) {
     print("[AppCheck] Activation note: $e");
   }
+
+  // 3. Préférences & Services tiers
+  try {
+    final saved = (await SharedPreferences.getInstance()).getString(
+      'app_language',
+    );
+    if (saved != null) {
+      appLocale.value = Locale(saved);
+      GameWords.setLanguage(saved);
+    }
+  } catch (_) {}
+
+  ForceUpdateService.navigatorKey = GlobalKey<NavigatorState>();
+  await ForceUpdateService.init();
+  await Supabase.initialize(
+    url: 'https://sarxmbhxptzrsahuymhr.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhcnhtYmh4cHR6cnNhaHV5bWhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzMzQ1OTgsImV4cCI6MjA3NDkxMDU5OH0.HBNOwCyDNQoPgkzxMEubkMARsWulUS7NcJs_Mg83WVg',
+  );
 
   runApp(
     MultiProvider(
@@ -1306,8 +1313,12 @@ class _MainScreenState extends State<MainScreen> {
                                           onPressed: () async {
                                             Navigator.pop(confirmCtx);
                                             Navigator.pop(ctx);
-                                            await ps.deleteAccount();
-                                            await auth.deleteCurrentUser();
+                                            try {
+                                              await ps.deleteAccount();
+                                            } catch (_) {}
+                                            try {
+                                              await auth.signOut();
+                                            } catch (_) {}
                                           },
                                           child: Text(
                                             MatchmakingLocalization.tr(
