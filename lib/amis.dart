@@ -13071,67 +13071,68 @@ class FirebaseService {
     String playerName,
     String playerId,
   ) async {
-    print(
-      "[DEBUG joinGame] Tentative de rejoindre la partie '$gameCode' par '$playerName' (ID: $playerId).",
-    );
-    DocumentReference gameRef = _db.collection('games').doc(gameCode);
+    final cleanCode = gameCode.trim();
+    final cleanName = playerName.trim().isEmpty ? 'Joueur' : playerName.trim();
+    final DocumentReference gameRef = _db.collection('games').doc(cleanCode);
 
-    return _db
-        .runTransaction((transaction) async {
-          print("[DEBUG joinGame] Démarrage de la transaction.");
-          DocumentSnapshot gameSnap = await transaction.get(gameRef);
+    try {
+      return await _db.runTransaction<bool>((transaction) async {
+        final DocumentSnapshot gameSnap = await transaction.get(gameRef);
 
-          if (gameSnap.exists && gameSnap.get('gameState') == 'lobby') {
-            print(
-              "[DEBUG joinGame] Partie trouvée et en lobby. Lecture des données...",
-            );
-
-            final Map<String, dynamic> players = Map<String, dynamic>.from(
-              gameSnap.get('players') as Map? ?? {},
-            );
-
-            print("[DEBUG joinGame] JOUEURS ACTUELS (AVANT AJOUT): $players");
-
-            User? currentUser = FirebaseAuth.instance.currentUser;
-            players[playerId] = {
-              'name': playerName,
-              'score': 0,
-              'xp': 0,
-              'authUid': currentUser?.uid,
-              'livekitIdentity': playerId,
-              'isReady': false,
-              'isOnline': true,
-              'lastHeartbeat': FieldValue.serverTimestamp(),
-            };
-
-            print(
-              "[DEBUG joinGame] JOUEURS MIS À JOUR (APRÈS AJOUT): $players",
-            );
-
-            transaction.update(gameRef, {'players': players});
-
-            print(
-              "[DEBUG joinGame] Transaction.update() appelée avec la nouvelle liste de joueurs.",
-            );
-
-            if (gameSnap['gameType'] == 'Petit Bac') {
-              transaction.update(gameRef, {'petitBacTotalScores.$playerId': 0});
-            }
-            print("[DEBUG joinGame] Transaction réussie. Retourne true.");
-            return true;
-          }
-
-          print(
-            "[DEBUG joinGame] La partie n'existe pas ou n'est plus en lobby. Retourne false.",
-          );
+        if (!gameSnap.exists) {
+          debugPrint("[joinGame] La partie n'existe pas : $cleanCode");
           return false;
-        })
-        .catchError((e) {
-          print("--- ERREUR CRITIQUE DANS joinGame ---");
-          print("Erreur lors de la transaction pour rejoindre la partie: $e");
-          print("------------------------------------");
+        }
+
+        final data = gameSnap.data() as Map<String, dynamic>? ?? {};
+        final String gameState = data['gameState'] ?? '';
+
+        if (gameState != 'lobby') {
+          debugPrint("[joinGame] La partie n'est pas en lobby : $gameState");
           return false;
-        });
+        }
+
+        final Map<String, dynamic> players =
+            Map<String, dynamic>.from(data['players'] ?? {});
+        final List<String> playerOrder =
+            List<String>.from(data['playerOrder'] ?? []);
+        final User? currentUser = FirebaseAuth.instance.currentUser;
+        final String authUid = currentUser?.uid ?? playerId;
+
+        // Écriture complète avec tous les champs requis pour l'affichage immédiat
+        players[playerId] = {
+          'name': cleanName,
+          'score': 0,
+          'xp': 0,
+          'authUid': authUid,
+          'livekitIdentity': playerId,
+          'isReady': false,
+          'isOnline': true,
+          'lastHeartbeat': FieldValue.serverTimestamp(),
+        };
+
+        if (!playerOrder.contains(playerId)) {
+          playerOrder.add(playerId);
+        }
+
+        final Map<String, dynamic> updates = {
+          'players': players,
+          'playerOrder': playerOrder,
+          'players.$playerId.isOnline': true,
+          'players.$playerId.name': cleanName,
+        };
+
+        if (data['gameType'] == 'Petit Bac') {
+          updates['petitBacTotalScores.$playerId'] = 0;
+        }
+
+        transaction.update(gameRef, updates);
+        return true;
+      });
+    } catch (e) {
+      debugPrint("--- ERREUR CRITIQUE DANS joinGame : $e ---");
+      return false;
+    }
   }
 
   Stream<DocumentSnapshot> getGameStream(String gameCode) {
@@ -30049,7 +30050,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
       _connectedSub = connectedRef.onValue.listen((event) {
         final connected = event.snapshot.value as bool? ?? false;
         if (connected && _presenceRef != null) {
-          _presenceRef!.onDisconnect().set({
+          // IMPORTANT : OnDisconnect arme le serveur pour basculer à false dès la coupure
+          _presenceRef!.onDisconnect().update({
             'isOnline': false,
             'lastSeen': ServerValue.timestamp,
           });
@@ -30057,9 +30059,16 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
             'isOnline': true,
             'lastSeen': ServerValue.timestamp,
           });
+          _firebaseService.setPlayerOnlineStatusInGame(
+            widget.gameCode,
+            widget.playerId,
+            true,
+          );
         }
       });
-    } catch (_) {}
+    } catch (e) {
+      debugPrint("Erreur _setupRtdbPresence: $e");
+    }
   }
 
   @override
@@ -30187,8 +30196,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                 }
               });
             }
-            return Center(
-              child: Text(AppLocalizations.of(context)!.laPartieCommence),
+            return const Scaffold(
+              backgroundColor: Color(0xFF121212),
+              body: Center(
+                child: CircularProgressIndicator(color: Colors.greenAccent),
+              ),
             );
           }
 
@@ -31481,7 +31493,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       _rtGameConnectedSub = connectedRef.onValue.listen((event) {
         final connected = event.snapshot.value as bool? ?? false;
         if (connected && _rtGamePresenceRef != null) {
-          _rtGamePresenceRef!.onDisconnect().set({
+          _rtGamePresenceRef!.onDisconnect().update({
             'isOnline': false,
             'lastSeen': ServerValue.timestamp,
           });
@@ -31489,9 +31501,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             'isOnline': true,
             'lastSeen': ServerValue.timestamp,
           });
+          _firebaseService.setPlayerOnlineStatusInGame(
+            widget.gameCode,
+            widget.playerId,
+            true,
+          );
         }
       });
-    } catch (_) {}
+    } catch (e) {
+      debugPrint("Erreur _setupRtdbGamePresence: $e");
+    }
   }
 
   bool _livekitInitialized = false;
@@ -31521,21 +31540,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     _gribouillisPageController = PageController();
 
-    // Écouter les changements de LivekitService pour mettre à jour Firestore
-    _livekitService.addListener(() {
-      if (_livekitService.localUserJoined &&
-          _livekitService.localIdentity.isNotEmpty) {
-        final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-        FirebaseFirestore.instance
-            .collection('games')
-            .doc(widget.gameCode)
-            .update({
-              'players.${widget.playerId}.livekitIdentity':
-                  _livekitService.localIdentity,
-              if (currentAuthUid != null && currentAuthUid.isNotEmpty)
-                'players.${widget.playerId}.authUid': currentAuthUid,
-            });
-      }
+    // MISE À JOUR UNIQUE DE L'IDENTITY LIVEKIT (SANS BOUCLE INFINIE)
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+      await FirebaseFirestore.instance
+          .collection('games')
+          .doc(widget.gameCode)
+          .update({
+            'players.${widget.playerId}.livekitIdentity': widget.playerId,
+            if (currentAuthUid != null && currentAuthUid.isNotEmpty)
+              'players.${widget.playerId}.authUid': currentAuthUid,
+          }).catchError((_) {});
     });
 
     _answerController.addListener(() {
@@ -33398,10 +33413,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return;
       }
 
-      // --- AJOUT IMPORTANT : Forcer le rafraîchissement de l'écran ---
-      setState(() {});
-      // ---------------------------------------------------------------
-
       final now = DateTime.now();
       final elapsed = now.difference(startTime).inSeconds;
       final remaining = durationSeconds - elapsed;
@@ -33943,10 +33954,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                               SizedBox(height: 10),
                               Expanded(
-                                child: _buildGameContent(
-                                  context,
-                                  gameData,
-                                  playerId,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom:
+                                        (showFloatingChat &&
+                                                currentGameType != 'Pictionary')
+                                            ? 64.0
+                                            : 0.0,
+                                  ),
+                                  child: _buildGameContent(
+                                    context,
+                                    gameData,
+                                    playerId,
+                                  ),
                                 ),
                               ),
                             ],
@@ -34944,9 +34964,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             (turnDurationSeconds - elapsedSeconds).ceil(),
           );
 
-          // ⚡ DÉCLENCHEMENT INSTANTANÉ DÈS QUE LE TEMPS EST ÉCOULÉ (0s)
-          // Seul l'hôte ou le joueur actif exécute la fonction pour éviter les conflits
-          if (elapsedSeconds >= turnDurationSeconds &&
+          // ✅ CORRECTION : Ne déclencher le timeout QUE si le temps est réellement écoulé avec une marge,
+          // et SEULEMENT si turnStartTime existe depuis au moins 2 secondes (évite le déclenchement immédiat au chargement)
+          final bool hasTurnActuallyStarted =
+              DateTime.now().difference(turnStartTime).inSeconds >= 2;
+
+          if (hasTurnActuallyStarted &&
+              elapsedSeconds >= (turnDurationSeconds + 1.0) &&
               _lastExecutedTimeoutKey != currentTurnKey) {
             _lastExecutedTimeoutKey = currentTurnKey;
 
@@ -68970,7 +68994,7 @@ class FloatingChatOverlay extends StatefulWidget {
   final String playerName;
   final Map<String, dynamic> gameData;
 
-  FloatingChatOverlay({
+  const FloatingChatOverlay({
     Key? key,
     required this.gameCode,
     required this.playerId,
@@ -68986,13 +69010,32 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
   final FirebaseService _firebaseService = FirebaseService();
   final TextEditingController _textCtrl = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
-  bool _isSwipedUp = false; // false = 3 messages, true = 5 messages
+
+  bool _isExpanded = false; // false = 3 messages max (92px), true = 6 messages max (175px)
   bool _isSending = false;
 
   @override
+  void initState() {
+    super.initState();
+    _scrollCtrl.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (!_scrollCtrl.hasClients) return;
+    final offset = _scrollCtrl.offset;
+
+    if (offset > 12 && !_isExpanded) {
+      setState(() => _isExpanded = true);
+    } else if (offset <= 2 && _isExpanded) {
+      setState(() => _isExpanded = false);
+    }
+  }
+
+  @override
   void dispose() {
-    _textCtrl.dispose();
+    _scrollCtrl.removeListener(_onScroll);
     _scrollCtrl.dispose();
+    _textCtrl.dispose();
     super.dispose();
   }
 
@@ -69033,29 +69076,32 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
     return StreamBuilder<QuerySnapshot>(
       stream: _firebaseService.getChatStream(widget.gameCode, 'global'),
       builder: (context, snapshot) {
-        final messages = snapshot.hasData ? snapshot.data!.docs : [];
+        final docs = snapshot.hasData ? snapshot.data!.docs : [];
         final ps = Provider.of<PlayerState>(context, listen: false);
 
-        // Messages ordonnés chronologiquement (du plus ancien au plus récent)
-        final List<Map<String, dynamic>> allMessages =
-            messages
-                .map((doc) => doc.data() as Map<String, dynamic>)
-                .where((data) {
-                  if (data['chatType'] != null && data['chatType'] != 'global')
-                    return false;
-                  if (ps.isUserBlocked(data['senderId'])) return false;
-                  return true;
-                })
-                .toList()
-                .reversed
+        // Messages du plus récent au plus ancien pour un chat dynamique
+        final List<Map<String, dynamic>> allMessages = docs
+            .map((doc) => doc.data() as Map<String, dynamic>)
+            .where((data) {
+              if (data['chatType'] != null && data['chatType'] != 'global') {
+                return false;
+              }
+              if (ps.isUserBlocked(data['senderId'])) return false;
+              return true;
+            })
+            .toList();
+
+        // 3 messages max au repos, jusqu'à 6 visibles quand étendu
+        final int maxItems = _isExpanded ? 6 : 3;
+        final List<Map<String, dynamic>> visibleMessages =
+            allMessages
+                .take(
+                  allMessages.length > maxItems ? maxItems : allMessages.length,
+                )
                 .toList();
 
-        // 3 messages par défaut, 5 messages si swipé vers le haut
-        final int targetCount = _isSwipedUp ? 5 : 3;
-        final List<Map<String, dynamic>> displayMessages =
-            allMessages.length > targetCount
-                ? allMessages.sublist(allMessages.length - targetCount)
-                : allMessages;
+        // Hauteur animée fluide : ~92px (3 messages) <-> ~175px (6 messages)
+        final double targetHeight = _isExpanded ? 175.0 : 92.0;
 
         return Material(
           color: Colors.transparent,
@@ -69063,151 +69109,156 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── MESSAGES FLOTTANTS SANS ENCADRÉ LOURD, AVEC SWIPE HAUT/BAS ──
-              if (displayMessages.isNotEmpty)
+              // ── BULLES FLOTTANTES DE MESSAGES ──
+              if (visibleMessages.isNotEmpty)
                 GestureDetector(
+                  // Détection par glissement tactile (Swipe)
                   onVerticalDragEnd: (details) {
                     final vel = details.primaryVelocity;
                     if (vel != null) {
-                      if (vel < -60) {
-                        // Swipe vers le haut : on affiche 5 messages
-                        setState(() => _isSwipedUp = true);
-                      } else if (vel > 60) {
-                        // Swipe vers le bas : on revient à 3 messages
-                        setState(() => _isSwipedUp = false);
+                      if (vel < -40 && !_isExpanded) {
+                        setState(() => _isExpanded = true);
+                      } else if (vel > 40 && _isExpanded) {
+                        setState(() {
+                          _isExpanded = false;
+                          if (_scrollCtrl.hasClients) {
+                            _scrollCtrl.jumpTo(0);
+                          }
+                        });
                       }
                     }
                   },
-                  child: Container(
-                    constraints: BoxConstraints(
-                      maxHeight: _isSwipedUp ? 150.0 : 90.0,
-                    ),
-                    child: Scrollbar(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 260),
+                    curve: Curves.easeOutCubic,
+                    constraints: BoxConstraints(maxHeight: targetHeight),
+                    child: ListView.builder(
                       controller: _scrollCtrl,
-                      thumbVisibility: _isSwipedUp,
-                      child: ListView.builder(
-                        controller: _scrollCtrl,
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: displayMessages.length,
-                        itemBuilder: (context, index) {
-                          final msg = displayMessages[index];
-                          final sender =
-                              msg['senderName'] ??
-                              AppLocalizations.of(context)!.joueur;
-                          final text = msg['text'] ?? '';
-                          final isMe = msg['senderId'] == widget.playerId;
+                      reverse: true, // Le message le plus récent est en bas
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: visibleMessages.length,
+                      itemBuilder: (context, index) {
+                        final msg = visibleMessages[index];
+                        final sender =
+                            msg['senderName'] ??
+                            AppLocalizations.of(context)?.joueur ??
+                            "Joueur";
+                        final text = msg['text'] ?? '';
+                        final isMe = msg['senderId'] == widget.playerId;
 
-                          return Align(
-                            alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap:
-                                  isMe
-                                      ? null
-                                      : () {
-                                        if (msg['senderId'] != null) {
-                                          showUserProfileDialog(
-                                            context,
-                                            targetUid: msg['senderId'],
-                                            currentUserId: widget.playerId,
-                                          );
-                                        }
-                                      },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(vertical: 2),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 9,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withValues(alpha: 0.35),
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color:
-                                        isMe
-                                            ? Colors.pinkAccent.withValues(
-                                              alpha: 0.3,
-                                            )
-                                            : Colors.white.withValues(
-                                              alpha: 0.08,
-                                            ),
-                                  ),
-                                ),
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                      fontSize: 11.5,
-                                      color: Colors.white,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: AppLocalizations.of(
+                        return Align(
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                            onTap:
+                                isMe
+                                    ? null
+                                    : () {
+                                      if (msg['senderId'] != null) {
+                                        showUserProfileDialog(
                                           context,
-                                        )!.stre786cb(sender),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 11,
-                                          color:
-                                              isMe
-                                                  ? Colors.pinkAccent
-                                                  : Colors.cyanAccent,
-                                        ),
-                                      ),
-                                      TextSpan(text: text),
-                                    ],
+                                          targetUid: msg['senderId'],
+                                          currentUserId: widget.playerId,
+                                        );
+                                      }
+                                    },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.45),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color:
+                                      isMe
+                                          ? Colors.pinkAccent.withValues(
+                                            alpha: 0.4,
+                                          )
+                                          : Colors.white.withValues(alpha: 0.1),
+                                ),
+                              ),
+                              child: RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 11.5,
+                                    color: Colors.white,
                                   ),
+                                  children: [
+                                    TextSpan(
+                                      text: "$sender : ",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 11,
+                                        color:
+                                            isMe
+                                                ? Colors.pinkAccent
+                                                : Colors.cyanAccent,
+                                      ),
+                                    ),
+                                    TextSpan(text: text),
+                                  ],
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
 
-              SizedBox(height: 6),
+              const SizedBox(height: 6),
 
-              // ── LONGUE BARRE DE TCHAT EN BAS ──
+              // ── BARRE DE SAISIE DE TEXTE ──
               Container(
-                height: 42,
+                height: 44,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.50),
+                  color: Colors.black.withValues(alpha: 0.65),
                   borderRadius: BorderRadius.circular(22),
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.16),
+                    color: Colors.white.withValues(alpha: 0.18),
                     width: 1,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
+                      color: Colors.black.withValues(alpha: 0.4),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.chat_bubble_outline_rounded,
                       size: 16,
                       color: Colors.cyanAccent,
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: TextField(
                         controller: _textCtrl,
-                        style: TextStyle(color: Colors.white, fontSize: 13),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
                         decoration: InputDecoration(
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(
                             vertical: 10,
                           ),
                           hintText:
-                              AppLocalizations.of(context)!.ecrireUnMessage,
-                          hintStyle: TextStyle(
+                              _isExpanded
+                                  ? "Faites défiler vers le bas pour réduire (3 max)"
+                                  : (AppLocalizations.of(context)
+                                          ?.ecrireUnMessage ??
+                                      "Écrire un message..."),
+                          hintStyle: const TextStyle(
                             color: Colors.white38,
                             fontSize: 12,
                           ),
@@ -69222,7 +69273,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                     IconButton(
                       icon:
                           _isSending
-                              ? SizedBox(
+                              ? const SizedBox(
                                 width: 14,
                                 height: 14,
                                 child: CircularProgressIndicator(
@@ -69230,13 +69281,16 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                                   color: Colors.cyanAccent,
                                 ),
                               )
-                              : Icon(
+                              : const Icon(
                                 Icons.send_rounded,
                                 size: 18,
                                 color: Colors.cyanAccent,
                               ),
                       padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(minWidth: 32, minHeight: 32),
+                      constraints: const BoxConstraints(
+                        minWidth: 32,
+                        minHeight: 32,
+                      ),
                       onPressed: _sendMessage,
                     ),
                   ],
