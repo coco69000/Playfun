@@ -512,6 +512,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                   content: Text(successText),
                                 ),
                               );
+                              if (context.mounted) {
+                                Navigator.of(context).maybePop();
+                              }
                             } else if (!result.userCancelled) {
                               messenger.showSnackBar(
                                 SnackBar(

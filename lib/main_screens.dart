@@ -345,6 +345,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
       code,
       playerState.userName ?? AppLocalizations.of(context)!.joueur,
       widget.playerId,
+      isPremium: playerState.isPremium,
     );
     if (success) {
       _joinCodeController.clear();

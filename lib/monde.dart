@@ -567,6 +567,12 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             isEqualTo: widget.devineTeteUseTeams,
           );
           break;
+        case 'Qui pourrait ?':
+          refillingQuery = refillingQuery.where(
+            'quiPourraitVoteMode',
+            isEqualTo: widget.quiPourraitVoteMode,
+          );
+          break;
       }
 
       // Exécuter la requête Refilling
@@ -736,6 +742,12 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             isEqualTo: widget.devineTeteUseTeams,
           );
           break;
+        case 'Qui pourrait ?':
+          query = query.where(
+            'quiPourraitVoteMode',
+            isEqualTo: widget.quiPourraitVoteMode,
+          );
+          break;
       }
 
       final querySnapshot = await query.get();
@@ -836,6 +848,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           'photoRoulettePhotosPerPlayer': widget.photoRoulettePhotosPerPlayer,
           'photoRouletteMediaType': widget.photoRouletteMediaType,
           'devineTeteUseTeams': widget.devineTeteUseTeams,
+          'quiPourraitVoteMode': widget.quiPourraitVoteMode,
         });
 
         if (!_isDisposed) {
@@ -947,12 +960,24 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         if (_isLaunchingGame) return;
         _isLaunchingGame = true;
         try {
+          // Double vérification Firestore pour éviter toute collision d'hôtes concurrents
+          final freshSnap = await roomSnap.reference.get();
+          if (!freshSnap.exists) {
+            _isLaunchingGame = false;
+            return;
+          }
+          final freshData = freshSnap.data() as Map<String, dynamic>? ?? {};
+          if (freshData['gameCode'] != null) {
+            _isLaunchingGame = false;
+            return;
+          }
+
           final gameCode = randomNumeric(6);
           Map<String, dynamic> gamePlayers = {};
-          (roomData['playerNames'] as Map<String, dynamic>).forEach((
-            pId,
-            pName,
-          ) {
+          final playerNames = Map<String, dynamic>.from(
+            freshData['playerNames'] ?? roomData['playerNames'] ?? {},
+          );
+          playerNames.forEach((pId, pName) {
             gamePlayers[pId] = {'name': pName, 'score': 0};
           });
 
@@ -1129,8 +1154,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             .where('level', isLessThanOrEqualTo: myLevel + 2);
       }
 
-      final querySnapshot =
-          await query.orderBy('createdAt', descending: false).limit(1).get();
+      final querySnapshot = await query.limit(10).get();
 
       // Filter out rooms where this player is the only member
       final validRooms =
@@ -1141,6 +1165,18 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                 !(roomPlayers.length == 1 &&
                     roomPlayers.contains(widget.playerId));
           }).toList();
+
+      // Tri en mémoire par date de création croissante pour éviter d'exiger des index composites Firestore complexes
+      validRooms.sort((a, b) {
+        final aData = a.data() as Map<String, dynamic>;
+        final bData = b.data() as Map<String, dynamic>;
+        final aTime = aData['createdAt'] as Timestamp?;
+        final bTime = bData['createdAt'] as Timestamp?;
+        if (aTime == null && bTime == null) return 0;
+        if (aTime == null) return 1;
+        if (bTime == null) return -1;
+        return aTime.compareTo(bTime);
+      });
 
       if (validRooms.isNotEmpty && !_isDisposed) {
         final fallbackRoom = validRooms.first;

@@ -1394,6 +1394,7 @@ class _MainScreenState extends State<MainScreen> {
                             playerState.userName ??
                                 AppLocalizations.of(context)!.joueur,
                             playerId,
+                            isPremium: playerState.isPremium,
                           );
 
                           if (success && context.mounted) {

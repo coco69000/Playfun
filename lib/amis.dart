@@ -34,7 +34,6 @@ import 'services/force_update_service.dart';
 
 import 'game_video_overlay.dart';
 import 'widgets/xp_gain_overlay.dart';
-import 'game_xp_helper.dart';
 
 AppLocalizations get _l10n {
   try {
@@ -2463,16 +2462,15 @@ class FirebaseService {
     } else if (currentStreak >= 1) {
       totalXp += 3; // Enchaînement x2 ✨
     }
-    transaction.update(gameRef, {
-      'playerActionStreaks.$playerId': FieldValue.increment(1),
-    });
 
     // 3. Bonus selon la Difficulté de la Partie
     final String difficulty =
         (gameData['difficulty'] as String?)?.toLowerCase() ?? '';
     if (difficulty == 'hardcore' || difficulty == 'expert') {
       totalXp += 6; // Mode Extrême
-    } else if (difficulty == 'medium' || difficulty == 'difficile') {
+    } else if (difficulty == 'medium' ||
+        difficulty == 'difficile' ||
+        difficulty == 'hard') {
       totalXp += 3; // Défi Supérieur
     }
 
@@ -2540,21 +2538,26 @@ class FirebaseService {
     // 6. Bonus Abonné VIP (+50% d'XP sur chaque action en jeu)
     final bool isVip =
         players[playerId]?['isPremium'] == true ||
+        players[playerId]?['isVip'] == true ||
         gameData['isPremiumLobby'] == true;
     if (isVip) {
       totalXp = (totalXp * 1.5).round();
     }
 
-    // 1. Mise à jour de la session de jeu
+    // Mise à jour atomique dans la session de jeu
     transaction.update(gameRef, {
       'players.$playerId.xp': FieldValue.increment(totalXp),
+      'playerActionStreaks.$playerId': FieldValue.increment(1),
     });
 
-    // 2. Mise à jour du profil utilisateur persistant
-    final userDocRef = _db.collection('users').doc(authUid);
-    transaction.set(userDocRef, {
-      'xp': FieldValue.increment(totalXp),
-    }, SetOptions(merge: true));
+    // Mise à jour du profil utilisateur persistant hors de la transaction pour éviter tout conflit de verrous Firestore
+    if (authUid.isNotEmpty) {
+      _db.collection('users').doc(authUid).set({
+        'xp': FieldValue.increment(totalXp),
+      }, SetOptions(merge: true)).catchError((e) {
+        debugPrint("Erreur crédit XP utilisateur persistant: $e");
+      });
+    }
   }
 
   // 1. Cadavre Exquis : Nombre de mots tapés en direct
@@ -3198,6 +3201,25 @@ class FirebaseService {
           gState == 'cancelled' ||
           status == 'cancelled' ||
           status == 'finished') {
+        // En cas de gameOver, on attend au moins 45 secondes pour laisser le temps au compte à rebours de revanche (30s)
+        if (gState == 'gameOver' &&
+            status != 'cancelled' &&
+            status != 'finished') {
+          final gameOverAt = gData['gameOverAt'] as Timestamp?;
+          if (gameOverAt == null) {
+            // Premier repérage de fin de partie : on enregistre l'horodatage et on temporise
+            await _db.collection('games').doc(gameCode).update({
+              'gameOverAt': FieldValue.serverTimestamp(),
+            }).catchError((_) {});
+            return;
+          } else {
+            final secondsElapsed = now.difference(gameOverAt.toDate()).inSeconds;
+            if (secondsElapsed < 45) {
+              return; // Délai de 45s non écoulé, on conserve pendingGame pour le vote Rejouer
+            }
+          }
+        }
+
         String winnerName =
             gData['players']?[gData['gameWinner']]?['name'] ?? _l10n.inconnu;
         String reason = gData['gameEndReason'] ?? '';
@@ -7201,6 +7223,14 @@ class FirebaseService {
 
           updates['gameLog'] = FieldValue.arrayUnion(newLogs);
           transaction.update(gameRef, updates);
+
+          final String? loungeId = gameData['loungeId'] as String?;
+          if (loungeId != null && loungeId.isNotEmpty) {
+            _db.collection('lounges').doc(loungeId).update({
+              'pendingGame.joinedPlayers':
+                  FieldValue.arrayRemove([playerIdToRemove]),
+            }).catchError((_) {});
+          }
         });
         break;
       } catch (e) {
@@ -12472,6 +12502,7 @@ class FirebaseService {
         }
         pMap['isReady'] = pMap['isReady'] ?? (pId == hostId);
         pMap['isOnline'] = true;
+        pMap['isPremium'] = pMap['isPremium'] ?? isPremiumLobby;
         pMap['lastHeartbeat'] = FieldValue.serverTimestamp();
         enrichedPlayers[pId] = pMap;
       } else {
@@ -12479,6 +12510,7 @@ class FirebaseService {
           'name': pData.toString(),
           'score': 0,
           'xp': 0,
+          'isPremium': isPremiumLobby,
           'livekitIdentity': pId,
           'isReady': pId == hostId,
           'isOnline': true,
@@ -12887,6 +12919,7 @@ class FirebaseService {
           'livekitIdentity': playerId,
           'isReady': true,
           'isOnline': true,
+          'isPremium': isPremiumLobby,
           'lastHeartbeat': FieldValue.serverTimestamp(),
         },
       },
@@ -13172,8 +13205,9 @@ class FirebaseService {
   Future<bool> joinGame(
     String gameCode,
     String playerName,
-    String playerId,
-  ) async {
+    String playerId, {
+    bool isPremium = false,
+  }) async {
     final cleanCode = gameCode.trim();
     final cleanName = playerName.trim().isEmpty ? 'Joueur' : playerName.trim();
     final DocumentReference gameRef = _db.collection('games').doc(cleanCode);
@@ -13201,6 +13235,7 @@ class FirebaseService {
             List<String>.from(data['playerOrder'] ?? []);
         final User? currentUser = FirebaseAuth.instance.currentUser;
         final String authUid = currentUser?.uid ?? playerId;
+        final bool isVipUser = isPremium || (data['isPremiumLobby'] == true);
 
         // Écriture complète avec tous les champs requis pour l'affichage immédiat
         players[playerId] = {
@@ -13211,6 +13246,7 @@ class FirebaseService {
           'livekitIdentity': playerId,
           'isReady': false,
           'isOnline': true,
+          'isPremium': isVipUser,
           'lastHeartbeat': FieldValue.serverTimestamp(),
         };
 
@@ -30075,6 +30111,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
         gameCode,
         widget.playerName,
         widget.playerId,
+        isPremium: playerState.isPremium,
       );
 
       if (success) {
@@ -33730,50 +33767,44 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     gameData['gameType'] ??
                     AppLocalizations.of(context)!.inconnu;
 
-                // Calcul personnalisé de l'XP en fonction des actions spécifiques au jeu
-                final xpCalc = GameXpHelper.calculateXp(
-                  gameName: currentGame,
-                  isWin: isWin,
-                  playerId: myId,
-                  gameData: gameData,
-                  isPremium: ps.isPremium,
-                );
-                final int xpEarned = xpCalc.totalXp;
+                // L'XP total accumulé durant cette partie en cours de jeu
+                final int sessionXpEarned =
+                    (myData?['xp'] as num?)?.toInt() ?? 0;
 
-                // Enregistrement des stats par jeu
+                // Enregistrement des statistiques de victoire / défaite
                 await ps.recordGameResult(
                   gameName: currentGame,
                   isWin: isWin,
-                  xpEarned: xpEarned,
+                  xpEarned: sessionXpEarned,
                 );
 
-                // Calcul du niveau adverse maximum
-                int maxOpponentLvl = 1;
-                playersMap.forEach((pId, pData) {
-                  if (pId != myId && pData is Map) {
-                    int oppLvl = (pData['level'] as num?)?.toInt() ?? 1;
-                    if (oppLvl > maxOpponentLvl) maxOpponentLvl = oppLvl;
-                  }
-                });
-
-                // Attribution avec multiplicateurs Ranked, Giant Slayer et Win Streaks
-                int finalAwardedXp = xpEarned;
+                // En partie classée, calcul du bonus de rang (Giant Slayer / Win Streak)
+                int finalAwardedXp = sessionXpEarned;
                 if (isRanked) {
+                  int maxOpponentLvl = 1;
+                  playersMap.forEach((pId, pData) {
+                    if (pId != myId && pData is Map) {
+                      int oppLvl = (pData['level'] as num?)?.toInt() ?? 1;
+                      if (oppLvl > maxOpponentLvl) maxOpponentLvl = oppLvl;
+                    }
+                  });
+
                   finalAwardedXp = await ps.handleRankedGameEnd(
                     isWin: isWin,
                     maxOpponentLevel: maxOpponentLvl,
-                    baseGameXp: xpEarned,
+                    baseGameXp: sessionXpEarned,
                   );
-                } else {
-                  // La Cloud Function sécurisée s'occupe d'ajouter les pièces, l'XP et les badges
-                  await ps.claimGameReward(widget.gameCode);
                 }
 
                 // Déclenchement de l'animation visuelle de gain d'XP
-                _triggerXpAnimation(finalAwardedXp);
+                _triggerXpAnimation(
+                  finalAwardedXp > 0 ? finalAwardedXp : (isWin ? 25 : 10),
+                );
 
-                // NOUVEAU : Envoyer les résultats au salon si rattaché (fiabilisé : premier client qui détecte la fin)
-                if (gameData['loungeId'] != null &&
+                // NOUVEAU : Envoyer les résultats au salon si rattaché (seul l'hôte poste pour éviter les doublons)
+                final bool isHost = (gameData['hostId'] == widget.playerId);
+                if (isHost &&
+                    gameData['loungeId'] != null &&
                     !(gameData['loungeResultPosted'] ?? false)) {
                   await FirebaseFirestore.instance
                       .collection('games')
@@ -33800,7 +33831,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       .collection('lounges')
                       .doc(gameData['loungeId'])
                       .update({
-                        'pendingGame': FieldValue.delete(),
                         'lastGameResult': {
                           'gameName': gameData['gameType'],
                           'winnerName': winnerName,
@@ -72579,6 +72609,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                             gameCode,
                             ps.userName ?? AppLocalizations.of(context)!.joueur,
                             widget.playerId,
+                            isPremium: ps.isPremium,
                           );
                         },
                         child: Text(
@@ -73547,6 +73578,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                                       context,
                                                     )!.joueur,
                                                 widget.playerId,
+                                                isPremium: ps.isPremium,
                                               );
                                             },
                                             child: Text(
